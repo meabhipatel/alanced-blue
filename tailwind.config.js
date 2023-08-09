@@ -4,7 +4,14 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'cardo': ['Cardo', 'serif'],
+        'inter': ['Inter', 'sans-serif'],
+        'jost': ['Jost', 'sans-serif'],
+        'poppins': ['Poppins', 'sans-serif'],
+      }
+    },
   },
   plugins: [],
 }
