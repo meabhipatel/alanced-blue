@@ -15,6 +15,7 @@ import {
   import { useSelector } from "react-redux";
   import { ToastContainer } from "react-toastify";
   import Header from "../components/Layout/Header";
+import Registration from "../container/auth/Registration";
   
   
 
@@ -24,10 +25,19 @@ import {
     const loginType = useSelector((state) => state.login.type);
     const state = useSelector((state) => state)
     const navigate = useNavigate();
+    
+    React.useEffect(() => {
+    if (loginType == 'HIRER' || loginType == 'FREELANCER') {
+      navigate('/')
+    }
+  }, [loginType])
+
     return (
       <>
         <Routes>
           <Route path="/" element={<Header />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registration" element={<Registration />} />
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   
