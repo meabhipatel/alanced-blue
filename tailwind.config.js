@@ -10,6 +10,7 @@ module.exports = {
         'inter': ['Inter', 'sans-serif'],
         'jost': ['Jost', 'sans-serif'],
         'poppins': ['Poppins', 'sans-serif'],
+        'larsseit': ['Larsseit', 'sans'] 
       }
     },
   },
