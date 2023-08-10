@@ -1,5 +1,5 @@
 import React from 'react'
-import background from './alanced-back.png'
+import background from '../images/alanced-back.png'
 import Navbar from './Navbar'
 import { Link } from 'react-router-dom'
 

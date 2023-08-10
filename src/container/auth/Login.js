@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginAction } from "../../redux/Auth/AuthAction";
 import { Link, useNavigate } from "react-router-dom";
-import loginimg from './login.png';
-import google from './google.png'
+import loginimg from '../../components/images/login.png';
+import google from '../../components/images/google.png';
 
 
 const Login = (props) => {
@@ -12,29 +12,50 @@ const Login = (props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const [show, toogleShow] = useState(false)
+    const [loading, setLoading] = useState(false);
+  
     
 
     const User = useSelector(state => state.login.accessToken)
     const login = useSelector(state => state.login.Login)
+    const loginstatus = useSelector(state => state.login.status)
    
 
     const onChange = (e) => {
         setAuthDetails({ ...authDetails, [e.target.name]: e.target.value })
     }
 
-    const LoginButton = async() => {
-        const uname = document.getElementById("uname").value
-        const upass = document.getElementById("upass").value
-        // const login = await login
-        if(uname.trim().length && upass.trim().length != 0)
-        {
-        toogleShow(true)
+   
+    const LoginButton = () => {
+        const uname = document.getElementById("uname").value;
+        const upass = document.getElementById("upass").value;
+    
+        if (uname.trim().length !== 0 && upass.trim().length !== 0) {
+            setLoading(true);
+    
+            dispatch(LoginAction(authDetails, navigate));
+        } else {
+            toogleShow(false);
+            setLoading(false);
         }
-        else{
-            toogleShow(false)
-        }
-        dispatch(LoginAction(authDetails, navigate))
     }
+    
+    
+    useEffect(() => {
+        if (loginstatus === 200) {
+            toogleShow(true);
+            setTimeout(() => {
+                navigate("/");
+                setLoading(false);
+            }, 2000);
+        } else if (loginstatus !== undefined && loginstatus !== 200) {
+            toogleShow(false);
+            setTimeout(() => {
+                setLoading(false); 
+            }, 2000);
+        }
+    }, [loginstatus]);
+    
     
     
     return (
@@ -85,11 +106,24 @@ const Login = (props) => {
                                 </span></Link>
                             </div>
 
-                            <button
+                            {/* <button
                                 class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold"
                                 href="#" onClick={LoginButton}>
                                 Sign In
-                            </button>
+                            </button> */}
+
+<button
+    class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold"
+    href="#"
+    onClick={LoginButton}
+    disabled={loading}
+>
+    {loading ? (
+        <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-white mx-auto"></div>
+    ) : (
+        "Sign In"
+    )}
+</button>
 
                             <div class="flex items-center">
                             <div class="flex-1 border-t-2 my-8"></div>

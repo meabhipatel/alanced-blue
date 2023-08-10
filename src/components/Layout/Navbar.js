@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from './Alanced.png'
+import logo from '../images/Alanced.png'
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {
