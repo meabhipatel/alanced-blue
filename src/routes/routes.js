@@ -16,6 +16,7 @@ import {
   import { ToastContainer } from "react-toastify";
   import Header from "../components/Layout/Header";
 import Registration from "../container/auth/Registration";
+import Choose from "../container/auth/Choose";
   
   
 
@@ -38,6 +39,7 @@ import Registration from "../container/auth/Registration";
           <Route path="/" element={<Header />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
+          <Route path="/choose" element={<Choose />} />
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   
