@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import registerimg from './register.png'
-import google from './google.png'
+// import google from './google.png'
+import google from '../../components/images/google.png'
 import box from './box.png'
 import registerimg2 from './register2.png'
 
