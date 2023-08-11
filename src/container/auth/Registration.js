@@ -6,6 +6,7 @@ import box from '../../components/images/box.png'
 import registerimg2 from '../../components/images/register2.png'
 
 
+
 const Registration = () => {
   return (
     <>
