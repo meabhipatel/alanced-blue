@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link, useNavigate } from "react-router-dom";
-import registerimg from './register.png'
-import google from './google.png'
-import box from './box.png'
-import registerimg2 from './register2.png'
+import registerimg from '../../components/images/register.png'
+import google from '../../components/images/google.png'
+import box from '../../components/images/box.png'
+import registerimg2 from '../../components/images/register2.png'
 
 
 const Registration = () => {
@@ -30,7 +30,7 @@ const Registration = () => {
                         <div class='flex flex-row space-x-4'>
                         <div className=''>
                             <label class="block text-sm text-left font-cardo">
-                                Full Name
+                                First Name
                             </label>
                             <input type="email"
                                 class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
