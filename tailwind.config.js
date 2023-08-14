@@ -11,6 +11,11 @@ module.exports = {
         'jost': ['Jost', 'sans-serif'],
         'poppins': ['Poppins', 'sans-serif'],
         'larsseit': ['Larsseit', 'sans'] 
+      },
+      zIndex: {
+        '20': '20',
+        '10':'10',
+        '60':'60'
       }
     },
   },

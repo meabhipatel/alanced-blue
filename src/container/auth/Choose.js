@@ -37,7 +37,7 @@ const Choose = () => {
 </div>
 
 
-    <Link to='/registration'><button 
+    <Link to='/'><button 
         class="block w-[320px] px-4 py-2 -mt-2 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold">
        {selectedOption === 'client' ? 'Join as a Client' :'Join as a Freelancer'}
     </button></Link>
