@@ -12,45 +12,45 @@ import { Link } from 'react-router-dom'
 const HomeSection3 = () => {
   return (
     <div>
-        <div className='bg-[#F6FAFD] mt-10 h-[600px]'>
-        <h1 className='font-cardo text-[26px] text-center pt-6 inline-block text-[#0A142F]'>
-    Why Over 3 Million People Choose Us
-    <div className="border-b-2 border-gray-300 w-1/6 mx-auto mt-3.5"></div>
-</h1>
-<div class="grid grid-cols-3 gap-4 mt-8 px-32 text-center">
-    <div class="p-4">
-        <img src={credibility} alt="" className='mx-auto'/>
+    <div className='bg-[#F6FAFD] mt-10 pb-7'>
+        <h1 className='font-cardo text-xl md:text-[26px] text-center pt-6 inline-block text-[#0A142F]'>
+            Why Over 3 Million People Choose Us
+            <div className="border-b-2 border-gray-300 w-1/4 sm:w-1/6 mx-auto mt-3.5"></div>
+        </h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8 px-4 md:px-32 text-center">
+        <div class="p-4">
+         <img src={credibility} alt="" className='mx-auto'/>
         <p className='opacity-50'>01</p>
         <h5 className='font-inter font-semibold py-4 text-[#0A142F]'>Credibility</h5>
         <p className='opacity-50'>We verify Freelancers, publish their feedback <br /> scores and All-Time Transaction Data to help <br /> you identify time-tested professionals across <br /> the globe.</p>
-        <img src={boxarrow} alt="" className='mx-auto mt-2'/>
-    </div>
+        <img src={boxarrow} alt="" className='mx-auto mt-2 cursor-pointer'/>
+   </div>
     <div class="p-4">
     <img src={flexibility} alt="" className='mx-auto'/>
-    <p className='opacity-50'>02</p>
+     <p className='opacity-50'>02</p>
     <h5 className='font-inter font-semibold py-4 text-[#0A142F]'>Flexibility</h5>
     <p className='opacity-50'>We provide multiple Payment terms and <br />flexible Agreements to enable you to work <br />the way you want.</p>
-        <img src={boxarrow} alt="" className='mx-auto mt-8'/>
+         <img src={boxarrow} alt="" className='mx-auto mt-8 cursor-pointer'/>
     </div>
     <div class="p-4">
     <img src={value} alt="" className='mx-auto'/>
     <p className='opacity-50'>03</p>
     <h5 className='font-inter font-semibold py-4 text-[#0A142F]'>Value</h5>
     <p className='opacity-50'>We have the lowest fees in the industry,<br /> providing you with maximum value at <br />minimum cost.</p>
-        <img src={boxarrow} alt="" className='mx-auto mt-8'/>
+        <img src={boxarrow} alt="" className='mx-auto mt-8 cursor-pointer'/>
     </div>
-</div>
-<div className='mt-5'>
-<Link to=''><span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Why Choose Alanced</span></Link>
-</div>
-</div>
-<div>
-<h1 className='font-cardo text-[26px] text-center pt-6 inline-block text-[#0A142F]'>
-Work Your Way
-    <div className="border-b-2 border-gray-300 w-1/3 mx-auto mt-3.5"></div>
-</h1>
-<div class="flex space-x-4 mt-6 px-32">
-    <div class="flex-1 p-4 pb-0">
+        </div>
+        <div className='mt-5 text-center'>
+            <Link to=''><span class="text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Why Choose Alanced</span></Link>
+        </div>
+    </div>
+    <div>
+        <h1 className='font-cardo text-xl md:text-[26px] text-center pt-16 inline-block text-[#0A142F]'>
+            Work Your Way
+            <div className="border-b-2 border-gray-300 w-1/2 md:w-1/3 mx-auto mt-3.5"></div>
+        </h1>
+        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 mt-6 px-4 md:px-32">
+        <div class="flex-1 p-4 pb-0">
         <img src={womanwithtab} alt="" className='-mt-20 h-[440px] ml-[180px]'/>
     </div>
     <div class="flex-1 p-4 text-left">
@@ -76,12 +76,11 @@ Work Your Way
 <Link to=''><span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Learn About Agreements</span></Link>
 </div>
     </div>
-</div>
-
-</div>
-<div className='bg-[#F6FAFD]'>
-<div class="flex space-x-1 px-[145px]">
-    <div class="flex-1 p-4 text-left">
+        </div>
+    </div>
+    <div className='bg-[#F6FAFD]'>
+        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 px-4 md:px-[145px]">
+        <div class="flex-1 p-4 text-left">
     <h1 className='font-cardo text-[26px] pt-20 inline-block text-[#0A142F]'>
     Get Book Copy Today!
     <div className="border-b-2 border-[#1B3764] w-1/6 my-4 opacity-62"></div>
@@ -95,8 +94,7 @@ Work Your Way
         <img src={cupbook} alt="" />
     </div>
 </div>
-
-</div>
+        </div>
     </div>
   )
 }
