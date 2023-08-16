@@ -71,7 +71,7 @@ const Login = (props) => {
                         <div class="w-full">
                         <div class="flex items-center justify-between -mt-[20px]">
                             <p className="inline-block ml-[170px] text-xs">Don't have an account?</p>
-                            <Link to='/choose'><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Sign Up</span></Link>
+                            <Link to='/registration'><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Sign Up</span></Link>
                         </div>
                           
                             <h1 class="mb-4 text-xl text-left mt-10 font-cardo text-gray-700">
@@ -132,7 +132,7 @@ const Login = (props) => {
                             </div>
 
                             <button class=" w-full px-4 py-2 text-sm leading-5 text-center transition-colors duration-150 border border-gray-200 rounded-lg focus:outline-none focus:shadow-outline-blue bg-white text-black font-semibold flex items-center justify-center font-jost" href="#"><img src={google} alt="" class="mr-2" /> Sign In with Google</button>
-                            <p className="text-xs pt-2 font-inter">Don't have an account? <Link to='/choose'><span className="text-yellow-400">Create an account</span></Link> It takes less than a minute.</p>
+                            <p className="text-xs pt-2 font-inter">Don't have an account? <Link to='/registration'><span className="text-yellow-400">Create an account</span></Link> It takes less than a minute.</p>
                         </div>
                         
                     </div>

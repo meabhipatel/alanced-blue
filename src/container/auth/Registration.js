@@ -63,11 +63,11 @@ const Registration = () => {
                                 placeholder="•••••••••••" type="password"  name='password'/>
                         </div>
 
-                        <button
+                        <Link to='/choose'><button
                             class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold"
-                            href="#">
+                            >
                             Create your account
-                        </button>
+                        </button></Link>
 
                         <div class="flex items-center">
                         <div class="flex-1 border-t-2 my-8"></div>

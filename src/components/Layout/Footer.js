@@ -11,10 +11,10 @@ const Footer = () => {
     <>
     <footer class="footer-1 bg-white py-8 sm:py-12">
   <div class="container mx-auto px-4">
-    <div class="sm:flex sm:flex-wrap sm:-mx-4 md:py-4">
-      <div class="px-4 sm:w-1/2 md:w-1/4 xl:w-1/6 text-left ml-20 mr-10">
-        <h5 class="text-xl font-bold font-cardo mb-6">Product</h5>
-        <ul class="list-none footer-links">
+  <div class="grid gap-3 px-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+    <div class="p-4 text-left">
+    <h5 class="text-xl font-bold font-cardo mb-6">Product</h5>
+        <ul class="list-none footer-links opacity-50">
           <li class="mb-2">
             <a href="#" class="hover:text-green-800">Employee database</a>
           </li>
@@ -34,10 +34,10 @@ const Footer = () => {
             <a href="#" class="hover:text-green-800">Recruiting</a>
           </li>
         </ul>
-      </div>
-      <div class="px-4 sm:w-1/2 md:w-1/4 xl:w-1/6 mt-8 sm:mt-0 text-left">
-        <h5 class="text-xl font-bold mb-6 font-cardo">Information</h5>
-        <ul class="list-none footer-links">
+    </div>
+    <div class="p-4 text-left">
+    <h5 class="text-xl font-bold mb-6 font-cardo">Information</h5>
+        <ul class="list-none footer-links opacity-50">
           <li class="mb-2">
             <a href="#" class="hover:text-green-800">FAQ</a>
           </li>
@@ -48,10 +48,10 @@ const Footer = () => {
             <a href="#" class="hover:text-green-800">Support</a>
           </li>
         </ul>
-      </div>
-      <div class="px-4 sm:w-1/2 md:w-1/4 xl:w-1/6 mt-8 md:mt-0 text-left">
-        <h5 class="text-xl font-bold mb-6 font-cardo">Company</h5>
-        <ul class="list-none footer-links">
+    </div>
+    <div class="p-4 text-left">
+    <h5 class="text-xl font-bold mb-6 font-cardo">Company</h5>
+        <ul class="list-none footer-links opacity-50">
           <li class="mb-2">
             <a href="#" class="hover:text-green-800">About us</a>
           </li>
@@ -65,32 +65,34 @@ const Footer = () => {
             <a href="#" class="hover:text-green-800">Lift media</a>
           </li>
         </ul>
-      </div>
-      <div class="px-4 mt-4 sm:w-1/3 xl:w-1/6 sm:mx-auto xl:mt-0 xl:ml-auto">
-        <div className='bg-[#F4F5F9] h-[220px] w-[350px] -mt-6 -ml-[120px]'>
-        <h5 class="text-xl font-bold font-cardo pt-[22px] text-start ml-[23px]">Subscribe</h5>
-        <input type="email" className='mt-3 -ml-[60px] p-2 text-sm focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Email Address'/>
-        <Link to=''><button class="inline-block text-sm px-4 py-[12px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold"><img src={arrow} alt="" /></button></Link>
-        <p className='text-[14px] pt-3 text-left pl-6'>Hello, we are Lift Media. Our goal is to translate <br />the positive effects from revolutionizing how <br /> companies engage with their clients & their <br /> team.</p>
-        </div>
-      </div>
     </div>
+    <div class="p-4">
+    <div className='bg-[#F4F5F9] lg:h-[220px] lg:w-[350px] -mt-6 lg:-ml-[100px]'>
+        <h5 class="text-xl font-bold font-cardo pt-[22px] text-start ml-[23px]">Subscribe</h5>
+        <input type="email" className='mt-3 lg:-ml-[60px] p-2 text-sm focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Email Address'/>
+        <Link to=''><button class="inline-block text-sm px-4 py-[12px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold"><img src={arrow} alt="" /></button></Link>
+        <p className='text-[14px] pt-3 text-left pl-6 opacity-50'>Hello, we are Lift Media. Our goal is to translate <br />the positive effects from revolutionizing how <br /> companies engage with their clients & their <br /> team.</p>
+        </div>
+    </div>
+</div>
 
-    <div class="sm:flex sm:flex-wrap sm:-mx-4 mt-6 pt-6 sm:mt-12 sm:pt-12 border-t text-[#0A142F]">
-      <div class="sm:w-full px-4 -mt-6 md:w-1/6 flex items-center flex-shrink-0">
+    <hr className='mx-14'/>
+    <div class="flex space-x-4 mt-5 px-[55px]">
+    <div class="flex-1 flex justify-start p-4 pl-0 pt-1">
+    <div class="md:w-1/6 flex items-center flex-shrink-0">
         <img src={logo} alt="" />
         <span class="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
       </div>
-      <div class="px-4 sm:w-1/2 md:w-1/6 md:mt-0 ml-[250px]">
-        <h6 class="font-bold mb-2 font-larsseit -mt-5 text-[14px] cursor-pointer">Terms</h6>
-        </div>
-        <div class="sm:w-1/2 md:w-1/6 md:mt-0">
-        <h6 class="font-bold mb-2 font-larsseit -mt-5 -ml-[290px] text-[14px] cursor-pointer">Privacy</h6>
-        </div>
-        <div class="sm:w-1/2 md:w-1/6 md:mt-0">
-        <h6 class="font-bold mb-2 font-larsseit -mt-5 -ml-[590px] text-[14px] cursor-pointer">Cookies</h6>
-        </div>
-        <div class="flex sm:justify-center xl:justify-start md:justify-end -mt-[42px] ml-[1160px]">
+    </div>
+    <div class="flex-1 flex justify-center p-4 pt-1">
+    <div class="flex space-x-4 w-full">
+        <div class="flex-1 p-2 font-bold font-larsseit text-[14px] cursor-pointer">Terms</div>
+        <div class="flex-1 p-2 font-bold font-larsseit text-[14px] cursor-pointer">Privacy</div>
+        <div class="flex-1 p-2 font-bold font-larsseit text-[14px] cursor-pointer">Cookies</div>
+    </div>
+    </div>
+    <div class="flex-1 flex justify-end p-4 pr-0 pt-1">
+    <div class="flex sm:justify-center xl:justify-start md:justify-end">
           <a href="" class="w-8 h-8 border-2 border-gray-400 rounded-full text-center py-1 text-gray-600 hover:text-white hover:bg-[#B6F36F] hover:border-[#B6F36F]">
             <img src={linkedin} alt="" className='ml-2 mt-1'/>
           </a>
@@ -102,6 +104,8 @@ const Footer = () => {
           </a>
         </div>
     </div>
+</div>
+
   </div>
 </footer>
     </>
