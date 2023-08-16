@@ -1,13 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import registerimg from '../../components/images/register.png'
 import google from '../../components/images/google.png'
 import box from '../../components/images/box.png'
 import registerimg2 from '../../components/images/register2.png'
+import { useDispatch } from 'react-redux';
+import { AddNewFreelancerAction } from "../../redux/Freelancer/FreelancerAction"
 
 
 
 const Registration = () => {
+
+    const [addFreelancer, setAddFreelancer] = useState('');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const AddFreelancer = () => {
+        const formData = new URLSearchParams();
+        formData.append("first_Name",addFreelancer.first_Name);
+        formData.append("last_Name",addFreelancer.last_Name);
+        formData.append("email",addFreelancer.email);
+        formData.append("password",addFreelancer.password);
+        formData.append("password2",addFreelancer.password);
+
+        dispatch(AddNewFreelancerAction(formData));
+        navigate('/')
+    }
+
+    const onChange = e =>{
+        setAddFreelancer({
+            ...addFreelancer,[e.target.name]: e.target.value
+        });
+    }
+
   return (
     <>
         <div class="flex items-center min-h-screen bg-gray-50">
@@ -33,17 +58,17 @@ const Registration = () => {
                             <label class="block text-sm text-left font-cardo">
                                 First Name
                             </label>
-                            <input type="email"
+                            <input type="text"
                                 class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
-                                placeholder="Your Name"  name=''/>
+                                placeholder="First Name"  name='first_Name' onChange={onChange}/>
                         </div>
                         <div className=''>
                             <label class="block text-sm text-left font-cardo">
                                 Last Name
                             </label>
-                            <input type="email"
+                            <input type="text"
                                 class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
-                                placeholder="Your Last Name"  name=''/>
+                                placeholder="Your Last Name"  name='last_Name' onChange={onChange}/>
                         </div>
                         </div>
                         <div>
@@ -52,7 +77,7 @@ const Registration = () => {
                             </label>
                             <input type="email"
                                 class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
-                                placeholder="example@gmail.com"  name='email'/>
+                                placeholder="example@gmail.com"  name='email' onChange={onChange}/>
                         </div>
                         <div>
                             <label class="block mt-4 text-sm text-left font-cardo">
@@ -60,14 +85,14 @@ const Registration = () => {
                             </label>
                             <input
                                 class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
-                                placeholder="•••••••••••" type="password"  name='password'/>
+                                placeholder="•••••••••••" type="password"  name='password' onChange={onChange}/>
                         </div>
 
-                        <Link to='/choose'><button
+                        <button
                             class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold"
-                            >
+                            href="#" onClick={AddFreelancer}>
                             Create your account
-                        </button></Link>
+                        </button>
 
                         <div class="flex items-center">
                         <div class="flex-1 border-t-2 my-8"></div>
