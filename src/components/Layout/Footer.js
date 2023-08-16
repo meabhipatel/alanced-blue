@@ -9,9 +9,9 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <>
-    <footer class="footer-1 bg-white py-8 sm:py-12">
-  <div class="container mx-auto px-4">
-  <div class="grid gap-3 px-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="footer-1 bg-white py-8 sm:py-12">
+  <div className="container mx-auto px-4">
+    <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:px-20">
     <div class="p-4 text-left">
     <h5 class="text-xl font-bold font-cardo mb-6">Product</h5>
         <ul class="list-none footer-links opacity-50">
@@ -74,25 +74,26 @@ const Footer = () => {
         <p className='text-[14px] pt-3 text-left pl-6 opacity-50'>Hello, we are Lift Media. Our goal is to translate <br />the positive effects from revolutionizing how <br /> companies engage with their clients & their <br /> team.</p>
         </div>
     </div>
-</div>
+    </div>
 
-    <hr className='mx-14'/>
-    <div class="flex space-x-4 mt-5 px-[55px]">
-    <div class="flex-1 flex justify-start p-4 pl-0 pt-1">
-    <div class="md:w-1/6 flex items-center flex-shrink-0">
+    <hr className="mx-4 my-6 sm:mx-14"/>
+
+    <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-5 px-4 sm:px-[55px]">
+      <div className="flex-1 flex justify-start p-4 pl-0 pt-1">
+      <div class="md:w-1/6 flex items-center flex-shrink-0">
         <img src={logo} alt="" />
         <span class="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
       </div>
-    </div>
-    <div class="flex-1 flex justify-center p-4 pt-1">
-    <div class="flex space-x-4 w-full">
+      </div>
+      <div className="flex-1 flex justify-center p-4 pt-1">
+      <div class="flex space-x-4 w-full">
         <div class="flex-1 p-2 font-bold font-larsseit text-[14px] cursor-pointer">Terms</div>
         <div class="flex-1 p-2 font-bold font-larsseit text-[14px] cursor-pointer">Privacy</div>
         <div class="flex-1 p-2 font-bold font-larsseit text-[14px] cursor-pointer">Cookies</div>
     </div>
-    </div>
-    <div class="flex-1 flex justify-end p-4 pr-0 pt-1">
-    <div class="flex sm:justify-center xl:justify-start md:justify-end">
+      </div>
+      <div className="flex-1 flex justify-end p-4 pr-0 pt-1">
+      <div class="flex sm:justify-center xl:justify-start md:justify-end">
           <a href="" class="w-8 h-8 border-2 border-gray-400 rounded-full text-center py-1 text-gray-600 hover:text-white hover:bg-[#B6F36F] hover:border-[#B6F36F]">
             <img src={linkedin} alt="" className='ml-2 mt-1'/>
           </a>
@@ -103,9 +104,8 @@ const Footer = () => {
           <img src={twitter} alt="" className='ml-2 mt-1.5'/>
           </a>
         </div>
+      </div>
     </div>
-</div>
-
   </div>
 </footer>
     </>

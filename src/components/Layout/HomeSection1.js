@@ -15,7 +15,7 @@ const HomeSection1 = () => {
   return (
     <div>
         <h4 className="pt-16 font-cardo text-[20px]">Trusted by 4,000+ companies</h4>
-        <div class="grid grid-cols-6 gap-4 px-32 mt-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 px-32 mt-8 cursor-pointer">
     <div class="p-4">
         <img src={coinbase} alt="" />
     </div>
@@ -36,32 +36,30 @@ const HomeSection1 = () => {
     </div>
 </div>
 <hr className='mx-28 my-9'/>
-<div class="grid grid-cols-2 gap-4 px-32 mt-6">
-    <div class="p-4 ml-24">
-    <div class="relative p-10">
-  <div class="absolute top-0 left-0 w-[190px] h-[210px] rounded shadow-lg">
-  <img src={client2} alt="" />
-  </div>
-  <div class="absolute top-[65px] left-[170px] w-[220px] h-[295px] rounded shadow-lg">
-  <img src={client1} alt="" className='h-[295px] w-[222px]'/>
-  </div>
-  <div class="absolute top-[276.5px] left-[30px] p-6 w-[170px] h-[83px] rounded shadow-lg z-20 bg-white">
-    <img src={happyclient} alt="" />
-  </div>
-</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 md:px-32 mt-6">
+    <div class="relative p-10 md:ml-24">
+        <div class="md:absolute md:top-0 md:left-0 w-[190px] h-[210px] md:w-[190px] md:h-[210px] rounded shadow-lg">
+            <img src={client2} alt="" />
+        </div>
+        <div class="mt-4 md:absolute md:top-[65px] md:left-[170px] w-full md:w-[220px] h-auto md:h-[295px] rounded shadow-lg">
+            <img src={client1} alt="" className="h-auto w-full md:h-[295px] md:w-[222px]"/>
+        </div>
+        <div class="mt-4 md:absolute md:top-[276.5px] md:left-[30px] p-6 w-[170px] h-[83px] rounded shadow-lg z-20 bg-white">
+            <img src={happyclient} alt="" />
+        </div>
     </div>
     <div class="p-4 text-left">
-      <h4 className='font-cardo text-[23px] text-[#0A142F] mt-5'>Simple Solutions for Complex <br />Connections</h4>
-      <p className='font-inter text-[13px] opacity-50 mt-3'>Lorem Ipsum is simply dummy text of the printing and typesetting <br /> industry. Lorem Ipsum has been the industry's standard dummy text <br /> ever since the 1500s, when an unknown printer took a galley of type <br /> and scrambled it to make a type specimen book. It has survived not <br /> only five centuries, but also the leap into electronic typesetting,<br /> remaining essentially unchanged. It was popularised in the 1960s with <br />the release of Letraset sheets containing Lorem Ipsum passages, and <br /> more recently with desktop publishing software like Aldus PageMaker <br /> including versions of Lorem Ipsum.</p>
-      <div class="flex items-center space-x-3 mt-4">
-        <img src={circlecheck} alt="" className='h-5 w-5'/>
-    <span className='pr-6 font-inter text-[15px]'>High Analysis</span>
-    <img src={circlecheck} alt="" className='h-5 w-5'/>
-    <span className='font-inter text-[15px]'>Certified Institute</span>
-</div>
-<div className='mt-7'>
-<Link to=''><span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Read More</span></Link>
-</div>
+        <h4 className='font-cardo text-lg md:text-[23px] text-[#0A142F] mt-5'>Simple Solutions for Complex <br />Connections</h4>
+        <p className='font-inter text-sm md:text-[13px] opacity-50 mt-3'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ,including versions of Lorem Ipsum.</p>
+        <div class="flex flex-wrap items-center space-x-3 mt-4">
+            <img src={circlecheck} alt="" className='h-5 w-5'/>
+            <span className='pr-6 font-inter text-[15px]'>High Analysis</span>
+            <img src={circlecheck} alt="" className='h-5 w-5'/>
+            <span className='font-inter text-[15px]'>Certified Institute</span>
+        </div>
+        <div className='mt-7'>
+            <Link to=''><span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Read More</span></Link>
+        </div>
     </div>
 </div>
 
