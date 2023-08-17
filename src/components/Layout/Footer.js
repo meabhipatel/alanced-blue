@@ -78,7 +78,7 @@ const Footer = () => {
 
     <hr className="mx-4 my-6 sm:mx-14"/>
 
-    <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-5 px-4 sm:px-[55px]">
+    <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-5 px-4 sm:px-[55px]">
       <div className="flex-1 flex justify-start p-4 pl-0 pt-1">
       <div class="md:w-1/6 flex items-center flex-shrink-0">
         <img src={logo} alt="" />

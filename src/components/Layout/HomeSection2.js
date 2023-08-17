@@ -21,7 +21,7 @@ const HomeSection2 = () => {
     <h1 className='text-center'>Find Top Freelancer</h1>
     <div className='border-b border-gray-600 w-20 mx-auto mt-5'></div>
 </div>
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mx-4 md:mx-28 mt-10">
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mx-4 md:mx-28 mt-10 px-5">
     <div>
         <Card className="bg-[#EEF8F9] rounded">
         <CardBody>
@@ -168,200 +168,62 @@ const HomeSection2 = () => {
         <span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">See All Skills</span>
     </Link>
 </div>
+   
+    <div className="container mx-auto px-6 mt-16 mb-10 text-3xl font-cardo">
+    <h1>It’s Easy to Get Work Done on Alanced</h1>
+    <div className="border-b border-gray-600 w-20 mx-auto mt-5"></div>
+</div>
+<div className="container mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+    <div>
+        <img src={job} alt="" className="lg:ml-[30%] ml-0" />
+        <Typography variant="h5" className="lg:text-center text-left mt-3 font-cardo">
+            Post a Job
+        </Typography>
+        <Typography variant="h5" className="font-inter opacity-40 text-xs mt-2 lg:text-center text-left">
+            Create your free job posting and<br/> 
+            start receiving Quotes within<br/> 
+            hours.
+        </Typography>
+    </div>
+    <div>
+        <img src={free} alt="" className="lg:ml-[30%] ml-0" />
+        <Typography variant="h5" className="lg:text-center text-left mt-3 font-cardo">
+            Hire Freelancers
+        </Typography>
+        <Typography variant="h5" className="font-inter opacity-40 text-xs mt-2 lg:text-center text-left">
+            Compare the Quotes you receive<br/>
+            and hire the best freelance<br/>
+            professionals for the job.
+        </Typography>
+    </div>
+    <div>
+        <img src={done} alt="" className="lg:ml-[30%] ml-0" />
+        <Typography variant="h5" className="lg:text-center text-left mt-3 font-cardo">
+            Get Work Done
+        </Typography>
+        <Typography variant="h5" className="font-inter opacity-40 text-xs mt-2 lg:text-center text-left">
+            Decide on how and when <br /> payments will be made and use <br />
+            WorkRooms to collaborate,<br /> communicate and track work.
+        </Typography>
+    </div>
+    <div>
+        <img src={payment} alt="" className="lg:ml-[30%] ml-0" />
+        <Typography variant="h5" className="lg:text-center text-left mt-3 font-cardo">
+            Make Secure Payments
+        </Typography>
+        <Typography variant="h5" className="font-inter opacity-40 mt-2 lg:text-center text-left text-xs">
+            Choose from multiple payment <br /> methods with SafePay payment <br /> protection.
+        </Typography>
+    </div>
+</div>
+<div className="container mx-auto px-6 mt-8 text-center">
+    <Link to="">
+        <span className="inline-block text-sm px-4 py-2 bg-gradient-to-r from-green-600 to-[#E3FF75] border rounded text-white font-semibold">
+            See How Alanced Work
+        </span>
+    </Link>
+</div>
 
-    {/* <div className='mt-10 mb-10 text-3xl font-cardo'>
-        <h1 className=''>Find Top Freelancer</h1>
-        <div className=' border-b border-gray-600 w-20 mx-auto mt-5'></div>
-    </div>
-    <div class="flex flex-row mx-28 space-x-10">
-    <div class="basis-1/3">
-    <Card className="bg-[#EEF8F9]">
-      <CardBody>
-        <img src={write} alt="" />
-        <Typography variant="h5" color="" className=" text-left mt-5 font-cardo">
-          Writing &
-        </Typography>
-        <Typography variant="h5" color="" className="text-left font-cardo">
-          Translation
-        </Typography>
-        <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-          218,356 Freelancers
-        </Typography>
-      </CardBody>
-    </Card>
-    </div>
-    <div class="basis-1/3">
-    <Card className="bg-[#FEF8F8]">
-      <CardBody>
-        <img src={pro} alt="" />
-        <Typography variant="h5" color="" className=" text-left mt-5 font-cardo">
-          Programming &
-        </Typography>
-        <Typography variant="h5" color="" className="text-left font-cardo">
-          Software
-        </Typography>
-        <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-          309,384 Freelancers
-        </Typography>
-      </CardBody>
-    </Card>
-    </div>
-    <div class="basis-1/3">
-    <Card className="bg-[#EEECF7]">
-      <CardBody>
-        <img src={desig} alt="" />
-        <Typography variant="h5" color="" className=" text-left mt-5 font-cardo">
-          Design &
-        </Typography>
-        <Typography variant="h5" color="" className="text-left font-cardo">
-          Art
-        </Typography>
-        <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-          218,356 Freelancers
-        </Typography>
-      </CardBody>
-    </Card>
-    </div>
-    <div class="basis-1/3">
-    <Card className="bg-[#FDF6E4]">
-      <CardBody>
-        <img src={admistrative} alt="" />
-        <Typography variant="h5" color="" className=" text-left mt-5 font-cardo">
-          Administrative &
-        </Typography>
-        <Typography variant="h5" color="" className="text-left font-cardo">
-          Secretarial
-        </Typography>
-        <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-          100,130 Freelancers
-        </Typography>
-      </CardBody>
-    </Card>
-    </div>
-    </div>
-    <div class="flex flex-row mx-28 space-x-10">
-        <div class="basis-1/3 mt-10">
-        <Card className="bg-[#DBD7FB]">
-        <CardBody>
-            <img src={sale} alt="" />
-            <Typography variant="h5" color="" className=" text-left mt-5 font-cardo">
-            Sales 
-            </Typography>
-            <Typography variant="h5" color="" className="text-left font-cardo">
-            & Marketing
-            </Typography>
-            <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-            76,605 Freelancers
-            </Typography>
-        </CardBody>
-        </Card>
-        </div>
-        <div class="basis-1/3 mt-10">
-        <Card className="bg-[#D3FFDE]">
-        <CardBody>
-            <img src={engi} alt="" />
-            <Typography variant="h5" color="" className="text-left mt-5 font-cardo">
-            Engineering &
-            </Typography>
-            <Typography variant="h5" color="" className="text-left font-cardo">
-            Architecture
-            </Typography>
-            <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-            53,508 Freelancers
-            </Typography>
-        </CardBody>
-        </Card>
-        </div>
-        <div class="basis-1/3 mt-10">
-        <Card className="bg-[#FFE2C8]">
-        <CardBody>
-            <img src={busines} alt="" />
-            <Typography variant="h5" color="" className=" text-left mt-5 font-cardo">
-            Business &
-            </Typography>
-            <Typography variant="h5" color="" className="text-left font-cardo">
-            Finance
-            </Typography>
-            <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-            52,417 Freelancers
-            </Typography>
-        </CardBody>
-        </Card>
-        </div>
-        <div class="basis-1/3 mt-10">
-        <Card className="bg-[#D3EFFD]">
-        <CardBody>
-            <img src={edu} alt="" />
-            <Typography variant="h5" color="" className=" text-left mt-5 font-cardo">
-            Education
-            </Typography>
-            <Typography variant="h5" color="" className="text-left font-cardo">
-            & Training
-            </Typography>
-            <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-            8,837 Freelancers
-            </Typography>
-        </CardBody>
-        </Card>
-        </div>
-    </div>
-    <div className='mt-8'>
-    <Link to=''><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-2 font-semibold">See All Skills</span></Link>
-    </div> */}
-    <div className='mb-10 text-3xl font-cardo mt-16'>
-        <h1 className=''>It’s Easy to Get Work Done on Alanced</h1>
-        <div className=' border-b border-gray-600 w-20 mx-auto mt-5'></div>
-    </div>
-    <div class="flex flex-row mx-28 space-x-10">
-    <div class="basis-1/3">
-    <div><img src={job} alt="" className='ml-[30%]' /></div>
-    <Typography variant="h5" color="" className=" text-center mt-3 font-cardo">
-    Post a Job
-    </Typography>
-    <Typography variant="h5" color="" className="font-inter opacity-40 text-xs mt-2 text-center">
-    Create your free job posting and<br/> 
-    start receiving Quotes within<br/> 
-    hours.
-    </Typography>
-    </div>
-    <div class="basis-1/3">
-    <div><img src={free} alt="" className='ml-[30%]' /></div>
-    <Typography variant="h5" color="" className=" text-center mt-3 font-cardo">
-    Hire Freelancers
-    </Typography>
-    <Typography variant="h5" color="" className="font-inter opacity-40 text-xs mt-2 text-center">
-    Compare the Quotes you receive<br/>
-     and hire the best freelance<br/>
-    professionals for the job..
-    </Typography>
-    </div>
-    <div class="basis-1/3">
-    <div><img src={done} alt="" className='ml-[30%]' /></div>
-    <Typography variant="h5" color="" className=" text-center mt-3 font-cardo">
-    Get Work Done
-    </Typography>
-    <Typography variant="h5" color="" className="font-inter opacity-40 text-xs mt-2 text-center">
-    Decide on how and when <br/>
-    payments will be made and use <br/>
-    WorkRooms to collaborate, <br/>
-    communicate and track work.
-    </Typography>
-    </div>
-    <div class="basis-1/3">
-    <div><img src={payment} alt="" className='mx-auto' /></div>
-    <Typography variant="h5" color="" className=" text-center mt-3 font-cardo">
-    Make Secure Payments
-    </Typography>
-    <Typography variant="h5" color="" className="font-inter opacity-40 mt-2 text-center text-xs">
-    Choose from multiple payment<br/>
-     methods with SafePay payment<br/>
-      protection.
-    </Typography>
-    </div>
-    </div>
-    <div className='mt-8'>
-    <Link to=''><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-2 font-semibold">See How Alanced Work</span></Link>
-    </div>
     </>
   )
 }
