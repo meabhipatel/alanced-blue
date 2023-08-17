@@ -5,7 +5,13 @@ const API = {
 
   Freelancers: {
     Freelancer: {
-      Registration: '/account/freelancer/registration'
+      FreelancerRegistration: '/account/freelancer/registration'
+    }
+  },
+  
+  Hirers: {
+    Hirer: {
+      HirerRegistration: '/account/hirer/registration'
     }
   }
 };

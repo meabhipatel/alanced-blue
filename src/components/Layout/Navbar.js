@@ -5,7 +5,7 @@ import navback from '../images/Nav_Background.png'
 
 const Navbar = () => {
   return (
-    <div className='sticky top-0 bg-cover' style={{ backgroundImage: `url(${navback})`}}>
+    <div className='sticky z-50 top-0 bg-cover' style={{ backgroundImage: `url(${navback})`}}>
       <nav class="flex items-center justify-between flex-wrap p-6">
   <div class="flex items-center flex-shrink-0 ml-[129px]">
     <img src={logo} alt=""  />
@@ -29,7 +29,7 @@ const Navbar = () => {
     <div className='mr-[100px]'>
       <Link to='/login'><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-2 font-semibold">Sign In</span></Link>
       <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
-      <Link to='/registration'><button class="px-2 py-1 bg-[#E2F9EE]"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px]">Sign Up</p></button></Link>
+      <Link to='/choose'><button class="px-2 py-1 bg-[#E2F9EE]"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px]">Sign Up</p></button></Link>
 </div>
     </div>
   </div>

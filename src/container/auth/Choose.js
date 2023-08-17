@@ -7,6 +7,7 @@ import freelancer from '../../components/images/freelancer.png';
 const Choose = () => {
   
   const [selectedOption, setSelectedOption] = useState('client');
+  console.log(selectedOption)
 
   return (
     <div className="h-screen flex items-center justify-center" style={{ 
@@ -37,11 +38,13 @@ const Choose = () => {
 </div>
 
 
-    <Link to='/'><button 
+   {selectedOption === 'freelancer' ?  <Link to='/freelancer/registration'><button 
         class="block w-[320px] px-4 py-2 -mt-2 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold">
        {selectedOption === 'client' ? 'Join as a Client' :'Join as a Freelancer'}
-    </button></Link>
-    <p className="text-xs pt-2 font-inter">Already have an account? <Link to='/login'><span className="text-yellow-400">Log In</span></Link></p>
+    </button></Link> :  <Link to='/hirer/registration'><button 
+        class="block w-[320px] px-4 py-2 -mt-2 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold">
+       {selectedOption === 'client' ? 'Join as a Client' :'Join as a Freelancer'}
+    </button></Link> }
 </div>
 
 
