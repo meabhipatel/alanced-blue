@@ -4,7 +4,7 @@ import registerimg from '../../components/images/register.png'
 import google from '../../components/images/google.png'
 import box from '../../components/images/box.png'
 import registerimg2 from '../../components/images/register2.png'
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector } from 'react-redux';
 import { AddNewFreelancerAction } from "../../redux/Freelancer/FreelancerAction"
 
 
@@ -14,6 +14,19 @@ const Registration = () => {
     const [addFreelancer, setAddFreelancer] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const addfree = useSelector(state => state.freelancer.addfree);
+    console.log(addfree)
+    const [show, toogleShow] = useState(false);
+    const Loader = () =>{
+        if(addfree ==false || addfree == true){
+            toogleShow(false)
+        }
+        return(
+            <>
+            <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-white mx-auto"></div>
+            </>
+        )
+    }
 
     const AddFreelancer = () => {
         const formData = new URLSearchParams();
@@ -24,7 +37,7 @@ const Registration = () => {
         formData.append("password2",addFreelancer.password);
 
         dispatch(AddNewFreelancerAction(formData));
-        navigate('/')
+        toogleShow(true)
     }
 
     const onChange = e =>{
@@ -91,7 +104,7 @@ const Registration = () => {
                         <button
                             class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold"
                             href="#" onClick={AddFreelancer}>
-                            Create your account
+                            {show ? <div><Loader/></div> : "Create your account"}
                         </button>
 
                         <div class="flex items-center">

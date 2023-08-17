@@ -6,16 +6,17 @@ import {
     Navigate,
     useNavigate
   } from "react-router-dom";
-  import React from 'react'
+import React from 'react'
   // import Home from "../container/Home";
-  import Login from "../container/auth/Login";
+import Login from "../container/auth/Login";
   // import About from "../container/About";
   // import Header from "../components/Header";
   // import Products from "../container/Products";
-  import { useSelector } from "react-redux";
-  import { ToastContainer } from "react-toastify";
-  import Header from "../components/Layout/Header";
-import Registration from "../container/auth/Registration";
+import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import Header from "../components/Layout/Header";
+import FreelancerRegistration from '../container/freelancer/FreelancerRegistration'
+import HirerRegistration from '../container/hirer/HirerRegistration'
 import Choose from "../container/auth/Choose";
   
   
@@ -38,7 +39,8 @@ import Choose from "../container/auth/Choose";
         <Routes>
           <Route path="/" element={<Header />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/registration" element={<Registration />} />
+          <Route path="/freelancer/registration" element={<FreelancerRegistration />} />
+          <Route path="/hirer/registration" element={<HirerRegistration/>}/>
           <Route path="/choose" element={<Choose />} />
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>

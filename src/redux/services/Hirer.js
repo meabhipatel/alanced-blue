@@ -3,9 +3,9 @@ import DataService from "../../config/Dataservice"
 import { handleError, setHeadersWithAccessToken } from './Comman';
 
 
-export const AddFreelancer = async (data) =>{
+export const AddHirer = async (data) =>{
     // setHeadersWithAccessToken(token);
-    return DataService.post(API.Freelancers.Freelancer.FreelancerRegistration, data)
+    return DataService.post(API.Hirers.Hirer.HirerRegistration, data)
     .then(res => {
         return res.data;
     })
