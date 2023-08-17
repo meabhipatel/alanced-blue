@@ -12,66 +12,56 @@ const Login = (props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const [show, toogleShow] = useState(false)
-    const [loading, setLoading] = useState(false);
   
-    
-
-    const User = useSelector(state => state.login.accessToken)
+  
     const login = useSelector(state => state.login.Login)
-    const loginstatus = useSelector(state => state.login.status)
+  
    
+    const Loader = () =>{
+        if(login ==false || login == true){
+            toogleShow(false)
+        }
+        return(
+            <>
+            <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-white mx-auto"></div>
+            </>
+        )
+    }
 
     const onChange = (e) => {
         setAuthDetails({ ...authDetails, [e.target.name]: e.target.value })
     }
 
    
-    const LoginButton = () => {
-        const uname = document.getElementById("uname").value;
-        const upass = document.getElementById("upass").value;
-    
-        if (uname.trim().length !== 0 && upass.trim().length !== 0) {
-            setLoading(true);
-    
-            dispatch(LoginAction(authDetails, navigate));
-        } else {
-            toogleShow(false);
-            setLoading(false);
+
+    const LoginButton = async() => {
+        const uname = document.getElementById("uname").value
+        const upass = document.getElementById("upass").value
+        // const login = await login
+        if(uname.trim().length && upass.trim().length != 0)
+        {
+        toogleShow(true)
         }
+        else{
+            toogleShow(false)
+        }
+        dispatch(LoginAction(authDetails, navigate))
     }
     
-    
-    useEffect(() => {
-        if (loginstatus === 200) {
-            toogleShow(true);
-            setTimeout(() => {
-                navigate("/");
-                setLoading(false);
-            }, 2000);
-        } else if (loginstatus !== undefined && loginstatus !== 200) {
-            toogleShow(false);
-            setTimeout(() => {
-                setLoading(false); 
-            }, 2000);
-        }
-    }, [loginstatus]);
-    
-    
-    
+     
     return (
         <>
-            <div class="flex items-center min-h-screen bg-gray-50">
-            <div class="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl">
-                <div class="flex flex-col md:flex-row">
-                    <div class="h-32 md:h-auto md:w-[45%]">
-                        <img class="w-full h-[580px]" src={loginimg}
-                            alt="img" />
-                    </div>
-                    <div class="flex items-center justify-center sm:px-14 md:w-[55%]">
-                        <div class="w-full">
-                        <div class="flex items-center justify-between -mt-[20px]">
+      <div className="flex items-center min-h-screen bg-gray-50">
+    <div className="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg">
+        <div className="flex flex-col md:flex-row">
+            <div className="w-full md:w-[45%]">
+                <img className="w-full h-[580px] md:h-auto object-cover" src={loginimg} alt="img" />
+            </div>
+            <div className="w-full flex items-center justify-center px-4 sm:px-14 md:w-[55%] mt-8 md:mt-0">
+                <div className="w-full">
+                <div class="flex items-center justify-between -mt-[20px]">
                             <p className="inline-block ml-[170px] text-xs">Don't have an account?</p>
-                            <Link to='/registration'><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Sign Up</span></Link>
+                            <Link to='/choose'><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Sign Up</span></Link>
                         </div>
                           
                             <h1 class="mb-4 text-xl text-left mt-10 font-cardo text-gray-700">
@@ -105,25 +95,13 @@ const Login = (props) => {
                                     Reset Password
                                 </span></Link>
                             </div>
-
-                            {/* <button
+                            <button
                                 class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold"
-                                href="#" onClick={LoginButton}>
-                                Sign In
-                            </button> */}
-
-<button
-    class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold"
-    href="#"
-    onClick={LoginButton}
-    disabled={loading}
->
-    {loading ? (
-        <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-white mx-auto"></div>
-    ) : (
-        "Sign In"
-    )}
-</button>
+                                href="#"
+                                onClick={LoginButton}
+                            >
+                                {show ? <div><Loader/></div> : "Sign In"}
+                            </button>
 
                             <div class="flex items-center">
                             <div class="flex-1 border-t-2 my-8"></div>
@@ -132,13 +110,13 @@ const Login = (props) => {
                             </div>
 
                             <button class=" w-full px-4 py-2 text-sm leading-5 text-center transition-colors duration-150 border border-gray-200 rounded-lg focus:outline-none focus:shadow-outline-blue bg-white text-black font-semibold flex items-center justify-center font-jost" href="#"><img src={google} alt="" class="mr-2" /> Sign In with Google</button>
-                            <p className="text-xs pt-2 font-inter">Don't have an account? <Link to='/registration'><span className="text-yellow-400">Create an account</span></Link> It takes less than a minute.</p>
-                        </div>
-                        
-                    </div>
+                            <p className="text-xs pt-2 font-inter">Don't have an account? <Link to='/choose'><span className="text-yellow-400">Create an account</span></Link> It takes less than a minute.</p>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
         </>
     )
 }
