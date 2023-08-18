@@ -2,8 +2,9 @@ import React, { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginAction } from "../../redux/Auth/AuthAction";
 import { Link, useNavigate } from "react-router-dom";
-import loginimg from '../../components/images/login.png';
+import loginimg from '../../components/images/loginimg.png';
 import google from '../../components/images/google.png';
+import logo from '../../components/images/Alanced.png'
 
 
 const Login = (props) => {
@@ -54,9 +55,16 @@ const Login = (props) => {
       <div className="flex items-center min-h-screen bg-gray-50">
     <div className="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg">
         <div className="flex flex-col md:flex-row">
-            <div className="w-full md:w-[45%]">
-                <img className="w-full h-[580px] md:h-auto object-cover" src={loginimg} alt="img" />
-            </div>
+            <div className="relative w-full md:w-[45%]">
+    <img className="w-full h-[580px] md:h-auto object-cover" src={loginimg} alt="img" />
+    <Link to='/'>
+        <div className="absolute rounded-tr rounded-br rounded-tl-none rounded-bl-none top-[29px] left-[18%] sm:left-1/4 md:left-[73.2px] transform -translate-x-1/2 flex items-center space-x-2 lg:bg-white bg-[#E2F9EE] p-3">
+            <img src={logo} alt="Logo" className="h-5 w-5 md:h-6 md:w-6" /> 
+            <span className="font-semibold text-[15px] tracking-widest ml-2 font-poppins text-[#031136] md:text-[16px]">ALANCED</span>
+        </div> 
+    </Link>
+</div>
+
             <div className="w-full flex items-center justify-center px-4 sm:px-14 md:w-[55%] mt-8 md:mt-0">
                 <div className="w-full">
                 <div class="flex items-center justify-between -mt-[20px]">
