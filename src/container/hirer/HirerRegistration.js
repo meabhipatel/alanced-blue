@@ -6,7 +6,7 @@ import box from '../../components/images/box.png'
 import registerimg2 from '../../components/images/register2.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { AddNewHirerAction } from '../../redux/Hirer/HirerAction'
-
+import logo from '../../components/images/Alanced.png'
 
 
 const Registration = () => {
@@ -19,6 +19,7 @@ const Registration = () => {
     const Loader = () =>{
         if(addhirer ==false || addhirer == true){
             toogleShow(false)
+            navigate('/')
         }
         return(
             <>
@@ -47,17 +48,21 @@ const Registration = () => {
 
   return (
     <>
-        <div class="flex items-center min-h-screen bg-gray-50">
-        <div class="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl">
-            <div class="flex flex-col md:flex-row">
-                <div class="h-32 md:h-auto md:w-[45%]">
-                    <img class="w-full h-[580px]" src={registerimg2}
-                        alt="img"/>
-                        {/* <img src={box} alt="" className='display: inline -mt-[188%] h-[18%] ml-[61%] animate-bounce'/> */}
-                </div>
-                <div class="flex items-center justify-center sm:px-14 md:w-[57%]">
-                    <div class="w-full">
-                    <div class="flex items-center justify-between -mt-[20px]">
+    <div class="flex items-center min-h-screen bg-gray-50">
+    <div class="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl">
+        <div class="flex flex-col md:flex-row">
+            <div class="relative h-[535px] md:h-auto md:w-[45%]">
+                <img class="w-full h-full object-cover md:h-[580px]" src={registerimg2} alt="img"/>
+                <Link to='/'>
+        <div className="absolute rounded-tr rounded-br rounded-tl-none rounded-bl-none top-[19px] left-[18%] sm:left-1/4 md:left-[73.2px] transform -translate-x-1/2 flex items-center space-x-2 lg:bg-white bg-[#E2F9EE] p-3">
+            <img src={logo} alt="Logo" className="h-5 w-5 md:h-6 md:w-6" /> 
+            <span className="font-semibold text-[15px] tracking-widest ml-2 font-poppins text-[#031136] md:text-[16px]">ALANCED</span>
+        </div> 
+    </Link>
+            </div>
+            <div class="flex items-center justify-center p-8 sm:px-14 md:w-[57%]">
+                <div class="w-full">
+                <div class="flex items-center justify-between -mt-[20px]">
                         <p className="inline-block ml-[170px] text-xs">Already have an account?</p>
                         <Link to='/login'><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Sign in</span></Link>
                     </div>
@@ -114,12 +119,12 @@ const Registration = () => {
 
                         <button class=" w-full px-4 py-2 text-sm leading-5 text-center transition-colors duration-150 border border-gray-200 rounded-lg focus:outline-none focus:shadow-outline-blue bg-white text-black font-semibold flex items-center justify-center font-jost" href="#"><img src={google} alt="" class="mr-2" /> Sign In with Google</button>
                         <p className="text-xs text-left pt-3 font-inter">Already have and Account? <Link to='/login'><span className="text-yellow-400">Sign in</span></Link></p>
-                    </div>
-                    
                 </div>
             </div>
         </div>
     </div>
+</div>
+
     </>
 )
 }
