@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import loginimg from '../../components/images/loginimg.png';
 import google from '../../components/images/google.png';
 import logo from '../../components/images/Alanced.png'
+import { toast } from "react-toastify";
 
 
 const Login = (props) => {
@@ -13,11 +14,10 @@ const Login = (props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const [show, toogleShow] = useState(false)
-  
-  
+    const [inputType, setInputType] = useState('password');
+    const [rememberMe, setRememberMe] = useState(false);
     const login = useSelector(state => state.login.Login)
   
-   
     const Loader = () =>{
         if(login ==false || login == true){
             toogleShow(false)
@@ -27,6 +27,11 @@ const Login = (props) => {
             <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-white mx-auto"></div>
             </>
         )
+    }
+
+    
+    const togglePasswordVisibility = () => {
+        setInputType(inputType === 'password' ? 'text' : 'password');
     }
 
     const onChange = (e) => {
@@ -43,17 +48,33 @@ const Login = (props) => {
         {
         toogleShow(true)
         }
+        else if (!(uname.trim().length && upass.trim().length)){
+            toast.error("Email and password Both fields are required");
+            return;
+        }
         else{
             toogleShow(false)
         }
-        dispatch(LoginAction(authDetails, navigate))
+        toogleShow(true);
+        dispatch(LoginAction(authDetails, navigate,rememberMe))
     }
+    
+    useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+        const expiry = new Date(localStorage.getItem('tokenExpiry'));
+    
+        if (token && new Date() < expiry) {
+        } else {
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('tokenExpiry');
+        }
+    }, []);
     
      
     return (
         <>
       <div className="flex items-center min-h-screen bg-gray-50">
-    <div className="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg">
+    <div className="flex-1 h-full max-w-4xl mx-auto bg-white">
         <div className="flex flex-col md:flex-row">
             <div className="relative w-full md:w-[45%]">
     <img className="w-full h-[580px] md:h-auto object-cover" src={loginimg} alt="img" />
@@ -78,23 +99,39 @@ const Login = (props) => {
                             </h1>
                             <div>
                                 <label class="block text-sm text-left font-cardo">
-                                    Email Address
+                                    Email Address <span class="text-red-500">*</span>
                                 </label>
                                 <input type="email"
                                     class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
-                                    placeholder="example@gmail.com" id="uname" onChange={onChange} name='email'/>
+                                    placeholder="example@gmail.com" id="uname" onChange={onChange} name='email' required/>
                             </div>
                             <div>
-                                <label class="block mt-4 text-sm text-left font-cardo">
-                                    Password
-                                </label>
+                            <label class="block mt-4 text-sm text-left font-cardo">
+                                Password <span class="text-red-500">*</span>
+                            </label>
+                            <div className="relative">
                                 <input
+                                    type={inputType}
                                     class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
-                                    placeholder="•••••••••••" type="password" id="upass" onChange={onChange} name='password'/>
+                                    placeholder="•••••••••••"
+                                    name='password'
+                                    id="upass"
+                                    onChange={onChange}
+                                    required
+                                />
+                                <button 
+                                    onClick={togglePasswordVisibility}
+                                    className="absolute top-1/2 right-3 transform -translate-y-1/2"
+                                >
+                                    <i className={`fa ${inputType === 'password' ? 'fa-eye-slash' : 'fa-eye'} text-lime-600`}></i>
+                                </button>
                             </div>
+                        </div>
                             <div class="mb-6 mt-4 text-left flex justify-between items-center">
                                 <label class="flex items-center font-inter">
-                                    <input class="mr-2 leading-tight accent-lime-600" type="checkbox"/>
+                                    <input class="mr-2 leading-tight accent-lime-600" type="checkbox" 
+                                     onChange={(e) => setRememberMe(e.target.checked)}
+                                     />
                                     <span class="text-xs">
                                         Remember me
                                     </span>

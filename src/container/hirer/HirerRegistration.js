@@ -7,6 +7,8 @@ import registerimg2 from '../../components/images/register2.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { AddNewHirerAction } from '../../redux/Hirer/HirerAction'
 import logo from '../../components/images/Alanced.png'
+import { toast } from 'react-toastify';
+import 'font-awesome/css/font-awesome.min.css';
 
 
 const Registration = () => {
@@ -15,6 +17,7 @@ const Registration = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const addhirer = useSelector(state => state.hirer.addhirer);
+    const [inputType, setInputType] = useState('password');
     const [show, toogleShow] = useState(false);
     const Loader = () =>{
         if(addhirer ==false || addhirer == true){
@@ -28,7 +31,58 @@ const Registration = () => {
         )
     }
 
+    const togglePasswordVisibility = () => {
+        setInputType(inputType === 'password' ? 'text' : 'password');
+    }
+    
+    function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+    function validatePassword(password) {
+        const minLength = 8; 
+        const hasUppercase = /[A-Z]/.test(password); 
+        const hasLowercase = /[a-z]/.test(password); 
+        const hasNumber = /\d/.test(password); 
+        const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password); 
+      
+      
+        if (password.length < minLength) {
+          return false; 
+        }
+        if (!hasUppercase) {
+          return false; 
+        }
+        if (!hasLowercase) {
+          return false; 
+        }
+        if (!hasNumber) {
+          return false; 
+        }
+        if (!hasSpecialChar) {
+          return false; 
+        }
+      
+        return true; 
+      }
+
     const AddHirer = () => {
+
+        if (!addHirer.first_Name || !addHirer.last_Name || !addHirer.email || !addHirer.password) {
+            toast.error("All fields are required");
+            return;
+        }
+        if (!validateEmail(addHirer.email)){
+            toast.error("Enter a valid email address");
+            return;
+        }
+        if (!validatePassword(addHirer.password)){
+            toast.error("Password must contain atleast 8 characters,one numeric digit,one uppercase & lowercase letter and one special character, e.g., ! @ # ?");
+            return;
+        }
+        
+
         const formData = new URLSearchParams();
         formData.append("first_Name",addHirer.first_Name);
         formData.append("last_Name",addHirer.last_Name);
@@ -49,7 +103,7 @@ const Registration = () => {
   return (
     <>
     <div class="flex items-center min-h-screen bg-gray-50">
-    <div class="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl">
+    <div class="flex-1 h-full max-w-4xl mx-auto bg-white shadow-xl">
         <div class="flex flex-col md:flex-row">
             <div class="relative h-[535px] md:h-auto md:w-[45%]">
                 <img class="w-full h-full object-cover md:h-[580px]" src={registerimg2} alt="img"/>
@@ -73,38 +127,50 @@ const Registration = () => {
                         <div class='flex flex-row space-x-4'>
                         <div className=''>
                             <label class="block text-sm text-left font-cardo">
-                                First Name
+                                First Name <span class="text-red-500">*</span>
                             </label>
                             <input type="text"
                                 class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
-                                placeholder="First Name"  name='first_Name' onChange={onChange}/>
+                                placeholder="First Name"  name='first_Name' onChange={onChange} required/>
                         </div>
                         <div className=''>
                             <label class="block text-sm text-left font-cardo">
-                                Last Name
+                                Last Name <span class="text-red-500">*</span>
                             </label>
                             <input type="text"
                                 class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
-                                placeholder="Your Last Name"  name='last_Name' onChange={onChange}/>
+                                placeholder="Last Name"  name='last_Name' onChange={onChange} required/>
                         </div>
                         </div>
                         <div>
                             <label class="block text-sm text-left font-cardo mt-4">
-                                Email Address
+                                Email Address <span class="text-red-500">*</span>
                             </label>
                             <input type="email"
                                 class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
-                                placeholder="example@gmail.com"  name='email' onChange={onChange}/>
+                                placeholder="example@gmail.com"  name='email' onChange={onChange} required/>
                         </div>
                         <div>
                             <label class="block mt-4 text-sm text-left font-cardo">
-                                Password
+                                Password <span class="text-red-500">*</span>
                             </label>
-                            <input
-                                class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
-                                placeholder="•••••••••••" type="password"  name='password' onChange={onChange}/>
+                            <div className="relative">
+                                <input
+                                    type={inputType}
+                                    class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
+                                    placeholder="•••••••••••"
+                                    name='password'
+                                    onChange={onChange}
+                                    required
+                                />
+                                <button 
+                                    onClick={togglePasswordVisibility}
+                                    className="absolute top-1/2 right-3 transform -translate-y-1/2"
+                                >
+                                    <i className={`fa ${inputType === 'password' ? 'fa-eye-slash' : 'fa-eye'} text-lime-600`}></i>
+                                </button>
+                            </div>
                         </div>
-
                         <button
                             class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold"
                             href="#" onClick={AddHirer}>
