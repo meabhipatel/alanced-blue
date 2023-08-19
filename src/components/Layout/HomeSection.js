@@ -6,7 +6,7 @@ const Section = () => {
     return(
         <>
         <section className='flex justify-center '>
-            <div className='lg:w-[77vw] w-[95vw] p-2 lg:h-24 -mt-16 rounded-2xl lg:flex justify-center items-center shadow-lg'>
+            <div className='lg:w-[77vw] w-[95vw] bg-white -mt-[11vh] p-2 lg:h-24 -mt-12 rounded-2xl lg:flex justify-center items-center shadow-lg'>
                 <div className='flex flex-row p-4 lg:border-r-2 lg:border-r-[#1C3865]'>
                     <img src={search}></img>
                     <input className='w-96 ml-4 lg:mr-48' placeholder='Search'></input>
