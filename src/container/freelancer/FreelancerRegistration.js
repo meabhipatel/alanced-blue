@@ -9,6 +9,8 @@ import { AddNewFreelancerAction } from "../../redux/Freelancer/FreelancerAction"
 import logo from '../../components/images/Alanced.png'
 import { toast } from 'react-toastify';
 import 'font-awesome/css/font-awesome.min.css';
+import { Alert, Typography } from '@material-tailwind/react';
+
 
 
 const Registration = () => {
@@ -20,6 +22,8 @@ const Registration = () => {
     console.log(addfree)
     const [inputType, setInputType] = useState('password');
     const [show, toogleShow] = useState(false);
+    const [emailval, setemailval] = useState(false);
+    const [allfieldval, setallfieldval] = useState(false);
     const Loader = () =>{
         if(addfree ==false || addfree == true){
             toogleShow(false)
@@ -70,18 +74,18 @@ const Registration = () => {
 
     const AddFreelancer = () => {
 
-        if (!addFreelancer.first_Name || !addFreelancer.last_Name || !addFreelancer.email || !addFreelancer.password) {
-            toast.error("All fields are required");
-            return;
-        }
-        if (!validateEmail(addFreelancer.email)){
-            toast.error("Enter a valid email address");
-            return;
-        }
-        if (!validatePassword(addFreelancer.password)){
-            toast.error("Password must contain atleast 8 characters,one numeric digit,one uppercase & lowercase letter and one special character, e.g., ! @ # ?");
-            return;
-        }
+        // if (!addFreelancer.first_Name || !addFreelancer.last_Name || !addFreelancer.email || !addFreelancer.password) {
+        //     toast.error("All fields are required");
+        //     return;
+        // }
+        // if (!validateEmail(addFreelancer.email)){
+        //     toast.error("Enter a valid email address");
+        //     return;
+        // }
+        // if (!validatePassword(addFreelancer.password)){
+        //     toast.error("Password must contain atleast 8 characters,one numeric digit,one uppercase & lowercase letter and one special character, e.g., ! @ # ?");
+        //     return;
+        // }
         
 
         const formData = new URLSearchParams();
@@ -91,8 +95,9 @@ const Registration = () => {
         formData.append("password",addFreelancer.password);
         formData.append("password2",addFreelancer.password);
 
-        dispatch(AddNewFreelancerAction(formData));
-        toogleShow(true)
+            dispatch(AddNewFreelancerAction(formData));
+            toogleShow(true)
+        
     }
 
     const onChange = e =>{
@@ -101,6 +106,71 @@ const Registration = () => {
         });
     }
 
+    const handle_password_alert=()=>{
+        if (typeof(addFreelancer.password)!="undefined"){
+          if(validatePassword(addFreelancer.password)==false){
+            return   <Alert className='mb-1 mt-1 bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold' animate={{mount:{ y:0 }, unmount:{ y: 100},}}>
+            {/* <Typography className="">
+              Ensure that these requirements are met:
+            </Typography> */}
+            <p className=' text-left'>1. Password must contain atleast 8 characters<br/>2. One numeric digit <br/>3. One uppercase & lowercase letter <br/>4. One special character, e.g., ! @ # ?</p>
+          </Alert>
+          }
+        }
+      }
+
+    const handlealert = ()=>{
+        if (typeof(addFreelancer.email)!="undefined"){
+            if(validateEmail(addFreelancer.email)==false){
+              return   <Alert className='mb-2 mt-1 bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold' animate={{mount:{ y:0 }, unmount:{ y: 100},}}>
+              <Typography className="">
+                Please give valid email address
+              </Typography>
+            </Alert>
+            }
+          }}
+
+          
+          let a=false
+          // const handleDisable_btn= ()=> {
+          if(typeof(addFreelancer.first_Name)==='undefined'){
+              a=true
+          } else if(typeof(addFreelancer.last_Name)==='undefined'){
+              a=true
+          }else if(typeof(addFreelancer.email)==='undefined'){
+              a=true
+          }else if(validateEmail(addFreelancer.email)==false){
+            a=true
+          }else if(typeof(addFreelancer.password)==='undefined'){
+              a=true
+          }else if(validatePassword(addFreelancer.password)==false){
+              a=true
+          }else if(addFreelancer.first_Name==""){
+              a=true
+          }else if(addFreelancer.last_Name==""){
+              a=true
+          }else if(addFreelancer.email==""){
+              a=true
+          }
+          else if(addFreelancer.password==""){
+              a=true
+          }
+      
+          const handleDisable_btn= ()=> {
+          if (a==true){
+              return true
+          }
+          }
+    
+    const handleallalert = ()=>{
+        if (a==true){
+        return  <Alert className='mb-2 mt-2 bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold' animate={{mount:{ y:0 }, unmount:{ y: 100},}}>
+        <Typography className="">
+        All fields must be required
+        </Typography>
+        </Alert>
+        }}
+    
   return (
     <>
     <div class="flex items-center min-h-screen bg-gray-50">
@@ -172,9 +242,12 @@ const Registration = () => {
                                 </button>
                             </div>
                         </div>
+                        {handle_password_alert()}
+                        {handlealert()}
+                        {handleallalert()}
                         <button
                             class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold"
-                            href="#" onClick={AddFreelancer}>
+                            href="#" disabled={handleDisable_btn()} onClick={AddFreelancer}>
                             {show ? <div><Loader/></div> : "Create your account"}
                         </button>
 

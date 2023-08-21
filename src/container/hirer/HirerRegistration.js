@@ -9,6 +9,7 @@ import { AddNewHirerAction } from '../../redux/Hirer/HirerAction'
 import logo from '../../components/images/Alanced.png'
 import { toast } from 'react-toastify';
 import 'font-awesome/css/font-awesome.min.css';
+import { Alert, Typography } from '@material-tailwind/react';
 
 
 const Registration = () => {
@@ -69,18 +70,18 @@ const Registration = () => {
 
     const AddHirer = () => {
 
-        if (!addHirer.first_Name || !addHirer.last_Name || !addHirer.email || !addHirer.password) {
-            toast.error("All fields are required");
-            return;
-        }
-        if (!validateEmail(addHirer.email)){
-            toast.error("Enter a valid email address");
-            return;
-        }
-        if (!validatePassword(addHirer.password)){
-            toast.error("Password must contain atleast 8 characters,one numeric digit,one uppercase & lowercase letter and one special character, e.g., ! @ # ?");
-            return;
-        }
+        // if (!addHirer.first_Name || !addHirer.last_Name || !addHirer.email || !addHirer.password) {
+        //     toast.error("All fields are required");
+        //     return;
+        // }
+        // if (!validateEmail(addHirer.email)){
+        //     toast.error("Enter a valid email address");
+        //     return;
+        // }
+        // if (!validatePassword(addHirer.password)){
+        //     toast.error("Password must contain atleast 8 characters,one numeric digit,one uppercase & lowercase letter and one special character, e.g., ! @ # ?");
+        //     return;
+        // }
         
 
         const formData = new URLSearchParams();
@@ -99,6 +100,71 @@ const Registration = () => {
             ...addHirer,[e.target.name]: e.target.value
         });
     }
+
+    const handle_password_alert=()=>{
+        if (typeof(addHirer.password)!="undefined"){
+          if(validatePassword(addHirer.password)==false){
+            return   <Alert className='mb-2 mt-1 bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold' animate={{mount:{ y:0 }, unmount:{ y: 100},}}>
+            {/* <Typography className="">
+              Ensure that these requirements are met:
+            </Typography> */}
+            <p className=' text-left'>1. Password must contain atleast 8 characters<br/>2. One numeric digit <br/>3. One uppercase & lowercase letter <br/>4. One special character, e.g., ! @ # ?</p>
+          </Alert>
+          }
+        }
+      }
+
+    const handlealert = ()=>{
+        if (typeof(addHirer.email)!="undefined"){
+            if(validateEmail(addHirer.email)==false){
+              return   <Alert className='mb-2 mt-1 bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold' animate={{mount:{ y:0 }, unmount:{ y: 100},}}>
+              <Typography className="">
+                Please give valid email address
+              </Typography>
+            </Alert>
+            }
+          }}
+
+          
+          let a=false
+          // const handleDisable_btn= ()=> {
+          if(typeof(addHirer.first_Name)==='undefined'){
+              a=true
+          } else if(typeof(addHirer.last_Name)==='undefined'){
+              a=true
+          }else if(typeof(addHirer.email)==='undefined'){
+              a=true
+          }else if(validateEmail(addHirer.email)==false){
+            a=true
+          }else if(typeof(addHirer.password)==='undefined'){
+              a=true
+          }else if(validatePassword(addHirer.password)==false){
+              a=true
+          }else if(addHirer.first_Name==""){
+              a=true
+          }else if(addHirer.last_Name==""){
+              a=true
+          }else if(addHirer.email==""){
+              a=true
+          }
+          else if(addHirer.password==""){
+              a=true
+          }
+      
+          const handleDisable_btn= ()=> {
+          if (a==true){
+              return true
+          }
+          }
+    
+    const handleallalert = ()=>{
+        if (a==true){
+        return  <Alert className='mb-2 mt-1 bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold' animate={{mount:{ y:0 }, unmount:{ y: 100},}}>
+        <Typography className="">
+        All fields must be required
+        </Typography>
+        </Alert>
+        }}
 
   return (
     <>
@@ -171,9 +237,12 @@ const Registration = () => {
                                 </button>
                             </div>
                         </div>
+                        {handle_password_alert()}
+                        {handlealert()}
+                        {handleallalert()}
                         <button
                             class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold"
-                            href="#" onClick={AddHirer}>
+                            href="#" disabled={handleDisable_btn()} onClick={AddHirer}>
                             {show ? <div><Loader/></div> : "Create your account"}
                         </button>
 
