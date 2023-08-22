@@ -6,6 +6,11 @@ import loginimg from '../../components/images/loginimg.png';
 import google from '../../components/images/google.png';
 import logo from '../../components/images/Alanced.png'
 import { toast } from "react-toastify";
+import {GoogleLogin} from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
+import {useGoogleLogin} from '@react-oauth/google';
+import axios from "axios"
+
 
 
 const Login = (props) => {
@@ -55,6 +60,7 @@ const Login = (props) => {
         else{
             toogleShow(false)
         }
+        localStorage.setItem('loginMethod', 'traditional');
         toogleShow(true);
         dispatch(LoginAction(authDetails, navigate,rememberMe))
     }
@@ -70,7 +76,36 @@ const Login = (props) => {
         }
     }, []);
     
-     
+    const logins = useGoogleLogin({
+        onSuccess: async respose => {
+            try {
+                const res = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+                    headers: {
+                        "Authorization": `Bearer ${respose.access_token}`
+                    }
+                })
+                localStorage.setItem('googleUserName', res.data.name);
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('loginMethod', 'google'); 
+                // navigate('/');
+                // console.log(res.data.email,"userinfo")
+                // navigate('/', { state: { name: res.data.name } });
+                // await axios.post("http://127.0.0.1:8000/account/google-login/", {
+                //     email: res.data.email
+                // });
+                
+                navigate('/');
+                console.log(res.data.email, "userinfo");
+                
+            } catch (err) {
+                console.log(err)
+    
+            }
+    
+        }
+    });
+
+    
     return (
         <>
       <div className="flex items-center min-h-screen bg-gray-50">
@@ -154,7 +189,7 @@ const Login = (props) => {
                             <div class="flex-1 border-t-2 my-8"></div>
                             </div>
 
-                            <button class=" w-full px-4 py-2 text-sm leading-5 text-center transition-colors duration-150 border border-gray-200 rounded-lg focus:outline-none focus:shadow-outline-blue bg-white text-black font-semibold flex items-center justify-center font-jost" href="#"><img src={google} alt="" class="mr-2" /> Sign In with Google</button>
+                            <button class=" w-full px-4 py-2 text-sm leading-5 text-center transition-colors duration-150 border border-gray-200 rounded-lg focus:outline-none focus:shadow-outline-blue bg-white text-black font-semibold flex items-center justify-center font-jost" onClick={logins}><img src={google} alt="" class="mr-2" /> Sign In with Google</button>
                             <p className="text-xs pt-2 font-inter">Don't have an account? <Link to='/choose'><span className="text-yellow-400">Create an account</span></Link> It takes less than a minute.</p>
                 </div>
             </div>

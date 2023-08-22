@@ -8,6 +8,20 @@ const Navbar = () => {
   
   const accessToken = localStorage.getItem('accessToken');
   const logindata = useSelector(state => state.login.login_data);
+  const googleUserName = localStorage.getItem('googleUserName');
+  const loginMethod = localStorage.getItem('loginMethod');
+  
+  let displayName;
+
+  if (loginMethod === 'google') {
+      displayName = googleUserName;
+  } else if (loginMethod === 'traditional') {
+      displayName = logindata?.first_Name;
+  }
+
+
+  const isLoggedIn = Boolean(accessToken || googleUserName);
+
 
   return (
     <div className='sticky z-50 top-0 bg-cover bg-top' style={{ backgroundImage: `url(${navback})`}}>
@@ -32,7 +46,7 @@ const Navbar = () => {
       </a>
     </div>
     <div className='lg:mr-[100px] mt-2'>
-      {!accessToken ? (
+      {!isLoggedIn ? (
         <>
         <Link to='/login'><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-2 font-semibold">Sign In</span></Link>
       <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
@@ -40,9 +54,13 @@ const Navbar = () => {
 </div>
         </>
       ):(<>
-        <span className='pr-3 font-cardo text-xl'>Welcome, <span className="font-bold">{logindata.first_Name}</span></span>
+        <span className='pr-3 font-cardo text-xl'>Welcome, <span className="font-bold">{displayName}</span></span>
         <Link to='/login'><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-2 font-semibold" onClick={() => {
-          localStorage.removeItem('accessToken')}}>Logout</span></Link>
+          localStorage.removeItem('isLoggedIn');
+          localStorage.removeItem('googleUserName');
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('loginMethod');
+          }}>Logout</span></Link>
       </>)}
       
     </div>
