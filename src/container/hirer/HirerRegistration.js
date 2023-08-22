@@ -10,7 +10,8 @@ import logo from '../../components/images/Alanced.png'
 import { toast } from 'react-toastify';
 import 'font-awesome/css/font-awesome.min.css';
 import { Alert, Typography } from '@material-tailwind/react';
-
+import {useGoogleLogin} from '@react-oauth/google';
+import axios from "axios"
 
 const Registration = () => {
 
@@ -114,57 +115,87 @@ const Registration = () => {
         }
       }
 
-    const handlealert = ()=>{
-        if (typeof(addHirer.email)!="undefined"){
-            if(validateEmail(addHirer.email)==false){
-              return   <Alert className='mb-2 mt-1 bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold' animate={{mount:{ y:0 }, unmount:{ y: 100},}}>
-              <Typography className="">
-                Please give valid email address
-              </Typography>
-            </Alert>
-            }
-          }}
+    // const handlealert = ()=>{
+    //     if (typeof(addHirer.email)!="undefined"){
+    //         if(validateEmail(addHirer.email)==false){
+    //           return   <Alert className='mb-2 mt-1 bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold' animate={{mount:{ y:0 }, unmount:{ y: 100},}}>
+    //           <Typography className="">
+    //             Please give valid email address
+    //           </Typography>
+    //         </Alert>
+    //         }
+    //       }}
 
           
-          let a=false
-          // const handleDisable_btn= ()=> {
-          if(typeof(addHirer.first_Name)==='undefined'){
-              a=true
-          } else if(typeof(addHirer.last_Name)==='undefined'){
-              a=true
-          }else if(typeof(addHirer.email)==='undefined'){
-              a=true
-          }else if(validateEmail(addHirer.email)==false){
-            a=true
-          }else if(typeof(addHirer.password)==='undefined'){
-              a=true
-          }else if(validatePassword(addHirer.password)==false){
-              a=true
-          }else if(addHirer.first_Name==""){
-              a=true
-          }else if(addHirer.last_Name==""){
-              a=true
-          }else if(addHirer.email==""){
-              a=true
-          }
-          else if(addHirer.password==""){
-              a=true
-          }
+    //       let a=false
+    //       // const handleDisable_btn= ()=> {
+    //       if(typeof(addHirer.first_Name)==='undefined'){
+    //           a=true
+    //       } else if(typeof(addHirer.last_Name)==='undefined'){
+    //           a=true
+    //       }else if(typeof(addHirer.email)==='undefined'){
+    //           a=true
+    //       }else if(validateEmail(addHirer.email)==false){
+    //         a=true
+    //       }else if(typeof(addHirer.password)==='undefined'){
+    //           a=true
+    //       }else if(validatePassword(addHirer.password)==false){
+    //           a=true
+    //       }else if(addHirer.first_Name==""){
+    //           a=true
+    //       }else if(addHirer.last_Name==""){
+    //           a=true
+    //       }else if(addHirer.email==""){
+    //           a=true
+    //       }
+    //       else if(addHirer.password==""){
+    //           a=true
+    //       }
       
-          const handleDisable_btn= ()=> {
-          if (a==true){
-              return true
-          }
-          }
+    //       const handleDisable_btn= ()=> {
+    //       if (a==true){
+    //           return true
+    //       }
+    //       }
     
-    const handleallalert = ()=>{
-        if (a==true){
-        return  <Alert className='mb-2 mt-1 bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold' animate={{mount:{ y:0 }, unmount:{ y: 100},}}>
-        <Typography className="">
-        All fields must be required
-        </Typography>
-        </Alert>
-        }}
+    // const handleallalert = ()=>{
+    //     if (a==true){
+    //     return  <Alert className='mb-2 mt-1 bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold' animate={{mount:{ y:0 }, unmount:{ y: 100},}}>
+    //     <Typography className="">
+    //     All fields must be required
+    //     </Typography>
+    //     </Alert>
+    //     }}
+
+
+        const logins = useGoogleLogin({
+            onSuccess: async response => {
+                try {
+                    const res = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+                        headers: {
+                            "Authorization": `Bearer ${response.access_token}`
+                        }
+                    })
+        
+                    const payload = {
+                        email: res.data.email,
+                        type: 'HIRER'
+                    };
+        
+                    const registrationResponse = await axios.post('https://aparnawiz91.pythonanywhere.com/account/google-login/', payload);
+                    if (registrationResponse.data && registrationResponse.data.status === 200 && registrationResponse.data.message === "Email already exists") {
+                        toast.error("This email already exists");
+                    } else {
+                        navigate('/')
+                        toast.success(payload.type.toLowerCase() + " Registration Successful");
+                    }
+        
+                } catch (err) {
+                    console.log(err);
+                    toast.error("Something went wrong. Please try again.");
+                }
+            }
+        });
 
   return (
     <>
@@ -238,11 +269,11 @@ const Registration = () => {
                             </div>
                         </div>
                         {handle_password_alert()}
-                        {handlealert()}
-                        {handleallalert()}
+                        {/* {handlealert()}
+                        {handleallalert()} */}
                         <button
                             class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold"
-                            href="#" disabled={handleDisable_btn()} onClick={AddHirer}>
+                            href="#" onClick={AddHirer}>
                             {show ? <div><Loader/></div> : "Create your account"}
                         </button>
 
@@ -252,7 +283,7 @@ const Registration = () => {
                         <div class="flex-1 border-t-2 my-8"></div>
                         </div>
 
-                        <button class=" w-full px-4 py-2 text-sm leading-5 text-center transition-colors duration-150 border border-gray-200 rounded-lg focus:outline-none focus:shadow-outline-blue bg-white text-black font-semibold flex items-center justify-center font-jost" href="#"><img src={google} alt="" class="mr-2" /> Sign In with Google</button>
+                        <button class=" w-full px-4 py-2 text-sm leading-5 text-center transition-colors duration-150 border border-gray-200 rounded-lg focus:outline-none focus:shadow-outline-blue bg-white text-black font-semibold flex items-center justify-center font-jost" onClick={logins}><img src={google} alt="" class="mr-2" /> Sign Up with Google</button>
                         <p className="text-xs text-left pt-3 font-inter">Already have and Account? <Link to='/login'><span className="text-yellow-400">Sign in</span></Link></p>
                 </div>
             </div>
