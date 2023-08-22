@@ -75,6 +75,11 @@ const Login = (props) => {
             localStorage.removeItem('tokenExpiry');
         }
     }, []);
+
+    const checkEmailExists = async (email) => {
+        const response = await axios.post('https://aparnawiz91.pythonanywhere.com/account/check-email/', { email });
+        return response.data.exists; 
+    };
     
     const logins = useGoogleLogin({
         onSuccess: async respose => {
@@ -84,18 +89,18 @@ const Login = (props) => {
                         "Authorization": `Bearer ${respose.access_token}`
                     }
                 })
-                localStorage.setItem('googleUserName', res.data.name);
-                localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('loginMethod', 'google'); 
-                // navigate('/');
-                // console.log(res.data.email,"userinfo")
-                // navigate('/', { state: { name: res.data.name } });
-                // await axios.post("http://127.0.0.1:8000/account/google-login/", {
-                //     email: res.data.email
-                // });
                 
-                navigate('/');
-                console.log(res.data.email, "userinfo");
+               
+                const emailExists = await checkEmailExists(res.data.email);
+                if (emailExists) {
+                    navigate('/');  
+                    localStorage.setItem('googleUserName', res.data.name);
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('loginMethod', 'google'); 
+                    console.log(res.data.email, "userinfo");
+                } else {
+                    toast.error("You're not a Registered user, Please signup first.");
+                }
                 
             } catch (err) {
                 console.log(err)

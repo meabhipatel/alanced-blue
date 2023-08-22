@@ -18,7 +18,7 @@ const HirerReducer =(state = initialState, action) => {
             toast.success("Hirer Registration Sucessfull")
             return { loading: false, addhirer:true}
         case SERVER_ERROR:
-            toast.error(action.payload.message)
+            // toast.error(action.payload.message)
             return{loading: false}
         default:
             return state;
