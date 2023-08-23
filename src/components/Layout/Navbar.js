@@ -26,17 +26,19 @@ const Navbar = () => {
   return (
     <div className='sticky z-50 top-0 bg-cover bg-top' style={{ backgroundImage: `url(${navback})`}}>
       <nav class="flex items-center justify-between flex-wrap p-6">
+  <Link to='/'>
   <div class="flex items-center flex-shrink-0 lg:ml-[129px]">
     <img src={logo} alt=""  />
     <span class="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
   </div>
+  </Link>
   <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0">
     <div class="text-sm lg:flex-grow lg:ml-[45px]">
       <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
         Find Talent
       </a>
-      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
-        Find Work
+      <a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
+        <Link to='/projects'>Find Work</Link>
       </a>
       <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
         Why Alanced

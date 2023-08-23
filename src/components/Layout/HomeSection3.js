@@ -78,7 +78,7 @@ const HomeSection3 = () => {
     </div>
         </div>
     </div>
-    <div className='bg-[#F6FAFD]'>
+    {/* <div className='bg-[#F6FAFD]'>
         <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 px-4 md:px-[145px]">
         <div class="flex-1 p-4 text-left">
     <h1 className='font-cardo text-[26px] pt-20 inline-block text-[#0A142F]'>
@@ -94,7 +94,7 @@ const HomeSection3 = () => {
         <img src={cupbook} alt="" />
     </div>
 </div>
-        </div>
+        </div> */}
     </div>
   )
 }

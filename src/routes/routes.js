@@ -18,6 +18,7 @@ import Header from "../components/Layout/Header";
 import FreelancerRegistration from '../container/freelancer/FreelancerRegistration'
 import HirerRegistration from '../container/hirer/HirerRegistration'
 import Choose from "../container/auth/Choose";
+import ProjectList from "../container/freelancer/ProjectList";
   
   
 
@@ -42,6 +43,7 @@ import Choose from "../container/auth/Choose";
           <Route path="/freelancer/registration" element={<FreelancerRegistration />} />
           <Route path="/hirer/registration" element={<HirerRegistration/>}/>
           <Route path="/choose" element={<Choose />} />
+          <Route path="/projects" element={<ProjectList/>}/>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   

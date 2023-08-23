@@ -75,18 +75,18 @@ const Registration = () => {
 
     const AddFreelancer = () => {
 
-        // if (!addFreelancer.first_Name || !addFreelancer.last_Name || !addFreelancer.email || !addFreelancer.password) {
-        //     toast.error("All fields are required");
-        //     return;
-        // }
-        // if (!validateEmail(addFreelancer.email)){
-        //     toast.error("Enter a valid email address");
-        //     return;
-        // }
-        // if (!validatePassword(addFreelancer.password)){
-        //     toast.error("Password must contain atleast 8 characters,one numeric digit,one uppercase & lowercase letter and one special character, e.g., ! @ # ?");
-        //     return;
-        // }
+        if (!addFreelancer.first_Name || !addFreelancer.last_Name || !addFreelancer.email || !addFreelancer.password) {
+            toast.error("All fields are required");
+            return;
+        }
+        if (!validateEmail(addFreelancer.email)){
+            toast.error("Enter a valid email address");
+            return;
+        }
+        if (!validatePassword(addFreelancer.password)){
+            toast.error("Password must contain atleast 8 characters,one numeric digit,one uppercase & lowercase letter and one special character, e.g., ! @ # ?");
+            return;
+        }
         
 
         const formData = new URLSearchParams();

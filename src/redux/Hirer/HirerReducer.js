@@ -19,7 +19,7 @@ const HirerReducer =(state = initialState, action) => {
             return { loading: false, addhirer:true}
         case SERVER_ERROR:
             // toast.error(action.payload.message)
-            return{loading: false}
+            return{loading: false, addhirer:true}
         default:
             return state;
     }
