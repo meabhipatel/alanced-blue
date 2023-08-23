@@ -71,18 +71,18 @@ const Registration = () => {
 
     const AddHirer = () => {
 
-        // if (!addHirer.first_Name || !addHirer.last_Name || !addHirer.email || !addHirer.password) {
-        //     toast.error("All fields are required");
-        //     return;
-        // }
-        // if (!validateEmail(addHirer.email)){
-        //     toast.error("Enter a valid email address");
-        //     return;
-        // }
-        // if (!validatePassword(addHirer.password)){
-        //     toast.error("Password must contain atleast 8 characters,one numeric digit,one uppercase & lowercase letter and one special character, e.g., ! @ # ?");
-        //     return;
-        // }
+        if (!addHirer.first_Name || !addHirer.last_Name || !addHirer.email || !addHirer.password) {
+            toast.error("All fields are required");
+            return;
+        }
+        if (!validateEmail(addHirer.email)){
+            toast.error("Enter a valid email address");
+            return;
+        }
+        if (!validatePassword(addHirer.password)){
+            toast.error("Password must contain atleast 8 characters,one numeric digit,one uppercase & lowercase letter and one special character, e.g., ! @ # ?");
+            return;
+        }
         
 
         const formData = new URLSearchParams();

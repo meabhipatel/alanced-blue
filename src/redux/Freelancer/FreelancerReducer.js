@@ -19,7 +19,7 @@ const FreelancerReducer =(state = initialState, action) => {
             return { loading: false, addfree:true }
         case SERVER_ERROR:
             toast.error(action.payload.message)
-            return{loading: false}
+            return{loading: false, addfree:true}
         default:
             return state;
     }
