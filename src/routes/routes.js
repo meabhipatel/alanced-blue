@@ -19,6 +19,7 @@ import FreelancerRegistration from '../container/freelancer/FreelancerRegistrati
 import HirerRegistration from '../container/hirer/HirerRegistration'
 import Choose from "../container/auth/Choose";
 import ProjectList from "../container/freelancer/ProjectList";
+import FreelancerSelfProfile from "../container/freelancer/FreelancerSelfProfile";
   
   
 
@@ -44,6 +45,7 @@ import ProjectList from "../container/freelancer/ProjectList";
           <Route path="/hirer/registration" element={<HirerRegistration/>}/>
           <Route path="/choose" element={<Choose />} />
           <Route path="/projects" element={<ProjectList/>}/>
+          <Route path="/freelancer/profile" element={<FreelancerSelfProfile/>}/>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   
