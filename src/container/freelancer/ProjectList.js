@@ -42,9 +42,74 @@ const ProjectList = () => {
             </div>
         </div>
       </div>
-      <div className='flex flex-row mt-8'>
-        <div className=' basis-4/12'></div>
-        <div className=' basis-8/12'>
+      <div className='flex flex-row'>
+        <div className=' basis-4/12 mt-16'>
+        <div><h1 className='font-cardo text-xl text-left font-normal'>Category</h1></div>
+          <div className='flex flex-row mt-4'>
+          <div className=' basis-8/12'>
+          <label class="flex items-center font-inter">
+              <input class="mr-3 " type="checkbox" /><span class="font-normal text-[#797979]">UX Designer</span>
+            </label>
+          </div>
+          <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(1,945)</div>
+          </div>
+          <div className='flex flex-row mt-3'>
+          <div className=' basis-8/12'>
+          <label class="flex items-center font-inter">
+              <input class="mr-3" type="checkbox" /><span class="font-normal text-[#797979]">Web Developers</span>
+            </label>
+          </div>
+          <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2,945)</div>
+          </div>
+          <div className='flex flex-row mt-3'>
+          <div className=' basis-8/12'>
+          <label class="flex items-center font-inter">
+              <input class="mr-3" type="checkbox" /><span class="font-normal text-[#797979]">Illustrators</span>
+            </label>
+          </div>
+          <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(945)</div>
+          </div>
+          <div className='flex flex-row mt-3'>
+          <div className=' basis-8/12'>
+          <label class="flex items-center font-inter">
+              <input class="mr-3" type="checkbox" /><span class="font-normal text-[#797979]">Node.js</span>
+            </label>
+          </div>
+          <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(5,945)</div>
+          </div>
+          <div className='flex flex-row mt-3'>
+          <div className=' basis-8/12'>
+          <label class="flex items-center font-inter">
+              <input class="mr-3" type="checkbox" /><span class="font-normal text-[#797979]">Project Managers</span>
+            </label>
+          </div>
+          <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(45)</div>
+          </div>
+          <div><h1 className='font-cardo text-xl text-left mt-4 font-normal'>+20 More</h1></div>
+          <div><h1 className='font-cardo text-xl text-left font-normal mt-8'>Project Type</h1></div>
+          <div className='flex flex-row mt-4'>
+          <div className=' basis-8/12 text-left'>
+          <label class="relative inline-flex items-center mr-5 cursor-pointer">
+          <input type="checkbox" value="" class="sr-only peer"/>
+          <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
+          <span class="ml-3 text-base font-normal font-inter text-[#797979]">Fixed</span>
+        </label>
+          </div>
+          <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(1,945)</div>
+          </div>
+          <div className='flex flex-row mt-3'>
+          <div className=' basis-8/12 text-left'>
+          <label class="relative inline-flex items-center mr-5 cursor-pointer">
+          <input type="checkbox" value="" class="sr-only peer"/>
+          <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
+          <span class="ml-3 text-base font-inter font-normal text-[#797979]">Hourly</span>
+        </label>
+          </div>
+          <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2,945)</div>
+          </div>
+          <div><h1 className='font-cardo text-xl text-left font-normal mt-8'>Price</h1></div>
+        </div>
+        <div className=' basis-8/12 mt-20'>
           <div className='flex flex-row'>
             <div className='basis-2/12'>
             <Avatar src={profilepic} alt="avatar" variant="rounded" />
