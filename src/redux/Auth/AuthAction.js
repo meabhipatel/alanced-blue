@@ -2,7 +2,7 @@ import { toast } from "react-toastify"
 import { Login, LoginHandler } from "../services/Auth"
 import { AUTH_ERROR, AUTH_LOGOUT, LOGIN_REQUEST, LOGIN_SUCCESS } from "./Constant"
 
-export const LoginAction = (data, navigate, rememberMe) => async (dispatch) => {
+export const LoginAction = (data,rememberMe) => async (dispatch) => {
 
     dispatch({
         type: LOGIN_REQUEST
@@ -38,11 +38,15 @@ export const LoginAction = (data, navigate, rememberMe) => async (dispatch) => {
 }
 
 
-export const LogoutAction = (navigate) => (dispatch) => {
-    dispatch({
-        type: AUTH_LOGOUT,
-        payload: {}
-    })
-    toast.success('Logout')
-    navigate('/')
-}
+export const LogoutAction = () => (dispatch) => {
+    try {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('tokenExpiry');
+        dispatch({
+            type: AUTH_LOGOUT,
+        });
+        toast.success('Logged out successfully');
+    } catch (error) {
+        console.error('Error during logout:', error);
+    }
+};
