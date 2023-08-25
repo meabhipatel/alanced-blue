@@ -31,8 +31,11 @@ import FreelancerSelfProfile from "../container/freelancer/FreelancerSelfProfile
     const navigate = useNavigate();
     
     React.useEffect(() => {
-    if (loginType == 'HIRER' || loginType == 'FREELANCER') {
+    if (loginType == 'HIRER') {
       navigate('/')
+    }
+    if (loginType == 'FREELANCER') {
+      navigate('/freelancer/profile')
     }
   }, [loginType])
 

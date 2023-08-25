@@ -2,7 +2,8 @@ import React from 'react'
 import logo from '../images/Alanced.png'
 import { Link } from 'react-router-dom'
 import navback from '../images/Nav_Background.png'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { LogoutAction } from '../../redux/Auth/AuthAction'
 
 const Navbar = () => {
   
@@ -10,6 +11,7 @@ const Navbar = () => {
   const logindata = useSelector(state => state.login.login_data);
   const googleUserName = localStorage.getItem('googleUserName');
   const loginMethod = localStorage.getItem('loginMethod');
+  const dispatch = useDispatch();
   
   let displayName;
 
@@ -21,6 +23,15 @@ const Navbar = () => {
 
 
   const isLoggedIn = Boolean(accessToken || googleUserName);
+
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('googleUserName');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('loginMethod');
+
+    dispatch(LogoutAction());
+};
 
 
   return (
@@ -57,12 +68,20 @@ const Navbar = () => {
         </>
       ):(<>
         <span className='pr-3 font-cardo text-xl'>Welcome, <span className="font-bold">{displayName}</span></span>
-        <Link to='/login'><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-2 font-semibold" onClick={() => {
+        {/* <Link to='/login'><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-2 font-semibold" onClick={() => {
           localStorage.removeItem('isLoggedIn');
           localStorage.removeItem('googleUserName');
           localStorage.removeItem('accessToken');
           localStorage.removeItem('loginMethod');
-          }}>Logout</span></Link>
+          }}>Logout</span></Link> */}
+          <Link to='/'>
+        <span 
+            class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-2 font-semibold" 
+            onClick={handleLogout}
+        >
+            Logout
+        </span>
+    </Link>
       </>)}
       
     </div>
