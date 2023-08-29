@@ -1,12 +1,15 @@
 import { toast } from "react-toastify";
 import { ADD_NEW_FREELANCER_REQUEST,
 ADD_NEW_FREELANCER_SUCCESS,
+GET_FREELANCER_SELF_PROFILE_REQUEST,
+GET_FREELANCER_SELF_PROFILE_SUCCESS,
 SERVER_ERROR} from "./FreelancerConstant"
 
 
 
 const initialState = {
     allFreelancer: [],
+    freelancerselfprofile: null
   };
   
 
@@ -20,6 +23,10 @@ const FreelancerReducer =(state = initialState, action) => {
         case SERVER_ERROR:
             toast.error(action.payload.message)
             return{loading: false, addfree:true}
+        case GET_FREELANCER_SELF_PROFILE_REQUEST:
+            return { loading: true};
+        case GET_FREELANCER_SELF_PROFILE_SUCCESS: 
+            return { freelancerselfprofile: action.payload }; 
         default:
             return state;
     }
