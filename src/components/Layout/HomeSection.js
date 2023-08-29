@@ -11,8 +11,12 @@ const Section = () => {
                     <img src={search}></img>
                     <input className='w-96 ml-4 lg:mr-48' placeholder='Search'></input>
                 </div>
-                <div className='lg:w-40 lg:mr-36'>
-                    Talent
+                <div className=''>
+                <select id="countries" class="bg-gray-50 text-[#797979] text-sm font-inter font-normal rounded-lg  block  p-2.5 ml-5">
+                <option selected>Talent</option>
+                <option value="">Project</option>
+                <option value="">Jobs</option>
+                </select>
                 </div>
                 <div className='lg:ml-12 mt-2'>
                     <button className='rounded h-12 w-28 lg:ml-6 font-semibold text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>Search</button>
