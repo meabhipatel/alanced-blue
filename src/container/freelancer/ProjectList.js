@@ -14,11 +14,17 @@ import 'rc-slider/assets/index.css';
 import { Link } from 'react-router-dom'
 
 function ProjectList() {
-  const [range, setRange] = useState([20, 80])
+  const [range, setRange] = useState([1, 100000]);
 
-  const handleSliderChange = (values) => {
-    setRange(values)
-  }
+  const handleSliderChange = (newRange) => {
+    setRange(newRange);
+  };
+
+  const handleInputChange = (index, newValue) => {
+    const newRange = [...range];
+    newRange[index] = newValue;
+    setRange(newRange);
+  };
   return (
     <>
       <Navbar />
@@ -101,7 +107,7 @@ function ProjectList() {
                 </label> */}
                 <label class="relative inline-flex items-center mr-5 cursor-pointer">
               <input type="checkbox" value="" class="sr-only peer" />
-              <div class="w-11 h-6 bg-white border-2  border-green-300 rounded-full peer dark:bg-white-700 peer-focus:ring-0 peer-focus:ring-green-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-gradient-to-r from-[#00BF58] to-[#E3FF75] after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r from-[#00BF58] to-[#E3FF75]"></div>
+              <div class="w-11 h-6 bg-white border-2  border-green-300 rounded-full peer dark:bg-white-700 peer-focus:ring-0 peer-focus:ring-green-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-gradient-to-r  after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r from-[#00BF58] to-[#E3FF75]"></div>
               <span class="ml-3 text-base font-normal font-inter text-[#797979]">Fixed</span>
             </label>
               </div>
@@ -111,14 +117,14 @@ function ProjectList() {
               <div className=' basis-8/12 text-left'>
                 <label class="relative inline-flex items-center mr-5 cursor-pointer">
                   <input type="checkbox" value="" class="sr-only peer" />
-                  <div class="w-11 h-6 bg-white border-2  border-green-300 rounded-full peer dark:bg-white-700 peer-focus:ring-0 peer-focus:ring-green-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-gradient-to-r from-[#00BF58] to-[#E3FF75] after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r from-[#00BF58] to-[#E3FF75]"></div>
+                  <div class="w-11 h-6 bg-white border-2  border-green-300 rounded-full peer dark:bg-white-700 peer-focus:ring-0 peer-focus:ring-green-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-gradient-to-r  after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r from-[#00BF58] to-[#E3FF75]"></div>
                   <span class="ml-3 text-base font-inter font-normal text-[#797979]">Hourly</span>
                 </label>
               </div>
               <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2,945)</div>
             </div>
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Price</h1></div>
-            <div className="pt-4 w-[83%]">
+            <div className="pt-4 w-[75%]">
               <Slider
                 min={1}
                 max={100000}
@@ -127,15 +133,45 @@ function ProjectList() {
                 value={range}
                 onChange={handleSliderChange}
                 railStyle={{ background: 'lightgray' }}
-                trackStyle={[{ backgroundColor: '#84cc16' }]}
+                trackStyle={[
+                  {
+                    background: 'linear-gradient(45deg, #00BF58, #E3FF75)',
+                    borderColor: '#65a30d',
+                  },
+                ]}
                 handleStyle={[
-                  { backgroundColor: '#a3e635', borderColor: '#65a30d'},
-                  { backgroundColor: '#a3e635', borderColor: '#65a30d'},
-                ]} 
+                  {
+                    backgroundColor: 'white',
+                    borderColor: 'transparent', 
+                    borderRadius: '50%', // Set border radius for circular shape
+                    borderImage: 'linear-gradient(45deg, #00BF58, #E3FF75)',
+                    borderImageSlice: 1,
+                  },
+                  {
+                    backgroundColor: 'white',
+                    borderColor: 'transparent',
+                    borderRadius: '50%',
+                    borderImage: 'linear-gradient(45deg, #00BF58, #E3FF75)',
+                    borderImageSlice: 1,
+                  },
+                ]}
                 />
-              <div className='flex flex-row space-x-8 mt-4'>
-                <div className='mt-3 bg-white  text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979]'>${range[0]}</div>
-                <div className='mt-3 bg-white  text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979]'>${range[1]}</div>
+              <div className='flex flex-row mt-4'>
+                <div className='basis-5/12'><input
+                type="text"
+                value={range[0]}
+                onChange={(e) => handleInputChange(0, e.target.value)}
+                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-28 focus:border-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-60
+                focus:outline-none'
+              /></div>
+              <div className='basis-2/12 m-auto mt-4'><i class="bi bi-dash-lg text-[#475569]"></i></div>
+                <div className='basis-5/12'><input
+                type="text"
+                value={range[1]}
+                onChange={(e) => handleInputChange(1, e.target.value)}
+                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-28 focus:border-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-60
+                focus:outline-none'
+              /></div>
               </div>
             </div>
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Skills</h1></div>
@@ -286,7 +322,7 @@ function ProjectList() {
                 <h1 className='font-cardo text-xl font-extrabold text-right'>$100 - $150</h1>
                 <p className='font-inter text-[#797979] mt-1 text-sm text-right'>Hourly Rate</p>
                 <div className=''>
-                  <button className='rounded h-12 w-28  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button>
+                  <Link to='/login'><button className='rounded h-12 w-28  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
                 </div>
               </div>
             </div>
@@ -324,7 +360,7 @@ function ProjectList() {
                 <h1 className='font-cardo text-xl font-extrabold text-right'>$100 - $150</h1>
                 <p className='font-inter text-[#797979] mt-1 text-sm text-right'>Hourly Rate</p>
                 <div className=''>
-                  <button className='rounded h-12 w-28  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button>
+                  <Link to='/login'><button className='rounded h-12 w-28  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
                 </div>
               </div>
             </div>
