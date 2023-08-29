@@ -8,11 +8,12 @@ import { LogoutAction } from '../../redux/Auth/AuthAction'
 const Navbar = () => {
   
   const accessToken = localStorage.getItem('accessToken');
+  const loginType = useSelector(state => state.login.type)
   const logindata = useSelector(state => state.login.login_data);
   const googleUserName = localStorage.getItem('googleUserName');
   const loginMethod = localStorage.getItem('loginMethod');
   const dispatch = useDispatch();
-  
+ 
   let displayName;
 
   if (loginMethod === 'google') {
@@ -67,7 +68,15 @@ const Navbar = () => {
 </div>
         </>
       ):(<>
-        <span className='pr-3 font-cardo text-xl'>Welcome, <span className="font-bold">{displayName}</span></span>
+      <span className='pr-3 font-cardo text-xl'>Welcome, 
+  {loginType === 'FREELANCER'? (
+    <Link to="/freelancer/profile" className="font-bold">{" "+displayName}</Link>
+  ) : (
+      <Link to="/projects" className="font-bold">{" "+displayName}</Link>
+    ) 
+  }
+</span>
+        {/* <span className='pr-3 font-cardo text-xl'>Welcome, <span className="font-bold">{displayName}</span></span> */}
         {/* <Link to='/login'><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-2 font-semibold" onClick={() => {
           localStorage.removeItem('isLoggedIn');
           localStorage.removeItem('googleUserName');

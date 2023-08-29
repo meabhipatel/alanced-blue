@@ -19,6 +19,7 @@ module.exports = {
       },
       borderOpacity: {
         '50': '0.5',
+        '30': '0.3',
       },
     },
   },
