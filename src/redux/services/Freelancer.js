@@ -15,3 +15,17 @@ export const AddFreelancer = async (data) =>{
 };
 
 
+export const GetFreelancerSelfProfile = async (token) => {    
+    setHeadersWithAccessToken(token);
+    return await DataService.get(API.Freelancers.Freelancer.FreelancerSelfProfileView)
+      .then((res) => {
+        console.log("Freelancer Self Profile",res);
+        return res.data;
+      })
+      .catch((err) => {
+        return handleError(err);
+      });
+  };
+
+
+  

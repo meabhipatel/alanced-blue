@@ -23,10 +23,26 @@ import certificate from '../../components/images/certificate.png'
 import del from '../../components/images/delete.png'
 import experience from '../../components/images/experience.png'
 import { useDispatch, useSelector } from 'react-redux'
+import { GetFreelancerSelfProfileAction } from '../../redux/Freelancer/FreelancerAction'
+import StarRating from './StarRating'
 
 
 const FreelancerSelfProfile = () => {
 
+  const accessToken = useSelector(state => state.login.accessToken);  
+  const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile)
+  const dispatch = useDispatch();
+
+//   const [isExpanded, setIsExpanded] = useState(false);
+
+//     const fullText = freelancerselfprofile && freelancerselfprofile[0].Address ? freelancerselfprofile[0].Address : 'Your Description';
+//     const limit = 400;
+
+//     const handleToggle = () => {
+//         setIsExpanded(!isExpanded);
+//     };
+
+//     const displayText = isExpanded ? fullText : `${fullText.substring(0, limit)}...`;
   
   const [isAvailable, setIsAvailable] = useState(true);
 
@@ -45,7 +61,7 @@ const FreelancerSelfProfile = () => {
   };
  
   
-  const [selectedButton, setSelectedButton] = useState('Graphic Design');
+  const [selectedButton, setSelectedButton] = useState('All Work');
   const [selectedButtons, setSelectedButtons] = useState('Github');
   const commonStyle = "inline-block text-sm py-[10px] mt-4 lg:mt-0 border rounded font-semibold";
 
@@ -62,6 +78,10 @@ const FreelancerSelfProfile = () => {
         background: 'linear-gradient(90deg, #00BF58, #E3FF75)'
     };
 
+    React.useEffect(() => {
+        dispatch(GetFreelancerSelfProfileAction(accessToken))
+      }, [])
+
 
   return (
    <>
@@ -71,7 +91,7 @@ const FreelancerSelfProfile = () => {
    <div class="flex flex-col md:flex-row">
     <div class="md:w-[30%] p-4 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 mb-4 md:mb-0">
         <div class="relative w-28 h-28 mx-auto">
-            <img src={profilepic} alt="Profile" class="rounded-full w-full h-full border border-gray-200" />
+            <img src={freelancerselfprofile && freelancerselfprofile[0] ? "https://aparnawiz91.pythonanywhere.com/"+freelancerselfprofile[0].images_logo : ''} alt="Profile" class="rounded-full w-full h-full border border-gray-200" />
             <div class="absolute top-1 left-2 p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
                 <img src={edit} alt="edit" />
             </div>
@@ -81,12 +101,13 @@ const FreelancerSelfProfile = () => {
     <div class="md:w-[70%] border border-gray-200 border-opacity-30 flex flex-col md:flex-row">
         <div class="w-full md:w-3/4 pt-5 text-left pl-8">
             <div className="flex items-center">
-                <h1 className="font-cardo text-[24px] text-[#031136] font-normal mr-1">Ayan Jain</h1>
+                <h1 className="font-cardo text-[24px] text-[#031136] font-normal mr-1">{freelancerselfprofile && freelancerselfprofile[0] ? `${freelancerselfprofile[0].first_Name} ${freelancerselfprofile[0].last_Name}` : ''}
+            </h1>
                 <img className="h-4 w-4" src={verify} alt="Verification" />
             </div>
-            <div className="flex items-center my-2">
+            <div className="flex items-center my-1">
                 <img src={location} alt="Location" className="h-[13px] mr-1" />
-                <p className="text-[#797979] text-[14px] font-inter">Vidisha, India – 3:11 pm local time</p>
+                <p className="text-[#797979] text-[14px] font-inter">{freelancerselfprofile && freelancerselfprofile[0].Address ? freelancerselfprofile[0].Address : 'Your Location here'}</p>
             </div>
 
             <div className="flex space-x-1 mt-2">
@@ -120,7 +141,7 @@ const FreelancerSelfProfile = () => {
 </div>
 <div class="flex flex-col md:flex-row">
     <div class="w-full md:w-[30%] py-4 pl-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left mb-4 md:mb-0">
-        <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1 mb-3">Graphic Design</h1>
+        <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1 mb-3">{freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category : 'Your Designation'}</h1>
         <div className="grid grid-cols-3 md:grid-cols-3 gap-3">
             <div className="">
                 <h4 className='text-[#031136] font-cardo font-bold text-[23px]'>$300+</h4>
@@ -144,13 +165,24 @@ const FreelancerSelfProfile = () => {
             </div>
         </div>
         <div className='my-3 flex flex-wrap'>
-        <Link to=''  className="flex-grow md:flex-none p-1">
+        {freelancerselfprofile && freelancerselfprofile[0] && freelancerselfprofile[0].skills ? 
+    JSON.parse(freelancerselfprofile[0].skills.replace(/'/g, '"')).map((skill, index) => (
+        <Link key={index} to='' className="flex-grow md:flex-none p-1">
+                <span 
+                    className={`${commonStyle} px-3 my-3 md:px-8 ${selectedButton === skill ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
+                    onClick={() => setSelectedButton(skill)}>
+                    {skill}
+                </span>
+            </Link>
+    )) 
+: null}
+        {/* <Link to=''  className="flex-grow md:flex-none p-1">
                 <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'Graphic Design' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('Graphic Design')}>
                     Graphic Design
                 </span>
-            </Link>
-            <Link to='' className="flex-grow md:flex-none p-1">
+            </Link> */}
+            {/* <Link to='' className="flex-grow md:flex-none p-1">
                 <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'UI/UX Design' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('UI/UX Design')}>
                     UI/UX Design
@@ -161,7 +193,7 @@ const FreelancerSelfProfile = () => {
                     onClick={() => setSelectedButton('Logo Design')}>
                     Logo Design
                 </span>
-            </Link>
+            </Link> */}
             <Link to=''className="flex-grow md:flex-none p-1">
                 <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'All Work' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('All Work')}>
@@ -206,7 +238,7 @@ const FreelancerSelfProfile = () => {
     <div class="w-full md:w-[70%] py-4 px-4 md:px-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
     <div className="flex justify-between items-center">
     <div className="flex items-center">
-        <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-2">Graphic Design Specialist</h1>
+        <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-2">{freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category : 'Your Designation'}</h1>
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={edit} alt="Edit" className="align-middle" />
         </div>
@@ -218,8 +250,16 @@ const FreelancerSelfProfile = () => {
         </div>
     </div>
 </div>
-   <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-1'>Specializes in Graphic Design</p>
-   <p className='font-inter opacity-50 text-[#0A142F] text-[14px]'>I've been a graphic designer for more than 6+ years, assisting organizations and people to successfully market themselves. I have worked as a freelancer for both profit and nonprofit organizations. All facets of design, from letterhead, newsletters, and invitations to huge graphics and website banners, as well as website maintenance, are under my area of expertise....</p>
+   <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-2'>Specializes in {freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category : 'Your Designation'}</p>
+   {/* <div>
+            <p className='font-inter opacity-50 text-[#0A142F] text-[14px]'>
+                {displayText}
+            </p>
+            <h1 className="font-cardo text-[18px] text-[#031136] font-normal py-2 cursor-pointer" onClick={handleToggle}>
+                {isExpanded ? 'See Less' : 'See More'}
+            </h1>
+    </div> */}
+   <p className='font-inter opacity-50 text-[#0A142F] text-[14px]'>I've been a graphic designer for more than 6+ years, assisting organizations and people to successfully market themselves. I have worked as a freelancer for both profit and nonprofit organizations. All facets of design, from letterhead, newsletters, and invitations to huge graphics and website banners, as well as website maintenance, are under my area of expertise....</p> 
    <h1 className="font-cardo text-[18px] text-[#031136] font-normal py-2 cursor-pointer">See More</h1>
     </div>
 </div>
@@ -292,7 +332,7 @@ const FreelancerSelfProfile = () => {
     <p className='font-inter text-[#0A142F] text-[14px] py-1 inline-block mr-1'>ID : <span className='opacity-50'>Verified</span></p>
     <img src={verify} alt="" className='inline-block h-3 w-3'/>
     <div className="flex items-center justify-between">
-    <p className='font-inter text-[#0A142F] text-[14px] py-1 opacity-50'>Military Veteran</p>
+    <p className='font-inter text-[#0A142F] text-[14px] py-1 opacity-50'>{freelancerselfprofile && freelancerselfprofile[0] ? `${freelancerselfprofile[0].first_Name} ${freelancerselfprofile[0].last_Name}` : ''}</p>
     <div className="flex items-center space-x-2">
     <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={plus} alt="more" />
@@ -310,6 +350,7 @@ const FreelancerSelfProfile = () => {
         </div>
     </div>
     </div> 
+    <p className='font-inter text-[#0A142F] text-[14px] py-1'>{freelancerselfprofile && freelancerselfprofile[0] ? freelancerselfprofile[0].qualification : ''}</p>
     <div class="border-b opacity-50 my-5"></div>
     <div className='my-3 flex flex-wrap'>
         <Link to=''  className="flex-grow md:flex-none p-1">
@@ -332,8 +373,9 @@ const FreelancerSelfProfile = () => {
     <div className="flex justify-between items-center">
     <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-1'>Banner designer for Dental Clinic</p>
     <div className="flex items-center space-x-2">
-        <div className="text-[16px] text-yellow-500 mr-1 inline-block">★★★★★</div>
-        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] inline-block'>5.0</p>
+    <StarRating rating={3} />
+        {/* <div className="text-[16px] text-yellow-500 mr-1 inline-block">★★★★★</div> */}
+        {/* <p className='font-inter opacity-50 text-[#0A142F] text-[14px] inline-block'>5.0</p> */}
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 inline-block">
             <img src={share} alt="share" />
         </div>
@@ -354,8 +396,9 @@ const FreelancerSelfProfile = () => {
 <div className="flex justify-between items-center">
     <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-1'>Banner designer for Dental Clinic</p>
     <div className="flex items-center space-x-2">
-        <div className="text-[16px] text-yellow-500 mr-1 inline-block">★★★★★</div>
-        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] inline-block'>5.0</p>
+    <StarRating rating={5} />
+        {/* <div className="text-[16px] text-yellow-500 mr-1 inline-block">★★★★★</div>
+        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] inline-block'>5.0</p> */}
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 inline-block">
             <img src={share} alt="share" />
         </div>
@@ -457,11 +500,29 @@ const FreelancerSelfProfile = () => {
         </div>
     </div>
     </div>
-    <p className='font-inter text-[#0A142F] text-[13px] py-2'>Graphic Design Deliverables</p>
-    <Link to=''><span className='border px-4 py-1 border-gray-300 opacity-50 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2'>Social Media Imagery</span></Link>
-    <Link to=''><span className='border px-4 py-1 border-gray-300 opacity-50 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2'>Infographic</span></Link>
-    <p className='font-inter text-[#0A142F] text-[13px] pt-6 pb-2'>Graphic Design Services</p>
-    <Link to=''><span className='border px-4 py-1 border-gray-300 opacity-50 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2'>Advertising Design</span></Link>
+    <p className='font-inter text-[#0A142F] text-[13px] py-2'>{freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category : 'Your Designation'} Deliverables</p>
+    {freelancerselfprofile && freelancerselfprofile[0] && freelancerselfprofile[0].skills ? 
+    JSON.parse(freelancerselfprofile[0].skills.replace(/'/g, '"')).map((skill, index) => (
+        <Link key={index} to=''>
+            <span className='border px-4 py-1 border-gray-300 opacity-50 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2'>
+                {skill}
+            </span>
+        </Link>
+    )) 
+: null}
+    {/* <Link to=''><span className='border px-4 py-1 border-gray-300 opacity-50 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2'>Social Media Imagery</span></Link> */}
+    <p className='font-inter text-[#0A142F] text-[13px] pt-6 pb-2'>{freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category : 'Your Designation'} Services</p>
+    {freelancerselfprofile && freelancerselfprofile[0] && freelancerselfprofile[0].skills ? 
+    JSON.parse(freelancerselfprofile[0].skills.replace(/'/g, '"')).map((skill, index) => (
+        <Link key={index} to=''>
+            <span className='border px-4 py-1 border-gray-300 opacity-50 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2'>
+                {skill}
+            </span>
+        </Link>
+    )) 
+: null}
+
+    {/* <Link to=''><span className='border px-4 py-1 border-gray-300 opacity-50 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2'>{freelancerselfprofile && freelancerselfprofile[0] ? freelancerselfprofile[0].skills : ''}</span></Link> */}
     </div>
 </div>
 <div class="flex flex-col md:flex-row">

@@ -5,7 +5,9 @@ const API = {
 
   Freelancers: {
     Freelancer: {
-      FreelancerRegistration: '/account/freelancer/registration'
+      FreelancerRegistration: '/account/freelancer/registration',
+      FreelancerSelfProfileView: '/account/freelancer/selfprofile/view',
+      FreelancerViewReviews:'/freelance/View-all/Review'
     }
   },
   
