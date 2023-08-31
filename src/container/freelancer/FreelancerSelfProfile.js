@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useRef } from 'react'
 import Navbar from '../../components/Layout/Navbar'
 import freelancercover from '../../components/images/freelancercover.png'
 import edit from '../../components/images/edit.png'
@@ -25,6 +25,7 @@ import experience from '../../components/images/experience.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetFreelancerSelfProfileAction } from '../../redux/Freelancer/FreelancerAction'
 import StarRating from './StarRating'
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
 const FreelancerSelfProfile = () => {
@@ -32,6 +33,7 @@ const FreelancerSelfProfile = () => {
   const accessToken = useSelector(state => state.login.accessToken);  
   const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile)
   const dispatch = useDispatch();
+
 
 //   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -67,6 +69,26 @@ const FreelancerSelfProfile = () => {
 
   const [selected, setSelected] = useState('completed');
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const inputRef = useRef(null)
+
+    const handleEditClick = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+    };
+  
+      const handleFileChange = (event) => {
+        setSelectedFile(event.target.files[0]);
+      };
+
+      const handleImageClick =()=>{
+        inputRef.current.click();
+      }
+
   const underlineStyle = {
         content: '""',
         display: 'block',
@@ -82,22 +104,88 @@ const FreelancerSelfProfile = () => {
         dispatch(GetFreelancerSelfProfileAction(accessToken))
       }, [])
 
-
+     
   return (
    <>
    <Navbar/>
    <div className='mt-4 mx-[9%]'>
    <img src={freelancercover} alt="" className=''/>
    <div class="flex flex-col md:flex-row">
-    <div class="md:w-[30%] p-4 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 mb-4 md:mb-0">
-        <div class="relative w-28 h-28 mx-auto">
-            <img src={freelancerselfprofile && freelancerselfprofile[0] ? "https://aparnawiz91.pythonanywhere.com/"+freelancerselfprofile[0].images_logo : ''} alt="Profile" class="rounded-full w-full h-full border border-gray-200" />
-            <div class="absolute top-1 left-2 p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
-                <img src={edit} alt="edit" />
+   <div className="md:w-[30%] p-4 bg-white py-8 border border-gray-200 border-opacity-30 mb-4 md:mb-0 relative">
+                <div className="relative w-28 h-28 mx-auto">
+                    <img src={freelancerselfprofile && freelancerselfprofile[0] ? "https://aparnawiz91.pythonanywhere.com/"+freelancerselfprofile[0].images_logo : ''} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
+                    <div className="absolute top-1 left-2 p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={handleEditClick}>
+                        <img src={edit} alt="edit" />
+                    </div>
+                    <div class="absolute bottom-3 right-2 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                </div>
             </div>
-            <div class="absolute bottom-3 right-2 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
-        </div>
-    </div>
+            {isModalOpen && (
+                <div className="fixed z-10 inset-0 overflow-y-auto mt-10">
+                    <div className="fixed inset-0 bg-black opacity-50"></div>
+                    <div className="flex items-center justify-center min-h-screen">
+                        <div className="bg-white rounded-lg w-[90%] md:w-[50%] p-6 relative z-20">
+                            <div className="text-right">
+                                <button onClick={handleModalClose} className="text-gray-500 hover:text-gray-700">
+                                <i class="bi bi-x-lg"></i>
+                                </button>
+                            </div>
+                            <div className='mx-8'>
+                            <h1 className="font-cardo text-[21px] text-[#031136] font-normal text-left">Edit Photo</h1>
+                            <p className="font-cardo text-[17px] text-[#031136] font-normal pt-2 text-left">Show Clients The Best Version Of Yourself!</p>
+                            <div className="flex justify-between items-center mt-4 mb-2">
+                            <div className="relative w-[200px] h-[200px] overflow-hidden">
+                            {selectedFile ? 
+                            <img className="absolute inset-0 w-full h-full object-cover" src={URL.createObjectURL(selectedFile)} alt="Profile" /> 
+                            : 
+                            <img className="absolute inset-0 w-full h-full object-cover" src={freelancerselfprofile && freelancerselfprofile[0] ? "https://aparnawiz91.pythonanywhere.com/" + freelancerselfprofile[0].images_logo : ''} alt="Profile" />
+                            }
+                            </div>
+                            <div className="relative w-28 h-28 overflow-hidden">
+                            {selectedFile ? 
+                            <img className="absolute inset-0 w-full h-full object-cover" src={URL.createObjectURL(selectedFile)} alt="Profile" /> 
+                            : 
+                            <img className="absolute inset-0 w-full h-full object-cover" src={freelancerselfprofile && freelancerselfprofile[0] ? "https://aparnawiz91.pythonanywhere.com/" + freelancerselfprofile[0].images_logo : ''} alt="Profile" />
+                            }
+                            </div>
+                            <div className="relative w-20 h-20 overflow-hidden">
+                            {selectedFile ? 
+                            <img className="absolute inset-0 w-full h-full object-cover" src={URL.createObjectURL(selectedFile)} alt="Profile" /> 
+                            : 
+                            <img className="absolute inset-0 w-full h-full object-cover" src={freelancerselfprofile && freelancerselfprofile[0] ? "https://aparnawiz91.pythonanywhere.com/" + freelancerselfprofile[0].images_logo : ''} alt="Profile" />
+                            }
+                            </div>
+                            <div className="relative w-16 h-16 overflow-hidden">
+                            {selectedFile ? 
+                            <img className="absolute inset-0 w-full h-full object-cover" src={URL.createObjectURL(selectedFile)} alt="Profile" /> 
+                            : 
+                            <img className="absolute inset-0 w-full h-full object-cover" src={freelancerselfprofile && freelancerselfprofile[0] ? "https://aparnawiz91.pythonanywhere.com/" + freelancerselfprofile[0].images_logo : ''} alt="Profile" />
+                            }
+                            </div>
+
+                            {/* <div className="w-[200px] h-[200px]">
+                        {selectedFile ? <img src={URL.createObjectURL(selectedFile)} alt="Profile"/> : <img src={freelancerselfprofile && freelancerselfprofile[0] ? "https://aparnawiz91.pythonanywhere.com/"+freelancerselfprofile[0].images_logo : ''} alt="Profile"/> }
+                    </div> */}
+                    <input 
+                    type='file' 
+                    ref={inputRef} 
+                    style={{display:"none"}}
+                    onChange={handleFileChange}
+                />
+                        </div>
+                        <p className="font-cardo text-[17px] text-[#031136] font-normal pt-2 text-left">Must Be An Actual Photo Of You.</p>
+                        <p className='text-[#0A142F] font-inter opacity-50 text-[14px] text-left'>Logos, clip-art, group photos, and digitally-altered images are not allowed.</p>
+                            <div className="mt-8 flex justify-end">
+                            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" onClick={handleImageClick} onChange={handleFileChange}>Change Image</span></Link>
+                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
+                                <Link to=''><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Save Photo</p></button></Link>
+                            </div>     
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
     <div class="md:w-[70%] border border-gray-200 border-opacity-30 flex flex-col md:flex-row">
         <div class="w-full md:w-3/4 pt-5 text-left pl-8">
             <div className="flex items-center">
@@ -370,30 +458,31 @@ const FreelancerSelfProfile = () => {
     </div>
 
     <div class="w-full md:w-[70%] py-4 px-4 md:px-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
-    <div className="flex justify-between items-center">
-    <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-1'>Banner designer for Dental Clinic</p>
-    <div className="flex items-center space-x-2">
-    <StarRating rating={3} />
-        {/* <div className="text-[16px] text-yellow-500 mr-1 inline-block">★★★★★</div> */}
-        {/* <p className='font-inter opacity-50 text-[#0A142F] text-[14px] inline-block'>5.0</p> */}
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 inline-block">
-            <img src={share} alt="share" />
+        <div className="flex justify-between items-center">
+        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-1'>Banner designer for Dental Clinic</p>
+        <div className="flex items-center space-x-2">
+        <StarRating rating={3} />
+            {/* <div className="text-[16px] text-yellow-500 mr-1 inline-block">★★★★★</div> */}
+            {/* <p className='font-inter opacity-50 text-[#0A142F] text-[14px] inline-block'>5.0</p> */}
+            <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 inline-block">
+                <img src={share} alt="share" />
+            </div>
         </div>
     </div>
-</div>
-   <p className='font-inter opacity-50 text-[#0A142F] text-[12px]'>Dec 26, 2022 - Dec 27, 2022</p>
-   <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-3'>"Great job and great guy to work with!! Fast work and very responsive and skilled. Thank you so much!"</p>
-   <div class="grid grid-cols-3 gap-4 my-6">
-  <div class="">
-    <p className='font-cardo text-[#031136] text-[16px] font-bold'>$30.00</p>
-  </div>
-  <div class="">
-    <p className='font-cardo text-[#031136] text-[16px] font-bold'>Fixed Price</p>
-  </div>
-  <div class=""></div>
-</div>
-<div class="border-b opacity-50 my-4"></div>
-<div className="flex justify-between items-center">
+        <p className='font-inter opacity-50 text-[#0A142F] text-[12px]'>Dec 26, 2022 - Dec 27, 2022</p>
+        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-3'>"Great job and great guy to work with!! Fast work and very responsive and skilled. Thank you so much!"</p>
+        <div class="grid grid-cols-3 gap-4 my-6">
+        <div class="">
+        <p className='font-cardo text-[#031136] text-[16px] font-bold'>$30.00</p>
+        </div>
+        <div class="">
+        <p className='font-cardo text-[#031136] text-[16px] font-bold'>Fixed Price</p>
+        </div>
+        <div class=""></div>
+    </div>   
+    <div class="border-b opacity-50 my-4"></div>
+                         
+    <div className="flex justify-between items-center">
     <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-1'>Banner designer for Dental Clinic</p>
     <div className="flex items-center space-x-2">
     <StarRating rating={5} />
