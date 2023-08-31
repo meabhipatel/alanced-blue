@@ -3,6 +3,8 @@ import { ADD_NEW_FREELANCER_REQUEST,
 ADD_NEW_FREELANCER_SUCCESS,
 GET_FREELANCER_SELF_PROFILE_REQUEST,
 GET_FREELANCER_SELF_PROFILE_SUCCESS,
+GET_VIEW_ALL_PROJECT_REQUEST,
+GET_VIEW_ALL_PROJECT_SUCCESS,
 SERVER_ERROR} from "./FreelancerConstant"
 
 
@@ -27,6 +29,10 @@ const FreelancerReducer =(state = initialState, action) => {
             return { loading: true};
         case GET_FREELANCER_SELF_PROFILE_SUCCESS: 
             return { freelancerselfprofile: action.payload }; 
+        case GET_VIEW_ALL_PROJECT_REQUEST:
+            return { loading: true};
+        case GET_VIEW_ALL_PROJECT_SUCCESS: 
+            return { viewallprojects: action.payload }; 
         default:
             return state;
     }

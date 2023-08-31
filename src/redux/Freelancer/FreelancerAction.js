@@ -1,9 +1,11 @@
 import { Navigate } from 'react-router-dom'
-import { AddFreelancer,GetFreelancerSelfProfile,GetFreelancerReviews} from '../services/Freelancer'
+import { AddFreelancer,GetFreelancerSelfProfile,GetFreelancerReviews,GetViewAllProjectList} from '../services/Freelancer'
 import { ADD_NEW_FREELANCER_REQUEST,
 ADD_NEW_FREELANCER_SUCCESS,
 GET_FREELANCER_SELF_PROFILE_REQUEST,
 GET_FREELANCER_SELF_PROFILE_SUCCESS,
+GET_VIEW_ALL_PROJECT_REQUEST,
+GET_VIEW_ALL_PROJECT_SUCCESS,
 SERVER_ERROR} from './FreelancerConstant'
 
 
@@ -52,4 +54,27 @@ export const GetFreelancerSelfProfileAction = (token) => dispatch => {
   });
 };
 
+
+export const GetViewAllProjectsListAction = () => dispatch => {
+  
+  dispatch({
+    type: GET_VIEW_ALL_PROJECT_REQUEST,
+    payload: []
+  });
+
+  GetViewAllProjectList().then(res => {
+    console.log(res, "view projects");
+    if (res.status === 200) {
+      dispatch({
+        type: GET_VIEW_ALL_PROJECT_SUCCESS,
+        payload: res.data
+      });
+    } else {
+      dispatch({
+        type: SERVER_ERROR,
+        payload: res
+      });
+    }
+  });
+};
 
