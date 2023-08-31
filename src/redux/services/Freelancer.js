@@ -28,4 +28,15 @@ export const GetFreelancerSelfProfile = async (token) => {
   };
 
 
+  export const GetViewAllProjectList = async () => {
+    // setHeadersWithAccessToken(token);
+    return await DataService.get(API.Freelancers.Freelancer.ViewAllProjects)
+      .then((res) => {
+        console.log(res);
+        return res.data;
+      })
+      .catch((err) => {
+        return handleError(err);
+      });
+  };
   

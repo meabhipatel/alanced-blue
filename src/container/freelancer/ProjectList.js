@@ -12,8 +12,14 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { GetViewAllProjectsListAction } from '../../redux/Freelancer/FreelancerAction'
+
+
 
 function ProjectList() {
+  const viewallprojects = useSelector(state => state.freelancer.viewallprojects)
+  const dispatch = useDispatch();
   const [range, setRange] = useState([1, 100000]);
 
   const handleSliderChange = (newRange) => {
@@ -25,6 +31,11 @@ function ProjectList() {
     newRange[index] = newValue;
     setRange(newRange);
   };
+
+  React.useEffect(() => {
+    dispatch(GetViewAllProjectsListAction())
+  }, [])
+
   return (
     <>
       <Navbar />
@@ -288,12 +299,14 @@ function ProjectList() {
             </div>
           </div>
           <div className=' basis-8/12 mt-20'>
-            <div className='flex flex-row'>
+            {viewallprojects && <>{viewallprojects.map((project,index)=> {
+              return(
+                <div className='flex flex-row'>
               <div className='basis-2/12'>
                 <Avatar src={profilepic} alt="avatar" variant="rounded" />
               </div>
-              <div className=' basis-7/12 text-left'>
-                <h1 className='font-cardo text-lg'>Food Delivery Mobile App</h1>
+              <div className=' basis-7/12 text-left mb-7'>
+                <h1 className='font-cardo text-lg'>{project.title}</h1>
                 <div className='flex flex-row mt-3'>
                   <div className=' basis-4/12 border-2 border-r-[#797979] mr-2 border-t-0 border-b-0 border-l-0'>
                     <div className='flex flex-row'>
@@ -314,19 +327,24 @@ function ProjectList() {
                     </div>
                   </div>
                 </div>
-                <p className='font-inter text-[#797979] mt-3'>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text.</p>
-                <div className='mt-3 bg-white shadow-lg text-center rounded-xl inline-block mr-3 p-1 w-24 border'>Figma</div>
-                <div className='mt-3 bg-white shadow-lg text-center w-24 border rounded-xl inline-block p-1'>Sketch</div>
+                <p className='font-inter text-[#797979] mt-3'>{project.description}</p>
+                {JSON.parse(project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
+                  <div key={index} className='mt-3 bg-white shadow-lg text-center rounded-xl inline-block mr-3 p-1 w-24 border'>{skill}</div>
+                ))}
+                {/* <div className='mt-3 bg-white shadow-lg text-center rounded-xl inline-block mr-3 p-1 w-24 border'>Figma</div> */}
+                {/* <div className='mt-3 bg-white shadow-lg text-center w-24 border rounded-xl inline-block p-1'>Sketch</div> */}
               </div>
               <div className='basis-3/12 pt-10'>
-                <h1 className='font-cardo text-xl font-extrabold text-right'>$100 - $150</h1>
+                <h1 className='font-cardo text-xl font-extrabold text-right'>${project.budget}</h1>
                 <p className='font-inter text-[#797979] mt-1 text-sm text-right'>Hourly Rate</p>
                 <div className=''>
                   <Link to='/login'><button className='rounded h-12 w-28  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
                 </div>
               </div>
             </div>
-            <div className='flex flex-row mt-12'>
+              )
+            })}</>}
+            {/* <div className='flex flex-row mt-12'>
               <div className='basis-2/12'>
                 <Avatar src={clint1} alt="avatar" variant="rounded" />
               </div>
@@ -363,7 +381,7 @@ function ProjectList() {
                   <Link to='/login'><button className='rounded h-12 w-28  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
