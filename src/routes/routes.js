@@ -20,6 +20,7 @@ import HirerRegistration from '../container/hirer/HirerRegistration'
 import Choose from "../container/auth/Choose";
 import ProjectList from "../container/freelancer/ProjectList";
 import FreelancerSelfProfile from "../container/freelancer/FreelancerSelfProfile";
+import FreelancerAfterLogin from "../container/freelancer/FreelancerAfterLogin";
   
   
 
@@ -48,7 +49,8 @@ import FreelancerSelfProfile from "../container/freelancer/FreelancerSelfProfile
           <Route path="/hirer/registration" element={<HirerRegistration/>}/>
           <Route path="/choose" element={<Choose />} />
           <Route path="/projects" element={<ProjectList/>}/>
-          <Route path="/freelancer/profile" element={<FreelancerSelfProfile/>}/>
+          <Route path="/freelancer/editprofile" element={<FreelancerSelfProfile/>}/>
+          <Route path="/freelancer/profile" element={<FreelancerAfterLogin/>}/>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   
