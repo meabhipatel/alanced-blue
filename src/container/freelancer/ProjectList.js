@@ -14,7 +14,7 @@ import 'rc-slider/assets/index.css';
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetViewAllProjectsListAction } from '../../redux/Freelancer/FreelancerAction'
-
+import ViewProjectPopup from './AllPopup/ViewProjectPopup'
 
 
 function ProjectList() {
@@ -30,6 +30,16 @@ function ProjectList() {
     const newRange = [...range];
     newRange[index] = newValue;
     setRange(newRange);
+  };
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const openDialog = () => {
+    setIsDialogOpen(true);
+  };
+
+  const closeDialog = () => {
+    setIsDialogOpen(false);
   };
 
   React.useEffect(() => {
@@ -327,7 +337,8 @@ function ProjectList() {
                     </div>
                   </div>
                 </div>
-                <p className='font-inter text-[#797979] mt-3'>{project.description}</p>
+                <p className='font-inter text-[#797979] mt-3' onClick={openDialog}>{project.description}</p>
+                <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog}/>
                 {JSON.parse(project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
                   <div key={index} className='mt-3 bg-white shadow-lg text-center rounded-xl inline-block mr-3 p-1 w-24 border'>{skill}</div>
                 ))}
