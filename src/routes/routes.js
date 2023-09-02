@@ -21,8 +21,8 @@ import Choose from "../container/auth/Choose";
 import ProjectList from "../container/freelancer/ProjectList";
 import FreelancerSelfProfile from "../container/freelancer/FreelancerSelfProfile";
 import FreelancerAfterLogin from "../container/freelancer/FreelancerAfterLogin";
-  
-  
+import ViewProjectNewTab from "../container/freelancer/AllPopup/ViewProjectNewTab";
+import MyProposalReferrals from "../container/freelancer/MyProposalReferrals";
 
   const AppRouter = (props) => {
     
@@ -51,6 +51,8 @@ import FreelancerAfterLogin from "../container/freelancer/FreelancerAfterLogin";
           <Route path="/projects" element={<ProjectList/>}/>
           <Route path="/freelancer/editprofile" element={<FreelancerSelfProfile/>}/>
           <Route path="/freelancer/profile" element={<FreelancerAfterLogin/>}/>
+          <Route path="/freelancer/view/project/detail" element={<ViewProjectNewTab/>}/>
+          <Route path="/freelancer/view/referals" element={<MyProposalReferrals/>}/>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   

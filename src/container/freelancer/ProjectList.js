@@ -32,15 +32,15 @@ function ProjectList() {
     setRange(newRange);
   };
 
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  // const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const openDialog = () => {
-    setIsDialogOpen(true);
-  };
+  // const openDialog = () => {
+  //   setIsDialogOpen(true);
+  // };
 
-  const closeDialog = () => {
-    setIsDialogOpen(false);
-  };
+  // const closeDialog = () => {
+  //   setIsDialogOpen(false);
+  // };
 
   React.useEffect(() => {
     dispatch(GetViewAllProjectsListAction())
@@ -305,7 +305,7 @@ function ProjectList() {
               <option value="DE">Germany</option>
             </select>
             <div className='mt-8'>
-            <Link to=''><span class="px-20 py-[12px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-bold mr-14 text-lg">Send Proposal</span></Link>
+            <Link to='/freelancer/view/referals'><span class="px-20 py-[12px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-bold mr-14 text-lg">Send Proposal</span></Link>
             </div>
           </div>
           <div className=' basis-8/12 mt-20'>
@@ -337,8 +337,8 @@ function ProjectList() {
                     </div>
                   </div>
                 </div>
-                <p className='font-inter text-[#797979] mt-3' onClick={openDialog}>{project.description}</p>
-                <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog}/>
+                <p className='font-inter text-[#797979] mt-3'>{project.description}</p>
+                {/* <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog}/> */}
                 {JSON.parse(project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
                   <div key={index} className='mt-3 bg-white shadow-lg text-center rounded-xl inline-block mr-3 p-1 w-24 border'>{skill}</div>
                 ))}
