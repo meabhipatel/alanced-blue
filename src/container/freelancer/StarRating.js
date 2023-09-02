@@ -8,7 +8,7 @@ const StarRating = ({rating}) => {
       <div className="inline-block">
         {/* Render filled stars */}
         {Array.from({ length: roundedRating }).map((_, index) => (
-          <span key={index} className="text-[16px] text-yellow-500">★</span>
+          <span key={index} className="text-[16px] text-[#FFC107]">★</span>
         ))}
   
         {/* Render empty stars */}
