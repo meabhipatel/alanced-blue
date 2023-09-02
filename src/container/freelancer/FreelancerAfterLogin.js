@@ -14,11 +14,13 @@ import verify from '../../components/images/verify.png'
 import location from '../../components/images/location.png'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import ViewProjectPopup from './AllPopup/ViewProjectPopup'
+
 
 const FreelancerAfterLogin = () => {
 
   const logindata = useSelector(state => state.login.login_data);  
-
+ 
   const [selected, setSelected] = useState('Best Matches');
   const underlineStyle = {
     content: '""',
@@ -29,7 +31,54 @@ const FreelancerAfterLogin = () => {
     width: '100%',
     height: '2px',
     background: 'linear-gradient(90deg, #00BF58, #E3FF75)'
-};
+  };
+
+  function getCurrentDateAndGreeting() {
+    const current = new Date();
+    const hours = current.getHours();
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    let greeting;
+    if (hours < 12) {
+        greeting = 'Morning';
+    } else if (hours < 17) {
+        greeting = 'Afternoon';
+    } else {
+        greeting = 'Evening';
+    }
+
+ 
+    const dateOfMonth = current.getDate();
+    function getOrdinalSuffix(date) {
+        if (date > 3 && date < 21) return 'th'; 
+        switch (date % 10) {
+            case 1:  return 'st';
+            case 2:  return 'nd';
+            case 3:  return 'rd';
+            default: return 'th';
+        }
+    }
+
+    const formattedDate = `${months[current.getMonth()]} ${dateOfMonth}${getOrdinalSuffix(dateOfMonth)}`;
+    return {
+        day: days[current.getDay()],
+        formattedDate,
+        greeting
+    };
+}
+      
+const { day, formattedDate, greeting } = getCurrentDateAndGreeting();
+
+const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const openDialog = () => {
+    setIsDialogOpen(true);
+  };
+
+  const closeDialog = () => {
+    setIsDialogOpen(false);
+  };
 
   return (
     <>
@@ -38,14 +87,14 @@ const FreelancerAfterLogin = () => {
     <div className="relative">
     <img src={profilebg} alt="" className='w-full' />
     <div className="absolute top-16 left-12 p-4 text-left">
-        <h1 className='font-cardo text-[#031136] sm:text-xl text-lg font-normal'>Wednesday, August 30th</h1>
-        <h1 className='font-cardo text-[#031136] sm:text-3xl text-2xl font-semibold py-1'>Good Evening, {logindata.first_Name+" "+logindata.last_Name}</h1>
+        <h1 className='font-cardo text-[#031136] sm:text-xl text-lg font-normal'>{day}, {formattedDate}</h1>
+        <h1 className='font-cardo text-[#031136] sm:text-3xl text-2xl font-semibold py-1'>Good {greeting}, {logindata.first_Name+" "+logindata.last_Name}</h1>
     </div>
 </div>
 <section className='flex justify-center my-2'>
     <div className='sm:w-[78vw] w-[95vw] bg-white p-1 sm:h-16 rounded-md flex justify-between items-center shadow-md relative z-10'>
         <div className='flex flex-row items-center p-4'>
-            <img src={search} className="h-4 w-4" alt="Search Icon"/>
+            <img src={search} className="h-4 w-4" alt=""/>
             <input className='w-52 sm:w-[800px] ml-2 h-8 text-sm' placeholder='What are you looking for?' />
         </div>
         <button className='rounded h-8 w-20 sm:w-24 mr-3 font-semibold text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>Search</button>
@@ -89,25 +138,25 @@ const FreelancerAfterLogin = () => {
 <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
     <h1 className="font-cardo text-[20px] text-[#031136] font-normal mr-1">Connects</h1>
     <div className="flex items-center space-x-2">
-            <img src={downarrow} alt="edit" />
+            <img src={downarrow} alt="" />
     </div>
     </div>
     <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
     <h1 className="font-cardo text-[20px] text-[#031136] font-normal mr-1">Preferences</h1>
     <div className="flex items-center space-x-2">
-            <img src={downarrow} alt="edit" />
+            <img src={downarrow} alt="" />
     </div>
     </div>
     <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
     <h1 className="font-cardo text-[20px] text-[#031136] font-normal mr-1">Proposals</h1>
     <div className="flex items-center space-x-2">
-            <img src={downarrow} alt="edit" />
+            <img src={downarrow} alt="" />
     </div>
     </div>
     <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
     <h1 className="font-cardo text-[20px] text-[#031136] font-normal mr-1">Project catalog</h1>
     <div className="flex items-center space-x-2">
-            <img src={downarrow} alt="edit" />
+            <img src={downarrow} alt="" />
     </div>
     </div>
     <div className="px-4 md:px-8 py-5 m-4 rounded-lg shadow-md">
@@ -148,20 +197,21 @@ const FreelancerAfterLogin = () => {
     <div className='px-4 md:px-8 py-4'>
       <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse jobs that match your experience to a client's hiring preferences. Ordered by most relevant.</p>
     </div>
-    <div className='px-4 md:px-8 py-5 bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30'>
+    <div className='px-4 md:px-8 py-5 bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer'>
     <div className="flex items-center justify-between">
     <p className="font-inter text-[#0A142F] text-[18px] font-semibold">Graphic Designer</p>
     <div className="flex items-center space-x-2">
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
-            <img src={thumbdown} alt="View More" />
+            <img src={thumbdown} alt="" />
         </div>
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
-            <img src={heart} alt="Edit" />
+            <img src={heart} alt="" />
         </div>
     </div>
     </div>
     <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>Fixed-price - Expert - Est. Budget: $10 - Posted in 12 hours</p>
-    <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>Job Description: Graphic Designer for Vogue Tourism in Ajmer Only for Ajmer ( Rajasthan ) OFFLINE Please Share Your Details On this Whatsapp No.+91 95094 98242  Are you a talented and imaginative Graphic Designer with a flair for creating visually stunning and engaging designs? Vogue Tourism, a premier name in the travel and hospitality sector, is <span className="font-cardo text-[#031136] text-[18px] font-semibold cursor-pointer">More</span></p>
+    <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3' onClick={openDialog}>Job Description: Graphic Designer for Vogue Tourism in Ajmer Only for Ajmer ( Rajasthan ) OFFLINE Please Share Your Details On this Whatsapp No.+91 95094 98242  Are you a talented and imaginative Graphic Designer with a flair for creating visually stunning and engaging designs? Vogue Tourism, a premier name in the travel and hospitality sector, is <span className="font-cardo text-[#031136] text-[18px] font-semibold cursor-pointer">More</span></p>
+    <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog}/>
     <Link to=''>
             <span className='border px-4 py-1 border-gray-300 opacity-50 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2'>
             Social Media Imagery
@@ -170,7 +220,7 @@ const FreelancerAfterLogin = () => {
         <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>Proposals : <span className='opacity-50'>Less than 5</span></p>
         <img src={verify} alt="" className='inline-block h-3 w-3 mr-1'/>
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>Payment verified</p>
-        <div className="text-[16px] text-yellow-500 inline-block mx-3">★★★★★</div>
+        <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>
         <p className='font-inter text-[#0A142F] text-[14px] opacity-80 inline-block mr-1'>$0</p>
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-3'>Spent</p>
         <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
@@ -181,10 +231,10 @@ const FreelancerAfterLogin = () => {
     <p className="font-inter text-[#0A142F] text-[18px] font-semibold">UI Designer - Landing Page</p>
     <div className="flex items-center space-x-2">
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
-            <img src={thumbdown} alt="View More" />
+            <img src={thumbdown} alt="" />
         </div>
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
-            <img src={heart} alt="Edit" />
+            <img src={heart} alt="" />
         </div>
     </div>
     </div>
@@ -198,7 +248,7 @@ const FreelancerAfterLogin = () => {
         <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>Proposals : <span className='opacity-50'>Less than 5</span></p>
         <img src={verify} alt="" className='inline-block h-3 w-3 mr-1'/>
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>Payment verified</p>
-        <div className="text-[16px] text-yellow-500 inline-block mx-3">★★★★★</div>
+        <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>
         <p className='font-inter text-[#0A142F] text-[14px] opacity-80 inline-block mr-1'>$0</p>
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-3'>Spent</p>
         <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
