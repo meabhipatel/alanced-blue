@@ -1,34 +1,22 @@
-import React from 'react';
+import React from 'react'
+import Navbar from '../../../components/Layout/Navbar'
+import HomeSection4 from '../../../components/Layout/HomeSection4'
+import Footer from '../../../components/Layout/Footer'
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import 'font-awesome/css/font-awesome.min.css';
+import { Link } from 'react-router-dom';
 import frame from '../../../components/images/Frame.png'
-import money from '../../../components/images/money.png'
 import rating from '../../../components/images/superstart.png'
-import { Link } from 'react-router-dom'
+import money from '../../../components/images/money.png'
 
-function ViewProjectPopup({ isOpen, onClose }) {
-  if (!isOpen) {
-    return null; // Don't render anything if the dialog is closed
-  }
 
+const ViewProjectNewTab = () => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-10 mt-20">
-        <div className="fixed inset-0 bg-black opacity-10"></div>
-      {/* Dialog content goes here */}
-      <div className="bg-white p-6 rounded-lg shadow-xl w-3/4 h-[85%] z-20 overflow-y-scroll">
-        <div className='flex flex-row'>
-            <div className='basis-6/12 cursor-pointer'><i class="bi bi-chevron-left font-bold text-black text-lg" onClick={onClose}></i></div>
-            <div className=' basis-6/12'>
-                <Link to="/freelancer/view/project/detail" target="_blank" rel="noopener noreferrer">
-                <div className=' text-right font-cardo font-normal text-base'>
-                <i class="bi bi-box-arrow-up-right"></i> Open job in a new window
-                </div>
-                </Link>
-            </div>
-        </div>
-        <div className=' container px-6'>
-            <div className=' flex flex-row mt-10'>
-                <div className=' basis-8/12'>
+    <>
+    <Navbar/>
+    <div className='cursor-pointer text-left ml-[7%] mt-[5%]'><i class="bi bi-chevron-left font-bold text-black text-lg"></i></div>
+    <div className=' container px-40'>
+    <div className=' flex flex-row mt-10'>
+                <div className=' basis-8/12 text-left'>
                     <h1 className='text-xl font-normal font-cardo'>Graphic Designer</h1>
                     <p className='mt-4 text-base font-normal font-cardo'>Graphic Design</p>
                     <div className='flex flex-row mt-2'>
@@ -103,32 +91,33 @@ function ViewProjectPopup({ isOpen, onClose }) {
                     <div className=' mt-2'><h1 className=' font-inter font-normal text-base'>Unanswered invites:<span className=' opacity-[50%]'> 0</span></h1></div>
                 </div>
                 <div className=' basis-4/12'>
-                <div className='mt-6 ml-[30%]'>
+                <div className='mt-6 ml-32'>
                 <Link to=''><span class="px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal">Apply Now</span></Link>
                 </div>
-                <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-8 ml-[30%]">
+                <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-8 ml-32">
                 <Link to=''><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-inter font-bold text-base py-[4px] px-8"><i class="bi bi-suit-heart"></i>  Save Job</p></button></Link>
                 </div> 
-                <div className='mt-8 text-sm font-inter font-normal text-[#0A142F] text-center ml-9'><i class="bi bi-flag-fill"></i><span className=' opacity-[50%] ml-2'>Flag as inappropriate</span></div>
-                <div className='mt-2 text-sm font-inter font-normal text-[#0A142F] text-center ml-9 opacity-[50%]'>Send a proposal for: 8 Connects</div>
-                <div className='mt-2 text-sm font-inter font-normal text-[#0A142F] text-center ml-9 opacity-[50%]'>Available Connects: 10</div>
-                <div className='mt-12 text-xl font-cardo font-normal text-[#0A142F] ml-10'>About the client</div>
-                <div className='mt-3 text-sm font-inter font-normal text-[#0A142F] ml-10 opacity-[50%]'>Payment method not verified</div>
-                <div className='mt-5 text-base font-inter font-normal text-[#0A142F] ml-10'>India</div>
-                <div className='mt-2 text-base font-inter font-normal text-[#0A142F] ml-10 opacity-[50%]'>Ajmer 2:42 pm</div>
-                <div className='mt-5 text-base font-inter font-normal text-[#0A142F] ml-10'>2 jobs posted</div>
-                <div className='mt-2 text-base font-inter font-normal text-[#0A142F] ml-10 opacity-[50%]'>Member since Aug 28, 2023</div>
-                <div className=' mt-16 text-xl font-cardo font-normal text-[#0A142F] ml-10'>Job link</div>
-                <div class="p-0.5 inline-block rounded bg-black opacity-[30%] mt-5 ml-10">
+                <div className='mt-8 text-sm font-inter font-normal text-[#0A142F] ml-28'><i class="bi bi-flag-fill"></i><span className=' opacity-[50%] ml-2'>Flag as inappropriate</span></div>
+                <div className='mt-2 text-sm font-inter font-normal text-[#0A142F] opacity-[50%] ml-28'>Send a proposal for: 8 Connects</div>
+                <div className='mt-2 text-sm font-inter font-normal text-[#0A142F]  opacity-[50%] ml-32'>Available Connects: 10</div>
+                <div className='mt-12 text-xl font-cardo font-normal text-[#0A142F] text-left ml-20'>About the client</div>
+                <div className='mt-3 text-sm font-inter font-normal text-[#0A142F] opacity-[50%] text-left ml-20'>Payment method not verified</div>
+                <div className='mt-5 text-base font-inter font-normal text-[#0A142F] text-left ml-20'>India</div>
+                <div className='mt-2 text-base font-inter font-normal text-[#0A142F] opacity-[50%] text-left ml-20'>Ajmer 2:42 pm</div>
+                <div className='mt-5 text-base font-inter font-normal text-[#0A142F] text-left ml-20'>2 jobs posted</div>
+                <div className='mt-2 text-base font-inter font-normal text-[#0A142F] opacity-[50%] text-left ml-20'>Member since Aug 28, 2023</div>
+                <div className=' mt-16 text-xl font-cardo font-normal text-[#0A142F] text-left ml-20'>Job link</div>
+                <div class="p-0.5 inline-block rounded bg-black opacity-[30%] mt-5 ml-14">
                 <Link to=''><button class="px-1 py-1 bg-white"><p class="font-inter font-normal text-sm py-[10px] px-4 opacity-[90%] text-black">www.upwork.com/nx/find-work</p></button></Link>
                 </div>
-                <div className=' mt-5 text-base font-cardo font-bold text-[#0A142F] ml-10'>Copy link</div>
+                <div className=' mt-5 text-base font-cardo font-bold text-[#0A142F] text-left ml-20'>Copy link</div>
                 </div>
             </div>
-        </div>
-      </div>
     </div>
-  );
+    <HomeSection4/>
+    <Footer/>
+    </>
+  )
 }
 
-export default ViewProjectPopup;
+export default ViewProjectNewTab
