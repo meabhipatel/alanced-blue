@@ -52,7 +52,7 @@ function ProjectList() {
       <div className="h-[43vh] bg-no-repeat -mt-[1.3rem] bg-contain" style={{ backgroundImage: `url(${profile_list})` }}>
         <div className='text-left pt-[3rem] ml-[13.5vw] text-2xl font-cardo'>
           <h1>Projects List</h1>
-          <p className='font-inter text-sm text-[#797979] font-normal mt-2'>All the Lorem Ipsum generators on the Internet tend to repeat.</p>
+          <Link to='/freelancer/all/contracts'><p className='font-inter text-sm text-[#797979] font-normal mt-2'>All the Lorem Ipsum generators on the Internet tend to repeat.</p></Link>
           <div className='lg:w-[44vw] bg-white p-3 lg:h-20 rounded-2xl lg:flex items-center shadow-lg mt-2'>
             <div className='flex flex-row'>
               <img src={search}></img>
@@ -305,7 +305,7 @@ function ProjectList() {
               <option value="DE">Germany</option>
             </select>
             <div className='mt-8'>
-            <Link to='/freelancer/view/referals'><span class="px-20 py-[12px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-bold mr-14 text-lg">Send Proposal</span></Link>
+            <Link to=''><span class="px-20 py-[12px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-bold mr-14 text-lg">Send Proposal</span></Link>
             </div>
           </div>
           <div className=' basis-8/12 mt-20'>
