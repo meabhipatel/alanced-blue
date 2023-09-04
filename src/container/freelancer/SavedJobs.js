@@ -18,14 +18,14 @@ const SavedJobs = () => {
     <Navbar/>
     <div className='mt-2 mx-[9%]'>
     <div className='my-3 flex flex-wrap'>
-    <Link to='' className="flex-grow md:flex-none p-1">
+    <Link to='/savedjobs' className="flex-grow md:flex-none p-1">
                 <span 
                     className={`${commonStyle} px-3 my-3 md:px-8 ${selectedButton === 'Saved Jobs' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('Saved Jobs')}>
                     Saved Jobs
                 </span>
             </Link>  
-            <Link to='/myproposals'className="flex-grow md:flex-none p-1">
+            <Link to='/searchjobs'className="flex-grow md:flex-none p-1">
                 <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'Search' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('Search')}>
                     Search
@@ -41,7 +41,7 @@ const SavedJobs = () => {
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={thumbdown} alt="" />
         </div>
-        <Link to='/savedjobs'><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <Link to=''><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={heart} alt="" />
         </div></Link>
     </div>
@@ -62,7 +62,7 @@ const SavedJobs = () => {
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={thumbdown} alt="" />
         </div>
-        <Link to='/savedjobs'><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <Link to=''><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={heart} alt="" />
         </div></Link>
     </div>
@@ -83,7 +83,7 @@ const SavedJobs = () => {
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={thumbdown} alt="" />
         </div>
-        <Link to='/savedjobs'><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <Link to=''><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={heart} alt="" />
         </div></Link>
     </div>
@@ -104,7 +104,7 @@ const SavedJobs = () => {
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={thumbdown} alt="" />
         </div>
-        <Link to='/savedjobs'><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <Link to=''><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={heart} alt="" />
         </div></Link>
     </div>
@@ -125,7 +125,7 @@ const SavedJobs = () => {
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={thumbdown} alt="" />
         </div>
-        <Link to='/savedjobs'><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <Link to=''><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={heart} alt="" />
         </div></Link>
     </div>
