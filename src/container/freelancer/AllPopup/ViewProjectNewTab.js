@@ -14,7 +14,7 @@ const ViewProjectNewTab = () => {
     <>
     <Navbar/>
     <div className='cursor-pointer text-left ml-[7%] mt-[5%]'><i class="bi bi-chevron-left font-bold text-black text-lg"></i></div>
-    <div className=' container px-40'>
+    <div className=' container-sm px-40'>
     <div className=' flex flex-row mt-10'>
                 <div className=' basis-8/12 text-left'>
                     <h1 className='text-xl font-normal font-cardo'>Graphic Designer</h1>
