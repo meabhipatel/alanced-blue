@@ -23,6 +23,7 @@ import FreelancerSelfProfile from "../container/freelancer/FreelancerSelfProfile
 import FreelancerAfterLogin from "../container/freelancer/FreelancerAfterLogin";
 import ViewProjectNewTab from "../container/freelancer/AllPopup/ViewProjectNewTab";
 import MyProposalReferrals from "../container/freelancer/MyProposalReferrals";
+import Messages from "../container/messages/Messages"
 
   const AppRouter = (props) => {
     
@@ -53,6 +54,7 @@ import MyProposalReferrals from "../container/freelancer/MyProposalReferrals";
           <Route path="/freelancer/profile" element={<FreelancerAfterLogin/>}/>
           <Route path="/freelancer/view/project/detail" element={<ViewProjectNewTab/>}/>
           <Route path="/freelancer/view/referals" element={<MyProposalReferrals/>}/>
+          <Route path="/messages" element={<Messages/>}/>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   

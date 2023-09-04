@@ -67,7 +67,7 @@ const Navbar = () => {
       <Link to='/projects'><span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Find Work <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
       <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">My Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
       <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]"> Reports</span></Link>  
-      <Link to=''><span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]">Messages</span></Link>
+      <Link to='/messages'><span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]">Messages</span></Link>
     </div>
 <div className="flex flex-wrap items-center space-x-4">
 <section className='flex items-center p-2 bg-white rounded-lg shadow-md'>
