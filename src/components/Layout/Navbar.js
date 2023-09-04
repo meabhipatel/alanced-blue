@@ -18,6 +18,10 @@ const Navbar = () => {
   const loginMethod = localStorage.getItem('loginMethod')
   const dispatch = useDispatch();
   const [dropdownVisible, setDropdownVisible] = useState(false)
+  const [Findworkdropdown, setFindworkDropdown] = useState(false)
+  const [MyJobsdropdown, setMyJobsDropdown] = useState(false)
+  const [Reportsdropdown, setReportsDropdown] = useState(false)
+ 
  
 
   const isLoggedIn = Boolean(accessToken || googleUserName)
@@ -64,16 +68,62 @@ const Navbar = () => {
   </div> :
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0">
     <div class="text-sm lg:flex-grow lg:ml-[45px]">
-      <Link to='/projects'><span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Find Work <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
-      <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">My Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
-      <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]"> Reports</span></Link>  
+      <Link to=''><span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setFindworkDropdown(true)}>Find Work <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
+      {Findworkdropdown && (
+        <div className="absolute right-[54rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container" onMouseLeave={() => setFindworkDropdown(false)}>
+            <div className="py-1">
+            <Link to='/projects' className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Find Work</span>
+                      </Link>
+                      <Link to='/savedjobs' className="flex items-center px-4 py-2">
+                        <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Saved Jobs</span>
+                      </Link>
+                      <Link to='/myproposals' className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Proposals</span>
+                      </Link>
+                      <Link to='/freelancer/profile' className="flex items-center px-4 py-2" >
+                        <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Profile</span>
+                      </Link>
+            </div>
+        </div>
+    )}
+      <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setMyJobsDropdown(true)} 
+    >My Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
+      {MyJobsdropdown && (
+        <div className="absolute right-[46rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container" onMouseLeave={() => setMyJobsDropdown(false)}>
+            <div className="py-1">
+            <Link to='/myjobs' className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Jobs</span>
+                      </Link>
+                      <Link to='' className="flex items-center px-4 py-2">
+                        <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">All Contracts</span>
+                      </Link>
+            </div>
+        </div>
+    )}
+      <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setReportsDropdown(true)}> Reports <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>  
+      {Reportsdropdown && (
+        <div className="absolute right-[39rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container" onMouseLeave={() => setReportsDropdown(false)}>
+            <div className="py-1">
+            <Link to='' className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Overview</span>
+                      </Link>
+                      <Link to='' className="flex items-center px-4 py-2">
+                        <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Billing & Earnings</span>
+                      </Link>
+                      <Link to='' className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Transaction History</span>
+                      </Link>
+             </div>
+        </div>
+    )}
       <Link to='/messages'><span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]">Messages</span></Link>
     </div>
 <div className="flex flex-wrap items-center space-x-4">
 <section className='flex items-center p-2 bg-white rounded-lg shadow-md'>
     <div className='flex items-center mr-1 space-x-1'>
         <img src={search} alt="Search Icon" className="h-3 w-3" />
-        <input className='w-28 lg:w-40 xl:w-56 h-7 text-xs lg:text-sm rounded' placeholder='Search' />
+        <input className='w-28 lg:w-40 xl:w-56 h-7 text-xs lg:text-sm outline-none' placeholder='Search' />
     </div>
     <div className="hidden lg:block border-l h-5 mx-5 border-gray-400"></div>
     <div className='mr-1'>
@@ -110,10 +160,6 @@ const Navbar = () => {
     {dropdownVisible && (
         <div className="absolute right-0 mt-5 w-48 rounded-md shadow-lg bg-white">
             <div className="py-1">
-            <Link to='/freelancer/profile' className="flex items-center px-4 py-2 hover:bg-gray-100">
-                          <i class="bi bi-person mr-3 opacity-50"></i>
-                          <span className="font-inter text-[16px] text-[#031136] opacity-50">My Profile</span>
-                      </Link>
                       <Link to='/freelancer/editprofile' className="flex items-center px-4 py-2 hover:bg-gray-100">
                           <i class="bi bi-pencil mr-3 opacity-50"></i>
                           <span className="font-inter text-[16px] text-[#031136] opacity-50">Edit Profile</span>
