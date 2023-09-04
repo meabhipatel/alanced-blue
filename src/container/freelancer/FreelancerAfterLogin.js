@@ -95,7 +95,7 @@ const [isDialogOpen, setIsDialogOpen] = useState(false);
     <div className='sm:w-[78vw] w-[95vw] bg-white p-1 sm:h-16 rounded-md flex justify-between items-center shadow-md relative z-10'>
         <div className='flex flex-row items-center p-4'>
             <img src={search} className="h-4 w-4" alt=""/>
-            <input className='w-52 sm:w-[800px] ml-2 h-8 text-sm' placeholder='What are you looking for?' />
+            <input className='w-52 sm:w-[800px] ml-2 h-8 text-sm outline-none' placeholder='What are you looking for?' />
         </div>
         <button className='rounded h-8 w-20 sm:w-24 mr-3 font-semibold text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>Search</button>
     </div>
@@ -204,9 +204,9 @@ const [isDialogOpen, setIsDialogOpen] = useState(false);
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={thumbdown} alt="" />
         </div>
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <Link to=''><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={heart} alt="" />
-        </div>
+        </div></Link>
     </div>
     </div>
     <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>Fixed-price - Expert - Est. Budget: $10 - Posted in 12 hours</p>
