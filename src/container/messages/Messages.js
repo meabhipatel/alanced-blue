@@ -5,6 +5,12 @@ import people from '../../components/images/people.png'
 import files from '../../components/images/files.png'
 import notepad from '../../components/images/notepad.png'
 import cross from '../../components/images/cross.png'
+import phone from '../../components/images/phone.png'
+import iicon from '../../components/images/iicon.png'
+import paper from '../../components/images/paper.svg'
+import paperpin from '../../components/images/paperpin.svg'
+import attherate from '../../components/images/attherate.svg'
+import smiley from '../../components/images/smiley.svg'
 
 const Messages = () => {
 
@@ -12,7 +18,7 @@ const Messages = () => {
         <>
         <Navbar/>
         
-<div class="container mx-auto shadow-lg rounded-lg">
+<div class="container-sm shadow-lg rounded-lg">
         
     {/* <div class="px-5 py-5 flex justify-between items-center bg-white border-b-2">
       <div class="font-semibold text-2xl">GoingChat</div>
@@ -54,19 +60,22 @@ const Messages = () => {
         <div
           class="flex flex-row py-4 px-2 justify-center items-center border-b-2"
         >
-          <div class="w-1/4">
+          <div class="w-1/4 ml-4">
             <div className="relative">
             <img
               src="https://source.unsplash.com/_7LbC5J-jw4/600x600"
               class="object-cover h-12 w-12 rounded-full"
               alt=""
             />
-            <span class="bottom-0 left-9 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+            <span class="bottom-0 left-8 absolute  w-3 h-3 bg-white border-[3px] border-green-400 dark:border-gray-800 rounded-full"></span>
             </div>
           </div>
           <div class="w-full">
-            <div class="text-lg font-semibold">Luis1994</div>
-            <span class="text-gray-500">Pick me at 9:00 Am</span>
+            <div class="text-lg text-[#031136] font-cardo w-fit font-semibold">Anthony Daugloi</div>
+            <div className="flex-row">
+            <span class="text-[#8A8A8A] text-xs float-left">UI Designer - Complex</span>
+            <span class="text-[#8A8A8A] text-[10px] float-left">You: do you have any reference card?</span>
+            </div>
           </div>
         </div>
         <div class="flex flex-row py-4 px-2 items-center border-b-2">
@@ -141,14 +150,44 @@ const Messages = () => {
       </div>
       
       <div class="w-full flex flex-col justify-between">
-        <div className="border-b-2 h-16"></div>
+        <div className="border-b-2 h-16 p-2 flex items-center justify-between">
+          <div>
+          <div className="flex items-center gap-2 w-fit">
+          <div className="border-2 border-[#07BC00] h-3 w-3 rounded-full"></div>
+          <span className="text-[20px] font-cardo text-[#031136]">David Lynch</span>
+          </div>
+          <span className="text-[12px] text-[#8A8A8A] float-left ml-5">3:06 PM EDTAlgorithm and Software Developer</span>
+          </div>
+          <div className="flex gap-2 items-center float-right">
+            <img className="h-[19px] w-[19px]" src={phone}/>
+            <img className="h-[25px] w-[25px]" src={iicon}/>
+          </div>
+        </div>
         <div className="px-5">
         <div class="flex flex-col mt-5">
-          <div class="flex justify-end mb-4">
+        <div class="flex justify-start mb-4">
+            <img
+              src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+              class="object-cover h-8 w-8 rounded-full"
+              alt=""
+            />
+            <div className="flex-row">
             <div
-              class="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"
+              class="ml-2 py-3 px-4 text-left w-[45vw] rounded-lg text-[#0A142F]"
             >
-              Welcome to group everyone !
+              Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            </div>
+            <span className="text-xs text-[#D7D7D7] float-right mr-2">Yesterday at 8:00 pm</span>
+            </div>
+          </div>
+          <div class="flex justify-end mb-4">
+            <div className="flex-row">
+            <div
+              class="mr-2 py-3 px-4 w-[45vw] text-left bg-[#F6FAFD] rounded-md text-[#0A142F]"
+            >
+              Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            </div>
+            <span className="text-xs text-[#D7D7D7] float-left ml-2">Yesterday at 8:00 pm</span>
             </div>
             <img
               src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
@@ -162,16 +201,31 @@ const Messages = () => {
               class="object-cover h-8 w-8 rounded-full"
               alt=""
             />
+            <div className="flex-row">
             <div
-              class="ml-2 py-3 px-4 bg-gray-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white"
+              class="ml-2 py-3 px-4 text-left w-[45vw] rounded-lg text-[#0A142F]"
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-              at praesentium, aut ullam delectus odio error sit rem. Architecto
-              nulla doloribus laborum illo rem enim dolor odio saepe,
-              consequatur quas?
+              Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            </div>
+            <span className="text-xs text-[#D7D7D7] float-right mr-2">Yesterday at 8:00 pm</span>
             </div>
           </div>
           <div class="flex justify-end mb-4">
+            <div className="flex-row">
+            <div
+              class="mr-2 py-3 px-4 w-[45vw] text-left bg-[#F6FAFD] rounded-md text-[#0A142F]"
+            >
+              Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            </div>
+            <span className="text-xs text-[#D7D7D7] float-left ml-2">Yesterday at 8:00 pm</span>
+            </div>
+            <img
+              src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+              class="object-cover h-8 w-8 rounded-full"
+              alt=""
+            />
+          </div>
+          {/* <div class="flex justify-end mb-4">
             <div>
               <div
                 class="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"
@@ -192,8 +246,8 @@ const Messages = () => {
               class="object-cover h-8 w-8 rounded-full"
               alt=""
             />
-          </div>
-          <div class="flex justify-start mb-4">
+          </div> */}
+          {/* <div class="flex justify-start mb-4">
             <img
               src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
               class="object-cover h-8 w-8 rounded-full"
@@ -204,14 +258,23 @@ const Messages = () => {
             >
               happy holiday guys!
             </div>
-          </div>
+          </div> */}
         </div>
         <div class="py-5">
-          <input
+          {/* <input
             class="w-full bg-gray-300 py-5 px-3 rounded-xl"
             type="text"
             placeholder="type your message here..."
-          />
+          /> */}
+          <div className="rounded-lg border-2 border-[#E7E8F2] p-1 pb-2">
+            <textarea rows="3" class="block p-2.5 w-full text-sm outline-none resize-none" placeholder="Type Message Here ..."></textarea>
+            <div className="flex justify-end gap-2 mr-2">
+            <img src={smiley}/>
+            <img src={attherate}/>
+            <img src={paperpin}/>
+            <img className="border-l-2 border-[#D9D9D9] pl-2" src={paper}/>
+            </div>
+          </div>
         </div>
         </div>
       </div>
@@ -225,29 +288,31 @@ const Messages = () => {
             class="object-cover rounded-full h-28 w-28 mt-12"
             alt=""
           />
-          <div class="font-semibold py-4 text-xl font-cardo">Created 22 Sep 2021</div>
-          <div class="font-light mb-6">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt,
-            perspiciatis!
+          <div class=" pt-4 text-xl font-cardo">David Lynch</div>
+          <div class="text-[#797979] text-sm">
+          5:18 AM GMT+10 (4.5 h ahead)
+          </div>
+          <div class="text-[#0A142F] text-xs mb-6">
+          UI Designer - Complex Topics, Simple Designs
           </div>
           </div>
           <div className="pt-6 pl-6 flex flex-col items-start">
             <span className="text-lg font-cardo mb-2 ">Recent files</span>
             <div className="flex items-center py-2">
               <img className="h-3.5 w-3.5 mr-2" src={search}/>
-            <span>Search Messages</span>
+            <span className="text-[#8A8A8A]">Search Messages</span>
             </div>
             <div className="flex items-center py-2">
               <img className="h-4 w-4 mr-2" src={people}/>
-            <span>People</span>
+            <span className="text-[#8A8A8A]">People</span>
             </div>
             <div className="flex items-center py-2">
               <img className="h-4 w-4 mr-2" src={files}/>
-            <span>Files & Links</span>
+            <span className="text-[#8A8A8A]">Files & Links</span>
             </div>
             <div className="flex items-center py-2">
               <img className="h-4 w-4 mr-2" src={notepad}/>
-            <span>Personal Notepad</span>
+            <span className="text-[#8A8A8A]">Personal Notepad</span>
             </div>
           </div>
         </div>
