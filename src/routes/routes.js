@@ -28,6 +28,9 @@ import MyProposals from '../container/freelancer/MyProposals'
 import MyJobs from '../container/freelancer/MyJobs';
 import Messages from "../container/messages/Messages"
 import SearchJobs from '../container/freelancer/SearchJobs'
+import MyProposalArchived from "../container/freelancer/MyProposalArchived";
+import AllContracts from "../container/freelancer/AllContracts";
+import MyReports from "../container/freelancer/MyReports";
 
   const AppRouter = (props) => {
     
@@ -63,6 +66,9 @@ import SearchJobs from '../container/freelancer/SearchJobs'
           <Route path="/myjobs" element={<MyJobs/>}/>
           <Route path="/messages" element={<Messages/>}/>
           <Route path="/searchjobs" element={<SearchJobs/>}/>
+          <Route path="/freelancer/view/archived" element={<MyProposalArchived/>}/>
+          <Route path="/freelancer/all/contracts" element={<AllContracts/>}/>
+          <Route path="/freelancer/my/reports" element={<MyReports/>}/>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   

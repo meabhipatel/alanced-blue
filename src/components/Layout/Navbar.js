@@ -37,7 +37,7 @@ const Navbar = () => {
 
 
   return (
-<div className='sticky z-50 top-0 bg-cover bg-top' style={{ backgroundImage: `url(${navback})`}}>
+<div className='sticky z-50 top-0 bg-cover bg-top' style={{ backgroundImage: `url(${navback})`}} onMouseLeave={(e)=>{setFindworkDropdown(); setMyJobsDropdown(); setReportsDropdown()}}>
       <nav class="flex items-center justify-between flex-wrap p-6">
   <Link to='/'>
   <div class="flex items-center flex-shrink-0 lg:ml-[129px]">
@@ -70,7 +70,7 @@ const Navbar = () => {
     <div class="text-sm lg:flex-grow lg:ml-[45px]">
       <Link to=''><span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setFindworkDropdown(true)}>Find Work <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
       {Findworkdropdown && (
-        <div className="absolute right-[54rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container" onMouseLeave={() => setFindworkDropdown(false)}>
+        <div className="absolute right-[54rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
             <Link to='/projects' className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Find Work</span>
@@ -90,12 +90,12 @@ const Navbar = () => {
       <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setMyJobsDropdown(true)} 
     >My Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
       {MyJobsdropdown && (
-        <div className="absolute right-[46rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container" onMouseLeave={() => setMyJobsDropdown(false)}>
+        <div className="absolute right-[46rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
             <Link to='/myjobs' className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Jobs</span>
                       </Link>
-                      <Link to='' className="flex items-center px-4 py-2">
+                      <Link to='/freelancer/all/contracts' className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">All Contracts</span>
                       </Link>
             </div>
@@ -103,17 +103,17 @@ const Navbar = () => {
     )}
       <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setReportsDropdown(true)}> Reports <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>  
       {Reportsdropdown && (
-        <div className="absolute right-[39rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container" onMouseLeave={() => setReportsDropdown(false)}>
+        <div className="absolute right-[39rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
-            <Link to='' className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Overview</span>
+            <Link to='/freelancer/my/reports' className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Reports</span>
                       </Link>
                       <Link to='' className="flex items-center px-4 py-2">
-                        <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Billing & Earnings</span>
+                        <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Connects Histroy</span>
                       </Link>
-                      <Link to='' className="flex items-center px-4 py-2">
+                      {/* <Link to='' className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Transaction History</span>
-                      </Link>
+                      </Link> */}
              </div>
         </div>
     )}

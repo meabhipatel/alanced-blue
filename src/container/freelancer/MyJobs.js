@@ -163,7 +163,7 @@ const MyJobs = () => {
 </div>
 </div>
 <div className='px-4 md:px-8 py-6 border-b border-gray-200 border-opacity-30'>
-<Link to=''><span class="text-sm py-[8px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold lg:px-[462px] px-6">View All Contracts</span></Link>
+<Link to='/freelancer/all/contracts'><span class="text-sm py-[8px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold lg:px-[462px] px-6">View All Contracts</span></Link>
 </div>
 </div>
     </div>
