@@ -4,8 +4,26 @@ import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
 import search from '../../components/images/SearchOutlined.png'
 import searchbtn from '../../components/images/searchbtn.png'
+import { Link } from 'react-router-dom'
+import gradientdot from '../../components/images/gradientdot.png'
+import threedot from '../../components/images/threedot.png'
 
 const AllContracts = () => {
+
+    const [active, setActive] = React.useState(1);
+ 
+    const next = () => {
+      if (active === 5) return;
+   
+      setActive(active + 1);
+    };
+   
+    const prev = () => {
+      if (active === 1) return;
+   
+      setActive(active - 1);
+    };
+
   return (
     <>
     <Navbar/>
@@ -23,17 +41,142 @@ const AllContracts = () => {
                 </button>
             </section>
             </div>
-            <div className=' basis-1/12 mt-3'><i class="bi bi-sliders text-3xl mr-9"></i></div>
+            <div className=' basis-1/12 mt-4'><i class="bi bi-sliders text-3xl mr-9"></i></div>
         </div>
-{/* <form>  
-    <div class="relative mt-5">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <i class="bi bi-search"></i>
+        <div className='mt-8  border border-[#E7E8F2] py-5 px-5 rounded'>
+        <div className='mt-3'>
+        <div className=' flex flex-row'>
+            <div className=' basis-8/12'>
+                <h1 className=' font-cardo text-lg font-normal text-left'>UI UX design for Education Resources Mobile App</h1>
+                <p className='font-inter text-[14px] text-[#031136]  mt-3 text-left font-normal'>Staffed by: <span className='opacity-50'>AMIT B. at Wiz91 Technologies</span></p>
+            </div>
+            <div className=' basis-3/12'><Link to=''><button className='rounded h-8 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-sm font-bold ml-20'>See Timesheet</button></Link></div>
+            <div className=' basis-1/12'><div class="p-1 w-7 h-7 bg-white rounded-full border border-gray-200 mt-1 mx-auto">
+            <img src={gradientdot} alt="" /></div>
         </div>
-        <input type="search" id="default-search" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required/>
-        <button type="submit" class="absolute right-[3px] bottom-1 rounded h-8 w-8 text-xs font-semibold bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white"><i class="bi bi-search"></i></button>
-    </div>
-</form> */}
+        </div>
+        <div className=' flex flex-row'>
+            <div className=' basis-5/12'>
+            <p className='font-inter text-[14px] text-[#031136] py-2 font-normal text-left'>Hired by: <span className='opacity-50'>Aloha Apps</span></p>
+            </div>
+            <div className=' basis-5/12'>
+            <p className='font-inter text-[14px] text-[#031136] font-normal text-left'>
+        Active: <span className='text-[#03C058]'>5:10 hrs</span> <span className='opacity-50 text-[#0A142F]'>this week</span></p>
+            </div>
+            <div className=' basis-2/12'>
+            <p className='font-inter text-[14px] text-[#0A142F] opacity-50 font-normal text-center'>Aug 31 - Present</p>
+            </div>
+        </div>
+        </div>
+        <div className='mt-5'>
+        <div className=' flex flex-row'>
+            <div className=' basis-8/12'>
+                <h1 className=' font-cardo text-lg font-normal text-left'>UI UX design for Education Resources Mobile App</h1>
+                <p className='font-inter text-[14px] text-[#031136]  mt-3 text-left font-normal'>Staffed by: <span className='opacity-50'>AMIT B. at Wiz91 Technologies</span></p>
+            </div>
+            <div className=' basis-3/12'><Link to=''><button className='rounded h-8 w-36 text-[#797979cc] text-sm font-inter border border-gray-200 ml-20'>See Timesheet</button></Link></div>
+            <div className=' basis-1/12'><div class="p-1 w-7 h-7 bg-white rounded-full border border-gray-400 mt-1 mx-auto">
+            <img src={threedot} alt="" /></div>
+        </div>
+        </div>
+        <div className=' flex flex-row'>
+            <div className=' basis-5/12'>
+            <p className='font-inter text-[14px] text-[#031136] py-2 font-normal text-left'>Hired by: <span className='opacity-50'>Aloha Apps</span></p>
+            </div>
+            <div className=' basis-5/12'>
+            <p className='font-inter text-[14px] text-[#031136] font-normal text-left'>
+        Active: <span className='text-[#03C058]'>5:10 hrs</span> <span className='opacity-50 text-[#0A142F]'>this week</span></p>
+            </div>
+            <div className=' basis-2/12'>
+            <p className='font-inter text-[14px] text-[#0A142F] opacity-50 font-normal text-center'>Aug 31 - Present</p>
+            </div>
+        </div>
+        </div>
+        <div className='mt-5'>
+        <div className=' flex flex-row'>
+            <div className=' basis-8/12'>
+                <h1 className=' font-cardo text-lg font-normal text-left'>UI UX design for Education Resources Mobile App</h1>
+                <p className='font-inter text-[14px] text-[#031136]  mt-3 text-left font-normal'>Staffed by: <span className='opacity-50'>AMIT B. at Wiz91 Technologies</span></p>
+            </div>
+            <div className=' basis-3/12'><Link to=''><button className='rounded h-8 w-36 text-[#797979cc] text-sm font-inter border border-gray-200 ml-20'>See Timesheet</button></Link></div>
+            <div className=' basis-1/12'><div class="p-1 w-7 h-7 bg-white rounded-full border border-gray-400 mt-1 mx-auto">
+            <img src={threedot} alt="" /></div>
+        </div>
+        </div>
+        <div className=' flex flex-row'>
+            <div className=' basis-5/12'>
+            <p className='font-inter text-[14px] text-[#031136] py-2 font-normal text-left'>Hired by: <span className='opacity-50'>Aloha Apps</span></p>
+            </div>
+            <div className=' basis-5/12'>
+            <p className='font-inter text-[14px] text-[#031136] font-normal text-left'>
+        Active: <span className='text-[#03C058]'>5:10 hrs</span> <span className='opacity-50 text-[#0A142F]'>this week</span></p>
+            </div>
+            <div className=' basis-2/12'>
+            <p className='font-inter text-[14px] text-[#0A142F] opacity-50 font-normal text-center'>Aug 31 - Present</p>
+            </div>
+        </div>
+        </div>
+        <div className='mt-5'>
+        <div className=' flex flex-row'>
+            <div className=' basis-8/12'>
+                <h1 className=' font-cardo text-lg font-normal text-left'>UI UX design for Education Resources Mobile App</h1>
+                <p className='font-inter text-[14px] text-[#031136]  mt-3 text-left font-normal'>Staffed by: <span className='opacity-50'>AMIT B. at Wiz91 Technologies</span></p>
+            </div>
+            <div className=' basis-3/12'><Link to=''><button className='rounded h-8 w-36 text-[#797979cc] text-sm font-inter border border-gray-200 ml-20'>See Timesheet</button></Link></div>
+            <div className=' basis-1/12'><div class="p-1 w-7 h-7 bg-white rounded-full border border-gray-400 mt-1 mx-auto">
+            <img src={threedot} alt="" /></div>
+        </div>
+        </div>
+        <div className=' flex flex-row'>
+            <div className=' basis-5/12'>
+            <p className='font-inter text-[14px] text-[#031136] py-2 font-normal text-left'>Hired by: <span className='opacity-50'>Aloha Apps</span></p>
+            </div>
+            <div className=' basis-5/12'>
+            <p className='font-inter text-[14px] text-[#031136] font-normal text-left'>
+        Active: <span className='text-[#03C058]'>5:10 hrs</span> <span className='opacity-50 text-[#0A142F]'>this week</span></p>
+            </div>
+            <div className=' basis-2/12'>
+            <p className='font-inter text-[14px] text-[#0A142F] opacity-50 font-normal text-center'>Aug 31 - Present</p>
+            </div>
+        </div>
+        </div>
+        <div className=' mt-7'>
+            <div className=' flex flex-row'>
+            <div className=' basis-4/12'><h1 className=' font-cardo font-normal text-lg text-left'>1 - 10 of 12 contracts</h1></div>
+            <div className=' basis-8/12'>
+            <div className="flex justify-end items-center mr-6">
+            <div className="flex items-center justify-center w-8 h-8 text-gray-500 border border-gray-200 p-1 cursor-pointer" onClick={prev}
+                disabled={active === 1}>
+                -
+            </div>
+            <div className="flex border-t border-b border-gray-200 p-1 gap-4">
+                {[...Array(5)].map((_, index) => {
+                const pageNumber = index + 1;
+                return (
+                    <span
+                    key={pageNumber}
+                    className={`w-6 h-6 flex items-center justify-center cursor-pointer ${
+                        active === pageNumber
+                        ? 'bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-white text-xs rounded-sm'
+                        : 'text-gray-500 font-bold font-inter text-xs'
+                    }`}
+                    onClick={() => setActive(pageNumber)}
+                    >
+                    {pageNumber}
+                    </span>
+                );
+                })}
+            </div>
+            <div className="flex items-center justify-center w-8 h-8 text-gray-500 border border-gray-200 p-1 cursor-pointer" onClick={next}
+                disabled={active === 5}>
+                +
+            </div>
+
+            </div>
+            </div>
+            </div>
+        </div>
+        </div>
     </div>
     <HomeSection4/>
     <Footer/>
