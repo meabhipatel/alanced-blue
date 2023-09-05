@@ -52,7 +52,7 @@ function ProjectList() {
       <div className="h-[43vh] bg-no-repeat -mt-[1.3rem] bg-contain" style={{ backgroundImage: `url(${profile_list})` }}>
         <div className='text-left pt-[3rem] ml-[13.5vw] text-2xl font-cardo'>
           <h1>Projects List</h1>
-          <Link to='/freelancer/all/contracts'><p className='font-inter text-sm text-[#797979] font-normal mt-2'>All the Lorem Ipsum generators on the Internet tend to repeat.</p></Link>
+          <p className='font-inter text-sm text-[#797979] font-normal mt-2'>All the Lorem Ipsum generators on the Internet tend to repeat.</p>
           <div className='lg:w-[44vw] bg-white p-3 lg:h-20 rounded-2xl lg:flex items-center shadow-lg mt-2'>
             <div className='flex flex-row'>
               <img src={search}></img>
@@ -78,45 +78,75 @@ function ProjectList() {
           <div className=' basis-4/12 mt-16'>
             <div><h1 className='font-cardo text-xl text-left font-normal'>Category</h1></div>
             <div className='flex flex-row mt-4'>
-              <div className=' basis-8/12'>
-                <label class="flex items-center font-inter">
-                  <input class="mr-3 " type="checkbox" /><span class="font-normal text-[#797979]">UX Designer</span>
-                </label>
-              </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(1,945)</div>
-            </div>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">UX Designer</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(1,945)</div>
+    </div>
             <div className='flex flex-row mt-3'>
-              <div className=' basis-8/12'>
-                <label class="flex items-center font-inter">
-                  <input class="mr-3" type="checkbox" /><span class="font-normal text-[#797979]">Web Developers</span>
-                </label>
-              </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2,945)</div>
-            </div>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Web Developers</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2,945)</div>
+    </div>
             <div className='flex flex-row mt-3'>
-              <div className=' basis-8/12'>
-                <label class="flex items-center font-inter">
-                  <input class="mr-3" type="checkbox" /><span class="font-normal text-[#797979]">Illustrators</span>
-                </label>
-              </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(945)</div>
-            </div>
-            <div className='flex flex-row mt-3'>
-              <div className=' basis-8/12'>
-                <label class="flex items-center font-inter">
-                  <input class="mr-3" type="checkbox" /><span class="font-normal text-[#797979]">Node.js</span>
-                </label>
-              </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(5,945)</div>
-            </div>
-            <div className='flex flex-row mt-3'>
-              <div className=' basis-8/12'>
-                <label class="flex items-center font-inter">
-                  <input class="mr-3" type="checkbox" /><span class="font-normal text-[#797979]">Project Managers</span>
-                </label>
-              </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(45)</div>
-            </div>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Illustrators</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(945)</div>
+    </div>
+            <div className='flex flex-row mt-4'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Node.js</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(5,945)</div>
+    </div>
+            <div className='flex flex-row mt-4'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Project Managers</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(45)</div>
+    </div>
             <div><h1 className='font-cardo text-xl text-left mt-5 font-normal'>+20 More</h1></div>
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Project Type</h1></div>
             <div className='flex flex-row mt-4'>
@@ -196,105 +226,195 @@ function ProjectList() {
               </div>
             </div>
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Skills</h1></div>
-              <label class="flex items-center font-inter mt-4">
-                <input class="mr-3" type="checkbox" /><span class="font-normal text-[#797979]">Adobe Photoshop</span>
-              </label>
-              <label class="flex items-center font-inter mt-3">
-                <input class="mr-3" type="checkbox" /><span class="font-normal text-[#797979]">Adobe XD</span>
-              </label>
-              <label class="flex items-center font-inter mt-3">
-                <input class="mr-3" type="checkbox" /><span class="font-normal text-[#797979]">Android Developer</span>
-              </label>
-              <label class="flex items-center font-inter mt-3">
-                <input class="mr-3" type="checkbox" /><span class="font-normal text-[#797979]">Artist</span>
-              </label>
-              <label class="flex items-center font-inter mt-3">
-                <input class="mr-3" type="checkbox" /><span class="font-normal text-[#797979]">Computer</span>
-              </label>
+            <label class="flex items-center font-inter relative cursor-pointer mt-4">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Adobe Photoshop</span>
+            </label>
+            <label class="flex items-center font-inter relative cursor-pointer mt-4">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Adobe XD</span>
+            </label>
+            <label class="flex items-center font-inter relative cursor-pointer mt-4">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Android Developer</span>
+            </label>
+            <label class="flex items-center font-inter relative cursor-pointer mt-4">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Artist</span>
+            </label>
+            <label class="flex items-center font-inter relative cursor-pointer mt-4">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Computer</span>
+            </label>
               <div><h1 className='font-cardo text-xl text-left mt-5 font-normal'>+Show More</h1></div>
               <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Citys</h1></div>
-              <div className='flex flex-row mt-4'>
-              <div className=' basis-8/12'>
-                <label class="flex items-center font-inter">
-                  <input class="mr-3 " type="checkbox" /><span class="font-normal text-[#797979]">Boston</span>
-                </label>
-              </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(1,945)</div>
-            </div>
-            <div className='flex flex-row mt-3'>
-              <div className=' basis-8/12'>
-                <label class="flex items-center font-inter">
-                  <input class="mr-3 " type="checkbox" /><span class="font-normal text-[#797979]">Florida</span>
-                </label>
-              </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2,945)</div>
-            </div>
-            <div className='flex flex-row mt-3'>
-              <div className=' basis-8/12'>
-                <label class="flex items-center font-inter">
-                  <input class="mr-3 " type="checkbox" /><span class="font-normal text-[#797979]">Log Angeles</span>
-                </label>
-              </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(945)</div>
-            </div>
-            <div className='flex flex-row mt-3'>
-              <div className=' basis-8/12'>
-                <label class="flex items-center font-inter">
-                  <input class="mr-3 " type="checkbox" /><span class="font-normal text-[#797979]">Miami</span>
-                </label>
-              </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(5,945)</div>
-            </div>
-            <div className='flex flex-row mt-3'>
-              <div className=' basis-8/12'>
-                <label class="flex items-center font-inter">
-                  <input class="mr-3 " type="checkbox" /><span class="font-normal text-[#797979]">New York</span>
-                </label>
-              </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(45)</div>
-            </div>
+             <div className='flex flex-row mt-4'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Boston</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(1,945)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Florida</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2,945)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Log Angeles</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(945)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Miami</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(5,945)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">New York</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(45)</div>
+    </div>
             <div><h1 className='font-cardo text-xl text-left mt-5 font-normal'>+Show More</h1></div>
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Languages</h1></div>
-              <div className='flex flex-row mt-4'>
-              <div className=' basis-8/12'>
-                <label class="flex items-center font-inter">
-                  <input class="mr-3 " type="checkbox" /><span class="font-normal text-[#797979]">English</span>
-                </label>
-              </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(1,945)</div>
-            </div>
-            <div className='flex flex-row mt-3'>
-              <div className=' basis-8/12'>
-                <label class="flex items-center font-inter">
-                  <input class="mr-3 " type="checkbox" /><span class="font-normal text-[#797979]">French</span>
-                </label>
-              </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2,945)</div>
-            </div>
-            <div className='flex flex-row mt-3'>
-              <div className=' basis-8/12'>
-                <label class="flex items-center font-inter">
-                  <input class="mr-3 " type="checkbox" /><span class="font-normal text-[#797979]">Italian</span>
-                </label>
-              </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(945)</div>
-            </div>
-            <div className='flex flex-row mt-3'>
-              <div className=' basis-8/12'>
-                <label class="flex items-center font-inter">
-                  <input class="mr-3 " type="checkbox" /><span class="font-normal text-[#797979]">Japanese</span>
-                </label>
-              </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(5,945)</div>
-            </div>
-            <div className='flex flex-row mt-3'>
-              <div className=' basis-8/12'>
-                <label class="flex items-center font-inter">
-                  <input class="mr-3 " type="checkbox" /><span class="font-normal text-[#797979]">Spanish</span>
-                </label>
-              </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(45)</div>
-            </div>
+            <div className='flex flex-row mt-4'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">English</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(1,945)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">French</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2,945)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Italian</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(945)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Japanese</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(5,945)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Spanish</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(45)</div>
+    </div>
             <div><h1 className='font-cardo text-xl text-left mt-5 font-normal'>+Show More</h1></div>
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>English Level</h1></div>
             <select id="countries" class="bg-gray-50 border border-gray-300 text-[#797979] text-base font-inter font-normal rounded-lg mt-4 focus:ring-green-500 focus:border-green-500 block w-[83%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">

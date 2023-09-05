@@ -26,6 +26,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GetFreelancerSelfProfileAction } from '../../redux/Freelancer/FreelancerAction'
 import StarRating from './StarRating'
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import EditTitlePopup from './AllPopup/EditTitlePopup'
 
 
 const FreelancerSelfProfile = () => {
@@ -70,8 +71,18 @@ const FreelancerSelfProfile = () => {
   const [selected, setSelected] = useState('completed');
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditTitleOpen, setIsEditTitleOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const inputRef = useRef(null)
+
+
+  const openEditTitle = () => {
+    setIsEditTitleOpen(true);
+  };
+
+  const closeEditTitle = () => {
+    setIsEditTitleOpen(false);
+  };
 
     const handleEditClick = () => {
         setIsModalOpen(true);
@@ -327,9 +338,10 @@ const FreelancerSelfProfile = () => {
     <div className="flex justify-between items-center">
     <div className="flex items-center">
         <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-2">{freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category : 'Your Designation'}</h1>
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openEditTitle}>
             <img src={edit} alt="Edit" className="align-middle" />
         </div>
+        {isEditTitleOpen && <EditTitlePopup closeEditTitle={closeEditTitle} />}
     </div>
     <div className="flex items-center">
         <h1 className="font-cardo text-[20px] text-[#031136] font-bold mr-2">$8.00/Hr</h1>
