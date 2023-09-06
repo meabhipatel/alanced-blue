@@ -6,11 +6,12 @@ import files from '../../components/images/files.png'
 import notepad from '../../components/images/notepad.png'
 import cross from '../../components/images/cross.png'
 import phone from '../../components/images/phone.png'
-import iicon from '../../components/images/iicon.png'
+import iicon from '../../components/images/iicon.svg'
 import paper from '../../components/images/paper.svg'
 import paperpin from '../../components/images/paperpin.svg'
 import attherate from '../../components/images/attherate.svg'
 import smiley from '../../components/images/smiley.svg'
+import vthreedots from '../../components/images/vthreedots.svg'
 
 const Messages = () => {
 
@@ -42,56 +43,136 @@ const Messages = () => {
       
       <div class="flex flex-col w-2/5 border-r-2 overflow-y-auto">
         
-      <div class="border-b-2 py-3 px-2 flex items-center justify-between">
-        <span className="float-left text-lg font-cardo font-semibold">Chats</span>
-        <img className="float-right" src={threedots}></img>
-      </div>
-        <div class="border-b-2 py-4 px-2">
-        <div class="relative">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-            </svg>
+        <div class="border-b-2 py-3 px-2 flex items-center justify-between">
+          <span className="float-left text-lg font-cardo font-semibold">Chats</span>
+          <img className="float-right" src={threedots}></img>
         </div>
-        <input type="search" id="default-search" class="block w-full pr-4 p-2 pl-10 text-sm text-gray-900 border border-gray-300 outline-none rounded-lg " placeholder="Search" required/>
-    </div>
+        <div class="border-b-2 py-4 px-2">
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+              </svg>
+            </div>
+            <input type="search" id="default-search" class="block w-full pr-4 p-2 pl-10 text-sm text-gray-900 border border-gray-300 outline-none rounded-lg " placeholder="Search" required/>
+          </div>
         </div>
         
-        <div
-          class="flex flex-row py-4 px-2 justify-center items-center border-b-2"
-        >
+        <div class="flex flex-row py-4 px-2 justify-center items-center border-b-2">
           <div class="w-1/4 ml-4">
             <div className="relative">
-            <img
-              src="https://source.unsplash.com/_7LbC5J-jw4/600x600"
-              class="object-cover h-12 w-12 rounded-full"
-              alt=""
-            />
-            <span class="bottom-0 left-8 absolute  w-3 h-3 bg-white border-[3px] border-green-400 dark:border-gray-800 rounded-full"></span>
+              <img
+                src="https://source.unsplash.com/_7LbC5J-jw4/600x600"
+                class="object-cover h-12 w-12 rounded-full"
+                alt=""
+              />
+              <span class="bottom-0 left-8 absolute  w-3 h-3 bg-white border-[3px] border-green-400 dark:border-gray-800 rounded-full"></span>
             </div>
           </div>
           <div class="w-full">
             <div class="text-lg text-[#031136] font-cardo w-fit font-semibold">Anthony Daugloi</div>
             <div className="flex-row">
-            <span class="text-[#8A8A8A] text-xs float-left">UI Designer - Complex</span>
-            <span class="text-[#8A8A8A] text-[10px] float-left">You: do you have any reference card?</span>
+              <span class="text-[#8A8A8A] text-xs float-left">UI Designer - Complex</span>
+              <span class="text-[#8A8A8A] text-[10px] float-left">You: do you have any reference card?</span>
             </div>
           </div>
         </div>
         <div class="flex flex-row py-4 px-2 items-center border-b-2">
-          <div class="w-1/4">
-            <img
-              src="https://source.unsplash.com/otT2199XwI8/600x600"
-              class="object-cover h-12 w-12 rounded-full"
-              alt=""
-            />
+          <div class="w-1/4 ml-4">
+            <div className="relative">
+              <img
+                src="https://www.famousbirthdays.com/headshots/russell-crowe-6.jpg"
+                class="object-cover h-12 w-12 rounded-full"
+                alt=""
+              />
+              <span class="bottom-0 left-8 absolute  w-3 h-3 bg-white border-[3px] border-green-400 dark:border-gray-800 rounded-full"></span>
+            </div>
           </div>
           <div class="w-full">
-            <div class="text-lg font-semibold">Everest Trip 2021</div>
-            <span class="text-gray-500">Hi Sam, Welcome</span>
+            <div class="text-lg font-semibold text-[#031136] font-cardo w-fit">ByeWind</div>
+            <div className="flex-row">
+              <span class="text-[#8A8A8A] text-xs float-left">UI Designer - Complex</span>
+              <span class="text-[#8A8A8A] text-[10px] float-left">You: do you have any reference card?</span>
+            </div>
           </div>
         </div>
-        <div
+        <div class="flex flex-row py-4 px-2 justify-center items-center border-b-2">
+          <div class="w-1/4 ml-4">
+            <div className="relative">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGpYTzuO0zLW7yadaq4jpOz2SbsX90okb24Z9GtEvK6Z9x2zS5"
+                class="object-cover h-12 w-12 rounded-full"
+                alt=""
+              />
+              <span class="bottom-0 left-8 absolute  w-3 h-3 bg-white border-[3px] border-green-400 dark:border-gray-800 rounded-full"></span>
+            </div>
+          </div>
+          <div class="w-full">
+            <div class="text-lg text-[#031136] font-cardo w-fit font-semibold">Jannes Graf</div>
+            <div className="flex-row">
+              <span class="text-[#8A8A8A] text-xs float-left">UI Designer - Complex</span>
+              <span class="text-[#8A8A8A] text-[10px] float-left">You: do you have any reference card?</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-row py-4 px-2 justify-center items-center border-b-2">
+          <div class="w-1/4 ml-4">
+            <div className="relative">
+              <img
+                src="https://avatars3.githubusercontent.com/u/2763884?s=128"
+                class="object-cover h-12 w-12 rounded-full"
+                alt=""
+              />
+              <span class="bottom-0 left-8 absolute  w-3 h-3 bg-white border-[3px] border-green-400 dark:border-gray-800 rounded-full"></span>
+            </div>
+          </div>
+          <div class="w-full">
+            <div class="text-lg text-[#031136] font-cardo w-fit font-semibold">David Lynch</div>
+            <div className="flex-row">
+              <span class="text-[#8A8A8A] text-xs float-left">UI Designer - Complex</span>
+              <span class="text-[#8A8A8A] text-[10px] float-left">You: do you have any reference card?</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-row py-4 px-2 justify-center items-center border-b-2">
+          <div class="w-1/4 ml-4">
+            <div className="relative">
+              <img
+                src="https://source.unsplash.com/_7LbC5J-jw4/600x600"
+                class="object-cover h-12 w-12 rounded-full"
+                alt=""
+              />
+              <span class="bottom-0 left-8 absolute  w-3 h-3 bg-white border-[3px] border-green-400 dark:border-gray-800 rounded-full"></span>
+            </div>
+          </div>
+          <div class="w-full">
+            <div class="text-lg text-[#031136] font-cardo w-fit font-semibold">Anthony Daugloi</div>
+            <div className="flex-row">
+              <span class="text-[#8A8A8A] text-xs float-left">UI Designer - Complex</span>
+              <span class="text-[#8A8A8A] text-[10px] float-left">You: do you have any reference card?</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-row py-4 px-2 justify-center items-center border-b-2">
+          <div class="w-1/4 ml-4">
+            <div className="relative">
+              <img
+                src="https://source.unsplash.com/_7LbC5J-jw4/600x600"
+                class="object-cover h-12 w-12 rounded-full"
+                alt=""
+              />
+              <span class="bottom-0 left-8 absolute  w-3 h-3 bg-white border-[3px] border-green-400 dark:border-gray-800 rounded-full"></span>
+            </div>
+          </div>
+          <div class="w-full">
+            <div class="text-lg text-[#031136] font-cardo w-fit font-semibold">Anthony Daugloi</div>
+            <div className="flex-row">
+              <span class="text-[#8A8A8A] text-xs float-left">UI Designer - Complex</span>
+              <span class="text-[#8A8A8A] text-[10px] float-left">You: do you have any reference card?</span>
+            </div>
+          </div>
+        </div>
+        {/* <div
           class="flex flex-row py-4 px-2 items-center border-b-2"
         >
           <div class="w-1/4">
@@ -132,7 +213,6 @@ const Messages = () => {
             <span class="text-gray-500">Evan : some one can fix this</span>
           </div>
         </div>
-
         <div class="flex flex-row py-4 px-2 items-center border-b-2">
           <div class="w-1/4">
             <img
@@ -145,7 +225,7 @@ const Messages = () => {
             <div class="text-lg font-semibold">Javascript Indonesia</div>
             <span class="text-gray-500">Evan : some one can fix this</span>
           </div>
-        </div>
+        </div> */}
         
       </div>
       
@@ -165,7 +245,8 @@ const Messages = () => {
         </div>
         <div className="px-5">
         <div class="flex flex-col mt-5">
-        <div class="flex justify-start mb-4">
+        <div class="flex justify-between mb-4">
+          <div className="flex justify-start">
             <img
               src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
               class="object-cover h-8 w-8 rounded-full"
@@ -177,8 +258,10 @@ const Messages = () => {
             >
               Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
             </div>
-            <span className="text-xs text-[#D7D7D7] float-right mr-2">Yesterday at 8:00 pm</span>
+            <span className="text-xs text-[#D7D7D7] float-left ml-6">Yesterday at 8:00 pm</span>
             </div>
+            </div>
+            <img className="w-fit h-fit" src={vthreedots}/>
           </div>
           <div class="flex justify-end mb-4">
             <div className="flex-row">
@@ -187,15 +270,17 @@ const Messages = () => {
             >
               Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
             </div>
-            <span className="text-xs text-[#D7D7D7] float-left ml-2">Yesterday at 8:00 pm</span>
+            <span className="text-xs text-[#D7D7D7] float-right mr-3">Yesterday at 8:00 pm</span>
             </div>
-            <img
+            {/* <img
               src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
               class="object-cover h-8 w-8 rounded-full"
               alt=""
-            />
+            /> */}
+            <img className="w-fit h-fit" src={vthreedots}/>
           </div>
-          <div class="flex justify-start mb-4">
+          <div class="flex justify-between mb-4">
+            <div className="flex justify-start">
             <img
               src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
               class="object-cover h-8 w-8 rounded-full"
@@ -207,8 +292,10 @@ const Messages = () => {
             >
               Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
             </div>
-            <span className="text-xs text-[#D7D7D7] float-right mr-2">Yesterday at 8:00 pm</span>
+            <span className="text-xs text-[#D7D7D7] float-left ml-6">Yesterday at 8:00 pm</span>
             </div>
+            </div>
+            <img className="h-fit w-fit" src={vthreedots} alt=""/>
           </div>
           <div class="flex justify-end mb-4">
             <div className="flex-row">
@@ -217,13 +304,14 @@ const Messages = () => {
             >
               Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
             </div>
-            <span className="text-xs text-[#D7D7D7] float-left ml-2">Yesterday at 8:00 pm</span>
+            <span className="text-xs text-[#D7D7D7] float-right mr-3">Yesterday at 8:00 pm</span>
             </div>
-            <img
+            {/* <img
               src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
               class="object-cover h-8 w-8 rounded-full"
               alt=""
-            />
+            /> */}
+            <img className="w-fit h-fit" src={vthreedots}/>
           </div>
           {/* <div class="flex justify-end mb-4">
             <div>
@@ -284,7 +372,7 @@ const Messages = () => {
         <div class="flex flex-col items-center w-full border-b-2">
           {/* <div class="font-semibold text-xl py-4">Mern Stack Group</div> */}
           <img
-            src="https://source.unsplash.com/L2cxSuKWbpo/600x600"
+            src="https://source.unsplash.com/_7LbC5J-jw4/600x600"
             class="object-cover rounded-full h-28 w-28 mt-12"
             alt=""
           />
