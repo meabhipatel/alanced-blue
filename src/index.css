@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 
+/* gradient checkbox css start */
+
 .dropdown-container::before {
     content: "";
     position: absolute;
@@ -34,3 +36,38 @@ input[type="checkbox"]:checked + .checkbox-border-gradient .checkmark {
 input[type="checkbox"]:checked + .checkbox-border-gradient + .normal-checkbox {
     display: none;
 }
+
+
+/* gradient checkbox css end */
+
+
+/* gradient radiobuttons start */
+
+input[type="radio"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%; 
+    outline: none;
+    border: 1px solid #ddd;
+    transition: background 0.3s;
+    padding: 1px;
+    margin-top: 3px;
+}
+
+input[type="radio"]:checked {
+    background: linear-gradient(to right, #00BF58, #E3FF75);
+    border: none;
+}
+
+input[type="radio"]:checked:after {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin: 3px auto; 
+    background: white;
+}
+
+/* gradient radiobuttons end */
