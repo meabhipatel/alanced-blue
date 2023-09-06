@@ -57,18 +57,18 @@ import MyReports from "../container/freelancer/MyReports";
           <Route path="/hirer/registration" element={<HirerRegistration/>}/>
           <Route path="/choose" element={<Choose />} />
           <Route path="/projects" element={<ProjectList/>}/>
-          <Route path="/freelancer/editprofile" element={<FreelancerSelfProfile/>}/>
+          <Route path="/freelancer/edit-profile" element={<FreelancerSelfProfile/>}/>
           <Route path="/freelancer/profile" element={<FreelancerAfterLogin/>}/>
-          <Route path="/freelancer/view/project/detail" element={<ViewProjectNewTab/>}/>
-          <Route path="/freelancer/view/referals" element={<MyProposalReferrals/>}/>
-          <Route path="/savedjobs" element={<SavedJobs/>}/>
-          <Route path="/myproposals" element={<MyProposals/>}/>
-          <Route path="/myjobs" element={<MyJobs/>}/>
+          <Route path="/freelancer/view-project/detail" element={<ViewProjectNewTab/>}/>
+          <Route path="/freelancer/view-referals" element={<MyProposalReferrals/>}/>
+          <Route path="/saved-jobs" element={<SavedJobs/>}/>
+          <Route path="/my-proposals" element={<MyProposals/>}/>
+          <Route path="/my-jobs" element={<MyJobs/>}/>
           <Route path="/messages" element={<Messages/>}/>
-          <Route path="/searchjobs" element={<SearchJobs/>}/>
-          <Route path="/freelancer/view/archived" element={<MyProposalArchived/>}/>
-          <Route path="/freelancer/all/contracts" element={<AllContracts/>}/>
-          <Route path="/freelancer/my/reports" element={<MyReports/>}/>
+          <Route path="/search-jobs" element={<SearchJobs/>}/>
+          <Route path="/freelancer/view-archived" element={<MyProposalArchived/>}/>
+          <Route path="/freelancer/all-contracts" element={<AllContracts/>}/>
+          <Route path="/freelancer/my-reports" element={<MyReports/>}/>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   

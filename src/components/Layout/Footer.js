@@ -16,22 +16,22 @@ const Footer = () => {
     <h5 class="text-xl font-bold font-cardo mb-6">Product</h5>
         <ul class="list-none footer-links opacity-50">
           <li class="mb-2">
-            <a href="#" class="hover:text-green-800">Employee database</a>
+            <a href="" class="hover:text-green-800">Employee database</a>
           </li>
           <li class="mb-2">
-            <a href="#" class="hover:text-green-800">Payroll</a>
+            <a href="" class="hover:text-green-800">Payroll</a>
           </li>
           <li class="mb-2">
-            <a href="#" class="hover:text-green-800">Absences</a>
+            <a href="" class="hover:text-green-800">Absences</a>
           </li>
           <li class="mb-2">
-            <a href="#" class="hover:text-green-800">Time tracking</a>
+            <a href="" class="hover:text-green-800">Time tracking</a>
           </li>
           <li class="mb-2">
-            <a href="#" class="hover:text-green-800">Shift Planner</a>
+            <a href="" class="hover:text-green-800">Shift Planner</a>
           </li>
           <li class="mb-2">
-            <a href="#" class="hover:text-green-800">Recruiting</a>
+            <a href="" class="hover:text-green-800">Recruiting</a>
           </li>
         </ul>
     </div>
@@ -39,13 +39,13 @@ const Footer = () => {
     <h5 class="text-xl font-bold mb-6 font-cardo">Information</h5>
         <ul class="list-none footer-links opacity-50">
           <li class="mb-2">
-            <a href="#" class="hover:text-green-800">FAQ</a>
+            <a href="" class="hover:text-green-800">FAQ</a>
           </li>
           <li class="mb-2">
-            <a href="#" class="hover:text-green-800">Blog</a>
+            <a href="" class="hover:text-green-800">Blog</a>
           </li>
           <li class="mb-2">
-            <a href="#" class="hover:text-green-800">Support</a>
+            <a href="" class="hover:text-green-800">Support</a>
           </li>
         </ul>
     </div>
@@ -53,16 +53,16 @@ const Footer = () => {
     <h5 class="text-xl font-bold mb-6 font-cardo">Company</h5>
         <ul class="list-none footer-links opacity-50">
           <li class="mb-2">
-            <a href="#" class="hover:text-green-800">About us</a>
+            <a href="" class="hover:text-green-800">About us</a>
           </li>
           <li class="mb-2">
-            <a href="#" class="hover:text-green-800">Career</a>
+            <a href="" class="hover:text-green-800">Career</a>
           </li>
           <li class="mb-2">
-            <a href="#" class="hover:text-green-800">Contact us</a>
+            <a href="" class="hover:text-green-800">Contact us</a>
           </li>
           <li class="mb-2">
-            <a href="#" class="hover:text-green-800">Lift media</a>
+            <a href="" class="hover:text-green-800">Lift media</a>
           </li>
         </ul>
     </div>
@@ -94,13 +94,13 @@ const Footer = () => {
       </div>
       <div className="flex-1 flex justify-end p-4 pr-0 pt-1">
       <div class="flex sm:justify-center xl:justify-start md:justify-end">
-          <a href="" class="w-8 h-8 border-2 border-gray-400 rounded-full text-center py-1 text-gray-600 hover:text-white hover:bg-[#B6F36F] hover:border-[#B6F36F]">
+          <a href="" class="w-8 h-8 border-2 border-gray-400 rounded-full text-center py-1 text-gray-600 hover:text-white hover:bg-gradient-to-r from-[#00BF58] to-[#E3FF75] hover:border-[#B6F36F]">
             <img src={linkedin} alt="" className='ml-2 mt-1'/>
           </a>
-          <a href="" class="w-8 h-8 border-2 border-gray-400 rounded-full text-center py-1 ml-2 text-gray-600 hover:text-white hover:bg-[#B6F36F] hover:border-[#B6F36F]">
+          <a href="" class="w-8 h-8 border-2 border-gray-400 rounded-full text-center py-1 ml-2 text-gray-600 hover:text-white hover:bg-gradient-to-r from-[#00BF58] to-[#E3FF75] hover:border-[#B6F36F]">
           <img src={fb} alt="" className='ml-2.5 mt-1'/>
           </a>
-          <a href="" class="w-8 h-8 border-2 border-gray-400 rounded-full text-center py-1 ml-2 text-gray-600 hover:text-white hover:bg-[#B6F36F] hover:border-[#B6F36F]">
+          <a href="" class="w-8 h-8 border-2 border-gray-400 rounded-full text-center py-1 ml-2 text-gray-600 hover:text-white hover:bg-gradient-to-r from-[#00BF58] to-[#E3FF75] hover:border-[#B6F36F]">
           <img src={twitter} alt="" className='ml-2 mt-1.5'/>
           </a>
         </div>

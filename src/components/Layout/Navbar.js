@@ -75,10 +75,10 @@ const Navbar = () => {
             <Link to='/projects' className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Find Work</span>
                       </Link>
-                      <Link to='/savedjobs' className="flex items-center px-4 py-2">
+                      <Link to='/saved-jobs' className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Saved Jobs</span>
                       </Link>
-                      <Link to='/myproposals' className="flex items-center px-4 py-2">
+                      <Link to='/my-proposals' className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Proposals</span>
                       </Link>
                       <Link to='/freelancer/profile' className="flex items-center px-4 py-2" >
@@ -92,10 +92,10 @@ const Navbar = () => {
       {MyJobsdropdown && (
         <div className="absolute right-[46rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
-            <Link to='/myjobs' className="flex items-center px-4 py-2">
+            <Link to='/my-jobs' className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Jobs</span>
                       </Link>
-                      <Link to='/freelancer/all/contracts' className="flex items-center px-4 py-2">
+                      <Link to='/freelancer/all-contracts' className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">All Contracts</span>
                       </Link>
             </div>
@@ -105,7 +105,7 @@ const Navbar = () => {
       {Reportsdropdown && (
         <div className="absolute right-[39rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
-            <Link to='/freelancer/my/reports' className="flex items-center px-4 py-2">
+            <Link to='/freelancer/my-reports' className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Reports</span>
                       </Link>
                       <Link to='' className="flex items-center px-4 py-2">
@@ -160,7 +160,7 @@ const Navbar = () => {
     {dropdownVisible && (
         <div className="absolute right-0 mt-5 w-48 rounded-md shadow-lg bg-white">
             <div className="py-1">
-                      <Link to='/freelancer/editprofile' className="flex items-center px-4 py-2 hover:bg-gray-100">
+                      <Link to='/freelancer/edit-profile' className="flex items-center px-4 py-2 hover:bg-gray-100">
                           <i class="bi bi-pencil mr-3 opacity-50"></i>
                           <span className="font-inter text-[16px] text-[#031136] opacity-50">Edit Profile</span>
                       </Link>
