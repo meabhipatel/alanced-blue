@@ -27,6 +27,11 @@ import { GetFreelancerSelfProfileAction } from '../../redux/Freelancer/Freelance
 import StarRating from './StarRating'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import EditTitlePopup from './AllPopup/EditTitlePopup'
+import AddEducationPopup from './AllPopup/AddEducationPopup'
+import EditSkillPopup from './AllPopup/EditSkillPopup'
+import OtherExperiencePopup from './AllPopup/OtherExperiencePopup'
+import VideoIntroPopup from './AllPopup/VideoIntroPopup'
+import HrsPerWeekPopup from './AllPopup/HrsPerWeekPopup'
 
 
 const FreelancerSelfProfile = () => {
@@ -72,9 +77,54 @@ const FreelancerSelfProfile = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditTitleOpen, setIsEditTitleOpen] = useState(false);
+  const [isAddEducationOpen, setIsAddEducationOpen] = useState(false);
+  const [isEditSkillOpen, setIsEditSkillOpen] = useState(false);
+  const [isOtherExpOpen, setIsOtherExpOpen] = useState(false);
+  const [isVideoIntroOpen, setIsVideoIntroOpen] = useState(false);
+  const [isHrsperWeekOpen, setIsHrsperWeekOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const inputRef = useRef(null)
 
+  const openHrsperWeek = () => {
+    setIsHrsperWeekOpen(true);
+  };
+
+  const closeHrsperWeek = () => {
+    setIsHrsperWeekOpen(false);
+  };
+
+  const openVideoIntro = () => {
+    setIsVideoIntroOpen(true);
+  };
+
+  const closeVideoIntro = () => {
+    setIsVideoIntroOpen(false);
+  };
+
+  const openOtherExp = () => {
+    setIsOtherExpOpen(true);
+  };
+
+  const closeOtherExp = () => {
+    setIsOtherExpOpen(false);
+  };
+
+
+  const openEditSkill = () => {
+    setIsEditSkillOpen(true);
+  };
+
+  const closeEditSkill = () => {
+    setIsEditSkillOpen(false);
+  };
+
+  const openAddEducation = () => {
+    setIsAddEducationOpen(true);
+  };
+
+  const closeAddEducation = () => {
+    setIsAddEducationOpen(false);
+  };
 
   const openEditTitle = () => {
     setIsEditTitleOpen(true);
@@ -326,9 +376,10 @@ const FreelancerSelfProfile = () => {
         <div className="flex items-center justify-between">
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Video introduction</h1>
     <div className="flex items-center space-x-2">
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openVideoIntro}>
             <img src={plus} alt="more" />
         </div>
+        {isVideoIntroOpen && <VideoIntroPopup closeVideoIntro={closeVideoIntro} />}
     </div>
     </div>
         </div>
@@ -367,11 +418,12 @@ const FreelancerSelfProfile = () => {
 <div class="flex flex-col md:flex-row">
     <div class="w-full md:w-[30%] px-4 md:px-8 bg-[#FFFFFF] py-6 border border-gray-200 border-opacity-30 text-left">
     <div className="flex items-center justify-between">
-    <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Video introduction</h1>
+    <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1"> Hours per week</h1>
     <div className="flex items-center space-x-2">
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openHrsperWeek}>
             <img src={edit} alt="edit" />
         </div>
+        {isHrsperWeekOpen && <HrsPerWeekPopup closeHrsperWeek={closeHrsperWeek} />}
     </div>
     </div>
     <p className='font-inter text-[#0A142F] text-[14px] py-1'>More than 30 hrs/week</p>
@@ -413,7 +465,7 @@ const FreelancerSelfProfile = () => {
     <div class="flex flex-col w-full md:w-[30%] py-4 px-4 md:px-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
     <div class="">
         <div className="flex items-center justify-between">
-    <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Video introduction</h1>
+    <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Languages</h1>
     <div className="flex items-center space-x-2">
     <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={plus} alt="more" />
@@ -445,9 +497,10 @@ const FreelancerSelfProfile = () => {
         <div className="flex items-center justify-between">
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Education</h1>
     <div className="flex items-center space-x-2">
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openAddEducation}>
             <img src={plus} alt="more" />
         </div>
+        {isAddEducationOpen && <AddEducationPopup closeAddEducation={closeAddEducation}/>}
     </div>
     </div> 
     <p className='font-inter text-[#0A142F] text-[14px] py-1'>{freelancerselfprofile && freelancerselfprofile[0] ? freelancerselfprofile[0].qualification : ''}</p>
@@ -596,9 +649,10 @@ const FreelancerSelfProfile = () => {
     <div className="flex items-center justify-between">
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Skills & Expertise</h1>
     <div className="flex items-center space-x-2">
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
-            <img src={edit} alt="edit" />
+        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openEditSkill}>
+            <img src={edit} alt="edit"/>
         </div>
+        {isEditSkillOpen && <EditSkillPopup closeEditSkill={closeEditSkill}/>}
     </div>
     </div>
     <p className='font-inter text-[#0A142F] text-[13px] py-2'>{freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category : 'Your Designation'} Deliverables</p>
@@ -662,7 +716,6 @@ const FreelancerSelfProfile = () => {
         </div>
     </div>
     </div>
-    <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>Endorsements from past clients</p>
     <img src={certificate} alt="" className='mx-auto mt-2'/>
     <p className='font-inter opacity-50 text-[#0A142F] text-[16px] py-2'>Listing your certifications can help prove your specific knowledge or abilities. (+10%)You can <br />
     add them manually or import them from Credly.</p>
@@ -702,15 +755,15 @@ const FreelancerSelfProfile = () => {
     <div className="flex items-center justify-between">
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Other Experiences</h1>
     <div className="flex items-center space-x-2">
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openOtherExp}>
             <img src={plus} alt="more" />
         </div>
+        {isOtherExpOpen && <OtherExperiencePopup closeOtherExp={closeOtherExp} />}
     </div>
     </div>
-    <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>Endorsements from past clients</p>
     <img src={experience} alt="" className='mx-auto mt-2'/>
     <p className='font-inter opacity-50 text-[#0A142F] text-[16px] py-2'>Highlighting relevant experiences can boost your visibility in our search results. (+5%)</p>
-    <p className='font-inter text-[#0A142F] text-[14px]'>Add an experience</p>
+    <p className='font-inter text-[#0A142F] text-[14px] cursor-pointer' onClick={openOtherExp}>Add an experience</p>
     </div>
    </div>
    <HomeSection4/>
