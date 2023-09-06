@@ -19,7 +19,7 @@ function ViewProjectPopup({ isOpen, onClose }) {
         <div className='flex flex-row'>
             <div className='basis-6/12 cursor-pointer'><i class="bi bi-chevron-left font-bold text-black text-lg" onClick={onClose}></i></div>
             <div className=' basis-6/12'>
-                <Link to="/freelancer/view/project/detail" target="_blank" rel="noopener noreferrer">
+                <Link to="/freelancer/view-project/detail" target="_blank" rel="noopener noreferrer">
                 <div className=' text-right font-cardo font-normal text-base'>
                 <i class="bi bi-box-arrow-up-right"></i> Open job in a new window
                 </div>
