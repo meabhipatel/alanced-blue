@@ -30,12 +30,12 @@ const MyProposals = () => {
   return (
     <>
     <Navbar/>
-    <div className='mt-2 mx-[9%]'>
+    <div className='mt-2 mx-[10rem]'>
       <h1 className='font-cardo text-[21px] text-[#031136] font-normal pt-4 text-left'>My proposals</h1>
     <div className='my-3 flex flex-wrap'>
     <Link to='/my-proposals' className="flex-grow md:flex-none p-1">
                 <span 
-                    className={`${commonStyle} px-3 my-3 md:px-8 ${selectedButton === 'Active' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
+                    className={`${commonStyle} px-3 my-3 md:px-8 ${selectedButton === 'Active' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white  font-inter text-sm font-normal border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('Active')}>
                     Active
                 </span>
@@ -54,11 +54,11 @@ const MyProposals = () => {
             </Link>
     </div>
     <div class="flex-1 border-t-2 border-gray-200 opacity-30 my-4"></div>
-    <div className='my-4 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left'>
-      <h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Offers (0)</h1>
+    <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2] text-left'>
+      <h1 className='font-inter text-[16px] font-semibold text-[#031136] p-3'>Offers (0)</h1>
     </div>
-    <div className='my-4 bg-[#FFFFFF] border p-3 border-gray-200 border-opacity-30 text-left flex items-center justify-between'>
-    <h1 className='font-inter text-[16px] font-bold text-[#031136]'>Invitations to Interview (0)</h1>
+    <div className='my-4 bg-[#FFFFFF] border p-3 border-[#E7E8F2] text-left flex items-center justify-between'>
+    <h1 className='font-inter text-[16px] font-semibold text-[#031136]'>Invitations to Interview (0)</h1>
     <div className="flex space-x-1">
         <button
             onClick={() => setIsAvailable(true)}
@@ -76,7 +76,7 @@ const MyProposals = () => {
         </div>
     </div>
 </div>
-<div className='my-4 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left'>
+<div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2]  text-left'>
 <h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Active Proposals (5)</h1>
 <div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
     <div className='flex flex-col w-1/4'>
@@ -89,7 +89,7 @@ const MyProposals = () => {
     </div>
 
     <div className='flex flex-col w-1/4 items-end pr-4'>
-        <p className='font-inter text-[14px] text-[#031136] opacity-50'>General Profile</p>
+        <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
     </div>
 </div>
 <div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
@@ -103,7 +103,7 @@ const MyProposals = () => {
     </div>
 
     <div className='flex flex-col w-1/4 items-end pr-4'>
-        <p className='font-inter text-[14px] text-[#031136] opacity-50'>General Profile</p>
+        <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
     </div>
 </div>
 <div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
@@ -117,7 +117,7 @@ const MyProposals = () => {
     </div>
 
     <div className='flex flex-col w-1/4 items-end pr-4'>
-        <p className='font-inter text-[14px] text-[#031136] opacity-50'>General Profile</p>
+        <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
     </div>
 </div>
 <div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
@@ -131,11 +131,11 @@ const MyProposals = () => {
     </div>
 
     <div className='flex flex-col w-1/4 items-end pr-4'>
-        <p className='font-inter text-[14px] text-[#031136] opacity-50'>General Profile</p>
+        <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
     </div>
 </div>
 </div>
-<div className='my-4 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left'>
+<div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2] text-left'>
 <h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Submitted Proposals (57)</h1>
 <div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
     <div className='flex flex-col w-1/4'>
@@ -148,7 +148,7 @@ const MyProposals = () => {
     </div>
 
     <div className='flex flex-col w-1/4 items-end pr-4'>
-        <p className='font-inter text-[14px] text-[#031136] opacity-50'>General Profile</p>
+        <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
     </div>
 </div>
 <div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
@@ -162,7 +162,7 @@ const MyProposals = () => {
     </div>
 
     <div className='flex flex-col w-1/4 items-end pr-4'>
-        <p className='font-inter text-[14px] text-[#031136] opacity-50'>General Profile</p>
+        <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
     </div>
 </div>
 <div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
@@ -176,7 +176,7 @@ const MyProposals = () => {
     </div>
 
     <div className='flex flex-col w-1/4 items-end pr-4'>
-        <p className='font-inter text-[14px] text-[#031136] opacity-50'>General Profile</p>
+        <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
     </div>
 </div>
 <div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
@@ -190,7 +190,7 @@ const MyProposals = () => {
     </div>
 
     <div className='flex flex-col w-1/4 items-end pr-4'>
-        <p className='font-inter text-[14px] text-[#031136] opacity-50'>General Profile</p>
+        <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
     </div>
 </div>
 <div className="flex justify-end items-center p-5">
