@@ -138,7 +138,7 @@ const [isDialogOpen, setIsDialogOpen] = useState(false);
 <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
     <h1 className="font-cardo text-[20px] text-[#031136] font-normal mr-1">Connects</h1>
     <div className="flex items-center space-x-2">
-            <img src={downarrow} alt="" />
+            <Link to='/freelancer/add/portfolio'><img src={downarrow} alt="" /></Link>
     </div>
     </div>
     <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
