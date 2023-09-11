@@ -14,6 +14,7 @@ import smiley from '../../components/images/smiley.svg'
 import vthreedots from '../../components/images/vthreedots.svg'
 import AudioVisualizer from './AudioVisualizer'
 import file_example_MP3_5MG from '../../components/images/file_example_MP3_5MG.mp3'
+import AudioMessages from './AudioMessages'
 
 const Messages = () => {
     const audioSrc = {file_example_MP3_5MG}
@@ -316,6 +317,7 @@ const Messages = () => {
             <img className="w-fit h-fit" src={vthreedots}/>
           </div>
           <AudioVisualizer audioSrc={file_example_MP3_5MG}/>
+          {/* <AudioMessages audioSrc={file_example_MP3_5MG}/> */}
           {/* <div class="flex justify-end mb-4">
             <div>
               <div

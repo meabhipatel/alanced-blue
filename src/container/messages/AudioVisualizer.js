@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AudioPlayer from 'react-audio-player';
 import AudioSpectrum from 'react-audio-spectrum';
+import WaveSurfer from 'react-wavesurfer'
 
 const AudioVisualizer = ({ audioSrc }) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -21,6 +22,15 @@ const AudioVisualizer = ({ audioSrc }) => {
       }
     }
   }, [isPlaying]);
+  
+  const wavesurferoption ={
+    waveColor: '#C9C9C9',
+    progressColor: '#031136',
+    barWidth: 2,
+    cursorWidth: 0,
+    barGap:4,
+    barRadius:4,
+  }
 
   return (
     <div>
@@ -51,6 +61,12 @@ const AudioVisualizer = ({ audioSrc }) => {
         ]}
         gap={4}
       />
+      <div className='w-96'>
+      <WaveSurfer
+        audioFile={audioSrc}
+        options={wavesurferoption}
+        />
+        </div>
     </div>
   );
 };
