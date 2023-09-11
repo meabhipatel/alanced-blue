@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react'
+import React, { useState,useRef, useEffect, useCallback } from 'react'
 import Navbar from '../../components/Layout/Navbar'
 import freelancercover from '../../components/images/freelancercover.png'
 import edit from '../../components/images/edit.png'
@@ -32,7 +32,11 @@ import EditSkillPopup from './AllPopup/EditSkillPopup'
 import OtherExperiencePopup from './AllPopup/OtherExperiencePopup'
 import VideoIntroPopup from './AllPopup/VideoIntroPopup'
 import HrsPerWeekPopup from './AllPopup/HrsPerWeekPopup'
-
+import AddLanguagePopup from './AllPopup/AddLanguagePopup'
+import EditLanguagePopup from './AllPopup/EditLanguagePopup'
+import EditEducationPopup from './AllPopup/EditEducationPopup'
+import AvailableOffPopup from './AllPopup/AvailableOffPopup'
+import EditHrRatePopup from './AllPopup/EditHrRatePopup'
 
 const FreelancerSelfProfile = () => {
 
@@ -52,7 +56,12 @@ const FreelancerSelfProfile = () => {
 
 //     const displayText = isExpanded ? fullText : `${fullText.substring(0, limit)}...`;
   
-  const [isAvailable, setIsAvailable] = useState(true);
+  const [isAvailable, setIsAvailable] = useState(localStorage.getItem('userAvailability') || 'available');
+
+
+  useEffect(() => {
+    localStorage.setItem('userAvailability', isAvailable);
+  }, [isAvailable]);
 
   const [active, setActive] = React.useState(1);
  
@@ -82,8 +91,53 @@ const FreelancerSelfProfile = () => {
   const [isOtherExpOpen, setIsOtherExpOpen] = useState(false);
   const [isVideoIntroOpen, setIsVideoIntroOpen] = useState(false);
   const [isHrsperWeekOpen, setIsHrsperWeekOpen] = useState(false);
+  const [isAddLanguageOpen, setIsAddLanguageOpen] = useState(false);
+  const [isEditLanguageOpen, setIsEditLanguageOpen] = useState(false);
+  const [isEditEducationOpen, setIsEditEducationOpen] = useState(false);
+  const [isAvailableOffOpen, setIsAvailableOffOpen] = useState(false);
+  const [isHrRateOpen, setIsHrRateOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const inputRef = useRef(null)
+
+  const openHrRate = () => {
+    setIsHrRateOpen(true);
+  };
+
+  const closeHrRate = () => {
+    setIsHrRateOpen(false);
+  };
+
+  const openAvailableOff = () => {
+    setIsAvailableOffOpen(true);
+  };
+
+  const closeAvailableOff = () => {
+    setIsAvailableOffOpen(false);
+  };
+
+  const openEditEducation = () => {
+    setIsEditEducationOpen(true);
+  };
+
+  const closeEditEducation = () => {
+    setIsEditEducationOpen(false);
+  };
+
+  const openEditLanguage = () => {
+    setIsEditLanguageOpen(true);
+  };
+
+  const closeEditLanguage = () => {
+    setIsEditLanguageOpen(false);
+  };
+
+  const openAddLanguage = () => {
+    setIsAddLanguageOpen(true);
+  };
+
+  const closeAddLanguage = () => {
+    setIsAddLanguageOpen(false);
+  };
 
   const openHrsperWeek = () => {
     setIsHrsperWeekOpen(true);
@@ -165,6 +219,23 @@ const FreelancerSelfProfile = () => {
         dispatch(GetFreelancerSelfProfileAction(accessToken))
       }, [])
 
+
+      const [showCopyMessage, setShowCopyMessage] = useState(false);
+      const profileLink = "http://localhost:3000/freelancer/edit-profile"; 
+  
+      const handlePinClick = useCallback(() => {
+        navigator.clipboard.writeText(profileLink)
+            .then(() => {
+                console.log("Setting showCopyMessage to true"); 
+                setShowCopyMessage(true);
+                setTimeout(() => setShowCopyMessage(false), 2000);
+            })
+            .catch(err => {
+                console.error("Could not copy text: ", err);
+            });
+    }, [profileLink]);
+    
+  
      
   return (
    <>
@@ -260,20 +331,19 @@ const FreelancerSelfProfile = () => {
             </div>
 
             <div className="flex space-x-1 mt-2">
-                <button
-                    onClick={() => setIsAvailable(true)}
-                    className={`flex items-center justify-center text-[#0A142F] font-inter opacity-50 text-[13px] py-2 px-4 focus:outline-none rounded-full ${isAvailable ? 'ring-1 ring-gray-400' : ''}`}>
-                    <img src={availablenow} alt="" className='h-[16px] mr-2' />
-                    Available now
-                </button>
-                <button
-                    onClick={() => setIsAvailable(false)}
-                    className={`text-center text-[#0A142F] font-inter opacity-50 text-[13px] py-2 px-4 focus:outline-none rounded-full ${!isAvailable ? 'ring-1 ring-gray-400' : ''}`}>
-                    Off
-                </button>
-                <div class="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 mt-1">
+            <button className={`flex items-center justify-center text-[#0A142F] font-inter opacity-50 text-[13px] py-2 px-4 focus:outline-none rounded-full ${isAvailable === 'available' ? 'ring-1 ring-gray-400' : ''}`}>
+            <img src={availablenow} alt="" className='h-[16px] mr-2' />
+                Available Now
+            </button>
+
+            <button className={`text-center text-[#0A142F] font-inter opacity-50 text-[13px] py-2 px-4 focus:outline-none rounded-full ${isAvailable === 'off' ? 'ring-1 ring-gray-400' : ''}`}>
+                Off
+            </button>
+
+                <div class="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 mt-1 cursor-pointer" onClick={openAvailableOff}>
                     <img src={edit} alt="edit" />
                 </div>
+                {isAvailableOffOpen && <AvailableOffPopup isAvailable={isAvailable} setIsAvailable={setIsAvailable} closeAvailableOff={closeAvailableOff} />}
             </div>
             <div className="flex items-center mt-3">
                 <img src={jobsuccess} alt="" className="h-[22px] mr-2" />
@@ -396,9 +466,32 @@ const FreelancerSelfProfile = () => {
     </div>
     <div className="flex items-center">
         <h1 className="font-cardo text-[20px] text-[#031136] font-bold mr-2">$8.00/Hr</h1>
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
-            <img src={pin} alt="pin" className="align-middle" />
+        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 mr-2 cursor-pointer" onClick={openHrRate}>
+            <img src={edit} alt="edit" className="align-middle" />
         </div>
+        {isHrRateOpen && <EditHrRatePopup closeHrRate={closeHrRate} />}
+        <div 
+        className="relative p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" 
+        onClick={handlePinClick}
+    >
+        <img src={pin} alt="pin" className="align-middle" />
+        {showCopyMessage && 
+            <div style={{
+                position: 'absolute',
+                top: '-60px', 
+                left: '50%', 
+                transform: 'translateX(-50%)',
+                padding: '8px 6px',
+                backgroundColor: 'black',
+                color: 'white',
+                zIndex: 1000,
+                width:250,
+                borderRadius:10
+            }}>
+                Profile link copied to clipboard
+            </div>
+        }
+    </div>
     </div>
 </div>
    <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-2'>Specializes in {freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category : 'Your Designation'}</p>
@@ -467,12 +560,14 @@ const FreelancerSelfProfile = () => {
         <div className="flex items-center justify-between">
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Languages</h1>
     <div className="flex items-center space-x-2">
-    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openAddLanguage}>
             <img src={plus} alt="more" />
         </div>
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        {isAddLanguageOpen && <AddLanguagePopup closeAddLanguage={closeAddLanguage} />}
+        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openEditLanguage}>
             <img src={edit} alt="edit" />
         </div>
+        {isEditLanguageOpen && <EditLanguagePopup closeEditLanguage={closeEditLanguage} />}
     </div>
     </div>
     <p className='font-inter text-[#0A142F] text-[14px] py-1'>English : <span className='opacity-50'>Native or Bilingual</span></p>
@@ -483,14 +578,14 @@ const FreelancerSelfProfile = () => {
         <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Verifications</h1>
     <p className='font-inter text-[#0A142F] text-[14px] py-1 inline-block mr-1'>ID : <span className='opacity-50'>Verified</span></p>
     <img src={verify} alt="" className='inline-block h-3 w-3'/>
-    <div className="flex items-center justify-between">
+    {/* <div className="flex items-center justify-between"> */}
     <p className='font-inter text-[#0A142F] text-[14px] py-1 opacity-50'>{freelancerselfprofile && freelancerselfprofile[0] ? `${freelancerselfprofile[0].first_Name} ${freelancerselfprofile[0].last_Name}` : ''}</p>
-    <div className="flex items-center space-x-2">
+    {/* <div className="flex items-center space-x-2">
     <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={plus} alt="more" />
         </div>
     </div>
-    </div>
+    </div> */}
         </div>
         <div class="border-b opacity-50 my-5"></div>
         <div class="">
@@ -503,7 +598,31 @@ const FreelancerSelfProfile = () => {
         {isAddEducationOpen && <AddEducationPopup closeAddEducation={closeAddEducation}/>}
     </div>
     </div> 
-    <p className='font-inter text-[#0A142F] text-[14px] py-1'>{freelancerselfprofile && freelancerselfprofile[0] ? freelancerselfprofile[0].qualification : ''}</p>
+    <div className="flex items-center justify-between mt-5">
+    <p className='font-inter text-[#0A142F] text-[14px] pt-1'>{freelancerselfprofile && freelancerselfprofile[0] ? freelancerselfprofile[0].qualification : ''} (Computer Science)</p>
+    <div className="flex items-center space-x-2">
+        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openEditEducation}>
+            <img src={edit} alt="more" />
+        </div>
+        {isEditEducationOpen && 
+    <EditEducationPopup 
+        qualification={freelancerselfprofile && freelancerselfprofile[0] ? freelancerselfprofile[0].qualification : ''}
+        university="DAVV"
+        startdate="2015"
+        enddate="2018"
+        stream="Computer Science"
+        closeEditEducation={closeEditEducation}
+    />
+}
+
+        <div className="pb-2 pl-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openAddEducation}>
+         <i className="bi bi-trash text-sm"></i>
+        </div>
+        {isAddEducationOpen && <AddEducationPopup closeAddEducation={closeAddEducation}/>}
+    </div>
+    </div>  
+    <p className='font-inter text-[#0A142F] text-[14px]'>DAVV</p>
+    <p className='font-inter text-[#0A142F] text-[14px] opacity-50'>2015 - 2018</p>
     <div class="border-b opacity-50 my-5"></div>
     <div className='my-3 flex flex-wrap'>
         <Link to=''  className="flex-grow md:flex-none p-1">
