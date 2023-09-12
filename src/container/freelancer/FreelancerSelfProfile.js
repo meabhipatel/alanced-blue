@@ -37,13 +37,29 @@ import EditLanguagePopup from './AllPopup/EditLanguagePopup'
 import EditEducationPopup from './AllPopup/EditEducationPopup'
 import AvailableOffPopup from './AllPopup/AvailableOffPopup'
 import EditHrRatePopup from './AllPopup/EditHrRatePopup'
+import AddCertificatesPopup from './AllPopup/AddCertificatesPopup'
+import AddEmploymentPopup from './AllPopup/AddEmploymentPopup'
+import EditEmploymentPopup from './AllPopup/EditEmploymentPopup'
 
 const FreelancerSelfProfile = () => {
 
   const accessToken = useSelector(state => state.login.accessToken);  
   const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile)
   const dispatch = useDispatch();
+  const [isHovered, setIsHovered] = useState(false);
 
+  function handleMouseEnter() {
+    setIsHovered(true);
+}
+
+function handleMouseLeave() {
+    setIsHovered(false);
+}
+
+function combinedClick() {
+    handlePinClick();
+    handleMouseLeave();
+}
 
 //   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -96,8 +112,35 @@ const FreelancerSelfProfile = () => {
   const [isEditEducationOpen, setIsEditEducationOpen] = useState(false);
   const [isAvailableOffOpen, setIsAvailableOffOpen] = useState(false);
   const [isHrRateOpen, setIsHrRateOpen] = useState(false);
+  const [isCertificatesOpen, setIsCertificatesOpen] = useState(false);
+  const [isAddEmploymentOpen, setIsAddEmploymentOpen] = useState(false);
+  const [isEditEmploymentOpen, setIsEditEmploymentOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const inputRef = useRef(null)
+
+  const openEditEmployment = () => {
+    setIsEditEmploymentOpen(true);
+  };
+
+  const closeEditEmployment = () => {
+    setIsEditEmploymentOpen(false);
+  };
+
+  const openAddEmployment = () => {
+    setIsAddEmploymentOpen(true);
+  };
+
+  const closeAddEmployment = () => {
+    setIsAddEmploymentOpen(false);
+  };
+
+  const openAddCertificates = () => {
+    setIsCertificatesOpen(true);
+  };
+
+  const closeAddCertificates = () => {
+    setIsCertificatesOpen(false);
+  };
 
   const openHrRate = () => {
     setIsHrRateOpen(true);
@@ -472,9 +515,43 @@ const FreelancerSelfProfile = () => {
         {isHrRateOpen && <EditHrRatePopup closeHrRate={closeHrRate} />}
         <div 
         className="relative p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" 
-        onClick={handlePinClick}
+        onClick={combinedClick} onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
     >
         <img src={pin} alt="pin" className="align-middle" />
+        {isHovered && 
+    <div style={{
+        position: 'absolute',
+        top: '-70px',
+        left: '50%', 
+        transform: 'translateX(-50%)',
+        zIndex: 1000
+    }}>
+        <div style={{
+            padding: '8px 6px',
+            paddingLeft: 16,
+            backgroundColor: 'black',
+            color: 'white',
+            width: 200,
+            position: 'relative',
+        }}>
+            <div style={{
+                position: 'absolute',
+                top: '40px', 
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: 0,
+                height: 0,
+                borderTop: '10px solid black',
+                borderLeft: '10px solid transparent',
+                borderRight: '10px solid transparent',
+                borderBottom: 'none', 
+            }}></div>
+            Copy link to clipboard
+        </div>
+    </div>
+}
+
         {showCopyMessage && 
             <div style={{
                 position: 'absolute',
@@ -486,7 +563,8 @@ const FreelancerSelfProfile = () => {
                 color: 'white',
                 zIndex: 1000,
                 width:250,
-                borderRadius:10
+                borderRadius:10,
+                paddingLeft:16
             }}>
                 Profile link copied to clipboard
             </div>
@@ -703,9 +781,9 @@ const FreelancerSelfProfile = () => {
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={updownarrow} alt="" />
         </div>
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <Link to='/freelancer/add/portfolio'><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={plus} alt="More" />
-        </div>
+        </div></Link>
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={edit} alt="edit" />
         </div>
@@ -830,37 +908,41 @@ const FreelancerSelfProfile = () => {
     <div className="flex items-center justify-between">
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Certifications</h1>
     <div className="flex items-center space-x-2">
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openAddCertificates}>
             <img src={plus} alt="more" />
         </div>
+        {isCertificatesOpen && <AddCertificatesPopup closeAddCertificates={closeAddCertificates} />}
     </div>
     </div>
     <img src={certificate} alt="" className='mx-auto mt-2'/>
     <p className='font-inter opacity-50 text-[#0A142F] text-[16px] py-2'>Listing your certifications can help prove your specific knowledge or abilities. (+10%)You can <br />
     add them manually or import them from Credly.</p>
-    <div class="flex justify-center items-center">
+    <p className='font-inter text-[#0A142F] text-[14px] cursor-pointer' onClick={openAddCertificates}>Add Certificate</p>
+    {/* <div class="flex justify-center items-center">
     <div class="flex space-x-12 font-inter text-[#0A142F] text-[14px]">
         <p>Add manually</p>
         <p>Import from Credly</p>
     </div>
-</div>
+</div> */}
     </div>
     <div className='my-6 p-4 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-40'>
     <div className="flex items-center justify-between">
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Employment history</h1>
     <div className="flex items-center space-x-2">
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openAddEmployment}>
             <img src={plus} alt="more" />
         </div>
+        {isAddEmploymentOpen && <AddEmploymentPopup closeAddEmployment={closeAddEmployment} />}
     </div>
     </div>
     <div class="border-b opacity-50 my-3"></div>
     <div className="flex items-center justify-between">
     <h1 className="font-cardo text-[18px] text-[#031136] font-normal mr-1">Graphic Designer | Wiz91 Technologies</h1>
     <div className="flex items-center space-x-2">
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openEditEmployment}>
             <img src={edit} alt="edit" />
         </div>
+        {isEditEmploymentOpen && <EditEmploymentPopup closeEditEmployment={closeEditEmployment} />}
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={del} alt="delet" />
         </div>
