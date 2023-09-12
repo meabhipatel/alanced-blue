@@ -60,7 +60,7 @@ const Messages = () => {
             <input type="search" id="default-search" class="block w-full pr-4 p-2 pl-10 text-sm text-gray-900 border border-gray-300 outline-none rounded-lg " placeholder="Search" required/>
           </div>
         </div>
-        
+        <div className="overflow-y-scroll">
         <div class="flex flex-row py-4 px-2 justify-center items-center border-b-2">
           <div class="w-1/4 ml-4">
             <div className="relative">
@@ -174,6 +174,7 @@ const Messages = () => {
               <span class="text-[#8A8A8A] text-[10px] float-left">You: do you have any reference card?</span>
             </div>
           </div>
+        </div>
         </div>
         {/* <div
           class="flex flex-row py-4 px-2 items-center border-b-2"
@@ -317,7 +318,7 @@ const Messages = () => {
             <img className="w-fit h-fit" src={vthreedots}/>
           </div>
           <AudioVisualizer audioSrc={file_example_MP3_5MG}/>
-          {/* <AudioMessages audioSrc={file_example_MP3_5MG}/> */}
+          <AudioMessages/>
           {/* <div class="flex justify-end mb-4">
             <div>
               <div
