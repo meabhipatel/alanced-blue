@@ -14,10 +14,10 @@ const AddPortfolio = () => {
             <div className=' basis-3/12'>
             <div className=" w-56">
             <ul className="text-left">
-                <li className="px-6 py-2 hover:bg-green-600 cursor-pointe rounded-full hover:text-white font-semibold text-base">Add Portfolio</li>
-                <li className="px-6 py-2 hover:bg-green-600 cursor-pointe rounded-full hover:text-white font-semibold text-bas">Select Templete</li>
-                <li className="px-6 py-2 hover:bg-green-600 cursor-pointe rounded-full hover:text-white font-semibold text-bas">Add Details</li>
-                <li className="px-6 py-2 hover:bg-green-600 cursor-pointe rounded-full hover:text-white font-semibold text-bas">Preview</li>
+                <li className="px-6 py-2 bg-green-600 cursor-pointe rounded-lg text-white font-semibold text-base">Add Portfolio</li>
+                <li className="px-6 py-2  rounded-full font-semibold text-base  opacity-50 cursor-not-allowed"  disabled>Select Templete</li>
+                <li className="px-6 py-2 rounded-full font-semibold text-bas opacity-50 cursor-not-allowed" disabled>Add Details</li>
+                <li className="px-6 py-2 rounded-full font-semibold text-bas opacity-50 cursor-not-allowed" disabled>Preview</li>
             </ul>
             </div>
             </div>
@@ -34,7 +34,7 @@ const AddPortfolio = () => {
                     <div className=' flex flex-row mt-16'>
                         <div className=' basis-6/12'>
                         <div class="p-0.5 inline-block rounded-full bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mr-[15rem]">
-                        <Link to=''><button class="px-2 py-1 bg-[#E2F9EE] rounded-full"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-bold text-sm py-[4px] px-[16px]">Cancel</p></button></Link>
+                        <Link to='/freelancer/edit-profile'><button class="px-2 py-1 bg-[#E2F9EE] rounded-full"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-bold text-sm py-[4px] px-[16px]">Cancel</p></button></Link>
                         </div> 
                         </div>
                         <div className=' basis-6/12'>
