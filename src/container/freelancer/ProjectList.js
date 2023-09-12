@@ -20,7 +20,7 @@ import ViewProjectPopup from './AllPopup/ViewProjectPopup'
 function ProjectList() {
   const viewallprojects = useSelector(state => state.freelancer.viewallprojects)
   const dispatch = useDispatch();
-  const [range, setRange] = useState([1, 100000]);
+  const [range, setRange] = useState([1, 1000]);
 
   const handleSliderChange = (newRange) => {
     setRange(newRange);
@@ -53,18 +53,18 @@ function ProjectList() {
         <div className='text-left pt-[3rem] ml-[13.5vw] text-2xl font-cardo'>
           <h1>Projects List</h1>
           <p className='font-inter text-sm text-[#797979] font-normal mt-2'>All the Lorem Ipsum generators on the Internet tend to repeat.</p>
-          <div className='lg:w-[44vw] bg-white p-3 lg:h-20 rounded-2xl lg:flex items-center shadow-lg mt-2'>
+          <div className='lg:w-[44vw] bg-white p-3 lg:h-14 rounded-2xl lg:flex items-center mt-2 shadow-md'>
             <div className='flex flex-row'>
-              <img src={search}></img>
+              <img className='w-5 h-5' src={search}></img>
               <input className='w-96 font-inter text-base ml-3' placeholder='What are you looking for?'></input>
             </div>
             <div className=''>
-              <button className='rounded h-12 w-28 lg:ml-6 font-bold text-lg text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>Search</button>
+              <button className='rounded h-8 w-24 lg:ml-6 font-semibold text-base text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>Search</button>
             </div>
           </div>
         </div>
       </div>
-      <div className=' container-sm px-40'>
+      <div className=' container-sm px-36'>
         <div className='flex flex-row'>
           <div className=' basis-6/12 text-left'>5,512 services available</div>
           <div className=' basis-6/12'>
@@ -75,7 +75,7 @@ function ProjectList() {
           </div>
         </div>
         <div className='flex flex-row'>
-          <div className=' basis-4/12 mt-16'>
+          <div className=' basis-3/12 mt-6'>
             <div><h1 className='font-cardo text-xl text-left font-normal'>Category</h1></div>
             <div className='flex flex-row mt-4'>
         <div className='basis-8/12'>
@@ -175,10 +175,10 @@ function ProjectList() {
               <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2,945)</div>
             </div>
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Price</h1></div>
-            <div className="pt-4 w-[75%]">
+            <div className="pt-4 w-[85%]">
               <Slider
                 min={1}
-                max={100000}
+                max={1000}
                 step={1}
                 range
                 value={range}
@@ -212,7 +212,7 @@ function ProjectList() {
                 type="text"
                 value={range[0]}
                 onChange={(e) => handleInputChange(0, e.target.value)}
-                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-28 focus:border-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-60
+                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-60
                 focus:outline-none'
               /></div>
               <div className='basis-2/12 m-auto mt-4'><i class="bi bi-dash-lg text-[#475569]"></i></div>
@@ -220,7 +220,7 @@ function ProjectList() {
                 type="text"
                 value={range[1]}
                 onChange={(e) => handleInputChange(1, e.target.value)}
-                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-28 focus:border-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-60
+                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-60
                 focus:outline-none'
               /></div>
               </div>
@@ -425,17 +425,17 @@ function ProjectList() {
               <option value="DE">Germany</option>
             </select>
             <div className='mt-8'>
-            <Link to=''><span class="px-20 py-[12px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-bold mr-14 text-lg">Send Proposal</span></Link>
+            <Link to=''><span class="px-16 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold mr-14 text-base">Send Proposal</span></Link>
             </div>
           </div>
-          <div className=' basis-8/12 mt-20'>
+          <div className=' basis-9/12 mt-10'>
             {viewallprojects && <>{viewallprojects.map((project,index)=> {
               return(
                 <div className='flex flex-row'>
-              <div className='basis-2/12'>
+              <div className='basis-1/12 mr-3'>
                 <Avatar src={profilepic} alt="avatar" variant="rounded" />
               </div>
-              <div className=' basis-7/12 text-left mb-7'>
+              <div className=' basis-9/12 text-left mb-7'>
                 <h1 className='font-cardo text-lg'>{project.title}</h1>
                 <div className='flex flex-row mt-3'>
                   <div className=' basis-4/12 border-2 border-r-[#797979] mr-2 border-t-0 border-b-0 border-l-0'>
@@ -457,7 +457,7 @@ function ProjectList() {
                     </div>
                   </div>
                 </div>
-                <p className='font-inter text-[#797979] mt-3'>{project.description}</p>
+                <p className='font-inter text-base font-normal text-[#797979] mt-3'>{project.description}</p>
                 {/* <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog}/> */}
                 {JSON.parse(project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
                   <div key={index} className='mt-3 bg-white shadow-lg text-center rounded-xl inline-block mr-3 p-1 w-24 border'>{skill}</div>
@@ -465,11 +465,11 @@ function ProjectList() {
                 {/* <div className='mt-3 bg-white shadow-lg text-center rounded-xl inline-block mr-3 p-1 w-24 border'>Figma</div> */}
                 {/* <div className='mt-3 bg-white shadow-lg text-center w-24 border rounded-xl inline-block p-1'>Sketch</div> */}
               </div>
-              <div className='basis-3/12 pt-10'>
+              <div className='basis-2/12 pt-10'>
                 <h1 className='font-cardo text-xl font-extrabold text-right'>${project.budget}</h1>
                 <p className='font-inter text-[#797979] mt-1 text-sm text-right'>Hourly Rate</p>
                 <div className=''>
-                  <Link to='/login'><button className='rounded h-12 w-28  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
+                  <Link to='/login'><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
                 </div>
               </div>
             </div>
