@@ -39,13 +39,20 @@ const Navbar = () => {
   return (
 <div className='sticky z-50 top-0 bg-cover bg-top' style={{ backgroundImage: `url(${navback})`}} onMouseLeave={(e)=>{setFindworkDropdown(); setMyJobsDropdown(); setReportsDropdown()}}>
       <nav class="flex items-center justify-between flex-wrap p-6">
+  {/* <Link to='/'>
+  <div class="flex items-center flex-shrink-0 lg:ml-[129px]">
+    <img src={logo} alt=""  />
+    <span class="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
+  </div>
+  </Link> */}
+  {!isLoggedIn ? 
+  <>
   <Link to='/'>
   <div class="flex items-center flex-shrink-0 lg:ml-[129px]">
     <img src={logo} alt=""  />
     <span class="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
   </div>
   </Link>
-  {!isLoggedIn ? 
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0">
     <div class="text-sm lg:flex-grow lg:ml-[45px]">
       <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
@@ -65,7 +72,14 @@ const Navbar = () => {
       <Link to='/choose'><button class="px-2 py-1 bg-[#E2F9EE]"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px]">Sign Up</p></button></Link>
 </div>    
     </div>
-  </div> :
+  </div> 
+  </>:<>
+  <Link to='/freelancer/profile'>
+  <div class="flex items-center flex-shrink-0 lg:ml-[129px]">
+    <img src={logo} alt=""  />
+    <span class="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
+  </div>
+  </Link>
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0">
     <div class="text-sm lg:flex-grow lg:ml-[45px]">
       <Link to=''><span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setFindworkDropdown(true)}>Find Work <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
@@ -81,7 +95,7 @@ const Navbar = () => {
                       <Link to='/my-proposals' className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Proposals</span>
                       </Link>
-                      <Link to='/freelancer/profile' className="flex items-center px-4 py-2" >
+                      <Link to='/freelancer/edit-profile' className="flex items-center px-4 py-2" >
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Profile</span>
                       </Link>
             </div>
@@ -160,10 +174,10 @@ const Navbar = () => {
     {dropdownVisible && (
         <div className="absolute right-0 mt-5 w-48 rounded-md shadow-lg bg-white">
             <div className="py-1">
-                      <Link to='/freelancer/edit-profile' className="flex items-center px-4 py-2 hover:bg-gray-100">
+                      {/* <Link to='/freelancer/edit-profile' className="flex items-center px-4 py-2 hover:bg-gray-100">
                           <i class="bi bi-pencil mr-3 opacity-50"></i>
                           <span className="font-inter text-[16px] text-[#031136] opacity-50">Edit Profile</span>
-                      </Link>
+                      </Link> */}
                       <Link to='/' className="flex items-center px-4 py-2 hover:bg-gray-100" onClick={handleLogout}>
                           <i class="bi bi-box-arrow-right mr-3 opacity-50"></i>
                           <span className="font-inter text-[16px] text-[#031136] opacity-50">Logout</span>
@@ -176,6 +190,7 @@ const Navbar = () => {
 
 
   </div>
+  </>
 }
 
 </nav>
