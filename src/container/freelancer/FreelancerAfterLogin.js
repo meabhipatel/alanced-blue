@@ -169,16 +169,17 @@ const [isDialogOpen, setIsDialogOpen] = useState(false);
     <h1 className="font-cardo text-[18px] text-[#031136] font-normal pt-2">Community & Forums  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
     <h1 className="font-cardo text-[18px] text-[#031136] font-normal py-2">Help Center  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
     </div>
+    <Link to='/freelancer/edit-profile'>
     <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#E2F9EE] rounded-lg p-4 mx-4 shadow-sm">
     <div>
         <h1 className='font-cardo text-lg text-[#031136] text-left'>Import A Certification</h1>
         <p className='font-inter text-sm text-[#0A142F] opacity-50 py-2 text-left'>Showing a credential may increase your chances of earning by 4 times.</p>
     </div>
     <div className="text-center">
-        <i class="bi bi-arrow-right"></i>
+       <i class="bi bi-arrow-right"></i>
         <img src={certifybadge} alt="" className='mx-auto h-16 w-16 mt-2'/>
     </div>
-</div>
+</div></Link>
     <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#E2F9EE] rounded-lg p-4 mx-4 my-3 shadow-sm">
         <div>
         <h1 className='font-cardo text-lg text-[#031136] text-left'>Get Tips To Find Work</h1>
@@ -189,16 +190,18 @@ const [isDialogOpen, setIsDialogOpen] = useState(false);
             <img src={ladder} alt="" className='mx-auto h-16 w-16 mt-2'/>
         </div>
     </div>
+    <Link to='/my-jobs'>
     <div className="grid grid-cols-[2fr,1fr] gap-2 rounded-lg p-4 mx-4 relative z-10 shadow-sm">
         <div>
         <h1 className='font-cardo text-lg text-[#031136] text-left'>My Jobs</h1>
            <p className='font-inter text-sm text-[#0A142F] opacity-50 py-2 text-left'>View your active contracts, timesheets, and available earnings.</p>
         </div>
         <div className="text-center">
-            <i class="bi bi-arrow-right"></i>
+        <i class="bi bi-arrow-right"></i>
             <img src={bag} alt="" className='mx-auto h-16 w-16 mt-2'/>
         </div>
     </div>
+    </Link>
 </div>
 
 <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
