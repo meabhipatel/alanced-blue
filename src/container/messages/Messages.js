@@ -44,7 +44,7 @@ const Messages = () => {
     
     <div class="flex flex-row border-t-2 justify-between bg-white">
       
-      <div class="flex flex-col w-2/5 border-r-2 overflow-y-auto">
+      <div class="flex flex-col h-[86.9vh] w-2/5 border-r-2 overflow-y-auto">
         
         <div class="border-b-2 py-3 px-2 flex items-center justify-between">
           <span className="float-left text-lg font-cardo font-semibold">Chats</span>
@@ -247,8 +247,8 @@ const Messages = () => {
             <img className="h-[25px] w-[25px]" src={iicon}/>
           </div>
         </div>
-        <div className="px-5">
-        <div class="flex flex-col mt-5">
+        <div className="px-5 pr-0">
+        <div class="flex flex-col h-[54vh] overflow-y-auto pr-2 mt-5">
         <div class="flex justify-between mb-4">
           <div className="flex justify-start">
             <img
@@ -317,8 +317,21 @@ const Messages = () => {
             /> */}
             <img className="w-fit h-fit" src={vthreedots}/>
           </div>
-          <AudioVisualizer audioSrc={file_example_MP3_5MG}/>
-          <AudioMessages/>
+          <div class="flex justify-end mb-4">
+            <div className="flex-row">
+            <AudioMessages/>
+            <span className="text-xs text-[#D7D7D7] float-right mr-3">Yesterday at 8:00 pm</span>
+            </div>
+            {/* <img
+              src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+              class="object-cover h-8 w-8 rounded-full"
+              alt=""
+            /> */}
+            <img className="w-fit h-fit mt-2 ml-2" src={vthreedots}/>
+          </div>
+          
+          {/* <AudioVisualizer audioSrc={file_example_MP3_5MG}/> */}
+          {/* <AudioMessages/> */}
           {/* <div class="flex justify-end mb-4">
             <div>
               <div
