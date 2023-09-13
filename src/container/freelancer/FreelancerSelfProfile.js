@@ -40,6 +40,7 @@ import EditHrRatePopup from './AllPopup/EditHrRatePopup'
 import AddCertificatesPopup from './AllPopup/AddCertificatesPopup'
 import AddEmploymentPopup from './AllPopup/AddEmploymentPopup'
 import EditEmploymentPopup from './AllPopup/EditEmploymentPopup'
+import TestimonialPopup from './AllPopup/TestimonialPopup'
 
 const FreelancerSelfProfile = () => {
 
@@ -115,8 +116,17 @@ function combinedClick() {
   const [isCertificatesOpen, setIsCertificatesOpen] = useState(false);
   const [isAddEmploymentOpen, setIsAddEmploymentOpen] = useState(false);
   const [isEditEmploymentOpen, setIsEditEmploymentOpen] = useState(false);
+  const [isTestimonialOpen, setIsTestimonialOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const inputRef = useRef(null)
+
+  const openTestimonial = () => {
+    setIsTestimonialOpen(true);
+  };
+
+  const closeTestimonial = () => {
+    setIsTestimonialOpen(false);
+  };
 
   const openEditEmployment = () => {
     setIsEditEmploymentOpen(true);
@@ -420,12 +430,12 @@ function combinedClick() {
         </div>
     </div>
     <div class="w-full md:w-[70%] py-4 px-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
-        <div className="flex items-center justify-between">
+        {/* <div className="flex items-center justify-between"> */}
             <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">View Profile</h1>
-            <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 mt-1">
+            {/* <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 mt-1">
                 <img src={edit} alt="Edit" />
             </div>
-        </div>
+        </div> */}
         <div className='my-3 flex flex-wrap'>
         {freelancerselfprofile && freelancerselfprofile[0] && freelancerselfprofile[0].skills ? 
     JSON.parse(freelancerselfprofile[0].skills.replace(/'/g, '"')).map((skill, index) => (
@@ -604,14 +614,14 @@ function combinedClick() {
     <div class="w-full md:w-[70%] pt-6 px-4 md:px-8 bg-[#FFFFFF] border border-gray-100 border-opacity-40 text-left">
     <div className="flex items-center justify-between">
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Work History</h1>
-    <div className="flex items-center space-x-2">
+    {/* <div className="flex items-center space-x-2">
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={threedot} alt="View More" />
         </div>
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={edit} alt="Edit" />
         </div>
-    </div>
+    </div> */}
     </div>
     <p 
         className={`font-inter opacity-50 text-[#0A142F] text-[13px] py-2 inline-block pr-8 relative cursor-pointer`} 
@@ -778,15 +788,15 @@ function combinedClick() {
     <div className="flex items-center justify-between">
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Portfolio (4)</h1>
     <div className="flex items-center space-x-2">
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        {/* <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={updownarrow} alt="" />
-        </div>
+        </div> */}
         <Link to='/freelancer/add/portfolio'><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={plus} alt="More" />
         </div></Link>
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        {/* <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={edit} alt="edit" />
-        </div>
+        </div> */}
     </div>
     </div>
     <div className='w-[190px] h-[165px] inline-block mt-4 mr-2'>
@@ -894,15 +904,16 @@ function combinedClick() {
     <div className="flex items-center justify-between">
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Testimonials</h1>
     <div className="flex items-center space-x-2">
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openTestimonial}>
             <img src={plus} alt="more" />
         </div>
+        {isTestimonialOpen && <TestimonialPopup closeTestimonial={closeTestimonial} />}
     </div>
     </div>
     <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>Endorsements from past clients</p>
     <img src={testimonial} alt="" className='mx-auto mt-2'/>
     <p className='font-inter opacity-50 text-[#0A142F] text-[16px] py-2'>Showcasing client testimonials can strengthen your profile. (+5%)</p>
-    <p className='font-inter text-[#0A142F] text-[14px]'>Request a testimonial</p>
+    <p className='font-inter text-[#0A142F] text-[14px] cursor-pointer' onClick={openTestimonial}>Request a testimonial</p>
     </div>
     <div className='my-6 p-4 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-40'>
     <div className="flex items-center justify-between">
