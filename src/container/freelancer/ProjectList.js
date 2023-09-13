@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetViewAllProjectsListAction } from '../../redux/Freelancer/FreelancerAction'
 import ViewProjectPopup from './AllPopup/ViewProjectPopup'
+import AddBidPopup from './AllPopup/AddBidPopup'
 
 
 function ProjectList() {
@@ -32,15 +33,15 @@ function ProjectList() {
     setRange(newRange);
   };
 
-  // const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  // const openDialog = () => {
-  //   setIsDialogOpen(true);
-  // };
+  const openDialog = () => {
+    setIsDialogOpen(true);
+  };
 
-  // const closeDialog = () => {
-  //   setIsDialogOpen(false);
-  // };
+  const closeDialog = () => {
+    setIsDialogOpen(false);
+  };
 
   React.useEffect(() => {
     dispatch(GetViewAllProjectsListAction())
@@ -469,8 +470,9 @@ function ProjectList() {
                 <h1 className='font-cardo text-xl font-extrabold text-right'>${project.budget}</h1>
                 <p className='font-inter text-[#797979] mt-1 text-sm text-right'>Hourly Rate</p>
                 <div className=''>
-                  <Link to='/login'><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
+                  <button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16' onClick={openDialog}>Send Proposal</button>
                 </div>
+                <AddBidPopup isOpen={isDialogOpen} onClose={closeDialog}/>
               </div>
             </div>
               )
