@@ -22,6 +22,14 @@ const Navbar = () => {
   const [MyJobsdropdown, setMyJobsDropdown] = useState(false)
   const [Reportsdropdown, setReportsDropdown] = useState(false)
  
+
+  let displayName;
+
+  if (loginMethod === 'google') {
+      displayName = googleUserName;
+  } else if (loginMethod === 'traditional') {
+      displayName = logindata?.first_Name;
+  }
  
 
   const isLoggedIn = Boolean(accessToken || googleUserName)
@@ -123,7 +131,7 @@ const Navbar = () => {
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Reports</span>
                       </Link>
                       <Link to='' className="flex items-center px-4 py-2">
-                        <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Connects Histroy</span>
+                        <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Connects History</span>
                       </Link>
                       {/* <Link to='' className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Transaction History</span>
@@ -156,10 +164,10 @@ const Navbar = () => {
     <span className="absolute top-0.5 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 border-2 border-white"></span>
 </div>
 <div className="relative ml-4">
-    {logindata.images_logo !== "/media/images/blank.png" ? (
+   {logindata && logindata.images_logo !== "/media/images/blank.png" ? (
         <img 
             src={"https://aparnawiz91.pythonanywhere.com/" + logindata.images_logo} 
-            alt="" 
+            alt="Profile" 
             className="h-8 w-8 rounded-full cursor-pointer" 
             onClick={() => setDropdownVisible(!dropdownVisible)}
         />
@@ -168,11 +176,11 @@ const Navbar = () => {
             className="h-8 w-8 rounded-full cursor-pointer flex items-center justify-center bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white font-bold font-cardo text-xl p-1"
             onClick={() => setDropdownVisible(!dropdownVisible)}
         >
-            {logindata.first_Name && logindata.first_Name[0].toUpperCase()}
+            {displayName && displayName[0].toUpperCase()}
         </div>
     )}
     {dropdownVisible && (
-        <div className="absolute right-0 mt-5 w-48 rounded-md shadow-lg bg-white">
+        <div className="drop absolute right-[-10px] mt-5 w-48 rounded-md shadow-lg bg-white">
             <div className="py-1">
                       {/* <Link to='/freelancer/edit-profile' className="flex items-center px-4 py-2 hover:bg-gray-100">
                           <i class="bi bi-pencil mr-3 opacity-50"></i>
