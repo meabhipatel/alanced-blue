@@ -33,6 +33,7 @@ import AllContracts from "../container/freelancer/AllContracts";
 import MyReports from "../container/freelancer/MyReports";
 import AddPortfolio from "../container/freelancer/portfolio/AddPortfolio";
 import SelectTemplete from "../container/freelancer/portfolio/SelectTemplete";
+import AddBidAmount from "../container/freelancer/AddBidAmount";
 
   const AppRouter = (props) => {
     
@@ -73,6 +74,7 @@ import SelectTemplete from "../container/freelancer/portfolio/SelectTemplete";
           <Route path="/freelancer/my-reports" element={<MyReports/>}/>
           <Route path="/freelancer/add/portfolio" element={<AddPortfolio/>}/>
           <Route path="/freelancer/select/templete" element={<SelectTemplete/>}/>
+          <Route path="/freelancer/add-bid" element={<AddBidAmount/>}/>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   
