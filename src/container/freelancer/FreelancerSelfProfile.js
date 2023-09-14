@@ -49,6 +49,16 @@ const FreelancerSelfProfile = () => {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
 
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const targetElement = document.querySelector(hash);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, []);
+
   function handleMouseEnter() {
     setIsHovered(true);
 }
@@ -915,7 +925,7 @@ function combinedClick() {
     <p className='font-inter opacity-50 text-[#0A142F] text-[16px] py-2'>Showcasing client testimonials can strengthen your profile. (+5%)</p>
     <p className='font-inter text-[#0A142F] text-[14px] cursor-pointer' onClick={openTestimonial}>Request a testimonial</p>
     </div>
-    <div className='my-6 p-4 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-40'>
+    <div className='my-6 p-4 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-40' id="certificate">
     <div className="flex items-center justify-between">
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Certifications</h1>
     <div className="flex items-center space-x-2">

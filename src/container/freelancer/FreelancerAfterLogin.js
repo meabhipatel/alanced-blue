@@ -12,17 +12,56 @@ import thumbdown from '../../components/images/thumbdown.png'
 import heart from '../../components/images/heart.png'
 import verify from '../../components/images/verify.png'
 import location from '../../components/images/location.png'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ViewProjectPopup from './AllPopup/ViewProjectPopup'
+import { GetViewAllProjectsListAction } from '../../redux/Freelancer/FreelancerAction'
 
 
 const FreelancerAfterLogin = () => {
 
   const logindata = useSelector(state => state.login.login_data);  
+  const googleUserName = localStorage.getItem('googleUserName')
+  const loginMethod = localStorage.getItem('loginMethod')
+  const viewallprojects = useSelector(state => state.freelancer.viewallprojects)
+  const dispatch = useDispatch();
+ 
 
-  const handleClick = (event) => {
+  React.useEffect(() => {
+    dispatch(GetViewAllProjectsListAction())
+  }, [])
+
+  let displayName;
+
+  if (loginMethod === 'google') {
+      displayName = googleUserName;
+  } else if (loginMethod === 'traditional') {
+      displayName = logindata?.first_Name +" " +logindata?.last_Name;
+  }
+
+  const filteredProjects = viewallprojects ? viewallprojects.filter(project => project.category === logindata?.category) : [];
+
+  const projectsToDisplay = filteredProjects.length > 0 ? filteredProjects : viewallprojects;
+
+//   const filteredProjects = viewallprojects ? viewallprojects.filter(project => project.category === logindata.category) : [];
+
+  const [expandedProjects, setExpandedProjects] = useState([]);
+
+const handleToggleDescription = (index) => {
+    const updatedState = [...expandedProjects];
+    updatedState[index] = !updatedState[index];
+    setExpandedProjects(updatedState);
+};
+
+//   const handleClick = (event) => {
+//     event.stopPropagation();
+// };
+const handleClick = (event, index) => {
     event.stopPropagation();
+
+    handleToggleDescription(index);
+
+    // Rest of your handleClick code, if any...
 };
  
   const [selected, setSelected] = useState('Best Matches');
@@ -75,8 +114,10 @@ const FreelancerAfterLogin = () => {
 const { day, formattedDate, greeting } = getCurrentDateAndGreeting();
 
 const [isDialogOpen, setIsDialogOpen] = useState(false);
+const [selectedProject, setSelectedProject] = useState(null);
 
-  const openDialog = () => {
+  const openDialog = (project) => {
+    setSelectedProject(project);
     setIsDialogOpen(true);
   };
 
@@ -92,7 +133,7 @@ const [isDialogOpen, setIsDialogOpen] = useState(false);
     <img src={profilebg} alt="" className='w-full h-52' />
     <div className="absolute top-12 left-12 p-4 text-left">
         <h1 className='font-cardo text-[#031136] sm:text-xl text-lg font-normal'>{day}, {formattedDate}</h1>
-        <h1 className='font-cardo text-[#031136] sm:text-3xl text-2xl font-semibold py-1'>Good {greeting}, {logindata.first_Name+" "+logindata.last_Name}</h1>
+        <h1 className='font-cardo text-[#031136] sm:text-3xl text-2xl font-semibold py-1'>Good {greeting}, {displayName}</h1>
     </div>
 </div>
 {/* <section className='flex justify-center my-2'>
@@ -169,7 +210,7 @@ const [isDialogOpen, setIsDialogOpen] = useState(false);
     <h1 className="font-cardo text-[18px] text-[#031136] font-normal pt-2">Community & Forums  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
     <h1 className="font-cardo text-[18px] text-[#031136] font-normal py-2">Help Center  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
     </div>
-    <Link to='/freelancer/edit-profile'>
+    <Link to='/freelancer/edit-profile#certificate'>
     <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#E2F9EE] rounded-lg p-4 mx-4 shadow-sm">
     <div>
         <h1 className='font-cardo text-lg text-[#031136] text-left'>Import A Certification</h1>
@@ -244,9 +285,15 @@ const [isDialogOpen, setIsDialogOpen] = useState(false);
     <div className='px-4 md:px-8 py-4'>
       <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse jobs that match your experience to a client's hiring preferences. Ordered by most relevant.</p>
     </div>
-    <div className='px-4 md:px-8 py-5 bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer' onClick={openDialog}>
+    {projectsToDisplay && projectsToDisplay.map((project, index) => {
+    {/* {filteredProjects && filteredProjects.map((project, index) => { */}
+    {/* {viewallprojects && <>{viewallprojects.map((project,index)=> { */}
+        const words = project.description.split(' ');
+        const displayWords = expandedProjects[index] || words.length <= 50 ? words : words.slice(0, 50);
+              return(<>
+    <div className='px-4 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer' onClick={() => openDialog(project)}>
     <div className="flex items-center justify-between">
-    <p className="font-inter text-[#0A142F] text-[18px] font-semibold">Graphic Designer</p>
+    <p className="font-inter text-[#0A142F] text-[18px] font-semibold">{project.title}</p>
     <div className="flex items-center space-x-2">
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200" onClick={handleClick}>
             <img src={thumbdown} alt="" />
@@ -256,13 +303,26 @@ const [isDialogOpen, setIsDialogOpen] = useState(false);
         </div>
     </div>
     </div>
-    <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>Fixed-price - Expert - Est. Budget: $10 - Posted in 12 hours</p>
-    <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>Job Description: Graphic Designer for Vogue Tourism in Ajmer Only for Ajmer ( Rajasthan ) OFFLINE Please Share Your Details On this Whatsapp No.+91 95094 98242  Are you a talented and imaginative Graphic Designer with a flair for creating visually stunning and engaging designs? Vogue Tourism, a premier name in the travel and hospitality sector, is <span className="font-cardo text-[#031136] text-[18px] font-semibold cursor-pointer" onClick={handleClick}>More</span></p>
+    <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>Fixed-price - Expert - Est. Budget: ${project.budget} - Posted 12 hrs ago</p>
+    <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>
+                Job Description: {displayWords.join(' ')} 
+                {words.length > 50 && (
+                    <span 
+                        className="font-cardo text-[#031136] text-[18px] font-semibold cursor-pointer pl-2" 
+                        onClick={(event) => handleClick(event, index)}
+                    >
+                        {expandedProjects[index] ? 'Less' : 'More'}
+                    </span>
+                )}
+            </p>
+    {/* <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>Job Description: {project.description} <span className="font-cardo text-[#031136] text-[18px] font-semibold cursor-pointer" onClick={handleClick}>More</span></p> */}
+    {JSON.parse(project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
     <Link to=''>
             <span className='border px-4 py-1 border-gray-300 opacity-50 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2'>
-            Social Media Imagery
+           {skill}
             </span>
         </Link>
+         ))}
         <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>Proposals : <span className='opacity-50'>Less than 5</span></p>
         <img src={verify} alt="" className='inline-block h-3 w-3 mr-1'/>
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>Payment verified</p>
@@ -272,8 +332,11 @@ const [isDialogOpen, setIsDialogOpen] = useState(false);
         <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>India</p>
     </div>
-    <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog}/>
-    <div className='px-4 md:px-8 py-5 border-t border-b border-gray-200 border-opacity-30'>
+    <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog} project={selectedProject}/>
+    </>
+    )
+})}
+    {/* <div className='px-4 md:px-8 py-5 border-t border-b border-gray-200 border-opacity-30'>
     <div className="flex items-center justify-between">
     <p className="font-inter text-[#0A142F] text-[18px] font-semibold">UI Designer - Landing Page</p>
     <div className="flex items-center space-x-2">
@@ -300,7 +363,7 @@ const [isDialogOpen, setIsDialogOpen] = useState(false);
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-3'>Spent</p>
         <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>India</p>
-    </div>
+    </div> */}
 </div>
 </div>
 </div>
