@@ -16,6 +16,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GetViewAllProjectsListAction } from '../../redux/Freelancer/FreelancerAction'
 import ViewProjectPopup from './AllPopup/ViewProjectPopup'
 import AddBidPopup from './AllPopup/AddBidPopup'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 
 function ProjectList() {
@@ -429,6 +431,7 @@ function ProjectList() {
             <Link to=''><span class="px-16 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold mr-14 text-base">Send Proposal</span></Link>
             </div>
           </div>
+          { viewallprojects != null ? 
           <div className=' basis-9/12 mt-10'>
             {viewallprojects && <>{viewallprojects.map((project,index)=> {
               return(
@@ -515,7 +518,14 @@ function ProjectList() {
                 </div>
               </div>
             </div> */}
+          </div> : <div className=' basis-9/12 mt-10'>
+            <Skeleton height={50} width={50} inline={true} style={{ float: 'left'}}/>
+            <Skeleton height={110} width={700} style={{ float: 'left', marginLeft: 20}}/>
+            <Skeleton height={40} width={100} style={{ marginTop: 40}}/><br/>
+            <Skeleton height={40} width={100} inline={true} style={{marginTop:5, marginLeft:70, float:'left'}}/>
+            <Skeleton height={40} width={100} inline={true} count={2} style={{ marginTop:5, marginLeft:5, float:'left'}}/>
           </div>
+          }
         </div>
       </div>
       <HomeSection4 />
