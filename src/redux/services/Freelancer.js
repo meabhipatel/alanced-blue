@@ -40,3 +40,43 @@ export const GetFreelancerSelfProfile = async (token) => {
       });
   };
   
+
+  export const UpdateFreelancerProfile = async(data,token) =>{
+    setHeadersWithAccessToken(token);
+    return DataService.put(API.Freelancers.Freelancer.UpdateFreelancerProfile, data,{
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+      .then(res => {
+        return res.data;
+      })
+      .catch(err => {
+        return handleError(err);
+      });
+  }  
+
+
+//   export const GetViewAllSavedJobs = async (token) => {
+//     setHeadersWithAccessToken(token);
+//     return await DataService.get(API.Freelancers.Freelancer.ViewAllSavedJobs)
+//       .then((res) => {
+//         console.log(res);
+//         return res.data;
+//       })
+//       .catch((err) => {
+//         return handleError(err);
+//       });
+//   };
+
+
+//   export const SaveUnsaveJob = async (data,id,token) =>{
+//     setHeadersWithAccessToken(token);
+//     return DataService.post(`${API.Freelancers.Freelancer.SavedUnsavedJobs}/${id}`, data)
+//     .then(res => {
+//         return res.data;
+//     })
+//     .catch(err => {
+//         return handleError(err);
+//     });
+// };

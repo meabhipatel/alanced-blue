@@ -5,7 +5,10 @@ GET_FREELANCER_SELF_PROFILE_REQUEST,
 GET_FREELANCER_SELF_PROFILE_SUCCESS,
 GET_VIEW_ALL_PROJECT_REQUEST,
 GET_VIEW_ALL_PROJECT_SUCCESS,
-SERVER_ERROR} from "./FreelancerConstant"
+UPDATE_FREELANCER_REQUEST,
+UPDATE_FREELANCER_SUCCESS,
+SERVER_ERROR,
+} from "./FreelancerConstant"
 
 
 
@@ -33,6 +36,19 @@ const FreelancerReducer =(state = initialState, action) => {
             return { loading: true};
         case GET_VIEW_ALL_PROJECT_SUCCESS: 
             return { viewallprojects: action.payload }; 
+        case UPDATE_FREELANCER_REQUEST:
+            return { loading: true };
+        case UPDATE_FREELANCER_SUCCESS:
+            toast.success("Freelancer Profile Updated");
+            return { loading: false , freelancerselfprofile: action.payload}; 
+        // case GET_VIEW_ALL_SAVEDJOBS_REQUEST:
+        //     return { loading: true};
+        // case GET_VIEW_ALL_SAVEDJOBS_SUCCESS: 
+        //     return { viewallsavedjob: action.payload };   
+        // case ADD_NEW_SAVEUNSAVEJOB_REQUEST:
+        //     return { loading: true };
+        // case ADD_NEW_SAVEUNSAVEJOB_SUCCESS:
+        //     return { loading: false }    
         default:
             return state;
     }

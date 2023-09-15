@@ -1,7 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { UpdateFreelancerProfileAction } from '../../../redux/Freelancer/FreelancerAction';
 
 const EditTitlePopup = ({ closeEditTitle }) => {
+
+  const accessToken = useSelector(state => state.login.accessToken);  
+
+  const [category, setCategory] = useState(""); 
+  const dispatch = useDispatch();
+  const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile)
+  useEffect(() => {
+      if (freelancerselfprofile && freelancerselfprofile[0]) {
+          setCategory(freelancerselfprofile[0].category);
+      }
+  }, [freelancerselfprofile]);
+
+  const handleSave = () => {
+      dispatch(UpdateFreelancerProfileAction({ category },accessToken));
+      closeEditTitle();
+  }
+
   return (
     <>
     <div className="fixed z-10 inset-0 overflow-y-auto mt-12">
@@ -16,11 +35,11 @@ const EditTitlePopup = ({ closeEditTitle }) => {
                     </div>
                     <div className='mt-8'>
                             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Your Designation</h1>
-                            <input type="text" className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Python Developer'/>
+                            <input type="text" value={category} onChange={e => setCategory(e.target.value)} className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Python Developer'/>
                             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left pt-5">About You</h1>
                           <textarea name="" id="" cols="30" rows="5" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'></textarea> 
                             <div className="mt-8 flex justify-end">
-                            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" >Save</span></Link>
+                            <Link to='' onClick={handleSave}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" >Save</span></Link>
                             <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={closeEditTitle}>
                                 <Link to=''><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
                             </div>     
