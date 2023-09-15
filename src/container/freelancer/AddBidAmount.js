@@ -5,8 +5,8 @@ import Footer from '../../components/Layout/Footer'
 import { Link } from 'react-router-dom'
 import dollarimg from '../../components/images/doller3.png'
 
-const AddBidAmount = () => {
-
+const AddBidAmount = ({projectData}) => {
+console.log(projectData,"bid page")
 
   return (
     <>
