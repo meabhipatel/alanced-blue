@@ -23,7 +23,7 @@ import certificate from '../../components/images/certificate.png'
 import del from '../../components/images/delete.png'
 import experience from '../../components/images/experience.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { GetFreelancerSelfProfileAction } from '../../redux/Freelancer/FreelancerAction'
+import { GetFreelancerSelfProfileAction, UpdateFreelancerProfileAction } from '../../redux/Freelancer/FreelancerAction'
 import StarRating from './StarRating'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import EditTitlePopup from './AllPopup/EditTitlePopup'
@@ -84,7 +84,7 @@ function combinedClick() {
 //     const displayText = isExpanded ? fullText : `${fullText.substring(0, limit)}...`;
   
   const [isAvailable, setIsAvailable] = useState(localStorage.getItem('userAvailability') || 'available');
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem('userAvailability', isAvailable);
@@ -267,6 +267,29 @@ function combinedClick() {
         inputRef.current.click();
       }
 
+      const handleImageSave = async () => {
+    const formData = new FormData();
+    formData.append("images_logo", selectedFile);
+
+    // Update local state immediately
+    if(freelancerselfprofile && freelancerselfprofile[0]){
+        freelancerselfprofile[0].images_logo = URL.createObjectURL(selectedFile);
+    }
+
+    dispatch(UpdateFreelancerProfileAction(formData, accessToken));
+    setIsModalOpen(false);
+    navigate('/freelancer/edit-profile');
+}
+
+
+    //   const handleImageSave = async () => {
+    //     const formData = new FormData();
+    //     formData.append("images_logo",selectedFile);
+
+    //     dispatch(UpdateFreelancerProfileAction(formData,accessToken))
+    //     navigate('/freelancer/edit-profile')
+    //   }
+
   const underlineStyle = {
         content: '""',
         display: 'block',
@@ -372,7 +395,7 @@ function combinedClick() {
                         <p className='text-[#0A142F] font-inter opacity-50 text-[14px] text-left'>Logos, clip-art, group photos, and digitally-altered images are not allowed.</p>
                             <div className="mt-8 flex justify-end">
                             <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" onClick={handleImageClick} onChange={handleFileChange}>Change Image</span></Link>
-                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
+                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={handleImageSave}>
                                 <Link to=''><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Save Photo</p></button></Link>
                             </div>     
                             </div>
