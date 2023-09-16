@@ -24,6 +24,7 @@ const FreelancerAfterLogin = () => {
   const googleUserName = localStorage.getItem('googleUserName')
   const loginMethod = localStorage.getItem('loginMethod')
   const viewallprojects = useSelector(state => state.freelancer.viewallprojects)
+  const [searchTerm, setSearchTerm] = useState('');
   const dispatch = useDispatch();
  
 
@@ -41,7 +42,20 @@ const FreelancerAfterLogin = () => {
 
   const filteredProjects = viewallprojects ? viewallprojects.filter(project => project.category === logindata?.category) : [];
 
-  const projectsToDisplay = filteredProjects.length > 0 ? filteredProjects : viewallprojects;
+  // New filter based on the search term
+  const searchFilteredProjects = filteredProjects.filter(project => {
+    const skills = JSON.parse(project.skills_required.replace(/'/g, '"'));
+    return (
+      skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      project.category.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
+
+  const projectsToDisplay = searchFilteredProjects.length > 0 ? searchFilteredProjects : viewallprojects;
+
+//***    const filteredProjects = viewallprojects ? viewallprojects.filter(project => project.category === logindata?.category) : [];
+
+//   const projectsToDisplay = filteredProjects.length > 0 ? filteredProjects : viewallprojects;****
 
 //   const filteredProjects = viewallprojects ? viewallprojects.filter(project => project.category === logindata.category) : [];
 
@@ -256,7 +270,8 @@ const [selectedProject, setSelectedProject] = useState(null);
     <div className="flex items-center">
     <div className='flex items-center mr-1 space-x-1 border p-1 w-[200px] rounded-md'>
         <img src={search} alt="Search Icon" className="h-4 w-4 mr-1 ml-1" />
-        <input className='w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none' placeholder='Search Jobs' />
+        <input className='w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none' placeholder='Search Jobs' value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)} />
     </div>
     </div>
 </div>
