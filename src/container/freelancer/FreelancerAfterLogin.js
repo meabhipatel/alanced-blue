@@ -130,13 +130,13 @@ const { day, formattedDate, greeting } = getCurrentDateAndGreeting();
 const [isDialogOpen, setIsDialogOpen] = useState(false);
 const [selectedProject, setSelectedProject] = useState(null);
 
-  const openDialog = (projectData) => {
-    const { id, title, category, description, budget, skills_required } = projectData;
-    setSelectedProject(projectData);
+const openDialog = (project) => {
+    setSelectedProject(project); 
     setIsDialogOpen(true);
   };
 
   const closeDialog = () => {
+    setSelectedProject(null); 
     setIsDialogOpen(false);
   };
 
@@ -307,7 +307,7 @@ const [selectedProject, setSelectedProject] = useState(null);
         const words = project.description.split(' ');
         const displayWords = expandedProjects[index] || words.length <= 50 ? words : words.slice(0, 50);
               return(<>
-    <div className='px-4 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer' onClick={() => openDialog({id: project.id,title: project.title,category: project.category,description: project.description,budget: project.budget,skills_required: project.skills_required,})}>
+    <div className='px-4 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer' onClick={() => openDialog(project)}>
     <div className="flex items-center justify-between">
     <p className="font-inter text-[#0A142F] text-[18px] font-semibold">{project.title}</p>
     <div className="flex items-center space-x-2">
@@ -349,10 +349,11 @@ const [selectedProject, setSelectedProject] = useState(null);
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>India</p>
     </div>
     {/* <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog} projectData={{pro_id:project.id, pro_tit:project.title, pro_cat:project.category, pro_desc:project.description, pro_budget:project.budget ,pro_skills:project.skills_required}}/> */}
-    <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog} projectData={selectedProject}/>
+    {/* <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog} projectData={selectedProject}/> */}
     </>
     )
 })}
+<ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog} project={selectedProject}/>
     {/* <div className='px-4 md:px-8 py-5 border-t border-b border-gray-200 border-opacity-30'>
     <div className="flex items-center justify-between">
     <p className="font-inter text-[#0A142F] text-[18px] font-semibold">UI Designer - Landing Page</p>
