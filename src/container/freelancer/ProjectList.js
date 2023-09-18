@@ -484,6 +484,18 @@ function ProjectList() {
             <Skeleton height={40} width={100} style={{ marginTop: 40}}/><br/>
             <Skeleton height={40} width={100} inline={true} style={{marginTop:5, marginLeft:70, float:'left'}}/>
             <Skeleton height={40} width={100} inline={true} count={2} style={{ marginTop:5, marginLeft:5, float:'left'}}/>
+
+            <Skeleton height={50} width={50} inline={true} style={{ float: 'left', marginTop:80, marginLeft:-382 }}/>
+            <Skeleton height={110} width={700} style={{ float: 'left', marginLeft: 70, marginTop:35}}/>
+            <Skeleton height={40} width={100} style={{ marginTop: 125 }}/><br/>
+            <Skeleton height={40} width={100} inline={true} style={{marginTop:5, marginLeft:70, float:'left'}}/>
+            <Skeleton height={40} width={100} inline={true} count={2} style={{ marginTop:5, marginLeft:5, float:'left'}}/>
+            
+            <Skeleton height={50} width={50} inline={true} style={{ float: 'left', marginTop:80, marginLeft:-382 }}/>
+            <Skeleton height={110} width={700} style={{ float: 'left', marginLeft: 70, marginTop:35}}/>
+            <Skeleton height={40} width={100} style={{ marginTop: 125 }}/><br/>
+            <Skeleton height={40} width={100} inline={true} style={{marginTop:5, marginLeft:70, float:'left'}}/>
+            <Skeleton height={40} width={100} inline={true} count={2} style={{ marginTop:5, marginLeft:5, float:'left'}}/>
           </div>
           }
         </div>
