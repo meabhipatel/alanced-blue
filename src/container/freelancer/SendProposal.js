@@ -5,34 +5,31 @@ import Footer from '../../components/Layout/Footer'
 import { Link, useLocation } from 'react-router-dom'
 import dollarimg from '../../components/images/doller3.png'
 
-const AddBidAmount = () => {
-    
-const location = useLocation();
-const projectData = location.state && location.state.projectData;
+const SendProposal = () => {
+    const location = useLocation();
+    const findproject = location.state && location.state.project;
+    console.log(findproject,"send_praposal")
+ 
+    const [userInput, setUserInput] = useState('8')
+    const [hourlyRate, setHourlyRate] = useState(8);
+    const [serviceFee, setServiceFee] = useState(0);
+    const [totalAfterFee, setTotalAfterFee] = useState(0);
 
-// Use projectData as needed
-console.log("Project Data:", projectData);
-console.log("Project Title",projectData.project.title)
+    useEffect(() => {
+        // Parse the userInput and update hourlyRate
+        const parsedRate = parseFloat(userInput.replace('$', ''));
+        if (!isNaN(parsedRate)) {
+        setHourlyRate(parsedRate);
+        }
+    }, [userInput]);
+
+    useEffect(() => {
+        const fee = (10/100) * hourlyRate;
+        setServiceFee(fee);
+        setTotalAfterFee(hourlyRate - fee);
+    }, [hourlyRate]);
 
 
-const [userInput, setUserInput] = useState('8')
-const [hourlyRate, setHourlyRate] = useState(8);
-const [serviceFee, setServiceFee] = useState(0);
-const [totalAfterFee, setTotalAfterFee] = useState(0);
-
-useEffect(() => {
-    // Parse the userInput and update hourlyRate
-    const parsedRate = parseFloat(userInput.replace('$', ''));
-    if (!isNaN(parsedRate)) {
-      setHourlyRate(parsedRate);
-    }
-}, [userInput]);
-
-useEffect(() => {
-    const fee = (10/100) * hourlyRate;
-    setServiceFee(fee);
-    setTotalAfterFee(hourlyRate - fee);
-}, [hourlyRate]);
 
   return (
     <>
@@ -42,12 +39,12 @@ useEffect(() => {
         <h1 className=' text-2xl font-cardo font-semibold text-left'>Job Details</h1>
             <div className=' flex flex-row mt-6'>
                 <div className=' basis-8/12'>
-                <h1 className=' text-xl font-inter font-medium text-left'>{projectData.project.title}</h1>
+                <h1 className=' text-xl font-inter font-medium text-left'>{findproject.title}</h1>
                 <div className=' flex flex-row'>
-                <div className=' basis-4/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-green-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  w-[90%] bg-opacity-[60%]">{projectData.project.category}</div></div>
+                <div className=' basis-4/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-green-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  w-[90%] bg-opacity-[60%]">{findproject.category}</div></div>
                 <div className=' basis-4/12 mt-5 ml-2'><p className=' text-sm font-medium font-inter text-left opacity-[50%]'>Posted 22 hours ago</p></div>
                 </div>
-                <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>{projectData.project.description}</p>
+                <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>{findproject.description}</p>
                 <p className=' mt-3 text-base font-semibold text-green-600 text-left'>more</p>
                 <Link><p className='mb-5 mt-3 text-base font-semibold text-green-600 text-left'>View more job details</p></Link>
                 </div>
@@ -86,7 +83,7 @@ useEffect(() => {
             <hr className=' mt-5' />
             <h1 className='text-base font-medium font-inter text-left mt-5'>Skills & Experties</h1>
             <div className="text-left mt-5">
-            {JSON.parse(projectData.project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
+            {JSON.parse(findproject.skills_required.replace(/'/g,'"')).map((skill,index)=>(
                 <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
                 <p className=" text-center">{skill}</p>
             </div>
@@ -183,7 +180,7 @@ useEffect(() => {
         <div className=' flex flex-row mt-5  mb-5'>
         <div className=' basis-3/12'><button className='h-10 w-52 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded'>Send Proposal</button></div>
         <div class="p-0.5 mt-5 rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
-        <Link to='/freelancer/profile' onClick={() => window.scrollTo(0, 0)}><button class="px-2 py-1 bg-[#f8faf9] rounded"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-bold text-sm py-[4px] px-[16px]">Cancel</p></button></Link>
+        <Link to='/projects' onClick={() => window.scrollTo(0, 0)}><button class="px-2 py-1 bg-[#f8faf9] rounded"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-bold text-sm py-[4px] px-[16px]">Cancel</p></button></Link>
         </div>
         </div>
     </div>
@@ -193,4 +190,4 @@ useEffect(() => {
   )
 }
 
-export default AddBidAmount
+export default SendProposal
