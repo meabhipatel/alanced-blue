@@ -101,7 +101,7 @@ function ViewProjectPopup({ isOpen, onClose,project}) {
                 </div>
                 <div className=' basis-4/12'>
                 <div className='mt-6 ml-[30%]'>
-                <Link to="/freelancer/add-bid" state={{ projectData }}><span class="px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal">Apply Now</span></Link>
+                <Link to="/freelancer/add-bid" state={{ projectData }} onClick={() => window.scrollTo(0, 0)}><span class="px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal">Apply Now</span></Link>
                 </div>
                 <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-8 ml-[30%]">
                 <Link to=''><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-inter font-bold text-base py-[4px] px-8"><i class="bi bi-suit-heart"></i>  Save Job</p></button></Link>
