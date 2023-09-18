@@ -14,7 +14,7 @@ const HomeSection4 = () => {
     </h1>
     <p className='opacity-50 font-inter text-[13px]'>This the first true value generator on the Internet. It uses alphas dictionary <br /> of over 200 Latin words.</p>
 <div className='mt-8'>
-<Link to=''><span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Sign In</span></Link>
+<span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Sign In</span>
 </div>
     </div>
     <div class="flex-1 p-4">
