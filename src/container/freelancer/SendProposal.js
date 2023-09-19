@@ -9,6 +9,15 @@ const SendProposal = () => {
     const location = useLocation();
     const findproject = location.state && location.state.project;
     console.log(findproject,"send_praposal")
+    const [showFullDescription, setShowFullDescription] = useState(false);
+
+    const toggleDescription = () => {
+        setShowFullDescription(!showFullDescription);
+    };
+
+    const descriptionToShow = showFullDescription
+        ? findproject.description
+        : findproject.description.slice(0, 200);
  
     const [userInput, setUserInput] = useState('8')
     const [hourlyRate, setHourlyRate] = useState(8);
@@ -44,9 +53,20 @@ const SendProposal = () => {
                 <div className=' basis-4/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-green-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  w-[90%] bg-opacity-[60%]">{findproject.category}</div></div>
                 <div className=' basis-4/12 mt-5 ml-2'><p className=' text-sm font-medium font-inter text-left opacity-[50%]'>Posted 22 hours ago</p></div>
                 </div>
-                <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>{findproject.description}</p>
-                <p className=' mt-3 text-base font-semibold text-green-600 text-left'>more</p>
-                <Link><p className='mb-5 mt-3 text-base font-semibold text-green-600 text-left'>View more job details</p></Link>
+                <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>
+                    {descriptionToShow}
+                </p>
+                {findproject.description.length > 200 && (
+                    <p
+                    className='mt-3 text-base font-semibold text-green-600 text-left cursor-pointer'
+                    onClick={toggleDescription}
+                    >
+                    {showFullDescription ? 'less' : 'more'}
+                    </p>
+                )}
+                {/* <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>{findproject.description}</p>
+                <p className=' mt-3 text-base font-semibold text-green-600 text-left'>more</p> */}
+                <p className='mb-5 mt-3 text-base font-semibold text-green-600 text-left'>View more job details</p>
                 </div>
                 <div className=' basis-1/12'></div>
                 <div className=' basis-3/12 border-l border-[#E7E8F2]'>
