@@ -40,7 +40,7 @@ const FreelancerReducer =(state = initialState, action) => {
             return { loading: true };
         case UPDATE_FREELANCER_SUCCESS:
             toast.success("Freelancer Profile Updated");
-            return { loading: false , freelancerselfprofile: action.payload}; 
+            return { loading: false }; 
         // case GET_VIEW_ALL_SAVEDJOBS_REQUEST:
         //     return { loading: true};
         // case GET_VIEW_ALL_SAVEDJOBS_SUCCESS: 
