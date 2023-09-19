@@ -41,6 +41,7 @@ import AddCertificatesPopup from './AllPopup/AddCertificatesPopup'
 import AddEmploymentPopup from './AllPopup/AddEmploymentPopup'
 import EditEmploymentPopup from './AllPopup/EditEmploymentPopup'
 import TestimonialPopup from './AllPopup/TestimonialPopup'
+import axios from 'axios'
 
 const FreelancerSelfProfile = () => {
 
@@ -48,6 +49,9 @@ const FreelancerSelfProfile = () => {
   const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile)
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
+  const [reviews, setReviews] = useState([]);
+  const id = freelancerselfprofile && freelancerselfprofile[0].id ? freelancerselfprofile[0].id : '';
+
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -71,6 +75,22 @@ function combinedClick() {
     handlePinClick();
     handleMouseLeave();
 }
+
+useEffect(() => {
+    if(id) { 
+        axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/Review/${id}`)
+            .then(response => {
+                if (response.data.status === 200) {
+                    setReviews(response.data.data);
+                } else {
+                    console.log(response.data.message || 'Error fetching reviews');
+                }
+            })
+            .catch(err => {
+                console.log(err.message);
+            });
+    }
+}, [id]); 
 
 //   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -763,10 +783,12 @@ function combinedClick() {
     </div>
 
     <div class="w-full md:w-[70%] py-4 px-4 md:px-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
+    {reviews.map((review, index) => (<>
+    <div key={index}>
         <div className="flex justify-between items-center">
         <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-1'>Banner designer for Dental Clinic</p>
         <div className="flex items-center space-x-2">
-        <StarRating rating={3} />
+        <StarRating rating={review.rating} />
             {/* <div className="text-[16px] text-yellow-500 mr-1 inline-block">★★★★★</div> */}
             {/* <p className='font-inter opacity-50 text-[#0A142F] text-[14px] inline-block'>5.0</p> */}
             <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 inline-block">
@@ -775,7 +797,7 @@ function combinedClick() {
         </div>
     </div>
         <p className='font-inter opacity-50 text-[#0A142F] text-[12px]'>Dec 26, 2022 - Dec 27, 2022</p>
-        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-3'>"Great job and great guy to work with!! Fast work and very responsive and skilled. Thank you so much!"</p>
+        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-3'>{review.review}</p>
         <div class="grid grid-cols-3 gap-4 my-6">
         <div class="">
         <p className='font-cardo text-[#031136] text-[16px] font-bold'>$30.00</p>
@@ -786,13 +808,15 @@ function combinedClick() {
         <div class=""></div>
     </div>   
     <div class="border-b opacity-50 my-4"></div>
-                         
-    <div className="flex justify-between items-center">
+    </div>
+    </>       
+     ))}           
+    {/* <div className="flex justify-between items-center">
     <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-1'>Banner designer for Dental Clinic</p>
     <div className="flex items-center space-x-2">
     <StarRating rating={5} />
         {/* <div className="text-[16px] text-yellow-500 mr-1 inline-block">★★★★★</div>
-        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] inline-block'>5.0</p> */}
+        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] inline-block'>5.0</p> *
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 inline-block">
             <img src={share} alt="share" />
         </div>
@@ -809,7 +833,7 @@ function combinedClick() {
   </div>
   <div class=""></div>
 </div>
-<div class="border-b opacity-50 my-4"></div>
+<div class="border-b opacity-50 my-4"></div> */}
 <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-right cursor-pointer">Show More</h1>
     </div>
 </div>
