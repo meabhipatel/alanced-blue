@@ -7,6 +7,8 @@ GET_VIEW_ALL_PROJECT_REQUEST,
 GET_VIEW_ALL_PROJECT_SUCCESS,
 UPDATE_FREELANCER_REQUEST,
 UPDATE_FREELANCER_SUCCESS,
+GET_FREELANCER_ADD_BID_AMOUNT_REQUEST,
+GET_FREELANCER_ADD_BID_AMOUNT_SUCCESS,
 SERVER_ERROR,
 } from "./FreelancerConstant"
 
@@ -40,6 +42,11 @@ const FreelancerReducer =(state = initialState, action) => {
             return { loading: true };
         case UPDATE_FREELANCER_SUCCESS:
             toast.success("Freelancer Profile Updated");
+            return { loading: false };
+        case GET_FREELANCER_ADD_BID_AMOUNT_REQUEST:
+            return { loading: true };
+        case GET_FREELANCER_ADD_BID_AMOUNT_SUCCESS:
+            toast.success("Add Bid Sucessfully");
             return { loading: false }; 
         // case GET_VIEW_ALL_SAVEDJOBS_REQUEST:
         //     return { loading: true};
