@@ -90,6 +90,7 @@ const Navbar = () => {
   </Link>
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0">
     <div class="text-sm lg:flex-grow lg:ml-[45px]">
+      {loginType=='FREELANCER' ? <>
       <Link to=''><span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setFindworkDropdown(true)}>Find Work <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
       {Findworkdropdown && (
         <div className="absolute right-[54rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
@@ -109,6 +110,7 @@ const Navbar = () => {
             </div>
         </div>
     )}
+      </> : <Link to=''><span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" >Find Talent </span></Link> }
       <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setMyJobsDropdown(true)} 
     >My Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
       {MyJobsdropdown && (
