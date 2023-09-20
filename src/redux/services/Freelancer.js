@@ -81,14 +81,14 @@ export const GetFreelancerSelfProfile = async (token) => {
 //     });
 // };
 
-export const AddBidAmount = async (data, token) => {
-  setHeadersWithAccessToken(token);
-  console.log(data)
-  return DataService.post(`${API.Freelancers.Freelancer.AddBidAmount}/${data.project_id}`, data)
-    .then(res => {
-      return res.data;
-    })
-    .catch(err => {
-      return handleError(err);
-    });
-};
+// export const AddBidAmount = async (data, token) => {
+//   setHeadersWithAccessToken(token);
+//   console.log(data)
+//   return DataService.post(`${API.Freelancers.Freelancer.AddBidAmount}/${data.project.id}`, data)
+//     .then(res => {
+//       return res.data;
+//     })
+//     .catch(err => {
+//       return handleError(err);
+//     });
+// };
