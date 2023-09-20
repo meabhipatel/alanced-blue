@@ -1,8 +1,10 @@
 import { Navigate } from 'react-router-dom'
-import { AddHirer } from '../../redux/services/Hirer'
+import { AddHirer, GetViewAllfreelancers } from '../../redux/services/Hirer'
 import { SERVER_ERROR } from '../Freelancer/FreelancerConstant'
 import { ADD_NEW_HIRER_REQUEST,
- ADD_NEW_HIRER_SUCCESS
+ ADD_NEW_HIRER_SUCCESS,
+ GET_VIEW_ALL_FREELANCER_REQUEST,
+ GET_VIEW_ALL_FREELANCER_SUCCESS
 } from './HirerConstant'
 
 
@@ -25,4 +27,26 @@ export const AddNewHirerAction = (data) => dispatch => {
           });
         }
       });
+};
+
+export const GetViewAllFreelancersAction = () => dispatch => {
+  
+  dispatch({
+    type: GET_VIEW_ALL_FREELANCER_REQUEST,
+    payload: []
+  });
+
+  GetViewAllfreelancers().then(res => {
+    if (res.status === 200) {
+      dispatch({
+        type: GET_VIEW_ALL_FREELANCER_SUCCESS,
+        payload: res.data
+      });
+    } else {
+      dispatch({
+        type: SERVER_ERROR,
+        payload: res
+      });
+    }
+  });
 };

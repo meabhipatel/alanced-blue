@@ -15,3 +15,14 @@ export const AddHirer = async (data) =>{
 };
 
 
+export const GetViewAllfreelancers = async () => {
+    return await DataService.get(API.Hirers.Hirer.ViewAllFreelancers)
+      .then((res) => {
+        console.log(res);
+        return res.data;
+      })
+      .catch((err) => {
+        return handleError(err);
+      });
+  };
+

@@ -35,6 +35,7 @@ import AddPortfolio from "../container/freelancer/portfolio/AddPortfolio";
 import SelectTemplete from "../container/freelancer/portfolio/SelectTemplete";
 import AddBidAmount from "../container/freelancer/AddBidAmount";
 import SendProposal from "../container/freelancer/SendProposal";
+import HirerAfterLogin from "../container/hirer/HirerAfterLogin";
 
   const AppRouter = (props) => {
     
@@ -45,7 +46,7 @@ import SendProposal from "../container/freelancer/SendProposal";
     
     React.useEffect(() => {
     if (loginType == 'HIRER') {
-      navigate('/')
+      navigate('/hirer/profile')
     }
     if (loginType == 'FREELANCER') {
       navigate('/freelancer/profile')
@@ -77,6 +78,7 @@ import SendProposal from "../container/freelancer/SendProposal";
           <Route path="/freelancer/select/templete" element={<SelectTemplete/>}/>
           <Route path="/freelancer/add-bid" element={<AddBidAmount/>}/>
           <Route path="/freelancer/send-proposal" element={<SendProposal/>}/>
+          <Route path="/hirer/profile" element={<HirerAfterLogin/>}/>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   

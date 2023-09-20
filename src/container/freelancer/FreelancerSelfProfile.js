@@ -50,6 +50,7 @@ const FreelancerSelfProfile = () => {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
   const [reviews, setReviews] = useState([]);
+  const [freelancerproject, setfreelancerproject] = useState([]);
   const id = freelancerselfprofile && freelancerselfprofile[0].id ? freelancerselfprofile[0].id : '';
 
 
@@ -92,6 +93,23 @@ useEffect(() => {
     }
 }, [id]); 
 
+
+useEffect(() => {
+    if(id) { 
+        axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}`)
+            .then(response => {
+                if (response.data.status === 200) {
+                    setfreelancerproject(response.data.data);
+                } else {
+                    console.log(response.data.message || 'Error fetching project');
+                }
+            })
+            .catch(err => {
+                console.log(err.message);
+            });
+    }
+}, [id]); 
+
 //   const [isExpanded, setIsExpanded] = useState(false);
 
 //     const fullText = freelancerselfprofile && freelancerselfprofile[0].Address ? freelancerselfprofile[0].Address : 'Your Description';
@@ -110,20 +128,56 @@ useEffect(() => {
     localStorage.setItem('userAvailability', isAvailable);
   }, [isAvailable]);
 
+
   const [active, setActive] = React.useState(1);
  
   const next = () => {
-    if (active === 5) return;
- 
-    setActive(active + 1);
+      if (active === Math.ceil(freelancerproject.length / 6)) return;
+      setActive(active + 1);
   };
- 
+
   const prev = () => {
-    if (active === 1) return;
- 
-    setActive(active - 1);
+      if (active === 1) return;
+      setActive(active - 1);
   };
+
+  // 1. Chunk the Array
+  const chunkArray = (array, size) => {
+      let chunked = [];
+      for (let i = 0; i < array.length; i += size) {
+          chunked.push(array.slice(i, i + size));
+      }
+      return chunked;
+  }
+
+  const chunkedProjects = chunkArray(freelancerproject, 6);
+
+//   const [active, setActive] = React.useState(1);
  
+//   const next = () => {
+//     if (active === 5) return;
+ 
+//     setActive(active + 1);
+//   };
+ 
+//   const prev = () => {
+//     if (active === 1) return;
+ 
+//     setActive(active - 1);
+//   };
+const [startIdx, setStartIdx] = useState(0);  // Initial index to start displaying reviews from
+
+const showMoreHandler = () => {
+    // Move the starting index forward by 4 positions
+    setStartIdx(prevIdx => prevIdx + 4);
+}
+
+const showLessHandler = () => {
+    // Reset to the beginning
+    setStartIdx(0);
+}
+
+const visibleReviews = reviews.slice(startIdx, startIdx + 4);
   
   const [selectedButton, setSelectedButton] = useState('All Work');
   const [selectedButtons, setSelectedButtons] = useState('Github');
@@ -783,7 +837,8 @@ useEffect(() => {
     </div>
 
     <div class="w-full md:w-[70%] py-4 px-4 md:px-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
-    {reviews.map((review, index) => (<>
+    {visibleReviews.map((review, index) => (<>
+    {/* {reviews.map((review, index) => (<> */}
     <div key={index}>
         <div className="flex justify-between items-center">
         <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-1'>Banner designer for Dental Clinic</p>
@@ -834,7 +889,11 @@ useEffect(() => {
   <div class=""></div>
 </div>
 <div class="border-b opacity-50 my-4"></div> */}
-<h1 className="font-cardo text-[20px] text-[#031136] font-normal text-right cursor-pointer">Show More</h1>
+{/* <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-right cursor-pointer">Show More</h1> */}
+{startIdx + 4 < reviews.length ? 
+                <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-right cursor-pointer" onClick={showMoreHandler}>Show More</h1> :
+                <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-right cursor-pointer" onClick={showLessHandler}>Show Less</h1>
+            }
     </div>
 </div>
 
@@ -856,18 +915,50 @@ useEffect(() => {
         </div> */}
     </div>
     </div>
-    <div className='w-[190px] h-[165px] inline-block mt-4 mr-2'>
+    <div className="flex flex-wrap -mx-2">  
+    {chunkedProjects[active - 1] && chunkedProjects[active - 1].map((pro, index) => (
+        <div className='w-1/3 px-2' key={index}>  
+            <div className='w-full h-[165px] mt-4 border border-gray-100 overflow-hidden'>
+                <img 
+                    src={"https://aparnawiz91.pythonanywhere.com/"+pro.images_logo} 
+                    alt="" 
+                    style={{
+                        maxWidth: '100%',
+                        maxHeight: '100%',
+                        objectFit: 'contain',  
+                        width: '100%', 
+                        height: '100%' 
+                    }}
+                />
+            </div>
+            <p className='font-inter text-[#0A142F] text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis'>{pro.project_title}</p>
+        </div>
+    ))}
+</div>
+    {/* {freelancerproject.map((pro, index) => (
+    <div className='w-[190px] h-[165px] inline-block mt-4 mr-2' key={index}>
+        <div className='w-full h-[150px] border border-gray-100 overflow-hidden'>
+            <img 
+                src={"https://aparnawiz91.pythonanywhere.com/"+pro.images_logo} 
+                alt="" 
+                style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    objectFit: 'contain',  
+                    width: '100%', 
+                    height: '100%' 
+                }}
+            />
+        </div>
+        <p className='font-inter text-[#0A142F] text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis'>{pro.project_title}</p>
+    </div>
+))} */}
+   {/* <div className='w-[190px] h-[165px] inline-block mt-4 mr-2'>
     <div className='w-full h-[150px] border border-gray-100'>
         <img src={cupbook} alt="" />
     </div>
     <p className='font-inter text-[#0A142F] text-[13px] pt-2'>Figma Design</p>
-   </div>
-   <div className='w-[190px] h-[165px] inline-block mt-4 mr-2'>
-    <div className='w-full h-[150px] border border-gray-100'>
-        <img src={cupbook} alt="" />
-    </div>
-    <p className='font-inter text-[#0A142F] text-[13px] pt-2'>Figma Design</p>
-   </div>
+   </div> */}
     <div className="flex justify-end items-center gap-6 mt-5">
   <IconButton
     size="sm"
