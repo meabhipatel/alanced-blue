@@ -69,7 +69,7 @@ const handleBidSubmission = () => {
         if (response.data.status === 200) {
           setAddBid(response.data.data);
           // Handle success, e.g., show a success message to the user
-        } else {
+        // } else {
           toast.success(response.data.message);
         }
       })
