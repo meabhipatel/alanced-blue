@@ -10,7 +10,7 @@ const API = {
       FreelancerViewReviews:'/freelance/View-all/Review',
       ViewAllProjects: '/freelance/view-all/Project',
       UpdateFreelancerProfile: '/account/freelancer/profile/update',
-      // AddBidAmount: '/freelance/Add/bid'
+      AddBidAmount: '/freelance/Add/bid'
       // SavedUnsavedJobs:'/freelance/saved-projects',
       // ViewAllSavedJobs:'/freelance/View-all/SavedProjects'
     }
