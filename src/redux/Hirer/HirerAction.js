@@ -1,10 +1,14 @@
 import { Navigate } from 'react-router-dom'
-import { AddHirer, GetViewAllfreelancers } from '../../redux/services/Hirer'
+import { AddHirer, GetViewAllBids, GetViewAllfreelancers, GetViewHirerSelfProjects } from '../../redux/services/Hirer'
 import { SERVER_ERROR } from '../Freelancer/FreelancerConstant'
 import { ADD_NEW_HIRER_REQUEST,
  ADD_NEW_HIRER_SUCCESS,
+ GET_VIEW_ALL_BIDS_REQUEST,
+ GET_VIEW_ALL_BIDS_SUCCESS,
  GET_VIEW_ALL_FREELANCER_REQUEST,
- GET_VIEW_ALL_FREELANCER_SUCCESS
+ GET_VIEW_ALL_FREELANCER_SUCCESS,
+ GET_VIEW_HIRER_SELF_PROJECT_REQUEST,
+ GET_VIEW_HIRER_SELF_PROJECT_SUCCESS
 } from './HirerConstant'
 
 
@@ -40,6 +44,52 @@ export const GetViewAllFreelancersAction = () => dispatch => {
     if (res.status === 200) {
       dispatch({
         type: GET_VIEW_ALL_FREELANCER_SUCCESS,
+        payload: res.data
+      });
+    } else {
+      dispatch({
+        type: SERVER_ERROR,
+        payload: res
+      });
+    }
+  });
+};
+
+
+export const GetViewHirerSelfProjectssAction = (token) => dispatch => {
+  
+  dispatch({
+    type: GET_VIEW_HIRER_SELF_PROJECT_REQUEST,
+    payload: []
+  });
+
+  GetViewHirerSelfProjects(token).then(res => {
+    if (res.status === 200) {
+      dispatch({
+        type: GET_VIEW_HIRER_SELF_PROJECT_SUCCESS,
+        payload: res.data
+      });
+    } else {
+      dispatch({
+        type: SERVER_ERROR,
+        payload: res
+      });
+    }
+  });
+};
+
+
+export const GetViewAllBidsAction = (id) => dispatch => {
+  
+  dispatch({
+    type: GET_VIEW_ALL_BIDS_REQUEST,
+    payload: []
+  });
+
+  GetViewAllBids(id).then(res => {
+    if (res.status === 200) {
+      dispatch({
+        type: GET_VIEW_ALL_BIDS_SUCCESS,
         payload: res.data
       });
     } else {
