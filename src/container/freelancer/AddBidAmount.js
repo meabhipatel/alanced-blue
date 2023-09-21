@@ -8,7 +8,7 @@ import dollarimg from '../../components/images/doller3.png'
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { AddBidAmountAction } from '../../redux/Freelancer/FreelancerAction';
+import { AddBidAmountAction } from '../../redux/Freelancer/FreelancerAction';
 
 
 
@@ -21,63 +21,65 @@ const projectData = location.state && location.state.projectData;
 const accessToken = useSelector(state => state.login.accessToken); 
 const [bidAmount, setBidAmount] = useState('');
 const [bidDescription, setBidDescription] = useState('');
+const [bidId, setbidId] = useState('');
 const [addBid, setAddBid] = useState('');
-// console.log(addBid.project.id,"addbid")
+console.log(addBid,"addbid")
 
-// const dispatch = useDispatch();
+const dispatch = useDispatch();
 
-// const BidAdd = () => {
-//     const formData = new URLSearchParams();
-//     formData.append("project.id",addBid.project.id);
-//     formData.append("bid_amount", addBid.bid_amount);
-//     formData.append("description", addBid.description);
+const BidAdd = () => {
+    const formData = new URLSearchParams();
+    formData.append("project_id",addBid.project_id);
+    formData.append("bid_amount", addBid.bid_amount);
+    formData.append("description", addBid.description);
 
-//     // const data ={
-//     //     "project_id": addBid.project_id,
-//     //     "description":addBid.description,
-//     //     "bid_amount":addBid.bid_amount,  
-//     //   }
+    const data ={
+        "project_id": id,
+        "description":addBid.description,
+        "bid_amount":addBid.bid_amount,  
+      }
+      console.log("/-/-/-/-/-/-/-/-/-/-/",data)
+    dispatch(AddBidAmountAction(data, accessToken));
+  };
 
-//     dispatch(AddBidAmountAction(formData, accessToken));
-//   };
-
-//   const onChange = e =>{
-//     setAddBid({
-//         ...addBid,[e.target.name]: e.target.value
-//     });
-// }
+  const onChange = e =>{
+    setAddBid({
+        ...addBid,[e.target.name]: e.target.value
+    });
+    // setAddBid.project_id(id)
+}
 
 const id = projectData.project.id
-// console.log(id,"id")
+console.log(id,"id")
 
-const handleBidSubmission = () => {
-    // Prepare the bid data to send to the server
-    const bidData = {
-      project_id: id,
-      bid_amount: bidAmount,
-      description: bidDescription,
-    };
+// const handleBidSubmission = () => {
+//     // Prepare the bid data to send to the server
+//     const bidData = {
+//       project_id: id,
+//       bid_amount: bidAmount,
+//       description: bidDescription,
+//     };
 
-    // Send the bid data to your server using an HTTP POST request
-    axios
-      .post(`https://aparnawiz91.pythonanywhere.com/freelance/Add/bid/${id}`, bidData, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`, // Include the access token if required
-        },
-      })
-      .then((response) => {
-        if (response.data.status === 200) {
-          setAddBid(response.data.data);
-          // Handle success, e.g., show a success message to the user
-        // } else {
-          toast.success(response.data.message);
-        }
-      })
-      .catch((err) => {
-        toast.error(err.message);
-        // Handle error, e.g., show an error message to the user
-      });
-  }; 
+//     // Send the bid data to your server using an HTTP POST request
+//     axios
+//       .post(`https://aparnawiz91.pythonanywhere.com/freelance/Add/bid/${id}`, bidData, {
+//         headers: {
+//           Authorization: `Bearer ${accessToken}`, // Include the access token if required
+//         },
+//       })
+//       .then((response) => {
+//         if (response.data.status === 200) {
+//           setAddBid(response.data.data);
+//           // Handle success, e.g., show a success message to the user
+//         // } else {
+//           toast.success(response.data.message);
+//         }
+//       })
+//       .catch((err) => {
+//         toast.error(err.message);
+//         // Handle error, e.g., show an error message to the user
+//       });
+//   }; 
 
 const [showFullDescription, setShowFullDescription] = useState(false);
 
@@ -208,16 +210,19 @@ useEffect(() => {
                         type="text"
                         placeholder='$0.00'
                         className='border py-1.5 px-2 rounded-md w-56 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 text-right'
-                        name="bidAmount"
-                        value={bidAmount}
-                        onChange={(e) => setBidAmount(e.target.value)}
-                        // name='bid_amount'
+                        // name="bidAmount"
                         // value={addBid.bid_amount}
+                        onChange={onChange}
+                        name='bid_amount'
+                        value={addBid.bid_amount}
                         // onChange={onChange}
                         // value={userInput}  // Use the userInput as value
                         // onChange={(e) => setUserInput(e.target.value)}
                     /> 
+                    
                     <span>/hr</span>
+                    {/* <input type='text' name='project_id' value={addBid.project_id}
+                    placeholder={id} defaultValue={id} onChange={onChange}/> */}
                 </div>
             </div>
 
@@ -279,13 +284,13 @@ useEffect(() => {
         <h1 className=' text-2xl font-cardo font-semibold text-left'>Additional details</h1>
             <h1 className='text-base font-inter font-medium text-left mt-8'>Cover Letter</h1>
             <div class="w-full mx-auto">
-            <textarea id="message" name="bidDescription"
-                    value={bidDescription}
-                    onChange={(e) => setBidDescription(e.target.value)}  class="mt-3 w-full  px-3 py-2 border-2 rounded-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500  dark:focus:ring-green-500 dark:focus:border-green-500" rows='15'></textarea>
+            <textarea id="message" name="description"
+                    value={addBid.description}
+                    onChange={onChange}  class="mt-3 w-full  px-3 py-2 border-2 rounded-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500  dark:focus:ring-green-500 dark:focus:border-green-500" rows='15'></textarea>
         </div>
         </div>
         <div className=' flex flex-row mt-5  mb-5'>
-        <div className=' basis-3/12'onClick={handleBidSubmission} ><button className='h-10 w-52 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded'>Send Proposal</button></div>
+        <div className=' basis-3/12' ><button className='h-10 w-52 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded' onClick={BidAdd}>Send Proposal</button></div>
         <div class="p-0.5 mt-5 rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
         <Link to='/freelancer/profile' onClick={() => window.scrollTo(0, 0)}><button class="px-2 py-1 bg-[#f8faf9] rounded"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-bold text-sm py-[4px] px-[16px]">Cancel</p></button></Link>
         </div>

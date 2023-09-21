@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom'
-import { AddFreelancer,GetFreelancerSelfProfile,GetViewAllProjectList,UpdateFreelancerProfile} from '../services/Freelancer'
+import { AddFreelancer,GetFreelancerSelfProfile,GetViewAllProjectList,UpdateFreelancerProfile, AddBidAmount} from '../services/Freelancer'
 import { ADD_NEW_FREELANCER_REQUEST,
 ADD_NEW_FREELANCER_SUCCESS,
 GET_FREELANCER_SELF_PROFILE_REQUEST,
@@ -151,24 +151,24 @@ export const UpdateFreelancerProfileAction = (data, token, navigate) => dispatch
 // };
 
 
-// export const AddBidAmountAction = (data, token, navigate) => dispatch => {
-//   dispatch({
-//     type: GET_FREELANCER_ADD_BID_AMOUNT_REQUEST,
-//     payload: []
-//   });
+export const AddBidAmountAction = (data, token, navigate) => dispatch => {
+  dispatch({
+    type: GET_FREELANCER_ADD_BID_AMOUNT_REQUEST,
+    payload: []
+  });
 
-// //   AddBidAmount(data, token).then(res => {
-// //     console.log(res, "Data Action");
-// //     if (res.status === 200) {
-// //       dispatch({
-// //         type: GET_FREELANCER_ADD_BID_AMOUNT_SUCCESS,
-// //         payload: res.data
-// //       });
-// //     } else {
-// //       dispatch({
-// //         type: SERVER_ERROR,
-// //         payload: res
-// //       });
-// //     }
-// //   });
-// // };
+  AddBidAmount(data, token).then(res => {
+    console.log(res, "Data Action");
+    if (res.status === 200) {
+      dispatch({
+        type: GET_FREELANCER_ADD_BID_AMOUNT_SUCCESS,
+        payload: res.data
+      });
+    } else {
+      dispatch({
+        type: SERVER_ERROR,
+        payload: res
+      });
+    }
+  });
+};
