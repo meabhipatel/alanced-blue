@@ -47,7 +47,7 @@ const FreelancerReducer =(state = initialState, action) => {
             return { loading: true };
         case GET_FREELANCER_ADD_BID_AMOUNT_SUCCESS:
             toast.success("Add Bid Sucessfully");
-            return { loading: false }; 
+            return { loading: false, addbid: false }; 
         // case GET_VIEW_ALL_SAVEDJOBS_REQUEST:
         //     return { loading: true};
         // case GET_VIEW_ALL_SAVEDJOBS_SUCCESS: 
