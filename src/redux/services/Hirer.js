@@ -26,3 +26,28 @@ export const GetViewAllfreelancers = async () => {
       });
   };
 
+
+export const GetViewHirerSelfProjects = async (token) => {
+   setHeadersWithAccessToken(token);
+    return await DataService.get(API.Hirers.Hirer.ViewHirerSelfProject)
+      .then((res) => {
+        console.log(res);
+        return res.data;
+      })
+      .catch((err) => {
+        return handleError(err);
+      });
+  };
+
+
+  export const GetViewAllBids = async (id) => {
+     return await DataService.get(`${API.Hirers.Hirer.ViewAllBids}/${id}`)
+       .then((res) => {
+         console.log(res);
+         return res.data;
+       })
+       .catch((err) => {
+         return handleError(err);
+       });
+   };  
+

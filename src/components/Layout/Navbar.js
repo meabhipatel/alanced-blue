@@ -111,6 +111,7 @@ const Navbar = () => {
         </div>
     )}
       </> : <Link to=''><span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" >Find Talent </span></Link> }
+      {loginType=='FREELANCER' ? <>
       <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setMyJobsDropdown(true)} 
     >My Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
       {MyJobsdropdown && (
@@ -124,7 +125,18 @@ const Navbar = () => {
                       </Link>
             </div>
         </div>
-    )}
+    )} </> : <>
+    <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setMyJobsDropdown(true)} 
+  > Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
+    {MyJobsdropdown && (
+      <div className="absolute right-[47rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+          <div className="py-1">
+          <Link to='/View-all/Job-post' className="flex items-center px-4 py-2">
+                        <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">All Jobs</span>
+                    </Link>
+          </div>
+      </div>
+  )} </> }
       <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setReportsDropdown(true)}> Reports <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>  
       {Reportsdropdown && (
         <div className="absolute right-[39rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">

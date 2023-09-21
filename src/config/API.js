@@ -20,6 +20,8 @@ const API = {
     Hirer: {
       HirerRegistration: '/account/hirer/registration',
       ViewAllFreelancers:'/account/freelancer/profile/view-all',
+      ViewHirerSelfProject:'/freelance/view/hirer-self/Project',
+      ViewAllBids:'/freelance/View/bids'
     }
   }
 };
