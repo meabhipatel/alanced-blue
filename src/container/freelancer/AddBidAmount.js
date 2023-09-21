@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from '../../components/Layout/Navbar'
 import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import dollarimg from '../../components/images/doller3.png'
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -19,27 +19,24 @@ const location = useLocation();
 const projectData = location.state && location.state.projectData;
 
 const accessToken = useSelector(state => state.login.accessToken); 
-const [bidAmount, setBidAmount] = useState('');
-const [bidDescription, setBidDescription] = useState('');
-const [bidId, setbidId] = useState('');
+const addbid = useSelector(state => state.freelancer.addbid)
 const [addBid, setAddBid] = useState('');
+const navigate = useNavigate();
+const [showDialog, setShowDialog] = useState(false);
 console.log(addBid,"addbid")
 
 const dispatch = useDispatch();
+const id = projectData.project.id
 
 const BidAdd = () => {
-    const formData = new URLSearchParams();
-    formData.append("project_id",addBid.project_id);
-    formData.append("bid_amount", addBid.bid_amount);
-    formData.append("description", addBid.description);
-
-    const data ={
+    const prodata ={
         "project_id": id,
         "description":addBid.description,
         "bid_amount":addBid.bid_amount,  
       }
-      console.log("/-/-/-/-/-/-/-/-/-/-/",data)
-    dispatch(AddBidAmountAction(data, accessToken));
+      console.log("/-/-/-/-/-/-/-/-/-/-/",prodata)
+    dispatch(AddBidAmountAction(prodata, accessToken));
+    navigate('/freelancer/profile')
   };
 
   const onChange = e =>{
@@ -49,37 +46,13 @@ const BidAdd = () => {
     // setAddBid.project_id(id)
 }
 
-const id = projectData.project.id
-console.log(id,"id")
+const openDialog = () => {
+    setShowDialog(true);
+  };
 
-// const handleBidSubmission = () => {
-//     // Prepare the bid data to send to the server
-//     const bidData = {
-//       project_id: id,
-//       bid_amount: bidAmount,
-//       description: bidDescription,
-//     };
-
-//     // Send the bid data to your server using an HTTP POST request
-//     axios
-//       .post(`https://aparnawiz91.pythonanywhere.com/freelance/Add/bid/${id}`, bidData, {
-//         headers: {
-//           Authorization: `Bearer ${accessToken}`, // Include the access token if required
-//         },
-//       })
-//       .then((response) => {
-//         if (response.data.status === 200) {
-//           setAddBid(response.data.data);
-//           // Handle success, e.g., show a success message to the user
-//         // } else {
-//           toast.success(response.data.message);
-//         }
-//       })
-//       .catch((err) => {
-//         toast.error(err.message);
-//         // Handle error, e.g., show an error message to the user
-//       });
-//   }; 
+const closeDialog = () => {
+    setShowDialog(false);
+  };
 
 const [showFullDescription, setShowFullDescription] = useState(false);
 
@@ -196,22 +169,10 @@ useEffect(() => {
                     <p className="font-inter text-[14px] text-[#031136] font-normal text-left opacity-50">Total amount the client will see</p>
                 </div>
                 <div className="flex items-center space-x-2"> 
-                {/* <input
-                        type="text"
-                        // value={addBid.project.id}
-                        placeholder='$0.00'
-                        className='border py-1.5 px-2 rounded-md w-56 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 text-right'
-                        name='project.id'
-                        // onChange={onChange}
-                        // value={userInput}  // Use the userInput as value
-                        // onChange={(e) => setUserInput(e.target.value)}
-                    />  */}
                     <input
                         type="text"
                         placeholder='$0.00'
                         className='border py-1.5 px-2 rounded-md w-56 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 text-right'
-                        // name="bidAmount"
-                        // value={addBid.bid_amount}
                         onChange={onChange}
                         name='bid_amount'
                         value={addBid.bid_amount}
@@ -264,7 +225,7 @@ useEffect(() => {
             </div> */}
         </div>
             </div>
-            <div className=' basis-4/12'>
+            <div className=' basis-4/12' onClick={setShowDialog}>
             <img src={dollarimg} alt="" className=' h-28 w-28 mx-auto' />
             <p className=' opacity-[50%] font-normal text-sm mt-3'>Includes Alanced Hourly Protection.</p>
             </div>
@@ -285,17 +246,31 @@ useEffect(() => {
             <h1 className='text-base font-inter font-medium text-left mt-8'>Cover Letter</h1>
             <div class="w-full mx-auto">
             <textarea id="message" name="description"
-                    value={addBid.description}
-                    onChange={onChange}  class="mt-3 w-full  px-3 py-2 border-2 rounded-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500  dark:focus:ring-green-500 dark:focus:border-green-500" rows='15'></textarea>
+            value={addBid.description}
+            onChange={onChange}  class="mt-3 w-full  px-3 py-2 border-2 rounded-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500  dark:focus:ring-green-500 dark:focus:border-green-500" rows='15'></textarea>
         </div>
         </div>
         <div className=' flex flex-row mt-5  mb-5'>
-        <div className=' basis-3/12' ><button className='h-10 w-52 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded' onClick={BidAdd}>Send Proposal</button></div>
+        <div className=' basis-3/12' ><button className='h-10 w-52 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded' onClick={()=>{ BidAdd(); window.scrollTo(0, 0); }}>Send Proposal</button></div>
         <div class="p-0.5 mt-5 rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
         <Link to='/freelancer/profile' onClick={() => window.scrollTo(0, 0)}><button class="px-2 py-1 bg-[#f8faf9] rounded"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-bold text-sm py-[4px] px-[16px]">Cancel</p></button></Link>
         </div>
         </div>
     </div>
+    {showDialog && (
+  <div className='fixed top-0 left-0 flex justify-center w-full z-50'>
+  <div className=' bg-green-500 p-8 rounded-lg shadow-lg mt-24'>
+    <h2 className='text-xl font-semibold mb-4'>Thank You!</h2>
+    <p>Your proposal has been sent successfully.</p>
+    <button
+      className='mt-4 bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded-lg'
+      onClick={closeDialog}
+    >
+      Close
+    </button>
+  </div>
+</div>
+)}
     <HomeSection4/>
     <Footer/>
     </>
