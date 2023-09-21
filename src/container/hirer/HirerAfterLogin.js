@@ -103,7 +103,7 @@ const HirerAfterLogin = () => {
       </div>
   </div>
   <div class="flex flex-col md:flex-row mb-5 mx-5">
-  <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
+  <div class="w-full md:w-[25%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
   <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
       <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Connects</h1>
       <div className="flex items-center space-x-2">
@@ -169,7 +169,7 @@ const HirerAfterLogin = () => {
       </Link> */}
   </div>
   
-  <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
+  <div class="w-full md:w-[75%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
       <div className='px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30'>
       {/* <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1> */}
       <div className="flex justify-between items-center">
@@ -210,21 +210,23 @@ const HirerAfterLogin = () => {
       <div className='px-4 md:px-8 py-4'>
         <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse Freelancers that match your jobs</p>
       </div>
+      <div className='flex w-[75%] md:w-full shadow-inner shadow-white overflow-x-scroll'>
       {viewallfreelancer && viewallfreelancer.map((free, index) => {
                 return(<>
-      <div className='px-4 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer'>
-      <div className="flex items-start">
-    <Avatar src={"https://aparnawiz91.pythonanywhere.com/"+free.images_logo} alt="" variant="rounded" className="mr-4" />
-    <div>
-        <p className="font-inter text-[#0A142F] text-[18px] font-semibold">{free.first_Name + " " + free.last_Name}</p>
-        <p className='font-inter opacity-50 text-[#0A142F] text-[14px]'>{free.category}</p>
-    </div>
-    <div className="flex items-center space-x-2 ml-auto">
+                
+      <div className='px-4 w-[400px] flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer'>
+        <div className="flex items-start">
+            <Avatar src={"https://aparnawiz91.pythonanywhere.com/"+free.images_logo} alt="" variant="rounded" className="mr-4" />
+            <div>
+            <p className="font-inter text-[#0A142F] text-[18px] font-semibold">{free.first_Name + " " + free.last_Name}</p>
+            <p className='font-inter opacity-50 text-[#0A142F] text-[14px]'>{free.category}</p>
+        </div>
+        <div className="flex items-center space-x-2 ml-auto">
         <Link to=''>
             <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
         </Link>
-    </div>
-</div>
+        </div>
+        </div>
       <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-4'>A passionate Web Developer with over 5 years of experience specializing in front-end and back-end development. Proficient in HTML, CSS, JavaScript, and Python. Experienced with full-stack development and popular frameworks like React and Django. I've successfully completed over 100 projects, ranging from simple landing pages to complex eCommerce platforms. Committed to providing high-quality code and solutions for every project.</p>
       {free.skills &&
      JSON.parse(free.skills.replace(/'/g, '"')).map((skill, index) => (
@@ -234,6 +236,7 @@ const HirerAfterLogin = () => {
       </span>
     </Link>
   ))}
+  
 
           <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>completed projects : <span className='opacity-50'>More than 50</span></p>
           <img src={verify} alt="" className='inline-block h-3 w-3 mr-1'/>
@@ -244,9 +247,11 @@ const HirerAfterLogin = () => {
           <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
           <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>{free.Address}</p>
       </div>
+      
       </>
       )
   })}
+  </div>
   </div>
   </div>
   </div>
