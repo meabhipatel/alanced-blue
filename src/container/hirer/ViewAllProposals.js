@@ -9,8 +9,11 @@ import { useState } from 'react'
 import profilepic from '../../components/images/profilepic.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetViewAllBidsAction } from '../../redux/Hirer/HirerAction'
+import experience from '../../components/images/experience.png'
 
 const ViewAllProposals = () => {
+
+    const error = useSelector(state => state.hirer.error);
 
    const viewallbids = useSelector(state => state.hirer.viewallbids)
    const dispatch = useDispatch();
@@ -68,6 +71,8 @@ const ViewAllProposals = () => {
         {selected === 'Messaged' && <span style={underlineStyle}></span>}
     </p>
     </div>
+    {
+  !(error && error.includes("No bids found for this project")) && (
     <div className="flex justify-between items-center">
     {/* Search Section */}
     <section className='flex items-center p-2 bg-white rounded-lg m-5 border w-[49%]'>
@@ -86,7 +91,19 @@ const ViewAllProposals = () => {
         <option value="">Highest Hourly Rate</option>
         <option value="">Lowest Hourly Rate</option>
     </select>
-</div>
+</div>)
+}
+{
+  error && error.includes("No bids found for this project") ? (
+  <div className='my-8'> 
+  <img src={experience} alt="" className='mx-auto mt-2'/>
+    <div className='px-4 md:px-8 py-5 text-center text-2xl opacity-50'>
+      No proposals found for this project
+    </div>
+    </div>
+  ):
+  (
+    <>
 {viewallbids && viewallbids.map((bid, index) => {
                 return(<>
     <div className='px-4 md:px-8 py-2 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30'>
@@ -130,6 +147,9 @@ const ViewAllProposals = () => {
     </>
       )
   })}
+    </>
+  )}
+
     {/* <div className='px-4 md:px-8 py-2 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30'>
     <div class="flex">
   <div class="flex-[10%] p-4">
