@@ -41,6 +41,7 @@ import AddCertificatesPopup from './AllPopup/AddCertificatesPopup'
 import AddEmploymentPopup from './AllPopup/AddEmploymentPopup'
 import EditEmploymentPopup from './AllPopup/EditEmploymentPopup'
 import TestimonialPopup from './AllPopup/TestimonialPopup'
+import FreelancerProjectsPopup from './AllPopup/FreelancerProjectsPopup'
 import axios from 'axios'
 
 const FreelancerSelfProfile = () => {
@@ -184,6 +185,8 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
   const commonStyle = "inline-block text-sm py-[10px] mt-4 lg:mt-0 border rounded font-semibold";
 
   const [selected, setSelected] = useState('completed');
+  const [selectedProject, setSelectedProject] = useState(null);
+
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditTitleOpen, setIsEditTitleOpen] = useState(false);
@@ -201,8 +204,20 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
   const [isAddEmploymentOpen, setIsAddEmploymentOpen] = useState(false);
   const [isEditEmploymentOpen, setIsEditEmploymentOpen] = useState(false);
   const [isTestimonialOpen, setIsTestimonialOpen] = useState(false);
+  const [isFreeProjectOpen, setIsFreeProjectOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const inputRef = useRef(null)
+
+  const openFreeProject = (project) => {
+    setSelectedProject(project);
+    setIsFreeProjectOpen(true);
+};
+
+const closeFreeProject = () => {
+    setSelectedProject(null);
+    setIsFreeProjectOpen(false);
+};
+
 
   const openTestimonial = () => {
     setIsTestimonialOpen(true);
@@ -917,7 +932,7 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
     </div>
     <div className="flex flex-wrap -mx-2">  
     {chunkedProjects[active - 1] && chunkedProjects[active - 1].map((pro, index) => (
-        <div className='w-1/3 px-2' key={index}>  
+        <div className='w-1/3 px-2 cursor-pointer' key={index} onClick={() => openFreeProject(pro)}>  
             <div className='w-full h-[165px] mt-4 border border-gray-100 overflow-hidden'>
                 <img 
                     src={"https://aparnawiz91.pythonanywhere.com/"+pro.images_logo} 
@@ -931,9 +946,10 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
                     }}
                 />
             </div>
-            <p className='font-inter text-[#0A142F] text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis'>{pro.project_title}</p>
+            <p className='font-inter text-green-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-green-700 underline font-semibold'>{pro.project_title}</p>
         </div>
     ))}
+    {isFreeProjectOpen && <FreelancerProjectsPopup project={selectedProject} closeFreeProject={closeFreeProject} />}
 </div>
     {/* {freelancerproject.map((pro, index) => (
     <div className='w-[190px] h-[165px] inline-block mt-4 mr-2' key={index}>

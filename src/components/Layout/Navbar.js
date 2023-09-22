@@ -82,12 +82,18 @@ const Navbar = () => {
     </div>
   </div> 
   </>:<>
-  <Link to='/freelancer/profile'>
+  {loginType=='FREELANCER' ? <Link to='/freelancer/profile'>
   <div class="flex items-center flex-shrink-0 lg:ml-[129px]">
     <img src={logo} alt=""  />
     <span class="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
   </div>
-  </Link>
+  </Link>:<Link to='/hirer/profile'>
+  <div class="flex items-center flex-shrink-0 lg:ml-[129px]">
+    <img src={logo} alt=""  />
+    <span class="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
+  </div>
+  </Link>}
+  
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0">
     <div class="text-sm lg:flex-grow lg:ml-[45px]">
       {loginType=='FREELANCER' ? <>

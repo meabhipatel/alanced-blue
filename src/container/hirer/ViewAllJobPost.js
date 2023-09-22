@@ -15,11 +15,11 @@ const ViewAllJobPost = () => {
    const viewhirerselfproject = useSelector(state => state.hirer.viewhirerselfproject)
    const accessToken = useSelector(state => state.login.accessToken); 
    const dispatch = useDispatch();
-
+   
    React.useEffect(() => {
     dispatch(GetViewHirerSelfProjectssAction(accessToken))
   }, [])
-
+  
 
     const [selectedButton, setSelectedButton] = useState('All Job Posts');
     const commonStyle = "inline-block text-sm py-[10px] mt-4 lg:mt-0 border rounded font-semibold"; 
@@ -69,13 +69,23 @@ const ViewAllJobPost = () => {
     </button>
 </section>
 {viewhirerselfproject && viewhirerselfproject.map((project, index) => {
+                 
+                 const isJobOpen = (deadline) => {
+                  const deadlineDate = new Date(deadline);
+                  const now = new Date();
+                  return now < deadlineDate;
+                }
+
                 return(<>
     <div className='px-4 md:px-8 py-5 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30' key={index}>
 <div class="flex">
   <div class="flex-[40%]">
   <p className="font-inter text-[#0A142F] text-[16px] font-medium">{project.title}</p>
   <p className='font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-1'>Hourly - Intermediate - Posted 2 months ago</p>
-  <span className='border px-4 py-1 border-gray-300 rounded bg-[#E4EBE4] font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 font-semibold'>Open</span>
+  {/* <span className='border px-4 py-1 border-gray-300 rounded bg-[#E4EBE4] font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 font-semibold'>Open</span> */}
+  <span className={`px-4 py-1 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 font-semibold ${isJobOpen(project.deadline) ? 'bg-[#E4EBE4] text-green-800 border border-green-800' : 'bg-yellow-100 text-yellow-700 border border-yellow-700'}`}>
+              {isJobOpen(project.deadline) ? 'Open' : 'Closed'}
+            </span>
   </div>
   <div class="flex-[40%] flex">
     <div class="flex-1 p-2">
