@@ -86,3 +86,15 @@ input[type="radio"]:checked:after {
     border-bottom: 10px solid white;
 }
 
+.custom-toast {
+    /* Add custom styles for the toast container here */
+    margin-top: 80px;
+    width: 450px;
+    margin-right: 5%;
+  }
+  
+  .custom-toast-body {
+    /* Add custom styles for the toast content here */
+    font-size: 18px;
+    font: bold;
+  }

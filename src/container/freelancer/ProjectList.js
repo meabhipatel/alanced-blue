@@ -22,6 +22,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 function ProjectList() {
   const viewallprojects = useSelector(state => state.freelancer.viewallprojects)
+  const accessToken = useSelector(state => state.login.accessToken);
   // const projectData = { viewallprojects }
   const dispatch = useDispatch();
   const [range, setRange] = useState([1, 1000]);
@@ -472,7 +473,11 @@ function ProjectList() {
                 <h1 className='font-cardo text-xl font-extrabold text-right'>${project.budget}</h1>
                 <p className='font-inter text-[#797979] mt-1 text-sm text-right'>Hourly Rate</p>
                 <div className=''>
-                  <Link to='/freelancer/send-proposal' state={{ project }} onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
+                  {accessToken ? (
+                    <Link to='/freelancer/send-proposal' state={{ project }} onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
+                  ): (
+                  <Link to='/login' state={{ project }} onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
+                )}
                 </div>
               </div>
             </div>

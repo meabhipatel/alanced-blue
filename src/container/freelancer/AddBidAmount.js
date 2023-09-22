@@ -23,7 +23,9 @@ const addbid = useSelector(state => state.freelancer.addbid)
 const [addBid, setAddBid] = useState('');
 const navigate = useNavigate();
 const [showDialog, setShowDialog] = useState(false);
-console.log(addBid,"addbid")
+// console.log(addBid.bid_amount,"bid amount only")
+
+// const bid_rate = addBid.bid_amount
 
 const dispatch = useDispatch();
 const id = projectData.project.id
@@ -46,6 +48,30 @@ const BidAdd = () => {
     // setAddBid.project_id(id)
 }
 
+const [userInput, setUserInput] = useState('')
+const [hourlyRate, setHourlyRate] = useState('');
+const [serviceFee, setServiceFee] = useState(0);
+const [totalAfterFee, setTotalAfterFee] = useState(0);
+
+useEffect(() => {
+    // Set the initial value of userInput to bid_rate when component mounts
+    setUserInput(addBid.bid_amount || ''); // Use an empty string as a fallback
+  }, [addBid.bid_amount]);
+
+useEffect(() => {
+    // Parse the userInput and update hourlyRate
+    const parsedRate = parseFloat(userInput.replace('$', ''));
+    if (!isNaN(parsedRate)) {
+      setHourlyRate(parsedRate);
+    }
+}, [userInput]);
+
+useEffect(() => {
+    const fee = (10/100) * hourlyRate;
+    setServiceFee(fee);
+    setTotalAfterFee(hourlyRate - fee);
+}, [hourlyRate]);
+
 const openDialog = () => {
     setShowDialog(true);
   };
@@ -64,25 +90,6 @@ const [showFullDescription, setShowFullDescription] = useState(false);
         ? projectData.project.description
         : projectData.project.description.slice(0, 200);
 
-
-const [userInput, setUserInput] = useState('8')
-const [hourlyRate, setHourlyRate] = useState(8);
-const [serviceFee, setServiceFee] = useState(0);
-const [totalAfterFee, setTotalAfterFee] = useState(0);
-
-useEffect(() => {
-    // Parse the userInput and update hourlyRate
-    const parsedRate = parseFloat(userInput.replace('$', ''));
-    if (!isNaN(parsedRate)) {
-      setHourlyRate(parsedRate);
-    }
-}, [userInput]);
-
-useEffect(() => {
-    const fee = (10/100) * hourlyRate;
-    setServiceFee(fee);
-    setTotalAfterFee(hourlyRate - fee);
-}, [hourlyRate]);
 
   return (
     <>
@@ -173,10 +180,9 @@ useEffect(() => {
                         type="text"
                         placeholder='$0.00'
                         className='border py-1.5 px-2 rounded-md w-56 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 text-right'
-                        onChange={onChange}
                         name='bid_amount'
                         value={addBid.bid_amount}
-                        // onChange={onChange}
+                        onChange={onChange}
                         // value={userInput}  // Use the userInput as value
                         // onChange={(e) => setUserInput(e.target.value)}
                     /> 
@@ -189,7 +195,7 @@ useEffect(() => {
 
             <div className="border-b opacity-60 my-5"></div>
 
-            {/* <div className="flex items-center mt-4">
+            <div className="flex items-center mt-4">
                 <div className="flex flex-col justify-center w-2/3">
                     <h1 className="font-cardo text-[18px] text-[#031136] font-medium text-left">10% Alanced Service Fee</h1>
                 </div>
@@ -198,16 +204,16 @@ useEffect(() => {
                         type="text"
                         placeholder='$0.00'
                         className='py-1.5 px-2 rounded-md w-56 border-none text-right cursor-not-allowed bg-none'
-                        // value={`-$${serviceFee.toFixed(2)}`}
+                        value={`-$${serviceFee.toFixed(2)}`}
                         disabled
                     /> 
                     <span>/hr</span>
                 </div>
-            </div> */}
+            </div>
 
             <div className="border-b opacity-60 my-5"></div>
 
-            {/* <div className="flex items-center mt-4">
+            <div className="flex items-center mt-4">
                 <div className="flex flex-col justify-center w-2/3">
                     <h1 className="font-cardo text-[18px] text-[#031136] font-medium text-left">You'll Receive</h1>
                     <p className="font-inter text-[14px] text-[#031136] font-normal text-left opacity-50">The estimated amount you'll receive after service fees</p>
@@ -217,15 +223,15 @@ useEffect(() => {
                         type="text"
                         placeholder='$0.00'
                         className='border py-1.5 px-2 rounded-md w-56 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 text-right cursor-not-allowed'
-                        // value={`$${totalAfterFee.toFixed(2)}`}
+                        value={`$${totalAfterFee.toFixed(2)}`}
                         disabled
                     /> 
                     <span>/hr</span>
                 </div>
-            </div> */}
+            </div>
         </div>
             </div>
-            <div className=' basis-4/12' onClick={setShowDialog}>
+            <div className=' basis-4/12' onClick={openDialog}>
             <img src={dollarimg} alt="" className=' h-28 w-28 mx-auto' />
             <p className=' opacity-[50%] font-normal text-sm mt-3'>Includes Alanced Hourly Protection.</p>
             </div>
@@ -259,11 +265,11 @@ useEffect(() => {
     </div>
     {showDialog && (
   <div className='fixed top-0 left-0 flex justify-center w-full z-50'>
-  <div className=' bg-green-500 p-8 rounded-lg shadow-lg mt-24'>
+  <div className=' bg-green-500 p-8 rounded-lg shadow-lg mt-24 text-black font-semibold'>
     <h2 className='text-xl font-semibold mb-4'>Thank You!</h2>
     <p>Your proposal has been sent successfully.</p>
     <button
-      className='mt-4 bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded-lg'
+      className='mt-4 text-black font-bold bg-white hover:bg-gray-200 px-4 py-2 rounded-lg'
       onClick={closeDialog}
     >
       Close
