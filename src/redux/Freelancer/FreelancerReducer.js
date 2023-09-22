@@ -12,7 +12,7 @@ GET_FREELANCER_ADD_BID_AMOUNT_SUCCESS,
 SERVER_ERROR,
 } from "./FreelancerConstant"
 
-
+import '../../index.css'
 
 const initialState = {
     allFreelancer: [],
@@ -46,8 +46,8 @@ const FreelancerReducer =(state = initialState, action) => {
         case GET_FREELANCER_ADD_BID_AMOUNT_REQUEST:
             return { loading: true };
         case GET_FREELANCER_ADD_BID_AMOUNT_SUCCESS:
-            toast.success("Add Bid Sucessfully");
-            return { loading: false, addbid: false }; 
+            toast.success("Thank you ! Your Bid Add  Sucessfully",{ position: "top-center",className: "custom-toast",bodyClassName: "custom-toast-body",});
+            return { loading: false, addbid: true }; 
         // case GET_VIEW_ALL_SAVEDJOBS_REQUEST:
         //     return { loading: true};
         // case GET_VIEW_ALL_SAVEDJOBS_SUCCESS: 

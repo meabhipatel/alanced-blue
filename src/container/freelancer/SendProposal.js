@@ -1,14 +1,48 @@
 import React, { useState, useEffect} from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import Navbar from '../../components/Layout/Navbar'
 import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation,useNavigate } from 'react-router-dom'
 import dollarimg from '../../components/images/doller3.png'
+import { AddBidAmountAction, GetViewAllProjectsListAction } from '../../redux/Freelancer/FreelancerAction';
 
 const SendProposal = () => {
     const location = useLocation();
     const findproject = location.state && location.state.project;
     console.log(findproject,"send_praposal")
+
+    const accessToken = useSelector(state => state.login.accessToken); 
+    const addbid = useSelector(state => state.freelancer.addbid)
+    const [addBid, setAddBid] = useState('');
+    const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+    const id = findproject.id
+
+    const BidAdd = () => {
+        const prodata ={
+            "project_id": id,
+            "description":addBid.description,
+            "bid_amount":addBid.bid_amount,  
+        }
+        console.log("/-/-/-/-/-/-/-/-/-/-/",prodata)
+        dispatch(AddBidAmountAction(prodata, accessToken));
+        // navigate('/projects')
+    };
+
+    if(addbid==true){
+        dispatch(GetViewAllProjectsListAction(accessToken));
+        navigate('/projects')
+    }
+
+    const onChange = e =>{
+        setAddBid({
+            ...addBid,[e.target.name]: e.target.value
+        });
+        // setAddBid.project_id(id)
+    }
+
     const [showFullDescription, setShowFullDescription] = useState(false);
 
     const toggleDescription = () => {
@@ -19,25 +53,30 @@ const SendProposal = () => {
         ? findproject.description
         : findproject.description.slice(0, 200);
  
-    const [userInput, setUserInput] = useState('8')
-    const [hourlyRate, setHourlyRate] = useState(8);
+    const [userInput, setUserInput] = useState('')
+    const [hourlyRate, setHourlyRate] = useState('');
     const [serviceFee, setServiceFee] = useState(0);
     const [totalAfterFee, setTotalAfterFee] = useState(0);
-
+    
+    useEffect(() => {
+        // Set the initial value of userInput to bid_rate when component mounts
+        setUserInput(addBid.bid_amount || ''); // Use an empty string as a fallback
+        }, [addBid.bid_amount]);
+    
     useEffect(() => {
         // Parse the userInput and update hourlyRate
         const parsedRate = parseFloat(userInput.replace('$', ''));
         if (!isNaN(parsedRate)) {
-        setHourlyRate(parsedRate);
+            setHourlyRate(parsedRate);
         }
     }, [userInput]);
-
+    
     useEffect(() => {
         const fee = (10/100) * hourlyRate;
         setServiceFee(fee);
         setTotalAfterFee(hourlyRate - fee);
     }, [hourlyRate]);
-
+        
 
 
   return (
@@ -129,8 +168,11 @@ const SendProposal = () => {
                         type="text"
                         placeholder='$0.00'
                         className='border py-1.5 px-2 rounded-md w-56 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 text-right'
-                        value={userInput}  // Use the userInput as value
-                        onChange={(e) => setUserInput(e.target.value)}
+                        name='bid_amount'
+                        value={addBid.bid_amount}
+                        onChange={onChange}
+                        // value={userInput}  // Use the userInput as value
+                        // onChange={(e) => setUserInput(e.target.value)}
                     /> 
                     <span>/hr</span>
                 </div>
@@ -194,11 +236,13 @@ const SendProposal = () => {
         <h1 className=' text-2xl font-cardo font-semibold text-left'>Additional details</h1>
             <h1 className='text-base font-inter font-medium text-left mt-8'>Cover Letter</h1>
             <div class="w-full mx-auto">
-            <textarea id="message" name="message" class="mt-3 w-full  px-3 py-2 border-2 rounded-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500  dark:focus:ring-green-500 dark:focus:border-green-500" rows='15'></textarea>
+            <textarea id="message" name="description"
+            value={addBid.description}
+            onChange={onChange} class="mt-3 w-full  px-3 py-2 border-2 rounded-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500  dark:focus:ring-green-500 dark:focus:border-green-500" rows='15'></textarea>
         </div>
         </div>
         <div className=' flex flex-row mt-5  mb-5'>
-        <div className=' basis-3/12'><button className='h-10 w-52 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded'>Send Proposal</button></div>
+        <div className=' basis-3/12'><button className='h-10 w-52 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded' onClick={()=>{ BidAdd(); window.scrollTo(0, 0); }}>Send Proposal</button></div>
         <div class="p-0.5 mt-5 rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
         <Link to='/projects' onClick={() => window.scrollTo(0, 0)}><button class="px-2 py-1 bg-[#f8faf9] rounded"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-bold text-sm py-[4px] px-[16px]">Cancel</p></button></Link>
         </div>
