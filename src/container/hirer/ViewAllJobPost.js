@@ -39,6 +39,12 @@ const ViewAllJobPost = () => {
     setActive(active - 1);
   };
 
+  const isJobOpen = (deadline) => {
+    const deadlineDate = new Date(deadline);
+    const now = new Date();
+    return now < deadlineDate;
+}
+
   return (
     <>
     <Navbar/>
@@ -70,11 +76,11 @@ const ViewAllJobPost = () => {
 </section>
 {viewhirerselfproject && viewhirerselfproject.map((project, index) => {
                  
-                 const isJobOpen = (deadline) => {
-                  const deadlineDate = new Date(deadline);
-                  const now = new Date();
-                  return now < deadlineDate;
-                }
+                //  const isJobOpen = (deadline) => {
+                //   const deadlineDate = new Date(deadline);
+                //   const now = new Date();
+                //   return now < deadlineDate;
+                // }
 
                 return(<>
     <div className='px-4 md:px-8 py-5 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30' key={index}>
@@ -103,7 +109,7 @@ const ViewAllJobPost = () => {
   </div>
   <div class="flex-[20%] text-center">
   <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
-                <Link to='/View-all/proposals' state={{ project }}><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">View Proposals</p></button></Link>
+                <Link to='/View-all/proposals' state={{ project, isOpen: isJobOpen(project.deadline) }}><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">View Proposals</p></button></Link>
             </div>
   </div>
 </div>
