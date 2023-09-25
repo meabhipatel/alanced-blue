@@ -18,6 +18,9 @@ import { GetViewAllProjectsListAction } from '../../redux/Freelancer/FreelancerA
 import { GetViewAllFreelancersAction } from '../../redux/Hirer/HirerAction'
 import { Avatar } from '@material-tailwind/react'
 import profilepic from '../../components/images/profilepic.png'
+import { IconButton, Typography } from "@material-tailwind/react";
+import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
+
 
 
 const HirerAfterLogin = () => {
@@ -26,6 +29,7 @@ const HirerAfterLogin = () => {
     const loginMethod = localStorage.getItem('loginMethod')
     const viewallfreelancer = useSelector(state => state.hirer.viewallfreelancer)
     const [searchTerm, setSearchTerm] = useState('');
+    console.log("/-/-/-/-/-/-/-/-/-/",useSelector(state => state.login.accessToken))
     const dispatch = useDispatch();
    
   
@@ -89,6 +93,18 @@ const HirerAfterLogin = () => {
   }
         
   const { day, formattedDate, greeting } = getCurrentDateAndGreeting();
+
+  const [active, setActive] = React.useState(1);
+ 
+  const next = () => {
+      if (active === Math.ceil(viewallfreelancer.length / 6)) return;
+      setActive(active + 1);
+  };
+
+  const prev = () => {
+      if (active === 1) return;
+      setActive(active - 1);
+  };
   
  
     return (
@@ -103,7 +119,7 @@ const HirerAfterLogin = () => {
       </div>
   </div>
   <div class="flex flex-col md:flex-row mb-5 mx-5">
-  <div class="w-full md:w-[25%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
+  <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
   <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
       <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Connects</h1>
       <div className="flex items-center space-x-2">
@@ -169,7 +185,7 @@ const HirerAfterLogin = () => {
       </Link> */}
   </div>
   
-  <div class="w-full md:w-[75%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
+  <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
       <div className='px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30'>
       {/* <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1> */}
       <div className="flex justify-between items-center">
@@ -210,22 +226,22 @@ const HirerAfterLogin = () => {
       <div className='px-4 md:px-8 py-4'>
         <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse Freelancers that match your jobs</p>
       </div>
-      <div className='flex w-[75%] md:w-full shadow-inner shadow-white overflow-x-scroll'>
+      <div className='grid grid-cols-2 w-[70%] md:w-full shadow-inner shadow-white'>
       {viewallfreelancer && viewallfreelancer.map((free, index) => {
                 return(<>
                 
-      <div className='px-4 w-[400px] flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer'>
-        <div className="flex items-start">
-            <Avatar src={"https://aparnawiz91.pythonanywhere.com/"+free.images_logo} alt="" variant="rounded" className="mr-4" />
+      <div className='px-4 w-[400px] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4'>
+        <div className="flex items-center">
+            <Avatar src={"https://aparnawiz91.pythonanywhere.com/"+free.images_logo} alt="" variant="rounded" className="mr-4 h-24 w-24" />
             <div>
             <p className="font-inter text-[#0A142F] text-[18px] font-semibold">{free.first_Name + " " + free.last_Name}</p>
             <p className='font-inter opacity-50 text-[#0A142F] text-[14px]'>{free.category}</p>
         </div>
-        <div className="flex items-center space-x-2 ml-auto">
+        {/* <div className="flex items-center space-x-2 ml-auto">
         <Link to=''>
             <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
         </Link>
-        </div>
+        </div> */}
         </div>
       <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-4'>A passionate Web Developer with over 5 years of experience specializing in front-end and back-end development. Proficient in HTML, CSS, JavaScript, and Python. Experienced with full-stack development and popular frameworks like React and Django. I've successfully completed over 100 projects, ranging from simple landing pages to complex eCommerce platforms. Committed to providing high-quality code and solutions for every project.</p>
       {free.skills &&
@@ -237,7 +253,7 @@ const HirerAfterLogin = () => {
     </Link>
   ))}
   
-
+            <div className='mb-12'>
           <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>completed projects : <span className='opacity-50'>More than 50</span></p>
           <img src={verify} alt="" className='inline-block h-3 w-3 mr-1'/>
           <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>Account verified</p>
@@ -246,11 +262,55 @@ const HirerAfterLogin = () => {
           <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-3'>Fixed Rate</p>
           <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
           <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>{free.Address}</p>
+          </div>
+          <div className=" absolute bottom-2 right-2 items-center space-x-2 ml-auto">
+        <Link to=''>
+            <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
+        </Link>
+        </div>
       </div>
       
       </>
       )
   })}
+  
+  </div>
+  <div>
+  <div className="flex justify-end items-center gap-6 mt-5">
+  <IconButton
+    size="sm"
+    variant="outlined"
+    onClick={prev}
+    disabled={active === 1}
+    style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+  >
+    <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+  </IconButton>
+
+  
+  {[...Array(5)].map((_, index) => {
+    const pageNumber = index + 1;
+    return (
+      <span
+        key={pageNumber}
+        className={`px-0 py-1 ${active === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+        onClick={() => setActive(pageNumber)}
+      >
+        {pageNumber}
+      </span>
+    );
+  })}
+
+  <IconButton
+    size="sm"
+    variant="outlined"
+    onClick={next}
+    disabled={active === 5}
+    style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+  >
+    <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+  </IconButton>
+</div>
   </div>
   </div>
   </div>
