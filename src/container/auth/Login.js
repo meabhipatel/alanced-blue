@@ -135,7 +135,7 @@ const Login = (props) => {
     //                 if (emailCheckResponse.type === 'FREELANCER') {
     //                     navigate('/freelancer/profile');
     //                 } else if (emailCheckResponse.type === 'HIRER') {
-    //                     navigate('/projects');
+    //                     navigate('/hirer/profile');
     //                 } else {
     //                     toast.error("Invalid user type. Please contact support.");
     //                 }

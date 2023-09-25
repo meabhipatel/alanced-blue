@@ -10,6 +10,7 @@ import profilepic from '../../components/images/profilepic.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetViewAllBidsAction } from '../../redux/Hirer/HirerAction'
 import experience from '../../components/images/experience.png'
+import ViewProposalPopup from './HirerAllPopup/ViewProposalPopup'
 
 const ViewAllProposals = () => {
 
@@ -25,9 +26,19 @@ const ViewAllProposals = () => {
 
   const location = useLocation();
   const project = location.state && location.state.project;
+  const isOpen = location.state && location.state.isOpen;
 
   const id = project.id
 
+  const [isViewProposalOpen, setIsViewProposalOpen] = useState(false);
+
+  const openViewProposal = () => {
+    setIsViewProposalOpen(true);
+  };
+
+  const closeViewProposal = () => {
+    setIsViewProposalOpen(false);
+  };
     
     const [selected, setSelected] = useState('All Proposals');
     const underlineStyle = {
@@ -71,10 +82,100 @@ const ViewAllProposals = () => {
         {selected === 'Messaged' && <span style={underlineStyle}></span>}
     </p>
     </div>
-    {
+    {isOpen ? (
+                    <>
+                            {
+                                !(error && error.includes("No bids found for this project")) && (
+                                    <div className="flex justify-between items-center">
+                                        <section className='flex items-center p-2 bg-white rounded-lg m-5 border w-[49%]'>
+        <div className='flex items-center mr-1 space-x-1'>
+            <img src={search} alt="Search Icon" className="h-3 w-3" />
+            <input className='w-28 lg:w-40 xl:w-[30rem] h-7 text-xs lg:text-sm outline-none' placeholder='Search' />
+        </div>
+        <button className='rounded h-7 w-7 p-2 text-xs lg:text-sm font-semibold text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>
+            <img src={searchbtn} alt="Search Icon" />
+        </button>
+    </section>
+    <select id="countries" class="bg-gray-50 border border-gray-300 text-[#797979] text-sm font-inter font-normal rounded-lg focus:ring-green-500 focus:border-green-500 block w-[22%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 mr-12">
+        <option selected>Best Match</option>
+        <option value="">Newest Applicants</option>
+        <option value="">Oldest Applicants</option>
+        <option value="">Highest Hourly Rate</option>
+        <option value="">Lowest Hourly Rate</option>
+    </select>
+                    </div>
+                )
+            }
+            {
+                error && error.includes("No bids found for this project") ? (
+                    <div className='my-8'> 
+                        <img src={experience} alt="" className='mx-auto mt-2' />
+                        <div className='px-4 md:px-8 py-5 text-center text-2xl opacity-50'>
+                            No proposals found for this project
+                        </div>
+                    </div>
+                ) : (
+                    <>
+                        {viewallbids && viewallbids.map((bid, index) => {
+                            return(<>
+                              <div className='px-4 md:px-8 py-2 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30' onClick={openViewProposal}>
+                              <div class="flex">
+                            <div class="flex-[10%] p-4">
+                            <div className="relative w-24 h-24 mx-auto">
+                                              <img src={profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
+                                              <div class="absolute bottom-2 right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                                          </div>
+                            </div>
+                            <div class="flex-[90%] p-4">
+                            <div class="flex items-center justify-between">
+                            <p className="font-cardo text-[#0A142F] text-2xl font-medium">{bid.freelancer_first_Name}</p>
+                              
+                              <div class="flex items-center space-x-4">
+                                      <span class="inline-block text-sm px-10 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Message</span>
+                          
+                                  <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
+                                          <button class="px-10 py-1 bg-white">
+                                              <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p>
+                                          </button>
+                                  </div>
+                              </div>
+                          </div>
+                          <h1 className="font-cardo opacity-50 text-lg text-[#031136]">Python Developer</h1>
+                            <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 inline-block pr-28">${bid.bid_amount} <span className='opacity-50 font-medium'>/hr</span></h1>
+                            <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 inline-block pr-28">$0 <span className='opacity-50 font-medium'>earned</span></h1>
+                            <h1 className="font-cardo text-lg text-[#031136] py-3 inline-block">Indore, India</h1>
+                            <p className='font-inter text-[#0A142F] text-[14px]'>Cover Letter - <span className='opacity-50'>{bid.description}</span></p> 
+                            <div className="text-left mt-5">
+                                          <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
+                                          <p className=" text-center">html</p>
+                                      </div>
+                                      <div className="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-24 text-green-800 px-3 py-[3px] font-semibold text-sm dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
+                                          <p className="text-center">React</p>
+                                      </div>
+                                      </div>
+                            </div>
+                          </div>
+                              </div>
+                              {isViewProposalOpen && <ViewProposalPopup closeViewProposal={closeViewProposal} state={{project}}/>}
+                              </>
+                                )
+                        })}
+                    </>
+                )
+            }
+    </>
+                ) : (
+                    <div className='my-8'> 
+                        <img src={experience} alt="" className='mx-auto mt-2' />
+                        <div className='px-4 md:px-8 py-5 text-center text-2xl opacity-50'>
+                            This job is closed and is no longer accepting proposals.
+                        </div>
+                    </div>
+                )}
+    {/* {
   !(error && error.includes("No bids found for this project")) && (
     <div className="flex justify-between items-center">
-    {/* Search Section */}
+    {/* Search Section *
     <section className='flex items-center p-2 bg-white rounded-lg m-5 border w-[49%]'>
         <div className='flex items-center mr-1 space-x-1'>
             <img src={search} alt="Search Icon" className="h-3 w-3" />
@@ -148,7 +249,7 @@ const ViewAllProposals = () => {
       )
   })}
     </>
-  )}
+  )} */}
 
     {/* <div className='px-4 md:px-8 py-2 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30'>
     <div class="flex">
