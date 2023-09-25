@@ -38,6 +38,7 @@ import SendProposal from "../container/freelancer/SendProposal";
 import HirerAfterLogin from "../container/hirer/HirerAfterLogin";
 import ViewAllJobPost from "../container/hirer/ViewAllJobPost";
 import ViewAllProposals from "../container/hirer/ViewAllProposals";
+import ViewBidAfterAdd from "../container/freelancer/ViewBidAfterAdd";
 
   const AppRouter = (props) => {
     
@@ -83,6 +84,7 @@ import ViewAllProposals from "../container/hirer/ViewAllProposals";
           <Route path="/hirer/profile" element={<HirerAfterLogin/>}/>
           <Route path="/View-all/Job-post" element={<ViewAllJobPost/>}/>
           <Route path="/View-all/proposals" element={<ViewAllProposals/>}/>
+          <Route path="/View-proposal" element={<ViewBidAfterAdd/>}/>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   
