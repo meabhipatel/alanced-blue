@@ -196,7 +196,7 @@ const openDialog = (project) => {
 <div class="flex flex-col md:flex-row mb-5 mx-5">
 <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
 <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
-    <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Connects</h1>
+    <Link to='/View-proposal'><h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Connects</h1></Link>
     <div className="flex items-center space-x-2">
             <img src={downarrow} alt="" />
     </div>

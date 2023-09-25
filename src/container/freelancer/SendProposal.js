@@ -105,7 +105,7 @@ const SendProposal = () => {
                 )}
                 {/* <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>{findproject.description}</p>
                 <p className=' mt-3 text-base font-semibold text-green-600 text-left'>more</p> */}
-                <p className='mb-5 mt-3 text-base font-semibold text-green-600 text-left'>View more job details</p>
+                {/* <p className='mb-5 mt-3 text-base font-semibold text-green-600 text-left'>View more job details</p> */}
                 </div>
                 <div className=' basis-1/12'></div>
                 <div className=' basis-3/12 border-l border-[#E7E8F2]'>
