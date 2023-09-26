@@ -31,12 +31,15 @@ const ViewAllProposals = () => {
   const id = project.id
 
   const [isViewProposalOpen, setIsViewProposalOpen] = useState(false);
+  const [selectedbid, setSelectedbid] = useState(null);
 
-  const openViewProposal = () => {
+  const openViewProposal = (bid) => {
+    setSelectedbid(bid);
     setIsViewProposalOpen(true);
   };
 
   const closeViewProposal = () => {
+    setSelectedbid(null);
     setIsViewProposalOpen(false);
   };
     
@@ -118,7 +121,7 @@ const ViewAllProposals = () => {
                     <>
                         {viewallbids && viewallbids.map((bid, index) => {
                             return(<>
-                              <div className='px-4 md:px-8 py-2 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30' onClick={openViewProposal}>
+                              <div className='px-4 md:px-8 py-2 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30' onClick={() => openViewProposal(bid)}>
                               <div class="flex">
                             <div class="flex-[10%] p-4">
                             <div className="relative w-24 h-24 mx-auto">
@@ -156,7 +159,7 @@ const ViewAllProposals = () => {
                             </div>
                           </div>
                               </div>
-                              {isViewProposalOpen && <ViewProposalPopup closeViewProposal={closeViewProposal} state={{project}}/>}
+                              {isViewProposalOpen && <ViewProposalPopup closeViewProposal={closeViewProposal} state={{project}} bid={selectedbid}/>}
                               </>
                                 )
                         })}

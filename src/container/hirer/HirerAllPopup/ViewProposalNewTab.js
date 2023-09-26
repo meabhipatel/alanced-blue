@@ -10,12 +10,13 @@ import locations from '../../../components/images/location.png'
 const ViewProposalNewTab = () => {
 
     const location = useLocation();
-    const project = location.state && location.state.project;
+   const bidData = location.state && location.state.bidData;
+   const project = location.state && location.state.project;
 
   return (
    <>
    <Navbar/>
-   <Link to=''><div className='text-left ml-[12%] mt-[5%]'><i class="bi bi-chevron-left font-bold text-green-600 text-lg inline-block mr-2"></i><p className="text-green-600 text-[16px] font-inter inline-block font-semibold cursor-pointer hover:underline">View all proposals</p></div></Link>
+   <Link to='/View-all/proposals'><div className='text-left ml-[12%] mt-[5%]'><i class="bi bi-chevron-left font-bold text-green-600 text-lg inline-block mr-2"></i><p className="text-green-600 text-[16px] font-inter inline-block font-semibold cursor-pointer hover:underline">View all proposals</p></div></Link>
    <div className=' container-sm px-40'>
     <div className="flex mt-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30">
   <div className="flex-[20%] p-6">
@@ -26,7 +27,7 @@ const ViewProposalNewTab = () => {
   </div>
   <div className="flex-[30%] py-6">
   <div className="flex items-center">
-                <h1 className="font-cardo text-[24px] text-[#031136] font-normal mr-1">Ayan Jain
+                <h1 className="font-cardo text-[24px] text-[#031136] font-normal mr-1">{bidData.bid.freelancer_first_Name}
             </h1>
                 <img className="h-4 w-4" src={verify} alt="Verification" />
             </div>
@@ -46,19 +47,19 @@ const ViewProposalNewTab = () => {
         <div class="flex flex-col md:flex-row">
     <div class="w-full md:w-[30%] py-4 px-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
     <h1 className="font-cardo text-xl text-[#031136] font-normal">Applicant</h1>
-    <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2">Ayan has applied to or been invited to your or your company's job {project.title}</p>
+    <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2">{bidData.bid.freelancer_first_Name} has applied to or been invited to your or your company's job {project.title}</p>
     </div>
     <div class="w-full md:w-[70%] py-4 px-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
     <div className="flex justify-between items-center">
     <h1 className="font-cardo text-2xl text-[#031136] font-normal">Proposal Details</h1>
     <div>
-        <h1 className="font-cardo text-xl text-[#031136] font-semibold">$30.00/hr</h1>
+        <h1 className="font-cardo text-xl text-[#031136] font-semibold">${bidData.bid.bid_amount}/hr</h1>
         <p className="text-[#031136] opacity-50 text-[14px] font-inter font-semibold">Proposed bid</p>
     </div>
 </div>
 <div className="border-b opacity-60 my-3"></div>
 <h1 className="font-cardo text-xl text-[#031136] font-normal">Cover Letter</h1>
-<p className="text-[#031136] opacity-50 text-[14px] font-inter py-4">Hello, I am software developer working as a full stack Mean developer, I can do this work with good efficiency in less time, please let me know when we can connect and discuss further for this and other projects.</p>
+<p className="text-[#031136] opacity-50 text-[14px] font-inter py-4">{bidData.bid.description}</p>
     </div>
     </div>
     <div class="flex flex-col md:flex-row">
