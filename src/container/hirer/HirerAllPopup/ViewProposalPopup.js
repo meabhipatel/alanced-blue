@@ -4,22 +4,23 @@ import profilepic from '../../../components/images/profilepic.png'
 import verify from '../../../components/images/verify.png'
 import locations from '../../../components/images/location.png'
 import { useState } from 'react'
-import FreelancerProjectsPopup from '../../freelancer/AllPopup/FreelancerProjectsPopup'
+import Portfolio from './Portfolio'
 
 
-const ViewProposalPopup = ({ closeViewProposal }) => {
+const ViewProposalPopup = ({ closeViewProposal, bid }) => {
 
+    const bidData = { bid };
     const location = useLocation();
   const project = location.state && location.state.project;
 
-  const [isFreelancerProjectsOpen, setIsFreelancerProjectsOpen] = useState(false);
+  const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
 
-  const openFreelancerProjects = () => {
-    setIsFreelancerProjectsOpen(true);
+  const openPortfolio = () => {
+    setIsPortfolioOpen(true);
   };
 
-  const closeFreelancerProjects = () => {
-    setIsFreelancerProjectsOpen(false);
+  const closePortfolio = () => {
+    setIsPortfolioOpen(false);
   };
     
   return (
@@ -29,13 +30,13 @@ const ViewProposalPopup = ({ closeViewProposal }) => {
   <div className="bg-white p-6 rounded-lg shadow-xl w-3/4 h-[94%] z-20 overflow-y-scroll">
     <div className='flex flex-row'>
         <div className='basis-6/12 cursor-pointer'><i class="bi bi-chevron-left font-bold text-black text-lg" onClick={closeViewProposal}></i></div>
-        <div className=' basis-6/12'>
-            <Link to="" state={{project}}>
+        {/* <div className=' basis-6/12'>
+            <Link to="" state={{project,bidData}}>
             <div className=' text-right font-cardo font-normal text-base'>
             <i class="bi bi-box-arrow-up-right"></i> Open proposal in a new window
             </div>
             </Link>
-        </div>
+        </div> */}
     </div>
     <div className=' container px-2'>
     <div className="flex mt-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30">
@@ -47,7 +48,7 @@ const ViewProposalPopup = ({ closeViewProposal }) => {
   </div>
   <div className="flex-[30%] py-6">
   <div className="flex items-center">
-                <h1 className="font-cardo text-[24px] text-[#031136] font-normal mr-1">Ayan Jain
+                <h1 className="font-cardo text-[24px] text-[#031136] font-normal mr-1">{bid.freelancer_first_Name}
             </h1>
                 <img className="h-4 w-4" src={verify} alt="Verification" />
             </div>
@@ -67,19 +68,19 @@ const ViewProposalPopup = ({ closeViewProposal }) => {
         <div class="flex flex-col md:flex-row">
     <div class="w-full md:w-[30%] py-4 px-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
     <h1 className="font-cardo text-xl text-[#031136] font-normal">Applicant</h1>
-    <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2">Ayan has applied to or been invited to your or your company's job {project.title} </p>
+    <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2">{bid.freelancer_first_Name} has applied to or been invited to your or your company's job {project.title} </p>
     </div>
     <div class="w-full md:w-[70%] py-4 px-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
     <div className="flex justify-between items-center">
     <h1 className="font-cardo text-2xl text-[#031136] font-normal">Proposal Details</h1>
     <div>
-        <h1 className="font-cardo text-xl text-[#031136] font-semibold">$30.00/hr</h1>
+        <h1 className="font-cardo text-xl text-[#031136] font-semibold">${bid.bid_amount}/hr</h1>
         <p className="text-[#031136] opacity-50 text-[14px] font-inter font-semibold">Proposed bid</p>
     </div>
 </div>
 <div className="border-b opacity-60 my-3"></div>
 <h1 className="font-cardo text-xl text-[#031136] font-normal">Cover Letter</h1>
-<p className="text-[#031136] opacity-50 text-[14px] font-inter py-4">Hello, I am software developer working as a full stack Mean developer, I can do this work with good efficiency in less time, please let me know when we can connect and discuss further for this and other projects.</p>
+<p className="text-[#031136] opacity-50 text-[14px] font-inter py-4">{bid.description}</p>
     </div>
     </div>
     <div class="flex flex-col md:flex-row">
@@ -114,7 +115,7 @@ const ViewProposalPopup = ({ closeViewProposal }) => {
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
     <h1 className="font-cardo text-2xl text-[#031136] font-normal">Portfolio</h1>
     <div className="flex flex-wrap -mx-2">  
-        <div className='w-1/3 px-2 cursor-pointer' onClick={openFreelancerProjects}>  
+        <div className='w-1/3 px-2 cursor-pointer' onClick={openPortfolio}>  
             <div className='w-full h-[165px] mt-4 border border-gray-100 overflow-hidden'>
                 <img 
                     src={profilepic} 
@@ -130,7 +131,7 @@ const ViewProposalPopup = ({ closeViewProposal }) => {
             </div>
             <p className='font-inter text-green-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-green-700 underline font-semibold'>Project Title</p>
         </div>
-        {isFreelancerProjectsOpen && <FreelancerProjectsPopup closeFreelancerProjects={closeFreelancerProjects} project={project}/>}
+        {isPortfolioOpen && <Portfolio closePortfolio={closePortfolio} project={project}/>}
 </div>
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
