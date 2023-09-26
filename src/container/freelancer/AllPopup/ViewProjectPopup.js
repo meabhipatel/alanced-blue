@@ -22,13 +22,13 @@ function ViewProjectPopup({ isOpen, onClose,project}) {
       <div className="bg-white p-6 rounded-lg shadow-xl w-3/4 h-[94%] z-20 overflow-y-scroll">
         <div className='flex flex-row'>
             <div className='basis-6/12 cursor-pointer'><i class="bi bi-chevron-left font-bold text-black text-lg" onClick={onClose}></i></div>
-            <div className=' basis-6/12'>
+            {/* <div className=' basis-6/12'>
                 <Link to="/freelancer/view-project/detail" target="_blank" rel="noopener noreferrer">
                 <div className=' text-right font-cardo font-normal text-base'>
                 <i class="bi bi-box-arrow-up-right"></i> Open job in a new window
                 </div>
                 </Link>
-            </div>
+            </div> */}
         </div>
         <div className=' container px-6'>
             <div className=' flex flex-row mt-6'>
