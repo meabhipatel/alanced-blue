@@ -20,6 +20,8 @@ import { Avatar } from '@material-tailwind/react'
 import profilepic from '../../components/images/profilepic.png'
 import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 
 
@@ -27,14 +29,17 @@ const HirerAfterLogin = () => {
     const logindata = useSelector(state => state.login.login_data);  
     const googleUserName = localStorage.getItem('googleUserName')
     const loginMethod = localStorage.getItem('loginMethod')
-    const viewallfreelancer = useSelector(state => state.hirer.viewallfreelancer)
+    const [viewallfreelancer, setviewallfreelancer] = useState([])
+    const freelancers = useSelector(state => state.hirer.viewallfreelancer)
+    // console.log(";;;;;;;;;;;;;;;;;;;;;;;",viewallfreelancer.length)
     const [searchTerm, setSearchTerm] = useState('');
-    console.log("/-/-/-/-/-/-/-/-/-/",useSelector(state => state.login.accessToken))
+    console.log(useSelector(state => state.login.accessToken))
     const dispatch = useDispatch();
    
   
     React.useEffect(() => {
       dispatch(GetViewAllFreelancersAction())
+      setviewallfreelancer(freelancers)
     }, [])
   
     let displayName;
@@ -106,7 +111,16 @@ const HirerAfterLogin = () => {
       setActive(active - 1);
   };
   
- 
+ // 1. Chunk the Array
+ const chunkArray = (array, size) => {
+  let chunked = [];
+  for (let i = 0; i < array.length; i += size) {
+      chunked.push(array.slice(i, i + size));
+  }
+  return chunked;
+}
+
+const chunkedFree = chunkArray(viewallfreelancer, 6);
     return (
       <>
       <Navbar/>
@@ -121,32 +135,32 @@ const HirerAfterLogin = () => {
   <div class="flex flex-col md:flex-row mb-5 mx-5">
   <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
   <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
-      <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Connects</h1>
+      <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Discover</h1>
       <div className="flex items-center space-x-2">
               <img src={downarrow} alt="" />
       </div>
       </div>
       <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
-      <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Preferences</h1>
+      <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Your hires</h1>
       <div className="flex items-center space-x-2">
               <img src={downarrow} alt="" />
       </div>
       </div>
       <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
-      <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Proposals</h1>
+      <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Company hires</h1>
       <div className="flex items-center space-x-2">
               <img src={downarrow} alt="" />
       </div>
       </div>
       <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
-      <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Project catalog</h1>
+      <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Recently viewed</h1>
       <div className="flex items-center space-x-2">
               <img src={downarrow} alt="" />
       </div>
       </div>
       <div className="px-4 md:px-8 py-5 m-4 rounded-lg shadow-md">
       <h1 className="font-cardo text-[18px] text-[#031136] font-normal pt-2">Upwork Academy  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
-      <h1 className="font-cardo text-[18px] text-[#031136] font-normal pt-2">Get Paid  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
+      <h1 className="font-cardo text-[18px] text-[#031136] font-normal pt-2">Get Freelancer  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
       <h1 className="font-cardo text-[18px] text-[#031136] font-normal pt-2">Community & Forums  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
       <h1 className="font-cardo text-[18px] text-[#031136] font-normal py-2">Help Center  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
       </div>
@@ -226,8 +240,9 @@ const HirerAfterLogin = () => {
       <div className='px-4 md:px-8 py-4'>
         <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse Freelancers that match your jobs</p>
       </div>
-      <div className='grid grid-cols-2 w-[70%] md:w-full shadow-inner shadow-white'>
-      {viewallfreelancer && viewallfreelancer.map((free, index) => {
+      {freelancers != null ? 
+      <div className='grid grid-cols-2 w-[70%] md:w-full pl-3.5'>
+      {chunkedFree[active - 1] && chunkedFree[active - 1].map((free, index) => {
                 return(<>
                 
       <div className='px-4 w-[400px] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4'>
@@ -263,7 +278,7 @@ const HirerAfterLogin = () => {
           <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
           <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>{free.Address}</p>
           </div>
-          <div className=" absolute bottom-2 right-2 items-center space-x-2 ml-auto">
+          <div className=" absolute bottom-2 right-6 items-center space-x-2 ml-auto">
         <Link to=''>
             <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
         </Link>
@@ -274,9 +289,24 @@ const HirerAfterLogin = () => {
       )
   })}
   
+  </div> : 
+  <div className='grid grid-cols-2 w-[70%] md:w-full pl-3.5'>
+    {[...Array(6)].map((_) => {
+      return (
+    <div className='px-4 w-[400px] h-[467px] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4'>
+      <Skeleton height={90} width={90} inline={true} style={{borderRadius:'50%', float: 'left'}}/>
+      <Skeleton height={20} width={200} style={{marginLeft:10, marginTop:20}}/>
+      <Skeleton height={20} width={200} style={{marginLeft:10, marginTop:10}}/>
+      <Skeleton height={200} width={300} style={{marginTop:20}}/>
+      <Skeleton height={50} width={200} style={{marginTop:10}}/>
+      <Skeleton height={35} width={80} style={{marginTop:20, float: 'right'}}/>
+      
+    </div>);})}
   </div>
+    }
   <div>
-  <div className="flex justify-end items-center gap-6 mt-5">
+  <div className="flex justify-end items-center gap-6 mt-7
+   mr-5">
   <IconButton
     size="sm"
     variant="outlined"
