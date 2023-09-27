@@ -127,6 +127,25 @@ const handleClick = (event, index) => {
       
 const { day, formattedDate, greeting } = getCurrentDateAndGreeting();
 
+
+const calculateTimeAgo = (projectCreationDate) => {
+    const currentDate = new Date();
+    const creationDate = new Date(projectCreationDate);
+    const timeDifference = currentDate - creationDate;
+
+    const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    const hoursAgo = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+    const minutesAgo = Math.floor((timeDifference / 1000 / 60) % 60);
+
+    if (daysAgo > 0) {
+      return `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
+    } else if (hoursAgo > 0) {
+      return `${hoursAgo} hour${hoursAgo > 1 ? 's' : ''} ago`;
+    } else {
+      return `${minutesAgo} minute${minutesAgo > 1 ? 's' : ''} ago`;
+    }
+  };
+
 const [isDialogOpen, setIsDialogOpen] = useState(false);
 const [selectedProject, setSelectedProject] = useState(null);
 
@@ -302,6 +321,7 @@ const openDialog = (project) => {
       <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse jobs that match your experience to a client's hiring preferences. Ordered by most relevant.</p>
     </div>
     {projectsToDisplay && projectsToDisplay.map((project, index) => {
+        const timeAgo = calculateTimeAgo(project.project_creation_date);
     {/* {filteredProjects && filteredProjects.map((project, index) => { */}
     {/* {viewallprojects && <>{viewallprojects.map((project,index)=> { */}
         const words = project.description.split(' ');
@@ -319,7 +339,7 @@ const openDialog = (project) => {
         </div>
     </div>
     </div>
-    <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>Fixed-price - Expert - Est. Budget: ${project.budget} - Posted 12 hrs ago</p>
+    <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>Fixed-price - Expert - Est. Budget: ${project.budget} - {timeAgo}</p>
     <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>
                 Job Description: {displayWords.join(' ')} 
                 {words.length > 50 && (
@@ -346,7 +366,7 @@ const openDialog = (project) => {
         <p className='font-inter text-[#0A142F] text-[14px] opacity-80 inline-block mr-1'>$0</p>
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-3'>Spent</p>
         <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
-        <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>India</p>
+        <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>{ project.project_owner_location ? project.project_owner_location : "NA"}</p>
     </div>
     {/* <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog} projectData={{pro_id:project.id, pro_tit:project.title, pro_cat:project.category, pro_desc:project.description, pro_budget:project.budget ,pro_skills:project.skills_required}}/> */}
     {/* <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog} projectData={selectedProject}/> */}

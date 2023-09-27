@@ -12,6 +12,35 @@ import AddBidAmount from '../AddBidAmount'
 function ViewProjectPopup({ isOpen, onClose,project}) {
   console.log(project,"project")
   const projectData = { project };
+  
+  function timeAgo(postedTimeStr) {
+    const postedTime = new Date(postedTimeStr);
+    const currentTime = new Date();
+  
+    const deltaInMilliseconds = currentTime - postedTime;
+    const deltaInSeconds = Math.floor(deltaInMilliseconds / 1000);
+    const deltaInMinutes = Math.floor(deltaInSeconds / 60);
+    const deltaInHours = Math.floor(deltaInMinutes / 60);
+    const deltaInDays = Math.floor(deltaInHours / 24);
+  
+    if (deltaInMinutes < 1) {
+        return "just now";
+    } else if (deltaInMinutes < 60) {
+        return `${deltaInMinutes} minute ago`;
+    } else if (deltaInHours < 24) {
+        return `${deltaInHours} hour ago`;
+    } else if (deltaInDays < 30) {
+        return `${deltaInDays} day ago`;
+    } else if (deltaInDays < 365) {
+        const months = Math.floor(deltaInDays / 30);
+        return `${months} month ago`;
+    } else {
+        const years = Math.floor(deltaInDays / 365);
+        return `${years} year ago`;
+    }
+  }
+
+
   if (!isOpen) {
     return null;
   }
@@ -36,13 +65,13 @@ function ViewProjectPopup({ isOpen, onClose,project}) {
                     <h1 className='text-xl font-normal font-cardo'>{project.title}</h1>
                     <p className='mt-4 text-base font-normal font-cardo'>{project.category}</p>
                     <div className='flex flex-row mt-2'>
-                        <div className=' basis-6/12'><p className=' font-inter font-normal text-base text-[#797979]'>Posted in 11 hours</p></div>
+                        <div className=' basis-6/12'><p className=' font-inter font-normal text-base text-[#797979]'>Posted in {timeAgo(project.project_creation_date)}</p></div>
                         <div className=' basis-6/12'>
                             <div className=' text-right font-inter text-base font-normal opacity-[50%]'><i class="bi bi-geo-alt"></i>  Worldwide</div>
                         </div>
                     </div>
                     <div className='mt-8 font-inter font-normal text-base text-[#797979]'>Job Description: {project.description}</div>
-                    <div className='font-inter font-normal text-base text-[#797979]'>Please Share Your Details On this Whatsapp No.+91 95094 98242 </div>
+                    <div className='font-inter font-normal text-base text-[#797979]'>Please Share Your Details On this Whatsapp No.+{project.project_owner_contact ? project.project_owner_contact: "NA"} </div>
                     <div className='font-inter font-normal text-base text-[#797979] mt-5'>Are you a talented and imaginative Graphic Designer with a flair for creating visually stunning and engaging designs? Vogue Tourism, a premier name in the travel and hospitality sector, is seeking a skilled Graphic Designer to join our team. If you're passionate about translating travel experiences into captivating visuals, we want to hear from you.</div>
                     <div className='mt-5 font-inter font-normal text-base text-[#797979]'>Responsibilities:</div>
                     <div className='mt-5 font-inter font-normal text-base text-[#797979]'>Collaborate with the marketing team to understand design requirements and objectives for various projects, including flyers, posters, social media graphics, and more.Create compelling visual content that aligns with our brand identity and resonates with our target audience.Develop original design concepts, graphics, and layouts that tell the story of unique travel destinations and experiences.Ensure that all designs adhere to branding guidelines and maintain a consistent visual identity.Use your creative expertise to enhance the overall aesthetic and impact of our marketing materials.</div>
@@ -112,7 +141,7 @@ function ViewProjectPopup({ isOpen, onClose,project}) {
                 <div className='mt-12 text-xl font-cardo font-normal text-[#0A142F] ml-10'>About the client</div>
                 <div className='mt-3 text-sm font-inter font-normal text-[#0A142F] ml-10 opacity-[50%]'>Payment method not verified</div>
                 <div className='mt-5 text-base font-inter font-normal text-[#0A142F] ml-10'>India</div>
-                <div className='mt-2 text-base font-inter font-normal text-[#0A142F] ml-10 opacity-[50%]'>Ajmer 2:42 pm</div>
+                <div className='mt-2 text-base font-inter font-normal text-[#0A142F] ml-10 opacity-[50%]'>{project.project_owner_location ? project.project_owner_location : "NA"} 2:42 pm</div>
                 <div className='mt-5 text-base font-inter font-normal text-[#0A142F] ml-10'>2 jobs posted</div>
                 <div className='mt-2 text-base font-inter font-normal text-[#0A142F] ml-10 opacity-[50%]'>Member since Aug 28, 2023</div>
                 <div className=' mt-16 text-xl font-cardo font-normal text-[#0A142F] ml-10'>Job link</div>
