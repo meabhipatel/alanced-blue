@@ -152,7 +152,8 @@ useEffect(() => {
   }
 
   const chunkedProjects = chunkArray(freelancerproject, 6);
-
+//   console.log(chunkedProjects[0].length,'chklengthchunk')
+ 
 //   const [active, setActive] = React.useState(1);
  
 //   const next = () => {
@@ -179,6 +180,7 @@ const showLessHandler = () => {
 }
 
 const visibleReviews = reviews.slice(startIdx, startIdx + 4);
+
   
   const [selectedButton, setSelectedButton] = useState('All Work');
   const [selectedButtons, setSelectedButtons] = useState('Github');
@@ -749,7 +751,7 @@ const closeFreeProject = () => {
         className={`font-inter opacity-50 text-[#0A142F] text-[13px] py-2 inline-block pr-8 relative cursor-pointer`} 
         onClick={() => setSelected('completed')}
     >
-        Completed Jobs (4)
+        Completed Jobs ({reviews && reviews ? reviews.length : 0})
         {selected === 'completed' && <span style={underlineStyle}></span>}
     </p>
 
@@ -905,10 +907,16 @@ const closeFreeProject = () => {
 </div>
 <div class="border-b opacity-50 my-4"></div> */}
 {/* <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-right cursor-pointer">Show More</h1> */}
-{startIdx + 4 < reviews.length ? 
+{reviews.length > 4 && (
+  startIdx + 4 < reviews.length ? 
+    <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-right cursor-pointer" onClick={showMoreHandler}>Show More</h1> :
+    <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-right cursor-pointer" onClick={showLessHandler}>Show Less</h1>
+)}
+
+{/* {startIdx + 4 < reviews.length ? 
                 <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-right cursor-pointer" onClick={showMoreHandler}>Show More</h1> :
                 <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-right cursor-pointer" onClick={showLessHandler}>Show Less</h1>
-            }
+            } */}
     </div>
 </div>
 
@@ -917,7 +925,7 @@ const closeFreeProject = () => {
 
     <div class="w-full md:w-[70%] pt-3 px-4 md:px-8 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
     <div className="flex items-center justify-between">
-    <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Portfolio (4)</h1>
+    <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Portfolio ({freelancerproject && freelancerproject ? freelancerproject.length : 0})</h1>
     <div className="flex items-center space-x-2">
         {/* <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={updownarrow} alt="" />
@@ -975,7 +983,46 @@ const closeFreeProject = () => {
     </div>
     <p className='font-inter text-[#0A142F] text-[13px] pt-2'>Figma Design</p>
    </div> */}
-    <div className="flex justify-end items-center gap-6 mt-5">
+   <div className="flex justify-end items-center gap-6 mt-5">
+{freelancerproject.length > 6 && (
+  <>
+    <IconButton
+      size="sm"
+      variant="outlined"
+      onClick={prev}
+      disabled={active === 1}
+      style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+    >
+      <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+    </IconButton>
+
+    {[...Array(Math.ceil(freelancerproject.length / 6))].map((_, index) => {
+      const pageNumber = index + 1;
+      return (
+        <span
+          key={pageNumber}
+          className={`px-0 py-1 ${active === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+          onClick={() => setActive(pageNumber)}
+        >
+          {pageNumber}
+        </span>
+      );
+    })}
+
+    <IconButton
+      size="sm"
+      variant="outlined"
+      onClick={next}
+      disabled={active === Math.ceil(freelancerproject.length / 6)}
+      style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+    >
+      <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+    </IconButton>
+  </>
+)}
+</div>
+
+    {/* <div className="flex justify-end items-center gap-6 mt-5">
   <IconButton
     size="sm"
     variant="outlined"
@@ -1009,7 +1056,7 @@ const closeFreeProject = () => {
   >
     <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
   </IconButton>
-</div>
+</div> */}
     </div>
 </div>
 

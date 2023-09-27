@@ -30,31 +30,31 @@ const ViewProposalPopup = ({ closeViewProposal, bid }) => {
   <div className="bg-white p-6 rounded-lg shadow-xl w-3/4 h-[94%] z-20 overflow-y-scroll">
     <div className='flex flex-row'>
         <div className='basis-6/12 cursor-pointer'><i class="bi bi-chevron-left font-bold text-black text-lg" onClick={closeViewProposal}></i></div>
-        {/* <div className=' basis-6/12'>
-            <Link to="" state={{project,bidData}}>
+        <div className=' basis-6/12'>
+            <Link to="/View/proposal" state={{project,bidData}}>
             <div className=' text-right font-cardo font-normal text-base'>
             <i class="bi bi-box-arrow-up-right"></i> Open proposal in a new window
             </div>
             </Link>
-        </div> */}
+        </div>
     </div>
     <div className=' container px-2'>
     <div className="flex mt-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30">
   <div className="flex-[20%] p-6">
   <div className="relative w-24 h-24">
-                    <img src={profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
+                    <img src={"https://aparnawiz91.pythonanywhere.com/"+bid.freelancer_profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
                     <div class="absolute bottom-3 right-0.5 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                 </div>
   </div>
   <div className="flex-[30%] py-6">
   <div className="flex items-center">
-                <h1 className="font-cardo text-[24px] text-[#031136] font-normal mr-1">{bid.freelancer_first_Name}
+                <h1 className="font-cardo text-[24px] text-[#031136] font-normal mr-1">{bid.freelancer_Name}
             </h1>
                 <img className="h-4 w-4" src={verify} alt="Verification" />
             </div>
             <div className="flex items-center my-1">
                 <img src={locations} alt="Location" className="h-[13px] mr-1" />
-                <p className="text-[#797979] text-[14px] font-inter">Indore, India</p>
+                <p className="text-[#797979] text-[14px] font-inter">{bid.freelancer_address ? bid.freelancer_address:'NA'}</p>
             </div>
             <p className="text-green-600 text-[16px] font-inter py-3 font-semibold cursor-pointer hover:underline">View Profile</p>
   </div>
@@ -68,7 +68,7 @@ const ViewProposalPopup = ({ closeViewProposal, bid }) => {
         <div class="flex flex-col md:flex-row">
     <div class="w-full md:w-[30%] py-4 px-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
     <h1 className="font-cardo text-xl text-[#031136] font-normal">Applicant</h1>
-    <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2">{bid.freelancer_first_Name} has applied to or been invited to your or your company's job {project.title} </p>
+    <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2">{bid.freelancer_Name} has applied to or been invited to your or your company's job {project.title} </p>
     </div>
     <div class="w-full md:w-[70%] py-4 px-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
     <div className="flex justify-between items-center">
@@ -87,7 +87,7 @@ const ViewProposalPopup = ({ closeViewProposal, bid }) => {
     <div class="w-full md:w-[30%] bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
         <h1 className="font-cardo text-xl text-[#031136] font-normal">View Profile</h1>
-    <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2 pb-6">Full Stack Development</p>
+    <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2 pb-6">{bid.freelancer_category}</p>
     <Link to=''><span class="text-sm px-16 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">All Work</span></Link>
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
@@ -105,7 +105,7 @@ const ViewProposalPopup = ({ closeViewProposal, bid }) => {
     <div class="w-full md:w-[70%] bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
         <div className="flex justify-between items-center">
-    <h1 className="font-cardo text-2xl text-[#031136] font-normal">Full Stack Developer</h1>
+    <h1 className="font-cardo text-2xl text-[#031136] font-normal">{bid.freelancer_category}</h1>
     <div>
         <h1 className="font-cardo text-xl text-[#031136] font-semibold inline-block">$5.00/hr</h1>
     </div>
@@ -137,12 +137,24 @@ const ViewProposalPopup = ({ closeViewProposal, bid }) => {
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
     <h1 className="font-cardo text-2xl text-[#031136] font-normal">Skills</h1>
     <div className="text-left mt-5">
-        <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
-        <p className=" text-center">html</p>
-    </div>
-    <div className="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-24 text-green-800 px-3 py-[3px] font-semibold text-sm dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
-        <p className="text-center">React</p>
-    </div>
+    {bid.Freelancer_skills && 
+  (() => {
+    try {
+      const skillsArray = JSON.parse(bid.Freelancer_skills.replace(/'/g, '"'));
+      return skillsArray.map((skill, index) => (
+        <div
+          key={index}
+          className="mr-3 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-green-800 px-3 py-[3px] my-1 text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
+        >
+          <p className="text-center">{skill}</p>
+        </div>
+      ));
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return null;
+    }
+  })()
+} 
     </div>
     </div>
     </div>

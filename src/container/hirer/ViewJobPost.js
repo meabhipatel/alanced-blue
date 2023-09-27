@@ -23,6 +23,35 @@ const ViewJobPost = () => {
 }
 
 
+function timeAgo(postedTimeStr) {
+  const postedTime = new Date(postedTimeStr);
+  const currentTime = new Date();
+
+  const deltaInMilliseconds = currentTime - postedTime;
+  const deltaInSeconds = Math.floor(deltaInMilliseconds / 1000);
+  const deltaInMinutes = Math.floor(deltaInSeconds / 60);
+  const deltaInHours = Math.floor(deltaInMinutes / 60);
+  const deltaInDays = Math.floor(deltaInHours / 24);
+
+  if (deltaInMinutes < 1) {
+      return "just now";
+  } else if (deltaInMinutes < 60) {
+      return `${deltaInMinutes}m ago`;
+  } else if (deltaInHours < 24) {
+      return `${deltaInHours}h ago`;
+  } else if (deltaInDays < 30) {
+      return `${deltaInDays}d ago`;
+  } else if (deltaInDays < 365) {
+      const months = Math.floor(deltaInDays / 30);
+      return `${months} month ago`;
+  } else {
+      const years = Math.floor(deltaInDays / 365);
+      return `${years} year ago`;
+  }
+}
+
+
+
   return (
     <>
     <Navbar/>
@@ -33,7 +62,7 @@ const ViewJobPost = () => {
     <div class="w-full md:w-[70%] bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
         <p className="font-inter text-green-700 text-[16px] font-medium">{project.category}</p>
-        <p className="font-inter text-[#031136] opacity-50 text-sm font-medium py-1">posted 5 days ago</p>
+        <p className="font-inter text-[#031136] opacity-50 text-sm font-medium py-1">posted {timeAgo(project.Project_created_at)}</p>
         <p className="font-inter text-[#031136] text-sm font-normal py-3"><i class="bi bi-geo-alt-fill text-green-700"></i> Worldwide</p>
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
