@@ -16,6 +16,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ViewProjectPopup from './AllPopup/ViewProjectPopup'
 import { GetViewAllProjectsListAction } from '../../redux/Freelancer/FreelancerAction'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 
 const FreelancerAfterLogin = () => {
@@ -278,7 +280,7 @@ const openDialog = (project) => {
     </div>
     </Link>
 </div>
-
+{viewallprojects != null ? 
 <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
     <div className='px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30'>
     {/* <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1> */}
@@ -402,7 +404,61 @@ const openDialog = (project) => {
         <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>India</p>
     </div> */}
+</div> : 
+<div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
+<div className='px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30'>
+    {/* <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1> */}
+    <div className="flex justify-between items-center">
+    <div className="flex items-center">
+    <h1  className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1>
+    </div>
+    <div className="flex items-center">
+    <div className='flex items-center mr-1 space-x-1 border p-1 w-[200px] rounded-md'>
+        <img src={search} alt="Search Icon" className="h-4 w-4 mr-1 ml-1" />
+        <input className='w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none' placeholder='Search Jobs' value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)} />
+    </div>
+    </div>
 </div>
+    <p 
+        className={`font-inter opacity-50 text-[#0A142F] text-[13px] py-2 inline-block pr-10 relative cursor-pointer`} 
+        onClick={() => setSelected('Best Matches')}
+    >
+        Best Matches
+        {selected === 'Best Matches' && <span style={underlineStyle}></span>}
+    </p>
+
+    <p 
+        className={`font-inter opacity-50 text-[#0A142F] text-[13px] py-2 inline-block pr-10 relative cursor-pointer`} 
+        onClick={() => setSelected('Most Recent')}
+    >
+        Most Recent
+        {selected === 'Most Recent' && <span style={underlineStyle}></span>}
+    </p>
+    <p 
+        className={`font-inter opacity-50 text-[#0A142F] text-[13px] py-2 inline-block relative cursor-pointer`} 
+        onClick={() => setSelected('Saved Jobs')}
+    >
+        Saved Jobs
+        {selected === 'Saved Jobs' && <span style={underlineStyle}></span>}
+    </p>
+    </div>
+    <div className='px-4 md:px-8 py-4'>
+      <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse jobs that match your experience to a client's hiring preferences. Ordered by most relevant.</p>
+    </div>
+    {[...Array(8)].map((_) => {
+      return (
+    <div>
+    <Skeleton height={30} width={200} style={{ marginLeft: 20, marginTop: 20 }}/>
+    <Skeleton height={30} width={300} style={{ marginLeft: 20, marginTop:10 }}/>
+    <Skeleton height={110} width={700} style={{ marginLeft: 20, marginTop: 10}}/>
+    <Skeleton height={30} width={100} inline={true} style={{marginTop:5, marginLeft:70, float:'left'}}/>
+    <Skeleton height={30} width={100} inline={true} count={2} style={{ marginTop:5, marginLeft:5, float:'left'}}/><br/><br/>
+    <Skeleton height={20} width={200} style={{ marginLeft: 20}}/>
+    <Skeleton height={20} width={250} style={{ marginLeft: 20, marginTop:10 }}/>
+    </div>
+    );})}
+</div>}
 </div>
 </div>
     <HomeSection4/>

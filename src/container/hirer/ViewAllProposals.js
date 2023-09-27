@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GetViewAllBidsAction } from '../../redux/Hirer/HirerAction'
 import experience from '../../components/images/experience.png'
 import ViewProposalPopup from './HirerAllPopup/ViewProposalPopup'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const ViewAllProposals = () => {
 
@@ -118,7 +120,8 @@ const ViewAllProposals = () => {
                         </div>
                     </div>
                 ) : (
-                    <>
+                    <>{viewallbids != null ? 
+                        <div>
                         {viewallbids && viewallbids.map((bid, index) => {
                             return(<>
                               <div className='px-4 md:px-8 py-2 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30' onClick={() => openViewProposal(bid)}>
@@ -183,7 +186,15 @@ const ViewAllProposals = () => {
                               {isViewProposalOpen && <ViewProposalPopup closeViewProposal={closeViewProposal} state={{project}} bid={selectedbid}/>}
                               </>
                                 )
-                        })}
+                        })}</div> : 
+                        <div>
+                        <Skeleton height={100} width={100} style={{borderRadius: '50%', marginLeft: 30, float:'left', marginTop: 30}}/>
+                        <Skeleton height={40} width={150} style={{float: 'right', marginTop: 25, marginLeft: 10}}/>
+                        <Skeleton height={40} width={150} style={{float: 'right'}}/>
+                        <Skeleton height={100} width={1000}/>
+                        <Skeleton height={40} width={100} inline="true" style={{marginLeft: 50}}/>
+                        <Skeleton height={40} width={100} inline="true" count={4} style={{marginLeft: 20}}/>
+                        </div>}
                     </>
                 )
             }
