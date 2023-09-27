@@ -114,9 +114,11 @@ const HirerAfterLogin = () => {
  // 1. Chunk the Array
  const chunkArray = (array, size) => {
   let chunked = [];
+  if(viewallfreelancer != null){
   for (let i = 0; i < array.length; i += size) {
       chunked.push(array.slice(i, i + size));
   }
+}
   return chunked;
 }
 
@@ -245,7 +247,7 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
       {chunkedFree[active - 1] && chunkedFree[active - 1].map((free, index) => {
                 return(<>
                 
-      <div className='px-4 w-[400px] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4'>
+      <div className='px-4 w-[26vw] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4'>
         <div className="flex items-center">
             <Avatar src={"https://aparnawiz91.pythonanywhere.com/"+free.images_logo} alt="" variant="rounded" className="mr-4 h-24 w-24" />
             <div>
@@ -293,8 +295,8 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
   <div className='grid grid-cols-2 w-[70%] md:w-full pl-3.5'>
     {[...Array(6)].map((_) => {
       return (
-    <div className='px-4 w-[400px] h-[467px] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4'>
-      <Skeleton height={90} width={90} inline={true} style={{borderRadius:'50%', float: 'left'}}/>
+    <div className='px-4 w-[26vw] h-[467px] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4'>
+      <Skeleton height={90} width={90} inline={true} style={{borderRadius:'10%', float: 'left'}}/>
       <Skeleton height={20} width={200} style={{marginLeft:10, marginTop:20}}/>
       <Skeleton height={20} width={200} style={{marginLeft:10, marginTop:10}}/>
       <Skeleton height={200} width={300} style={{marginTop:20}}/>
