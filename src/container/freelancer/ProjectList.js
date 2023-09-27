@@ -37,6 +37,33 @@ function ProjectList() {
     setRange(newRange);
   };
 
+  function timeAgo(postedTimeStr) {
+    const postedTime = new Date(postedTimeStr);
+    const currentTime = new Date();
+  
+    const deltaInMilliseconds = currentTime - postedTime;
+    const deltaInSeconds = Math.floor(deltaInMilliseconds / 1000);
+    const deltaInMinutes = Math.floor(deltaInSeconds / 60);
+    const deltaInHours = Math.floor(deltaInMinutes / 60);
+    const deltaInDays = Math.floor(deltaInHours / 24);
+  
+    if (deltaInMinutes < 1) {
+        return "just now";
+    } else if (deltaInMinutes < 60) {
+        return `${deltaInMinutes} minute ago`;
+    } else if (deltaInHours < 24) {
+        return `${deltaInHours} hour ago`;
+    } else if (deltaInDays < 30) {
+        return `${deltaInDays} day ago`;
+    } else if (deltaInDays < 365) {
+        const months = Math.floor(deltaInDays / 30);
+        return `${months} month ago`;
+    } else {
+        const years = Math.floor(deltaInDays / 365);
+        return `${years} year ago`;
+    }
+  }
+
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const openDialog = () => {
@@ -447,13 +474,13 @@ function ProjectList() {
                   <div className=' basis-4/12 border-2 border-r-[#797979] mr-2 border-t-0 border-b-0 border-l-0'>
                     <div className='flex flex-row'>
                       <div className=' basis-2/12'><i class="bi bi-geo-alt"></i></div>
-                      <div className=' basis-10/12 font-inter text-[#797979]'>London, UK</div>
+                      <div className=' basis-10/12 font-inter text-[#797979]'>{ project.project_owner_location ? project.project_owner_location : "NA"}</div>
                     </div>
                   </div>
                   <div className=' basis-4/12 border-2 border-r-[#797979] mr-2 border-t-0 border-b-0 border-l-0'>
                     <div className='flex flex-row'>
                       <div className=' basis-2/12'><i class="fa fa-calendar" aria-hidden="true"></i></div>
-                      <div className=' basis-10/12 font-inter text-[#797979]'>2 hours ago</div>
+                      <div className=' basis-10/12 font-inter text-[#797979]'>{timeAgo(project.project_creation_date)}</div>
                     </div>
                   </div>
                   <div className=' basis-4/12'>
