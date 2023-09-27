@@ -28,7 +28,7 @@ const Navbar = () => {
   if (loginMethod === 'google') {
       displayName = googleUserName;
   } else if (loginMethod === 'traditional') {
-      displayName = logindata?.first_Name;
+      displayName = logindata?.first_Name+" "+logindata?.last_Name;
   }
  
 
@@ -200,15 +200,32 @@ const Navbar = () => {
         </div>
     )}
     {dropdownVisible && (
-        <div className="drop absolute right-[-10px] mt-5 w-48 rounded-md shadow-lg bg-white">
+        <div className="drop absolute right-[-10px] mt-5 w-[13rem] rounded-md shadow-lg bg-white">
             <div className="py-1">
                       {/* <Link to='/freelancer/edit-profile' className="flex items-center px-4 py-2 hover:bg-gray-100">
                           <i class="bi bi-pencil mr-3 opacity-50"></i>
                           <span className="font-inter text-[16px] text-[#031136] opacity-50">Edit Profile</span>
                       </Link> */}
+                      {logindata && logindata.images_logo !== "/media/images/blank.png" ? (
+        <img 
+            src={"https://aparnawiz91.pythonanywhere.com/" + logindata.images_logo} 
+            alt="Profile" 
+            className="h-20 w-20 rounded-full cursor-pointer mx-auto my-5" 
+            onClick={() => setDropdownVisible(!dropdownVisible)}
+        />
+    ) : (
+        <div 
+            className="h-20 w-20 rounded-full cursor-pointer flex items-center justify-center bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white font-bold font-cardo text-4xl p-1 mx-auto my-5"
+            onClick={() => setDropdownVisible(!dropdownVisible)}
+        >
+            {displayName && displayName[0].toUpperCase()}
+        </div>
+    )}
+                     <h1 className="font-cardo text-2xl text-[#031136] font-normal text-center">{displayName}</h1>
+                     <h1 className="font-cardo text-lg text-[#031136] font-normal text-center opacity-50 mb-3">{loginType=='FREELANCER'? loginType.toLowerCase(): 'client'}</h1>
                       <Link to='/' className="flex items-center px-4 py-2 hover:bg-gray-100" onClick={handleLogout}>
-                          <i class="bi bi-box-arrow-right mr-3 opacity-50"></i>
-                          <span className="font-inter text-[16px] text-[#031136] opacity-50">Logout</span>
+                          <i class="bi bi-box-arrow-right mr-3"></i>
+                          <span className="font-inter text-[16px] text-[#031136]">Logout</span>
                       </Link>
             </div>
         </div>

@@ -125,13 +125,13 @@ const ViewAllProposals = () => {
                               <div class="flex">
                             <div class="flex-[10%] p-4">
                             <div className="relative w-24 h-24 mx-auto">
-                                              <img src={profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
+                                              <img src={"https://aparnawiz91.pythonanywhere.com/"+bid.freelancer_profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
                                               <div class="absolute bottom-2 right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                                           </div>
                             </div>
                             <div class="flex-[90%] p-4">
                             <div class="flex items-center justify-between">
-                            <p className="font-cardo text-[#0A142F] text-2xl font-medium">{bid.freelancer_first_Name}</p>
+                            <p className="font-cardo text-[#0A142F] text-2xl font-medium">{bid.freelancer_Name}</p>
                               
                               <div class="flex items-center space-x-4">
                                       <span class="inline-block text-sm px-10 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Message</span>
@@ -143,18 +143,39 @@ const ViewAllProposals = () => {
                                   </div>
                               </div>
                           </div>
-                          <h1 className="font-cardo opacity-50 text-lg text-[#031136]">Python Developer</h1>
-                            <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 inline-block pr-28">${bid.bid_amount} <span className='opacity-50 font-medium'>/hr</span></h1>
-                            <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 inline-block pr-28">$0 <span className='opacity-50 font-medium'>earned</span></h1>
-                            <h1 className="font-cardo text-lg text-[#031136] py-3 inline-block">Indore, India</h1>
+                          <h1 className="font-cardo opacity-50 text-lg text-[#031136]">{bid.freelancer_category}</h1>
+                           <div style={{ display: 'flex' }}>
+                            <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">${bid.bid_amount} <span className='opacity-50 font-medium'>/hr</span></h1>
+                            <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">$0 <span className='opacity-50 font-medium'>earned</span></h1>
+                            <h1 className="font-cardo text-lg text-[#031136] py-3 flex-1">{bid.freelancer_address}</h1>
+                            <h1 className="font-cardo text-lg text-[#031136] py-3 flex-1"></h1>
+                        </div>
                             <p className='font-inter text-[#0A142F] text-[14px]'>Cover Letter - <span className='opacity-50'>{bid.description}</span></p> 
                             <div className="text-left mt-5">
-                                          <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
-                                          <p className=" text-center">html</p>
-                                      </div>
-                                      <div className="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-24 text-green-800 px-3 py-[3px] font-semibold text-sm dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
-                                          <p className="text-center">React</p>
-                                      </div>
+                            {/* {JSON.parse(bid.Freelancer_skills.replace(/'/g,'"')).map((skill,index)=>(
+                <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
+                <p className=" text-center">{skill}</p>
+            </div>
+            ))} */}
+            {bid.Freelancer_skills && 
+  (() => {
+    try {
+      const skillsArray = JSON.parse(bid.Freelancer_skills.replace(/'/g, '"'));
+      return skillsArray.map((skill, index) => (
+        <div
+          key={index}
+          className="mr-3 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
+        >
+          <p className="text-center">{skill}</p>
+        </div>
+      ));
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return null;
+    }
+  })()
+}
+
                                       </div>
                             </div>
                           </div>

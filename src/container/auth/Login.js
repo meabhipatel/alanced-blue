@@ -76,80 +76,80 @@ const Login = (props) => {
         }
     }, []);
 
-    const checkEmailExists = async (email) => {
-        const response = await axios.post('https://aparnawiz91.pythonanywhere.com/account/check-email/', { email });
-        return response.data.exists; 
-    };
-    
-    const logins = useGoogleLogin({
-        onSuccess: async respose => {
-            try {
-                const res = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
-                    headers: {
-                        "Authorization": `Bearer ${respose.access_token}`
-                    }
-                })
-                
-                const emailExists = await checkEmailExists(res.data.email);
-                if (emailExists) {
-                    navigate('/freelancer/profile');  
-                    localStorage.setItem('googleUserName', res.data.name);
-                    localStorage.setItem('isLoggedIn', 'true');
-                    localStorage.setItem('loginMethod', 'google'); 
-                    console.log(res.data.email, "userinfo");
-                } else {
-                    toast.error("You're not a Registered user, Please signup first.");
-                }
-                
-            } catch (err) {
-                console.log(err)
-    
-            }
-    
-        }
-    });
-
-    //----- updated code commented Below ,which is to be applied with checkemail-API updation -----
-
-    // const checkEmailExists = async (email,type) => {
-    //     const response = await axios.post('http://127.0.0.1:8000/account/check-email/', { email ,type });
-    //     return response.data; 
+    // const checkEmailExists = async (email) => {
+    //     const response = await axios.post('https://aparnawiz91.pythonanywhere.com/account/check-email/', { email });
+    //     return response.data.exists; 
     // };
     
     // const logins = useGoogleLogin({
-    //     onSuccess: async response => {
+    //     onSuccess: async respose => {
     //         try {
     //             const res = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
     //                 headers: {
-    //                     "Authorization": `Bearer ${response.access_token}`
+    //                     "Authorization": `Bearer ${respose.access_token}`
     //                 }
-    //             });
-    //             const emailCheckResponse = await checkEmailExists(res.data.email);
+    //             })
                 
-    //             if (emailCheckResponse.exists) {
+    //             const emailExists = await checkEmailExists(res.data.email);
+    //             if (emailExists) {
+    //                 navigate('/freelancer/profile');  
     //                 localStorage.setItem('googleUserName', res.data.name);
     //                 localStorage.setItem('isLoggedIn', 'true');
-    //                 localStorage.setItem('loginMethod', 'google');
-    //                 console.log(emailCheckResponse.type,"ckhfff")
-    //                 // Navigate based on user type
-    //                 if (emailCheckResponse.type === 'FREELANCER') {
-    //                     navigate('/freelancer/profile');
-    //                 } else if (emailCheckResponse.type === 'HIRER') {
-    //                     navigate('/hirer/profile');
-    //                 } else {
-    //                     toast.error("Invalid user type. Please contact support.");
-    //                 }
-    
+    //                 localStorage.setItem('loginMethod', 'google'); 
+    //                 console.log(res.data.email, "userinfo");
     //             } else {
     //                 toast.error("You're not a Registered user, Please signup first.");
     //             }
-    
+                
     //         } catch (err) {
-    //             console.log(err);
-    //             toast.error("Something went wrong. Please try again.");
+    //             console.log(err)
+    
     //         }
+    
     //     }
     // });
+
+    //----- updated code commented Below ,which is to be applied with checkemail-API updation -----
+
+    const checkEmailExists = async (email,type) => {
+        const response = await axios.post('https://aparnawiz91.pythonanywhere.com/account/check-email/', { email ,type });
+        return response.data; 
+    };
+    
+    const logins = useGoogleLogin({
+        onSuccess: async response => {
+            try {
+                const res = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+                    headers: {
+                        "Authorization": `Bearer ${response.access_token}`
+                    }
+                });
+                const emailCheckResponse = await checkEmailExists(res.data.email);
+                
+                if (emailCheckResponse.exists) {
+                    localStorage.setItem('googleUserName', res.data.name);
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('loginMethod', 'google');
+                    console.log(emailCheckResponse.type,"ckhfff")
+                    // Navigate based on user type
+                    if (emailCheckResponse.type === 'FREELANCER') {
+                        navigate('/freelancer/profile');
+                    } else if (emailCheckResponse.type === 'HIRER') {
+                        navigate('/hirer/profile');
+                    } else {
+                        toast.error("Invalid user type. Please contact support.");
+                    }
+    
+                } else {
+                    toast.error("You're not a Registered user, Please signup first.");
+                }
+    
+            } catch (err) {
+                console.log(err);
+                toast.error("Something went wrong. Please try again.");
+            }
+        }
+    });
 
     
     return (
