@@ -189,11 +189,13 @@ const ViewAllProposals = () => {
                         })}</div> : 
                         <div>
                         <Skeleton height={100} width={100} style={{borderRadius: '50%', marginLeft: 30, float:'left', marginTop: 30}}/>
-                        <Skeleton height={40} width={150} style={{float: 'right', marginTop: 25, marginLeft: 10}}/>
-                        <Skeleton height={40} width={150} style={{float: 'right'}}/>
-                        <Skeleton height={100} width={1000}/>
-                        <Skeleton height={40} width={100} inline="true" style={{marginLeft: 50}}/>
-                        <Skeleton height={40} width={100} inline="true" count={4} style={{marginLeft: 20}}/>
+                        <Skeleton height={20} width={100} style={{marginLeft: 20, marginTop: 30}}/>
+                        <Skeleton height={20} width={150} style={{marginLeft: 20}}/>
+                        <Skeleton height={40} width={150} style={{float: 'right', marginTop: -40, marginLeft: 10, marginRight: 50}}/>
+                        <Skeleton height={40} width={150} style={{float: 'right', marginTop: -64, marginRight: 210}}/>
+                        <Skeleton height={100} width={1000} style={{marginLeft: 150}}/>
+                        <Skeleton height={30} width={100} inline="true" style={{marginLeft: 150, marginTop: 10, borderRadius: '25px'}}/>
+                        <Skeleton height={30} width={100} inline="true" count={4} style={{marginLeft: 20, marginTop: 10, borderRadius: '25px'}}/>
                         </div>}
                     </>
                 )
