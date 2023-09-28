@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import profilepic from '../../../components/images/profilepic.png'
 import verify from '../../../components/images/verify.png'
 import locations from '../../../components/images/location.png'
 import { useState } from 'react'
 import Portfolio from './Portfolio'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
+import { IconButton, Typography } from "@material-tailwind/react";
+import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 
 const ViewProposalPopup = ({ closeViewProposal, bid }) => {
@@ -14,12 +18,58 @@ const ViewProposalPopup = ({ closeViewProposal, bid }) => {
   const project = location.state && location.state.project;
 
   const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
+  const accessToken = useSelector(state => state.login.accessToken);  
+  const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile)
+  const [freelancerproject, setfreelancerproject] = useState([]);
+  const id = freelancerselfprofile && freelancerselfprofile[0].id ? freelancerselfprofile[0].id : '';
+  const [selectedProjects, setSelectedProjects] = useState(null);
 
-  const openPortfolio = () => {
+  useEffect(() => {
+    if(id) { 
+        axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}`)
+            .then(response => {
+                if (response.data.status === 200) {
+                    setfreelancerproject(response.data.data);
+                } else {
+                    console.log(response.data.message || 'Error fetching project');
+                }
+            })
+            .catch(err => {
+                console.log(err.message);
+            });
+    }
+}, [id]); 
+
+const [active, setActive] = React.useState(1);
+ 
+  const next = () => {
+      if (active === Math.ceil(freelancerproject.length / 6)) return;
+      setActive(active + 1);
+  };
+
+  const prev = () => {
+      if (active === 1) return;
+      setActive(active - 1);
+  };
+
+  // 1. Chunk the Array
+  const chunkArray = (array, size) => {
+      let chunked = [];
+      for (let i = 0; i < array.length; i += size) {
+          chunked.push(array.slice(i, i + size));
+      }
+      return chunked;
+  }
+
+  const chunkedProjects = chunkArray(freelancerproject, 6);
+
+  const openPortfolio = (project) => {
+    setSelectedProjects(project);
     setIsPortfolioOpen(true);
   };
 
   const closePortfolio = () => {
+    setSelectedProjects(null);
     setIsPortfolioOpen(false);
   };
     
@@ -113,6 +163,68 @@ const ViewProposalPopup = ({ closeViewProposal, bid }) => {
 <p className="text-[#031136] opacity-50 text-[14px] font-inter py-5">Hello, I am software developer working as a full stack Mean developer, I can do this work with good efficiency in less time, please let me know when we can connect and discuss further for this and other projects.</p>
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
+        <h1 className="font-cardo text-2xl text-[#031136] font-normal">Portfolio ({freelancerproject && freelancerproject ? freelancerproject.length : 0})</h1>
+    <div className="flex flex-wrap -mx-2">  
+    {chunkedProjects[active - 1] && chunkedProjects[active - 1].map((pro, index) => (
+        <div className='w-1/3 px-2 cursor-pointer' key={index} onClick={() => openPortfolio(pro)}>  
+            <div className='w-full h-[165px] mt-4 border border-gray-100 overflow-hidden'>
+                <img 
+                    src={"https://aparnawiz91.pythonanywhere.com/"+pro.images_logo} 
+                    alt="" 
+                    style={{
+                        maxWidth: '100%',
+                        maxHeight: '100%',
+                        objectFit: 'contain',  
+                        width: '100%', 
+                        height: '100%' 
+                    }}
+                />
+            </div>
+            <p className='font-inter text-green-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-green-700 underline font-semibold'>{pro.project_title}</p>
+        </div>
+    ))}
+    {isPortfolioOpen && <Portfolio project={selectedProjects} closePortfolio={closePortfolio} />}
+</div>
+   <div className="flex justify-end items-center gap-6 mt-5">
+{freelancerproject.length > 6 && (
+  <>
+    <IconButton
+      size="sm"
+      variant="outlined"
+      onClick={prev}
+      disabled={active === 1}
+      style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+    >
+      <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+    </IconButton>
+
+    {[...Array(Math.ceil(freelancerproject.length / 6))].map((_, index) => {
+      const pageNumber = index + 1;
+      return (
+        <span
+          key={pageNumber}
+          className={`px-0 py-1 ${active === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+          onClick={() => setActive(pageNumber)}
+        >
+          {pageNumber}
+        </span>
+      );
+    })}
+
+    <IconButton
+      size="sm"
+      variant="outlined"
+      onClick={next}
+      disabled={active === Math.ceil(freelancerproject.length / 6)}
+      style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+    >
+      <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+    </IconButton>
+  </>
+)}
+</div>
+    </div>
+        {/* <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
     <h1 className="font-cardo text-2xl text-[#031136] font-normal">Portfolio</h1>
     <div className="flex flex-wrap -mx-2">  
         <div className='w-1/3 px-2 cursor-pointer' onClick={openPortfolio}>  
@@ -133,7 +245,7 @@ const ViewProposalPopup = ({ closeViewProposal, bid }) => {
         </div>
         {isPortfolioOpen && <Portfolio closePortfolio={closePortfolio} project={project}/>}
 </div>
-        </div>
+        </div> */}
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
     <h1 className="font-cardo text-2xl text-[#031136] font-normal">Skills</h1>
     <div className="text-left mt-5">
