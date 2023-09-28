@@ -116,7 +116,7 @@ const Navbar = () => {
             </div>
         </div>
     )}
-      </> : <Link to=''><span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" >Find Talent </span></Link> }
+      </> : <span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" >Find Talent </span> }
       {loginType=='FREELANCER' ? <>
       <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setMyJobsDropdown(true)} 
     >My Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
