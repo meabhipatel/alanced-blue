@@ -1,39 +1,54 @@
-import React from 'react'
+import React, { useState} from 'react'
 import Navbar from '../../components/Layout/Navbar'
 import Footer from '../../components/Layout/Footer'
 import HomeSection4 from '../../components/Layout/HomeSection4'
+import { Link, useLocation,useNavigate } from 'react-router-dom'
 
 
 
 const ViewBidAfterAdd = () => {
+const location = useLocation();
+const findbid = location.state && location.state.bid;
+console.log(findbid,"find bid")
+
+const [showFullDescription, setShowFullDescription] = useState(false);
+
+    const toggleDescription = () => {
+        setShowFullDescription(!showFullDescription);
+    };
+
+    const descriptionToShow = showFullDescription
+        ? findbid.project.description
+        : findbid.project.description.slice(0, 200);
+
   return (
     <>
     <Navbar/>
     <div className=' container-sm px-36'>
-        <h1 className='font-inter text-2xl text-left mt-10'>Proposal Details</h1>
+        <h1 className='font-inter text-2xl text-left mt-5'>Proposal Details</h1>
         <div className=' flex flex-row'>
             <div className=' basis-9/12'>
             <div className=' mt-8  border border-[#E7E8F2] py-8 px-8 rounded-lg'>
         <h1 className=' text-2xl font-cardo font-semibold text-left'>Job Details</h1>
             <div className=' flex flex-row mt-6'>
                 <div className=' basis-8/12'>
-                <h1 className=' text-xl font-inter font-medium text-left'>Software Developer</h1>
+                <h1 className=' text-xl font-inter font-medium text-left'>{findbid.project.title}</h1>
                 <div className=' flex flex-row'>
-                <div className=' basis-4/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-green-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  w-[90%] bg-opacity-[60%]">Software Developer</div></div>
+                <div className=' basis-4/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-green-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  w-[90%] bg-opacity-[60%]">{findbid.project.category}</div></div>
                 <div className=' basis-4/12 mt-5 ml-2'><p className=' text-sm font-medium font-inter text-left opacity-[50%]'>Posted 22 hours ago</p></div>
                 </div>
                 <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum commodi tenetur veniam exercitationem vitae dolores atque similique culpa tempore reiciendis?
+                    {descriptionToShow}
                 </p>
-                {/* {projectData.project.description.length > 200 && (
+                {findbid.project.description.length > 200 && (
                     <p
                     className='mt-3 text-base font-semibold text-green-600 text-left cursor-pointer'
                     onClick={toggleDescription}
                     >
                     {showFullDescription ? 'less' : 'more'}
                     </p>
-                )} */}
-                {/* <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>{projectData.project.description}</p>
+                )}
+                {/* <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>{findbid.project.description}</p>
                 <p className=' mt-3 text-base font-semibold text-green-600 text-left'>more</p> */}
                 <p className='mb-5 mt-5 text-base font-semibold text-green-600 text-left'>View job posting</p>
                 </div>
@@ -65,29 +80,29 @@ const ViewBidAfterAdd = () => {
             <hr className=' mt-5' />
             <h1 className='text-base font-medium font-inter text-left mt-5'>Skills & Experties</h1>
             <div className="text-left mt-5">
-            {/* {JSON.parse(projectData.project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
+            {JSON.parse(findbid.project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
                 <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
                 <p className=" text-center">{skill}</p>
             </div>
-            ))} */}
-            <div className="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-24 text-green-800 px-3 py-[3px] font-semibold text-sm dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
+            ))}
+            {/* <div className="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-24 text-green-800 px-3 py-[3px] font-semibold text-sm dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
                 <p className="text-center">React</p>
             </div>
             <div className="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-24 ml-3 text-green-800 px-3 py-[3px] font-semibold text-sm dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
                 <p className="text-center">Django</p>
-            </div>
+            </div> */}
             </div>
             <hr className=' mt-8' />
             <div className=' flex flex-row'>
                 <div className=' basis-6/12'><p className='text-base font-medium font-inter text-left mt-5'>Your proposed terms</p></div>
-                <div className=' basis-6/12'><p className='text-base font-medium opacity-50 font-inter text-right mt-5'>Client's budget: $500.00</p></div>
+                <div className=' basis-6/12'><p className='text-base font-medium opacity-50 font-inter text-right mt-5'>Client's budget: ${findbid.project.budget}</p></div>
             </div>
             <div>
             <p className='text-[15px] font-medium font-inter text-left mt-5'>How do you want to be paid?</p>
             <p className='text-[15px] font-medium font-inter text-left opacity-70'>By Project</p>
             <p className='text-[15px] font-medium font-inter text-left mt-5'>Total price of project</p>
             <p className='text-[15px] font-medium font-inter text-left opacity-70'>This includes all milestones, and is the amount your client will see.</p>
-            <p className='text-base font-medium font-inter text-left mt-5 opacity-70'>$500.00</p>
+            <p className='text-base font-medium font-inter text-left mt-5 opacity-70'>{findbid.bid_amount}</p>
             <hr className=' mt-5' />
             <p className='text-[15px] font-medium font-inter text-left mt-5'>You'll Receive</p>
             <p className='text-[15px] font-medium font-inter text-left opacity-70'>The estimated payment, after service fees.</p>
@@ -103,7 +118,7 @@ const ViewBidAfterAdd = () => {
         <div className='mt-8  border border-[#E7E8F2] py-8 px-8 rounded-lg'>
         <h1 className=' text-xl font-inter font-medium text-left'>Cover Letter</h1>
         <p className='font-inter text-[15px] font-medium mt-7 text-left opacity-[70%]'>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum commodi tenetur veniam exercitationem vitae dolores atque similique culpa tempore reiciendis?
+        {findbid.description}
         </p>
         </div>
             </div>

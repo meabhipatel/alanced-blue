@@ -1,12 +1,43 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Navbar from '../../components/Layout/Navbar'
 import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
 import { Link } from 'react-router-dom'
 import availablenow from '../../components/images/availablenow.png'
 import edit from '../../components/images/edit.png'
+import { GetFreelancerSelfBidAction } from '../../redux/Freelancer/FreelancerAction'
+
+
 
 const MyProposals = () => {
+
+const accessToken = useSelector(state => state.login.accessToken); 
+const freelancerselfbid = useSelector(state => state.freelancer.freelancerselfbid)
+const bidCount = freelancerselfbid?.length || 0;
+const dispatch = useDispatch();
+
+React.useEffect(() => {
+    dispatch(GetFreelancerSelfBidAction(accessToken))
+  }, [])
+
+  const calculateTimeAgo = (projectCreationDate) => {
+    const currentDate = new Date();
+    const creationDate = new Date(projectCreationDate);
+    const timeDifference = currentDate - creationDate;
+
+    const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    const hoursAgo = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+    const minutesAgo = Math.floor((timeDifference / 1000 / 60) % 60);
+
+    if (daysAgo > 0) {
+      return `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
+    } else if (hoursAgo > 0) {
+      return `${hoursAgo} hour${hoursAgo > 1 ? 's' : ''} ago`;
+    } else {
+      return `${minutesAgo} minute${minutesAgo > 1 ? 's' : ''} ago`;
+    }
+  };
 
   const [selectedButton, setSelectedButton] = useState('Active');
   const commonStyle = "inline-block text-sm py-[10px] mt-4 lg:mt-0 border rounded font-semibold"; 
@@ -76,6 +107,72 @@ const MyProposals = () => {
         </div>
     </div>
 </div>
+<div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2] text-left'>
+<h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Submitted Proposals ({bidCount})</h1>
+{freelancerselfbid && <>{freelancerselfbid.map((bid,index) => {
+    const timeAgo = calculateTimeAgo(bid.bid_time);
+    const bidTime = new Date(bid.bid_time);
+
+    // Calculate the time difference
+    const currentTime = new Date();
+    // Options for formatting the date
+    const dateFormatOptions = {
+        day: 'numeric',
+        month: 'short', // Use 'short' for abbreviated month name
+        year: 'numeric',
+      };
+      // Format the date as "23 Sep 2023"
+      const formattedDate = bidTime.toLocaleDateString(undefined, dateFormatOptions);
+
+    return(
+        <Link to="/View-proposal" state={{ bid }} onClick={() => window.scrollTo(0, 0)}>
+        <div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
+        <div className='flex flex-col w-1/4'>
+            <h1 className='font-cardo text-[18px] text-[#031136]'>Initiated {formattedDate}</h1>
+            <p className='font-inter text-[14px] text-[#031136] opacity-50'>{timeAgo}</p>
+        </div>
+
+        <div className='flex-grow pl-[180px]'>
+            <h1 className='font-cardo text-[18px] text-[#031136]'>{bid.project.title}</h1>
+        </div>
+
+        <div className='flex flex-col w-1/4 items-end pr-4'>
+            <p className='font-inter text-[16px] text-[#031136] opacity-50'>{bid.project.category}</p>
+        </div>
+    </div>
+    </Link>
+    )
+})}</>}
+<div className="flex justify-end items-center p-5">
+  <div className="flex items-center justify-center w-8 h-8 text-gray-500 border border-gray-200 p-1 cursor-pointer" onClick={prev}
+    disabled={active === 1}>
+    -
+  </div>
+  <div className="flex border-t border-b border-gray-200 p-1 gap-4">
+    {[...Array(5)].map((_, index) => {
+      const pageNumber = index + 1;
+      return (
+        <span
+          key={pageNumber}
+          className={`w-6 h-6 flex items-center justify-center cursor-pointer ${
+            active === pageNumber
+              ? 'bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-white text-xs rounded-sm'
+              : 'text-gray-500 font-bold font-inter text-xs'
+          }`}
+          onClick={() => setActive(pageNumber)}
+        >
+          {pageNumber}
+        </span>
+      );
+    })}
+  </div>
+  <div className="flex items-center justify-center w-8 h-8 text-gray-500 border border-gray-200 p-1 cursor-pointer" onClick={next}
+    disabled={active === 5}>
+    +
+  </div>
+
+</div>
+</div>
 <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2]  text-left'>
 <h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Active Proposals (5)</h1>
 <div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
@@ -133,94 +230,6 @@ const MyProposals = () => {
     <div className='flex flex-col w-1/4 items-end pr-4'>
         <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
     </div>
-</div>
-</div>
-<div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2] text-left'>
-<h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Submitted Proposals (57)</h1>
-<div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
-    <div className='flex flex-col w-1/4'>
-        <h1 className='font-cardo text-[18px] text-[#031136]'>Initiated Sep 2, 2023</h1>
-        <p className='font-inter text-[14px] text-[#031136] opacity-50'>8 hours ago</p>
-    </div>
-
-    <div className='flex-grow pl-[180px]'>
-        <h1 className='font-cardo text-[18px] text-[#031136]'>Web designer for saas landing page</h1>
-    </div>
-
-    <div className='flex flex-col w-1/4 items-end pr-4'>
-        <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
-    </div>
-</div>
-<div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
-    <div className='flex flex-col w-1/4'>
-        <h1 className='font-cardo text-[18px] text-[#031136]'>Initiated Sep 2, 2023</h1>
-        <p className='font-inter text-[14px] text-[#031136] opacity-50'>16 hours ago</p>
-    </div>
-
-    <div className='flex-grow pl-[180px]'>
-        <h1 className='font-cardo text-[18px] text-[#031136]'>Landing page design for a wine delivery website</h1>
-    </div>
-
-    <div className='flex flex-col w-1/4 items-end pr-4'>
-        <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
-    </div>
-</div>
-<div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
-    <div className='flex flex-col w-1/4'>
-        <h1 className='font-cardo text-[18px] text-[#031136]'>Initiated Sep 1, 2023</h1>
-        <p className='font-inter text-[14px] text-[#031136] opacity-50'>16 hours ago</p>
-    </div>
-
-    <div className='flex-grow pl-[180px]'>
-        <h1 className='font-cardo text-[18px] text-[#031136]'>Senior React/React Native Developer</h1>
-    </div>
-
-    <div className='flex flex-col w-1/4 items-end pr-4'>
-        <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
-    </div>
-</div>
-<div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
-    <div className='flex flex-col w-1/4'>
-        <h1 className='font-cardo text-[18px] text-[#031136]'>Initiated Sep 1, 2023</h1>
-        <p className='font-inter text-[14px] text-[#031136] opacity-50'>1 day ago</p>
-    </div>
-
-    <div className='flex-grow pl-[180px]'>
-        <h1 className='font-cardo text-[18px] text-[#031136]'>Looking for UI/UX Designer</h1>
-    </div>
-
-    <div className='flex flex-col w-1/4 items-end pr-4'>
-        <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
-    </div>
-</div>
-<div className="flex justify-end items-center p-5">
-  <div className="flex items-center justify-center w-8 h-8 text-gray-500 border border-gray-200 p-1 cursor-pointer" onClick={prev}
-    disabled={active === 1}>
-    -
-  </div>
-  <div className="flex border-t border-b border-gray-200 p-1 gap-4">
-    {[...Array(5)].map((_, index) => {
-      const pageNumber = index + 1;
-      return (
-        <span
-          key={pageNumber}
-          className={`w-6 h-6 flex items-center justify-center cursor-pointer ${
-            active === pageNumber
-              ? 'bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-white text-xs rounded-sm'
-              : 'text-gray-500 font-bold font-inter text-xs'
-          }`}
-          onClick={() => setActive(pageNumber)}
-        >
-          {pageNumber}
-        </span>
-      );
-    })}
-  </div>
-  <div className="flex items-center justify-center w-8 h-8 text-gray-500 border border-gray-200 p-1 cursor-pointer" onClick={next}
-    disabled={active === 5}>
-    +
-  </div>
-
 </div>
 </div>
     </div>
