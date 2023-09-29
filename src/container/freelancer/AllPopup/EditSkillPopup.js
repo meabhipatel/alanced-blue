@@ -63,6 +63,34 @@ const EditSkillPopup = ({ closeEditSkill }) => {
             <div className="mt-10">
                 <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Skills</h1>
                 <div className="border rounded-md p-2 flex items-center flex-wrap my-3">
+    {Array.isArray(skills) && skills.map((skill, index) => (
+        <div key={index} className="bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border-none text-white font-semibold rounded px-2 py-1.5 mr-3 my-2 flex items-center">
+            <span>{skill}</span>
+            <button onClick={() => removeSkill(index)} className="ml-2 mt-1 pb-0.5 text-sm bg-white text-green-500 rounded-full w-4 h-4 flex justify-center items-center">
+                &times;
+            </button>
+        </div>
+    ))}
+    <div className="flex items-center relative w-full">
+        <input 
+            type="text" 
+            value={currentSkill} 
+            onChange={(e) => setCurrentSkill(e.target.value)}
+            placeholder="Enter Skills here"
+            className="outline-none w-full"
+        />
+        <span id="hiddenText" style={{visibility: 'hidden', whiteSpace: 'pre', position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)'}}>{currentSkill}</span>
+        <button 
+            onClick={addSkill} 
+            style={{position: 'absolute', left: `${document.getElementById("hiddenText")?.offsetWidth || 0}px`, top: '47%', transform: 'translateY(-50%)'}}
+            className={`ml-4 mt-1 pb-0.5 text-sm bg-lime-500 text-white rounded-full w-4 h-4 flex justify-center items-center ${currentSkill.trim() ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+        >
+            +
+        </button>
+    </div>
+</div>
+
+                {/* <div className="border rounded-md p-2 flex items-center flex-wrap my-3">
                     {Array.isArray(skills) && skills.map((skill, index) => (
                         <div key={index} className="bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border-none text-white  font-semibold rounded px-2 py-1.5 mr-3 my-2 flex items-center">
                             <span>{skill}</span>
@@ -83,7 +111,7 @@ const EditSkillPopup = ({ closeEditSkill }) => {
                         placeholder="Enter Skills here"
                         className="outline-none w-full"
                     />
-                </div>
+                </div> */}
                 {error && <p className="text-red-500 mt-2">{error}</p>}
             </div>
             <div className="mt-8 flex justify-end">

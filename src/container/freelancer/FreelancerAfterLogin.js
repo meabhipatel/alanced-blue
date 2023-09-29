@@ -217,7 +217,7 @@ const openDialog = (project) => {
 <div class="flex flex-col md:flex-row mb-5 mx-5">
 <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
 <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
-    <Link to='/View-proposal'><h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Connects</h1></Link>
+    <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Connects</h1>
     <div className="flex items-center space-x-2">
             <img src={downarrow} alt="" />
     </div>
@@ -267,7 +267,7 @@ const openDialog = (project) => {
             <img src={ladder} alt="" className='mx-auto h-16 w-16 mt-2'/>
         </div>
     </div>
-    <Link to='/my-jobs'>
+    <Link to='/my-jobs' onClick={() => window.scrollTo(0, 0)}>
     <div className="grid grid-cols-[2fr,1fr] gap-2 rounded-lg p-4 mx-4 relative z-10 shadow-sm">
         <div>
         <h1 className='font-cardo text-lg text-[#031136] text-left'>My Jobs</h1>

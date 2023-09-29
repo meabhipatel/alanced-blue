@@ -44,6 +44,20 @@ const ViewAllProposals = () => {
     setSelectedbid(null);
     setIsViewProposalOpen(false);
   };
+
+  const [expandedProjects, setExpandedProjects] = useState([]);
+
+const handleToggleDescription = (index) => {
+    const updatedState = [...expandedProjects];
+    updatedState[index] = !updatedState[index];
+    setExpandedProjects(updatedState);
+};
+
+const handleClick = (event, index) => {
+  event.stopPropagation();
+
+  handleToggleDescription(index);
+};
     
     const [selected, setSelected] = useState('All Proposals');
     const underlineStyle = {
@@ -123,6 +137,8 @@ const ViewAllProposals = () => {
                     <>{viewallbids != null ? 
                         <div>
                         {viewallbids && viewallbids.map((bid, index) => {
+                          const words = bid.description.split(' ');
+                          const displayWords = expandedProjects[index] || words.length <= 50 ? words : words.slice(0, 50);
                             return(<>
                               <div className='px-4 md:px-8 py-2 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30' onClick={() => openViewProposal(bid)}>
                               <div class="flex">
@@ -137,9 +153,9 @@ const ViewAllProposals = () => {
                             <p className="font-cardo text-[#0A142F] text-2xl font-medium">{bid.freelancer_Name}</p>
                               
                               <div class="flex items-center space-x-4">
-                                      <span class="inline-block text-sm px-10 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Message</span>
+                                      <span class="inline-block text-sm px-10 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold" onClick={handleClick}>Message</span>
                           
-                                  <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
+                                  <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={handleClick}>
                                           <button class="px-10 py-1 bg-white">
                                               <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p>
                                           </button>
@@ -153,13 +169,19 @@ const ViewAllProposals = () => {
                             <h1 className="font-cardo text-lg text-[#031136] py-3 flex-1">{bid.freelancer_address}</h1>
                             <h1 className="font-cardo text-lg text-[#031136] py-3 flex-1"></h1>
                         </div>
-                            <p className='font-inter text-[#0A142F] text-[14px]'>Cover Letter - <span className='opacity-50'>{bid.description}</span></p> 
+                            <p className='font-inter text-[#0A142F] text-[14px]'>Cover Letter - <span className='opacity-50'>
+                            {displayWords.join(' ')} 
+                {words.length > 50 && (
+                    <span 
+                        className="font-cardo text-[#031136] text-[18px] font-semibold cursor-pointer pl-2" 
+                        onClick={(event) => handleClick(event, index)}
+
+                    >
+                        {expandedProjects[index] ? 'Less' : 'More'}
+                    </span>
+                )}
+                              </span></p> 
                             <div className="text-left mt-5">
-                            {/* {JSON.parse(bid.Freelancer_skills.replace(/'/g,'"')).map((skill,index)=>(
-                <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
-                <p className=" text-center">{skill}</p>
-            </div>
-            ))} */}
             {bid.Freelancer_skills && 
   (() => {
     try {
@@ -167,7 +189,7 @@ const ViewAllProposals = () => {
       return skillsArray.map((skill, index) => (
         <div
           key={index}
-          className="mr-3 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
+          className="mr-3 my-2 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
         >
           <p className="text-center">{skill}</p>
         </div>
