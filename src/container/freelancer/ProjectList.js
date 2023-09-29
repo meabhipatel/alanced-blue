@@ -503,7 +503,7 @@ function ProjectList() {
                   {accessToken ? (
                     <Link to='/freelancer/send-proposal' state={{ project }} onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
                   ): (
-                  <Link to='/login' state={{ project }} onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
+                  <Link to='/login' onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
                 )}
                 </div>
               </div>

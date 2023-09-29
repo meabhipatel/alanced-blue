@@ -93,3 +93,15 @@ export const AddBidAmount = async (data, token) => {
       return handleError(err);
     });
 };
+
+export const GetFreelancerSelfBid = async (token) => {    
+  setHeadersWithAccessToken(token);
+  return await DataService.get(API.Freelancers.Freelancer.ViewFreelancerSelfBid)
+    .then((res) => {
+      console.log("Freelancer Self Bid",res);
+      return res.data;
+    })
+    .catch((err) => {
+      return handleError(err);
+    });
+};

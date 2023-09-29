@@ -41,6 +41,7 @@ import ViewAllProposals from "../container/hirer/ViewAllProposals";
 import ViewBidAfterAdd from "../container/freelancer/ViewBidAfterAdd";
 import ViewProposalNewTab from '../container/hirer/HirerAllPopup/ViewProposalNewTab';
 import ViewJobPost from "../container/hirer/ViewJobPost";
+import ViewBidDetailAfterAdd from "../container/freelancer/ViewBidDetailAfterAdd";
 
   const AppRouter = (props) => {
     
@@ -89,6 +90,7 @@ import ViewJobPost from "../container/hirer/ViewJobPost";
           <Route path="/View-proposal" element={<ViewBidAfterAdd/>}/>
           <Route path="/View/proposal" element={<ViewProposalNewTab/>}/>
           <Route path="/View/Job-post" element={<ViewJobPost/>}/>
+          <Route path="/View/bid-details" element={<ViewBidDetailAfterAdd/>}/>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   

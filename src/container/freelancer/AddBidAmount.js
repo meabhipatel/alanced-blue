@@ -38,7 +38,7 @@ const BidAdd = () => {
       }
       console.log("/-/-/-/-/-/-/-/-/-/-/",prodata)
     dispatch(AddBidAmountAction(prodata, accessToken));
-    navigate('/freelancer/profile')
+    navigate('/View/bid-details', { state: { bidData: prodata, projectdetail: projectData,} })
   };
 
   const onChange = e =>{
