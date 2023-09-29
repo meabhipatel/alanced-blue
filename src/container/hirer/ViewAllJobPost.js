@@ -9,6 +9,8 @@ import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useDispatch, useSelector } from 'react-redux'
 import { GetViewHirerSelfProjectssAction } from '../../redux/Hirer/HirerAction'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const ViewAllJobPost = () => {
     
@@ -28,12 +30,14 @@ const ViewAllJobPost = () => {
   const [active, setActive] = React.useState(1);
  
   const next = () => {
+    window.scrollTo(0, 0)
     if (active === 5) return;
  
     setActive(active + 1);
   };
  
   const prev = () => {
+    window.scrollTo(0, 0)
     if (active === 1) return;
  
     setActive(active - 1);
@@ -101,6 +105,8 @@ function timeAgo(postedTimeStr) {
         <img src={searchbtn} alt="Search Icon" />
     </button>
 </section>
+{viewhirerselfproject != null ? 
+<div>
 {viewhirerselfproject && viewhirerselfproject.map((project, index) => {
                  
                 //  const isJobOpen = (deadline) => {
@@ -145,7 +151,25 @@ function timeAgo(postedTimeStr) {
     </div>
     </>
       )
-  })}
+  })}</div>: <div>
+    {[...Array(8)].map((_) => {
+      return (
+  <div className='flex mt-5'>
+    <div className='pl-6'>
+    <Skeleton height={20} width={120}/>
+    <Skeleton height={20} width={250} style={{marginTop: 10}}/>
+    <Skeleton height={30} width={60} style={{marginTop: 10}}/>
+    </div>
+    <div className='ml-48'>
+    <Skeleton height={45} inline="true" count={2} width={100} style={{marginLeft:60}}/>
+    <Skeleton height={45} inline="true" width={60} style={{marginLeft:60}}/>
+    </div>
+    <Skeleton height={40} width={150} style={{marginLeft: 140}}/>
+    </div>
+    );})}
+    </div>
+    
+    }
     <div className="flex justify-end items-center gap-6 m-4">
   <IconButton
     size="sm"

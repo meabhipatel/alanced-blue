@@ -29,8 +29,8 @@ const HirerAfterLogin = () => {
     const logindata = useSelector(state => state.login.login_data);  
     const googleUserName = localStorage.getItem('googleUserName')
     const loginMethod = localStorage.getItem('loginMethod')
-    const [viewallfreelancer, setviewallfreelancer] = useState([])
-    const freelancers = useSelector(state => state.hirer.viewallfreelancer)
+    // const [viewallfreelancer, setviewallfreelancer] = useState([])
+    const viewallfreelancer = useSelector(state => state.hirer.viewallfreelancer)
     // console.log(";;;;;;;;;;;;;;;;;;;;;;;",viewallfreelancer.length)
     const [searchTerm, setSearchTerm] = useState('');
     console.log(useSelector(state => state.login.accessToken))
@@ -39,7 +39,7 @@ const HirerAfterLogin = () => {
   
     React.useEffect(() => {
       dispatch(GetViewAllFreelancersAction())
-      setviewallfreelancer(freelancers)
+      // setviewallfreelancer(freelancers)
     }, [])
   
     let displayName;
@@ -103,6 +103,7 @@ const HirerAfterLogin = () => {
  
   const next = () => {
       if (active === Math.ceil(viewallfreelancer.length / 6)) return;
+      window.scrollTo(0, 0)
       setActive(active + 1);
   };
 
@@ -166,7 +167,7 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
       <h1 className="font-cardo text-[18px] text-[#031136] font-normal pt-2">Community & Forums  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
       <h1 className="font-cardo text-[18px] text-[#031136] font-normal py-2">Help Center  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
       </div>
-      <Link to='/freelancer/edit-profile#certificate'>
+      <Link to=''>
       <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#E2F9EE] rounded-lg p-4 mx-4 shadow-sm">
       <div>
           <h1 className='font-cardo text-lg text-[#031136] text-left'>Post A Job</h1>
@@ -242,7 +243,7 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
       <div className='px-4 md:px-8 py-4'>
         <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse Freelancers that match your jobs</p>
       </div>
-      {freelancers != null ? 
+      {viewallfreelancer != null ? 
       <div className='grid grid-cols-2 w-[70%] md:w-full pl-3.5'>
       {chunkedFree[active - 1] && chunkedFree[active - 1].map((free, index) => {
                 return(<>
