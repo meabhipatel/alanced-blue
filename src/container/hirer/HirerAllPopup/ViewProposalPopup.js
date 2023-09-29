@@ -12,7 +12,6 @@ import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 
 const ViewProposalPopup = ({ closeViewProposal, bid }) => {
-
     const bidData = { bid };
     const location = useLocation();
   const project = location.state && location.state.project;

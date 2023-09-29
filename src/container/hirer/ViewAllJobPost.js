@@ -113,7 +113,7 @@ function timeAgo(postedTimeStr) {
     <div className='px-4 md:px-8 py-5 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30' key={index}>
 <div class="flex">
   <div class="flex-[40%]">
-  <Link to='/View/Job-post' state={{project}}>
+  <Link to='/View/Job-post' state={{project}} onClick={() => window.scrollTo(0, 0)}>
   <p className="font-inter text-[#0A142F] text-[16px] font-medium hover:underline hover:text-green-600">{project.title}</p>
   </Link>
   <p className='font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-1'>Hourly - Intermediate - Posted {timeAgo(project.Project_created_at)}</p>
@@ -138,7 +138,7 @@ function timeAgo(postedTimeStr) {
   </div>
   <div class="flex-[20%] text-center">
   <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
-                <Link to='/View-all/proposals' state={{ project, isOpen: isJobOpen(project.deadline) }}><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">View Proposals</p></button></Link>
+                <Link to='/View-all/proposals' state={{ project, isOpen: isJobOpen(project.deadline) }} onClick={() => window.scrollTo(0, 0)}><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">View Proposals</p></button></Link>
             </div>
   </div>
 </div>

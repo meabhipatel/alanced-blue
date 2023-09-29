@@ -63,16 +63,16 @@ const Navbar = () => {
   </Link>
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0">
     <div class="text-sm lg:flex-grow lg:ml-[45px]">
-      <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
+      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
         Find Talent
-      </span></Link>
+      </span>
       <Link to='/projects'><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Find Work</span></Link>
-      <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
+     <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
         Why Alanced
-      </span></Link>
-      <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]">
+      </span>
+      <span class="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]">
         Enterprise
-      </span></Link>
+      </span>
     </div>
     <div className='lg:mr-[100px] mt-2'>
         <Link to='/login'><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-2 font-semibold">Sign In</span></Link>
@@ -97,7 +97,7 @@ const Navbar = () => {
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0">
     <div class="text-sm lg:flex-grow lg:ml-[45px]">
       {loginType=='FREELANCER' ? <>
-      <Link to=''><span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setFindworkDropdown(true)}>Find Work <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
+      <span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setFindworkDropdown(true)}>Find Work <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
       {Findworkdropdown && (
         <div className="absolute right-[54rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
@@ -118,8 +118,8 @@ const Navbar = () => {
     )}
       </> : <span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" >Find Talent </span> }
       {loginType=='FREELANCER' ? <>
-      <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setMyJobsDropdown(true)} 
-    >My Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
+      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setMyJobsDropdown(true)} 
+    >My Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
       {MyJobsdropdown && (
         <div className="absolute right-[46rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
@@ -132,8 +132,8 @@ const Navbar = () => {
             </div>
         </div>
     )} </> : <>
-    <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setMyJobsDropdown(true)} 
-  > Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>
+    <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setMyJobsDropdown(true)} 
+  > Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
     {MyJobsdropdown && (
       <div className="absolute right-[47rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
           <div className="py-1">
@@ -143,7 +143,7 @@ const Navbar = () => {
           </div>
       </div>
   )} </> }
-      <Link to=''><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setReportsDropdown(true)}> Reports <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span></Link>  
+      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setReportsDropdown(true)}> Reports <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
       {Reportsdropdown && (
         <div className="absolute right-[39rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
@@ -223,7 +223,11 @@ const Navbar = () => {
     )}
                      <h1 className="font-cardo text-2xl text-[#031136] font-normal text-center">{displayName}</h1>
                      <h1 className="font-cardo text-lg text-[#031136] font-normal text-center opacity-50 mb-3">{loginType=='FREELANCER'? loginType.toLowerCase(): 'client'}</h1>
-                      <Link to='/' className="flex items-center px-4 py-2 hover:bg-gray-100" onClick={handleLogout}>
+                      <Link to='/' className="flex items-center px-4 py-2 hover:bg-gray-100" onClick={() => {
+                          window.scrollTo(0, 0);
+                          handleLogout();
+                      }}
+                      >
                           <i class="bi bi-box-arrow-right mr-3"></i>
                           <span className="font-inter text-[16px] text-[#031136]">Logout</span>
                       </Link>

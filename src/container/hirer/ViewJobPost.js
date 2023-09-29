@@ -5,12 +5,14 @@ import Footer from '../../components/Layout/Footer'
 import frame from '../../components/images/Frame.png'
 import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const ViewJobPost = () => {
 
     const location = useLocation();
   const project = location.state && location.state.project;
-
+  const viewhirerselfproject = useSelector(state => state.hirer.viewhirerselfproject)
+  
 
   function getCurrentTime() {
     const now = new Date();
@@ -90,7 +92,7 @@ function timeAgo(postedTimeStr) {
     <div className="flex-1 py-4 flex">
     <i class="bi bi-coin flex-shrink-0 mr-3"></i>
     <div>
-        <p className="font-inter text-[#031136] text-md font-medium"> $ {project.budget}</p>
+        <p className="font-inter text-[#031136] text-md font-medium"> ${project.budget}</p>
         <p className="font-inter text-[#031136] text-sm font-medium opacity-50">Fixed</p>
     </div> 
     </div>
@@ -117,7 +119,7 @@ function timeAgo(postedTimeStr) {
         <p className="font-inter text-[#031136] text-lg font-medium">Skills and Expertise</p> 
         <div className="text-left mt-5">
         {JSON.parse(project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
-                <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
+                <div className="mr-3 my-2 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
                 <p className=" text-center">{skill}</p>
             </div>
             ))}
@@ -133,16 +135,18 @@ function timeAgo(postedTimeStr) {
         </div>
         <div class="w-full md:w-[30%] bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
+        {/* <Link to='/edit/Job-post' state={{project}} onClick={() => window.scrollTo(0, 0)}> */}
         <p className="font-inter text-green-700 text-md font-normal py-1"><i class="bi bi-pencil mr-1"></i> Edit Job Post</p>
-        <Link to='/View/Job-post' state={{project}}><p className="font-inter text-green-700 text-md font-normal py-1"><i class="bi bi-eye mr-1"></i> View Job Post</p></Link>
-        <p className="font-inter text-green-700 text-md font-normal py-1"><i class="bi bi-trash mr-1"></i> Delete Job Post</p>
+        {/* </Link> */}
+        <Link to='/View/Job-post' state={{project}} onClick={() => window.scrollTo(0, 0)}><p className="font-inter text-green-700 text-md font-normal py-1"><i class="bi bi-eye mr-1"></i> View Job Post</p></Link>
+        {/* <p className="font-inter text-green-700 text-md font-normal py-1"><i class="bi bi-trash mr-1"></i> Delete Job Post</p> */}
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
         <p className="font-inter text-[#031136] text-lg font-medium py-4">About the client</p> 
         <p className="font-inter text-[#031136] opacity-50 text-md font-medium py-2 mr-2 inline-block">Payment method not verified</p><i class="bi bi-question-circle-fill text-green-700 inline-block"></i>
         <p className="font-inter text-[#031136] text-md font-medium">India</p>
         <p className="font-inter text-[#031136] opacity-50 text-md font-medium">{getCurrentTime()}</p>
-        <p className="font-inter text-[#031136] text-md font-medium py-2">2 job posted</p>
+        <p className="font-inter text-[#031136] text-md font-medium py-2">{viewhirerselfproject && viewhirerselfproject ? viewhirerselfproject.length : 0} job posted</p>
         <p className="font-inter text-[#031136] text-sm font-medium opacity-50">Member since Sep 20, 2023</p>
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
