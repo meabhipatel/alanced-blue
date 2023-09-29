@@ -208,7 +208,9 @@ const handleClick = (event, index) => {
                               {isViewProposalOpen && <ViewProposalPopup closeViewProposal={closeViewProposal} state={{project}} bid={selectedbid}/>}
                               </>
                                 )
-                        })}</div> : 
+                        })}</div> : <div>
+                        {[...Array(8)].map((_) => {
+                          return (
                         <div>
                         <Skeleton height={100} width={100} style={{borderRadius: '50%', marginLeft: 30, float:'left', marginTop: 30}}/>
                         <Skeleton height={20} width={100} style={{marginLeft: 20, marginTop: 30}}/>
@@ -218,7 +220,7 @@ const handleClick = (event, index) => {
                         <Skeleton height={100} width={1000} style={{marginLeft: 150}}/>
                         <Skeleton height={30} width={100} inline="true" style={{marginLeft: 150, marginTop: 10, borderRadius: '25px'}}/>
                         <Skeleton height={30} width={100} inline="true" count={4} style={{marginLeft: 20, marginTop: 10, borderRadius: '25px'}}/>
-                        </div>}
+                        </div>);})}</div>}
                     </>
                 )
             }
