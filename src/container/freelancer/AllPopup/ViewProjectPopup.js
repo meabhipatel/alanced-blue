@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'font-awesome/css/font-awesome.min.css';
 import frame from '../../../components/images/Frame.png'
@@ -6,12 +6,58 @@ import money from '../../../components/images/money.png'
 import rating from '../../../components/images/superstart.png'
 import { Link } from 'react-router-dom'
 import AddBidAmount from '../AddBidAmount'
+// import { GetFreelancerSelfBidAction } from '../../../redux/Freelancer/FreelancerAction'
+import { useDispatch, useSelector } from 'react-redux'
+import axios from'axios'
+// import { toast } from 'react-toastify';
+import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
 
 
 
 function ViewProjectPopup({ isOpen, onClose,project}) {
   console.log(project,"project")
   const projectData = { project };
+//   const dispatch = useDispatch();
+
+  const accessToken = useSelector(state => state.login.accessToken);  
+//   const freelancerselfbid = useSelector(state => state.freelancer.freelancerselfbid)
+//   console.log(freelancerselfbid,"/*/*/*/*/*/*/*/*/*/*/*/*/*/*/")
+
+  const [AllProposals, setAllProposals] = useState('')
+  var clickable = false
+  
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch doc API
+        const response1 = await axios.get('https://aparnawiz91.pythonanywhere.com/freelance/view/freelancer-self/bid',{
+          headers: {
+            "Authorization":`Bearer ${accessToken}`
+          }
+        });
+        setAllProposals(response1.data.data);
+  
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    fetchData(); 
+  }, []);
+//   console.log("/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/",AllProposals)
+  if (project != null && AllProposals != ''){
+    for (const key in AllProposals){
+        // console.log("++++++++++++++++++",key,AllProposals[key].project_id)
+        if(project.id == AllProposals[key].project_id){
+            // toast.error('bid is applied on this project....')
+            clickable = true
+        }
+    }
+}
+//   console.log("=-=-=-=-=-=-=",AllProposals[0].project_id)
+    // React.useEffect(() => {
+    //     dispatch(GetFreelancerSelfBidAction(accessToken))
+    // }, [])
   
   function timeAgo(postedTimeStr) {
     const postedTime = new Date(postedTimeStr);
@@ -58,7 +104,8 @@ function ViewProjectPopup({ isOpen, onClose,project}) {
                 </div>
                 </Link>
             </div> */}
-        </div>
+        </div>{clickable ?  
+        <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2'><LightbulbOutlinedIcon/><span className='ml-4'>You have already submitted a proposal for this project.</span><br/><Link><span className='text-green-700 font-bold ml-10'>View Proposal</span></Link></div>:  '' }
         <div className=' container px-6'>
             <div className=' flex flex-row mt-6'>
                 <div className=' basis-8/12'>
@@ -130,10 +177,10 @@ function ViewProjectPopup({ isOpen, onClose,project}) {
                 </div>
                 <div className=' basis-4/12'>
                 <div className='mt-6 ml-[30%]'>
-                <Link to="/freelancer/add-bid" state={{ projectData }} onClick={() => window.scrollTo(0, 0)}><span class="px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal">Apply Now</span></Link>
+                <Link to="/freelancer/add-bid" style={{pointerEvents: clickable ? 'none' : ''}} state={{ projectData }} onClick={() => window.scrollTo(0, 0)}><span class={clickable ? 'px-12 py-[15px] lg:mt-0 bg-slate-200 border rounded border-none text-white font-inter text-base font-normal':'px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal'}>Apply Now</span></Link>
                 </div>
                 <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-8 ml-[30%]">
-                <Link to=''><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-inter font-bold text-base py-[4px] px-8"><i class="bi bi-suit-heart"></i>  Save Job</p></button></Link>
+                <Link to=''><button class="rounded-sm px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-inter font-bold text-base py-[4px] px-8"><i class="bi bi-suit-heart"></i>  Save Job</p></button></Link>
                 </div> 
                 <div className='mt-8 text-sm font-inter font-normal text-[#0A142F] text-center ml-9'><i class="bi bi-flag-fill"></i><span className=' opacity-[50%] ml-2'>Flag as inappropriate</span></div>
                 <div className='mt-2 text-sm font-inter font-normal text-[#0A142F] text-center ml-9 opacity-[50%]'>Send a proposal for: 8 Connects</div>

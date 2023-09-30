@@ -109,6 +109,7 @@ const HirerAfterLogin = () => {
 
   const prev = () => {
       if (active === 1) return;
+      window.scrollTo(0, 0)
       setActive(active - 1);
   };
   
