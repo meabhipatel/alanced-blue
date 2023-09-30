@@ -51,3 +51,16 @@ export const GetViewHirerSelfProjects = async (token) => {
        });
    };  
 
+
+   export const UpdateProject = async(data,token,id) =>{
+    console.log(id,'chkidonact****************')
+    setHeadersWithAccessToken(token);
+    return DataService.put(`${API.Hirers.Hirer.UpdateProject}/${id}`, data)
+      .then(res => {
+        return res.data;
+      })
+      .catch(err => {
+        return handleError(err);
+      });
+  }   
+

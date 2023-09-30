@@ -135,9 +135,9 @@ function timeAgo(postedTimeStr) {
         </div>
         <div class="w-full md:w-[30%] bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
-        {/* <Link to='/edit/Job-post' state={{project}} onClick={() => window.scrollTo(0, 0)}> */}
+        <Link to='/edit/Job-post' state={{project}} onClick={() => window.scrollTo(0, 0)}>
         <p className="font-inter text-green-700 text-md font-normal py-1"><i class="bi bi-pencil mr-1"></i> Edit Job Post</p>
-        {/* </Link> */}
+        </Link>
         <Link to='/View/Job-post' state={{project}} onClick={() => window.scrollTo(0, 0)}><p className="font-inter text-green-700 text-md font-normal py-1"><i class="bi bi-eye mr-1"></i> View Job Post</p></Link>
         {/* <p className="font-inter text-green-700 text-md font-normal py-1"><i class="bi bi-trash mr-1"></i> Delete Job Post</p> */}
         </div>

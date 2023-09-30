@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom'
-import { AddHirer, GetViewAllBids, GetViewAllfreelancers, GetViewHirerSelfProjects } from '../../redux/services/Hirer'
+import { AddHirer, GetViewAllBids, GetViewAllfreelancers, GetViewHirerSelfProjects, UpdateProject } from '../../redux/services/Hirer'
 import { SERVER_ERROR } from '../Freelancer/FreelancerConstant'
 import { ADD_NEW_HIRER_REQUEST,
  ADD_NEW_HIRER_SUCCESS,
@@ -8,7 +8,9 @@ import { ADD_NEW_HIRER_REQUEST,
  GET_VIEW_ALL_FREELANCER_REQUEST,
  GET_VIEW_ALL_FREELANCER_SUCCESS,
  GET_VIEW_HIRER_SELF_PROJECT_REQUEST,
- GET_VIEW_HIRER_SELF_PROJECT_SUCCESS
+ GET_VIEW_HIRER_SELF_PROJECT_SUCCESS,
+ UPDATE_PROJECT_REQUEST,
+ UPDATE_PROJECT_SUCCESS
 } from './HirerConstant'
 
 
@@ -90,6 +92,28 @@ export const GetViewAllBidsAction = (id) => dispatch => {
     if (res.status === 200) {
       dispatch({
         type: GET_VIEW_ALL_BIDS_SUCCESS,
+        payload: res.data
+      });
+    } else {
+      dispatch({
+        type: SERVER_ERROR,
+        payload: res
+      });
+    }
+  });
+};
+
+
+export const UpdateProjectAction = (data, token, navigate,id) => dispatch => {
+  dispatch({
+    type: UPDATE_PROJECT_REQUEST,
+    payload: []
+  });
+
+  UpdateProject(data, token,id).then(res => {
+    if (res.status === 200) {
+      dispatch({
+        type: UPDATE_PROJECT_SUCCESS,
         payload: res.data
       });
     } else {

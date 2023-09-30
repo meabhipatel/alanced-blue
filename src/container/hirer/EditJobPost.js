@@ -1,15 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../../components/Layout/Navbar'
 import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
 import edit from '../../components/images/edit.png'
 import { Link, useLocation } from 'react-router-dom'
 import ProjectList from '../freelancer/ProjectList'
+import EditJobTitlePopup from './HirerAllPopup/EditJobTitlePopup'
+import EditJobDescPopup from './HirerAllPopup/EditJobDescPopup'
 
 const EditJobPost = () => {
 
     const location = useLocation();
     const project = location.state && location.state.project;
+    const [isJobTitleOpen, setIsJobTitleOpen] = useState(false);
+    const [isJobDescOpen, setIsJobDescOpen] = useState(false);
+    const openJobTitle = () => {
+        setIsJobTitleOpen(true);
+      };
+    
+      const closeJobTitle = () => {
+        setIsJobTitleOpen(false);
+      };
+
+      const openJobDesc = () => {
+        setIsJobDescOpen(true);
+      };
+    
+      const closeJobDesc = () => {
+        setIsJobDescOpen(false);
+      };
 
   return (
     <>
@@ -19,15 +38,17 @@ const EditJobPost = () => {
     <div className='my-2 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left'>
     <div className='border-b border-gray-200 border-opacity-30 py-5 px-8 flex justify-between items-center'>
     <h1 className="font-inter text-xl text-[#031136] text-left font-semibold">{project.title}</h1>
-    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer">
+    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={()=>openJobTitle(project)}>
         <img src={edit} alt="more" />
     </div>
+    {isJobTitleOpen && <EditJobTitlePopup closeJobTitle={closeJobTitle} project={project}/>}
 </div>
 <div className='border-b border-gray-200 border-opacity-30 py-5 px-8 flex justify-between items-center'>
     <h1 className="font-inter text-md text-[#031136] text-left font-normal opacity-40">{project.description}</h1>
-    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer">
+    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={()=>openJobDesc(project)}>
         <img src={edit} alt="more" />
     </div>
+    {isJobDescOpen && <EditJobDescPopup closeJobDesc={closeJobDesc} project={project}/>}
 </div>
 <div className='border-b border-gray-200 border-opacity-30 py-5 px-8'>
     <div className='flex justify-between items-center'>
@@ -50,7 +71,7 @@ const EditJobPost = () => {
             return skillsArray.map((skill, index) => (
                 <div
                 key={index}
-                className="mr-3 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
+                className="mr-3 my-2 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
                 >
                 <p className="text-center">{skill}</p>
                 </div>
