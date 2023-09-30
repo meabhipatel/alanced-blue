@@ -125,7 +125,7 @@ React.useEffect(() => {
       const formattedDate = bidTime.toLocaleDateString(undefined, dateFormatOptions);
 
     return(
-        <Link to="/View-proposal" state={{ bid }} onClick={() => window.scrollTo(0, 0)}>
+        <Link to="/View/freelancer/proposal" state={{ bid }} onClick={() => window.scrollTo(0, 0)}>
         <div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
         <div className='flex flex-col w-1/4'>
             <h1 className='font-cardo text-[18px] text-[#031136]'>Initiated {formattedDate}</h1>
