@@ -116,7 +116,7 @@ const handleClick = (event, index) => {
         </button>
     </section>
     <select id="countries" class="bg-gray-50 border border-gray-300 text-[#797979] text-sm font-inter font-normal rounded-lg focus:ring-green-500 focus:border-green-500 block w-[22%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 mr-12">
-        <option selected>Best Match</option>
+        <option selected disabled>Best Match</option>
         <option value="">Newest Applicants</option>
         <option value="">Oldest Applicants</option>
         <option value="">Highest Hourly Rate</option>
