@@ -18,6 +18,10 @@ import ViewProjectPopup from './AllPopup/ViewProjectPopup'
 import { GetViewAllProjectsListAction } from '../../redux/Freelancer/FreelancerAction'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import axios from 'axios';
+import TaskOutlinedIcon from '@mui/icons-material/TaskOutlined';
+import { IconButton, Typography } from "@material-tailwind/react";
+import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 
 const FreelancerAfterLogin = () => {
@@ -26,6 +30,7 @@ const FreelancerAfterLogin = () => {
   const googleUserName = localStorage.getItem('googleUserName')
   const loginMethod = localStorage.getItem('loginMethod')
   const viewallprojects = useSelector(state => state.freelancer.viewallprojects)
+  const accessToken = useSelector(state => state.login.accessToken);
   const [searchTerm, setSearchTerm] = useState('');
   const dispatch = useDispatch();
  
@@ -161,6 +166,55 @@ const openDialog = (project) => {
     setIsDialogOpen(false);
   };
 
+  const [AllProposals, setAllProposals] = useState('')
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch doc API
+        const response1 = await axios.get('https://aparnawiz91.pythonanywhere.com/freelance/view/freelancer-self/bid',{
+          headers: {
+            "Authorization":`Bearer ${accessToken}`
+          }
+        });
+        setAllProposals(response1.data.data);
+  
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    fetchData(); 
+  }, []);
+  console.log("/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/",AllProposals)
+
+  const [active, setActive] = React.useState(1);
+ 
+  const next = () => {
+      if (active === Math.ceil(projectsToDisplay.length / 10)) return;
+      window.scrollTo(0, 0)
+      setActive(active + 1);
+  };
+
+  const prev = () => {
+      if (active === 1) return;
+      window.scrollTo(0, 0)
+      setActive(active - 1);
+  };
+  
+ // 1. Chunk the Array
+ const chunkArray = (array, size) => {
+  let chunked = [];
+  if(viewallprojects != null){
+  for (let i = 0; i < array.length; i += size) {
+      chunked.push(array.slice(i, i + size));
+  }
+}
+  return chunked;
+}
+
+const chunkedFree = chunkArray(projectsToDisplay, 10);
+  
   return (
     <>
     <Navbar/>
@@ -280,7 +334,7 @@ const openDialog = (project) => {
     </div>
     </Link>
 </div>
-{viewallprojects != null ? 
+{/* {viewallprojects != null ?  */}
 <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
     <div className='px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30'>
     {/* <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1> */}
@@ -322,7 +376,9 @@ const openDialog = (project) => {
     <div className='px-4 md:px-8 py-4'>
       <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse jobs that match your experience to a client's hiring preferences. Ordered by most relevant.</p>
     </div>
-    {projectsToDisplay && projectsToDisplay.map((project, index) => {
+    {viewallprojects != null ?
+    <div>
+    {chunkedFree[active - 1] && chunkedFree[active - 1].map((project, index) => {
         const timeAgo = calculateTimeAgo(project.project_creation_date);
     {/* {filteredProjects && filteredProjects.map((project, index) => { */}
     {/* {viewallprojects && <>{viewallprojects.map((project,index)=> { */}
@@ -341,6 +397,13 @@ const openDialog = (project) => {
         </div>
     </div>
     </div>
+    {AllProposals && AllProposals.map((all, proposal) => {
+        return(
+            <>
+            {project.id == all.project_id ? <span className='text-[#00BF58] flex justify-center items-center w-fit'><TaskOutlinedIcon className='mr-1 text-slate-400'/>Applied</span> : ''}
+            </>
+        )
+    })}
     <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>Fixed-price - Expert - Est. Budget: ${project.budget} - {timeAgo}</p>
     <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>
                 Job Description: {displayWords.join(' ')} 
@@ -376,6 +439,21 @@ const openDialog = (project) => {
     )
 })}
 <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog} project={selectedProject}/>
+</div> : <div>
+{[...Array(8)].map((_) => {
+      return (
+    <div className='mb-5'>
+    <Skeleton height={30} width={200} style={{ marginLeft: 20, marginTop: 20 }}/>
+    <Skeleton height={30} width={300} style={{ marginLeft: 20, marginTop:10 }}/>
+    <Skeleton height={110} width={700} style={{ marginLeft: 20, marginTop: 10}}/>
+    <Skeleton height={30} width={100} inline={true} style={{marginTop:5, marginLeft:70, float:'left'}}/>
+    <Skeleton height={30} width={100} inline={true} count={2} style={{ marginTop:5, marginLeft:5, float:'left'}}/><br/><br/>
+    <Skeleton height={20} width={200} style={{ marginLeft: 20}}/>
+    <Skeleton height={20} width={250} style={{ marginLeft: 20, marginTop:10 }}/>
+    </div>
+    );})}
+    </div>}
+{/* <div className='h-8 w-full bg-red-500 mt-6'> pagination </div> */}
     {/* <div className='px-4 md:px-8 py-5 border-t border-b border-gray-200 border-opacity-30'>
     <div className="flex items-center justify-between">
     <p className="font-inter text-[#0A142F] text-[18px] font-semibold">UI Designer - Landing Page</p>
@@ -404,10 +482,48 @@ const openDialog = (project) => {
         <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>India</p>
     </div> */}
-</div> : 
-<div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
+    <div>
+  <div className="flex justify-end items-center gap-6 mt-7
+   mr-5">
+  <IconButton
+    size="sm"
+    variant="outlined"
+    onClick={prev}
+    disabled={active === 1}
+    style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+  >
+    <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+  </IconButton>
+
+  
+  {[...Array(5)].map((_, index) => {
+    const pageNumber = index + 1;
+    return (
+      <span
+        key={pageNumber}
+        className={`px-0 py-1 ${active === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+        onClick={() => setActive(pageNumber)}
+      >
+        {pageNumber}
+      </span>
+    );
+  })}
+
+  <IconButton
+    size="sm"
+    variant="outlined"
+    onClick={next}
+    disabled={active === 5}
+    style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+  >
+    <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+  </IconButton>
+</div>
+  </div>
+</div>  
+{/* <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
 <div className='px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30'>
-    {/* <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1> */}
+    
     <div className="flex justify-between items-center">
     <div className="flex items-center">
     <h1  className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1>
@@ -458,7 +574,7 @@ const openDialog = (project) => {
     <Skeleton height={20} width={250} style={{ marginLeft: 20, marginTop:10 }}/>
     </div>
     );})}
-</div>}
+</div>} */}
 </div>
 </div>
     <HomeSection4/>
