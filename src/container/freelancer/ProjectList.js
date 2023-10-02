@@ -85,7 +85,7 @@ function ProjectList() {
         <div className='text-left pt-[3rem] ml-[13.5vw] text-2xl font-cardo'>
           <h1>Projects List</h1>
           <p className='font-inter text-sm text-[#797979] font-normal mt-2'>All the Lorem Ipsum generators on the Internet tend to repeat.</p>
-          <div className='lg:w-[44vw] bg-white p-3 lg:h-14 rounded-2xl lg:flex items-center mt-2 shadow-md'>
+          <div className='lg:w-[44vw] bg-white p-3 lg:h-14 rounded-2xl lg:flex items-center mt-4 shadow-md'>
             <div className='flex flex-row'>
               <img className='w-5 h-5' src={search}></img>
               <input className='w-96 font-inter text-base ml-3' placeholder='What are you looking for?'></input>

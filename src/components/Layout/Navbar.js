@@ -63,10 +63,10 @@ const Navbar = () => {
   </Link>
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0">
     <div class="text-sm lg:flex-grow lg:ml-[45px]">
-      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
+      <Link to='/view-all/freelancer'onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
         Find Talent
-      </span>
-      <Link to='/projects'><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Find Work</span></Link>
+      </span></Link>
+      <Link to='/projects'onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Find Work</span></Link>
      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
         Why Alanced
       </span>
