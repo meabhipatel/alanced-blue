@@ -38,7 +38,15 @@ const BidAdd = () => {
       }
       console.log("/-/-/-/-/-/-/-/-/-/-/",prodata)
     dispatch(AddBidAmountAction(prodata, accessToken));
+    if(prodata.bid_amount >= 0 && prodata.description != null){
     navigate('/View/bid-details', { state: { bidData: prodata, projectdetail: projectData,} })
+    }
+    if(prodata.bid_amount < 0){
+        toast.error("Enter valid bid amount")
+    }
+    else if(prodata.bid_amount != null && prodata.description == null){
+    toast.error("Cover letter is required")
+    }
   };
 
   const onChange = e =>{
@@ -264,7 +272,7 @@ const [showFullDescription, setShowFullDescription] = useState(false);
             </div>
         </div>
         </div>
-        <div className=' mt-10 border border-[#E7E8F2] py-10 px-10 rounded-lg'>
+        {/* <div className=' mt-10 border border-[#E7E8F2] py-10 px-10 rounded-lg'>
             <h1 className='text-base font-inter font-medium text-left'>How long will this project take?</h1>
             <select id="countries" class="bg-gray-50 border border-gray-300 text-[#797979] text-sm font-inter font-normal rounded-lg mt-4 focus:ring-green-500 focus:border-green-500 block w-[22%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
               <option selected>Select a duration</option>
@@ -273,7 +281,7 @@ const [showFullDescription, setShowFullDescription] = useState(false);
               <option value="">1 to 3 months</option>
               <option value="">Less than 1 month</option>
             </select>
-        </div>
+        </div> */}
         <div className=' mt-10 border border-[#E7E8F2] py-10 px-10 rounded-lg'>
         <h1 className=' text-2xl font-cardo font-semibold text-left'>Additional details</h1>
             <h1 className='text-base font-inter font-medium text-left mt-8'>Cover Letter</h1>
@@ -286,7 +294,7 @@ const [showFullDescription, setShowFullDescription] = useState(false);
         <div className=' flex flex-row mt-5  mb-5'>
         <div className=' basis-3/12' ><button className='h-10 w-52 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded' onClick={()=>{ BidAdd(); window.scrollTo(0, 0); }}>Send Proposal</button></div>
         <div class="p-0.5 mt-5 rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
-        <Link to='/freelancer/profile' onClick={() => window.scrollTo(0, 0)}><button class="px-2 py-1 bg-[#f8faf9] rounded"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-bold text-sm py-[4px] px-[16px]">Cancel</p></button></Link>
+        <Link to='/freelancer/profile' onClick={() => window.scrollTo(0, 0)}><button class="px-2 py-1 bg-[#f8faf9] rounded-sm"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-bold text-sm py-[4px] px-[16px]">Cancel</p></button></Link>
         </div>
         </div>
     </div>

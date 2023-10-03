@@ -78,7 +78,7 @@ const MyProposalArchived = () => {
         <div className=' basis-9/12 mt-4'>
             <div className=' flex flex-row'>
                 <div className=' basis-6/12'>
-                <h1 className=' font-cardo font-normal text-lg text-left'>Landing page design for a wine delivery website</h1>
+                <h1 className=' font-cardo font-normal text-lg text-left'>Landing page design for a food delivery website</h1>
                 </div>
                 <div className=' basis-3/12'>
                 <p className=' font-inter font-normal text-base opacity-[50%] text-left'>Job is closed</p>

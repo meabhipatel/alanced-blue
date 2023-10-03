@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom'
 import availablenow from '../../components/images/availablenow.png'
 import edit from '../../components/images/edit.png'
 import { GetFreelancerSelfBidAction } from '../../redux/Freelancer/FreelancerAction'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 
 
@@ -109,6 +111,7 @@ React.useEffect(() => {
 </div>
 <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2] text-left'>
 <h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Submitted Proposals ({bidCount})</h1>
+{freelancerselfbid != null ? <div>
 {freelancerselfbid && <>{freelancerselfbid.map((bid,index) => {
     const timeAgo = calculateTimeAgo(bid.bid_time);
     const bidTime = new Date(bid.bid_time);
@@ -142,7 +145,18 @@ React.useEffect(() => {
     </div>
     </Link>
     )
-})}</>}
+})}</>}</div> : 
+<div>{[...Array(8)].map((_) => {
+      return (
+  <div className='flex mt-4'>
+  <div className='ml-10 mr-60'>
+    <Skeleton height={20} width={200} />
+    <Skeleton height={20} width={100} style={{marginTop: 10}}/>
+  </div>
+  <Skeleton height={20} width={300} />
+  <Skeleton height={20} width={200} style={{marginLeft: 180}}/>
+  </div>);})}
+  </div>}
 <div className="flex justify-end items-center p-5">
   <div className="flex items-center justify-center w-8 h-8 text-gray-500 border border-gray-200 p-1 cursor-pointer" onClick={prev}
     disabled={active === 1}>
