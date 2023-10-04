@@ -74,6 +74,21 @@ function ProjectList() {
     setIsDialogOpen(false);
   };
 
+  const [expandedProjects, setExpandedProjects] = useState([]);
+
+  const handleToggleDescription = (index) => {
+      const updatedState = [...expandedProjects];
+      updatedState[index] = !updatedState[index];
+      setExpandedProjects(updatedState);
+  };
+  const handleClick = (event, index) => {
+    event.stopPropagation();
+
+    handleToggleDescription(index);
+
+    // Rest of your handleClick code, if any...
+};
+
   React.useEffect(() => {
     dispatch(GetViewAllProjectsListAction())
   }, [])
@@ -463,6 +478,8 @@ function ProjectList() {
           { viewallprojects != null ? 
           <div className=' basis-9/12 mt-10'>
             {viewallprojects && <>{viewallprojects.map((project,index)=> {
+              const words = project.description.split(' ');
+              const displayWords = expandedProjects[index] || words.length <= 30 ? words : words.slice(0, 30);
               return(
                 <div className='flex flex-row'>
               <div className='basis-1/12 mr-3'>
@@ -490,8 +507,18 @@ function ProjectList() {
                     </div>
                   </div>
                 </div>
-                <p className='font-inter text-base font-normal text-[#797979] mt-3'>{project.description}</p>
-                {/* <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog}/> */}
+                {/* <p className='font-inter text-base font-normal text-[#797979] mt-3'>{project.description}</p> */}
+                <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>
+                Job Description: {displayWords.join(' ')} 
+                {words.length > 30 && (
+                    <span 
+                        className="font-cardo text-[#031136] text-[18px] font-semibold cursor-pointer pl-2" 
+                        onClick={(event) => handleClick(event, index)}
+                    >
+                        {expandedProjects[index] ? 'Less' : 'More'}
+                    </span>
+                )}
+            </p>
                 {JSON.parse(project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
                   <div key={index} className='mt-3 bg-white shadow-lg text-center rounded-xl inline-block mr-3 p-1 w-24 border'>{skill}</div>
                 ))}

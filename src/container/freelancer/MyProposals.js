@@ -128,7 +128,6 @@ React.useEffect(() => {
       const formattedDate = bidTime.toLocaleDateString(undefined, dateFormatOptions);
 
     return(
-        <Link to="/View/freelancer/proposal" state={{ bid }} onClick={() => window.scrollTo(0, 0)}>
         <div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
         <div className='flex flex-col w-1/4'>
             <h1 className='font-cardo text-[18px] text-[#031136]'>Initiated {formattedDate}</h1>
@@ -136,14 +135,13 @@ React.useEffect(() => {
         </div>
 
         <div className='flex-grow pl-[180px]'>
-            <h1 className='font-cardo text-[18px] text-[#031136]'>{bid.project.title}</h1>
+            <Link to="/View/freelancer/proposal" state={{ bid }} onClick={() => window.scrollTo(0, 0)}><h1 className='font-cardo text-[18px] text-green-600 hover:underline'>{bid.project.title}</h1></Link>
         </div>
 
         <div className='flex flex-col w-1/4 items-end pr-4'>
             <p className='font-inter text-[16px] text-[#031136] opacity-50'>{bid.project.category}</p>
         </div>
     </div>
-    </Link>
     )
 })}</>}</div> : 
 <div>{[...Array(8)].map((_) => {

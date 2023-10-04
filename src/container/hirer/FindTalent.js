@@ -144,7 +144,7 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
       <h1 className="font-cardo text-[18px] text-[#031136] font-normal pt-2">Community & Forums  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
       <h1 className="font-cardo text-[18px] text-[#031136] font-normal py-2">Help Center  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
       </div>
-      <Link to=''>
+      <Link to='/login'>
       <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#E2F9EE] rounded-lg p-4 mx-4 shadow-sm">
       <div>
           <h1 className='font-cardo text-lg text-[#031136] text-left'>Post A Job</h1>
@@ -155,6 +155,7 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
           <img src={certifybadge} alt="" className='mx-auto h-16 w-16 mt-2'/>
       </div>
   </div></Link>
+  <Link to='/login'>
       <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#E2F9EE] rounded-lg p-4 mx-4 my-3 shadow-sm">
           <div>
           <h1 className='font-cardo text-lg text-[#031136] text-left'>Get Tips To Find Talent</h1>
@@ -164,17 +165,11 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
               <i class="bi bi-arrow-right"></i>
               <img src={ladder} alt="" className='mx-auto h-16 w-16 mt-2'/>
           </div>
-      </div>
+      </div></Link>
   </div>
   
   <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
       <div className='px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30'>
-      {/* <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1> */}
-      {/* <div className="flex justify-between items-center">
-      <div className="flex items-center">
-      <h1  className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Freelancers that Matches your Job</h1>
-      </div>
-  </div> */}
   <div className=' flex flex-row'>
     <div className=' basis-6/12'>
     <h1  className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Freelancers that Matches your Job</h1>
@@ -284,8 +279,7 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
       <Skeleton height={20} width={200} style={{marginLeft:10, marginTop:10}}/>
       <Skeleton height={200} width={300} style={{marginTop:20}}/>
       <Skeleton height={50} width={200} style={{marginTop:10}}/>
-      <Skeleton height={35} width={80} style={{marginTop:20, float: 'right'}}/>
-      
+      <Skeleton height={35} width={80} style={{marginTop:20, float: 'right'}}/>    
     </div>);})}
   </div>
     }
