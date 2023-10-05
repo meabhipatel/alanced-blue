@@ -270,37 +270,44 @@ const chunkedFree = chunkArray(projectsToDisplay, 10);
 </div> */}
 <div class="flex flex-col md:flex-row mb-5 mx-5">
 <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
-<div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
-    <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Connects</h1>
-    <div className="flex items-center space-x-2">
-            <img src={downarrow} alt="" />
+  <Link to='/saved-jobs' onClick={() => window.scrollTo(0, 0)}>
+<div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#E2F9EE] rounded-2xl">
+    <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Saved Jobs</h1>
+    <div className="flex items-center space-x-2 text-green-600 mr-5">
+            <i class="bi bi-heart"></i>
+            {/* <i class="bi bi-heart-fill"></i> */}
     </div>
-    </div>
-    <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
-    <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Preferences</h1>
-    <div className="flex items-center space-x-2">
-            <img src={downarrow} alt="" />
-    </div>
-    </div>
-    <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
+    </div></Link>
+    <Link to='/my-proposals' onClick={() => window.scrollTo(0, 0)}>
+    <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#E2F9EE] rounded-2xl">
     <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Proposals</h1>
-    <div className="flex items-center space-x-2">
-            <img src={downarrow} alt="" />
+    <div className="flex items-center space-x-2 text-green-600 mr-5">
+            <i class="bi bi-send-check"></i>
+            {/* <i class="bi bi-send-check-fill"></i> */}
     </div>
-    </div>
-    <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
+    </div></Link>
+    <Link to='/freelancer/edit-profile#certificate'>
+    <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#E2F9EE] rounded-2xl">
     <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Project catalog</h1>
-    <div className="flex items-center space-x-2">
-            <img src={downarrow} alt="" />
+    <div className="flex items-center space-x-2 text-green-600 mr-5">
+            <i class="bi bi-folder-symlink"></i>
+            {/* <i class="bi bi-folder-symlink-fill"></i> */}
+    </div>
+    </div></Link>
+    <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#E2F9EE] rounded-2xl">
+    <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Get Paid</h1>
+    <div className="flex items-center space-x-2 text-green-600 mr-5">
+            {/* <img src={downarrow} alt="" /> */}
+            <i class="bi bi-coin"></i>
     </div>
     </div>
-    <div className="px-4 md:px-8 py-5 m-4 rounded-lg shadow-md">
+    {/* <div className="px-4 md:px-8 py-5 m-4 rounded-lg shadow-md">
     <h1 className="font-cardo text-[18px] text-[#031136] font-normal pt-2">Upwork Academy  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
     <h1 className="font-cardo text-[18px] text-[#031136] font-normal pt-2">Get Paid  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
     <h1 className="font-cardo text-[18px] text-[#031136] font-normal pt-2">Community & Forums  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
     <h1 className="font-cardo text-[18px] text-[#031136] font-normal py-2">Help Center  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
-    </div>
-    <Link to='/freelancer/edit-profile#certificate'>
+    </div> */}
+    {/* <Link to='/freelancer/edit-profile#certificate'>
     <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#E2F9EE] rounded-lg p-4 mx-4 shadow-sm">
     <div>
         <h1 className='font-cardo text-lg text-[#031136] text-left'>Import A Certification</h1>
@@ -310,7 +317,8 @@ const chunkedFree = chunkArray(projectsToDisplay, 10);
        <i class="bi bi-arrow-right"></i>
         <img src={certifybadge} alt="" className='mx-auto h-16 w-16 mt-2'/>
     </div>
-</div></Link>
+</div></Link> */}
+<Link to='/projects' onClick={() => window.scrollTo(0, 0)}>
     <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#E2F9EE] rounded-lg p-4 mx-4 my-3 shadow-sm">
         <div>
         <h1 className='font-cardo text-lg text-[#031136] text-left'>Get Tips To Find Work</h1>
@@ -320,9 +328,9 @@ const chunkedFree = chunkArray(projectsToDisplay, 10);
             <i class="bi bi-arrow-right"></i>
             <img src={ladder} alt="" className='mx-auto h-16 w-16 mt-2'/>
         </div>
-    </div>
+    </div></Link>
     <Link to='/my-jobs' onClick={() => window.scrollTo(0, 0)}>
-    <div className="grid grid-cols-[2fr,1fr] gap-2 rounded-lg p-4 mx-4 relative z-10 shadow-sm">
+    <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#E2F9EE] rounded-lg p-4 mx-4 relative z-10 shadow-sm">
         <div>
         <h1 className='font-cardo text-lg text-[#031136] text-left'>My Jobs</h1>
            <p className='font-inter text-sm text-[#0A142F] opacity-50 py-2 text-left'>View your active contracts, timesheets, and available earnings.</p>
@@ -350,7 +358,7 @@ const chunkedFree = chunkArray(projectsToDisplay, 10);
     </div>
     </div>
 </div>
-    <p 
+    {/* <p 
         className={`font-inter opacity-50 text-[#0A142F] text-[13px] py-2 inline-block pr-10 relative cursor-pointer`} 
         onClick={() => setSelected('Best Matches')}
     >
@@ -371,10 +379,10 @@ const chunkedFree = chunkArray(projectsToDisplay, 10);
     >
         Saved Jobs
         {selected === 'Saved Jobs' && <span style={underlineStyle}></span>}
-    </p>
+    </p> */}
     </div>
-    <div className='px-4 md:px-8 py-4'>
-      <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse jobs that match your experience to a client's hiring preferences. Ordered by most relevant.</p>
+    <div className='px-4 md:px-8 py-2'>
+      <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse jobs that match your experience to a client's hiring preferences.<br/> Ordered by most relevant.</p>
     </div>
     {viewallprojects != null ?
     <div>
@@ -385,13 +393,14 @@ const chunkedFree = chunkArray(projectsToDisplay, 10);
         const words = project.description.split(' ');
         const displayWords = expandedProjects[index] || words.length <= 50 ? words : words.slice(0, 50);
               return(<>
-    <div className='px-4 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer' onClick={() => openDialog(project)}>
+    <Link to='/view-project/full-detail' state={{ project }} onClick={() => window.scrollTo(0, 0)}>
+    <div className='px-4 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer'>
     <div className="flex items-center justify-between">
     <p className="font-inter text-[#0A142F] text-[18px] font-semibold">{project.title}</p>
     <div className="flex items-center space-x-2">
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200" onClick={handleClick}>
+        {/* <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200" onClick={handleClick}>
             <img src={thumbdown} alt="" />
-        </div>
+        </div> */}
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200" onClick={handleClick}>
             <img src={heart} alt="" />
         </div>
@@ -400,7 +409,7 @@ const chunkedFree = chunkArray(projectsToDisplay, 10);
     {AllProposals && AllProposals.map((all, proposal) => {
         return(
             <>
-            {project.id == all.project_id ? <span className='text-[#00BF58] flex justify-center items-center w-fit'><TaskOutlinedIcon className='mr-1 text-slate-400'/>Applied</span> : ''}
+            {project.id == all.project_id ? <span className='text-green-600 flex justify-center items-center w-fit'><TaskOutlinedIcon className='mr-1 text-green-600'/>Already Applied</span> : ''}
             </>
         )
     })}
@@ -428,17 +437,18 @@ const chunkedFree = chunkArray(projectsToDisplay, 10);
         <img src={verify} alt="" className='inline-block h-3 w-3 mr-1'/>
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>Payment verified</p>
         <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>
-        <p className='font-inter text-[#0A142F] text-[14px] opacity-80 inline-block mr-1'>$0</p>
-        <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-3'>Spent</p>
+        {/* <p className='font-inter text-[#0A142F] text-[14px] opacity-80 inline-block mr-1'>$0</p> */}
+        {/* <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-3'>Spent</p> */}
         <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>{ project.project_owner_location ? project.project_owner_location : "NA"}</p>
     </div>
+    </Link>
     {/* <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog} projectData={{pro_id:project.id, pro_tit:project.title, pro_cat:project.category, pro_desc:project.description, pro_budget:project.budget ,pro_skills:project.skills_required}}/> */}
     {/* <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog} projectData={selectedProject}/> */}
     </>
     )
 })}
-<ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog} project={selectedProject}/>
+{/* <ViewProjectPopup isOpen={isDialogOpen} onClose={closeDialog} project={selectedProject}/> */}
 </div> : <div>
 {[...Array(8)].map((_) => {
       return (

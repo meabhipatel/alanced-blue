@@ -4,18 +4,24 @@ import 'font-awesome/css/font-awesome.min.css';
 import frame from '../../../components/images/Frame.png'
 import money from '../../../components/images/money.png'
 import rating from '../../../components/images/superstart.png'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import AddBidAmount from '../AddBidAmount'
 // import { GetFreelancerSelfBidAction } from '../../../redux/Freelancer/FreelancerAction'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from'axios'
 // import { toast } from 'react-toastify';
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
+import Navbar from '../../../components/Layout/Navbar';
+import HomeSection4 from '../../../components/Layout/HomeSection4';
+import Footer from '../../../components/Layout/Footer';
 
 
 
-function ViewProjectPopup({ isOpen, onClose,project}) {
-  console.log(project,"project")
+function ViewProjectPopup() {
+  // console.log(project,"project")
+  const location = useLocation();
+  const project = location.state && location.state.project;
+  // console.log(findproject,"send_praposal")
   const projectData = { project };
 //   const dispatch = useDispatch();
 
@@ -87,28 +93,24 @@ function ViewProjectPopup({ isOpen, onClose,project}) {
   }
 
 
-  if (!isOpen) {
-    return null;
-  }
+  // if (!isOpen) {
+  //   return null;
+  // }
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-10 mt-20">
-        <div className="fixed inset-0 bg-black opacity-10"></div>
+    <>
+    <Navbar/>
+        {/* <div className="fixed inset-0 bg-black opacity-10"></div> */}
       {/* Dialog content goes here */}
-      <div className="bg-white p-6 rounded-lg shadow-xl w-3/4 h-[94%] z-20 overflow-y-scroll">
-        <div className='flex flex-row'>
-            <div className='basis-6/12 cursor-pointer'><i class="bi bi-chevron-left font-bold text-black text-lg" onClick={onClose}></i></div>
-            {/* <div className=' basis-6/12'>
-                <Link to="/freelancer/view-project/detail" target="_blank" rel="noopener noreferrer">
-                <div className=' text-right font-cardo font-normal text-base'>
-                <i class="bi bi-box-arrow-up-right"></i> Open job in a new window
-                </div>
-                </Link>
-            </div> */}
-        </div>{clickable ?  
-        <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2'><LightbulbOutlinedIcon/><span className='ml-4'>You have already submitted a proposal for this project.</span><br/><Link><span className='text-green-700 font-bold ml-10'>View Proposal</span></Link></div>:  '' }
-        <div className=' container px-6'>
+        {/* <div className='flex flex-row'>
+            <div className='basis-6/12 cursor-pointer'><i class="bi bi-chevron-left font-bold text-black text-lg"></i></div>
+            
+        </div> */}
+        
+        <div className=' container-sm px-40'>
+        {clickable ?  
+        <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><LightbulbOutlinedIcon/><span className='ml-4'>You have already submitted a proposal for this project.</span><br/><span className='text-green-700 font-bold ml-10'>View Proposal</span></div>:  '' }
             <div className=' flex flex-row mt-6'>
-                <div className=' basis-8/12'>
+                <div className=' basis-8/12 text-left'>
                     <h1 className='text-xl font-normal font-cardo'>{project.title}</h1>
                     <p className='mt-4 text-base font-normal font-cardo'>{project.category}</p>
                     <div className='flex flex-row mt-2'>
@@ -199,8 +201,9 @@ function ViewProjectPopup({ isOpen, onClose,project}) {
                 </div>
             </div>
         </div>
-      </div>
-    </div>
+      
+    
+    </>
   );
 }
 
