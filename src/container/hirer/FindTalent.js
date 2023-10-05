@@ -104,7 +104,7 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
           </div>
         </div>
       </div>
-      <div className='mx-[9%]'>
+      <div className='mx-[6%]'>
       {/* <div className="relative">
       <img src={mybg} alt="" className='w-full h-52' />
       <div className="absolute top-12 left-12 p-4 text-left">
@@ -112,8 +112,8 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
           <h1 className='font-cardo text-[#031136] sm:text-3xl text-2xl font-semibold py-1'>check</h1>
       </div>
   </div> */}
-  <div class="flex flex-col md:flex-row mb-5 mx-5">
-  <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
+  <div class="flex flex-col md:flex-row mb-5">
+  {/* <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
   <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
       <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Discover</h1>
       <div className="flex items-center space-x-2">
@@ -166,15 +166,17 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
               <img src={ladder} alt="" className='mx-auto h-16 w-16 mt-2'/>
           </div>
       </div></Link>
-  </div>
+  </div> */}
   
-  <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
-      <div className='px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30'>
-  <div className=' flex flex-row'>
-    <div className=' basis-6/12'>
-    <h1  className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Freelancers that Matches your Job</h1>
+  <div class="w-full pt-1 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">  
+    <div className=''>
+    <h1  className="font-cardo text-[21px] text-[#031136] font-normal mr-1 text-center">Freelancers that Matches your Job</h1>
     </div>
-    <div className=' basis-6/12'>
+    <div class="w-40 mx-auto mt-5 relative">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
+      <div class="border-gray-600 border-b-2 rounded-lg"></div>
+    </div>
+    {/* <div className=' basis-6/12'>
     <p 
           className={`font-inter opacity-50 text-[#0A142F] text-[13px] py-2 inline-block pr-10 relative cursor-pointer`} 
           onClick={() => setSelected('Best Matches')}
@@ -197,14 +199,12 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
           Saved 
           {selected === 'Saved' && <span style={underlineStyle}></span>}
       </p>
-    </div>
-  </div>
-      </div>
-      <div className='px-4 md:px-8 py-1'>
-        <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse Freelancers that match your jobs</p>
-      </div>
+    </div> */}
+      {/* <div className='px-4 md:px-8 py-1'>
+        <p className='font-inter opacity-50 text-[#0A142F] text-[13px] text-center'>Browse Freelancers that match your jobs</p>
+      </div> */}
       {viewallfreelancer != null ? 
-      <div className='grid grid-cols-2 w-[70%] md:w-full pl-3.5'>
+      <div className='grid grid-cols-3 w-[70%] md:w-full pl-3.5'>
       {chunkedFree[active - 1] && chunkedFree[active - 1].map((free, index) => {
                 return(<>
                 
@@ -248,19 +248,21 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
                             {showMoreSkills[free.id] && showMoreSkills[free.id].showAll ? ' Less' : ' More'}
                         </button>
                     )}
-            <div className='mb-12'>
-          <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>completed projects : <span className='opacity-50'>More than 50</span></p>
+            <div className='mb-2'>
+          {/* <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>completed projects : <span className='opacity-50'>More than 50</span></p> */}
           <img src={verify} alt="" className='inline-block h-3 w-3 mr-1'/>
           <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>Account verified</p>
           <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>
           <p className='font-inter text-[#0A142F] text-[14px] opacity-80 inline-block mr-1'>$0.00/Hr</p>
-          <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-3'>Fixed Rate</p>
-          <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
-          <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>{free.Address}</p>
+          {/* <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-3'>Fixed Rate</p> */}
+          {/* <img src={location} alt="" className='inline-block h-3 w-3 mr-4'/> */}
+          <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mt-3'>{free.Address}<span><i class="bi bi-geo-alt ml-1"></i></span></p>
+          {/* <i class="bi bi-geo-alt"><span className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>{free.Address}</span></i> */}
+
           </div>
           <div className=" absolute bottom-2 right-6 items-center space-x-2 ml-auto">
         <Link to='/login'>
-            <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
+            <span className="inline-block text-sm px-4 py-[10px] mt-2 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
         </Link>
         </div>
       </div>

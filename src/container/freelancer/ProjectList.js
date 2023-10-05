@@ -112,7 +112,7 @@ function ProjectList() {
         </div>
       </div>
       <div className=' container-sm px-36'>
-        <div className='flex flex-row'>
+        {/* <div className='flex flex-row'>
           <div className=' basis-6/12 text-left'>5,512 services available</div>
           <div className=' basis-6/12'>
             <div className=' flex flex-row justify-end'>
@@ -120,7 +120,7 @@ function ProjectList() {
               <div className='font-normal font-inter'>Best selling</div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className='flex flex-row'>
           <div className=' basis-3/12 mt-6'>
             <div><h1 className='font-cardo text-xl text-left font-normal'>Category</h1></div>
@@ -463,17 +463,17 @@ function ProjectList() {
         <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(45)</div>
     </div>
             <div><h1 className='font-cardo text-xl text-left mt-5 font-normal'>+Show More</h1></div>
-            <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>English Level</h1></div>
+            {/* <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>English Level</h1></div>
             <select id="countries" class="bg-gray-50 border border-gray-300 text-[#797979] text-base font-inter font-normal rounded-lg mt-4 focus:ring-green-500 focus:border-green-500 block w-[83%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
               <option selected>Choose a country</option>
               <option value="US">United States</option>
               <option value="CA">Canada</option>
               <option value="FR">France</option>
               <option value="DE">Germany</option>
-            </select>
-            <div className='mt-8'>
+            </select> */}
+            {/* <div className='mt-8'>
             <Link to=''><span class="px-12 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold mr-14 text-base">Send Proposal</span></Link>
-            </div>
+            </div> */}
           </div>
           { viewallprojects != null ? 
           <div className=' basis-9/12 mt-10'>
@@ -520,7 +520,10 @@ function ProjectList() {
                 )}
             </p>
                 {JSON.parse(project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
-                  <div key={index} className='mt-3 bg-white shadow-lg text-center rounded-xl inline-block mr-3 p-1 w-24 border'>{skill}</div>
+                  // <div key={index} className='mt-3 bg-white shadow-lg text-center rounded-xl inline-block mr-3 py-1 px-2  border'>{skill}</div>
+                  <span key={index} className='border px-4 py-1 border-gray-300 opacity-60 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2'>
+                  {skill}
+                    </span>
                 ))}
               </div>
               <div className='basis-2/12 pt-10'>
