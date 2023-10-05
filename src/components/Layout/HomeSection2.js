@@ -164,7 +164,7 @@ const HomeSection2 = () => {
     </div>
 </div>
 <div className='mt-8 text-center'>
-    <Link to=''>
+    <Link to='/view-all/freelancer' onClick={() => window.scrollTo(0, 0)}>
         <span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">See All Skills</span>
     </Link>
 </div>

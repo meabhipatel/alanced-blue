@@ -8,7 +8,7 @@ import logo from '../../components/images/Alanced.png'
 const Choose = () => {
   
   const [selectedOption, setSelectedOption] = useState('client');
-  console.log(selectedOption)
+
 
   return (
     <div className="h-screen flex items-center justify-center relative" style={{ 
@@ -17,7 +17,7 @@ const Choose = () => {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
     }}>
-   <Link to='/'>
+   <Link to='/' onClick={() => {window.scrollTo(0, 0);}}>
     <div className="absolute lg:rounded-tr lg:rounded-br lg:rounded-tl-none lg:rounded-bl-none top-[50px] left-1/2 sm:left-1/4 md:left-[331.2px] transform -translate-x-1/2 flex items-center space-x-2 lg:bg-white bg-[#E2F9EE] p-3">
         <img src={logo} alt="Logo" className="h-5 w-5 md:h-6 md:w-6" /> 
         <span className="font-semibold text-[15px] tracking-widest ml-2 font-poppins text-[#031136] md:text-[16px]">ALANCED</span>

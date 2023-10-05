@@ -55,7 +55,7 @@ const Navbar = () => {
   </Link> */}
   {!isLoggedIn ? 
   <>
-  <Link to='/'>
+  <Link to='/' onClick={() => window.scrollTo(0, 0)}>
   <div class="flex items-center flex-shrink-0 lg:ml-[129px]">
     <img src={logo} alt=""  />
     <span class="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
@@ -63,10 +63,10 @@ const Navbar = () => {
   </Link>
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0">
     <div class="text-sm lg:flex-grow lg:ml-[45px]">
-      <Link to='/view-all/freelancer'onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
+      <Link to='/view-all/freelancer' onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
         Find Talent
       </span></Link>
-      <Link to='/projects'onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Find Work</span></Link>
+      <Link to='/projects' onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Find Work</span></Link>
      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
         Why Alanced
       </span>
@@ -82,12 +82,12 @@ const Navbar = () => {
     </div>
   </div> 
   </>:<>
-  {loginType=='FREELANCER' ? <Link to='/freelancer/profile'>
+  {loginType=='FREELANCER' ? <Link to='/freelancer/profile' onClick={() => window.scrollTo(0, 0)}>
   <div class="flex items-center flex-shrink-0 lg:ml-[129px]">
     <img src={logo} alt=""  />
     <span class="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
   </div>
-  </Link>:<Link to='/hirer/profile'>
+  </Link>:<Link to='/hirer/profile' onClick={() => window.scrollTo(0, 0)}>
   <div class="flex items-center flex-shrink-0 lg:ml-[129px]">
     <img src={logo} alt=""  />
     <span class="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
@@ -97,36 +97,38 @@ const Navbar = () => {
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0">
     <div class="text-sm lg:flex-grow lg:ml-[45px]">
       {loginType=='FREELANCER' ? <>
-      <span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setFindworkDropdown(true)}>Find Work <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
+      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setFindworkDropdown(true)}>Find Work <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
       {Findworkdropdown && (
         <div className="absolute right-[54rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
-            <Link to='/projects' className="flex items-center px-4 py-2">
+            <Link to='/projects' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Find Work</span>
                       </Link>
-                      <Link to='/saved-jobs' className="flex items-center px-4 py-2">
+                      <Link to='/saved-jobs' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Saved Jobs</span>
                       </Link>
-                      <Link to='/my-proposals' className="flex items-center px-4 py-2">
+                      <Link to='/my-proposals' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Proposals</span>
                       </Link>
-                      <Link to='/freelancer/edit-profile' className="flex items-center px-4 py-2" >
+                      <Link to='/freelancer/edit-profile' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2" >
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Profile</span>
                       </Link>
             </div>
         </div>
     )}
-      </> : <span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" >Find Talent </span> }
+      </> : <Link to='/hirer/profile' onClick={() => window.scrollTo(0, 0)}>
+      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" >Find Talent </span>
+      </Link> }
       {loginType=='FREELANCER' ? <>
-      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setMyJobsDropdown(true)} 
+      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setMyJobsDropdown(true)} 
     >My Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
       {MyJobsdropdown && (
         <div className="absolute right-[46rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
-            <Link to='/my-jobs' className="flex items-center px-4 py-2">
+            <Link to='/my-jobs' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Jobs</span>
                       </Link>
-                      <Link to='/freelancer/all-contracts' className="flex items-center px-4 py-2">
+                      <Link to='/freelancer/all-contracts' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">All Contracts</span>
                       </Link>
             </div>
@@ -137,20 +139,23 @@ const Navbar = () => {
     {MyJobsdropdown && (
       <div className="absolute right-[47rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
           <div className="py-1">
-          <Link to='/View-all/Job-post' className="flex items-center px-4 py-2">
+          <Link to='/add/Job-post' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
+                        <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Post A Job</span>
+                    </Link>
+          <Link to='/View-all/Job-post' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">All Jobs</span>
                     </Link>
           </div>
       </div>
   )} </> }
-      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setReportsDropdown(true)}> Reports <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
+      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setReportsDropdown(true)}> Reports <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
       {Reportsdropdown && (
         <div className="absolute right-[39rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
-            <Link to='/freelancer/my-reports' className="flex items-center px-4 py-2">
+            <Link to='/freelancer/my-reports' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Reports</span>
                       </Link>
-                      <Link to='' className="flex items-center px-4 py-2">
+                      <Link to='' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Connects History</span>
                       </Link>
                       {/* <Link to='' className="flex items-center px-4 py-2">
@@ -159,7 +164,7 @@ const Navbar = () => {
              </div>
         </div>
     )}
-      <Link to='/messages'><span href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]">Messages</span></Link>
+      <Link to='/messages' onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]">Messages</span></Link>
     </div>
 <div className="flex flex-wrap items-center space-x-4">
 <section className='flex items-center p-2 bg-white rounded-lg shadow-md'>
@@ -171,7 +176,6 @@ const Navbar = () => {
     <div className='mr-1'>
         <select id="countries" className="bg-gray-50 text-[#797979] text-xs font-inter font-normal rounded h-7 cursor-pointer">
             <option defaultValue>Talent</option>
-            <option>Project</option>
             <option>Jobs</option>
         </select>
     </div>
@@ -202,10 +206,6 @@ const Navbar = () => {
     {dropdownVisible && (
         <div className="drop absolute right-[-10px] mt-5 w-[13rem] rounded-md shadow-lg bg-white">
             <div className="py-1">
-                      {/* <Link to='/freelancer/edit-profile' className="flex items-center px-4 py-2 hover:bg-gray-100">
-                          <i class="bi bi-pencil mr-3 opacity-50"></i>
-                          <span className="font-inter text-[16px] text-[#031136] opacity-50">Edit Profile</span>
-                      </Link> */}
                       {logindata && logindata.images_logo !== "/media/images/blank.png" ? (
         <img 
             src={"https://aparnawiz91.pythonanywhere.com/" + logindata.images_logo} 
@@ -223,6 +223,10 @@ const Navbar = () => {
     )}
                      <h1 className="font-cardo text-2xl text-[#031136] font-normal text-center">{displayName}</h1>
                      <h1 className="font-cardo text-lg text-[#031136] font-normal text-center opacity-50 mb-3">{loginType=='FREELANCER'? loginType.toLowerCase(): 'client'}</h1>
+                     {loginType=='FREELANCER'? <Link to='/freelancer/edit-profile' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2 hover:bg-gray-100" >
+                            <i class="bi bi-person-circle mr-3"></i>
+                        <span className="font-inter text-[16px] text-[#031136]">Profile</span>
+                      </Link>:''}
                       <Link to='/' className="flex items-center px-4 py-2 hover:bg-gray-100" onClick={() => {
                           window.scrollTo(0, 0);
                           handleLogout();

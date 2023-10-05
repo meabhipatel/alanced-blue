@@ -7,6 +7,10 @@ import { Link, useLocation } from 'react-router-dom'
 import ProjectList from '../freelancer/ProjectList'
 import EditJobTitlePopup from './HirerAllPopup/EditJobTitlePopup'
 import EditJobDescPopup from './HirerAllPopup/EditJobDescPopup'
+import EditCategoryPopup from './HirerAllPopup/EditCategoryPopup'
+import EditJobSkillsPopup from './HirerAllPopup/EditJobSkillsPopup'
+import EditJobScopePopup from './HirerAllPopup/EditJobScopePopup'
+import EditJobBudget from './HirerAllPopup/EditJobBudget'
 
 const EditJobPost = () => {
 
@@ -14,6 +18,11 @@ const EditJobPost = () => {
     const project = location.state && location.state.project;
     const [isJobTitleOpen, setIsJobTitleOpen] = useState(false);
     const [isJobDescOpen, setIsJobDescOpen] = useState(false);
+    const [isJobCategoryOpen, setIsJobCategoryOpen] = useState(false);
+    const [isJobSkillsOpen, setIsJobSkillsOpen] = useState(false);
+    const [isJobScopeOpen, setIsJobScopeOpen] = useState(false);
+    const [isJobBudgetOpen, setIsJobBudgetOpen] = useState(false);
+
     const openJobTitle = () => {
         setIsJobTitleOpen(true);
       };
@@ -22,12 +31,44 @@ const EditJobPost = () => {
         setIsJobTitleOpen(false);
       };
 
+      const openJobBudget = () => {
+        setIsJobBudgetOpen(true);
+      };
+    
+      const closeJobBudget = () => {
+        setIsJobBudgetOpen(false);
+      };
+
+      const openJobScope = () => {
+        setIsJobScopeOpen(true);
+      };
+    
+      const closeJobScope = () => {
+        setIsJobScopeOpen(false);
+      };
+
       const openJobDesc = () => {
         setIsJobDescOpen(true);
       };
     
       const closeJobDesc = () => {
         setIsJobDescOpen(false);
+      };
+
+      const openJobCategory = () => {
+        setIsJobCategoryOpen(true);
+      };
+    
+      const closeJobCategory = () => {
+        setIsJobCategoryOpen(false);
+      };
+
+      const openJobSkills = () => {
+        setIsJobSkillsOpen(true);
+      };
+    
+      const closeJobSkills = () => {
+        setIsJobSkillsOpen(false);
       };
 
   return (
@@ -56,9 +97,10 @@ const EditJobPost = () => {
         <h1 className="font-inter text-lg text-[#031136] font-semibold text-left">category</h1>
         <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">{project.category}</h1>
     </div>
-    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer">
+    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer"  onClick={()=>openJobCategory(project)}>
         <img src={edit} alt="more" />
     </div>
+    {isJobCategoryOpen && <EditCategoryPopup closeJobCategory={closeJobCategory} project={project}/>}
 </div>
 <div className='flex justify-between items-center mt-5'>
     <div className="flex flex-col">
@@ -84,9 +126,10 @@ const EditJobPost = () => {
         }
     </div> 
     </div>
-    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer">
+    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={()=>openJobSkills(project)}>
         <img src={edit} alt="more" />
     </div>
+    {isJobSkillsOpen && <EditJobSkillsPopup closeJobSkills={closeJobSkills} project={project}/>}
 </div>
 <div className='flex justify-between items-center mt-5'>
     <div className="flex flex-col">
@@ -94,18 +137,20 @@ const EditJobPost = () => {
         <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">Project Deadline : {project.deadline}</h1>
         <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">Experience Level : Expert </h1> 
     </div>
-    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer">
+    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={()=>openJobScope(project)}>
         <img src={edit} alt="more" />
     </div>
+    {isJobScopeOpen && <EditJobScopePopup closeJobScope={closeJobScope} project={project}/>}
 </div>
 <div className='flex justify-between items-center mt-5'>
     <div className="flex flex-col">
         <h1 className="font-inter text-lg text-[#031136] font-semibold text-left pb-2">Budget</h1>
         <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">${project.budget} /hr</h1>
         </div>
-    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer">
+    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={()=>openJobBudget(project)}>
         <img src={edit} alt="more" />
     </div>
+    {isJobBudgetOpen && <EditJobBudget closeJobBudget={closeJobBudget} project={project}/>}
 </div>
 </div>
 <div className='flex justify-end m-5'>

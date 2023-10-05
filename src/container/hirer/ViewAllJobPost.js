@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/Layout/Navbar'
 import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
@@ -27,21 +27,72 @@ const ViewAllJobPost = () => {
     const commonStyle = "inline-block text-sm py-[10px] mt-4 lg:mt-0 border rounded font-semibold"; 
 
 
-  const [active, setActive] = React.useState(1);
+  // const [active, setActive] = React.useState(1);
  
-  const next = () => {
-    window.scrollTo(0, 0)
-    if (active === 5) return;
+  // const next = () => {
+  //   window.scrollTo(0, 0)
+  //   if (active === 5) return;
  
-    setActive(active + 1);
-  };
+  //   setActive(active + 1);
+  // };
  
-  const prev = () => {
-    window.scrollTo(0, 0)
-    if (active === 1) return;
+  // const prev = () => {
+  //   window.scrollTo(0, 0)
+  //   if (active === 1) return;
  
-    setActive(active - 1);
-  };
+  //   setActive(active - 1);
+  // };
+
+  const [currentPage, setCurrentPage] = useState(1);
+    const [categorySearch, setCategorySearch] = useState('');
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [categorySearch]);
+
+    const jobsPerPage = 5;
+    const indexOfLastJob = currentPage * jobsPerPage;
+    const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+    
+    const filteredJobs = viewhirerselfproject?.filter(project => 
+        project.category.toLowerCase().includes(categorySearch.toLowerCase())
+    ) || [];
+
+    const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
+    const totalPages = Math.ceil((filteredJobs.length || 0) / jobsPerPage);
+
+    const next = () => {
+        window.scrollTo(0, 0);
+        if (currentPage === totalPages) return;
+        setCurrentPage(currentPage + 1);
+    };
+
+    const prev = () => {
+        window.scrollTo(0, 0);
+        if (currentPage === 1) return;
+        setCurrentPage(currentPage - 1);
+    };
+
+
+//   const [currentPage, setCurrentPage] = useState(1);
+//   const next = () => {
+//     window.scrollTo(0, 0);
+//     if (currentPage === totalPages) return;
+//     setCurrentPage(currentPage + 1);
+// };
+
+// const prev = () => {
+//     window.scrollTo(0, 0);
+//     if (currentPage === 1) return;
+//     setCurrentPage(currentPage - 1);
+// };
+
+//     const jobsPerPage = 5;
+//     const indexOfLastJob = currentPage * jobsPerPage;
+//     const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+//     const currentJobs = viewhirerselfproject?.slice(indexOfFirstJob, indexOfLastJob) || [];
+//     const totalPages = Math.ceil((viewhirerselfproject?.length || 0) / jobsPerPage);
+
 
   const isJobOpen = (deadline) => {
     const deadlineDate = new Date(deadline);
@@ -98,16 +149,26 @@ function timeAgo(postedTimeStr) {
     <div className='my-2 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left'>
     <section className='flex items-center p-2 bg-white rounded-lg m-5 border w-[49%]'>
     <div className='flex items-center mr-1 space-x-1'>
+                        <img src={search} alt="Search Icon" className="h-3 w-3" />
+                        <input 
+                            className='w-28 lg:w-40 xl:w-[30rem] h-7 text-xs lg:text-sm outline-none' 
+                            placeholder='Search by Category' 
+                            value={categorySearch}
+                            onChange={(e) => setCategorySearch(e.target.value)}
+                        />
+                    </div>
+    {/* <div className='flex items-center mr-1 space-x-1'>
         <img src={search} alt="Search Icon" className="h-3 w-3" />
         <input className='w-28 lg:w-40 xl:w-[30rem] h-7 text-xs lg:text-sm outline-none' placeholder='Search Job Postings' />
-    </div>
+    </div> */}
     <button className='rounded h-7 w-7 p-2 text-xs lg:text-sm font-semibold text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>
         <img src={searchbtn} alt="Search Icon" />
     </button>
 </section>
 {viewhirerselfproject != null ? 
 <div>
-{viewhirerselfproject && viewhirerselfproject.map((project, index) => {
+{currentJobs && currentJobs.map((project, index) => {
+{/* {viewhirerselfproject && viewhirerselfproject.map((project, index) => { */}
                  
                 //  const isJobOpen = (deadline) => {
                 //   const deadlineDate = new Date(deadline);
@@ -170,7 +231,43 @@ function timeAgo(postedTimeStr) {
     </div>
     
     }
-    <div className="flex justify-end items-center gap-6 m-4">
+    {viewhirerselfproject?.length > 5 && (
+                    <div className="flex justify-end items-center gap-6 m-4">
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={prev}
+                            disabled={currentPage === 1}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                        
+                        {[...Array(totalPages)].map((_, index) => {
+                            const pageNumber = index + 1;
+                            return (
+                                <span
+                                    key={pageNumber}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    onClick={() => setCurrentPage(pageNumber)}
+                                >
+                                    {pageNumber}
+                                </span>
+                            );
+                        })}
+
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={next}
+                            disabled={currentPage === totalPages}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                    </div>
+                )}
+    {/* <div className="flex justify-end items-center gap-6 m-4">
   <IconButton
     size="sm"
     variant="outlined"
@@ -204,7 +301,7 @@ function timeAgo(postedTimeStr) {
   >
     <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
   </IconButton>
-</div>
+</div> */}
     </div>
     </div>
     <HomeSection4/>

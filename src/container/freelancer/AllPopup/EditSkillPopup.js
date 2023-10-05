@@ -55,7 +55,10 @@ const EditSkillPopup = ({ closeEditSkill }) => {
     <div className="flex items-center justify-center min-h-screen">
         <div className="bg-white rounded-lg w-[90%] md:w-[50%] p-6 px-8 relative z-20">
             <div className="flex justify-between items-center">
-                <h1 className="font-cardo text-[26px] text-[#031136] font-normal">Edit Skills</h1>
+            <h1 className="font-cardo text-[26px] text-[#031136] font-normal">
+    {skills && skills.length > 0 ? 'Edit Skills' : 'Add Skills'}
+</h1>
+
                 <button onClick={closeEditSkill} className="text-gray-500 hover:text-gray-700">
                     <i className="bi bi-x-lg"></i>
                 </button>

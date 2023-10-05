@@ -159,7 +159,7 @@ const Login = (props) => {
         <div className="flex flex-col md:flex-row">
             <div className="relative w-full md:w-[45%]">
     <img className="w-full h-[580px] md:h-auto object-cover" src={loginimg} alt="img" />
-    <Link to='/'>
+    <Link to='/' onClick={() => {window.scrollTo(0, 0);}}>
         <div className="absolute rounded-tr rounded-br rounded-tl-none rounded-bl-none top-[29px] left-[18%] sm:left-1/4 md:left-[73.2px] transform -translate-x-1/2 flex items-center space-x-2 lg:bg-white bg-[#E2F9EE] p-3">
             <img src={logo} alt="Logo" className="h-5 w-5 md:h-6 md:w-6" /> 
             <span className="font-semibold text-[15px] tracking-widest ml-2 font-poppins text-[#031136] md:text-[16px]">ALANCED</span>

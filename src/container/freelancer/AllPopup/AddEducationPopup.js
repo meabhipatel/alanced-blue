@@ -2,14 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const AddEducationPopup = ({ closeAddEducation }) => {
-    
-  const degrees = ["Bachelor's", "Master's", "PhD", "Associate", "Diploma"];
+
     
   return (
-    <div className="fixed z-10 inset-0 overflow-y-auto mt-28">
+    <div className="fixed z-10 inset-0 overflow-y-auto mt-8">
     <div className="fixed inset-0 bg-black opacity-50"></div>
     <div className="flex items-center justify-center min-h-screen">
-    <div className="bg-white rounded-lg w-[90%] md:w-[61%] p-6 px-8 relative z-20">
+    <div className="bg-white rounded-lg w-[90%] md:w-[53%] p-6 px-8 relative z-20">
     <div className="flex justify-between items-center">
         <h1 className="font-cardo text-[26px] text-[#031136] font-normal">Add Education</h1>
         <button onClick={closeAddEducation} className="text-gray-500 hover:text-gray-700">
@@ -17,9 +16,9 @@ const AddEducationPopup = ({ closeAddEducation }) => {
         </button>
     </div>
     <div className='mt-10'>
-            <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">School/ University</h1>
-            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Ex: DAVV'/>
-            <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Dates Attended</h1>
+            {/* <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Degree</h1> */}
+            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Ex: B.Tech'/>
+            {/* <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Dates Attended</h1>
             <div className="flex justify-between items-center mt-2 mb-6">
         <select className="border py-2 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 mr-5 flex-1 bg-white opacity-50">
             <option value="" disabled selected>From</option>
@@ -37,9 +36,9 @@ const AddEducationPopup = ({ closeAddEducation }) => {
             {/* <div className="flex justify-between items-center mt-3 mb-6">
             <input type="text" className="border py-1.5 px-2 rounded-md outline-none mr-5 flex-1" placeholder="From"/>
              <input type="text" className="border py-1.5 px-2 rounded-md outline-none flex-1" placeholder="To (or expected graduation year)" />
-            </div> */}
+            </div> *
             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Degree</h1>
-            {/* <input type="text" className='border mt-3 mb-6 py-1.5 px-2 rounded-md w-full outline-none' placeholder='Degree'/> */}
+            {/* <input type="text" className='border mt-3 mb-6 py-1.5 px-2 rounded-md w-full outline-none' placeholder='Degree'/> *
             <select className="border mt-2 mb-6 py-2 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white opacity-50">
             <option value="" disabled>Degree</option>
             {degrees.map(degree => (
@@ -47,7 +46,7 @@ const AddEducationPopup = ({ closeAddEducation }) => {
             ))}
         </select>
             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Area of Study (Optional) </h1>
-            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Ex: Computer Science'/>
+            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Ex: Computer Science'/> */}
             {/* <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Description (Optional)</h1>
             <textarea name="" id="" cols="30" rows="5" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'></textarea> */}
             <div className="mt-8 flex justify-end">

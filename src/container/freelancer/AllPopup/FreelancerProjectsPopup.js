@@ -1,8 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import profilebg from '../../../components/images/profilebg.png'
+import edit from '../../../components/images/edit.png'
+import EditFreelancerProjectsPopup from './EditFreelancerProjectsPopup'
 
 const FreelancerProjectsPopup = ({ closeFreeProject, project }) => {
+
+    const [isEditFreeProjectOpen, setIsEditFreeProjectOpen] = useState(false);
+    const [selectedProject, setSelectedProject] = useState(null);
+  
+    const openEditFreeProject = (project) => {
+      setSelectedProject(project);
+      setIsEditFreeProjectOpen(true);
+  };
+  
+  const closeEditFreeProject = () => {
+      setSelectedProject(null);
+      setIsEditFreeProjectOpen(false);
+  };
+
   return (
     <>
     <div className="fixed z-10 inset-0 overflow-y-auto mt-24">
@@ -11,9 +27,13 @@ const FreelancerProjectsPopup = ({ closeFreeProject, project }) => {
                     <div className="bg-white rounded-lg w-[90%] md:w-[55%] p-6 px-8 relative z-20">
                     <div className="flex justify-between items-center">
                         <h1 className="font-cardo text-[26px] text-[#031136] font-normal text-wrap">{project.project_title}</h1>
-                        <button onClick={closeFreeProject} className="text-gray-500 hover:text-gray-700">
+                        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={() => openEditFreeProject(project)}>
+                        <img src={edit} alt="edit" />
+                        </div>
+                        {isEditFreeProjectOpen && <EditFreelancerProjectsPopup project={selectedProject} closeEditFreeProject={closeEditFreeProject} />}
+                        {/* <button onClick={closeFreeProject} className="text-gray-500 hover:text-gray-700">
                             <i class="bi bi-x-lg"></i>
-                        </button>
+                        </button> */}
                     </div>
                     <div className='mt-8'>
                         <img src={"https://aparnawiz91.pythonanywhere.com/"+project.images_logo} alt="" className='w-full h-[300px]'/>
@@ -43,6 +63,6 @@ const FreelancerProjectsPopup = ({ closeFreeProject, project }) => {
   )
 }
 
-export default FreelancerProjectsPopup
+export default FreelancerProjectsPopup;
 
 
