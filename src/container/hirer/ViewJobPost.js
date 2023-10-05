@@ -52,7 +52,10 @@ function timeAgo(postedTimeStr) {
   }
 }
 
-
+const formatDate = (dateStr) => {
+    const [year, month, day] = dateStr.split('-');
+    return `${day}-${month}-${year}`;
+  };
 
   return (
     <>
@@ -71,6 +74,34 @@ function timeAgo(postedTimeStr) {
         <p className="font-inter text-[#031136] text-lg font-medium">{project.title}</p>  
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
+  <div className="flex">
+    
+    <div className="flex-1 py-4 flex">
+        <i class="bi bi-coin flex-shrink-0 mr-3"></i>
+        <div>
+            <p className="font-inter text-[#031136] text-md font-medium"> ${project.budget}</p>
+            <p className="font-inter text-[#031136] text-sm font-medium opacity-50">Fixed</p>
+        </div> 
+    </div>
+
+    <div className="flex-1 py-4 flex">
+        <i class="bi bi-mortarboard-fill flex-shrink-0 mr-3"></i>
+        <div>
+            <p className="font-inter text-[#031136] text-md font-medium">Expert</p>
+            <p className="font-inter text-[#031136] text-sm font-medium opacity-50">Experience Level</p>
+        </div> 
+    </div>
+    <div className="flex-1 py-4 flex">
+        <i class="bi bi-calendar-minus flex-shrink-0 mr-3"></i>
+        <div>
+            <p className="font-inter text-[#031136] text-md font-medium">{formatDate(project.deadline)}</p>
+            <p className="font-inter text-[#031136] text-sm font-medium opacity-50">Project Deadline</p>
+        </div> 
+    </div>
+  </div>
+</div>
+
+        {/* <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
   <div className="flex mb-4">
   <div className="flex-1 py-4 flex">
     <i class="bi bi-alarm flex-shrink-0 mr-3"></i> 
@@ -104,12 +135,12 @@ function timeAgo(postedTimeStr) {
     </div> 
     </div>
   </div>
-</div>
+</div> */}
 <div className='border-b border-gray-200 border-opacity-30 py-6 px-8 flex items-center'>
     <div className="flex-1"> 
         <p className="font-inter text-[#031136] text-lg font-medium">Contract-to-hire opportunity</p>  
         <p className="font-inter text-[#031136] opacity-50 text-md font-medium py-2">This lets talent know that this job could become full time.</p>
-        <p className="font-inter text-green-700 text-md font-semibold py-3 cursor-pointer">Learn more</p>
+        {/* <p className="font-inter text-green-700 text-md font-semibold py-3 cursor-pointer">Learn more</p> */}
     </div>
     <div className="ml-4"> 
         <img src={frame} alt="" className='h-32 w-32'/>

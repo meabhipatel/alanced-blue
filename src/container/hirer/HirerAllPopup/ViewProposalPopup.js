@@ -11,10 +11,11 @@ import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 
-const ViewProposalPopup = ({ closeViewProposal, bid }) => {
-    const bidData = { bid };
+const ViewProposalPopup = ({ closeViewProposal }) => {
+    
     const location = useLocation();
   const project = location.state && location.state.project;
+  const bid = location.state && location.state.bid;
 
   const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
   const accessToken = useSelector(state => state.login.accessToken);  
@@ -77,7 +78,7 @@ const [active, setActive] = React.useState(1);
     <div className="fixed inset-0 flex items-center justify-center z-10 mt-20">
     <div className="fixed inset-0 bg-black opacity-10"></div>
   <div className="bg-white p-6 rounded-lg shadow-xl w-3/4 h-[94%] z-20 overflow-y-scroll">
-    <div className='flex flex-row'>
+    {/* <div className='flex flex-row'>
         <div className='basis-6/12 cursor-pointer'><i class="bi bi-chevron-left font-bold text-black text-lg" onClick={closeViewProposal}></i></div>
         <div className=' basis-6/12'>
             <Link to="/View/proposal" state={{project,bidData}}>
@@ -86,7 +87,7 @@ const [active, setActive] = React.useState(1);
             </div>
             </Link>
         </div>
-    </div>
+    </div> */}
     <div className=' container px-2'>
     <div className="flex mt-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30">
   <div className="flex-[20%] p-6">
@@ -105,7 +106,7 @@ const [active, setActive] = React.useState(1);
                 <img src={locations} alt="Location" className="h-[13px] mr-1" />
                 <p className="text-[#797979] text-[14px] font-inter">{bid.freelancer_address ? bid.freelancer_address:'NA'}</p>
             </div>
-            <p className="text-green-600 text-[16px] font-inter py-3 font-semibold cursor-pointer hover:underline">View Profile</p>
+            {/* <p className="text-green-600 text-[16px] font-inter py-3 font-semibold cursor-pointer hover:underline">View Profile</p> */}
   </div>
   <div className="flex-[50%] p-6 text-right">
   <Link to=''><span class="inline-block text-sm px-10 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold">Message</span></Link>
@@ -140,15 +141,11 @@ const [active, setActive] = React.useState(1);
     <Link to=''><span class="text-sm px-16 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">All Work</span></Link>
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
-        <h1 className="font-cardo text-xl text-[#031136] font-normal">Hours Per Week</h1>
-    <p className="text-[#031136] opacity-50 text-[14px] font-inter pb-6">more than 30 hrs/week</p>
     <h1 className="font-cardo text-xl text-[#031136] font-normal">Languages</h1>
     <p className='font-inter text-[#0A142F] text-[14px] py-1'>English : <span className='opacity-50'>Native or Bilingual</span></p>
     <p className='font-inter text-[#0A142F] text-[14px]'>Hindi : <span className='opacity-50'>Native or Bilingual</span></p>
     <h1 className="font-cardo text-xl text-[#031136] font-normal pt-6">Education</h1>
-    <p className='font-inter text-[#0A142F] text-[14px] py-1'>BSC (CS)</p>
-    <p className='font-inter text-[#0A142F] text-[14px] opacity-50'>Davv</p>
-    <p className='font-inter text-[#0A142F] text-[14px] opacity-50'>2018-2021</p>
+    <p className='font-inter text-[#0A142F] text-[14px] py-1'>B.Tech</p>
         </div>
     </div>
     <div class="w-full md:w-[70%] bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">

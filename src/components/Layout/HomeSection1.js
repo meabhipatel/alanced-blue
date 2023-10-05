@@ -57,9 +57,9 @@ const HomeSection1 = () => {
             <img src={circlecheck} alt="" className='h-5 w-5'/>
             <span className='font-inter text-[15px]'>Certified Institute</span>
         </div>
-        <div className='mt-7'>
+        {/* <div className='mt-7'>
             <Link to=''><span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Read More</span></Link>
-        </div>
+        </div> */}
     </div>
 </div>
 

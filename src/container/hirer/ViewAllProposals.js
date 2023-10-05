@@ -140,7 +140,8 @@ const handleClick = (event, index) => {
                           const words = bid.description.split(' ');
                           const displayWords = expandedProjects[index] || words.length <= 50 ? words : words.slice(0, 50);
                             return(<>
-                              <div className='px-4 md:px-8 py-2 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30' onClick={() => openViewProposal(bid)}>
+                            <Link to='/View/proposal' state={{ project, bid}} onClick={() => window.scrollTo(0, 0)}>
+                              <div className='px-4 md:px-8 py-2 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30'>
                               <div class="flex">
                             <div class="flex-[10%] p-4">
                             <div className="relative w-24 h-24 mx-auto">
@@ -205,7 +206,8 @@ const handleClick = (event, index) => {
                             </div>
                           </div>
                               </div>
-                              {isViewProposalOpen && <ViewProposalPopup closeViewProposal={closeViewProposal} state={{project}} bid={selectedbid}/>}
+                              </Link>
+                              {/* {isViewProposalOpen && <ViewProposalPopup closeViewProposal={closeViewProposal} state={{project}} bid={selectedbid}/>} */}
                               </>
                                 )
                         })}</div> : <div>

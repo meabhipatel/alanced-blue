@@ -14,7 +14,6 @@ const Section = () => {
                 <div className=''>
                 <select id="countries" class="bg-gray-50 text-[#797979] text-sm font-inter font-normal rounded-lg  block  p-2.5 ml-5">
                 <option selected>Talent</option>
-                <option value="">Project</option>
                 <option value="">Jobs</option>
                 </select>
                 </div>

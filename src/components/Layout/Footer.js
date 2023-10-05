@@ -14,56 +14,31 @@ const Footer = () => {
     <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:px-20">
     <div class="p-4 text-left">
     <h5 class="text-xl font-bold font-cardo mb-6">Product</h5>
-        <ul class="list-none footer-links opacity-50">
-          <li class="mb-2">
-            <a href="" class="hover:text-green-800">Employee database</a>
-          </li>
-          <li class="mb-2">
-            <a href="" class="hover:text-green-800">Payroll</a>
-          </li>
-          <li class="mb-2">
-            <a href="" class="hover:text-green-800">Absences</a>
-          </li>
-          <li class="mb-2">
-            <a href="" class="hover:text-green-800">Time tracking</a>
-          </li>
-          <li class="mb-2">
-            <a href="" class="hover:text-green-800">Shift Planner</a>
-          </li>
-          <li class="mb-2">
-            <a href="" class="hover:text-green-800">Recruiting</a>
-          </li>
+        <ul class="list-none footer-links text-gray-500">
+          <Link to='/view-all/freelancer' onClick={() => window.scrollTo(0, 0)}>
+          <li class="mb-2 hover:text-green-600 hover:underline">Recruiting</li>
+          </Link>
+          <Link to='/projects' onClick={() => window.scrollTo(0, 0)}>
+          <li class="mb-2 hover:text-green-600 hover:underline">Career</li>
+          </Link>
+          <li class="mb-2 hover:text-green-600 hover:underline">Enterprise Solution</li>
+          <li class="mb-2 hover:text-green-600 hover:underline">Alanced Foundation</li>
         </ul>
     </div>
     <div class="p-4 text-left">
     <h5 class="text-xl font-bold mb-6 font-cardo">Information</h5>
-        <ul class="list-none footer-links opacity-50">
-          <li class="mb-2">
-            <a href="" class="hover:text-green-800">FAQ</a>
-          </li>
-          <li class="mb-2">
-            <a href="" class="hover:text-green-800">Blog</a>
-          </li>
-          <li class="mb-2">
-            <a href="" class="hover:text-green-800">Support</a>
-          </li>
+        <ul class="list-none footer-links text-gray-500">
+          <li class="mb-2 hover:text-green-600 hover:underline">FAQ</li>
+          <li class="mb-2 hover:text-green-600 hover:underline">Blog</li>
+          <li class="mb-2 hover:text-green-600 hover:underline">Support</li>
         </ul>
     </div>
     <div class="p-4 text-left">
     <h5 class="text-xl font-bold mb-6 font-cardo">Company</h5>
-        <ul class="list-none footer-links opacity-50">
-          <li class="mb-2">
-            <a href="" class="hover:text-green-800">About us</a>
-          </li>
-          <li class="mb-2">
-            <a href="" class="hover:text-green-800">Career</a>
-          </li>
-          <li class="mb-2">
-            <a href="" class="hover:text-green-800">Contact us</a>
-          </li>
-          <li class="mb-2">
-            <a href="" class="hover:text-green-800">Lift media</a>
-          </li>
+        <ul class="list-none footer-links text-gray-500">
+          <li class="mb-2 hover:text-green-600 hover:underline">About us</li>
+          <li class="mb-2 hover:text-green-600 hover:underline">Contact us</li>
+          <li class="mb-2 hover:text-green-600 hover:underline">Safety & Security</li>
         </ul>
     </div>
     <div class="p-4">

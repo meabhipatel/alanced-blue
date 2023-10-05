@@ -3,6 +3,12 @@ import cupbook from '../images/cupbook.png'
 import { Link } from 'react-router-dom'
 
 const HomeSection4 = () => {
+
+  const accessToken = localStorage.getItem('accessToken')
+  const googleUserName = localStorage.getItem('googleUserName')
+
+  const isLoggedIn = Boolean(accessToken || googleUserName)
+
   return (
     <div>
       <div className='bg-[#F6FAFD]'>
@@ -12,9 +18,10 @@ const HomeSection4 = () => {
     Get Book Copy Today!
     <div className="border-b-2 border-[#1B3764] w-1/6 my-4 opacity-62"></div>
     </h1>
-    <p className='opacity-50 font-inter text-[13px]'>This the first true value generator on the Internet. It uses alphas dictionary <br /> of over 200 Latin words.</p>
+    <p className='opacity-50 font-inter text-[13px]'>This the first true value generator on the Internet. It uses alphas dictionary <br /> of over 200 Latin words. This unique collection not only highlights the beauty and depth of the Latin language.</p>
 <div className='mt-8'>
-<span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Sign In</span>
+{!isLoggedIn ? <Link to='/login'>
+<span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Sign In</span></Link> :''}
 </div>
     </div>
     <div class="flex-1 p-4">

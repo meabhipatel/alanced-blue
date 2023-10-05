@@ -211,7 +211,7 @@ const Registration = () => {
         <div class="flex flex-col md:flex-row">
             <div class="relative h-[535px] md:h-auto md:w-[45%]">
                 <img class="w-full h-full object-cover md:h-[580px]" src={registerimg2} alt="img"/>
-                <Link to='/'>
+                <Link to='/' onClick={() => {window.scrollTo(0, 0);}}>
         <div className="absolute rounded-tr rounded-br rounded-tl-none rounded-bl-none top-[19px] left-[18%] sm:left-1/4 md:left-[73.2px] transform -translate-x-1/2 flex items-center space-x-2 lg:bg-white bg-[#E2F9EE] p-3">
             <img src={logo} alt="Logo" className="h-5 w-5 md:h-6 md:w-6" /> 
             <span className="font-semibold text-[15px] tracking-widest ml-2 font-poppins text-[#031136] md:text-[16px]">ALANCED</span>
