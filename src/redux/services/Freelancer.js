@@ -105,3 +105,16 @@ export const GetFreelancerSelfBid = async (token) => {
       return handleError(err);
     });
 };
+
+export const GetFreelancerSelfBidProject = async (data, token) => {    
+  setHeadersWithAccessToken(data, token);
+  console.log("data from freelancer services",data)
+  return await DataService.post(`${API.Freelancers.Freelancer.ViewFreelancerSelfBidProject}/${data}`)
+    .then((res) => {
+      console.log("Freelancer Self Bid Project",res);
+      return res.data;
+    })
+    .catch((err) => {
+      return handleError(err);
+    });
+};

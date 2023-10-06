@@ -108,7 +108,7 @@ function ViewProjectPopup() {
         
         <div className=' container-sm px-40'>
         {clickable ?  
-        <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><LightbulbOutlinedIcon/><span className='ml-4'>You have already submitted a proposal for this project.</span><br/><span className='text-green-700 font-bold ml-10'>View Proposal</span></div>:  '' }
+        <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><LightbulbOutlinedIcon/><span className='ml-4'>You have already submitted a proposal for this project.</span><br/><span className='text-green-700 font-bold ml-10'><Link to="/view/SelfBidProject" state={{ project }}>View Proposal</Link></span></div>:  '' }
             <div className=' flex flex-row mt-6'>
                 <div className=' basis-8/12 text-left'>
                     <h1 className='text-xl font-normal font-cardo'>{project.title}</h1>
