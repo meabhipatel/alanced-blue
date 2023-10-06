@@ -79,18 +79,18 @@ React.useEffect(() => {
                     Referrals
                 </span>
             </Link>
-            <Link to='/freelancer/view-archived'className="flex-grow md:flex-none p-1">
+            {/* <Link to='/freelancer/view-archived'className="flex-grow md:flex-none p-1">
                 <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'Archieved' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('Archieved')}>
                     Archieved
                 </span>
-            </Link>
+            </Link> */}
     </div>
     <div class="flex-1 border-t-2 border-gray-200 opacity-30 my-4"></div>
     <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2] text-left'>
       <h1 className='font-inter text-[16px] font-semibold text-[#031136] p-3'>Offers (0)</h1>
     </div>
-    <div className='my-4 bg-[#FFFFFF] border p-3 border-[#E7E8F2] text-left flex items-center justify-between'>
+    {/* <div className='my-4 bg-[#FFFFFF] border p-3 border-[#E7E8F2] text-left flex items-center justify-between'>
     <h1 className='font-inter text-[16px] font-semibold text-[#031136]'>Invitations to Interview (0)</h1>
     <div className="flex space-x-1">
         <button
@@ -108,7 +108,7 @@ React.useEffect(() => {
             <img src={edit} alt="edit" />
         </div>
     </div>
-</div>
+</div> */}
 <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2] text-left'>
 <h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Submitted Proposals ({bidCount})</h1>
 {freelancerselfbid != null ? <div>

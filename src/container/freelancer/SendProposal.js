@@ -6,6 +6,7 @@ import Footer from '../../components/Layout/Footer'
 import { Link, useLocation,useNavigate } from 'react-router-dom'
 import dollarimg from '../../components/images/doller3.png'
 import { AddBidAmountAction, GetViewAllProjectsListAction } from '../../redux/Freelancer/FreelancerAction';
+import { toast } from 'react-toastify';
 
 const SendProposal = () => {
     const location = useLocation();
@@ -25,16 +26,35 @@ const SendProposal = () => {
             "project_id": id,
             "description":addBid.description,
             "bid_amount":addBid.bid_amount,  
-        }
-        console.log("/-/-/-/-/-/-/-/-/-/-/",prodata)
+          }
+          console.log("/-/-/-/-/-/-/-/-/-/-/",prodata)
         dispatch(AddBidAmountAction(prodata, accessToken));
-        // navigate('/projects')
-    };
+        if(prodata.bid_amount >= 0 && prodata.description != null){
+        navigate('/send-proposal/detail', { state: { bidData: prodata, projectdetail: findproject,} })
+        }
+        if(prodata.bid_amount < 0){
+            toast.error("Enter valid bid amount")
+        }
+        else if(prodata.bid_amount != null && prodata.description == null){
+        toast.error("Cover letter is required")
+        }
+      };
 
-    if(addbid==true){
-        dispatch(GetViewAllProjectsListAction(accessToken));
-        navigate('/projects')
-    }
+    // const BidAdd = () => {
+    //     const prodata ={
+    //         "project_id": id,
+    //         "description":addBid.description,
+    //         "bid_amount":addBid.bid_amount,  
+    //     }
+    //     console.log("/-/-/-/-/-/-/-/-/-/-/",prodata)
+    //     dispatch(AddBidAmountAction(prodata, accessToken));
+    //     // navigate('/projects')
+    // };
+
+    // if(addbid==true){
+    //     dispatch(GetViewAllProjectsListAction(accessToken));
+    //     navigate('/projects')
+    // }
 
     const onChange = e =>{
         setAddBid({

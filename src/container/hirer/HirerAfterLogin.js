@@ -500,7 +500,7 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
       </div>
       </div>
   </div>
-      <p 
+      {/* <p 
           className={`font-inter opacity-50 text-[#0A142F] text-[13px] py-2 inline-block pr-10 relative cursor-pointer`} 
           onClick={() => setSelected('Best Matches')}
       >
@@ -521,10 +521,10 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
       >
           Saved 
           {selected === 'Saved' && <span style={underlineStyle}></span>}
-      </p>
+      </p> */}
       </div>
-      <div className='px-4 md:px-8 py-4'>
-        <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse Freelancers that match your jobs</p>
+      <div className='px-4 md:px-8 py-2'>
+        <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Explore freelancers who are a perfect fit for your projects.</p>
       </div>
       {viewallfreelancer != null ? 
       <div className='grid grid-cols-2 w-[70%] md:w-full pl-3.5'>

@@ -21,6 +21,7 @@ import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import Slider from 'rc-slider'
 
 const FindTalent = () => {
     const viewallfreelancer = useSelector(state => state.hirer.viewallfreelancer)
@@ -34,6 +35,19 @@ const FindTalent = () => {
       dispatch(GetViewAllFreelancersAction())
       // setviewallfreelancer(freelancers)
     }, [])
+
+
+    const [range, setRange] = useState([1, 1000]);
+
+    const handleSliderChange = (newRange) => {
+      setRange(newRange);
+    };
+  
+    const handleInputChange = (index, newValue) => {
+      const newRange = [...range];
+      newRange[index] = newValue;
+      setRange(newRange);
+    };
   
     const [showMoreSkills, setShowMoreSkills] = useState({});
 
@@ -104,107 +118,355 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
           </div>
         </div>
       </div>
-      <div className='mx-[6%]'>
-      {/* <div className="relative">
-      <img src={mybg} alt="" className='w-full h-52' />
-      <div className="absolute top-12 left-12 p-4 text-left">
-          <h1 className='font-cardo text-[#031136] sm:text-xl text-lg font-normal'>Monday, October 2nd</h1>
-          <h1 className='font-cardo text-[#031136] sm:text-3xl text-2xl font-semibold py-1'>check</h1>
-      </div>
-  </div> */}
-  <div class="flex flex-col md:flex-row mb-5">
-  {/* <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
-  <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
-      <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Discover</h1>
-      <div className="flex items-center space-x-2">
-              <img src={downarrow} alt="" />
-      </div>
-      </div>
-      <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
-      <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Your hires</h1>
-      <div className="flex items-center space-x-2">
-              <img src={downarrow} alt="" />
-      </div>
-      </div>
-      <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
-      <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Company hires</h1>
-      <div className="flex items-center space-x-2">
-              <img src={downarrow} alt="" />
-      </div>
-      </div>
-      <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4">
-      <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Recently viewed</h1>
-      <div className="flex items-center space-x-2">
-              <img src={downarrow} alt="" />
-      </div>
-      </div>
-      <div className="px-4 md:px-8 py-5 m-4 rounded-lg shadow-md">
-      <h1 className="font-cardo text-[18px] text-[#031136] font-normal pt-2">Upwork Academy  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
-      <h1 className="font-cardo text-[18px] text-[#031136] font-normal pt-2">Get Freelancer  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
-      <h1 className="font-cardo text-[18px] text-[#031136] font-normal pt-2">Community & Forums  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
-      <h1 className="font-cardo text-[18px] text-[#031136] font-normal py-2">Help Center  <i class="bi bi-box-arrow-up-right text-sm"></i></h1>
-      </div>
-      <Link to='/login'>
-      <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#E2F9EE] rounded-lg p-4 mx-4 shadow-sm">
-      <div>
-          <h1 className='font-cardo text-lg text-[#031136] text-left'>Post A Job</h1>
-          <p className='font-inter text-sm text-[#0A142F] opacity-50 py-2 text-left'>Post Unlimited No. of Jobs & Hire Top Talents For Your Work.</p>
-      </div>
-      <div className="text-center">
-         <i class="bi bi-arrow-right"></i>
-          <img src={certifybadge} alt="" className='mx-auto h-16 w-16 mt-2'/>
-      </div>
-  </div></Link>
-  <Link to='/login'>
-      <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#E2F9EE] rounded-lg p-4 mx-4 my-3 shadow-sm">
-          <div>
-          <h1 className='font-cardo text-lg text-[#031136] text-left'>Get Tips To Find Talent</h1>
-             <p className='font-inter text-sm text-[#0A142F] opacity-50 py-2 text-left'>Learn to optimize search, use Connects, and Hire Freelancers.</p>
-          </div>
-          <div className="text-center">
-              <i class="bi bi-arrow-right"></i>
-              <img src={ladder} alt="" className='mx-auto h-16 w-16 mt-2'/>
-          </div>
-      </div></Link>
-  </div> */}
-  
-  <div class="w-full pt-1 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">  
-    <div className=''>
-    <h1  className="font-cardo text-[21px] text-[#031136] font-normal mr-1 text-center">Freelancers that Matches your Job</h1>
+      <div className=' mt-1 mx-[9%]'>
+      <div class="flex flex-col md:flex-row mb-5 mx-5">
+  <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
+  <div class='skills'>
+  <div><h1 className='font-cardo text-xl text-left font-normal'>Skills</h1></div>
+            <div className='flex flex-row mt-4'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">UX Designer</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(1,945)</div>
     </div>
-    <div class="w-40 mx-auto mt-5 relative">
+            <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Web Developers</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2,945)</div>
+    </div>
+            <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Illustrators</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(945)</div>
+    </div>
+            <div className='flex flex-row mt-4'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Node.js</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(5,945)</div>
+    </div>
+            <div className='flex flex-row mt-4'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Project Managers</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(45)</div>
+    </div>
+            <div><h1 className='font-cardo text-xl text-left mt-5 font-normal'>+20 More</h1></div>
+  </div>
+  <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Price</h1></div>
+  <div className="pt-4 w-[75%]">
+              <Slider
+                min={1}
+                max={1000}
+                step={1}
+                range
+                value={range}
+                onChange={handleSliderChange}
+                railStyle={{ background: 'lightgray' }}
+                trackStyle={[
+                  {
+                    background: 'linear-gradient(45deg, #00BF58, #E3FF75)',
+                    borderColor: '#65a30d',
+                  },
+                ]}
+                handleStyle={[
+                  {
+                    backgroundColor: 'white',
+                    borderColor: 'transparent', 
+                    borderRadius: '50%', // Set border radius for circular shape
+                    borderImage: 'linear-gradient(45deg, #00BF58, #E3FF75)',
+                    borderImageSlice: 1,
+                  },
+                  {
+                    backgroundColor: 'white',
+                    borderColor: 'transparent',
+                    borderRadius: '50%',
+                    borderImage: 'linear-gradient(45deg, #00BF58, #E3FF75)',
+                    borderImageSlice: 1,
+                  },
+                ]}
+                />
+              <div className='flex flex-row mt-4'>
+                <div className='basis-5/12'><input
+                type="text"
+                value={range[0]}
+                onChange={(e) => handleInputChange(0, e.target.value)}
+                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-60
+                focus:outline-none'
+              /></div>
+              <div className='basis-2/12 m-auto mt-4 text-center'><i class="bi bi-dash-lg text-[#475569]"></i></div>
+                <div className='basis-5/12'><input
+                type="text"
+                value={range[1]}
+                onChange={(e) => handleInputChange(1, e.target.value)}
+                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-60
+                focus:outline-none'
+              /></div>
+              </div>
+            </div>
+    <div class='location'>
+    <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Citys</h1></div>
+             <div className='flex flex-row mt-4'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Boston</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(1,945)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Florida</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2,945)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Log Angeles</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(945)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Miami</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(5,945)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">New York</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(45)</div>
+    </div>
+            <div><h1 className='font-cardo text-xl text-left mt-5 font-normal'>+Show More</h1></div>
+    </div>
+    <div class='language'>
+    <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Languages</h1></div>
+            <div className='flex flex-row mt-4'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">English</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(1,945)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">French</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2,945)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Italian</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(945)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Japanese</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(5,945)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Spanish</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(45)</div>
+    </div>
+            <div><h1 className='font-cardo text-xl text-left mt-5 font-normal'>+Show More</h1></div>
+    </div>
+    <div class='level'>
+    <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Level</h1></div>
+            <div className='flex flex-row mt-4'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Entry Level</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(45)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Intermediate Level</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(25)</div>
+    </div>
+    <div className='flex flex-row mt-3'>
+        <div className='basis-8/12'>
+            <label class="flex items-center font-inter relative cursor-pointer">
+                <input class="hidden" type="checkbox" />
+                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                  
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                </div>
+                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                <span class="font-normal text-[#797979]">Expert Level</span>
+            </label>
+        </div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(95)</div>
+    </div>
+    </div>
+  </div>
+  
+  <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
+      <div className='px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30'>
+      {/* <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1> */}
+      {/* <div className="flex justify-between items-center"> */}
+      <div className="flex items-center">
+      <h1  className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Freelancers that Matches your Job</h1>
+      </div>
+      <div class="w-40  mt-3 relative">
       <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
       <div class="border-gray-600 border-b-2 rounded-lg"></div>
     </div>
-    {/* <div className=' basis-6/12'>
-    <p 
-          className={`font-inter opacity-50 text-[#0A142F] text-[13px] py-2 inline-block pr-10 relative cursor-pointer`} 
-          onClick={() => setSelected('Best Matches')}
-      >
-          Best Matches
-          {selected === 'Best Matches' && <span style={underlineStyle}></span>}
-      </p>
-  
-      <p 
-          className={`font-inter opacity-50 text-[#0A142F] text-[13px] py-2 inline-block pr-10 relative cursor-pointer`} 
-          onClick={() => setSelected('Most Recent')}
-      >
-          Most Recent
-          {selected === 'Most Recent' && <span style={underlineStyle}></span>}
-      </p>
-      <p 
-          className={`font-inter opacity-50 text-[#0A142F] text-[13px] py-2 inline-block relative cursor-pointer`} 
-          onClick={() => setSelected('Saved')}
-      >
-          Saved 
-          {selected === 'Saved' && <span style={underlineStyle}></span>}
-      </p>
-    </div> */}
-      {/* <div className='px-4 md:px-8 py-1'>
-        <p className='font-inter opacity-50 text-[#0A142F] text-[13px] text-center'>Browse Freelancers that match your jobs</p>
+      {/* <div className="flex items-center">
+      <div className='flex items-center mr-1 space-x-1 border p-1 w-[200px] rounded-md'>
+          <img src={search} alt="Search Icon" className="h-4 w-4 mr-1 ml-1" />
+          <input className='w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none' placeholder='Search Freelancers' value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)} />
+      </div>
+      </div> */}
+  {/* </div> */}
+      
+      </div>
+      {/* <div className='px-4 md:px-8 py-4'>
+        <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse Freelancers that match your jobs</p>
       </div> */}
       {viewallfreelancer != null ? 
-      <div className='grid grid-cols-3 w-[70%] md:w-full pl-3.5'>
+      <div className='grid grid-cols-2 w-[70%] md:w-full pl-3.5'>
       {chunkedFree[active - 1] && chunkedFree[active - 1].map((free, index) => {
                 return(<>
                 
@@ -215,17 +477,14 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
             <p className="font-inter text-[#0A142F] text-[18px] font-semibold">{free.first_Name + " " + free.last_Name}</p>
             <p className='font-inter opacity-50 text-[#0A142F] text-[14px]'>{free.category}</p>
         </div>
+        {/* <div className="flex items-center space-x-2 ml-auto">
+        <Link to=''>
+            <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
+        </Link>
+        </div> */}
         </div>
       <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-4'>A passionate Web Developer with over 5 years of experience specializing in front-end and back-end development. Proficient in HTML, CSS, JavaScript, and Python. Experienced with full-stack development and popular frameworks like React and Django. I've successfully completed over 100 projects, ranging from simple landing pages to complex eCommerce platforms. Committed to providing high-quality code and solutions for every project.</p>
-      {/* {free.skills &&
-     JSON.parse(free.skills.replace(/'/g, '"')).map((skill, index) => (
-    <Link to={''} key={index}>
-      <span className='border px-4 py-1 border-gray-300 opacity-50 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2'>
-        {skill}
-      </span>
-    </Link>
-  ))} */}
-        {free.skills &&
+  {free.skills &&
                     JSON.parse(free.skills.replace(/'/g, '"')).map((skill, skillIndex) => (
                         <Link to={''} key={skillIndex}>
                             <span
@@ -248,28 +507,27 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
                             {showMoreSkills[free.id] && showMoreSkills[free.id].showAll ? ' Less' : ' More'}
                         </button>
                     )}
-            <div className='mb-2'>
-          {/* <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>completed projects : <span className='opacity-50'>More than 50</span></p> */}
+  
+            <div className='mb-12'>
+          <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>completed projects : <span className='opacity-50'>More than 50</span></p>
           <img src={verify} alt="" className='inline-block h-3 w-3 mr-1'/>
           <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>Account verified</p>
           <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>
           <p className='font-inter text-[#0A142F] text-[14px] opacity-80 inline-block mr-1'>$0.00/Hr</p>
-          {/* <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-3'>Fixed Rate</p> */}
-          {/* <img src={location} alt="" className='inline-block h-3 w-3 mr-4'/> */}
-          <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mt-3'>{free.Address}<span><i class="bi bi-geo-alt ml-1"></i></span></p>
-          {/* <i class="bi bi-geo-alt"><span className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>{free.Address}</span></i> */}
-
+          <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-3'>Fixed Rate</p>
+          <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
+          <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>{free.Address}</p>
           </div>
           <div className=" absolute bottom-2 right-6 items-center space-x-2 ml-auto">
-        <Link to='/login'>
-            <span className="inline-block text-sm px-4 py-[10px] mt-2 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
+        <Link to=''>
+            <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
         </Link>
         </div>
       </div>
       
       </>
       )
-  })}
+      })}
   
   </div> : 
   <div className='grid grid-cols-2 w-[70%] md:w-full pl-3.5'>
@@ -281,7 +539,8 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
       <Skeleton height={20} width={200} style={{marginLeft:10, marginTop:10}}/>
       <Skeleton height={200} width={300} style={{marginTop:20}}/>
       <Skeleton height={50} width={200} style={{marginTop:10}}/>
-      <Skeleton height={35} width={80} style={{marginTop:20, float: 'right'}}/>    
+      <Skeleton height={35} width={80} style={{marginTop:20, float: 'right'}}/>
+      
     </div>);})}
   </div>
     }
@@ -325,7 +584,7 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
   </div>
   </div>
   </div>
-  </div>
+      </div>
       <HomeSection4/>
       <Footer/>
       </>
