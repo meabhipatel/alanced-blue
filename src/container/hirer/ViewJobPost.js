@@ -66,7 +66,7 @@ const formatDate = (dateStr) => {
     <div class="flex flex-col md:flex-row">
     <div class="w-full md:w-[70%] bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
-        <p className="font-inter text-green-700 text-[16px] font-medium">{project.category}</p>
+        <p className="font-inter text-green-700 text-[16px] font-medium">{project.category.replace(/_/g, ' ')}</p>
         <p className="font-inter text-[#031136] opacity-50 text-sm font-medium py-1">posted {timeAgo(project.Project_created_at)}</p>
         <p className="font-inter text-[#031136] text-sm font-normal py-3"><i class="bi bi-geo-alt-fill text-green-700"></i> Worldwide</p>
         </div>
@@ -159,9 +159,9 @@ const formatDate = (dateStr) => {
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
         <p className="font-inter text-[#031136] text-lg font-medium py-4">Activity on this job</p> 
         <p className="font-inter text-[#031136] text-md font-medium py-1">Proposals : <i class="bi bi-question-circle-fill text-green-700"></i><span className='opacity-50'> 10 to 15</span></p>
-        <p className="font-inter text-[#031136] text-md font-medium py-1">Interviewing : <span className='opacity-50'> 0</span></p>
-        <p className="font-inter text-[#031136] text-md font-medium py-1">Invites sent : <span className='opacity-50'> 0</span></p>
-        <p className="font-inter text-[#031136] text-md font-medium py-1">Unanswered invites : <span className='opacity-50'> 0</span></p>
+        <p className="font-inter text-[#031136] text-md font-medium py-1">Messaged : <span className='opacity-50'> 0</span></p>
+        <p className="font-inter text-[#031136] text-md font-medium py-1">Hired : <span className='opacity-50'> 0</span></p>
+        {/* <p className="font-inter text-[#031136] text-md font-medium py-1">Unanswered invites : <span className='opacity-50'> 0</span></p> */}
         </div>
         </div>
         <div class="w-full md:w-[30%] bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
@@ -183,7 +183,7 @@ const formatDate = (dateStr) => {
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
         <p className="font-inter text-[#031136] text-lg font-medium py-4">Job link</p>
         <input type="text" className='border my-2 py-1.5 px-2 rounded-md w-full bg-[#E4EBE4] cursor-not-allowed' disabled placeholder='https://www.alanced.com/jobs'/>
-        <p className="font-inter text-green-700 text-md font-semibold py-3 cursor-pointer">copy link</p>
+        {/* <p className="font-inter text-green-700 text-md font-semibold py-3 cursor-pointer">copy link</p> */}
         </div>
         </div>
         </div>

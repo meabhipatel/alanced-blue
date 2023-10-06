@@ -1,8 +1,10 @@
 import { Navigate } from 'react-router-dom'
-import { AddHirer, GetViewAllBids, GetViewAllfreelancers, GetViewHirerSelfProjects, UpdateProject } from '../../redux/services/Hirer'
+import { AddHirer, AddProject, GetViewAllBids, GetViewAllfreelancers, GetViewHirerSelfProjects, UpdateProject } from '../../redux/services/Hirer'
 import { SERVER_ERROR } from '../Freelancer/FreelancerConstant'
 import { ADD_NEW_HIRER_REQUEST,
  ADD_NEW_HIRER_SUCCESS,
+ ADD_PROJECT_REQUEST,
+ ADD_PROJECT_SUCCESS,
  GET_VIEW_ALL_BIDS_REQUEST,
  GET_VIEW_ALL_BIDS_SUCCESS,
  GET_VIEW_ALL_FREELANCER_REQUEST,
@@ -123,4 +125,25 @@ export const UpdateProjectAction = (data, token, navigate,id) => dispatch => {
       });
     }
   });
+};
+
+
+export const AddProjectAction = (data,token) => dispatch => {
+  dispatch({
+      type: ADD_PROJECT_REQUEST,
+      payload: []
+    });
+    AddProject(data,token).then(res => {
+      if (res.status == 200) {
+        dispatch({
+          type: ADD_PROJECT_SUCCESS,
+          payload: res.data
+        });
+      } else {
+        dispatch({
+          type: SERVER_ERROR,
+          payload: res
+        });
+      }
+    });
 };

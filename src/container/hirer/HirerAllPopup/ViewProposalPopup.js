@@ -9,6 +9,9 @@ import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
+import Navbar from '../../../components/Layout/Navbar'
+import HomeSection4 from '../../../components/Layout/HomeSection4'
+import Footer from '../../../components/Layout/Footer'
 
 
 const ViewProposalPopup = ({ closeViewProposal }) => {
@@ -75,9 +78,10 @@ const [active, setActive] = React.useState(1);
     
   return (
     <>
-    <div className="fixed inset-0 flex items-center justify-center z-10 mt-20">
-    <div className="fixed inset-0 bg-black opacity-10"></div>
-  <div className="bg-white p-6 rounded-lg shadow-xl w-3/4 h-[94%] z-20 overflow-y-scroll">
+    <Navbar/>
+    {/* <div className="fixed inset-0 flex items-center justify-center z-10 mt-20"> */}
+    {/* <div className="fixed inset-0 bg-black opacity-10"></div> */}
+  {/* <div className="bg-white p-6 rounded-lg shadow-xl w-3/4 h-[94%] z-20 overflow-y-scroll"> */}
     {/* <div className='flex flex-row'>
         <div className='basis-6/12 cursor-pointer'><i class="bi bi-chevron-left font-bold text-black text-lg" onClick={closeViewProposal}></i></div>
         <div className=' basis-6/12'>
@@ -88,7 +92,8 @@ const [active, setActive] = React.useState(1);
             </Link>
         </div>
     </div> */}
-    <div className=' container px-2'>
+    {/* <div className=' container px-2'> */}
+    <div className='mt-2 mx-[9%]'>
     <div className="flex mt-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30">
   <div className="flex-[20%] p-6">
   <div className="relative w-24 h-24">
@@ -109,9 +114,9 @@ const [active, setActive] = React.useState(1);
             {/* <p className="text-green-600 text-[16px] font-inter py-3 font-semibold cursor-pointer hover:underline">View Profile</p> */}
   </div>
   <div className="flex-[50%] p-6 text-right">
-  <Link to=''><span class="inline-block text-sm px-10 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold">Message</span></Link>
+  <span class="inline-block text-sm px-10 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold">Message</span>
             <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
-                <Link to=''><button class="px-11 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p></button></Link>
+                <button class="px-11 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p></button>
             </div>
   </div>
 </div>
@@ -119,6 +124,10 @@ const [active, setActive] = React.useState(1);
     <div class="w-full md:w-[30%] py-4 px-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
     <h1 className="font-cardo text-xl text-[#031136] font-normal">Applicant</h1>
     <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2">{bid.freelancer_Name} has applied to or been invited to your or your company's job {project.title} </p>
+    <h1 className="font-cardo text-xl text-[#031136] font-normal pt-4">Hourly Rate</h1>
+    {/* <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2">$5.00/hr</p> */}
+    <h1 className="font-cardo text-xl text-[#031136] font-semibold inline-block py-2 opacity-50">$5.00/hr</h1>
+    <h1 className="font-cardo text-xl text-[#031136] font-normal pt-4">Entry Level</h1>
     </div>
     <div class="w-full md:w-[70%] py-4 px-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
     <div className="flex justify-between items-center">
@@ -137,8 +146,8 @@ const [active, setActive] = React.useState(1);
     <div class="w-full md:w-[30%] bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
         <h1 className="font-cardo text-xl text-[#031136] font-normal">View Profile</h1>
-    <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2 pb-6">{bid.freelancer_category}</p>
-    <Link to=''><span class="text-sm px-16 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">All Work</span></Link>
+    <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2 pb-6">{bid.freelancer_category.replace(/_/g, ' ')}</p>
+    <span class="text-sm px-16 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">All Work</span>
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
     <h1 className="font-cardo text-xl text-[#031136] font-normal">Languages</h1>
@@ -151,7 +160,7 @@ const [active, setActive] = React.useState(1);
     <div class="w-full md:w-[70%] bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
         <div className="flex justify-between items-center">
-    <h1 className="font-cardo text-2xl text-[#031136] font-normal">{bid.freelancer_category}</h1>
+    <h1 className="font-cardo text-2xl text-[#031136] font-normal">{bid.freelancer_category.replace(/_/g, ' ')}</h1>
     <div>
         <h1 className="font-cardo text-xl text-[#031136] font-semibold inline-block">$5.00/hr</h1>
     </div>
@@ -267,7 +276,7 @@ const [active, setActive] = React.useState(1);
     </div>
     </div>
     </div>
-    <div className='my-6 p-4 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-40'>
+    <div className='my-6 p-4 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-40 text-left'>
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Employment history</h1>
     <div class="border-b opacity-50 my-3"></div>
     <h1 className="font-cardo text-[18px] text-[#031136] font-normal mr-1">Graphic Designer | Wiz91 Technologies</h1>
@@ -278,9 +287,12 @@ const [active, setActive] = React.useState(1);
     <div class="border-b opacity-50 my-3"></div>
     <h1 className="font-cardo text-[20px] text-[#031136] font-normal cursor-pointer">Show More</h1>
     </div>
-    </div>
-    </div>
+    {/* </div> */}
+    {/* </div> */}
+  {/* </div> */}
   </div>
+  <HomeSection4/>
+  <Footer/>
 </>)
 }
 

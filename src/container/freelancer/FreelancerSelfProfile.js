@@ -55,15 +55,21 @@ const FreelancerSelfProfile = () => {
   const id = freelancerselfprofile && freelancerselfprofile[0].id ? freelancerselfprofile[0].id : '';
 
 
-  useEffect(() => {
-    const hash = window.location.hash;
-    if (hash) {
-      const targetElement = document.querySelector(hash);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  }, []);
+  const scrollToWorkHistory = () => {
+    const element = document.getElementById('workHistory');
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
+  }
+
+
+//   useEffect(() => {
+//     const hash = window.location.hash;
+//     if (hash) {
+//       const targetElement = document.querySelector(hash);
+//       if (targetElement) {
+//         targetElement.scrollIntoView({ behavior: 'smooth' });
+//       }
+//     }
+//   }, []);
 
   function handleMouseEnter() {
     setIsHovered(true);
@@ -408,10 +414,10 @@ const closeFreeProject = () => {
                 </div>
    </div>
    <div className='border-b border-gray-200 border-opacity-30 py-4 pl-8 bg-[#FFFFFF] text-left mb-4 md:mb-0'>
-   <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1 mb-3">{freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category : 'Your Designation'}</h1>
+   <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1 mb-3">{freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category.replace(/_/g, ' ') : 'Your Designation'}</h1>
         <div className="grid grid-cols-3 md:grid-cols-3 gap-3">
             <div className="">
-                <h4 className='text-[#031136] font-cardo font-bold text-[23px]'>$300+</h4>
+                <h4 className='text-[#031136] font-cardo font-bold text-[23px]'>$30</h4>
                 <p className='text-[#0A142F] font-inter opacity-50 text-[14px]'>Hourly rate</p>
             </div>
             <div className="">
@@ -670,14 +676,15 @@ const closeFreeProject = () => {
                 {isAvailableOffOpen && <AvailableOffPopup isAvailable={isAvailable} setIsAvailable={setIsAvailable} closeAvailableOff={closeAvailableOff} />}
             </div>
             <div className="flex items-center mt-3">
-                <img src={jobsuccess} alt="" className="h-[22px] mr-2" />
+                {/* <img src={jobsuccess} alt="" className="h-[22px] mr-2" /> */}
+                <i class="bi bi-patch-check text-green-600 mr-2"></i>
                 <p className="font-inter text-[#797979] text-[13px]">{calculateJobSuccess(reviews)}% Job Success</p>
             </div>
         </div>
         <div class="w-full md:w-1/4 px-auto pt-8">
-            <Link to=''><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-2 font-semibold">See Public View</span></Link>
+            {/* <Link to=''><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-2 font-semibold">See Public View</span></Link> */}
             <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
-                <Link to=''><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Profile Settings</p></button></Link>
+                <button class="px-2 py-1 bg-white" onClick={scrollToWorkHistory}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">See Public Reviews</p></button>
             </div>
         </div>
    </div>
@@ -706,7 +713,7 @@ const closeFreeProject = () => {
    <div className='border-b border-gray-200 border-opacity-30 py-4 px-4 md:px-8 text-left'>
    <div className="flex justify-between items-center">
     <div className="flex items-center">
-        <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-2">{freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category : 'Your Designation'}</h1>
+        <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-2">{freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category.replace(/_/g, ' ') : 'Your Designation'}</h1>
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openEditTitle}>
             <img src={edit} alt="Edit" className="align-middle" />
         </div>
@@ -777,11 +784,11 @@ const closeFreeProject = () => {
     </div> */}
     </div>
 </div>
-   <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-2'>Specializes in {freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category : 'Your Designation'}</p>
+   <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-2'>Specializes in {freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category.replace(/_/g, ' ') : 'Your Designation'}</p>
    <p className='font-inter opacity-50 text-[#0A142F] text-[14px]'>I've been a graphic designer for more than 6+ years, assisting organizations and people to successfully market themselves. I have worked as a freelancer for both profit and nonprofit organizations. All facets of design, from letterhead, newsletters, and invitations to huge graphics and website banners, as well as website maintenance, are under my area of expertise....</p> 
    <h1 className="font-cardo text-[18px] text-[#031136] font-normal py-2 cursor-pointer">See More</h1>
    </div>
-   <div className='border-b border-gray-200 border-opacity-30 text-left py-6 px-4 md:px-8'>
+   <div className='border-b border-gray-200 border-opacity-30 text-left py-6 px-4 md:px-8' id='workHistory'>
    <div className="flex items-center justify-between">
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1 pb-3">Work History ({reviews && reviews ? reviews.length : 0})</h1>
     </div>

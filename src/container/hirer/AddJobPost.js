@@ -4,29 +4,69 @@ import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { AddProjectAction } from '../../redux/Hirer/HirerAction'
 
 const AddJobPost = () => {
 
+    const [addProject, setAddProject] = useState('');
+    
+
+    const accessToken = useSelector(state => state.login.accessToken);
+    const addproject = useSelector(state => state.hirer.addproject);
+    const dispatch = useDispatch();
+
+    const [skills, setSkills] = useState([]);
+
+    const AddProjects = () => {
+    const formData = new URLSearchParams();
+        formData.append("title",addProject.title);
+        formData.append("description",addProject.description);
+        formData.append("deadline",addProject.deadline);
+        formData.append("skills_required",addProject.skills_required);
+        formData.append("category",addProject.category);
+
+
+    const x = {
+        "title": addProject.title,
+        "description":addProject.description,
+        "deadline":addProject.deadline,
+        "skills_required":addProject.skills_required,
+        "category":addProject.category
+    }    
+        
+
+        dispatch(AddProjectAction(x,accessToken));
+    };
+
+    // const onChange = e =>{
+    //     setAddProject({
+    //         ...addProject,[e.target.name]: e.target.value
+    //     });
+    // }
+
     const [selectedOption, setSelectedOption] = useState('hourly');
 
-    const [skills, setSkills] = useState(["JavaScript", "React", "Node.js", "Python"]);
+    // const [skills, setSkills] = useState(["JavaScript", "React", "Node.js", "Python"]);
     const [currentSkill, setCurrentSkill] = useState('');
     const [error, setError] = useState('');
   
-    const addSkill = () => {
-      if (currentSkill.trim() && skills.length < 15) {
-        setSkills(prevSkills => [...prevSkills, currentSkill.trim()]);
-        setCurrentSkill('');
-        setError('');
-      } else if (skills.length >= 15) {
-        setError('You can add a maximum of 15 skills.');
-      }
-    };
+    // const addSkill = () => {
+    //   if (currentSkill.trim() && skills.length < 15) {
+    //     setSkills(prevSkills => [...prevSkills, currentSkill.trim()]);
+    //     setCurrentSkill('');
+    //     setError('');
+    //   } else if (skills.length >= 15) {
+    //     setError('You can add a maximum of 15 skills.');
+    //   }
+    // };
   
-    const removeSkill = (index) => {
-      setSkills(prevSkills => prevSkills.filter((_, idx) => idx !== index));
-      setError('');
-    };
+    // const removeSkill = (index) => {
+    //   setSkills(prevSkills => prevSkills.filter((_, idx) => idx !== index));
+    //   setError('');
+    // };
+
+
 
     const [step, setStep] = useState(1);
 
@@ -40,6 +80,43 @@ const AddJobPost = () => {
         'Budget',
         'Deadline'
     ];
+
+    const onChange = e => {
+        setAddProject(prevProject => ({
+            ...prevProject,
+            [e.target.name]: e.target.value
+        }));
+    };
+    
+    const addSkill = () => {
+        if (currentSkill.trim() && skills.length < 15) {
+            setSkills(prevSkills => [...prevSkills, currentSkill.trim()]);
+    
+            setAddProject(prevProject => ({
+                ...prevProject,
+                skills_required: prevProject.skills_required 
+                    ? [...prevProject.skills_required, currentSkill.trim()]
+                    : [currentSkill.trim()]
+            }));
+    
+            setCurrentSkill('');
+            setError('');
+        } else if (skills.length >= 15) {
+            setError('You can add a maximum of 15 skills.');
+        }
+    };
+    
+    const removeSkill = (index) => {
+        const newSkills = skills.filter((_, idx) => idx !== index);
+    
+        setSkills(newSkills);
+        setAddProject(prevProject => ({
+            ...prevProject,
+            skills_required: newSkills
+        }));
+        setError('');
+    };
+    
     
   return (
     <>
@@ -60,18 +137,27 @@ const AddJobPost = () => {
         <label className="block text-xl mt-3 font-cardo" htmlFor="jobCategory">Job Title</label>
     <input 
         type="text" 
+        onChange={onChange}
+        name="title"
         className='border my-2 py-2 px-3 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' 
         placeholder="Add Job title" 
     />
     <label className="block text-xl mt-3 font-cardo" htmlFor="jobCategory">Job Category</label>
-    <select 
-        id="jobCategory" 
+    <input 
+        type="text" 
+        name="category"
+        onChange={onChange}
+        className='border my-2 py-2 px-3 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' 
+    />
+    {/* <select 
+        value={addProject.category}
+        onChange={onChange}
         className="border mt-2 py-2 px-3 bg-white rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
     >
-        <option value="design">Design</option>
-        <option value="development">Development</option>
-        <option value="marketing">Marketing</option>
-    </select>
+        <option>Web_development</option>
+        {/* <option value="development">Development</option>
+        <option value="marketing">Marketing</option> *
+    </select> */}
 </div>
     </div>
 )}
@@ -84,7 +170,7 @@ const AddJobPost = () => {
                     </div>
                     <div className="flex-1">
                     <label className="block text-xl mt-3 font-cardo" htmlFor="jobCategory">Job Description</label>
-                    <textarea name="" id="" cols="30" rows="5" className='border py-2 px-3 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Write Your Job Description Here'></textarea> 
+                    <textarea name="description" id="" cols="30" rows="5" className='border py-2 px-3 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Write Your Job Description Here' onChange={onChange}></textarea> 
             </div>
                 </div>
                 )}
@@ -108,6 +194,7 @@ const AddJobPost = () => {
         <input 
             type="text" 
             value={currentSkill} 
+            name="skills_required"
             onChange={(e) => setCurrentSkill(e.target.value)}
             placeholder="Enter Skills here"
             className="outline-none w-full"
@@ -193,7 +280,7 @@ const AddJobPost = () => {
                     </div>
                     <div className="flex-1">
                     <label className="block text-xl mt-3 font-cardo" htmlFor="jobCategory">Deadline</label>
-                    <input id="" type="date" className='border my-2 p-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input id="" name="deadline" type="text" className='border my-2 p-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' onChange={onChange} placeholder='DD-MM-YYYY'/>
             </div>
                 </div>
                 )}
@@ -227,8 +314,8 @@ const AddJobPost = () => {
             <span class="text-sm px-6 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Next: {stepsLabels[step]}</span>
         </Link>
     ) : (
-        <Link to='' >
-            <span class="text-sm px-6 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Post A Job</span>
+        <Link to=''>
+            <span class="text-sm px-6 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold" onClick={()=>{ AddProjects(); window.scrollTo(0, 0); }}>Post A Job</span>
         </Link>
     )}
 </div>

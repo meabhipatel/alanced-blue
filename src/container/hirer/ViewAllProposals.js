@@ -53,11 +53,23 @@ const handleToggleDescription = (index) => {
     setExpandedProjects(updatedState);
 };
 
+// const handleClick = (event, index) => {
+//   event.stopPropagation();
+
+//   handleToggleDescription(index);
+// };
+
+const handleButtonClick = (event) => {
+  event.stopPropagation();
+  event.preventDefault();
+};
+
 const handleClick = (event, index) => {
   event.stopPropagation();
-
+  event.preventDefault();
   handleToggleDescription(index);
 };
+
     
     const [selected, setSelected] = useState('All Proposals');
     const underlineStyle = {
@@ -154,16 +166,16 @@ const handleClick = (event, index) => {
                             <p className="font-cardo text-[#0A142F] text-2xl font-medium">{bid.freelancer_Name}</p>
                               
                               <div class="flex items-center space-x-4">
-                                      <span class="inline-block text-sm px-10 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold" onClick={handleClick}>Message</span>
+                                      <span class="inline-block text-sm px-10 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold" onClick={handleButtonClick}>Message</span>
                           
-                                  <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={handleClick}>
+                                  <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={handleButtonClick}>
                                           <button class="px-10 py-1 bg-white">
                                               <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p>
                                           </button>
                                   </div>
                               </div>
                           </div>
-                          <h1 className="font-cardo opacity-50 text-lg text-[#031136]">{bid.freelancer_category}</h1>
+                          <h1 className="font-cardo opacity-50 text-lg text-[#031136]">{bid.freelancer_category.replace(/_/g, ' ')}</h1>
                            <div style={{ display: 'flex' }}>
                             <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">${bid.bid_amount} <span className='opacity-50 font-medium'>/hr</span></h1>
                             <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">$0 <span className='opacity-50 font-medium'>earned</span></h1>
