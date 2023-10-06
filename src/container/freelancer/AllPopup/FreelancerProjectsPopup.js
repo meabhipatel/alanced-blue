@@ -45,7 +45,7 @@ const FreelancerProjectsPopup = ({ closeFreeProject, project }) => {
             </div>))}
             </div> 
             <h1 className="font-cardo text-lg text-[#031136] font-normal text-left pt-6">Project Description</h1>
-            <h1 className="font-inter text-sm font-normal text-left text-green-700">{project.category}</h1>
+            <h1 className="font-inter text-sm font-normal text-left text-green-700">{project.category.replace(/_/g, ' ')}</h1>
             <p className="font-inter text-sm text-[#031136] font-normal opacity-50 text-left py-4">{project.project_description}</p>
             <h1 className="font-inter text-sm text-[#031136] font-normal text-left">Project Link : <span className='text-green-700'>{project.project_link}</span></h1>
             <div className="border-b opacity-70 my-5"></div>

@@ -95,7 +95,7 @@ const EditJobPost = () => {
     <div className='flex justify-between items-center'>
     <div className="flex flex-col">
         <h1 className="font-inter text-lg text-[#031136] font-semibold text-left">category</h1>
-        <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">{project.category}</h1>
+        <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">{project.category.replace(/_/g, ' ')}</h1>
     </div>
     <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer"  onClick={()=>openJobCategory(project)}>
         <img src={edit} alt="more" />

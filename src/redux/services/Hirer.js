@@ -64,3 +64,15 @@ export const GetViewHirerSelfProjects = async (token) => {
       });
   }   
 
+
+  export const AddProject = async (data,token) =>{
+    setHeadersWithAccessToken(token);
+    return DataService.post(API.Hirers.Hirer.AddProject, data)
+    .then(res => {
+        return res.data;
+    })
+    .catch(err => {
+        return handleError(err);
+    });
+};  
+
