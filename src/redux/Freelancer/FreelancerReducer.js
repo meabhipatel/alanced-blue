@@ -11,6 +11,8 @@ GET_FREELANCER_ADD_BID_AMOUNT_REQUEST,
 GET_FREELANCER_ADD_BID_AMOUNT_SUCCESS,
 GET_FREELANCER_SELF_BID_REQUEST,
 GET_FREELANCER_SELF_BID_SUCCESS,
+GET_FREELANCER_SELF_BID_PROJECT_REQUEST,
+GET_FREELANCER_SELF_BID_PROJECT_SUCCESS,
 SERVER_ERROR,
 } from "./FreelancerConstant"
 
@@ -54,6 +56,10 @@ const FreelancerReducer =(state = initialState, action) => {
             return { loading: true};
         case GET_FREELANCER_SELF_BID_SUCCESS: 
             return { freelancerselfbid: action.payload }; 
+        case GET_FREELANCER_SELF_BID_PROJECT_REQUEST:
+            return { loading: true }
+        case GET_FREELANCER_SELF_BID_PROJECT_SUCCESS:
+            return { viewselfproject: action.payload, loading: false }
             
         // case GET_VIEW_ALL_SAVEDJOBS_REQUEST:
         //     return { loading: true};
