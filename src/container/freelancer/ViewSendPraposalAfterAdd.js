@@ -4,14 +4,12 @@ import Footer from '../../components/Layout/Footer'
 import HomeSection4 from '../../components/Layout/HomeSection4'
 import { Link, useLocation,useNavigate } from 'react-router-dom'
 
-
-const ViewBidDetailAfterAdd = () => {
+const ViewSendPraposalAfterAdd = () => {
     const location = useLocation();
     const addedbid = location.state && location.state.bidData;
     const projectdata = location.state && location.state.projectdetail;
     console.log(addedbid,"added bid")
     console.log(projectdata,"project data")
-
     return (
         <>
         <Navbar/>
@@ -26,9 +24,9 @@ const ViewBidDetailAfterAdd = () => {
             <h1 className=' text-2xl font-cardo font-semibold text-left'>Job Details</h1>
                 <div className=' flex flex-row mt-6'>
                     <div className=' basis-8/12'>
-                    <h1 className=' text-xl font-inter font-medium text-left'>{projectdata.project.title}</h1>
+                    <h1 className=' text-xl font-inter font-medium text-left'>{projectdata.title}</h1>
                     <div className=' flex flex-row'>
-                    <div className=' basis-4/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-green-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  w-[90%] bg-opacity-[60%]">{projectdata.project.category}</div></div>
+                    <div className=' basis-4/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-green-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  w-[90%] bg-opacity-[60%]">{projectdata.category}</div></div>
                     <div className=' basis-4/12 mt-5 ml-2'><p className=' text-sm font-medium font-inter text-left opacity-[50%]'>Posted 22 hours ago</p></div>
                     </div>
                     <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>
@@ -74,7 +72,7 @@ const ViewBidDetailAfterAdd = () => {
                 <hr className=' mt-5' />
                 <h1 className='text-base font-medium font-inter text-left mt-5'>Skills & Experties</h1>
                 <div className="text-left mt-5">
-                {JSON.parse(projectdata.project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
+                {JSON.parse(projectdata.skills_required.replace(/'/g,'"')).map((skill,index)=>(
                     <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
                     <p className=" text-center">{skill}</p>
                 </div>
@@ -89,7 +87,7 @@ const ViewBidDetailAfterAdd = () => {
                 <hr className=' mt-8' />
                 <div className=' flex flex-row'>
                     <div className=' basis-6/12'><p className='text-base font-medium font-inter text-left mt-5'>Your proposed terms</p></div>
-                    <div className=' basis-6/12'><p className='text-base font-medium opacity-50 font-inter text-right mt-5'>Client's budget: {projectdata.project.budget}</p></div>
+                    <div className=' basis-6/12'><p className='text-base font-medium opacity-50 font-inter text-right mt-5'>Client's budget: {projectdata.budget}</p></div>
                 </div>
                 <div>
                 <p className='text-[15px] font-medium font-inter text-left mt-5'>How do you want to be paid?</p>
@@ -141,5 +139,4 @@ const ViewBidDetailAfterAdd = () => {
       )
 }
 
-export default ViewBidDetailAfterAdd
-
+export default ViewSendPraposalAfterAdd

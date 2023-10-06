@@ -286,14 +286,14 @@ const chunkedFree = chunkArray(projectsToDisplay, 10);
             {/* <i class="bi bi-send-check-fill"></i> */}
     </div>
     </div></Link>
-    <Link to='/freelancer/edit-profile#certificate'>
+    {/* <Link to='/freelancer/edit-profile#certificate'>
     <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#E2F9EE] rounded-2xl">
     <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Project catalog</h1>
     <div className="flex items-center space-x-2 text-green-600 mr-5">
             <i class="bi bi-folder-symlink"></i>
-            {/* <i class="bi bi-folder-symlink-fill"></i> */}
+           
     </div>
-    </div></Link>
+    </div></Link> */}
     <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#E2F9EE] rounded-2xl">
     <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Get Paid</h1>
     <div className="flex items-center space-x-2 text-green-600 mr-5">
@@ -414,7 +414,7 @@ const chunkedFree = chunkArray(projectsToDisplay, 10);
         )
     })}
     <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>Fixed-price - Expert - Est. Budget: ${project.budget} - {timeAgo}</p>
-    <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>
+    {/* <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>
                 Job Description: {displayWords.join(' ')} 
                 {words.length > 50 && (
                     <span 
@@ -424,7 +424,8 @@ const chunkedFree = chunkArray(projectsToDisplay, 10);
                         {expandedProjects[index] ? 'Less' : 'More'}
                     </span>
                 )}
-            </p>
+            </p> */}
+            <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>{project.description}</p>
     {/* <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>Job Description: {project.description} <span className="font-cardo text-[#031136] text-[18px] font-semibold cursor-pointer" onClick={handleClick}>More</span></p> */}
     {JSON.parse(project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
     <Link to=''>

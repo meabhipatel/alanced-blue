@@ -46,6 +46,8 @@ import EditJobPost from "../container/hirer/EditJobPost";
 import FindTalent from "../container/hirer/FindTalent";
 import AddJobPost from "../container/hirer/AddJobPost";
 import ViewProposalPopup from "../container/hirer/HirerAllPopup/ViewProposalPopup";
+import ViewProjectPopup from "../container/freelancer/AllPopup/ViewProjectPopup";
+import ViewSendPraposalAfterAdd from "../container/freelancer/ViewSendPraposalAfterAdd";
 
   const AppRouter = (props) => {
     
@@ -98,6 +100,8 @@ import ViewProposalPopup from "../container/hirer/HirerAllPopup/ViewProposalPopu
           <Route path="/edit/Job-post" element={<EditJobPost/>}/>
           <Route path="/view-all/freelancer" element={<FindTalent/>}/>
           <Route path="/add/Job-post" element={<AddJobPost/>}/>
+          <Route path="/view-project/full-detail" element={<ViewProjectPopup/>}/>
+          <Route path='/send-proposal/detail' element={<ViewSendPraposalAfterAdd/>}></Route>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   

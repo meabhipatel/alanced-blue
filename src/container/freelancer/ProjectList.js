@@ -18,6 +18,10 @@ import ViewProjectPopup from './AllPopup/ViewProjectPopup'
 import AddBidPopup from './AllPopup/AddBidPopup'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import axios from 'axios'
+import TaskOutlinedIcon from '@mui/icons-material/TaskOutlined';
+import { IconButton, Typography } from "@material-tailwind/react";
+import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 
 function ProjectList() {
@@ -92,6 +96,42 @@ function ProjectList() {
   React.useEffect(() => {
     dispatch(GetViewAllProjectsListAction())
   }, [])
+
+  const [AllProposals, setAllProposals] = useState('')
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch doc API
+        const response1 = await axios.get('https://aparnawiz91.pythonanywhere.com/freelance/view/freelancer-self/bid',{
+          headers: {
+            "Authorization":`Bearer ${accessToken}`
+          }
+        });
+        setAllProposals(response1.data.data);
+  
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    fetchData(); 
+  }, []);
+  console.log("/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/",AllProposals)
+
+  const [active, setActive] = React.useState(1);
+ 
+  const next = () => {
+      if (active === Math.ceil(viewallprojects.length / 6)) return;
+      window.scrollTo(0, 0)
+      setActive(active + 1);
+  };
+
+  const prev = () => {
+      if (active === 1) return;
+      window.scrollTo(0, 0)
+      setActive(active - 1);
+  };
 
   return (
     <>
@@ -480,6 +520,7 @@ function ProjectList() {
             {viewallprojects && <>{viewallprojects.map((project,index)=> {
               const words = project.description.split(' ');
               const displayWords = expandedProjects[index] || words.length <= 30 ? words : words.slice(0, 30);
+              const isAlreadyApplied = Array.isArray(AllProposals) && AllProposals.some(all => project.id === all.project_id);
               return(
                 <div className='flex flex-row'>
               <div className='basis-1/12 mr-3'>
@@ -487,6 +528,13 @@ function ProjectList() {
               </div>
               <div className=' basis-9/12 text-left mb-7'>
                 <h1 className='font-cardo text-lg'>{project.title}</h1>
+                {AllProposals && AllProposals.map((all, proposal) => {
+                    return(
+                        <>
+                        {project.id == all.project_id ? <span className='text-green-600 flex justify-center items-center w-fit'><TaskOutlinedIcon className='mr-1 text-green-600'/>Already Applied</span> : ''}
+                        </>
+                    )
+                })}
                 <div className='flex flex-row mt-3'>
                   <div className=' basis-4/12 border-2 border-r-[#797979] mr-2 border-t-0 border-b-0 border-l-0'>
                     <div className='flex flex-row'>
@@ -530,11 +578,30 @@ function ProjectList() {
                 <h1 className='font-cardo text-xl font-extrabold text-right'>${project.budget}</h1>
                 <p className='font-inter text-[#797979] mt-1 text-sm text-right'>Hourly Rate</p>
                 <div className=''>
-                  {accessToken ? (
+                  {/* {accessToken ? (
                     <Link to='/freelancer/send-proposal' state={{ project }} onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
                   ): (
                   <Link to='/login' onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
-                )}
+                )} */}
+                {accessToken ? (
+                isAlreadyApplied ? (
+                  <button className='rounded h-12 w-36 text-gray-400 bg-slate-200 cursor-not-allowed mt-3 text-sm font-bold ml-16' disabled>
+                    Already Applied
+                  </button>
+                ) : (
+                  <Link to='/freelancer/send-proposal' state={{ project }} onClick={() => window.scrollTo(0, 0)}>
+                    <button className='rounded h-12 w-36 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>
+                      Send Proposal
+                    </button>
+                  </Link>
+                )
+              ) : (
+                <Link to='/login' onClick={() => window.scrollTo(0, 0)}>
+                  <button className='rounded h-12 w-36 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>
+                    Send Proposal
+                  </button>
+                </Link>
+              )}
                 </div>
               </div>
             </div>
@@ -561,6 +628,42 @@ function ProjectList() {
           </div>
           }
         </div>
+        <div className="flex justify-end items-center gap-6 mt-7
+        mr-5">
+        <IconButton
+          size="sm"
+          variant="outlined"
+          onClick={prev}
+          disabled={active === 1}
+          style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+        >
+          <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+        </IconButton>
+
+        
+        {[...Array(5)].map((_, index) => {
+          const pageNumber = index + 1;
+          return (
+            <span
+              key={pageNumber}
+              className={`px-0 py-1 ${active === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+              onClick={() => setActive(pageNumber)}
+            >
+              {pageNumber}
+            </span>
+          );
+        })}
+
+        <IconButton
+          size="sm"
+          variant="outlined"
+          onClick={next}
+          disabled={active === 5}
+          style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+        >
+          <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+        </IconButton>
+      </div>
       </div>
       <HomeSection4 />
       <Footer />

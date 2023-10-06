@@ -30,12 +30,12 @@ const MyProposalReferrals = () => {
                     Referrals
                 </span>
             </Link>
-            <Link to='/freelancer/view-archived'className="flex-grow md:flex-none p-1">
+            {/* <Link to='/freelancer/view-archived'className="flex-grow md:flex-none p-1">
                 <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'Archieved' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white font-inter text-sm font-normal border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('Archieved')}>
                     Archieved
                 </span>
-            </Link>
+            </Link> */}
     </div>
     <div className='border border-[#E7E8F2] py-12 mt-8'>
         <img src={refrel} alt="" className=' mx-auto' />
