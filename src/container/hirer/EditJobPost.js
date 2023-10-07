@@ -79,14 +79,14 @@ const EditJobPost = () => {
     <div className='my-2 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left'>
     <div className='border-b border-gray-200 border-opacity-30 py-5 px-8 flex justify-between items-center'>
     <h1 className="font-inter text-xl text-[#031136] text-left font-semibold">{project.title}</h1>
-    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={()=>openJobTitle(project)}>
+    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer flex-shrink-0" onClick={()=>openJobTitle(project)}>
         <img src={edit} alt="more" />
     </div>
     {isJobTitleOpen && <EditJobTitlePopup closeJobTitle={closeJobTitle} project={project}/>}
 </div>
 <div className='border-b border-gray-200 border-opacity-30 py-5 px-8 flex justify-between items-center'>
     <h1 className="font-inter text-md text-[#031136] text-left font-normal opacity-40">{project.description}</h1>
-    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={()=>openJobDesc(project)}>
+    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer flex-shrink-0" onClick={()=>openJobDesc(project)}>
         <img src={edit} alt="more" />
     </div>
     {isJobDescOpen && <EditJobDescPopup closeJobDesc={closeJobDesc} project={project}/>}

@@ -7,7 +7,7 @@ const EditJobBudget = ({closeJobBudget,project}) => {
 
   return (
     <>
-    <div className="fixed z-10 inset-0 overflow-y-auto mt-14">
+    <div className="fixed z-10 inset-0 overflow-y-auto mt-12">
                     <div className="fixed inset-0 bg-black opacity-50"></div>
                     <div className="flex items-center justify-center min-h-screen">
                     <div className="bg-white rounded-lg w-[90%] md:w-[50%] p-6 px-8 relative z-20">
@@ -21,14 +21,14 @@ const EditJobBudget = ({closeJobBudget,project}) => {
                     <div className="flex-1">
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full mb-8">
             <div 
-                className={`flex sm:block items-center w-full sm:flex-1 p-6 border ${selectedOption === 'hourly' ? 'border-lime-300' : ''} hover:border-lime-300 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
+                className={`flex sm:block items-center w-full sm:flex-1 p-4 border ${selectedOption === 'hourly' ? 'border-lime-300' : ''} hover:border-lime-300 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
                 onClick={() => setSelectedOption('hourly')}
             >
                 <i className="bi bi-alarm text-3xl sm:-mt-3 mr-4 sm:mr-0 text-green-600"></i>
                 <h5 className='text-left font-cardo text-2xl lg:pt-3'>Hourly Rate</h5>
             </div>
             <div 
-                className={`flex sm:block items-center w-full sm:flex-1 p-6 border ${selectedOption === 'fixed' ? 'border-lime-300' : ''} hover:border-lime-300 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
+                className={`flex sm:block items-center w-full sm:flex-1 p-4 border ${selectedOption === 'fixed' ? 'border-lime-300' : ''} hover:border-lime-300 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
                 onClick={() => setSelectedOption('fixed')}
             >
                 <i className="bi bi-tag-fill sm:-mt-3 mr-4 sm:mr-0 text-3xl text-green-600"></i>

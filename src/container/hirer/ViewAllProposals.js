@@ -17,6 +17,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 const ViewAllProposals = () => {
 
     const error = useSelector(state => state.hirer.error);
+    const [categorySearch, setCategorySearch] = useState('');
 
    const viewallbids = useSelector(state => state.hirer.viewallbids)
    const dispatch = useDispatch();
@@ -31,6 +32,10 @@ const ViewAllProposals = () => {
   const isOpen = location.state && location.state.isOpen;
 
   const id = project.id
+
+  const filteredData = viewallbids?.filter(bid => 
+    bid.freelancer_category.replace(/_/g, ' ').toLowerCase().includes(categorySearch.toLowerCase())
+) || [];
 
   const [isViewProposalOpen, setIsViewProposalOpen] = useState(false);
   const [selectedbid, setSelectedbid] = useState(null);
@@ -121,7 +126,8 @@ const handleClick = (event, index) => {
                                         <section className='flex items-center p-2 bg-white rounded-lg m-5 border w-[49%]'>
         <div className='flex items-center mr-1 space-x-1'>
             <img src={search} alt="Search Icon" className="h-3 w-3" />
-            <input className='w-28 lg:w-40 xl:w-[30rem] h-7 text-xs lg:text-sm outline-none' placeholder='Search' />
+            <input className='w-28 lg:w-40 xl:w-[30rem] h-7 text-xs lg:text-sm outline-none' placeholder='Search' value={categorySearch}
+                            onChange={(e) => setCategorySearch(e.target.value)} />
         </div>
         <button className='rounded h-7 w-7 p-2 text-xs lg:text-sm font-semibold text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>
             <img src={searchbtn} alt="Search Icon" />
@@ -148,7 +154,7 @@ const handleClick = (event, index) => {
                 ) : (
                     <>{viewallbids != null ? 
                         <div>
-                        {viewallbids && viewallbids.map((bid, index) => {
+                        {filteredData && filteredData.map((bid, index) => {
                           const words = bid.description.split(' ');
                           const displayWords = expandedProjects[index] || words.length <= 50 ? words : words.slice(0, 50);
                             return(<>

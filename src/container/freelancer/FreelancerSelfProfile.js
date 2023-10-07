@@ -950,9 +950,9 @@ const closeFreeProject = () => {
             <img src={edit} alt="edit" />
         </div>
         {isEditEmploymentOpen && <EditEmploymentPopup closeEditEmployment={closeEditEmployment} />}
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        {/* <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={del} alt="delet" />
-        </div>
+        </div> */}
     </div>
     </div>
     <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>January 2021 - Present</p>
