@@ -3,32 +3,44 @@ import Navbar from '../../components/Layout/Navbar'
 import Footer from '../../components/Layout/Footer'
 import HomeSection4 from '../../components/Layout/HomeSection4'
 import { Link, useLocation,useNavigate } from 'react-router-dom'
-// import { GetFreelancerSelfBidProjectAction } from '../../redux/Freelancer/FreelancerAction'
+import { GetFreelancerSelfBidProjectAction } from '../../redux/Freelancer/FreelancerAction'
 import { useDispatch, useSelector } from "react-redux";
 
 
-const ViewProposal = () => {
+const SelfBidProject = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const findbid = location.state && location.state.project.id;
     console.log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+",findbid )
     console.log(findbid.id,"find bid")
     const accessToken = useSelector(state => state.login.accessToken);
+    const BidData = useSelector(state => state.freelancer.viewselfproject)
+    if(BidData != null){
+        console.log("dataaaaaaaaaaaaaaaa",BidData[0].id)
+    }
+    var BidDataArray = null
+    console.log("BidData",Object.BidData)
     console.log("access token from selfbidproject", accessToken)
 
-    // React.useEffect(() => {
-    //     dispatch(GetFreelancerSelfBidProjectAction(findbid, accessToken))
-    //   }, [])
+    React.useEffect(() => {
+        dispatch(GetFreelancerSelfBidProjectAction(findbid, accessToken))
+      }, [])
+if(BidData != null){
+      for (let i=0; i<BidData.length; i++){
+        console.log("-=-==-=-=-=-=-=-=-==-=",i,BidData[i])
+        BidDataArray = BidData[i]
+        console.log("-+-+-+-+-+-++++++++++++",BidDataArray.id)
+      }}
     
-    // const [showFullDescription, setShowFullDescription] = useState(false);
+    const [showFullDescription, setShowFullDescription] = useState(false);
     
     //     const toggleDescription = () => {
     //         setShowFullDescription(!showFullDescription);
     //     };
     
     // const descriptionToShow = showFullDescription
-    //     ? findbid.description
-    //     : findbid.description.slice(0, 200);
+    //     ? BidData.description
+    //     : BidData.description.slice(0, 200);
 
     function timeAgo(postedTimeStr) {
         const postedTime = new Date(postedTimeStr);
@@ -63,12 +75,13 @@ const ViewProposal = () => {
         <div className=' container-sm px-36'>
             <h1 className='font-inter text-2xl text-left mt-5'>Proposal Details</h1>
             <div className=' flex flex-row'>
+            {/* {BidDataArray && <>{BidDataArray.map((project,index)=> { */}
                 <div className=' basis-9/12'>
                 <div className=' mt-8  border border-[#E7E8F2] py-8 px-8 rounded-lg'>
             <h1 className=' text-2xl font-cardo font-semibold text-left'>Job Details</h1>
                 <div className=' flex flex-row mt-6'>
                     <div className=' basis-8/12'>
-                    {/* <h1 className=' text-xl font-inter font-medium text-left'>{findbid.title}</h1> */}
+                    {/* <h1 className=' text-xl font-inter font-medium text-left'>{project.id}</h1> */}
                     <div className=' flex flex-row'>
                     {/* <div className=' basis-4/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-green-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  w-[90%] bg-opacity-[60%]">{findbid.category}</div></div> */}
                     {/* <div className=' basis-4/12 mt-5 ml-2'><p className=' text-sm font-medium font-inter text-left opacity-[50%]'>Posted {timeAgo(findbid.project_creation_date)}</p></div> */}
@@ -158,6 +171,7 @@ const ViewProposal = () => {
             </p>
             </div>
                 </div>
+                {/* })}</>} */}
                 <div className=' basis-3/12'>
                     <div className='mt-8 ml-7'>
                         <p className=' text-[17px] font-inter font-normal text-left'>About the client</p>
@@ -183,5 +197,5 @@ const ViewProposal = () => {
       )
 }
 
-export default ViewProposal
+export default SelfBidProject
 

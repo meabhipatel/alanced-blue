@@ -200,25 +200,25 @@ export const GetFreelancerSelfBidAction = (token) => dispatch => {
   });
 };
 
-// export const GetFreelancerSelfBidProjectAction = (data, token) => dispatch => {
+export const GetFreelancerSelfBidProjectAction = (data, token) => dispatch => {
   
-//   dispatch({
-//     type: GET_FREELANCER_SELF_BID_PROJECT_REQUEST,
-//     payload: []
-//   });
-
-//   GetFreelancerSelfBidProject(data, token).then(res => {
-//     console.log(res, "View Bid data");
-//     if (res.status === 200) {
-//       dispatch({
-//         type: GET_FREELANCER_SELF_BID_PROJECT_SUCCESS,
-//         payload: res.data
-//       });
-//     } else {
-//       dispatch({
-//         type: SERVER_ERROR,
-//         payload: res
-//       });
-//     }
-//   });
-// };
+  dispatch({
+    type: GET_FREELANCER_SELF_BID_PROJECT_REQUEST,
+    payload: []
+  });
+console.log("data from action",data)
+  GetFreelancerSelfBidProject(data, token).then(res => {
+    console.log(res, "View Bid data");
+    if (res.status === 200) {
+      dispatch({
+        type: GET_FREELANCER_SELF_BID_PROJECT_SUCCESS,
+        payload: res.data
+      });
+    } else {
+      dispatch({
+        type: SERVER_ERROR,
+        payload: res
+      });
+    }
+  });
+};

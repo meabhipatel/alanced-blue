@@ -107,9 +107,9 @@ export const GetFreelancerSelfBid = async (token) => {
 };
 
 export const GetFreelancerSelfBidProject = async (data, token) => {    
-  setHeadersWithAccessToken(data, token);
+  setHeadersWithAccessToken(token);
   console.log("data from freelancer services",data)
-  return await DataService.post(`${API.Freelancers.Freelancer.ViewFreelancerSelfBidProject}/${data}`)
+  return await DataService.get(`${API.Freelancers.Freelancer.ViewFreelancerSelfBidProject}/${data}`)
     .then((res) => {
       console.log("Freelancer Self Bid Project",res);
       return res.data;
