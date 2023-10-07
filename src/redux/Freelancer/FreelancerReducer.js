@@ -59,6 +59,7 @@ const FreelancerReducer =(state = initialState, action) => {
         case GET_FREELANCER_SELF_BID_PROJECT_REQUEST:
             return { loading: true }
         case GET_FREELANCER_SELF_BID_PROJECT_SUCCESS:
+            console.log("reducer ======== >",action.payload)
             return { viewselfproject: action.payload, loading: false }
             
         // case GET_VIEW_ALL_SAVEDJOBS_REQUEST:
