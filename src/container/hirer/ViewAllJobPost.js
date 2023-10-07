@@ -55,7 +55,7 @@ const ViewAllJobPost = () => {
     const indexOfFirstJob = indexOfLastJob - jobsPerPage;
     
     const filteredJobs = viewhirerselfproject?.filter(project => 
-        project.category.toLowerCase().includes(categorySearch.toLowerCase())
+        project.category.replace(/_/g, ' ').toLowerCase().includes(categorySearch.toLowerCase())
     ) || [];
 
     const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);

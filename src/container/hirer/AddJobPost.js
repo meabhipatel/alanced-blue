@@ -220,16 +220,16 @@ const AddJobPost = () => {
         <p className="text-lg opacity-50 font-cardo font-medium py-4">This will help us match you to talent within your range.</p>
     </div>
     <div className="flex-1">
-        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full mb-8">
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full mb-4">
             <div 
-                className={`flex sm:block items-center w-full sm:flex-1 p-6 border ${selectedOption === 'hourly' ? 'border-lime-300' : ''} hover:border-lime-300 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
+                className={`flex sm:block items-center w-full sm:flex-1 p-4 border ${selectedOption === 'hourly' ? 'border-lime-300' : ''} hover:border-lime-300 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
                 onClick={() => setSelectedOption('hourly')}
             >
                 <i className="bi bi-alarm text-3xl sm:-mt-3 mr-4 sm:mr-0 text-green-600"></i>
                 <h5 className='text-left font-cardo text-2xl lg:pt-3'>Hourly Rate</h5>
             </div>
             <div 
-                className={`flex sm:block items-center w-full sm:flex-1 p-6 border ${selectedOption === 'fixed' ? 'border-lime-300' : ''} hover:border-lime-300 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
+                className={`flex sm:block items-center w-full sm:flex-1 p-4 border ${selectedOption === 'fixed' ? 'border-lime-300' : ''} hover:border-lime-300 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
                 onClick={() => setSelectedOption('fixed')}
             >
                 <i className="bi bi-tag-fill sm:-mt-3 mr-4 sm:mr-0 text-3xl text-green-600"></i>
@@ -237,7 +237,7 @@ const AddJobPost = () => {
             </div>
         </div>
         
-        <div className="min-h-[200px]"> 
+        <div className="min-h-[160px]"> 
             {selectedOption === 'hourly' && (
                 <div>
                     <div className="flex space-x-16">
@@ -256,7 +256,7 @@ const AddJobPost = () => {
                             </div>
                         </div>
                     </div>
-                    <p className="text-lg opacity-50 font-cardo font-medium py-4">Set your Hourly Rate</p>
+                    <p className="text-lg opacity-50 font-cardo font-medium py-2">Set your Hourly Rate</p>
                 </div>
             )}
 
@@ -264,7 +264,7 @@ const AddJobPost = () => {
                 <div>
                     <label className="block text-xl mt-3 font-cardo" htmlFor="maxBudgetInput">Maximum Budget</label> 
                     <input id="maxBudgetInput" type="text" className='border my-2 p-2 rounded-md w-52 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
-                    <p className="text-lg opacity-50 font-cardo font-medium py-4">Set your Project Budget</p>
+                    <p className="text-lg opacity-50 font-cardo font-medium py-2">Set your Project Budget</p>
                 </div>
             )}
         </div>

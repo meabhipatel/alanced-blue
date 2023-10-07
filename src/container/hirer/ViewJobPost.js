@@ -71,7 +71,7 @@ const formatDate = (dateStr) => {
         <p className="font-inter text-[#031136] text-sm font-normal py-3"><i class="bi bi-geo-alt-fill text-green-700"></i> Worldwide</p>
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
-        <p className="font-inter text-[#031136] text-lg font-medium">{project.title}</p>  
+        <p className="font-inter text-[#031136] text-md font-medium opacity-50">{project.description}</p>  
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
   <div className="flex">
