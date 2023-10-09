@@ -712,13 +712,29 @@ const closeFreeProject = () => {
    </div>
    <div className='border-b border-gray-200 border-opacity-30 py-4 px-4 md:px-8 text-left'>
    <div className="flex justify-between items-center">
-    <div className="flex items-center">
+   <div className="flex items-center">
+    <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-2">
+        {freelancerselfprofile && freelancerselfprofile[0].category 
+            ? freelancerselfprofile[0].category.replace(/_/g, ' ') 
+            : 'Your Designation'}
+    </h1>
+    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openEditTitle}>
+        <img 
+            src={freelancerselfprofile && freelancerselfprofile[0].category ? edit : plus} 
+            alt={freelancerselfprofile && freelancerselfprofile[0].category ? "Edit" : "Add"} 
+            className="align-middle" 
+        />
+    </div>
+    {isEditTitleOpen && <EditTitlePopup closeEditTitle={closeEditTitle} />}
+</div>
+
+    {/* <div className="flex items-center">
         <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-2">{freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category.replace(/_/g, ' ') : 'Your Designation'}</h1>
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openEditTitle}>
             <img src={edit} alt="Edit" className="align-middle" />
         </div>
         {isEditTitleOpen && <EditTitlePopup closeEditTitle={closeEditTitle} />}
-    </div>
+    </div> */}
     <div className="flex items-center">
         <h1 className="font-cardo text-[20px] text-[#031136] font-bold mr-2">$8.00/Hr</h1>
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 mr-2 cursor-pointer" onClick={openHrRate}>

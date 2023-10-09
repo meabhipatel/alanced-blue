@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../../components/Layout/Navbar'
 import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
@@ -25,6 +25,7 @@ const AddJobPost = () => {
         formData.append("deadline",addProject.deadline);
         formData.append("skills_required",addProject.skills_required);
         formData.append("category",addProject.category);
+        formData.append("budget",addProject.budget);
 
 
     const x = {
@@ -32,7 +33,8 @@ const AddJobPost = () => {
         "description":addProject.description,
         "deadline":addProject.deadline,
         "skills_required":addProject.skills_required,
-        "category":addProject.category
+        "category":addProject.category,
+        "budget":addProject.budget
     }    
         
 
@@ -66,6 +68,7 @@ const AddJobPost = () => {
     //   setError('');
     // };
 
+    const [isValid, setIsValid] = useState(false);
 
 
     const [step, setStep] = useState(1);
@@ -81,12 +84,27 @@ const AddJobPost = () => {
         'Deadline'
     ];
 
+    // const onChange = e => {
+    //     setAddProject(prevProject => ({
+    //         ...prevProject,
+    //         [e.target.name]: e.target.value
+    //     }));
+    // };
+
     const onChange = e => {
+        let value = e.target.value;
+    
+        // Convert the date format if the input is the 'deadline' input
+        if(e.target.name === 'deadline') {
+            value = formatToDDMMYYYY(value);
+        }
+    
         setAddProject(prevProject => ({
             ...prevProject,
-            [e.target.name]: e.target.value
+            [e.target.name]: value
         }));
     };
+    
     
     const addSkill = () => {
         if (currentSkill.trim() && skills.length < 15) {
@@ -116,6 +134,62 @@ const AddJobPost = () => {
         }));
         setError('');
     };
+
+
+    useEffect(() => {
+        switch (step) {
+            case 1:
+                if (addProject.title && addProject.category) {
+                    setIsValid(true);
+                } else {
+                    setIsValid(false);
+                }
+                break;
+            case 2:
+                if (addProject.description) {
+                    setIsValid(true);
+                } else {
+                    setIsValid(false);
+                }
+                break;
+            case 3:
+                if (addProject.skills_required && addProject.skills_required.length > 0) {
+                    setIsValid(true);
+                } else {
+                    setIsValid(false);
+                }
+                break;
+            case 4:
+                if (addProject.budget) {
+                    setIsValid(true);
+                } else {
+                    setIsValid(false);
+                }
+                break;
+            case 5:
+                if (addProject.deadline) {
+                    setIsValid(true);
+                } else {
+                    setIsValid(false);
+                }
+                break;
+            default:
+                setIsValid(false);
+                break;
+        }
+    }, [step, addProject]);
+    
+    const formatToYYYYMMDD = (dateStr) => {
+        if(!dateStr) return '';
+        const [day, month, year] = dateStr.split("-");
+        return `${year}-${month}-${day}`;
+    }
+    
+    const formatToDDMMYYYY = (dateStr) => {
+        if(!dateStr) return '';
+        const [year, month, day] = dateStr.split("-");
+        return `${day}-${month}-${year}`;
+    }
     
     
   return (
@@ -139,6 +213,7 @@ const AddJobPost = () => {
         type="text" 
         onChange={onChange}
         name="title"
+        value={addProject.title || ''}
         className='border my-2 py-2 px-3 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' 
         placeholder="Add Job title" 
     />
@@ -147,6 +222,7 @@ const AddJobPost = () => {
         type="text" 
         name="category"
         onChange={onChange}
+        value={addProject.category || ''}
         className='border my-2 py-2 px-3 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' 
     />
     {/* <select 
@@ -170,7 +246,7 @@ const AddJobPost = () => {
                     </div>
                     <div className="flex-1">
                     <label className="block text-xl mt-3 font-cardo" htmlFor="jobCategory">Job Description</label>
-                    <textarea name="description" id="" cols="30" rows="5" className='border py-2 px-3 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Write Your Job Description Here' onChange={onChange}></textarea> 
+                    <textarea name="description" id="" cols="30" rows="5" className='border py-2 px-3 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Write Your Job Description Here' onChange={onChange} value={addProject.description || ''}></textarea> 
             </div>
                 </div>
                 )}
@@ -263,7 +339,7 @@ const AddJobPost = () => {
             {selectedOption === 'fixed' && (
                 <div>
                     <label className="block text-xl mt-3 font-cardo" htmlFor="maxBudgetInput">Maximum Budget</label> 
-                    <input id="maxBudgetInput" type="text" className='border my-2 p-2 rounded-md w-52 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input id="maxBudgetInput" type="text" className='border my-2 p-2 rounded-md w-52 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='' onChange={onChange} name="budget" value={addProject.budget || ''}/>
                     <p className="text-lg opacity-50 font-cardo font-medium py-2">Set your Project Budget</p>
                 </div>
             )}
@@ -280,7 +356,7 @@ const AddJobPost = () => {
                     </div>
                     <div className="flex-1">
                     <label className="block text-xl mt-3 font-cardo" htmlFor="jobCategory">Deadline</label>
-                    <input id="" name="deadline" type="text" className='border my-2 p-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' onChange={onChange} placeholder='DD-MM-YYYY'/>
+                    <input id="" name="deadline" type="date" className='border my-2 p-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' onChange={onChange} value={formatToYYYYMMDD(addProject.deadline || '')}/>
             </div>
                 </div>
                 )}
@@ -307,16 +383,28 @@ const AddJobPost = () => {
     )}
 
     {step < 5 ? (
-        <Link to='' onClick={() => {
-            window.scrollTo(0, 0);
-            nextStep();
-        }}>
-            <span class="text-sm px-6 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Next: {stepsLabels[step]}</span>
-        </Link>
-    ) : (
-        <Link to=''>
-            <span class="text-sm px-6 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold" onClick={()=>{ AddProjects(); window.scrollTo(0, 0); }}>Post A Job</span>
-        </Link>
+    <Link to='' onClick={(e) => {
+        if (!isValid) {
+            e.preventDefault();
+            return;
+        }
+        window.scrollTo(0, 0);
+        nextStep();
+    }}>
+        <span class={`text-sm px-6 py-[10px] ${isValid ? 'bg-gradient-to-r from-[#00BF58] to-[#E3FF75]' : 'bg-gray-400 cursor-not-allowed'} border rounded border-none text-white font-semibold`} >Next: {stepsLabels[step]}</span>
+    </Link>
+) : (
+    <Link to={isValid ? '/View-all/Job-post' : '#'} onClick={(e) => {
+        if (!isValid) {
+            e.preventDefault();
+            return;
+        }
+        AddProjects();
+        window.scrollTo(0, 0);
+    }}>
+        <span class={`text-sm px-6 py-[10px] ${isValid ? 'bg-gradient-to-r from-[#00BF58] to-[#E3FF75]' : 'bg-gray-400 cursor-not-allowed'} border rounded border-none text-white font-semibold`}>Post A Job</span>
+    </Link>
+    
     )}
 </div>
 

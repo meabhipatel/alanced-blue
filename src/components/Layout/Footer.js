@@ -28,7 +28,9 @@ const Footer = () => {
     <div class="p-4 text-left">
     <h5 class="text-xl font-bold mb-6 font-cardo">Information</h5>
         <ul class="list-none footer-links text-gray-500">
-          <li class="mb-2 hover:text-green-600 hover:underline">FAQ</li>
+        <Link to='/FAQ' onClick={() => window.scrollTo(0, 0)}>
+        <li class="mb-2 hover:text-green-600 hover:underline">FAQ</li>
+        </Link>
           <li class="mb-2 hover:text-green-600 hover:underline">Blog</li>
           <li class="mb-2 hover:text-green-600 hover:underline">Support</li>
         </ul>
@@ -36,8 +38,12 @@ const Footer = () => {
     <div class="p-4 text-left">
     <h5 class="text-xl font-bold mb-6 font-cardo">Company</h5>
         <ul class="list-none footer-links text-gray-500">
+        <Link to='/about-us' onClick={() => window.scrollTo(0, 0)}>
           <li class="mb-2 hover:text-green-600 hover:underline">About us</li>
+          </Link>
+          <Link to='/contact-us' onClick={() => window.scrollTo(0, 0)}>
           <li class="mb-2 hover:text-green-600 hover:underline">Contact us</li>
+          </Link>
           <li class="mb-2 hover:text-green-600 hover:underline">Safety & Security</li>
         </ul>
     </div>
