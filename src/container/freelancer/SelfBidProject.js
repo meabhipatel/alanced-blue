@@ -14,33 +14,36 @@ const SelfBidProject = () => {
     console.log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+",findbid )
     console.log(findbid.id,"find bid")
     const accessToken = useSelector(state => state.login.accessToken);
+    // const [BidData, setBidData ] = useState(null)
     const BidData = useSelector(state => state.freelancer.viewselfproject)
+    var description = ''
     if(BidData != null){
-        console.log("dataaaaaaaaaaaaaaaa",BidData[0].id)
+        // console.log("dataaaaaaaaaaaaaaaa",BidData.id)
+        description = BidData.project.description
     }
-    var BidDataArray = null
-    console.log("BidData",Object.BidData)
-    console.log("access token from selfbidproject", accessToken)
+    // var BidDataArray = null
+    // console.log("BidData",Object.BidData)
+    // console.log("access token from selfbidproject", accessToken)
 
     React.useEffect(() => {
         dispatch(GetFreelancerSelfBidProjectAction(findbid, accessToken))
       }, [])
-if(BidData != null){
-      for (let i=0; i<BidData.length; i++){
-        console.log("-=-==-=-=-=-=-=-=-==-=",i,BidData[i])
-        BidDataArray = BidData[i]
-        console.log("-+-+-+-+-+-++++++++++++",BidDataArray.id)
-      }}
+// if(BidData != null){
+//       for (let i=0; i<BidData.length; i++){
+//         console.log("-=-==-=-=-=-=-=-=-==-=",i,BidData[i])
+//         BidDataArray = BidData[i]
+//         console.log("-+-+-+-+-+-++++++++++++",BidDataArray.id)
+//       }}
     
     const [showFullDescription, setShowFullDescription] = useState(false);
     
-    //     const toggleDescription = () => {
-    //         setShowFullDescription(!showFullDescription);
-    //     };
+        const toggleDescription = () => {
+            setShowFullDescription(!showFullDescription);
+        };
     
-    // const descriptionToShow = showFullDescription
-    //     ? BidData.description
-    //     : BidData.description.slice(0, 200);
+    const descriptionToShow = showFullDescription
+        ? description
+        : description.slice(0, 200);
 
     function timeAgo(postedTimeStr) {
         const postedTime = new Date(postedTimeStr);
@@ -75,28 +78,29 @@ if(BidData != null){
         <div className=' container-sm px-36'>
             <h1 className='font-inter text-2xl text-left mt-5'>Proposal Details</h1>
             <div className=' flex flex-row'>
-            {/* {BidDataArray && <>{BidDataArray.map((project,index)=> { */}
+                {BidData != null ?
+            
                 <div className=' basis-9/12'>
                 <div className=' mt-8  border border-[#E7E8F2] py-8 px-8 rounded-lg'>
             <h1 className=' text-2xl font-cardo font-semibold text-left'>Job Details</h1>
                 <div className=' flex flex-row mt-6'>
                     <div className=' basis-8/12'>
-                    {/* <h1 className=' text-xl font-inter font-medium text-left'>{project.id}</h1> */}
+                    <h1 className=' text-xl font-inter font-medium text-left'>{BidData.project.title}</h1>
                     <div className=' flex flex-row'>
-                    {/* <div className=' basis-4/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-green-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  w-[90%] bg-opacity-[60%]">{findbid.category}</div></div> */}
-                    {/* <div className=' basis-4/12 mt-5 ml-2'><p className=' text-sm font-medium font-inter text-left opacity-[50%]'>Posted {timeAgo(findbid.project_creation_date)}</p></div> */}
+                    <div className=' basis-4/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-green-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  w-[90%] bg-opacity-[60%]">{BidData.project.category}</div></div>
+                    <div className=' basis-4/12 mt-5 ml-2'><p className=' text-sm font-medium font-inter text-left opacity-[50%]'>Posted {timeAgo(BidData.project.created_at)}</p></div>
                     </div>
                     <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>
-                        {/* {descriptionToShow} */}
+                        {descriptionToShow}
                     </p>
-                    {/* {findbid.description.length > 200 && (
+                    {description.length > 200 && (
                         <p
                         className='mt-3 text-base font-semibold text-green-600 text-left cursor-pointer'
                         onClick={toggleDescription}
                         >
                         {showFullDescription ? 'less' : 'more'}
                         </p>
-                    )} */}
+                    )}
                     {/* <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>{findbid.project.description}</p>
                     <p className=' mt-3 text-base font-semibold text-green-600 text-left'>more</p> */}
                     <p className='mb-5 mt-5 text-base font-semibold text-green-600 text-left'>View job posting</p>
@@ -129,11 +133,11 @@ if(BidData != null){
                 <hr className=' mt-5' />
                 <h1 className='text-base font-medium font-inter text-left mt-5'>Skills & Experties</h1>
                 <div className="text-left mt-5">
-                {/* {JSON.parse(findbid.skills_required.replace(/'/g,'"')).map((skill,index)=>( */}
+                {JSON.parse(BidData.project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
                     <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
-                    {/* <p className=" text-center">{skill}</p> */}
+                    <p className=" text-center">{skill}</p>
                 </div>
-                {/* ))} */}
+                ))}
                 {/* <div className="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-24 text-green-800 px-3 py-[3px] font-semibold text-sm dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
                     <p className="text-center">React</p>
                 </div>
@@ -144,18 +148,18 @@ if(BidData != null){
                 <hr className=' mt-8' />
                 <div className=' flex flex-row'>
                     <div className=' basis-6/12'><p className='text-base font-medium font-inter text-left mt-5'>Your proposed terms</p></div>
-                    {/* <div className=' basis-6/12'><p className='text-base font-medium opacity-50 font-inter text-right mt-5'>Client's budget: ${findbid.budget}</p></div> */}
+                    <div className=' basis-6/12'><p className='text-base font-medium opacity-50 font-inter text-right mt-5'>Client's budget: ${BidData.project.budget}</p></div>
                 </div>
                 <div>
                 <p className='text-[15px] font-medium font-inter text-left mt-5'>How do you want to be paid?</p>
                 <p className='text-[15px] font-medium font-inter text-left opacity-70'>By Project</p>
                 <p className='text-[15px] font-medium font-inter text-left mt-5'>Total price of project</p>
                 <p className='text-[15px] font-medium font-inter text-left opacity-70'>This includes all milestones, and is the amount your client will see.</p>
-                {/* <p className='text-base font-medium font-inter text-left mt-5 opacity-70'>{findbid.bid_amount}</p> */}
+                <p className='text-base font-medium font-inter text-left mt-5 opacity-70'>{BidData.bid_amount}</p>
                 <hr className=' mt-5' />
                 <p className='text-[15px] font-medium font-inter text-left mt-5'>You'll Receive</p>
                 <p className='text-[15px] font-medium font-inter text-left opacity-70'>The estimated payment, after service fees.</p>
-                <p className='text-base font-medium font-inter text-left mt-5 opacity-70'>$400.00</p>
+                <p className='text-base font-medium font-inter text-left mt-5 opacity-70'>{BidData.bid_amount-(BidData.bid_amount/10)}</p>
                 <div className=' flex flex-row mt-5  mb-5'>
             <div className=' basis-3/12' ><button className='h-10 w-40 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded'>Change Terms</button></div>
             <div class="p-0.5 mt-5 rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] ml-5">
@@ -167,11 +171,11 @@ if(BidData != null){
             <div className='mt-8  border border-[#E7E8F2] py-8 px-8 rounded-lg'>
             <h1 className=' text-xl font-inter font-medium text-left'>Cover Letter</h1>
             <p className='font-inter text-[15px] font-medium mt-7 text-left opacity-[70%]'>
-            {/* {findbid.description} */}
+            {BidData.description}
             </p>
             </div>
                 </div>
-                {/* })}</>} */}
+                :''}
                 <div className=' basis-3/12'>
                     <div className='mt-8 ml-7'>
                         <p className=' text-[17px] font-inter font-normal text-left'>About the client</p>
