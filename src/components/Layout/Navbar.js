@@ -226,7 +226,10 @@ const Navbar = () => {
                      {loginType=='FREELANCER'? <Link to='/freelancer/edit-profile' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2 hover:bg-gray-100" >
                             <i class="bi bi-person-circle mr-3"></i>
                         <span className="font-inter text-[16px] text-[#031136]">Profile</span>
-                      </Link>:''}
+                      </Link>:<Link to='/hirer/profile-edit' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2 hover:bg-gray-100" >
+                            <i class="bi bi-person-circle mr-3"></i>
+                        <span className="font-inter text-[16px] text-[#031136]">Profile</span>
+                      </Link>}
                       <Link to='/' className="flex items-center px-4 py-2 hover:bg-gray-100" onClick={() => {
                           window.scrollTo(0, 0);
                           handleLogout();

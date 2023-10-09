@@ -135,7 +135,7 @@ const ViewProposal = () => {
                 <hr className=' mt-5' />
                 <p className='text-[15px] font-medium font-inter text-left mt-5'>You'll Receive</p>
                 <p className='text-[15px] font-medium font-inter text-left opacity-70'>The estimated payment, after service fees.</p>
-                <p className='text-base font-medium font-inter text-left mt-5 opacity-70'>$400.00</p>
+                <p className='text-base font-medium font-inter text-left mt-5 opacity-70'>$ {findbid.bid_amount-(findbid.bid_amount/10)}</p>
                 {/* <div className=' flex flex-row mt-5  mb-5'>
             <div className=' basis-3/12' ><button className='h-10 w-40 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded'>Change Terms</button></div>
             <div class="p-0.5 mt-5 rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] ml-5">
