@@ -79,7 +79,7 @@ const handleToggleDescription = (index) => {
 // };
 const handleClick = (event, index) => {
     event.stopPropagation();
-
+    event.preventDefault();
     handleToggleDescription(index);
 
     // Rest of your handleClick code, if any...
@@ -401,7 +401,7 @@ const chunkedFree = chunkArray(projectsToDisplay, 10);
         {/* <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200" onClick={handleClick}>
             <img src={thumbdown} alt="" />
         </div> */}
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200" onClick={handleClick}>
+        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={heart} alt="" />
         </div>
     </div>
@@ -414,7 +414,7 @@ const chunkedFree = chunkArray(projectsToDisplay, 10);
         )
     })}
     <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>Fixed-price - Expert - Est. Budget: ${project.budget} - {timeAgo}</p>
-    {/* <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>
+    <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>
                 Job Description: {displayWords.join(' ')} 
                 {words.length > 50 && (
                     <span 
@@ -424,8 +424,8 @@ const chunkedFree = chunkArray(projectsToDisplay, 10);
                         {expandedProjects[index] ? 'Less' : 'More'}
                     </span>
                 )}
-            </p> */}
-            <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>{project.description}</p>
+            </p>
+            {/* <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>{project.description}</p> */}
     {/* <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>Job Description: {project.description} <span className="font-cardo text-[#031136] text-[18px] font-semibold cursor-pointer" onClick={handleClick}>More</span></p> */}
     {JSON.parse(project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
     <Link to=''>
