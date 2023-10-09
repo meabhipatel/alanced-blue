@@ -28,7 +28,8 @@ const EditTitlePopup = ({ closeEditTitle }) => {
                     <div className="flex items-center justify-center min-h-screen">
                     <div className="bg-white rounded-lg w-[90%] md:w-[50%] p-6 px-8 relative z-20">
                     <div className="flex justify-between items-center">
-                        <h1 className="font-cardo text-[26px] text-[#031136] font-normal">Edit About Me Section</h1>
+                        {/* <h1 className="font-cardo text-[26px] text-[#031136] font-normal">Edit About Me Section</h1> */}
+                        <h1 className="font-cardo text-[26px] text-[#031136] font-normal">{category && category.length > 0 ? 'Edit Profile' : 'Add Profile'}</h1>
                         <button onClick={closeEditTitle} className="text-gray-500 hover:text-gray-700">
                             <i class="bi bi-x-lg"></i>
                         </button>

@@ -49,6 +49,9 @@ import ViewProposalPopup from "../container/hirer/HirerAllPopup/ViewProposalPopu
 import ViewProjectPopup from "../container/freelancer/AllPopup/ViewProjectPopup";
 import ViewSendPraposalAfterAdd from "../container/freelancer/ViewSendPraposalAfterAdd";
 import SelfBidProject from "../container/freelancer/SelfBidProject";
+import AboutUs from "../components/Layout/AboutUs";
+import ContactUs from "../components/Layout/ContactUs";
+import FAQ from "../components/Layout/FAQ";
 
   const AppRouter = (props) => {
     
@@ -104,6 +107,9 @@ import SelfBidProject from "../container/freelancer/SelfBidProject";
           <Route path="/view-project/full-detail" element={<ViewProjectPopup/>}/>
           <Route path='/send-proposal/detail' element={<ViewSendPraposalAfterAdd/>}></Route>
           <Route path="/view/SelfBidProject" element={<SelfBidProject/>}></Route>
+          <Route path="/about-us" element={<AboutUs/>}/>
+          <Route path="/contact-us" element={<ContactUs/>}/>
+          <Route path="/FAQ" element={<FAQ/>}/>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   
