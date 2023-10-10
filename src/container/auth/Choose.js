@@ -28,7 +28,7 @@ const Choose = () => {
 
 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full mb-8">
     <div 
-        class={`flex sm:block items-center w-full sm:flex-1 p-6 border ${selectedOption === 'client' ? 'border-lime-300' : ''} hover:border-lime-300 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
+        class={`flex sm:block items-center w-full sm:flex-1 p-6 border-2 ${selectedOption === 'client' ? 'border-green-600' : ''} hover:border-green-600 hover:shadow-md cursor-pointer h-[120px] sm:h-auto`}
         onClick={() => setSelectedOption('client')}
     >
         <img src={client} alt="" className='h-[50px] sm:-mt-3 mr-4 sm:mr-0'/>
@@ -37,7 +37,7 @@ For A Project</h5>
     </div>
 
     <div 
-        class={`flex sm:block items-center w-full sm:flex-1 p-6 border ${selectedOption === 'freelancer' ? 'border-lime-300' : ''} hover:border-lime-300 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
+        class={`flex sm:block items-center w-full sm:flex-1 p-6 border-2 ${selectedOption === 'freelancer' ? 'border-green-600' : ''} hover:border-green-600 hover:shadow-md cursor-pointer h-[120px] sm:h-auto`}
         onClick={() => setSelectedOption('freelancer')}
     >
         <img src={freelancer} alt="" className='h-[50px] sm:-mt-3 mr-4 sm:mr-0'/>
