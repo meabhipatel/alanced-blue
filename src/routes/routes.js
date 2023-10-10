@@ -52,6 +52,12 @@ import SelfBidProject from "../container/freelancer/SelfBidProject";
 import AboutUs from "../components/Layout/AboutUs";
 import ContactUs from "../components/Layout/ContactUs";
 import FAQ from "../components/Layout/FAQ";
+import Enterprises from "../container/freelancer/Enterprises";
+import HirerSelfProfile from "../container/hirer/HirerProfile";
+import ViewFreelancerFullDetailBeforeLogin from "../container/hirer/ViewFreelancerFullDetailBeforeLogin";
+import ViewProjectListDetailBeforeLogin from "../container/freelancer/ViewProjectListDetailBeforeLogin";
+import WhyAlanced from "../components/Layout/WhyAlanced";
+import SafetyAndSecurity from "../components/Layout/SafetyAndSecurity";
 
   const AppRouter = (props) => {
     
@@ -76,7 +82,7 @@ import FAQ from "../components/Layout/FAQ";
           <Route path="/login" element={<Login />} />
           <Route path="/freelancer/registration" element={<FreelancerRegistration />} />
           <Route path="/hirer/registration" element={<HirerRegistration/>}/>
-          <Route path="/choose" element={<Choose />} />
+          <Route path="/sign-up" element={<Choose />} />
           <Route path="/projects" element={<ProjectList/>}/>
           <Route path="/freelancer/edit-profile" element={<FreelancerSelfProfile/>}/>
           <Route path="/freelancer/profile" element={<FreelancerAfterLogin/>}/>
@@ -110,6 +116,12 @@ import FAQ from "../components/Layout/FAQ";
           <Route path="/about-us" element={<AboutUs/>}/>
           <Route path="/contact-us" element={<ContactUs/>}/>
           <Route path="/FAQ" element={<FAQ/>}/>
+          <Route path='/enterprises' element={<Enterprises/>}></Route>
+          <Route path='/view/freelancer/full-detail' element={<ViewFreelancerFullDetailBeforeLogin/>}></Route>
+          <Route path='/view/project/full-detail' element={<ViewProjectListDetailBeforeLogin/>}></Route>
+          <Route path="/hirer/profile-edit" element={<HirerSelfProfile/>}></Route>
+          <Route path="/why-alanced" element={<WhyAlanced/>}></Route>
+          <Route path="/safety-security" element={<SafetyAndSecurity/>}></Route>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   

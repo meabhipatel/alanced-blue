@@ -73,7 +73,7 @@ const HomeSection3 = () => {
     <span className='font-cardo text-[18px] font-[700px] text-[#0A142F]'>Recurring Payment</span>
     </div>
     <div className='mt-8'>
-<Link to=''><span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Learn About Agreements</span></Link>
+<Link to='/terms' onClick={() => window.scroll(0 ,0)}><span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Learn About Agreements</span></Link>
 </div>
     </div>
         </div>
