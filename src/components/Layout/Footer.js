@@ -21,8 +21,9 @@ const Footer = () => {
           <Link to='/projects' onClick={() => window.scrollTo(0, 0)}>
           <li class="mb-2 hover:text-green-600 hover:underline">Career</li>
           </Link>
+          <Link to='/enterprises' onClick={() => window.scrollTo(0, 0)}>
           <li class="mb-2 hover:text-green-600 hover:underline">Enterprise Solution</li>
-          <li class="mb-2 hover:text-green-600 hover:underline">Alanced Foundation</li>
+          </Link>
         </ul>
     </div>
     <div class="p-4 text-left">
@@ -31,8 +32,11 @@ const Footer = () => {
         <Link to='/FAQ' onClick={() => window.scrollTo(0, 0)}>
         <li class="mb-2 hover:text-green-600 hover:underline">FAQ</li>
         </Link>
-          <li class="mb-2 hover:text-green-600 hover:underline">Blog</li>
+          {/* <li class="mb-2 hover:text-green-600 hover:underline">Blog</li> */}
+          <Link to='/contact-us' onClick={() => window.scrollTo(0, 0)}>
           <li class="mb-2 hover:text-green-600 hover:underline">Support</li>
+          </Link>
+          <li class="mb-2 hover:text-green-600 hover:underline">Alanced Foundation</li>
         </ul>
     </div>
     <div class="p-4 text-left">
@@ -61,27 +65,35 @@ const Footer = () => {
 
     <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-5 px-4 sm:px-[55px]">
       <div className="flex-1 flex justify-start p-4 pl-0 pt-1">
+      <Link to='/' onClick={() => window.scrollTo(0, 0)}>
       <div class="md:w-1/6 flex items-center flex-shrink-0">
         <img src={logo} alt="" />
         <span class="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
       </div>
+      </Link>
       </div>
       <div className="flex-1 flex justify-center p-4 pt-1">
-      <div class="flex space-x-4 w-full">
-        <div class="flex-1 p-2 font-bold font-larsseit text-[14px] cursor-pointer">Terms</div>
-        <div class="flex-1 p-2 font-bold font-larsseit text-[14px] cursor-pointer">Privacy</div>
-        <div class="flex-1 p-2 font-bold font-larsseit text-[14px] cursor-pointer">Cookies</div>
+      <div class="flex space-x-4 w-full md:pl-20">
+      <Link to='/terms' onClick={() => window.scrollTo(0, 0)}>
+      <div class="flex-1 p-2 font-bold font-larsseit text-[14px] hover:text-green-600 hover:underline">Terms</div>
+      </Link>
+      <Link to='/privacy-policy' onClick={() => window.scrollTo(0, 0)}>
+      <div class="flex-1 p-2 font-bold font-larsseit text-[14px] hover:text-green-600 hover:underline">Privacy</div>
+      </Link>
+      <Link to='/cookies' onClick={() => window.scrollTo(0, 0)}>
+      <div class="flex-1 p-2 font-bold font-larsseit text-[14px] hover:text-green-600 hover:underline">Cookies</div>
+      </Link>
     </div>
       </div>
       <div className="flex-1 flex justify-end p-4 pr-0 pt-1">
       <div class="flex sm:justify-center xl:justify-start md:justify-end">
-          <a  class="w-8 h-8 border-2 border-gray-400 rounded-full text-center py-1 text-gray-600 hover:text-white hover:bg-gradient-to-r from-[#00BF58] to-[#E3FF75] hover:border-[#B6F36F]">
+          <a href='https://in.linkedin.com/' class="w-8 h-8 border-2 border-gray-400 rounded-full text-center py-1 text-gray-600 hover:text-white hover:bg-gradient-to-r from-[#00BF58] to-[#E3FF75] hover:border-[#B6F36F]">
             <img src={linkedin} alt="" className='ml-2 mt-1'/>
           </a>
-          <a class="w-8 h-8 border-2 border-gray-400 rounded-full text-center py-1 ml-2 text-gray-600 hover:text-white hover:bg-gradient-to-r from-[#00BF58] to-[#E3FF75] hover:border-[#B6F36F]">
+          <a href='https://www.facebook.com/' class="w-8 h-8 border-2 border-gray-400 rounded-full text-center py-1 ml-2 text-gray-600 hover:text-white hover:bg-gradient-to-r from-[#00BF58] to-[#E3FF75] hover:border-[#B6F36F]">
           <img src={fb} alt="" className='ml-2.5 mt-1'/>
           </a>
-          <a  class="w-8 h-8 border-2 border-gray-400 rounded-full text-center py-1 ml-2 text-gray-600 hover:text-white hover:bg-gradient-to-r from-[#00BF58] to-[#E3FF75] hover:border-[#B6F36F]">
+          <a href='https://twitter.com/' class="w-8 h-8 border-2 border-gray-400 rounded-full text-center py-1 ml-2 text-gray-600 hover:text-white hover:bg-gradient-to-r from-[#00BF58] to-[#E3FF75] hover:border-[#B6F36F]">
           <img src={twitter} alt="" className='ml-2 mt-1.5'/>
           </a>
         </div>
