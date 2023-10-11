@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { UpdateFreelancerProfileAction } from '../../../redux/Freelancer/FreelancerAction';
 
 const EditTitlePopup = ({ closeEditTitle }) => {
-
   const accessToken = useSelector(state => state.login.accessToken);  
 
   const [category, setCategory] = useState(""); 
@@ -21,8 +20,62 @@ const EditTitlePopup = ({ closeEditTitle }) => {
       closeEditTitle();
   }
 
+  const [categories] = useState([
+    'Web Development',
+    'Web Designing',
+    'Data Science',
+]);
+
+const [searchTerm, setSearchTerm] = useState(category || ""); 
+const [isOpen, setIsOpen] = useState(false);
+const wrapperRef = useRef(null);
+
+const filteredCategories = categories.filter(
+    category => category.toLowerCase().includes(searchTerm.toLowerCase())
+);
+
+const handleClickOutside = (event) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setIsOpen(false);
+    }
+};
+
+useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+    };
+}, []);
+
+
   return (
     <>
+    <style>
+    {`
+    .dropdown-list {
+        border: 1px solid #ccc;
+        max-height: 200px;
+        overflow-y: auto;
+        position: absolute;
+        width: 90%;
+        z-index: 1000;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background-color: #fff;
+    }
+    
+    .dropdown-list li {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .dropdown-list li:hover {
+        background-color: #f7f7f7;
+    }
+    `}
+</style>
+
     <div className="fixed z-10 inset-0 overflow-y-auto mt-12">
                     <div className="fixed inset-0 bg-black opacity-50"></div>
                     <div className="flex items-center justify-center min-h-screen">
@@ -36,7 +89,43 @@ const EditTitlePopup = ({ closeEditTitle }) => {
                     </div>
                     <div className='mt-8'>
                             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Your Designation</h1>
-                            <input type="text" value={category} onChange={e => setCategory(e.target.value)} className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Python Developer'/>
+                            {/* <input type="text" value={category} onChange={e => setCategory(e.target.value)} className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Python Developer'/> */}
+                            <div ref={wrapperRef}>
+    <input 
+        type="text" 
+        value={category} 
+        onClick={() => setIsOpen(!isOpen)} 
+        onChange={e => {
+            setSearchTerm(e.target.value);
+            setCategory(e.target.value);
+            setIsOpen(true);
+        }} 
+        className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'
+        placeholder="Select Category" 
+    />
+    {isOpen && (
+    <ul className="dropdown-list">
+        {filteredCategories.length > 0 ? (
+            filteredCategories.map((cat, index) => (
+                <li 
+                    key={index} 
+                    onClick={() => {
+                        setSearchTerm(cat);
+                        setCategory(cat);
+                        setIsOpen(false);
+                    }}
+                >
+                    {cat}
+                </li>
+            ))
+        ) : (
+            <li>No results found</li>
+        )}
+    </ul>
+)}
+
+</div>
+
                             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left pt-5">About You</h1>
                           <textarea name="" id="" cols="30" rows="5" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'></textarea> 
                             <div className="mt-8 flex justify-end">

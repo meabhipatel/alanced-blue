@@ -72,7 +72,7 @@ const Enterprises = () => {
             <div className=' text-left text-2xl'><i class="bi bi-shield-lock"></i></div>
             <h1 className=' font-cardo text-[30px] text-left mt-2'>Security</h1>
                 <p className=' font-cardo text-[18px] text-left mt-3'>Protecting your digital assets with state-of-the-art security solutions.</p>
-                <div className='text-left mt-3'><Link to=''><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r bg-[#d2c8f8] border rounded border-none text-white mr-2 font-semibold">View Features</span></Link></div>
+                <div className='text-left mt-3'><Link to='/safety-security' onClick={() => window.scroll(0, 0)}><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r bg-[#d2c8f8] border rounded border-none text-white mr-2 font-semibold">View Features</span></Link></div>
             </div>
             <div className=' basis-3/12 border border-green-200 rounded-lg border-opacity-[50%] p-6 shadow-md bg-[#e3f7e9]'>
             <div className=' text-left text-2xl'><i class="fa fa-file-pdf-o" aria-hidden="true"></i></div>
