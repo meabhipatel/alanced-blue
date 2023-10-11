@@ -11,7 +11,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetViewAllProjectsListAction } from '../../redux/Freelancer/FreelancerAction'
 import ViewProjectPopup from './AllPopup/ViewProjectPopup'
@@ -25,10 +25,34 @@ import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 
 function ProjectList() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const category = searchParams.get('category');
+  console.log(category,"category")
   const viewallprojects = useSelector(state => state.freelancer.viewallprojects)
   const accessToken = useSelector(state => state.login.accessToken);
   // const projectData = { viewallprojects }
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(GetViewAllProjectsListAction())
+  }, [])
+
+  React.useEffect(() => {
+    if (category) {
+      const filteredData = viewallprojects.filter(project => {
+          return project.category.toLowerCase() === category.toLowerCase();
+        });
+      setFilteredProjects(filteredData);
+    } else {
+      setFilteredProjects(viewallprojects);
+    }
+  }, [category, viewallprojects]);
+
+
+  const [filteredProjects, setFilteredProjects] = useState([]);
+  console.log(filteredProjects, "filter freelancer");
+
   const [range, setRange] = useState([1, 1000]);
 
   const handleSliderChange = (newRange) => {
@@ -93,10 +117,6 @@ function ProjectList() {
     // Rest of your handleClick code, if any...
 };
 
-  React.useEffect(() => {
-    dispatch(GetViewAllProjectsListAction())
-  }, [])
-
   const [AllProposals, setAllProposals] = useState('')
 
   React.useEffect(() => {
@@ -159,7 +179,7 @@ function ProjectList() {
           <div className='lg:w-[44vw] bg-white p-3 lg:h-14 rounded-2xl lg:flex items-center mt-4 shadow-md'>
             <div className='flex flex-row'>
               <img className='w-5 h-5' src={search}></img>
-              <input className='w-96 font-inter text-base ml-3 outline-none' placeholder='What are you looking for?' value={categorySearch} onChange={(e) => setCategorySearch(e.target.value)}></input>
+              <input className='w-96 font-inter text-base ml-3 outline-none' placeholder='Search Job by Category?' value={categorySearch} onChange={(e) => setCategorySearch(e.target.value)}></input>
             </div>
             <div className=''>
               <button className='rounded h-8 w-24 lg:ml-6 font-semibold text-base text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>Search</button>
