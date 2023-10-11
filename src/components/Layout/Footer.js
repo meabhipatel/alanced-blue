@@ -48,7 +48,9 @@ const Footer = () => {
           <Link to='/contact-us' onClick={() => window.scrollTo(0, 0)}>
           <li class="mb-2 hover:text-green-600 hover:underline">Contact us</li>
           </Link>
+          <Link to='/safety-security' onClick={() => window.scrollTo(0, 0)}>
           <li class="mb-2 hover:text-green-600 hover:underline">Safety & Security</li>
+          </Link>
         </ul>
     </div>
     <div class="p-4">

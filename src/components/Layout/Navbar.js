@@ -95,12 +95,12 @@ const Navbar = () => {
   </div>
   </Link>}
   
-    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0">
-    <div class="text-sm lg:flex-grow lg:ml-[45px]">
+    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0 my-2.5">
+    <div class="text-sm lg:flex-grow lg:ml-[45px] lg:mr-12 mt-1.5">
       {loginType=='FREELANCER' ? <>
       <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setFindworkDropdown(true)}>Find Work <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
       {Findworkdropdown && (
-        <div className="absolute right-[54rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+        <div className="absolute right-[47.5rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
             <Link to='/projects' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Find Work</span>
@@ -124,7 +124,7 @@ const Navbar = () => {
       <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setMyJobsDropdown(true)} 
     >My Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
       {MyJobsdropdown && (
-        <div className="absolute right-[46rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+        <div className="absolute right-[39.5rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
             <Link to='/my-jobs' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Jobs</span>
@@ -135,10 +135,10 @@ const Navbar = () => {
             </div>
         </div>
     )} </> : <>
-    <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" onMouseEnter={() => setMyJobsDropdown(true)} 
+    <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setMyJobsDropdown(true)} 
   > Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
     {MyJobsdropdown && (
-      <div className="absolute right-[47rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+      <div className="absolute right-[41rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
           <div className="py-1">
           <Link to='/add/Job-post' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Post A Job</span>
@@ -149,9 +149,10 @@ const Navbar = () => {
           </div>
       </div>
   )} </> }
+  {loginType=='FREELANCER' ? <>
       <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setReportsDropdown(true)}> Reports <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
       {Reportsdropdown && (
-        <div className="absolute right-[39rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+        <div className="absolute right-[31.5rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
             <Link to='/freelancer/my-reports' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Reports</span>
@@ -159,59 +160,56 @@ const Navbar = () => {
                       <Link to='' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Connects History</span>
                       </Link>
-                      {/* <Link to='' className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Transaction History</span>
-                      </Link> */}
+             </div>
+        </div>
+    )}</>:<>
+    <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setReportsDropdown(true)}> Reports <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
+      {Reportsdropdown && (
+        <div className="absolute right-[33rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+            <div className="py-1">
+            <Link to='/freelancer/my-reports' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Reports</span>
+                      </Link>
+                      <Link to='' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
+                        <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Connects History</span>
+                      </Link>
              </div>
         </div>
     )}
+    </>}
       <Link to='/messages' onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]">Messages</span></Link>
     </div>
-<div className="flex flex-wrap items-center space-x-4">
-<section className='flex items-center p-2 bg-white rounded-lg shadow-md'>
-    <div className='flex items-center mr-1 space-x-1'>
-        <img src={search} alt="Search Icon" className="h-3 w-3" />
-        <input className='w-28 lg:w-40 xl:w-56 h-7 text-xs lg:text-sm outline-none' placeholder='Search' />
-    </div>
-    <div className="hidden lg:block border-l h-5 mx-5 border-gray-400"></div>
-    <div className='mr-1'>
-        <select id="countries" className="bg-gray-50 text-[#797979] text-xs font-inter font-normal rounded h-7 cursor-pointer">
-            <option defaultValue>Talent</option>
-            <option>Jobs</option>
-        </select>
-    </div>
-    <button className='rounded h-7 w-7 p-2 text-xs lg:text-sm font-semibold text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>
-        <img src={searchbtn} alt="Search Icon" />
-    </button>
-</section>
-<div className="relative ml-4">
-    <i className="bi bi-bell text-xl"></i>
-    <span className="absolute top-0.5 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 border-2 border-white"></span>
-</div>
-<div className="relative ml-4">
-   {logindata && logindata.images_logo !== "/media/images/blank.png" ? (
+    
+<div className='lg:mr-[100px]'>
+   <div className="flex items-center space-x-12">
+      <div className='relative inline-block pt-1'>
+         <i className="bi bi-bell text-2xl"></i>
+         <span className="absolute top-1.5 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 border-2 border-white"></span>
+      </div>
+      <div className='relative inline-block'>
+      {logindata && logindata.images_logo !== "/media/images/blank.png" ? (
         <img 
             src={"https://aparnawiz91.pythonanywhere.com/" + logindata.images_logo} 
             alt="Profile" 
-            className="h-8 w-8 rounded-full cursor-pointer" 
+            className="h-10 w-10 rounded-full cursor-pointer" 
             onClick={() => setDropdownVisible(!dropdownVisible)}
         />
     ) : (
         <div 
-            className="h-8 w-8 rounded-full cursor-pointer flex items-center justify-center bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white font-bold font-cardo text-xl p-1"
+            className="h-10 w-10 rounded-full cursor-pointer flex items-center justify-center bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white font-bold font-cardo text-xl p-1"
             onClick={() => setDropdownVisible(!dropdownVisible)}
         >
             {displayName && displayName[0].toUpperCase()}
         </div>
     )}
     {dropdownVisible && (
-        <div className="drop absolute right-[-10px] mt-5 w-[13rem] rounded-md shadow-lg bg-white">
+        <div className="drop absolute right-[-10px] mt-5 w-[14rem] rounded-md shadow-lg bg-white">
             <div className="py-1">
                       {logindata && logindata.images_logo !== "/media/images/blank.png" ? (
         <img 
             src={"https://aparnawiz91.pythonanywhere.com/" + logindata.images_logo} 
             alt="Profile" 
-            className="h-20 w-20 rounded-full cursor-pointer mx-auto my-5" 
+            className="h-20 w-20 rounded-full cursor-pointer mx-auto my-5 border border-gray-200 p-0.5" 
             onClick={() => setDropdownVisible(!dropdownVisible)}
         />
     ) : (
@@ -222,7 +220,7 @@ const Navbar = () => {
             {displayName && displayName[0].toUpperCase()}
         </div>
     )}
-                     <h1 className="font-cardo text-2xl text-[#031136] font-normal text-center">{displayName}</h1>
+                     <h1 className="font-cardo text-2xl text-[#031136] font-normal text-center px-2">{displayName}</h1>
                      <h1 className="font-cardo text-lg text-[#031136] font-normal text-center opacity-50 mb-3">{loginType=='FREELANCER'? loginType.toLowerCase(): 'client'}</h1>
                      {loginType=='FREELANCER'? <Link to='/freelancer/edit-profile' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2 hover:bg-gray-100" >
                             <i class="bi bi-person-circle mr-3"></i>
@@ -242,9 +240,9 @@ const Navbar = () => {
             </div>
         </div>
     )}
+      </div>
+   </div>
 </div>
-</div>
-
 
   </div>
   </>

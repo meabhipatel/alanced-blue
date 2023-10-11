@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../../components/Layout/Navbar'
 import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
@@ -13,9 +13,12 @@ import experience from '../../components/images/experience.png'
 import ViewProposalPopup from './HirerAllPopup/ViewProposalPopup'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { IconButton, Typography } from "@material-tailwind/react";
+import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 const ViewAllProposals = () => {
 
+  const [sortCriterion, setSortCriterion] = useState('bestMatch');
     const error = useSelector(state => state.hirer.error);
     const [categorySearch, setCategorySearch] = useState('');
 
@@ -27,15 +30,88 @@ const ViewAllProposals = () => {
     dispatch(GetViewAllBidsAction(id))
   }, [])
 
+  const convertToDateObject = (dateString) => {
+    const [date, time, period] = dateString.split(' ');
+    const [year, month, day] = date.split('-');
+    let [hour, minute] = time.split(':');
+
+    if (period === 'PM' && hour !== '12') {
+        hour = parseInt(hour) + 12;
+    }
+
+    if (period === 'AM' && hour === '12') {
+        hour = '00';
+    }
+
+    const formattedDate = `${year}-${month}-${day}T${hour}:${minute}:00`;
+    return new Date(formattedDate);
+}
+
+
+  const sortBids = (bids) => {
+    if (!bids) return [];
+
+    let sortedBids = [...bids];
+    switch (sortCriterion) {
+        case 'newest':
+            sortedBids.sort((a, b) => convertToDateObject(b.bid_time) - convertToDateObject(a.bid_time));
+            break;
+        case 'oldest':
+            sortedBids.sort((a, b) => convertToDateObject(a.bid_time) - convertToDateObject(b.bid_time));
+            break;
+        case 'highestRate':
+            sortedBids.sort((a, b) => b.bid_amount - a.bid_amount);
+            break;
+        case 'lowestRate':
+            sortedBids.sort((a, b) => a.bid_amount - b.bid_amount);
+            break;
+        default:
+            break;
+    }
+    return sortedBids;
+}
+
+
   const location = useLocation();
   const project = location.state && location.state.project;
   const isOpen = location.state && location.state.isOpen;
 
   const id = project.id
 
-  const filteredData = viewallbids?.filter(bid => 
-    bid.freelancer_category.replace(/_/g, ' ').toLowerCase().includes(categorySearch.toLowerCase())
-) || [];
+const [currentPage, setCurrentPage] = useState(1);
+
+
+useEffect(() => {
+    setCurrentPage(1);
+}, [categorySearch]);
+
+const jobsPerPage = 4;
+const indexOfLastJob = currentPage * jobsPerPage;
+const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+
+const sortedBids = sortBids(viewallbids);
+const filteredData = sortedBids?.filter(bid => 
+  bid.freelancer_category.replace(/_/g, ' ').toLowerCase().includes(categorySearch.toLowerCase())) || [];
+
+
+// const filteredData = viewallbids?.filter(bid => 
+//   bid.freelancer_category.replace(/_/g, ' ').toLowerCase().includes(categorySearch.toLowerCase())
+// ) || [];
+
+const currentJobs = filteredData.slice(indexOfFirstJob, indexOfLastJob);
+const totalPages = Math.ceil((filteredData.length || 0) / jobsPerPage);
+
+const next = () => {
+    window.scrollTo(0, 0);
+    if (currentPage === totalPages) return;
+    setCurrentPage(currentPage + 1);
+};
+
+const prev = () => {
+    window.scrollTo(0, 0);
+    if (currentPage === 1) return;
+    setCurrentPage(currentPage - 1);
+};
 
   const [isViewProposalOpen, setIsViewProposalOpen] = useState(false);
   const [selectedbid, setSelectedbid] = useState(null);
@@ -88,6 +164,8 @@ const handleClick = (event, index) => {
       background: 'linear-gradient(90deg, #00BF58, #E3FF75)'
     };
 
+    
+
   return (
     <>
     <Navbar/>
@@ -133,12 +211,14 @@ const handleClick = (event, index) => {
             <img src={searchbtn} alt="Search Icon" />
         </button>
     </section>
-    <select id="countries" class="bg-gray-50 border border-gray-300 text-[#797979] text-sm font-inter font-normal rounded-lg focus:ring-green-500 focus:border-green-500 block w-[22%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 mr-12">
-        <option selected disabled>Best Match</option>
-        <option value="">Newest Applicants</option>
-        <option value="">Oldest Applicants</option>
-        <option value="">Highest Hourly Rate</option>
-        <option value="">Lowest Hourly Rate</option>
+    <select id="countries" onChange={(e) => {
+        setSortCriterion(e.target.value);
+    }} class="bg-gray-50 border border-gray-300 text-[#797979] text-sm font-inter font-normal rounded-lg focus:ring-green-500 focus:border-green-500 block w-[22%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 mr-12">
+        <option selected disabled value="bestMatch">Best Match</option>
+        <option value="newest">Newest Applicants</option>
+        <option value="oldest">Oldest Applicants</option>
+        <option value="highestRate">Highest Hourly Rate</option>
+        <option value="lowestRate">Lowest Hourly Rate</option>
     </select>
                     </div>
                 )
@@ -154,7 +234,7 @@ const handleClick = (event, index) => {
                 ) : (
                     <>{viewallbids != null ? 
                         <div>
-                        {filteredData && filteredData.map((bid, index) => {
+                        {currentJobs && currentJobs.map((bid, index) => {
                           const words = bid.description.split(' ');
                           const displayWords = expandedProjects[index] || words.length <= 50 ? words : words.slice(0, 50);
                             return(<>
@@ -228,7 +308,44 @@ const handleClick = (event, index) => {
                               {/* {isViewProposalOpen && <ViewProposalPopup closeViewProposal={closeViewProposal} state={{project}} bid={selectedbid}/>} */}
                               </>
                                 )
-                        })}</div> : <div>
+                        })}
+                        {viewallbids?.length > 4 && (
+                    <div className="flex justify-end items-center gap-6 m-4">
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={prev}
+                            disabled={currentPage === 1}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                        
+                        {[...Array(totalPages)].map((_, index) => {
+                            const pageNumber = index + 1;
+                            return (
+                                <span
+                                    key={pageNumber}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    onClick={() => setCurrentPage(pageNumber)}
+                                >
+                                    {pageNumber}
+                                </span>
+                            );
+                        })}
+
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={next}
+                            disabled={currentPage === totalPages}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                    </div>
+                )}
+                        </div> : <div>
                         {[...Array(8)].map((_) => {
                           return (
                         <div>

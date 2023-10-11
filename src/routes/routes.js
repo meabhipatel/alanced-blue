@@ -58,6 +58,9 @@ import ViewFreelancerFullDetailBeforeLogin from "../container/hirer/ViewFreelanc
 import ViewProjectListDetailBeforeLogin from "../container/freelancer/ViewProjectListDetailBeforeLogin";
 import WhyAlanced from "../components/Layout/WhyAlanced";
 import SafetyAndSecurity from "../components/Layout/SafetyAndSecurity";
+import TermsConditions from '../components/Layout/TermsConditions';
+import PrivacyPolicy from '../components/Layout/PrivacyPolicy';
+import Cookies from '../components/Layout/Cookies';
 
   const AppRouter = (props) => {
     
@@ -122,6 +125,9 @@ import SafetyAndSecurity from "../components/Layout/SafetyAndSecurity";
           <Route path="/hirer/profile-edit" element={<HirerSelfProfile/>}></Route>
           <Route path="/why-alanced" element={<WhyAlanced/>}></Route>
           <Route path="/safety-security" element={<SafetyAndSecurity/>}></Route>
+          <Route path="/terms" element={<TermsConditions/>}/>
+          <Route path="/cookies" element={<Cookies/>}/>
+          <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   
