@@ -13,7 +13,7 @@ import heart from '../../components/images/heart.png'
 import verify from '../../components/images/verify.png'
 import location from '../../components/images/location.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link , useLocation } from 'react-router-dom'
 import mybg from '../../components/images/profile_list.png'
 import { GetViewAllFreelancersAction } from '../../redux/Hirer/HirerAction'
 import { Avatar } from '@material-tailwind/react'
@@ -24,9 +24,12 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import Slider from 'rc-slider'
 
 const FindTalent = () => {
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const category = searchParams.get('category');
+    console.log(category,"category")
     const viewallfreelancer = useSelector(state => state.hirer.viewallfreelancer)
     // console.log(";;;;;;;;;;;;;;;;;;;;;;;",viewallfreelancer.length)
-    const [searchTerm, setSearchTerm] = useState('');
     console.log(useSelector(state => state.login.accessToken))
     const dispatch = useDispatch();
    
@@ -36,7 +39,21 @@ const FindTalent = () => {
       // setviewallfreelancer(freelancers)
     }, [])
 
+    // React.useEffect(() => {
+    //     // This useEffect runs when category or viewallfreelancer changes.
+    //     if (category) {
+    //       const filteredData = viewallfreelancer.filter(freelancer => {
+    //         return freelancer.category.toLowerCase() === category.toLowerCase();
+    //       });
+    //       setFilteredFreelancers(filteredData);
+    //     } else {
+    //       setFilteredFreelancers(viewallfreelancer);
+    //     }
+    //   }, [category, viewallfreelancer]);
 
+    const [filteredFreelancers, setFilteredFreelancers] = useState([]);
+    console.log(filteredFreelancers, "filter freelancer");
+      
     const [range, setRange] = useState([1, 1000]);
 
     const handleSliderChange = (newRange) => {
@@ -518,10 +535,16 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
           <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
           <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>{free.Address}</p>
           </div>
-          <div className=" absolute bottom-2 right-6 items-center space-x-2 ml-auto">
+          {/* <div className=" absolute bottom-2 right-6 items-center space-x-2 ml-auto">
         <Link to=''>
             <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
         </Link>
+        </div> */}
+        <div className=' flex flex-row'>
+            <div className=' basis-8/12 absolute bottom-4 items-center font-inter text-green-600 text-[14px] cursor-pointer font-bold hover:underline'><Link to='/login'><p>View more detail</p></Link></div>
+            <div className=' basis-4/12 absolute bottom-2 right-6 items-center space-x-2 ml-auto'><Link to=''>
+            <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
+        </Link></div>
         </div>
       </div>
       

@@ -362,7 +362,7 @@ const chunkedFree = chunkArray(projectsToDisplay);
     <div className="flex items-center">
     <div className='flex items-center mr-1 space-x-1 border p-1 w-[200px] rounded-md'>
         <img src={search} alt="Search Icon" className="h-4 w-4 mr-1 ml-1" />
-        <input className='w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none' placeholder='Search Jobs' value={categorySearch} onChange={(e) => setCategorySearch(e.target.value)} />
+        <input className='w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none' placeholder='Search Jobs by skills' value={categorySearch} onChange={(e) => setCategorySearch(e.target.value)} />
     </div>
     </div>
 </div>
