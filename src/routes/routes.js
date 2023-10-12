@@ -54,13 +54,13 @@ import ContactUs from "../components/Layout/ContactUs";
 import FAQ from "../components/Layout/FAQ";
 import Enterprises from "../container/freelancer/Enterprises";
 import HirerSelfProfile from "../container/hirer/HirerProfile";
-import ViewFreelancerFullDetailBeforeLogin from "../container/hirer/ViewFreelancerFullDetailBeforeLogin";
-import ViewProjectListDetailBeforeLogin from "../container/freelancer/ViewProjectListDetailBeforeLogin";
 import WhyAlanced from "../components/Layout/WhyAlanced";
 import SafetyAndSecurity from "../components/Layout/SafetyAndSecurity";
 import TermsConditions from '../components/Layout/TermsConditions';
 import PrivacyPolicy from '../components/Layout/PrivacyPolicy';
 import Cookies from '../components/Layout/Cookies';
+import ViewMoreProjectDetail from "../container/freelancer/ViewMoreProjectDetail";
+import FreelancerFullDetailAfterLogin from "../container/hirer/FreelancerFullDetailAfterLogin";
 
   const AppRouter = (props) => {
     
@@ -120,14 +120,14 @@ import Cookies from '../components/Layout/Cookies';
           <Route path="/contact-us" element={<ContactUs/>}/>
           <Route path="/FAQ" element={<FAQ/>}/>
           <Route path='/enterprises' element={<Enterprises/>}></Route>
-          <Route path='/view/freelancer/full-detail' element={<ViewFreelancerFullDetailBeforeLogin/>}></Route>
-          <Route path='/view/project/full-detail' element={<ViewProjectListDetailBeforeLogin/>}></Route>
           <Route path="/hirer/profile-edit" element={<HirerSelfProfile/>}></Route>
           <Route path="/why-alanced" element={<WhyAlanced/>}></Route>
           <Route path="/safety-security" element={<SafetyAndSecurity/>}></Route>
           <Route path="/terms" element={<TermsConditions/>}/>
           <Route path="/cookies" element={<Cookies/>}/>
           <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
+          <Route path="/view-more/project-detail" element={<ViewMoreProjectDetail/>}></Route>
+          <Route path="/view-freelancer/full-detail" element={<FreelancerFullDetailAfterLogin/>}></Route>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   

@@ -179,7 +179,7 @@ function ProjectList() {
           <div className='lg:w-[44vw] bg-white p-3 lg:h-14 rounded-2xl lg:flex items-center mt-4 shadow-md'>
             <div className='flex flex-row'>
               <img className='w-5 h-5' src={search}></img>
-              <input className='w-96 font-inter text-base ml-3 outline-none' placeholder='Search Job by Category?' value={categorySearch} onChange={(e) => setCategorySearch(e.target.value)}></input>
+              <input className='w-96 font-inter text-base ml-3 outline-none' placeholder='Search Job by Category' value={categorySearch} onChange={(e) => setCategorySearch(e.target.value)}></input>
             </div>
             <div className=''>
               <button className='rounded h-8 w-24 lg:ml-6 font-semibold text-base text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>Search</button>
@@ -556,7 +556,7 @@ function ProjectList() {
             {currentJobs && <>{currentJobs.map((project,index)=> {
               const words = project.description.split(' ');
               const displayWords = expandedProjects[index] || words.length <= 30 ? words : words.slice(0, 30);
-              const isAlreadyApplied = Array.isArray(AllProposals) && AllProposals.some(all => project.id === all.project_id);
+              // const isAlreadyApplied = Array.isArray(AllProposals) && AllProposals.some(all => project.id === all.project_id);
               return(
                 <div className='flex flex-row'>
               <div className='basis-1/12 mr-3'>
@@ -615,11 +615,12 @@ function ProjectList() {
                 <p className='font-inter text-[#797979] mt-1 text-sm text-right'>Hourly Rate</p>
                 <div className=''>
                   {/* {accessToken ? (
-                    <Link to='/freelancer/send-proposal' state={{ project }} onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
+                    <Link to='/view-more/project-detail' state={{ project }} onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>View Detail</button></Link>
                   ): (
                   <Link to='/login' onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
                 )} */}
-                {accessToken ? (
+                 <Link to='/view-more/project-detail' state={{ project }} onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>View Detail</button></Link>
+                {/* {accessToken ? (
                 isAlreadyApplied ? (
                   <button className='rounded h-12 w-36 text-gray-400 bg-slate-200 cursor-not-allowed mt-3 text-sm font-bold ml-16' disabled>
                     Already Applied
@@ -637,7 +638,7 @@ function ProjectList() {
                     Send Proposal
                   </button>
                 </Link>
-              )}
+              )} */}
                 </div>
               </div>
             </div>

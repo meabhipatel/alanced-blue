@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect} from 'react'
 import Navbar from '../../components/Layout/Navbar'
 import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
@@ -91,19 +91,49 @@ const FindTalent = () => {
     };
   
 
-  const [active, setActive] = React.useState(1);
+//   const [active, setActive] = React.useState(1);
  
-  const next = () => {
-      if (active === Math.ceil(viewallfreelancer.length / 6)) return;
-      window.scrollTo(0, 0)
-      setActive(active + 1);
-  };
+//   const next = () => {
+//       if (active === Math.ceil(viewallfreelancer.length / 6)) return;
+//       window.scrollTo(0, 0)
+//       setActive(active + 1);
+//   };
 
-  const prev = () => {
-      if (active === 1) return;
-      window.scrollTo(0, 0)
-      setActive(active - 1);
-  };
+//   const prev = () => {
+//       if (active === 1) return;
+//       window.scrollTo(0, 0)
+//       setActive(active - 1);
+//   };
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [categorySearch, setCategorySearch] = useState('');
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [categorySearch]);
+
+    const jobsPerPage = 6;
+    const indexOfLastJob = currentPage * jobsPerPage;
+    const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+    
+    const filteredJobs = viewallfreelancer?.filter(project => 
+        project.category.replace(/_/g, ' ').toLowerCase().includes(categorySearch.toLowerCase())
+    ) || [];
+
+    const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
+    const totalPages = Math.ceil((filteredJobs.length || 0) / jobsPerPage);
+
+    const next = () => {
+        window.scrollTo(0, 0);
+        if (currentPage === totalPages) return;
+        setCurrentPage(currentPage + 1);
+    };
+
+    const prev = () => {
+        window.scrollTo(0, 0);
+        if (currentPage === 1) return;
+        setCurrentPage(currentPage - 1);
+    };
   
  // 1. Chunk the Array
  const chunkArray = (array, size) => {
@@ -127,7 +157,7 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
           <div className='lg:w-[44vw] bg-white p-3 lg:h-14 rounded-2xl lg:flex items-center mt-4 shadow-md'>
             <div className='flex flex-row'>
               <img className='w-5 h-5' src={search}></img>
-              <input className='w-96 font-inter text-base ml-3' placeholder='What are you looking for?'></input>
+              <input className='w-96 font-inter text-base ml-3' placeholder='Search by Category' value={categorySearch} onChange={(e) => setCategorySearch(e.target.value)}></input>
             </div>
             <div className=''>
               <button className='rounded h-8 w-24 lg:ml-6 font-semibold text-base text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>Search</button>
@@ -484,7 +514,7 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
       </div> */}
       {viewallfreelancer != null ? 
       <div className='grid grid-cols-2 w-[70%] md:w-full pl-3.5'>
-      {chunkedFree[active - 1] && chunkedFree[active - 1].map((free, index) => {
+      {currentJobs && currentJobs.map((free, index) => {
                 return(<>
                 
       <div className='px-4 w-[26vw] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4'>
@@ -568,42 +598,42 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
   </div>
     }
   <div>
-  <div className="flex justify-end items-center gap-6 mt-7
-   mr-5">
-  <IconButton
-    size="sm"
-    variant="outlined"
-    onClick={prev}
-    disabled={active === 1}
-    style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
-  >
-    <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
-  </IconButton>
+  {viewallfreelancer?.length > 5 && (
+                    <div className="flex justify-end items-center gap-6 m-4">
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={prev}
+                            disabled={currentPage === 1}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                        
+                        {[...Array(totalPages)].map((_, index) => {
+                            const pageNumber = index + 1;
+                            return (
+                                <span
+                                    key={pageNumber}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    onClick={() => setCurrentPage(pageNumber)}
+                                >
+                                    {pageNumber}
+                                </span>
+                            );
+                        })}
 
-  
-  {[...Array(5)].map((_, index) => {
-    const pageNumber = index + 1;
-    return (
-      <span
-        key={pageNumber}
-        className={`px-0 py-1 ${active === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
-        onClick={() => setActive(pageNumber)}
-      >
-        {pageNumber}
-      </span>
-    );
-  })}
-
-  <IconButton
-    size="sm"
-    variant="outlined"
-    onClick={next}
-    disabled={active === 5}
-    style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
-  >
-    <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
-  </IconButton>
-</div>
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={next}
+                            disabled={currentPage === totalPages}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                    </div>
+                )}
   </div>
   </div>
   </div>

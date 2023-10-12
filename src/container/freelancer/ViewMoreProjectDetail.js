@@ -1,25 +1,21 @@
-import React, {useState} from 'react';
+import React,{ useState} from 'react'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'font-awesome/css/font-awesome.min.css';
-import frame from '../../../components/images/Frame.png'
-import money from '../../../components/images/money.png'
-import rating from '../../../components/images/superstart.png'
+import frame from '../../components/images/Frame.png'
+import money from '../../components/images/money.png'
+import rating from '../../components/images/superstart.png'
 import { Link, useLocation } from 'react-router-dom'
-import AddBidAmount from '../AddBidAmount'
-// import { GetFreelancerSelfBidAction } from '../../../redux/Freelancer/FreelancerAction'
+
 import { useDispatch, useSelector } from 'react-redux'
 import axios from'axios'
-// import { toast } from 'react-toastify';
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
-import Navbar from '../../../components/Layout/Navbar';
-import HomeSection4 from '../../../components/Layout/HomeSection4';
-import Footer from '../../../components/Layout/Footer';
+import Navbar from '../../components/Layout/Navbar';
+import Footer from '../../components/Layout/Footer';
+import HomeSection4 from '../../components/Layout/HomeSection4';
 
 
-
-function ViewProjectPopup() {
-  // console.log(project,"project")
-  const location = useLocation();
+const ViewMoreProjectDetail = () => {
+    const location = useLocation();
   const project = location.state && location.state.project;
   // console.log(findproject,"send_praposal")
   const projectData = { project };
@@ -91,24 +87,14 @@ function ViewProjectPopup() {
         return `${years} year ago`;
     }
   }
-
-
-  // if (!isOpen) {
-  //   return null;
-  // }
   return (
     <>
     <Navbar/>
-        {/* <div className="fixed inset-0 bg-black opacity-10"></div> */}
-      {/* Dialog content goes here */}
-        {/* <div className='flex flex-row'>
-            <div className='basis-6/12 cursor-pointer'><i class="bi bi-chevron-left font-bold text-black text-lg"></i></div>
-            
-        </div> */}
-        
-        <div className=' container-sm px-40'>
+    <div className=' container-sm px-40'>
+        {/* {clickable ?  
+        <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><LightbulbOutlinedIcon/><span className='ml-4'>You have already submitted a proposal for this project.</span><br/><span className='text-green-700 font-bold ml-10'><Link to="/view/SelfBidProject" state={{ project }}>View Proposal</Link></span></div>:  '' } */}
         {clickable ?  
-        <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><LightbulbOutlinedIcon/><span className='ml-4'>You have already submitted a proposal for this project.</span><br/><span className='text-green-700 font-bold ml-10'><Link to="/view/SelfBidProject" state={{ project }}>View Proposal</Link></span></div>:  '' }
+        <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><LightbulbOutlinedIcon/><span className='ml-4'>You have already submitted a proposal for this project.</span></div>:  '' }
             <div className=' flex flex-row mt-6'>
                 <div className=' basis-8/12 text-left'>
                     <h1 className='text-xl font-normal font-cardo'>{project.title}</h1>
@@ -179,7 +165,12 @@ function ViewProjectPopup() {
                 </div>
                 <div className=' basis-4/12'>
                 <div className='mt-6 ml-[30%]'>
-                <Link to="/freelancer/add-bid" style={{pointerEvents: clickable ? 'none' : ''}} state={{ projectData }} onClick={() => window.scrollTo(0, 0)}><span class={clickable ? 'px-12 py-[15px] lg:mt-0 bg-slate-200 border rounded border-none text-white font-inter text-base font-normal':'px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal'}>Apply Now</span></Link>
+                {/* <Link to="/freelancer/send-proposal" style={{pointerEvents: clickable ? 'none' : ''}} state={{ projectData }} onClick={() => window.scrollTo(0, 0)}><span class={clickable ? 'px-12 py-[15px] lg:mt-0 bg-slate-200 border rounded border-none text-white font-inter text-base font-normal':'px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal'}>Apply Now</span></Link> */}
+                { accessToken ? (
+                    <Link to="/freelancer/send-proposal" style={{pointerEvents: clickable ? 'none' : ''}} state={{ projectData }} onClick={() => window.scrollTo(0, 0)}><span class={clickable ? 'px-12 py-[15px] lg:mt-0 bg-slate-200 border rounded border-none text-white font-inter text-base font-normal':'px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal'}>Apply Now</span></Link>
+                ):(
+                    <Link to="/login"  onClick={() => window.scrollTo(0, 0)}><span class='px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal'>Apply Now</span></Link>
+                )}
                 </div>
                 <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-8 ml-[30%]">
                 <button class="rounded-sm px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-inter font-bold text-base py-[4px] px-8"><i class="bi bi-suit-heart"></i>  Save Job</p></button>
@@ -201,10 +192,8 @@ function ViewProjectPopup() {
                 </div>
             </div>
         </div>
-      
-    
     </>
-  );
+  )
 }
 
-export default ViewProjectPopup;
+export default ViewMoreProjectDetail

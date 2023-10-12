@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Navbar from '../../components/Layout/Navbar'
 import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
@@ -126,19 +126,49 @@ const HirerAfterLogin = () => {
         
   const { day, formattedDate, greeting } = getCurrentDateAndGreeting();
 
-  const [active, setActive] = React.useState(1);
+//   const [active, setActive] = React.useState(1);
  
-  const next = () => {
-      if (active === Math.ceil(viewallfreelancer.length / 6)) return;
-      window.scrollTo(0, 0)
-      setActive(active + 1);
-  };
+//   const next = () => {
+//       if (active === Math.ceil(viewallfreelancer.length / 6)) return;
+//       window.scrollTo(0, 0)
+//       setActive(active + 1);
+//   };
 
-  const prev = () => {
-      if (active === 1) return;
-      window.scrollTo(0, 0)
-      setActive(active - 1);
-  };
+//   const prev = () => {
+//       if (active === 1) return;
+//       window.scrollTo(0, 0)
+//       setActive(active - 1);
+//   };
+
+const [currentPage, setCurrentPage] = useState(1);
+    const [categorySearch, setCategorySearch] = useState('');
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [categorySearch]);
+
+    const jobsPerPage = 6;
+    const indexOfLastJob = currentPage * jobsPerPage;
+    const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+    
+    const filteredJobs = viewallfreelancer?.filter(project => 
+        project.category.replace(/_/g, ' ').toLowerCase().includes(categorySearch.toLowerCase())
+    ) || [];
+
+    const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
+    const totalPages = Math.ceil((filteredJobs.length || 0) / jobsPerPage);
+
+    const next = () => {
+        window.scrollTo(0, 0);
+        if (currentPage === totalPages) return;
+        setCurrentPage(currentPage + 1);
+    };
+
+    const prev = () => {
+        window.scrollTo(0, 0);
+        if (currentPage === 1) return;
+        setCurrentPage(currentPage - 1);
+    };
   
  // 1. Chunk the Array
  const chunkArray = (array, size) => {
@@ -495,8 +525,7 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
       <div className="flex items-center">
       <div className='flex items-center mr-1 space-x-1 border p-1 w-[200px] rounded-md'>
           <img src={search} alt="Search Icon" className="h-4 w-4 mr-1 ml-1" />
-          <input className='w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none' placeholder='Search Freelancers' value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)} />
+          <input className='w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none' placeholder='Search by Category' value={categorySearch} onChange={(e) => setCategorySearch(e.target.value)} />
       </div>
       </div>
   </div>
@@ -528,7 +557,7 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
       </div>
       {viewallfreelancer != null ? 
       <div className='grid grid-cols-2 w-[70%] md:w-full pl-3.5'>
-      {chunkedFree[active - 1] && chunkedFree[active - 1].map((free, index) => {
+      {currentJobs && currentJobs.map((free, index) => {
                 return(<>
                 
       <div className='px-4 w-[26vw] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4'>
@@ -579,10 +608,16 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
           <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
           <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>{free.Address}</p>
           </div>
-          <div className=" absolute bottom-2 right-6 items-center space-x-2 ml-auto">
+          {/* <div className=" absolute bottom-2 right-6 items-center space-x-2 ml-auto">
         <Link to=''>
             <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
         </Link>
+        </div> */}
+        <div className=' flex flex-row'>
+            <div className=' basis-8/12 absolute bottom-4 items-center font-inter text-green-600 text-[14px] cursor-pointer font-bold hover:underline'><Link to='/view-freelancer/full-detail' state={{ free }} onClick={() => window.scroll(0, 0) }><p>View more detail</p></Link></div>
+            <div className=' basis-4/12 absolute bottom-2 right-6 items-center space-x-2 ml-auto'><Link to=''>
+            <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
+        </Link></div>
         </div>
       </div>
       
@@ -606,42 +641,42 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
   </div>
     }
   <div>
-  <div className="flex justify-end items-center gap-6 mt-7
-   mr-5">
-  <IconButton
-    size="sm"
-    variant="outlined"
-    onClick={prev}
-    disabled={active === 1}
-    style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
-  >
-    <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
-  </IconButton>
+  {viewallfreelancer?.length > 5 && (
+                    <div className="flex justify-end items-center gap-6 m-4">
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={prev}
+                            disabled={currentPage === 1}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                        
+                        {[...Array(totalPages)].map((_, index) => {
+                            const pageNumber = index + 1;
+                            return (
+                                <span
+                                    key={pageNumber}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    onClick={() => setCurrentPage(pageNumber)}
+                                >
+                                    {pageNumber}
+                                </span>
+                            );
+                        })}
 
-  
-  {[...Array(5)].map((_, index) => {
-    const pageNumber = index + 1;
-    return (
-      <span
-        key={pageNumber}
-        className={`px-0 py-1 ${active === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
-        onClick={() => setActive(pageNumber)}
-      >
-        {pageNumber}
-      </span>
-    );
-  })}
-
-  <IconButton
-    size="sm"
-    variant="outlined"
-    onClick={next}
-    disabled={active === 5}
-    style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
-  >
-    <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
-  </IconButton>
-</div>
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={next}
+                            disabled={currentPage === totalPages}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                    </div>
+                )}
   </div>
   </div>
   </div>

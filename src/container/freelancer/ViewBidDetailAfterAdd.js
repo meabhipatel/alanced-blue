@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Navbar from '../../components/Layout/Navbar'
 import Footer from '../../components/Layout/Footer'
 import HomeSection4 from '../../components/Layout/HomeSection4'
@@ -11,6 +11,43 @@ const ViewBidDetailAfterAdd = () => {
     const projectdata = location.state && location.state.projectdetail;
     console.log(addedbid,"added bid")
     console.log(projectdata,"project data")
+
+    const [showFullDescription, setShowFullDescription] = useState(false);
+
+    const toggleDescription = () => {
+        setShowFullDescription(!showFullDescription);
+    };
+
+    const descriptionToShow = showFullDescription
+        ? projectdata.project.description
+        : projectdata.project.description.slice(0, 200);
+
+        function timeAgo(postedTimeStr) {
+            const postedTime = new Date(postedTimeStr);
+            const currentTime = new Date();
+          
+            const deltaInMilliseconds = currentTime - postedTime;
+            const deltaInSeconds = Math.floor(deltaInMilliseconds / 1000);
+            const deltaInMinutes = Math.floor(deltaInSeconds / 60);
+            const deltaInHours = Math.floor(deltaInMinutes / 60);
+            const deltaInDays = Math.floor(deltaInHours / 24);
+          
+            if (deltaInMinutes < 1) {
+                return "just now";
+            } else if (deltaInMinutes < 60) {
+                return `${deltaInMinutes} minute ago`;
+            } else if (deltaInHours < 24) {
+                return `${deltaInHours} hour ago`;
+            } else if (deltaInDays < 30) {
+                return `${deltaInDays} day ago`;
+            } else if (deltaInDays < 365) {
+                const months = Math.floor(deltaInDays / 30);
+                return `${months} month ago`;
+            } else {
+                const years = Math.floor(deltaInDays / 365);
+                return `${years} year ago`;
+            }
+          }
 
     return (
         <>
@@ -29,22 +66,25 @@ const ViewBidDetailAfterAdd = () => {
                     <h1 className=' text-xl font-inter font-medium text-left'>{projectdata.project.title}</h1>
                     <div className=' flex flex-row'>
                     <div className=' basis-4/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-green-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  w-[90%] bg-opacity-[60%]">{projectdata.project.category}</div></div>
-                    <div className=' basis-4/12 mt-5 ml-2'><p className=' text-sm font-medium font-inter text-left opacity-[50%]'>Posted 22 hours ago</p></div>
+                    <div className=' basis-4/12 mt-5 ml-2'><p className=' text-sm font-medium font-inter text-left opacity-[50%]'>Posted {timeAgo(projectdata.project.project_creation_date)}</p></div>
                     </div>
-                    <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>
+                    {/* <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum commodi tenetur veniam exercitationem vitae dolores atque similique culpa tempore reiciendis?
+                    </p> */}
+                    <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>
+                    {descriptionToShow}
                     </p>
-                    {/* {projectData.project.description.length > 200 && (
-                        <p
-                        className='mt-3 text-base font-semibold text-green-600 text-left cursor-pointer'
-                        onClick={toggleDescription}
-                        >
-                        {showFullDescription ? 'less' : 'more'}
-                        </p>
-                    )} */}
+                {projectdata.project.description.length > 200 && (
+                    <p
+                    className='mt-3 text-base font-semibold text-green-600 text-left cursor-pointer'
+                    onClick={toggleDescription}
+                    >
+                    {showFullDescription ? 'less' : 'more'}
+                    </p>
+                )}
                     {/* <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>{projectData.project.description}</p>
                     <p className=' mt-3 text-base font-semibold text-green-600 text-left'>more</p> */}
-                    <p className='mb-5 mt-5 text-base font-semibold text-green-600 text-left'>View job posting</p>
+                    {/* <p className='mb-5 mt-5 text-base font-semibold text-green-600 text-left'>View job posting</p> */}
                     </div>
                     <div className=' basis-1/12'></div>
                     <div className=' basis-3/12 border-l border-[#E7E8F2]'>

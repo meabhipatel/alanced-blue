@@ -160,12 +160,12 @@ const SelfBidProject = () => {
                 <p className='text-[15px] font-medium font-inter text-left mt-5'>You'll Receive</p>
                 <p className='text-[15px] font-medium font-inter text-left opacity-70'>The estimated payment, after service fees.</p>
                 <p className='text-base font-medium font-inter text-left mt-5 opacity-70'>{BidData.bid_amount-(BidData.bid_amount/10)}</p>
-                <div className=' flex flex-row mt-5  mb-5'>
+                {/* <div className=' flex flex-row mt-5  mb-5'>
             <div className=' basis-3/12' ><button className='h-10 w-40 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded'>Change Terms</button></div>
             <div class="p-0.5 mt-5 rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] ml-5">
             <button class="px-2 py-1 bg-[#f8faf9] rounded"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-bold text-sm py-[4px] px-[8px]">Withdraw Proposal</p></button>
             </div>
-            </div>
+            </div> */}
                 </div>
             </div>
             <div className='mt-8  border border-[#E7E8F2] py-8 px-8 rounded-lg'>
