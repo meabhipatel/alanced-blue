@@ -220,14 +220,14 @@ const Navbar = () => {
             {displayName && displayName[0].toUpperCase()}
         </div>
     )}
-                     <h1 className="font-cardo text-2xl text-[#031136] font-normal text-center px-2">{displayName}</h1>
-                     <h1 className="font-cardo text-lg text-[#031136] font-normal text-center opacity-50 mb-3">{loginType=='FREELANCER'? loginType.toLowerCase(): 'client'}</h1>
+                     <h1 className="font-cardo text-[19px] text-[#031136]  text-center px-2">{displayName}</h1>
+                     <h1 className="font-cardo text-lg text-gray-500  text-center  mb-3">{loginType=='FREELANCER'? loginType.toLowerCase(): 'client'}</h1>
                      {loginType=='FREELANCER'? <Link to='/freelancer/edit-profile' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2 hover:bg-gray-100" >
                             <i class="bi bi-person-circle mr-3"></i>
-                        <span className="font-inter text-[16px] text-[#031136]">Profile</span>
+                        <span className="font-cardo text-[16px] text-[#031136]">Profile</span>
                       </Link>:<Link to='/hirer/profile-edit' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2 hover:bg-gray-100" >
                             <i class="bi bi-person-circle mr-3"></i>
-                        <span className="font-inter text-[16px] text-[#031136]">Profile</span>
+                        <span className="font-cardo text-[16px] text-[#031136]">Profile</span>
                       </Link>}
                       <Link to='/' className="flex items-center px-4 py-2 hover:bg-gray-100" onClick={() => {
                           window.scrollTo(0, 0);
@@ -235,7 +235,7 @@ const Navbar = () => {
                       }}
                       >
                           <i class="bi bi-box-arrow-right mr-3"></i>
-                          <span className="font-inter text-[16px] text-[#031136]">Logout</span>
+                          <span className="font-cardo text-[16px] text-[#031136]">Logout</span>
                       </Link>
             </div>
         </div>
