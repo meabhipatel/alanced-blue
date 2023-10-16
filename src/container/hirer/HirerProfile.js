@@ -34,22 +34,6 @@ const HirerSelfProfile = () => {
   const id = freelancerselfprofile && freelancerselfprofile[0].id ? freelancerselfprofile[0].id : '';
 
 
-  const scrollToWorkHistory = () => {
-    const element = document.getElementById('workHistory');
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
-  }
-
-
-//   useEffect(() => {
-//     const hash = window.location.hash;
-//     if (hash) {
-//       const targetElement = document.querySelector(hash);
-//       if (targetElement) {
-//         targetElement.scrollIntoView({ behavior: 'smooth' });
-//       }
-//     }
-//   }, []);
-
   function handleMouseEnter() {
     setIsHovered(true);
 }
@@ -163,7 +147,9 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEditTitleOpen, setIsEditTitleOpen] = useState(false);
+  const [isAccount, setIsAccountOpen] = useState(false);
+  const [isDetails, setIsDetailsOpen] = useState(false);
+  const [isContacts, setIsContactsOpen] = useState(false);
   
   const [isAvailableOffOpen, setIsAvailableOffOpen] = useState(false);
   const [isHrRateOpen, setIsHrRateOpen] = useState(false);
@@ -185,15 +171,6 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
     setIsAvailableOffOpen(false);
   };
 
-  
-
-  const openEditTitle = () => {
-    setIsEditTitleOpen(true);
-  };
-
-  const closeEditTitle = () => {
-    setIsEditTitleOpen(false);
-  };
 
     const handleEditClick = () => {
         setIsModalOpen(true);
@@ -202,6 +179,30 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
     const handleModalClose = () => {
         setIsModalOpen(false);
     };
+
+    const handleEditAccount = () => {
+        setIsAccountOpen(true)
+    }
+
+    const handleAccountClose = () => {
+        setIsAccountOpen(false);
+    }
+
+    const handleEditDetails = () => {
+        setIsDetailsOpen(true)
+    }
+
+    const handleDetailsClose = () => {
+        setIsDetailsOpen(false);
+    }
+
+    const handleEditContacts = () => {
+        setIsContactsOpen(true)
+    }
+
+    const handleContactsClose = () => {
+        setIsContactsOpen(false);
+    }
   
       const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
@@ -210,6 +211,7 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
       const handleImageClick =()=>{
         inputRef.current.click();
       }
+      
 
       const handleImageSave = async () => {
     const formData = new FormData();
@@ -273,7 +275,7 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
                     <div class="absolute bottom-3 right-2 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                 </div>
    </div>
-   <div className='border-b border-gray-200 border-opacity-30 text-left flex flex-col py-4 px-4 md:px-8'>
+   <div className='border-b border-gray-200 border-opacity-30 text-left flex flex-col justify-center items-center py-4 px-4 md:px-8'>
         <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Verifications</h1>
     <p className='font-inter text-[#0A142F] text-[14px] py-1 inline-block mr-1'>ID : <span className='opacity-50 mr-1'>Verified</span><img src={verify} alt="" className='inline-block h-3 w-3 mb-0.5'/></p>
     <p className='font-inter text-[#0A142F] text-[14px] py-1 opacity-50'>{freelancerselfprofile && freelancerselfprofile[0] ? `${freelancerselfprofile[0].first_Name} ${freelancerselfprofile[0].last_Name}` : ''}</p>
@@ -345,13 +347,10 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
    <div className='border-b border-gray-200 border-opacity-30 flex flex-col md:flex-row py-3.5'>
    <div class="w-full md:w-3/4 pt-3 text-left pl-8">
             <div className="flex items-center">
-                {/* <h1 className="font-cardo text-[24px] text-[#031136] font-normal mr-1">{freelancerselfprofile && freelancerselfprofile[0] ? `${freelancerselfprofile[0].first_Name} ${freelancerselfprofile[0].last_Name}` : ''}
-            </h1> */}
-                {/* <img className="h-4 w-4" src={verify} alt="Verification" /> */}
+                
             </div>
             <div className="flex items-center my-1">
-                {/* <img src={location} alt="Location" className="h-[13px] mr-1" /> */}
-                {/* <p className="text-[#797979] text-[14px] font-inter">{freelancerselfprofile && freelancerselfprofile[0].Address ? freelancerselfprofile[0].Address : 'Your Location here'}</p> */}
+                
             </div>
 
             <div className="flex space-x-1 mt-2">
@@ -364,44 +363,15 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
                 Off
             </button>
 
-                <div class="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 mt-1 cursor-pointer" onClick={openAvailableOff}>
-                    <img src={edit} alt="edit" />
-                </div>
-                {/* {isAvailableOffOpen && <AvailableOffPopup isAvailable={isAvailable} setIsAvailable={setIsAvailable} closeAvailableOff={closeAvailableOff} />} */}
+                
             </div>
             <div className="flex items-center mt-3">
-                {/* <img src={jobsuccess} alt="" className="h-[22px] mr-2" /> */}
-                {/* <i class="bi bi-patch-check text-green-600 mr-2"></i> */}
-                {/* <p className="font-inter text-[#797979] text-[13px]">{calculateJobSuccess(reviews)}% Job Success</p> */}
+                
             </div>
         </div>
-        <div class="w-full md:w-1/4 px-auto pt-8">
-            
-        </div>
+        
    </div>
-   {/* <div className='border-b border-gray-200 border-opacity-30 py-4 px-8 text-left'>
-   <h1 className="font-cardo text-[21px] text-[#031136] font-normal">View Profile</h1>
-        <div className='my-3 flex flex-wrap'>
-        {freelancerselfprofile && freelancerselfprofile[0] && freelancerselfprofile[0].skills ? 
-    JSON.parse(freelancerselfprofile[0].skills.replace(/'/g, '"')).map((skill, index) => (
-        <Link key={index} to='' className="flex-grow md:flex-none p-1">
-                <span 
-                    className={`${commonStyle} px-3 my-3 md:px-8 ${selectedButton === skill ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
-                    onClick={() => setSelectedButton(skill)}>
-                    {skill}
-                </span>
-            </Link>
-    )) 
-: null}
-            <Link to=''className="flex-grow md:flex-none p-1">
-                <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'All Work' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
-                    onClick={() => setSelectedButton('All Work')}>
-                    All Work
-                </span>
-            </Link>
-        </div>
-   </div> */}
-   {/* <div className='border-b border-gray-200 border-opacity-30 py-4 px-4 md:px-8 text-left'> */}
+   
    <div className="flex justify-between items-center">
     <div className="flex items-center">
         
@@ -409,45 +379,191 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
     
 </div>
    
-   <div className='border-b border-gray-200 border-opacity-30 text-left py-6 px-4 md:px-8' id='workHistory'>
-   <div className="flex items-center justify-between">
-    {/* <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1 pb-3">Work History ({reviews && reviews ? reviews.length : 0})</h1> */}
+   <div className='border-b flex border-gray-200 border-opacity-30 text-left py-6 px-4 md:px-8' id='workHistory'>
+    <div className='flex flex-col w-fit'>
+    <span className='text-xl text-[#00BF58] font-bold'>Account</span>
+    <div className='flex flex-col mt-5 ml-4'>
+    <span className='text-2xl font-semibold'>Sachin Sharma</span>
+    <span className='text-md text-gray-500 mt-4'>Client</span>
+    <span className='text-lg font-semibold'>Sachin Sharma</span>
+    <span className='text-md text-gray-500 mt-4'>Email</span>
+    <span className='font-semibold'>sachinsharmapeace@gmail.com</span>
+    </div>
     </div>
     
+    <div class="p-1 w-10 h-10 flex justify-center items-center float-right ml-auto bg-white rounded-full border border-gray-200 mt-1 cursor-pointer" onClick={handleEditAccount}>
+                    <img src={edit} alt="edit" />
+                </div>
+    
    </div>
-   <div className='border-b border-gray-200 border-opacity-30 text-left pt-3 px-4 md:px-8 py-8' id='freeselfpro'>
-   <div className="flex items-center justify-between">
-    {/* <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Portfolio ({freelancerproject && freelancerproject ? freelancerproject.length : 0})</h1> */}
-    <div className="flex items-center space-x-2">
-        <Link to='/freelancer/add/portfolio'><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
-            <img src={plus} alt="More" />
-        </div></Link>
-    </div>
-    </div>
-    <div className="flex flex-wrap -mx-2">  
-    {chunkedProjects[active - 1] && chunkedProjects[active - 1].map((pro, index) => (
-        <div className='w-1/3 px-2 cursor-pointer' key={index} onClick={() => openFreeProject(pro)}>  
-            <div className='w-full h-[165px] mt-4 border border-gray-100 overflow-hidden'>
-                <img 
-                    // src={"https://aparnawiz91.pythonanywhere.com/"+pro.images_logo} 
-                    alt="" 
-                    style={{
-                        maxWidth: '100%',
-                        maxHeight: '100%',
-                        objectFit: 'contain',  
-                        width: '100%', 
-                        height: '100%' 
-                    }}
-                />
+   {isAccount && (
+                <div className="fixed z-10 inset-0 overflow-y-auto mt-10">
+                    <div className="fixed inset-0 bg-black opacity-50"></div>
+                    <div className="flex items-center justify-center min-h-screen">
+                        <div className="bg-white rounded-lg w-[90%] md:w-[50%] p-6 relative z-20">
+                            <div className="text-right">
+                                <button onClick={handleAccountClose} className="text-gray-500 hover:text-gray-700">
+                                <i class="bi bi-x-lg"></i>
+                                </button>
+                            </div>
+                            <div className='mx-8'>
+                            <h1 className="font-cardo text-[21px] text-[#031136] font-normal text-left">Edit Account</h1>
+                            <div className="flex flex-col items-center mt-4 mb-2">
+                    <div className='flex gap-5 w-full'>
+                    <div className='flex flex-col w-full'>
+                    <span className='text-left'>First Name</span>
+                    <input type="text" defaultValue={'sachin'} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    </div>
+                    <div className='flex flex-col w-full'>
+                    <span className='text-left'>Last Name</span>
+                    <input type="text" defaultValue={'sharma'} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    </div>
+                    </div>
+                    <div className='flex flex-col w-full'>
+                    <span className='text-left'>Email</span>
+                    <input type="text" defaultValue={'sachinsharmapeace@gmail.com'} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    </div>
+                    <div className="flex justify-start items-center space-x-4 gap-6 mt-3 mr-auto"> 
+            <label className="flex items-center">
+                <input type="radio" name="option" value="available" className="mr-2 cursor-pointer"/>
+                Available Now
+            </label>
+            <label className="flex items-center">
+                <input type="radio" name="option" value="off" className="mr-2 cursor-pointer"/>
+                Off
+            </label>
             </div>
-            {/* <p className='font-inter text-green-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-green-700 underline font-semibold'>{pro.project_title}</p> */}
-        </div>
-    ))}
-    {/* {isFreeProjectOpen && <FreelancerProjectsPopup project={selectedProject} closeFreeProject={closeFreeProject} />} */}
-</div>
+                        </div>
+                        
+                            <div className="mt-8 flex justify-end">
+                            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold">Save</span></Link>
+                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
+                                <Link to=''><button class="px-2 py-1 bg-white rounded-sm" onClick={handleAccountClose}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
+                            </div>     
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+   <div className='border-b flex border-gray-200 border-opacity-30 text-left py-6 px-4 md:px-8' id='workHistory'>
+    <div className='flex flex-col'>
+    <span className='text-xl text-[#00BF58] font-bold'>Company Details</span>
+    <div className='flex flex-col mt-5 ml-4'>
+    <span className='text-lg font-semibold'>Sachin Sharma</span>
+    <span className='text-md text-gray-500 mt-4'>Website</span>
+    <span className='font-semibold'>www.Alanced.com</span>
+    <span className='text-md text-gray-500 mt-4'>Establish</span>
+    <span className='font-semibold'>16/10/2023</span>
+    </div>
+    </div>
+    <div class="p-1 w-10 h-10 flex justify-center items-center float-right ml-auto bg-white rounded-full border border-gray-200 mt-1 cursor-pointer" onClick={handleEditDetails}>
+                    <img src={edit} alt="edit" />
+                </div>
+   <div className="flex items-center justify-between">
+    
+    </div>
+    
    
    </div>
-   
+   {isDetails && (
+                <div className="fixed z-10 inset-0 overflow-y-auto mt-10">
+                    <div className="fixed inset-0 bg-black opacity-50"></div>
+                    <div className="flex items-center justify-center min-h-screen">
+                        <div className="bg-white rounded-lg w-[90%] md:w-[50%] p-6 relative z-20">
+                            <div className="text-right">
+                                <button onClick={handleDetailsClose} className="text-gray-500 hover:text-gray-700">
+                                <i class="bi bi-x-lg"></i>
+                                </button>
+                            </div>
+                            <div className='mx-8'>
+                            <h1 className="font-cardo text-[21px] text-[#031136] font-normal text-left">Edit Company Details</h1>
+                            <div className="flex flex-col items-center mt-4 mb-2">
+                    <div className='flex gap-5 w-full'>
+                    <div className='flex flex-col w-full'>
+                    <span className='text-left'>Company Name</span>
+                    <input type="text" defaultValue={'sachin'} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    </div>
+                    <div className='flex flex-col w-full'>
+                    <span className='text-left'>Establish</span>
+                    <input type="date" defaultValue={'sharma'} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    </div>
+                    </div>
+                    <div className='flex flex-col w-full'>
+                    <span className='text-left'>Website</span>
+                    <input type="text" defaultValue={'www.alanced.com'} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    </div>
+                    
+                        </div>
+                        
+                            <div className="mt-8 flex justify-end">
+                            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold">Save</span></Link>
+                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
+                                <Link to=''><button class="px-2 py-1 bg-white rounded-sm" onClick={handleDetailsClose}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
+                            </div>     
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+   <div className='border-b flex border-gray-200 border-opacity-30 text-left py-6 px-4 md:px-8' id='workHistory'>
+    <div className='flex flex-col'>
+    <span className='text-xl text-[#00BF58] font-bold'>Company Contacts</span>
+    <div className='flex flex-col mt-5 ml-4'>
+    <span className='text-md text-gray-500'>Owner</span>
+    <span className='text-lg font-semibold'>Sachin Sharma</span>
+    <span className='text-md text-gray-500 mt-4'>phone</span>
+    <span className='text-lg font-semibold'>0123456789</span>
+    <span className='text-md text-gray-500 mt-4'>Address</span>
+    <span className='text-lg font-semibold'>India</span>
+    </div>
+    </div>
+    <div class="p-1 w-10 h-10 flex justify-center items-center float-right ml-auto bg-white rounded-full border border-gray-200 mt-1 cursor-pointer" onClick={handleEditContacts}>
+                    <img src={edit} alt="edit" />
+                </div>
+   </div>
+   {isContacts && (
+                <div className="fixed z-10 inset-0 overflow-y-auto mt-10">
+                    <div className="fixed inset-0 bg-black opacity-50"></div>
+                    <div className="flex items-center justify-center min-h-screen">
+                        <div className="bg-white rounded-lg w-[90%] md:w-[50%] p-6 relative z-20">
+                            <div className="text-right">
+                                <button onClick={handleContactsClose} className="text-gray-500 hover:text-gray-700">
+                                <i class="bi bi-x-lg"></i>
+                                </button>
+                            </div>
+                            <div className='mx-8'>
+                            <h1 className="font-cardo text-[21px] text-[#031136] font-normal text-left">Edit Company Contacts</h1>
+                            <div className="flex flex-col items-center mt-4 mb-2">
+                    <div className='flex gap-5 w-full'>
+                    <div className='flex flex-col w-full'>
+                    <span className='text-left'>Owner</span>
+                    <input type="text" defaultValue={'sachin'} disabled='true' className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    </div>
+                    <div className='flex flex-col w-full'>
+                    <span className='text-left'>Phone</span>
+                    <input type="tel" defaultValue={'0123456789'} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    </div>
+                    </div>
+                    <div className='flex flex-col w-full'>
+                    <span className='text-left'>Address</span>
+                    <input type="text" defaultValue={'Bharat'} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    </div>
+            
+                        </div>
+                        
+                            <div className="mt-8 flex justify-end">
+                            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold">Save</span></Link>
+                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
+                                <Link to=''><button class="px-2 py-1 bg-white rounded-sm" onClick={handleContactsClose}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
+                            </div>     
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
    </div>
    </div>
     
