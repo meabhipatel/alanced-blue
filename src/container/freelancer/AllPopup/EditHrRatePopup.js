@@ -1,12 +1,26 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { UpdateFreelancerProfileAction } from "../../../redux/Freelancer/FreelancerAction";
 
 const EditHrRatePopup = ({ closeHrRate }) => {
-  const [userInput, setUserInput] = useState('$8.00');
-  const [hourlyRate, setHourlyRate] = useState(8);
+
+  const accessToken = useSelector(state => state.login.accessToken);
+  const dispatch = useDispatch();
+  const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile);
+  const [userInput, setUserInput] = useState('$0.00');
+  const [hourlyRate, setHourlyRate] = useState(freelancerselfprofile[0]?.hourly_rate || 0);
   const [serviceFee, setServiceFee] = useState(0);
   const [totalAfterFee, setTotalAfterFee] = useState(0);
 
+  useEffect(() => {
+    if (freelancerselfprofile && freelancerselfprofile[0]) {
+      const initialRate = freelancerselfprofile[0]?.hourly_rate || 0;
+      setHourlyRate(initialRate);
+      setUserInput(`$${initialRate.toFixed(2)}`); // updating the userInput with the initial rate
+    }
+  }, [freelancerselfprofile]);
+  
   useEffect(() => {
     const parsedRate = parseFloat(userInput.replace("$", ""));
     if (!isNaN(parsedRate)) {
@@ -19,6 +33,45 @@ const EditHrRatePopup = ({ closeHrRate }) => {
     setServiceFee(fee);
     setTotalAfterFee(hourlyRate - fee);
   }, [hourlyRate]);
+
+  const handleSave = () => {
+    dispatch(UpdateFreelancerProfileAction({ hourly_rate: hourlyRate }, accessToken));
+    closeHrRate();
+  }
+
+  // const accessToken = useSelector(state => state.login.accessToken);  
+
+  // const [hourlyrate, setHourlyrate] = useState(""); 
+  // const dispatch = useDispatch();
+  // const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile)
+  // useEffect(() => {
+  //     if (freelancerselfprofile && freelancerselfprofile[0]) {
+  //         setHourlyRate(freelancerselfprofile[0].hourly_rate);
+  //     }
+  // }, [freelancerselfprofile]);
+
+  // const handleSave = () => {
+  //     dispatch(UpdateFreelancerProfileAction({ hourlyRate },accessToken));
+  //     closeHrRate();
+  // }
+
+  // const [userInput, setUserInput] = useState('');
+  // const [hourlyRate, setHourlyRate] = useState(freelancerselfprofile[0].hourly_rate);
+  // const [serviceFee, setServiceFee] = useState(0);
+  // const [totalAfterFee, setTotalAfterFee] = useState(0);
+
+  // useEffect(() => {
+  //   const parsedRate = parseFloat(userInput.replace("$", ""));
+  //   if (!isNaN(parsedRate)) {
+  //     setHourlyRate(parsedRate);
+  //   }
+  // }, [userInput]);
+
+  // useEffect(() => {
+  //   const fee = (10 / 100) * hourlyRate;
+  //   setServiceFee(fee);
+  //   setTotalAfterFee(hourlyRate - fee);
+  // }, [hourlyRate]);
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto mt-12">
@@ -42,7 +95,7 @@ const EditHrRatePopup = ({ closeHrRate }) => {
               contracts.
             </p>
             <p className="font-cardo text-[18px] text-[#031136] font-normal text-left opacity-50">
-              Your profile Rate: $8.00/hr
+              Your profile Rate: ${freelancerselfprofile && freelancerselfprofile[0] ? freelancerselfprofile[0].hourly_rate : 0}/hr
             </p>
             <div>
               <div className="flex items-center mt-4">
@@ -115,7 +168,7 @@ const EditHrRatePopup = ({ closeHrRate }) => {
               </div>
             </div>
             <div className="mt-8 flex justify-end">
-              <Link to="">
+              <Link to="" onClick={handleSave}>
                 <span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold">
                   Save
                 </span>

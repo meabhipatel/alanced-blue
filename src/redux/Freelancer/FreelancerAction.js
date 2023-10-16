@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom'
-import { AddFreelancer,GetFreelancerSelfProfile,GetViewAllProjectList,UpdateFreelancerProfile, AddBidAmount,GetFreelancerSelfBid, GetFreelancerSelfBidProject} from '../services/Freelancer'
+import { AddFreelancer,GetFreelancerSelfProfile,GetViewAllProjectList,UpdateFreelancerProfile, AddBidAmount,GetFreelancerSelfBid, GetFreelancerSelfBidProject, AddFreelancerEmployment} from '../services/Freelancer'
 import { ADD_NEW_FREELANCER_REQUEST,
 ADD_NEW_FREELANCER_SUCCESS,
 GET_FREELANCER_SELF_PROFILE_REQUEST,
@@ -15,6 +15,8 @@ GET_FREELANCER_SELF_BID_SUCCESS,
 GET_FREELANCER_SELF_BID_PROJECT_REQUEST,
 GET_FREELANCER_SELF_BID_PROJECT_SUCCESS,
 SERVER_ERROR,
+ADD_NEW_FREELANCER_EMPLOYMENT_REQUEST,
+ADD_NEW_FREELANCER_EMPLOYMENT_SUCCESS,
 } from './FreelancerConstant'
 
 
@@ -221,4 +223,25 @@ console.log("data from action",data)
       });
     }
   });
+};
+
+
+export const AddFreelancerEmploymentAction = (data,token) => dispatch => {
+  dispatch({
+      type: ADD_NEW_FREELANCER_EMPLOYMENT_REQUEST,
+      payload: []
+    });
+    AddFreelancerEmployment(data,token).then(res => {
+      if (res.status == 200) {
+        dispatch({
+          type: ADD_NEW_FREELANCER_EMPLOYMENT_SUCCESS,
+          payload: res.data
+        });
+      } else {
+        dispatch({
+          type: SERVER_ERROR,
+          payload: res
+        });
+      }
+    });
 };

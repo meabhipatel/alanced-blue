@@ -118,3 +118,15 @@ export const GetFreelancerSelfBidProject = async (data, token) => {
       return handleError(err);
     });
 };
+
+
+export const AddFreelancerEmployment = async (data,token) =>{
+  setHeadersWithAccessToken(token);
+  return DataService.post(API.Freelancers.Freelancer.AddFreelancerEmployment, data)
+  .then(res => {
+      return res.data;
+  })
+  .catch(err => {
+      return handleError(err);
+  });
+};  
