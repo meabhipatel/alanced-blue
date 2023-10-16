@@ -89,15 +89,15 @@ const [active, setActive] = React.useState(1);
         </div>
         <div className='text-left pl-2 mt-10'>
           <h1 className=' font-cardo text-[20px] fond-semibold'>Experiance level</h1>
-          <p className='font-cardo text-lg fond-semibold text-gray-500'>Entry level</p>
+          <p className='font-cardo text-lg fond-semibold text-gray-500'>{freelancer.Address ? freelancer.experience_level.replace(/_/g, ' '):'NA'}</p>
         </div>
         <div className='text-left pl-2 mt-5 '>
           <h1 className=' font-cardo text-[20px] fond-semibold'>Category</h1>
-          <p className='font-cardo text-lg fond-semibold text-gray-500'>{freelancer.category ? freelancer.category.replace(/_/g, ' '): "NA"}</p>
+          <p className='font-cardo text-lg fond-semibold text-gray-500'>{freelancer.category ? freelancer.category: "NA"}</p>
         </div>
         <div className='text-left pl-2 mt-5 '>
           <h1 className=' font-cardo text-[20px] fond-semibold'>Hourly Rate</h1>
-          <p className='font-cardo text-lg fond-semibold text-gray-500'>35$</p>
+          <p className='font-cardo text-lg fond-semibold text-gray-500'>${freelancer.Address ? freelancer.hourly_rate:0}</p>
         </div>
         <div className='text-left pl-2 mt-5 '>
           <h1 className=' font-cardo text-[20px] fond-semibold'>Educations</h1>
@@ -136,7 +136,7 @@ const [active, setActive] = React.useState(1);
         <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
         <div class="border-gray-600 border-b-2 rounded-lg"></div>
       </div>
-      <p className="text-[#031136] opacity-50 text-[14px] font-inter py-5 text-left pr-8">Freelance writing allows you to work remotely, set your own hours, and choose how much you want to work. For businesses, employing freelance content writers enables you to acquire high-quality content for your website, blog, and social media platforms without the cost of a full-time staff member.</p>
+      <p className="text-[#031136] opacity-50 text-[14px] font-inter py-5 text-left pr-8">{freelancer.Address ? freelancer.about:'NA'}</p>
         </div>
         <div className=' mt-6'>
         <p className='font-cardo text-[22px] fond-semibold text-left'>Skills</p>

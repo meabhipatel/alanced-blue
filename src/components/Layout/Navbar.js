@@ -67,9 +67,11 @@ const Navbar = () => {
         Find Talent
       </span></Link>
       <Link to='/projects' onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Find Work</span></Link>
-     <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
+      <Link to='/why-alanced' onClick={() => window.scrollTo(0, 0)}>
+      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
         Why Alanced
       </span>
+      </Link>
       <Link to='/enterprises' onClick={() => window.scroll(0, 0)}>
       <span class="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]">
         Enterprise
@@ -187,39 +189,39 @@ const Navbar = () => {
          <span className="absolute top-1.5 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 border-2 border-white"></span>
       </div>
       <div className='relative inline-block'>
-      {logindata && logindata.images_logo !== "/media/images/blank.png" ? (
+      {/* {logindata && logindata.images_logo !== "/media/images/blank.png" ? ( */}
         <img 
             src={"https://aparnawiz91.pythonanywhere.com/" + logindata.images_logo} 
             alt="Profile" 
             className="h-10 w-10 rounded-full cursor-pointer" 
             onClick={() => setDropdownVisible(!dropdownVisible)}
         />
-    ) : (
+    {/* ) : (
         <div 
             className="h-10 w-10 rounded-full cursor-pointer flex items-center justify-center bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white font-bold font-cardo text-xl p-1"
             onClick={() => setDropdownVisible(!dropdownVisible)}
         >
             {displayName && displayName[0].toUpperCase()}
         </div>
-    )}
+    )} */}
     {dropdownVisible && (
         <div className="drop absolute right-[-10px] mt-5 w-[14rem] rounded-md shadow-lg bg-white">
             <div className="py-1">
-                      {logindata && logindata.images_logo !== "/media/images/blank.png" ? (
+                      {/* {logindata && logindata.images_logo !== "/media/images/blank.png" ? ( */}
         <img 
             src={"https://aparnawiz91.pythonanywhere.com/" + logindata.images_logo} 
             alt="Profile" 
             className="h-20 w-20 rounded-full cursor-pointer mx-auto my-5 border border-gray-200 p-0.5" 
             onClick={() => setDropdownVisible(!dropdownVisible)}
         />
-    ) : (
+    {/* ) : (
         <div 
             className="h-20 w-20 rounded-full cursor-pointer flex items-center justify-center bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white font-bold font-cardo text-4xl p-1 mx-auto my-5"
             onClick={() => setDropdownVisible(!dropdownVisible)}
         >
             {displayName && displayName[0].toUpperCase()}
         </div>
-    )}
+    )} */}
                      <h1 className="font-cardo text-[19px] text-[#031136]  text-center px-2">{displayName}</h1>
                      <h1 className="font-cardo text-lg text-gray-500  text-center  mb-3">{loginType=='FREELANCER'? loginType.toLowerCase(): 'client'}</h1>
                      {loginType=='FREELANCER'? <Link to='/freelancer/edit-profile' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2 hover:bg-gray-100" >

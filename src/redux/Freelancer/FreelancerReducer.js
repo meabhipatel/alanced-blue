@@ -14,6 +14,8 @@ GET_FREELANCER_SELF_BID_SUCCESS,
 GET_FREELANCER_SELF_BID_PROJECT_REQUEST,
 GET_FREELANCER_SELF_BID_PROJECT_SUCCESS,
 SERVER_ERROR,
+ADD_NEW_FREELANCER_EMPLOYMENT_REQUEST,
+ADD_NEW_FREELANCER_EMPLOYMENT_SUCCESS,
 } from "./FreelancerConstant"
 
 import '../../index.css'
@@ -61,6 +63,11 @@ const FreelancerReducer =(state = initialState, action) => {
         case GET_FREELANCER_SELF_BID_PROJECT_SUCCESS:
             console.log("reducer ======== >",action.payload)
             return { viewselfproject: action.payload[0], loading: false }
+        case ADD_NEW_FREELANCER_EMPLOYMENT_REQUEST:
+            return { loading: true };
+        case ADD_NEW_FREELANCER_EMPLOYMENT_SUCCESS:
+            toast.success("Employment Data Added Successfully");
+            return { loading: false, addemp:true}     
             
         // case GET_VIEW_ALL_SAVEDJOBS_REQUEST:
         //     return { loading: true};

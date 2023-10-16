@@ -1,13 +1,70 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { AddFreelancerEmploymentAction } from '../../../redux/Freelancer/FreelancerAction';
 
 const AddEmploymentPopup = ({ closeAddEmployment }) => {
 
+    const [AddEmployment, setAddEmployment] = useState('');
+    
+
+    const accessToken = useSelector(state => state.login.accessToken);
+    const addemp = useSelector(state => state.freelancer.addemp);
+    const dispatch = useDispatch();
+
+    const AddEmploymentData = () => {
+        const formData = new URLSearchParams();
+        formData.append("Freelancer_Company_Name", AddEmployment.Freelancer_Company_Name);
+        formData.append("Company_Designation", AddEmployment.Company_Designation);
+        formData.append("Company_Joining_date", AddEmployment.Company_Joining_date);
+        formData.append("Company_Leaving_date", AddEmployment.Company_Leaving_date);
+
+
+        const empdata = {
+            "Freelancer_Company_Name": AddEmployment.Freelancer_Company_Name,
+            "Company_Designation":AddEmployment.Company_Designation,
+            "Company_Joining_date":AddEmployment.Company_Joining_date,
+            "Company_Leaving_date":AddEmployment.Company_Leaving_date,
+        }
+      
+        dispatch(AddFreelancerEmploymentAction(empdata, accessToken));
+        closeAddEmployment();
+      };
+
+      const onChange = e => {
+        let value = e.target.value;
+    
+        if(e.target.name === 'Company_Joining_date') {
+            value = formatToDDMMYYYY(value);
+        }
+        if(e.target.name === 'Company_Leaving_date') {
+            value = formatToDDMMYYYY(value);
+        }
+    
+        setAddEmployment(prevEmployment => ({
+            ...prevEmployment,
+            [e.target.name]: value
+        }));
+    };
+
+
     const [isCurrentlyWorking, setIsCurrentlyWorking] = useState(true);
+
+    const formatToYYYYMMDD = (dateStr) => {
+        if(!dateStr) return '';
+        const [day, month, year] = dateStr.split("-");
+        return `${year}-${month}-${day}`;
+    }
+    
+    const formatToDDMMYYYY = (dateStr) => {
+        if(!dateStr) return '';
+        const [year, month, day] = dateStr.split("-");
+        return `${day}-${month}-${year}`;
+    }
 
 
   return (
-    <div className="fixed z-10 inset-0 overflow-y-auto mt-28">
+    <div className="fixed z-10 inset-0 overflow-y-auto mt-14">
     <div className="fixed inset-0 bg-black opacity-50"></div>
     <div className="flex items-center justify-center min-h-screen">
     <div className="bg-white rounded-lg w-[90%] md:w-[61%] p-6 px-8 relative z-20">
@@ -18,70 +75,44 @@ const AddEmploymentPopup = ({ closeAddEmployment }) => {
         </button>
     </div>
     <div className='mt-10'>
-            <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Company</h1>
-            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Ex: Wiz91'/>
-            <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Title</h1>
-            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Python Developer'/>
-            <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Location</h1>
-            <div className="flex justify-between space-x-6"> 
-           <div className="flex-1">
-         <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='City'/>
+            <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Company Name</h1>
+            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Ex: Wiz91' onChange={onChange} name='Freelancer_Company_Name'/>
+            <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Designation</h1>
+            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Python Developer' onChange={onChange} name='Company_Designation'/>
+            <div className="flex items-center justify-between">
+    <div className="flex-1 mr-2">
+        <p className="font-cardo text-[18px] text-[#031136] font-normal text-left opacity-50">From</p>
+        <input 
+            type="date" 
+            className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' 
+            placeholder='Start Date'
+            onChange={onChange}
+            name='Company_Joining_date'
+        />
     </div>
-    <div className="flex-1">
-        <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Country'/>
-    </div>
+    {/* <div className="flex-1 ml-2">
+        <p className="font-cardo text-[18px] text-[#031136] font-normal text-left opacity-50">To</p>
+        <input 
+            type="date" 
+            className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' 
+            placeholder='End Date'
+        />
+    </div> */}
+    <div className="flex-1 ml-2">
+    <p className="font-cardo text-[18px] text-[#031136] font-normal text-left opacity-50">To</p>
+    <input 
+        type="date" 
+        className={`border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 ${isCurrentlyWorking ? 'bg-gray-100 cursor-not-allowed' : ''}`} 
+        placeholder='End Date'
+        onChange={onChange}
+        name='Company_Leaving_date'
+        disabled={isCurrentlyWorking}
+    />
 </div>
-<h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Duration</h1>
-<p className="font-cardo text-[18px] text-[#031136] font-normal text-left opacity-50">From</p>
-<div className="flex justify-between items-center mt-2 mb-6">
-        <select className="border py-2 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 mr-5 flex-1 bg-white opacity-50">
-            <option value="" disabled selected>month</option>
-            <option value="01">January</option>
-            <option value="02">February</option>
-            <option value="03">March</option>
-            <option value="04">April</option>
-            <option value="05">May</option>
-            <option value="06">June</option>
-            <option value="07">July</option>
-            <option value="08">August</option>
-            <option value="09">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-        </select>
-        <select className="border py-2 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 flex-1 bg-white opacity-50">
-            <option value="" disabled selected>year</option>
-            {Array.from({ length: new Date().getFullYear() - 1980 + 1 }, (_, idx) => 1980 + idx).map(year => (
-                <option key={year} value={year}>{year}</option>
-            ))}
-        </select>
-            </div>
-            {!isCurrentlyWorking && (<>
-            <p className="font-cardo text-[18px] text-[#031136] font-normal text-left opacity-50">To</p>
-<div className="flex justify-between items-center mt-2 mb-6">
-        <select className="border py-2 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 mr-5 flex-1 bg-white opacity-50">
-            <option value="" disabled selected>month</option>
-            <option value="01">January</option>
-            <option value="02">February</option>
-            <option value="03">March</option>
-            <option value="04">April</option>
-            <option value="05">May</option>
-            <option value="06">June</option>
-            <option value="07">July</option>
-            <option value="08">August</option>
-            <option value="09">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-        </select>
-        <select className="border py-2 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 flex-1 bg-white opacity-50">
-            <option value="" disabled selected>year</option>
-            {Array.from({ length: new Date().getFullYear() - 1980 + 1 }, (_, idx) => 1980 + idx).map(year => (
-                <option key={year} value={year}>{year}</option>
-            ))}
-        </select>
-            </div>
-            </>)}
+
+</div>
+
+
 <label class="flex items-center font-inter relative cursor-pointer mb-4">
                 <input class="hidden" type="checkbox"  defaultChecked={true}
     onChange={() => setIsCurrentlyWorking(prev => !prev)}  />
@@ -92,10 +123,8 @@ const AddEmploymentPopup = ({ closeAddEmployment }) => {
                      <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
                 <span class="font-normal opacity-50">I Currently Work Here</span>
             </label>
-            <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Description</h1>
-            <textarea name="" id="" cols="30" rows="5" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'></textarea>
             <div className="mt-8 flex justify-end">
-            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" >Add</span></Link>
+            <Link to='' onClick={AddEmploymentData}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" >Add</span></Link>
             <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={closeAddEmployment}>
                 <Link to=''><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
             </div>     

@@ -7,7 +7,7 @@ import axios from 'axios';
 const EditFreelancerProjectsPopup = ({closeEditFreeProject,project}) => {
 
     
-    const id = project.id
+    const id = project.project_id
     const accessToken = useSelector(state => state.login.accessToken);
     const [title, setTitle] = useState(project.project_title || '');
     const [category, setCategory] = useState(project.category || '');
@@ -16,6 +16,8 @@ const EditFreelancerProjectsPopup = ({closeEditFreeProject,project}) => {
     const [skills, setSkills] = useState([]);
     const [currentSkill, setCurrentSkill] = useState('');
     const [error, setError] = useState('');
+
+
 
 
     useEffect(() => {

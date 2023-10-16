@@ -530,7 +530,7 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
         </Link>
         </div> */}
         </div>
-      <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-4'>A passionate Web Developer with over 5 years of experience specializing in front-end and back-end development. Proficient in HTML, CSS, JavaScript, and Python. Experienced with full-stack development and popular frameworks like React and Django. I've successfully completed over 100 projects, ranging from simple landing pages to complex eCommerce platforms. Committed to providing high-quality code and solutions for every project.</p>
+      <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-4'>{free.about}</p>
   {free.skills &&
                     JSON.parse(free.skills.replace(/'/g, '"')).map((skill, skillIndex) => (
                         <Link to={''} key={skillIndex}>

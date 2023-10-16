@@ -2,29 +2,42 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { UpdateFreelancerProfileAction } from '../../../redux/Freelancer/FreelancerAction';
+import CategoryList from '../AllSelectionData/CategoryList';
 
 const EditTitlePopup = ({ closeEditTitle }) => {
   const accessToken = useSelector(state => state.login.accessToken);  
 
-  const [category, setCategory] = useState(""); 
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState(""); 
   const dispatch = useDispatch();
   const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile)
   useEffect(() => {
       if (freelancerselfprofile && freelancerselfprofile[0]) {
           setCategory(freelancerselfprofile[0].category);
+          setDescription(freelancerselfprofile[0].about);
       }
   }, [freelancerselfprofile]);
 
   const handleSave = () => {
-      dispatch(UpdateFreelancerProfileAction({ category },accessToken));
+      dispatch(UpdateFreelancerProfileAction({ category:category,about:description },accessToken));
       closeEditTitle();
   }
 
-  const [categories] = useState([
-    'Web Development',
-    'Web Designing',
-    'Data Science',
-]);
+//   const [categories] = useState([
+//     'Web Development',
+//     'Web Designing',
+//     'Software Development',
+//     'Data Science',
+//     'Logo Designing',
+//     'Graphics Designing',
+//     'Artificial Intelligence',
+//     'Machine Learning',
+//     'UI/UX Designing'
+// ]);
+
+
+const [categories] = useState(CategoryList);
+
 
 const [searchTerm, setSearchTerm] = useState(category || ""); 
 const [isOpen, setIsOpen] = useState(false);
@@ -127,7 +140,7 @@ useEffect(() => {
 </div>
 
                             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left pt-5">About You</h1>
-                          <textarea name="" id="" cols="30" rows="5" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'></textarea> 
+                          <textarea name="" id="" cols="30" rows="5" value={description} onChange={e => setDescription(e.target.value)} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'></textarea> 
                             <div className="mt-8 flex justify-end">
                             <Link to='' onClick={handleSave}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" >Save</span></Link>
                             <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={closeEditTitle}>

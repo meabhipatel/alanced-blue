@@ -43,6 +43,7 @@ import EditEmploymentPopup from './AllPopup/EditEmploymentPopup'
 import TestimonialPopup from './AllPopup/TestimonialPopup'
 import FreelancerProjectsPopup from './AllPopup/FreelancerProjectsPopup'
 import axios from 'axios'
+import EditExperienceLevelPopup from './AllPopup/EditExperienceLevelPopup'
 
 const FreelancerSelfProfile = () => {
 
@@ -51,8 +52,30 @@ const FreelancerSelfProfile = () => {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
   const [reviews, setReviews] = useState([]);
+  const [bid, setBid] = useState([]);
   const [freelancerproject, setfreelancerproject] = useState([]);
+  const [freelanceremployment, setfreelanceremployment] = useState([]);
   const id = freelancerselfprofile && freelancerselfprofile[0].id ? freelancerselfprofile[0].id : '';
+
+  function formatDate(dateStr) {
+    if (!dateStr) return "present";
+
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const dateObj = new Date(dateStr);
+
+    return dateObj.toLocaleDateString(undefined, options);
+}
+
+
+function formatDateToDayMonthYear(dateStr) {
+    if (!dateStr) return "";
+
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const dateObj = new Date(dateStr);
+
+    return dateObj.toLocaleDateString(undefined, options);
+}
+
 
 
   const scrollToWorkHistory = () => {
@@ -116,6 +139,42 @@ useEffect(() => {
             });
     }
 }, [id]); 
+
+
+useEffect(() => {
+    if(id) { 
+        axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/Freelancer/Employment/${id}`)
+            .then(response => {
+                if (response.data.status === 200) {
+                    setfreelanceremployment(response.data.data);
+                } else {
+                    console.log(response.data.message || 'Error fetching Employment data');
+                }
+            })
+            .catch(err => {
+                console.log(err.message);
+            });
+    }
+}, [id]); 
+
+
+useEffect(() => { 
+        axios.get('https://aparnawiz91.pythonanywhere.com/freelance/view/freelancer-self/bid',{
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+            .then(response => {
+                if (response.data.status === 200) {
+                    setBid(response.data.data);
+                } else {
+                    console.log(response.data.message || 'Error fetching bid');
+                }
+            })
+            .catch(err => {
+                console.log(err.message);
+            });
+    }, []); 
   
   const [isAvailable, setIsAvailable] = useState(localStorage.getItem('userAvailability') || 'available');
   const navigate = useNavigate();
@@ -159,6 +218,19 @@ const showLessHandler = () => {
 
 const visibleReviews = reviews.slice(startIdx, startIdx + 4);
 
+const sortedEmployments = [...freelanceremployment].sort((a, b) => new Date(b.Company_Joining_date) - new Date(a.Company_Joining_date));
+
+const showMoreHandlers = () => {
+    setStartIdx(prevIdx => prevIdx + 3);
+}
+
+const showLessHandlers = () => {
+    setStartIdx(0);
+}
+
+const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 3);
+
+
   
   const [selectedButton, setSelectedButton] = useState('All Work');
   const [selectedButtons, setSelectedButtons] = useState('Github');
@@ -166,6 +238,7 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
 
   const [selected, setSelected] = useState('completed');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedEmp, setSelectedEmp] = useState(null);
 
   function calculateJobSuccess(reviews) {
    
@@ -200,8 +273,18 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
   const [isEditEmploymentOpen, setIsEditEmploymentOpen] = useState(false);
   const [isTestimonialOpen, setIsTestimonialOpen] = useState(false);
   const [isFreeProjectOpen, setIsFreeProjectOpen] = useState(false);
+  const [isExperienceLevelOpen, setIsExperienceLevelOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const inputRef = useRef(null)
+
+
+  const openExperienceLevel = () => {
+    setIsExperienceLevelOpen(true);
+  };
+
+  const closeExperienceLevel = () => {
+    setIsExperienceLevelOpen(false);
+  };
 
   const openFreeProject = (project) => {
     setSelectedProject(project);
@@ -222,11 +305,13 @@ const closeFreeProject = () => {
     setIsTestimonialOpen(false);
   };
 
-  const openEditEmployment = () => {
+  const openEditEmployment = (employment) => {
+    setSelectedEmp(employment);
     setIsEditEmploymentOpen(true);
   };
 
   const closeEditEmployment = () => {
+    setSelectedEmp(null);
     setIsEditEmploymentOpen(false);
   };
 
@@ -394,9 +479,19 @@ const closeFreeProject = () => {
                 console.error("Could not copy text: ", err);
             });
     }, [profileLink]);
-    
-  
-     
+   
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const toggleExpansion = () => {
+        setIsExpanded(prevState => !prevState);
+    }
+
+    const maxWords = 50;
+    const aboutText = freelancerselfprofile && freelancerselfprofile[0] ? freelancerselfprofile[0].about : '';
+    const words = aboutText.split(/\s+/).slice(0, maxWords);
+    const truncatedText = words.join(" ") + (words.length >= maxWords && !isExpanded ? "..." : "");
+
+
   return (
    <>
    <Navbar/>
@@ -414,70 +509,63 @@ const closeFreeProject = () => {
                 </div>
    </div>
    <div className='border-b border-gray-200 border-opacity-30 py-4 pl-8 bg-[#FFFFFF] text-left mb-4 md:mb-0'>
-   <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1 mb-3">{freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category.replace(/_/g, ' ') : 'Your Designation'}</h1>
+   <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1 mb-3">{freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category : 'Your Designation'}</h1>
         <div className="grid grid-cols-3 md:grid-cols-3 gap-3">
             <div className="">
-                <h4 className='text-[#031136] font-cardo font-bold text-[23px]'>$30</h4>
+                <h4 className='text-[#031136] font-cardo font-bold text-[23px]'>${freelancerselfprofile && freelancerselfprofile[0] ? freelancerselfprofile[0].hourly_rate : 0}</h4>
                 <p className='text-[#0A142F] font-inter opacity-50 text-[14px]'>Hourly rate</p>
             </div>
             <div className="">
-                <h4 className='text-[#031136] font-cardo font-bold text-[23px]'>6</h4>
+                <h4 className='text-[#031136] font-cardo font-bold text-[23px]'>{bid && bid ? bid.length : 0}</h4>
                 <p className='text-[#0A142F] font-inter opacity-50 text-[14px]'>Proposals</p>
             </div>
             <div className="">
-                <h4 className='text-[#031136] font-cardo font-bold text-[23px]'>33</h4>
+                <h4 className='text-[#031136] font-cardo font-bold text-[23px]'>{reviews && reviews ? reviews.length : 0}</h4>
                 <p className='text-[#0A142F] font-inter opacity-50 text-[14px]'>Reviews</p>
             </div>
         </div>
    </div>
-   {/* <div className='border-b flex flex-col border-gray-200 border-opacity-30 py-4 pl-4 md:pl-8 text-left'>
-   <div>
-        <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1 mb-3">All States</h1>
-    <div className="grid grid-cols-3 gap-3">
-    <div className="">
-        <h4 className='text-[#031136] font-cardo font-bold text-[23px]'>$1K+</h4>
-        <p className='text-[#0A142F] font-inter opacity-50 text-[14px]'>Total Earnings</p>
-    </div>
-    <div className="">
-    <h4 className='text-[#031136] font-cardo font-bold text-[23px]'>6</h4>
-    <p className='text-[#0A142F] font-inter opacity-50 text-[14px]'>Total Jobs</p>
-    </div>
-    <div className="">
-    <h4 className='text-[#031136] font-cardo font-bold text-[23px]'>33</h4>
-    <p className='text-[#0A142F] font-inter opacity-50 text-[14px]'>Total Hours</p>
-    </div>
-    </div>
-        </div>
-   </div> */}
-   {/* <div className='border-b border-gray-200 border-opacity-30 text-left px-4 md:px-8 py-6'>
-   <div className="flex items-center justify-between">
-    <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1"> Hours per week</h1>
+   <div className='border-b border-gray-200 border-opacity-30 text-left flex flex-col py-4 px-4 md:px-8'>
+        <div className="flex items-center justify-between">
+    <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Experience Level</h1>
     <div className="flex items-center space-x-2">
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openHrsperWeek}>
-            <img src={edit} alt="edit" />
-        </div>
-        {isHrsperWeekOpen && <HrsPerWeekPopup closeHrsperWeek={closeHrsperWeek} />}
+    {freelancerselfprofile && freelancerselfprofile[0] && freelancerselfprofile[0].experience_level ? 
+            <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openExperienceLevel}>
+                <img src={edit} alt="edit"/>
+            </div>
+            :
+            <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openExperienceLevel}>
+                <img src={plus} alt="add"/>
+            </div>
+        }
+        {isExperienceLevelOpen && <EditExperienceLevelPopup closeExperienceLevel={closeExperienceLevel} />}
     </div>
     </div>
-    <p className='font-inter text-[#0A142F] text-[14px] py-1'>More than 30 hrs/week</p>
-    <p className='font-inter opacity-50 text-[#0A142F] text-[14px]'>Open to contract to hire</p>
-   </div>  */}
+      <p className='font-inter text-[#0A142F] text-[14px] py-1'>{freelancerselfprofile && freelancerselfprofile[0] ? freelancerselfprofile[0].experience_level.replace(/_/g, ' ') : ''}</p>
+   </div>
    <div className='border-b border-gray-200 border-opacity-30 text-left flex flex-col py-4 px-4 md:px-8'>
         <div className="flex items-center justify-between">
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Languages</h1>
     <div className="flex items-center space-x-2">
-    <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openAddLanguage}>
-            <img src={plus} alt="more" />
-        </div>
-        {isAddLanguageOpen && <AddLanguagePopup closeAddLanguage={closeAddLanguage} />}
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openEditLanguage}>
-            <img src={edit} alt="edit" />
-        </div>
+    {freelancerselfprofile && freelancerselfprofile[0] && freelancerselfprofile[0].Language ? 
+            <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openEditLanguage}>
+                <img src={edit} alt="edit"/>
+            </div>
+            :
+            <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openEditLanguage}>
+                <img src={plus} alt="add"/>
+            </div>
+        }
         {isEditLanguageOpen && <EditLanguagePopup closeEditLanguage={closeEditLanguage} />}
     </div>
     </div>
-    <p className='font-inter text-[#0A142F] text-[14px] py-1'>English : <span className='opacity-50'>Native or Bilingual</span></p>
-    <p className='font-inter text-[#0A142F] text-[14px]'>Hindi : <span className='opacity-50'>Native or Bilingual</span></p>
+    {
+  freelancerselfprofile && freelancerselfprofile[0] && freelancerselfprofile[0].Language ? 
+    JSON.parse(freelancerselfprofile[0].Language.replace(/'/g, '"')).map((language, index) => (
+      <p key={index} className='font-inter text-[#0A142F] text-[14px] py-1'>{language}</p>
+    )) 
+  : null
+}
    </div>
    <div className='border-b border-gray-200 border-opacity-30 text-left flex flex-col py-4 px-4 md:px-8'>
         <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Verifications</h1>
@@ -540,50 +628,6 @@ const closeFreeProject = () => {
                 </div>
             </div>
         </div>
-
-   {/* <div className='border-b border-gray-200 border-opacity-30 text-left flex flex-col py-4 px-4 md:px-8'>
-   <div class="">
-        <div className="flex items-center justify-between">
-    <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Education</h1>
-    <div className="flex items-center space-x-2">
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openAddEducation}>
-            <img src={plus} alt="more" />
-        </div>
-        {isAddEducationOpen && <AddEducationPopup closeAddEducation={closeAddEducation}/>}
-    </div>
-    </div> 
-    <div className="flex items-center justify-between mt-5">
-    <p className='font-inter text-[#0A142F] text-[14px] pt-1'>{freelancerselfprofile && freelancerselfprofile[0] ? freelancerselfprofile[0].qualification : ''}</p>
-    <div className="flex items-center space-x-2">
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openEditEducation}>
-            <img src={edit} alt="more" />
-        </div>
-        {isEditEducationOpen && 
-    <EditEducationPopup 
-        qualification={freelancerselfprofile && freelancerselfprofile[0] ? freelancerselfprofile[0].qualification : ''}
-        closeEditEducation={closeEditEducation}
-    />
-}
-        {isAddEducationOpen && <AddEducationPopup closeAddEducation={closeAddEducation}/>}
-    </div>
-    </div>  
-    <div class="border-b opacity-50 my-5"></div>
-    <div className='my-3 flex flex-wrap'>
-        <Link to=''  className="flex-grow md:flex-none p-1">
-                <span className={`${commonStyle} px-3 md:px-6 ${selectedButtons === 'Github' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-1`}
-                    onClick={() => setSelectedButtons('Github')}>
-                    Github
-                </span>
-            </Link>
-            <Link to='' className="flex-grow md:flex-none p-1">
-                <span className={`${commonStyle} px-3 md:px-6 ${selectedButtons === 'StackOverflow' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
-                    onClick={() => setSelectedButtons('StackOverflow')}>
-                    StackOverflow
-                </span>
-            </Link>
-        </div>
-        </div>
-   </div> */}
    </div>
    {isModalOpen && (
                 <div className="fixed z-10 inset-0 overflow-y-auto mt-10">
@@ -736,7 +780,7 @@ const closeFreeProject = () => {
         {isEditTitleOpen && <EditTitlePopup closeEditTitle={closeEditTitle} />}
     </div> */}
     <div className="flex items-center">
-        <h1 className="font-cardo text-[20px] text-[#031136] font-bold mr-2">$8.00/Hr</h1>
+        <h1 className="font-cardo text-[20px] text-[#031136] font-bold mr-2">${freelancerselfprofile && freelancerselfprofile[0] ? freelancerselfprofile[0].hourly_rate : 0}/Hr</h1>
         <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 mr-2 cursor-pointer" onClick={openHrRate}>
             <img src={edit} alt="edit" className="align-middle" />
         </div>
@@ -801,8 +845,16 @@ const closeFreeProject = () => {
     </div>
 </div>
    <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-2'>Specializes in {freelancerselfprofile && freelancerselfprofile[0].category ? freelancerselfprofile[0].category.replace(/_/g, ' ') : 'Your Designation'}</p>
-   <p className='font-inter opacity-50 text-[#0A142F] text-[14px]'>I've been a graphic designer for more than 6+ years, assisting organizations and people to successfully market themselves. I have worked as a freelancer for both profit and nonprofit organizations. All facets of design, from letterhead, newsletters, and invitations to huge graphics and website banners, as well as website maintenance, are under my area of expertise....</p> 
-   <h1 className="font-cardo text-[18px] text-[#031136] font-normal py-2 cursor-pointer">See More</h1>
+   <p className='font-inter opacity-50 text-[#0A142F] text-[14px]'>
+            {isExpanded ? aboutText : truncatedText}
+        </p>
+        {words.length >= maxWords && (
+            <h1 onClick={toggleExpansion} className="font-cardo text-[18px] text-[#031136] font-normal py-2 cursor-pointer">
+                {isExpanded ? 'See Less' : 'See More'}
+            </h1>
+        )}
+   {/* <p className='font-inter opacity-50 text-[#0A142F] text-[14px]'>{freelancerselfprofile && freelancerselfprofile[0] ? freelancerselfprofile[0].about : ''}</p> 
+   <h1 className="font-cardo text-[18px] text-[#031136] font-normal py-2 cursor-pointer">See More</h1> */}
    </div>
    <div className='border-b border-gray-200 border-opacity-30 text-left py-6 px-4 md:px-8' id='workHistory'>
    <div className="flex items-center justify-between">
@@ -811,7 +863,7 @@ const closeFreeProject = () => {
     {visibleReviews.map((review, index) => (<>
     <div key={index}>
         <div className="flex justify-between items-center">
-        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-1'>Banner designer for Dental Clinic</p>
+        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-1'>{review.Project_Name}</p>
         <div className="flex items-center space-x-2">
         <StarRating rating={review.rating} />
             {/* <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 inline-block">
@@ -819,14 +871,14 @@ const closeFreeProject = () => {
             </div> */}
         </div>
     </div>
-        <p className='font-inter opacity-50 text-[#0A142F] text-[12px]'>Dec 26, 2022 - Dec 27, 2022</p>
+        <p className='font-inter opacity-50 text-[#0A142F] text-[12px]'>{formatDateToDayMonthYear(review.reviews_created_date)}</p>
         <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-3'>{review.review}</p>
         <div class="grid grid-cols-3 gap-4 my-6">
         <div class="">
-        <p className='font-cardo text-[#031136] text-[16px] font-bold'>$30.00</p>
+        <p className='font-cardo text-[#031136] text-[16px] font-bold'>${review.project_Rate == 'Hourly' ? review.project_Min_Hourly_Rate+"/hr" : review.project_Budget}</p>
         </div>
         <div class="">
-        <p className='font-cardo text-[#031136] text-[16px] font-bold'>Fixed Price</p>
+        <p className='font-cardo text-[#031136] text-[16px] font-bold'>{review.project_Rate}</p>
         </div>
         <div class=""></div>
     </div>   
@@ -959,21 +1011,33 @@ const closeFreeProject = () => {
     </div>
     </div>
     <div class="border-b opacity-50 my-3"></div>
+    {visibleEmp.map((emp, index) => (<>
+    <div key={index}>
     <div className="flex items-center justify-between">
-    <h1 className="font-cardo text-[18px] text-[#031136] font-normal mr-1">Graphic Designer | Wiz91 Technologies</h1>
+    <h1 className="font-cardo text-[18px] text-[#031136] font-normal mr-1">{emp.Company_Designation}  |  {emp.Freelancer_Company_Name}</h1>
     <div className="flex items-center space-x-2">
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={openEditEmployment}>
+        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={()=>openEditEmployment(emp)}>
             <img src={edit} alt="edit" />
         </div>
-        {isEditEmploymentOpen && <EditEmploymentPopup closeEditEmployment={closeEditEmployment} />}
+        {isEditEmploymentOpen && <EditEmploymentPopup employment={selectedEmp} closeEditEmployment={closeEditEmployment} />}
         {/* <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={del} alt="delet" />
         </div> */}
     </div>
     </div>
-    <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>January 2021 - Present</p>
+    <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>
+    {formatDate(emp.Company_Joining_date)} - {formatDate(emp.Company_Leaving_date)}
+</p>
     <div class="border-b opacity-50 my-3"></div>
-    <h1 className="font-cardo text-[20px] text-[#031136] font-normal mx-auto cursor-pointer">Show More</h1>
+    </div>
+    </>       
+     ))}
+     {freelanceremployment.length > 3 && (
+  startIdx + 3 < freelanceremployment.length ? 
+    <h1 className="font-cardo text-[20px] text-[#031136] font-normal mx-auto cursor-pointer" onClick={showMoreHandlers}>Show More</h1> :
+    <h1 className="font-cardo text-[20px] text-[#031136] font-normal mx-auto cursor-pointer" onClick={showLessHandlers}>Show Less</h1>
+)}
+    {/* <h1 className="font-cardo text-[20px] text-[#031136] font-normal mx-auto cursor-pointer">Show More</h1> */}
     </div>
     </div>
    <HomeSection4/>
