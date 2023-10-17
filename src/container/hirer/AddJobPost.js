@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Navbar from '../../components/Layout/Navbar'
 import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
@@ -6,6 +6,8 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { AddProjectAction } from '../../redux/Hirer/HirerAction'
+import CategoryList from '../freelancer/AllSelectionData/CategoryList'
+import SkillsList from '../freelancer/AllSelectionData/SkillsList'
 
 const AddJobPost = () => {
 
@@ -13,60 +15,112 @@ const AddJobPost = () => {
     
 
     const accessToken = useSelector(state => state.login.accessToken);
-    const addproject = useSelector(state => state.hirer.addproject);
     const dispatch = useDispatch();
 
     const [skills, setSkills] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('');
+
+    const [selectedOption, setSelectedOption] = useState('hourly');
+
+    const selectOptionHandler = (option) => {
+        setSelectedOption(option);
+    
+        if (option === 'hourly') {
+            setAddProject(prev => ({ 
+                ...prev, 
+                rate: "Hourly", 
+                fixed_budget: null, 
+                min_hourly_rate: '', 
+                max_hourly_rate: '' 
+            }));
+        } else if (option === 'fixed') {
+            setAddProject(prev => ({ 
+                ...prev, 
+                rate: "Fixed", 
+                fixed_budget: '', 
+                min_hourly_rate: null, 
+                max_hourly_rate: null 
+            }));
+        }
+    };
+    
+
 
     const AddProjects = () => {
-    const formData = new URLSearchParams();
-        formData.append("title",addProject.title);
-        formData.append("description",addProject.description);
-        formData.append("deadline",addProject.deadline);
-        formData.append("skills_required",addProject.skills_required);
-        formData.append("category",addProject.category);
-        formData.append("budget",addProject.budget);
 
+
+    const projectData = { ...addProject };
+
+    // If rate is not set, default it to "Hourly"
+    if (!projectData.rate) {
+        projectData.rate = "Hourly";
+    }    
+        
+    const formData = new URLSearchParams();
+        formData.append("title",projectData.title);
+        formData.append("description",projectData.description);
+        formData.append("deadline",projectData.deadline);
+        formData.append("skills_required",projectData.skills_required);
+        formData.append("category",projectData.category);
+        formData.append("rate",projectData.rate);
+        formData.append("fixed_budget",projectData.fixed_budget);
+        formData.append("min_hourly_rate",projectData.min_hourly_rate);
+        formData.append("max_hourly_rate",projectData.max_hourly_rate);
+        formData.append("experience_level",projectData.experience_level);
 
     const x = {
-        "title": addProject.title,
-        "description":addProject.description,
-        "deadline":addProject.deadline,
-        "skills_required":addProject.skills_required,
-        "category":addProject.category,
-        "budget":addProject.budget
+        "title": projectData.title,
+        "description":projectData.description,
+        "deadline":projectData.deadline,
+        "skills_required":skills,
+        "category": selectedCategory, 
+        "rate":projectData.rate,
+        "fixed_budget":projectData.fixed_budget,
+        "min_hourly_rate":projectData.min_hourly_rate,
+        "max_hourly_rate":projectData.max_hourly_rate,
+        "experience_level":projectData.experience_level,
     }    
         
 
         dispatch(AddProjectAction(x,accessToken));
     };
 
-    // const onChange = e =>{
-    //     setAddProject({
-    //         ...addProject,[e.target.name]: e.target.value
-    //     });
-    // }
+   
 
-    const [selectedOption, setSelectedOption] = useState('hourly');
+    
 
-    // const [skills, setSkills] = useState(["JavaScript", "React", "Node.js", "Python"]);
+
     const [currentSkill, setCurrentSkill] = useState('');
     const [error, setError] = useState('');
   
-    // const addSkill = () => {
-    //   if (currentSkill.trim() && skills.length < 15) {
-    //     setSkills(prevSkills => [...prevSkills, currentSkill.trim()]);
-    //     setCurrentSkill('');
-    //     setError('');
-    //   } else if (skills.length >= 15) {
-    //     setError('You can add a maximum of 15 skills.');
-    //   }
-    // };
   
-    // const removeSkill = (index) => {
-    //   setSkills(prevSkills => prevSkills.filter((_, idx) => idx !== index));
-    //   setError('');
-    // };
+    const [categories] = useState(CategoryList);
+
+
+const [searchTerm, setSearchTerm] = useState(""); 
+const [isOpen, setIsOpen] = useState(false);
+const wrapperRef = useRef(null);
+
+const filteredCategories = categories.filter(
+    category => category.toLowerCase().includes(searchTerm.toLowerCase())
+);
+
+
+const handleClickOutside = (event) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setIsOpen(false);
+    }
+};
+
+useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+    };
+}, []);
+
+
+
 
     const [isValid, setIsValid] = useState(false);
 
@@ -84,12 +138,7 @@ const AddJobPost = () => {
         'Deadline'
     ];
 
-    // const onChange = e => {
-    //     setAddProject(prevProject => ({
-    //         ...prevProject,
-    //         [e.target.name]: e.target.value
-    //     }));
-    // };
+    
 
     const onChange = e => {
         let value = e.target.value;
@@ -106,23 +155,7 @@ const AddJobPost = () => {
     };
     
     
-    const addSkill = () => {
-        if (currentSkill.trim() && skills.length < 15) {
-            setSkills(prevSkills => [...prevSkills, currentSkill.trim()]);
-    
-            setAddProject(prevProject => ({
-                ...prevProject,
-                skills_required: prevProject.skills_required 
-                    ? [...prevProject.skills_required, currentSkill.trim()]
-                    : [currentSkill.trim()]
-            }));
-    
-            setCurrentSkill('');
-            setError('');
-        } else if (skills.length >= 15) {
-            setError('You can add a maximum of 15 skills.');
-        }
-    };
+   
     
     const removeSkill = (index) => {
         const newSkills = skills.filter((_, idx) => idx !== index);
@@ -136,10 +169,34 @@ const AddJobPost = () => {
     };
 
 
+    const allSkills = SkillsList;
+
+const [searchTermSkill, setSearchTermSkill] = useState(''); 
+const [isOpenSkill, setIsOpenSkill] = useState(false);
+const wrapperRefSkill = useRef(null);
+
+const filteredSkills = allSkills.filter(
+    skill => skill.toLowerCase().includes(searchTermSkill.toLowerCase()) && !skills.includes(skill)
+);
+
+const handleClickOutsideSkill = (event) => {
+    if (wrapperRefSkill.current && !wrapperRefSkill.current.contains(event.target)) {
+        setIsOpenSkill(false);
+    }
+};
+
+useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutsideSkill);
+    return () => {
+        document.removeEventListener('mousedown', handleClickOutsideSkill);
+    };
+}, []);
+
+
     useEffect(() => {
         switch (step) {
             case 1:
-                if (addProject.title && addProject.category) {
+                if (addProject.title && selectedCategory) {
                     setIsValid(true);
                 } else {
                     setIsValid(false);
@@ -153,21 +210,21 @@ const AddJobPost = () => {
                 }
                 break;
             case 3:
-                if (addProject.skills_required && addProject.skills_required.length > 0) {
+                if (skills.length > 0) {
                     setIsValid(true);
                 } else {
                     setIsValid(false);
                 }
                 break;
             case 4:
-                if (addProject.budget) {
+                if (addProject.fixed_budget || (addProject.min_hourly_rate && addProject.max_hourly_rate)) {
                     setIsValid(true);
                 } else {
                     setIsValid(false);
                 }
                 break;
             case 5:
-                if (addProject.deadline) {
+                if (addProject.deadline && addProject.experience_level) {
                     setIsValid(true);
                 } else {
                     setIsValid(false);
@@ -177,7 +234,7 @@ const AddJobPost = () => {
                 setIsValid(false);
                 break;
         }
-    }, [step, addProject]);
+    }, [step, addProject,selectedCategory,skills]);
     
     const formatToYYYYMMDD = (dateStr) => {
         if(!dateStr) return '';
@@ -190,10 +247,62 @@ const AddJobPost = () => {
         const [year, month, day] = dateStr.split("-");
         return `${day}-${month}-${year}`;
     }
+
+
     
     
   return (
     <>
+     <style>
+    {`
+    .catdropdown-list {
+        border: 1px solid #ccc;
+        max-height: 200px;
+        overflow-y: auto;
+        position: absolute;
+        width: 38%;
+        z-index: 1000;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background-color: #fff;
+    }
+    
+    .catdropdown-list li {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .catdropdown-list li:hover {
+        background-color: #f7f7f7;
+    }
+    `}
+    {`
+    .skilldropdown-list {
+        border: 1px solid #ccc;
+        max-height: 200px;
+        overflow-y: auto;
+        position: absolute;
+        width: 100%;
+        z-index: 1000;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background-color: #fff;
+        margin-top:10px;
+    }
+    
+    .skilldropdown-list li {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .skilldropdown-list li:hover {
+        background-color: #f7f7f7;
+    }
+    `}
+</style>
+
     <Navbar/>
     <div className='mt-2 mx-[9%]'>
     <h1 className="font-cardo text-[26px] text-[#031136] text-left font-normal p-3">Add Job Post</h1>
@@ -218,22 +327,43 @@ const AddJobPost = () => {
         placeholder="Add Job title" 
     />
     <label className="block text-xl mt-3 font-cardo" htmlFor="jobCategory">Job Category</label>
+    <div ref={wrapperRef}>
     <input 
-        type="text" 
-        name="category"
-        onChange={onChange}
-        value={addProject.category || ''}
-        className='border my-2 py-2 px-3 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' 
-    />
-    {/* <select 
-        value={addProject.category}
-        onChange={onChange}
-        className="border mt-2 py-2 px-3 bg-white rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
-    >
-        <option>Web_development</option>
-        {/* <option value="development">Development</option>
-        <option value="marketing">Marketing</option> *
-    </select> */}
+    type="text" 
+    value={searchTerm || ''} 
+    onClick={() => setIsOpen(!isOpen)} 
+    onChange={e => {
+        setSearchTerm(e.target.value);
+        setIsOpen(true);
+    }} 
+    className='border my-2 py-2 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'
+    placeholder="Select Category" 
+/>
+
+    {isOpen && (
+    <ul className="catdropdown-list">
+        {filteredCategories.length > 0 ? (
+            filteredCategories.map((cat, index) => (
+                <li 
+                key={index} 
+                onClick={() => {
+                    setSelectedCategory(cat);
+                    setSearchTerm(cat);
+                    setIsOpen(false);
+                }}
+            >
+                {cat}
+            </li>
+            
+            ))
+        ) : (
+            <li>No results found</li>
+        )}
+    </ul>
+)}
+
+</div>
+  
 </div>
     </div>
 )}
@@ -266,23 +396,39 @@ const AddJobPost = () => {
             </button>
         </div>
     ))}
-    <div className="flex items-center relative w-full">
+     <div ref={wrapperRefSkill} className="relative w-full">
         <input 
             type="text" 
-            value={currentSkill} 
-            name="skills_required"
-            onChange={(e) => setCurrentSkill(e.target.value)}
-            placeholder="Enter Skills here"
-            className="outline-none w-full"
+            value={searchTermSkill} 
+            onClick={() => setIsOpenSkill(!isOpenSkill)} 
+            onChange={e => setSearchTermSkill(e.target.value)} 
+            className='outline-none w-full'
+            placeholder="Search & Select Skills"
         />
-        <span id="hiddenText" style={{visibility: 'hidden', whiteSpace: 'pre', position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)'}}>{currentSkill}</span>
-        <button 
-            onClick={addSkill} 
-            style={{position: 'absolute', left: `${document.getElementById("hiddenText")?.offsetWidth || 0}px`, top: '47%', transform: 'translateY(-50%)'}}
-            className={`ml-4 mt-1 pb-0.5 text-sm bg-lime-500 text-white rounded-full w-4 h-4 flex justify-center items-center ${currentSkill.trim() ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
-        >
-            +
-        </button>
+        {isOpenSkill && (
+            <ul className="skilldropdown-list w-full">
+                {filteredSkills.length > 0 ? (
+                  filteredSkills.map((skill, index) => (
+                    <li 
+                        key={index} 
+                        onClick={() => {
+                            if (skills.length < 15) {
+                                setSkills(prev => [...prev, skill]);
+                                setSearchTermSkill('');
+                                setIsOpenSkill(false);
+                            } else {
+                                setError('You can add a maximum of 15 skills.');
+                            }
+                        }}
+                    >
+                        {skill}
+                    </li>
+                ))
+                ) : (
+                    <li>No results found</li>
+                )}
+            </ul>
+        )}
     </div>
 </div>
 {error && <p className="text-red-500 mt-2">{error}</p>}
@@ -298,15 +444,17 @@ const AddJobPost = () => {
     <div className="flex-1">
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full mb-4">
             <div 
-                className={`flex sm:block items-center w-full sm:flex-1 p-4 border ${selectedOption === 'hourly' ? 'border-lime-300' : ''} hover:border-lime-300 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
-                onClick={() => setSelectedOption('hourly')}
+                className={`flex sm:block items-center w-full sm:flex-1 p-4 border ${selectedOption === 'hourly' ? 'border-green-600' : ''} hover:border-green-600 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
+                // onClick={() => setSelectedOption('hourly')}
+                onClick={() => selectOptionHandler('hourly')}
             >
                 <i className="bi bi-alarm text-3xl sm:-mt-3 mr-4 sm:mr-0 text-green-600"></i>
                 <h5 className='text-left font-cardo text-2xl lg:pt-3'>Hourly Rate</h5>
             </div>
             <div 
-                className={`flex sm:block items-center w-full sm:flex-1 p-4 border ${selectedOption === 'fixed' ? 'border-lime-300' : ''} hover:border-lime-300 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
-                onClick={() => setSelectedOption('fixed')}
+                className={`flex sm:block items-center w-full sm:flex-1 p-4 border ${selectedOption === 'fixed' ? 'border-green-600' : ''} hover:border-green-600 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
+                // onClick={() => setSelectedOption('fixed')}
+                onClick={() => selectOptionHandler('fixed')}
             >
                 <i className="bi bi-tag-fill sm:-mt-3 mr-4 sm:mr-0 text-3xl text-green-600"></i>
                 <h5 className='text-left font-cardo text-2xl lg:pt-3'>Fixed Budget</h5>
@@ -320,14 +468,14 @@ const AddJobPost = () => {
                         <div className="flex flex-col">
                             <label className="block text-xl mt-3 font-cardo" htmlFor="fromInput">From</label>
                             <div className="flex items-center">
-                                <input id="fromInput" type="text" placeholder="" className="flex-1 w-36 mr-1 p-2 border my-1 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600" />
+                                <input id="fromInput" type="text" placeholder="" className="flex-1 w-36 mr-1 p-2 border my-1 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"  onChange={onChange} name="min_hourly_rate" value={addProject.min_hourly_rate || ''}/>
                                 <span>/hr</span>
                             </div>
                         </div>
                         <div className="flex flex-col">
                             <label className="block text-xl mt-3 font-cardo" htmlFor="toInput">To</label>
                             <div className="flex items-center">
-                                <input id="toInput" type="text" placeholder="" className="flex-1 w-36 mr-1 p-2 border my-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600" />
+                                <input id="toInput" type="text" placeholder="" className="flex-1 w-36 mr-1 p-2 border my-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"  onChange={onChange} name="max_hourly_rate" value={addProject.max_hourly_rate || ''}/>
                                 <span>/hr</span>
                             </div>
                         </div>
@@ -339,7 +487,7 @@ const AddJobPost = () => {
             {selectedOption === 'fixed' && (
                 <div>
                     <label className="block text-xl mt-3 font-cardo" htmlFor="maxBudgetInput">Maximum Budget</label> 
-                    <input id="maxBudgetInput" type="text" className='border my-2 p-2 rounded-md w-52 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='' onChange={onChange} name="budget" value={addProject.budget || ''}/>
+                    <input id="maxBudgetInput" type="text" className='border my-2 p-2 rounded-md w-52 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='' onChange={onChange} name="fixed_budget" value={addProject.fixed_budget || ''}/>
                     <p className="text-lg opacity-50 font-cardo font-medium py-2">Set your Project Budget</p>
                 </div>
             )}
@@ -351,12 +499,19 @@ const AddJobPost = () => {
                 {step === 5 && (
                     <div className="flex justify-between items-center">
                     <div className="flex-1 mr-4 my-5">
-                        <h1 className="text-4xl text-green-600 font-cardo font-semibold">Your Deadline</h1>
-                        <p className="text-lg opacity-50 font-cardo font-medium py-4">Post Your Job Deadline</p>
+                        <h1 className="text-4xl text-green-600 font-cardo font-semibold">Your Deadline And Experience Level</h1>
+                        <p className="text-lg opacity-50 font-cardo font-medium py-4">Post Your Job Deadline And Experience Level</p>
                     </div>
                     <div className="flex-1">
                     <label className="block text-xl mt-3 font-cardo" htmlFor="jobCategory">Deadline</label>
                     <input id="" name="deadline" type="date" className='border my-2 p-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' onChange={onChange} value={formatToYYYYMMDD(addProject.deadline || '')}/>
+                    <label className="block text-xl mt-3 font-cardo" htmlFor="jobCategory">Experience Level</label>
+                    <select className="border mt-2 mb-6 py-2 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white opacity-50" onChange={onChange} name="experience_level" value={addProject.experience_level || ''}>
+                    <option value="" selected disabled>Select Experience Level</option>
+                    <option value="Entry_Level">Entry Level</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Expert">Expert</option>
+                </select>
             </div>
                 </div>
                 )}
