@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { SERVER_ERROR } from '../Freelancer/FreelancerConstant'
 import { ADD_NEW_HIRER_REQUEST,
-ADD_NEW_HIRER_SUCCESS,ADD_PROJECT_REQUEST,ADD_PROJECT_SUCCESS,GET_VIEW_ALL_BIDS_REQUEST,GET_VIEW_ALL_BIDS_SUCCESS,GET_VIEW_ALL_FREELANCER_REQUEST,GET_VIEW_ALL_FREELANCER_SUCCESS, GET_VIEW_HIRER_SELF_PROJECT_REQUEST, GET_VIEW_HIRER_SELF_PROJECT_SUCCESS, UPDATE_PROJECT_REQUEST, UPDATE_PROJECT_SUCCESS } from './HirerConstant'
+ADD_NEW_HIRER_SUCCESS,ADD_PROJECT_REQUEST,ADD_PROJECT_SUCCESS,GET_VIEW_ALL_BIDS_REQUEST,GET_VIEW_ALL_BIDS_SUCCESS,GET_VIEW_ALL_FREELANCER_REQUEST,GET_VIEW_ALL_FREELANCER_SUCCESS, GET_VIEW_HIRER_SELF_PROJECT_REQUEST, GET_VIEW_HIRER_SELF_PROJECT_SUCCESS, UPDATE_PROJECT_REQUEST, UPDATE_PROJECT_SUCCESS, GET_HIRER_SELF_PROFILE_REQUEST, GET_HIRER_SELF_PROFILE_SUCCESS } from './HirerConstant'
 
 
 
@@ -38,7 +38,11 @@ const HirerReducer =(state = initialState, action) => {
             return { loading: true };
         case ADD_PROJECT_SUCCESS:
             toast.success("Project Added Successfully")
-            return { loading: false, addproject:true}            
+            return { loading: false, addproject:true}
+        case GET_HIRER_SELF_PROFILE_REQUEST:
+            return { loading: true};
+        case GET_HIRER_SELF_PROFILE_SUCCESS: 
+            return { hirerselfprofile: action.payload[0] };            
         case SERVER_ERROR:
             // toast.error(action.payload.message)
             return{loading: false, addhirer:true ,error:action.payload.message}

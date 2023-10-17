@@ -26,7 +26,8 @@ const API = {
       ViewHirerSelfProject:'/freelance/view/hirer-self/Project',
       ViewAllBids:'/freelance/View/bids',
       UpdateProject:'/freelance/update/project',
-      AddProject:'/freelance/Add/Project'
+      AddProject:'/freelance/Add/Project',
+      HirerProfile:'/account/hirer/selfprofile/view'
     }
   }
 };

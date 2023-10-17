@@ -76,3 +76,14 @@ export const GetViewHirerSelfProjects = async (token) => {
     });
 };  
 
+export const GetHirerSelfProfile = async (token) => {
+  setHeadersWithAccessToken(token);
+   return await DataService.get(API.Hirers.Hirer.HirerProfile)
+     .then((res) => {
+       console.log("hirer data : ",res);
+       return res.data;
+     })
+     .catch((err) => {
+       return handleError(err);
+     });
+ };
