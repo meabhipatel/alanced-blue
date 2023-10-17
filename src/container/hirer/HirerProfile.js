@@ -20,19 +20,31 @@ import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useDispatch, useSelector } from 'react-redux'
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { GetHirerSelfProfileAction } from '../../redux/Hirer/HirerAction'
 
 import axios from 'axios'
 
 const HirerSelfProfile = () => {
 
-  const accessToken = useSelector(state => state.login.accessToken);  
-  const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile)
+  const accessToken = useSelector(state => state.login.accessToken);
+  console.log("hirer self profile access token", accessToken)  
+  const hirerselfprofile = useSelector(state => state.hirer.hirerselfprofile)
+  var hirerData = useState(null)
+  if(hirerselfprofile != null){
+    hirerData = hirerselfprofile
+  console.log("hirer profile data : ",hirerData)
+}
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [freelancerproject, setfreelancerproject] = useState([]);
-  const id = freelancerselfprofile && freelancerselfprofile[0].id ? freelancerselfprofile[0].id : '';
+//   const id = freelancerselfprofile && freelancerselfprofile[0].id ? freelancerselfprofile[0].id : '';
 
+
+
+  React.useEffect(() => {
+    dispatch(GetHirerSelfProfileAction(accessToken))
+  }, [])
 
   function handleMouseEnter() {
     setIsHovered(true);
@@ -47,38 +59,38 @@ function combinedClick() {
     handleMouseLeave();
 }
 
-useEffect(() => {
-    if(id) { 
-        axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/Review/${id}`)
-            .then(response => {
-                if (response.data.status === 200) {
-                    setReviews(response.data.data);
-                } else {
-                    console.log(response.data.message || 'Error fetching reviews');
-                }
-            })
-            .catch(err => {
-                console.log(err.message);
-            });
-    }
-}, [id]); 
+// useEffect(() => {
+//     if(id) { 
+//         axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/Review/${id}`)
+//             .then(response => {
+//                 if (response.data.status === 200) {
+//                     setReviews(response.data.data);
+//                 } else {
+//                     console.log(response.data.message || 'Error fetching reviews');
+//                 }
+//             })
+//             .catch(err => {
+//                 console.log(err.message);
+//             });
+//     }
+// }, [id]); 
 
 
-useEffect(() => {
-    if(id) { 
-        axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}`)
-            .then(response => {
-                if (response.data.status === 200) {
-                    setfreelancerproject(response.data.data);
-                } else {
-                    console.log(response.data.message || 'Error fetching project');
-                }
-            })
-            .catch(err => {
-                console.log(err.message);
-            });
-    }
-}, [id]); 
+// useEffect(() => {
+//     if(id) { 
+//         axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}`)
+//             .then(response => {
+//                 if (response.data.status === 200) {
+//                     setfreelancerproject(response.data.data);
+//                 } else {
+//                     console.log(response.data.message || 'Error fetching project');
+//                 }
+//             })
+//             .catch(err => {
+//                 console.log(err.message);
+//             });
+//     }
+// }, [id]); 
   
   const [isAvailable, setIsAvailable] = useState(localStorage.getItem('userAvailability') || 'available');
   const navigate = useNavigate();
@@ -88,62 +100,62 @@ useEffect(() => {
   }, [isAvailable]);
 
 
-  const [active, setActive] = React.useState(1);
+//   const [active, setActive] = React.useState(1);
  
-  const next = () => {
-      if (active === Math.ceil(freelancerproject.length / 6)) return;
-      setActive(active + 1);
-  };
+//   const next = () => {
+//       if (active === Math.ceil(freelancerproject.length / 6)) return;
+//       setActive(active + 1);
+//   };
 
-  const prev = () => {
-      if (active === 1) return;
-      setActive(active - 1);
-  };
+//   const prev = () => {
+//       if (active === 1) return;
+//       setActive(active - 1);
+//   };
 
-  const chunkArray = (array, size) => {
-      let chunked = [];
-      for (let i = 0; i < array.length; i += size) {
-          chunked.push(array.slice(i, i + size));
-      }
-      return chunked;
-  }
+//   const chunkArray = (array, size) => {
+//       let chunked = [];
+//       for (let i = 0; i < array.length; i += size) {
+//           chunked.push(array.slice(i, i + size));
+//       }
+//       return chunked;
+//   }
 
-  const chunkedProjects = chunkArray(freelancerproject, 6);
+//   const chunkedProjects = chunkArray(freelancerproject, 6);
 
-const [startIdx, setStartIdx] = useState(0);  
+// const [startIdx, setStartIdx] = useState(0);  
 
-const showMoreHandler = () => {
-    setStartIdx(prevIdx => prevIdx + 4);
-}
+// const showMoreHandler = () => {
+//     setStartIdx(prevIdx => prevIdx + 4);
+// }
 
-const showLessHandler = () => {
-    setStartIdx(0);
-}
+// const showLessHandler = () => {
+//     setStartIdx(0);
+// }
 
-const visibleReviews = reviews.slice(startIdx, startIdx + 4);
+// const visibleReviews = reviews.slice(startIdx, startIdx + 4);
 
   
-  const [selectedButton, setSelectedButton] = useState('All Work');
-  const [selectedButtons, setSelectedButtons] = useState('Github');
-  const commonStyle = "inline-block text-sm py-[10px] mt-4 lg:mt-0 border rounded font-semibold";
+//   const [selectedButton, setSelectedButton] = useState('All Work');
+//   const [selectedButtons, setSelectedButtons] = useState('Github');
+//   const commonStyle = "inline-block text-sm py-[10px] mt-4 lg:mt-0 border rounded font-semibold";
 
-  const [selected, setSelected] = useState('completed');
-  const [selectedProject, setSelectedProject] = useState(null);
+//   const [selected, setSelected] = useState('completed');
+//   const [selectedProject, setSelectedProject] = useState(null);
 
-  function calculateJobSuccess(reviews) {
+//   function calculateJobSuccess(reviews) {
    
-    if (!reviews || reviews.length === 0) {
-        return 0;
-    }
+//     if (!reviews || reviews.length === 0) {
+//         return 0;
+//     }
 
-    const totalReviews = reviews.length;
-    const positiveReviews = reviews.filter(review => review.rating >= 4).length;
-    const neutralReviews = reviews.filter(review => review.rating === 3).length;
+//     const totalReviews = reviews.length;
+//     const positiveReviews = reviews.filter(review => review.rating >= 4).length;
+//     const neutralReviews = reviews.filter(review => review.rating === 3).length;
 
-    const successPercentage = ((positiveReviews + 0.5 * neutralReviews) / totalReviews) * 100;
+//     const successPercentage = ((positiveReviews + 0.5 * neutralReviews) / totalReviews) * 100;
 
-    return Math.round(successPercentage);
-}
+//     return Math.round(successPercentage);
+// }
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -152,15 +164,15 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
   const [isContacts, setIsContactsOpen] = useState(false);
   
   const [isAvailableOffOpen, setIsAvailableOffOpen] = useState(false);
-  const [isHrRateOpen, setIsHrRateOpen] = useState(false);
-  const [isFreeProjectOpen, setIsFreeProjectOpen] = useState(false);
+//   const [isHrRateOpen, setIsHrRateOpen] = useState(false);
+//   const [isFreeProjectOpen, setIsFreeProjectOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const inputRef = useRef(null)
 
-  const openFreeProject = (project) => {
-    setSelectedProject(project);
-    setIsFreeProjectOpen(true);
-};
+//   const openFreeProject = (project) => {
+//     setSelectedProject(project);
+//     setIsFreeProjectOpen(true);
+// };
 
 
   const openAvailableOff = () => {
@@ -217,13 +229,28 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
     const formData = new FormData();
     formData.append("images_logo", selectedFile);
 
-    if(freelancerselfprofile && freelancerselfprofile[0]){
-        freelancerselfprofile[0].images_logo = URL.createObjectURL(selectedFile);
-    }
+    // if(hirerData && hirerData){
+    //     hirerData.images_logo = URL.createObjectURL(selectedFile);
+    // }
 
     // dispatch(UpdateFreelancerProfileAction(formData, accessToken));
+    axios.put('https://aparnawiz91.pythonanywhere.com/account/hirer/profile/update',formData,{
+        headers: {
+            "Authorization":`Bearer ${accessToken}`
+          }
+    })
+    .then(response => {
+        if (response.data.status === 200) {
+            setReviews(response.data.data);
+        } else {
+            console.log(response.data.message || 'Error fetching reviews');
+        }
+    })
+    .catch(err => {
+        console.log(err.message);
+    });
     setIsModalOpen(false);
-    navigate('/freelancer/edit-profile');
+    navigate('/hirer/profile-edit');
 }
 
   const underlineStyle = {
@@ -268,7 +295,7 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
    <div className="md:w-[30%] bg-white border border-gray-200 border-opacity-30">
    <div className='border-b border-gray-200 border-opacity-30 py-8 p-4 mb-4 md:mb-0 relative'>
    <div className="relative w-28 h-28 mx-auto">
-                    <img  alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
+                    <img  alt="Profile" src={hirerData && hirerData ? "https://aparnawiz91.pythonanywhere.com/"+hirerData.images_logo : ''} className="rounded-full w-full h-full border border-gray-200" />
                     <div className="absolute top-1 left-2 p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={handleEditClick}>
                         <img src={edit} alt="edit" />
                     </div>
@@ -278,7 +305,7 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
    <div className='border-b border-gray-200 border-opacity-30 text-left flex flex-col justify-center items-center py-4 px-4 md:px-8'>
         <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Verifications</h1>
     <p className='font-inter text-[#0A142F] text-[14px] py-1 inline-block mr-1'>ID : <span className='opacity-50 mr-1'>Verified</span><img src={verify} alt="" className='inline-block h-3 w-3 mb-0.5'/></p>
-    <p className='font-inter text-[#0A142F] text-[14px] py-1 opacity-50'>{freelancerselfprofile && freelancerselfprofile[0] ? `${freelancerselfprofile[0].first_Name} ${freelancerselfprofile[0].last_Name}` : ''}</p>
+    {/* <p className='font-inter text-[#0A142F] text-[14px] py-1 opacity-50'>{freelancerselfprofile && freelancerselfprofile[0] ? `${freelancerselfprofile[0].first_Name} ${freelancerselfprofile[0].last_Name}` : ''}</p> */}
    </div>
    </div>
    {isModalOpen && (
@@ -299,28 +326,28 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
                             {selectedFile ? 
                             <img className="absolute inset-0 w-full h-full object-cover" src={URL.createObjectURL(selectedFile)} alt="Profile" /> 
                             : 
-                            <img className="absolute inset-0 w-full h-full object-cover"  alt="Profile" />
+                            <img className="absolute inset-0 w-full h-full object-cover" src={hirerData && hirerData ? "https://aparnawiz91.pythonanywhere.com/"+hirerData.images_logo : ''} alt="Profile" />
                             }
                             </div>
                             <div className="relative w-28 h-28 overflow-hidden">
                             {selectedFile ? 
                             <img className="absolute inset-0 w-full h-full object-cover" src={URL.createObjectURL(selectedFile)} alt="Profile" /> 
                             : 
-                            <img className="absolute inset-0 w-full h-full object-cover"  alt="Profile" />
+                            <img className="absolute inset-0 w-full h-full object-cover" src={hirerData && hirerData ? "https://aparnawiz91.pythonanywhere.com/"+hirerData.images_logo : ''} alt="Profile" />
                             }
                             </div>
                             <div className="relative w-20 h-20 overflow-hidden">
                             {selectedFile ? 
                             <img className="absolute inset-0 w-full h-full object-cover" src={URL.createObjectURL(selectedFile)} alt="Profile" /> 
                             : 
-                            <img className="absolute inset-0 w-full h-full object-cover"  alt="Profile" />
+                            <img className="absolute inset-0 w-full h-full object-cover" src={hirerData && hirerData ? "https://aparnawiz91.pythonanywhere.com/"+hirerData.images_logo : ''} alt="Profile" />
                             }
                             </div>
                             <div className="relative w-16 h-16 overflow-hidden">
                             {selectedFile ? 
                             <img className="absolute inset-0 w-full h-full object-cover" src={URL.createObjectURL(selectedFile)} alt="Profile" /> 
                             : 
-                            <img className="absolute inset-0 w-full h-full object-cover"  alt="Profile" />
+                            <img className="absolute inset-0 w-full h-full object-cover" src={hirerData && hirerData ? "https://aparnawiz91.pythonanywhere.com/"+hirerData.images_logo : ''} alt="Profile" />
                             }
                             </div>
                     <input 
@@ -383,11 +410,11 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
     <div className='flex flex-col w-fit'>
     <span className='text-xl text-[#00BF58] font-bold'>Account</span>
     <div className='flex flex-col mt-5 ml-4'>
-    <span className='text-2xl font-semibold'>Sachin Sharma</span>
+    <span className='text-2xl font-semibold'>{hirerData.first_Name + ' ' + hirerData.last_Name}</span>
     <span className='text-md text-gray-500 mt-4'>Client</span>
-    <span className='text-lg font-semibold'>Sachin Sharma</span>
+    <span className='text-lg font-semibold'>{hirerData.first_Name + ' ' + hirerData.last_Name}</span>
     <span className='text-md text-gray-500 mt-4'>Email</span>
-    <span className='font-semibold'>sachinsharmapeace@gmail.com</span>
+    <span className='font-semibold'>{hirerData.email}</span>
     </div>
     </div>
     
@@ -412,16 +439,16 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
                     <div className='flex gap-5 w-full'>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>First Name</span>
-                    <input type="text" defaultValue={'sachin'} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input type="text" defaultValue={hirerData.first_Name} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
                     </div>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Last Name</span>
-                    <input type="text" defaultValue={'sharma'} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input type="text" defaultValue={hirerData.last_Name} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
                     </div>
                     </div>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Email</span>
-                    <input type="text" defaultValue={'sachinsharmapeace@gmail.com'} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input type="text" defaultValue={hirerData.email} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
                     </div>
                     <div className="flex justify-start items-center space-x-4 gap-6 mt-3 mr-auto"> 
             <label className="flex items-center">
@@ -450,11 +477,11 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
     <div className='flex flex-col'>
     <span className='text-xl text-[#00BF58] font-bold'>Company Details</span>
     <div className='flex flex-col mt-5 ml-4'>
-    <span className='text-lg font-semibold'>Sachin Sharma</span>
+    <span className='text-lg font-semibold'>{hirerData.first_Name + ' ' + hirerData.last_Name}</span>
     <span className='text-md text-gray-500 mt-4'>Website</span>
-    <span className='font-semibold'>www.Alanced.com</span>
+    <span className='font-semibold'>{hirerData.social_media}</span>
     <span className='text-md text-gray-500 mt-4'>Establish</span>
-    <span className='font-semibold'>16/10/2023</span>
+    <span className='font-semibold'>{hirerData.Company_Establish}</span>
     </div>
     </div>
     <div class="p-1 w-10 h-10 flex justify-center items-center float-right ml-auto bg-white rounded-full border border-gray-200 mt-1 cursor-pointer" onClick={handleEditDetails}>
@@ -482,16 +509,16 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
                     <div className='flex gap-5 w-full'>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Company Name</span>
-                    <input type="text" defaultValue={'sachin'} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input type="text" defaultValue={hirerData.Company_Name} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
                     </div>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Establish</span>
-                    <input type="date" defaultValue={'sharma'} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input type="date" defaultValue={hirerData.Company_Establish} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
                     </div>
                     </div>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Website</span>
-                    <input type="text" defaultValue={'www.alanced.com'} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input type="text" defaultValue={hirerData.social_media} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
                     </div>
                     
                         </div>
@@ -512,11 +539,11 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
     <span className='text-xl text-[#00BF58] font-bold'>Company Contacts</span>
     <div className='flex flex-col mt-5 ml-4'>
     <span className='text-md text-gray-500'>Owner</span>
-    <span className='text-lg font-semibold'>Sachin Sharma</span>
+    <span className='text-lg font-semibold'>{hirerData.first_Name + ' ' + hirerData.last_Name}</span>
     <span className='text-md text-gray-500 mt-4'>phone</span>
-    <span className='text-lg font-semibold'>0123456789</span>
+    <span className='text-lg font-semibold'>{hirerData.contact}</span>
     <span className='text-md text-gray-500 mt-4'>Address</span>
-    <span className='text-lg font-semibold'>India</span>
+    <span className='text-lg font-semibold'>{hirerData.Address}</span>
     </div>
     </div>
     <div class="p-1 w-10 h-10 flex justify-center items-center float-right ml-auto bg-white rounded-full border border-gray-200 mt-1 cursor-pointer" onClick={handleEditContacts}>
@@ -543,12 +570,12 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 4);
                     </div>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Phone</span>
-                    <input type="tel" defaultValue={'0123456789'} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input type="tel" defaultValue={hirerData.contact} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
                     </div>
                     </div>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Address</span>
-                    <input type="text" defaultValue={'Bharat'} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input type="text" defaultValue={hirerData.Address} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
                     </div>
             
                         </div>
