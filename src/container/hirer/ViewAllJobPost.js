@@ -183,7 +183,7 @@ function timeAgo(postedTimeStr) {
   <Link to='/View/Job-post' state={{project}} onClick={() => window.scrollTo(0, 0)}>
   <p className="font-inter text-[#0A142F] text-[16px] font-medium hover:underline hover:text-green-600">{project.title}</p>
   </Link>
-  <p className='font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-1'>Hourly - Intermediate - Posted {timeAgo(project.Project_created_at)}</p>
+  <p className='font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-1'>{project.Project_Rate} Rate - Intermediate - Posted {timeAgo(project.Project_created_at)}</p>
   {/* <span className='border px-4 py-1 border-gray-300 rounded bg-[#E4EBE4] font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 font-semibold'>Open</span> */}
   <span className={`px-4 py-1 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 font-semibold ${isJobOpen(project.deadline) ? 'bg-[#E4EBE4] text-green-800 border border-green-800' : 'bg-yellow-100 text-yellow-700 border border-yellow-700'}`}>
               {isJobOpen(project.deadline) ? 'Open' : 'Closed'}

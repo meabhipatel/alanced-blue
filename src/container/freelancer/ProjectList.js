@@ -31,11 +31,11 @@ function ProjectList() {
   console.log(category,"category")
   const viewallprojects = useSelector(state => state.freelancer.viewallprojects)
   const accessToken = useSelector(state => state.login.accessToken);
-  const [categoryFilter, setCategoryFilter] = useState('');
-  const [locationFilter, setLocationFilter] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState([]);
+  const [locationFilter, setLocationFilter] = useState([]);
   const [skillFilter, setSkillFilter] = useState('');
-  const [rateFilter, setRateFilter] = useState('');
-  const [expFilter, setExpFilter] = useState('');
+  const [rateFilter, setRateFilter] = useState([]);
+  const [expFilter, setExpFilter] = useState([]);
   // const projectData = { viewallprojects }
   const dispatch = useDispatch();
 
@@ -58,17 +58,29 @@ function ProjectList() {
   const [filteredProjects, setFilteredProjects] = useState([]);
   console.log(filteredProjects, "filter freelancer");
 
-  const [range, setRange] = useState([1, 1000]);
+  const [range, setRange] = useState([1, 10000]);
 
-  const handleSliderChange = (newRange) => {
-    setRange(newRange);
-  };
+    const handleSliderChange = (newRange) => {
+        setRange(newRange);
+    };
+    
+    const handleInputChange = (index, newValue) => {
+        const updatedRange = [...range];
+        updatedRange[index] = Number(newValue);  
+        setRange(updatedRange);
+    };
 
-  const handleInputChange = (index, newValue) => {
-    const newRange = [...range];
-    newRange[index] = newValue;
-    setRange(newRange);
-  };
+  // const [range, setRange] = useState([1, 1000]);
+
+  // const handleSliderChange = (newRange) => {
+  //   setRange(newRange);
+  // };
+
+  // const handleInputChange = (index, newValue) => {
+  //   const newRange = [...range];
+  //   newRange[index] = newValue;
+  //   setRange(newRange);
+  // };
 
   function timeAgo(postedTimeStr) {
     const postedTime = new Date(postedTimeStr);
@@ -155,8 +167,12 @@ function ProjectList() {
     const indexOfLastJob = currentPage * jobsPerPage;
     const indexOfFirstJob = indexOfLastJob - jobsPerPage;
     
+    const isDefaultRange = range[0] === 1 && range[1] === 10000;
    
     const filteredJobs = viewallprojects?.filter(project => {
+    
+      const withinPriceRange = isDefaultRange || (project.fixed_budget >= range[0] && project.fixed_budget <= range[1]);
+
       return (
         project.category.toLowerCase().includes(categorySearch.toLowerCase()) &&
     
@@ -169,7 +185,8 @@ function ProjectList() {
         (skillFilter.length === 0 || 
           JSON.parse(project.skills_required.replace(/'/g,'"')).some(skill => skillFilter.includes(skill))) &&
         
-        (rateFilter.length === 0 || rateFilter.includes(project.rate))
+        (rateFilter.length === 0 || rateFilter.includes(project.rate)) &&
+        withinPriceRange
       );
     }) || [];
     
@@ -376,11 +393,11 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
               </div>
               <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div>
             </div>))}
-            <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Price</h1></div>
+            <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Project Rate</h1></div>
             <div className="pt-4 w-[85%]">
               <Slider
                 min={1}
-                max={1000}
+                max={10000}
                 step={1}
                 range
                 value={range}

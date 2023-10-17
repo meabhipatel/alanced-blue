@@ -11,7 +11,7 @@ import downarrow from '../../components/images/downarrow.png'
 import thumbdown from '../../components/images/thumbdown.png'
 import heart from '../../components/images/heart.png'
 import verify from '../../components/images/verify.png'
-import location from '../../components/images/location.png'
+import locations from '../../components/images/location.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link , useLocation } from 'react-router-dom'
 import mybg from '../../components/images/profile_list.png'
@@ -29,6 +29,20 @@ const FindTalent = () => {
     const category = searchParams.get('category');
     console.log(category,"category")
     const viewallfreelancer = useSelector(state => state.hirer.viewallfreelancer)
+
+    function parsedata(str) {
+        try {
+            return JSON.parse(str.replace(/'/g, '"'));
+        } catch (error) {
+            console.error("Error parsing JSON:", error);
+            return [];
+        }
+    }
+
+    const [locationFilter, setLocationFilter] = useState([]);
+    const [expFilter, setExpFilter] = useState([]);
+    const [languageFilter, setLanguageFilter] = useState('');
+    const [skillFilter, setSkillFilter] = useState('');
     // console.log(";;;;;;;;;;;;;;;;;;;;;;;",viewallfreelancer.length)
     console.log(useSelector(state => state.login.accessToken))
     const dispatch = useDispatch();
@@ -54,16 +68,17 @@ const FindTalent = () => {
     const [filteredFreelancers, setFilteredFreelancers] = useState([]);
     console.log(filteredFreelancers, "filter freelancer");
       
+
     const [range, setRange] = useState([1, 1000]);
 
     const handleSliderChange = (newRange) => {
-      setRange(newRange);
+        setRange(newRange);
     };
-  
+    
     const handleInputChange = (index, newValue) => {
-      const newRange = [...range];
-      newRange[index] = newValue;
-      setRange(newRange);
+        const updatedRange = [...range];
+        updatedRange[index] = Number(newValue);  
+        setRange(updatedRange);
     };
   
     const [showMoreSkills, setShowMoreSkills] = useState({});
@@ -77,6 +92,29 @@ const FindTalent = () => {
             },
         }));
     };
+
+
+    const [showMoreDes, setShowMoreDes] = useState({});
+
+    const toggleShowMoreDes = (freelancerId) => {
+        setShowMoreDes((prevShowMoreDes) => ({
+            ...prevShowMoreDes,
+            [freelancerId]: {
+                showAllDes: !prevShowMoreDes[freelancerId]?.showAllDes,
+            },
+        }));
+    };
+    
+
+    const getDisplayedText = (text, showAll) => {
+        if (showAll) return text;
+    
+        const words = text.split(' ');
+        if (words.length <= 20) return text;
+    
+        return words.slice(0, 20).join(' ') + '...';
+    };
+    
     
     const [selected, setSelected] = useState('Best Matches');
     const underlineStyle = {
@@ -115,10 +153,26 @@ const FindTalent = () => {
     const jobsPerPage = 6;
     const indexOfLastJob = currentPage * jobsPerPage;
     const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+
+    const isDefaultRange = range[0] === 1 && range[1] === 1000;
+
+    const filteredJobs = viewallfreelancer?.filter(project => {
+        const languages = parsedata(project.Language);
+        const skills = parsedata(project.skills);
+        
+        const withinPriceRange = isDefaultRange || (project.hourly_rate >= range[0] && project.hourly_rate <= range[1]);
     
-    const filteredJobs = viewallfreelancer?.filter(project => 
-        project.category.replace(/_/g, ' ').toLowerCase().includes(categorySearch.toLowerCase())
-    ) || [];
+        return (
+            project.category.toLowerCase().includes(categorySearch.toLowerCase()) &&
+            (locationFilter.length === 0 || locationFilter.includes(project.Address)) &&
+            (expFilter.length === 0 || expFilter.includes(project.experience_level)) &&
+            (languageFilter.length === 0 || languages.some(language => languageFilter.includes(language))) &&
+            (skillFilter.length === 0 || skills.some(skill => skillFilter.includes(skill))) &&
+            withinPriceRange  
+        );
+    }) || [];
+    
+
 
     const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
     const totalPages = Math.ceil((filteredJobs.length || 0) / jobsPerPage);
@@ -147,6 +201,66 @@ const FindTalent = () => {
 }
 
 const chunkedFree = chunkArray(viewallfreelancer, 6);
+
+
+const languageCounts = {};
+viewallfreelancer?.forEach(project => {
+    const languages = parsedata(project.Language);
+    languages.forEach(language => {
+        if (languageCounts[language]) {
+            languageCounts[language]++;
+        } else {
+            languageCounts[language] = 1;
+        }
+    });
+});
+
+const skillCounts = {};
+viewallfreelancer?.forEach(project => {
+    const skills = parsedata(project.skills);
+    skills.forEach(skill => {
+        if (skillCounts[skill]) {
+            skillCounts[skill]++;
+        } else {
+            skillCounts[skill] = 1;
+        }
+    });
+});
+
+
+const expCounts = {};
+    
+    viewallfreelancer?.forEach(project => {
+        if (expCounts[project.experience_level]) {
+            expCounts[project.experience_level]++;
+        } else {
+            expCounts[project.experience_level] = 1;
+        }
+    });
+
+
+const locationCounts = {};
+    
+    viewallfreelancer?.forEach(project => {
+        if (locationCounts[project.Address]) {
+          locationCounts[project.Address]++;
+        } else {
+          locationCounts[project.Address] = 1;
+        }
+    });
+
+const [showAllLocation, setShowAllLocation] = useState(false);
+
+const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Object.entries(locationCounts).slice(0, 5);
+
+const [showAllLanguage, setShowAllLanguage] = useState(false);
+
+const displayedLanguages = showAllLanguage ? Object.entries(languageCounts) : Object.entries(languageCounts).slice(0, 5);
+
+const [showAllSkill, setShowAllSkill] = useState(false);
+
+const displayedSkills = showAllSkill ? Object.entries(skillCounts) : Object.entries(skillCounts).slice(0, 5);
+
     return (
       <>
       <Navbar/>
@@ -157,7 +271,7 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
           <div className='lg:w-[44vw] bg-white p-3 lg:h-14 rounded-2xl lg:flex items-center mt-4 shadow-md'>
             <div className='flex flex-row'>
               <img className='w-5 h-5' src={search}></img>
-              <input className='w-96 font-inter text-base ml-3' placeholder='Search by Category' value={categorySearch} onChange={(e) => setCategorySearch(e.target.value)}></input>
+              <input className='w-96 font-inter text-base ml-3 outline-none' placeholder='Search by Category' value={categorySearch} onChange={(e) => setCategorySearch(e.target.value)}></input>
             </div>
             <div className=''>
               <button className='rounded h-8 w-24 lg:ml-6 font-semibold text-base text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>Search</button>
@@ -170,79 +284,47 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
   <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
   <div class='skills'>
   <div><h1 className='font-cardo text-xl text-left font-normal'>Skills</h1></div>
-            <div className='flex flex-row mt-4'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">UX Designer</span>
-            </label>
+  {displayedSkills.map(([skill, count]) => (
+        <div key={skill} className='flex flex-row mt-4'>
+            <div className='basis-8/12'>
+                <label className="flex items-center font-inter relative cursor-pointer">
+                    <input 
+          className="hidden" 
+          type="checkbox"
+          value={skill}
+          onChange={() => {
+            if (skillFilter.includes(skill)) {
+              setSkillFilter(prev => prev.filter(c => c !== skill));
+            } else {
+              setSkillFilter(prev => [...prev, skill]);
+            }
+          }}
+        />
+                    <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                        <span className="checkmark hidden"><i className="bi bi-check-lg pr-2 pt-2"></i></span>
+                    </div>
+                    <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                    <span className="font-normal text-[#797979]">{skill}</span>
+                </label>
+            </div>
+            <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
+                ({count})
+            </div>
         </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(1,945)</div>
-    </div>
-            <div className='flex flex-row mt-3'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">Web Developers</span>
-            </label>
-        </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2,945)</div>
-    </div>
-            <div className='flex flex-row mt-3'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">Illustrators</span>
-            </label>
-        </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(945)</div>
-    </div>
-            <div className='flex flex-row mt-4'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">Node.js</span>
-            </label>
-        </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(5,945)</div>
-    </div>
-            <div className='flex flex-row mt-4'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">Project Managers</span>
-            </label>
-        </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(45)</div>
-    </div>
-            <div><h1 className='font-cardo text-xl text-left mt-5 font-normal'>+20 More</h1></div>
+    ))}
+    {Object.entries(skillCounts).length > 5 && (
+      <div>
+        <h1 
+          className='font-cardo text-xl text-left mt-5 font-normal cursor-pointer'
+          onClick={() => setShowAllSkill(!showAllSkill)}
+        >
+          {showAllSkill ? "Show Less" : "Show More"}
+        </h1>
+      </div>
+    )}
+           
   </div>
-  <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Price</h1></div>
+  <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Freelancer Rate</h1></div>
   <div className="pt-4 w-[75%]">
               <Slider
                 min={1}
@@ -295,196 +377,115 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
             </div>
     <div class='location'>
     <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Citys</h1></div>
-             <div className='flex flex-row mt-4'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">Boston</span>
-            </label>
+    {displayedLocation.map(([location, count]) => (
+  <div className='flex flex-row mt-4'>
+    <div className='basis-8/12'>
+      <label className="flex items-center font-inter relative cursor-pointer">
+        <input 
+          className="hidden" 
+          type="checkbox"
+          value={location}
+          onChange={() => {
+            if (locationFilter.includes(location)) {
+              setLocationFilter(prev => prev.filter(c => c !== location));
+            } else {
+              setLocationFilter(prev => [...prev, location]);
+            }
+          }}
+        />
+        <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+          <span className="checkmark hidden"><i className="bi bi-check-lg pr-2 pt-2"></i></span>
         </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(1,945)</div>
+        <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+        <span className="font-normal text-[#797979]">{location || 'NA'}</span>
+      </label>
     </div>
-    <div className='flex flex-row mt-3'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">Florida</span>
-            </label>
-        </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2,945)</div>
+    <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
+      ({count})
     </div>
-    <div className='flex flex-row mt-3'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">Log Angeles</span>
-            </label>
-        </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(945)</div>
-    </div>
-    <div className='flex flex-row mt-3'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">Miami</span>
-            </label>
-        </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(5,945)</div>
-    </div>
-    <div className='flex flex-row mt-3'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">New York</span>
-            </label>
-        </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(45)</div>
-    </div>
-            <div><h1 className='font-cardo text-xl text-left mt-5 font-normal'>+Show More</h1></div>
+  </div>
+))}
+{Object.entries(locationCounts).length > 5 && (
+      <div>
+        <h1 
+          className='font-cardo text-xl text-left mt-5 font-normal cursor-pointer'
+          onClick={() => setShowAllLocation(!showAllLocation)}
+        >
+          {showAllLocation ? "Show Less" : "Show More"}
+        </h1>
+      </div>
+    )}
     </div>
     <div class='language'>
     <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Languages</h1></div>
-            <div className='flex flex-row mt-4'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">English</span>
-            </label>
+    {displayedLanguages.map(([language, count]) => (
+        <div key={language} className='flex flex-row mt-4'>
+            <div className='basis-8/12'>
+                <label className="flex items-center font-inter relative cursor-pointer">
+                    <input 
+          className="hidden" 
+          type="checkbox"
+          value={language}
+          onChange={() => {
+            if (languageFilter.includes(language)) {
+              setLanguageFilter(prev => prev.filter(c => c !== language));
+            } else {
+              setLanguageFilter(prev => [...prev, language]);
+            }
+          }}
+        />
+                    <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                        <span className="checkmark hidden"><i className="bi bi-check-lg pr-2 pt-2"></i></span>
+                    </div>
+                    <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                    <span className="font-normal text-[#797979]">{language}</span>
+                </label>
+            </div>
+            <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
+                ({count})
+            </div>
         </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(1,945)</div>
-    </div>
-    <div className='flex flex-row mt-3'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">French</span>
-            </label>
-        </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2,945)</div>
-    </div>
-    <div className='flex flex-row mt-3'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">Italian</span>
-            </label>
-        </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(945)</div>
-    </div>
-    <div className='flex flex-row mt-3'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">Japanese</span>
-            </label>
-        </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(5,945)</div>
-    </div>
-    <div className='flex flex-row mt-3'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">Spanish</span>
-            </label>
-        </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(45)</div>
-    </div>
-            <div><h1 className='font-cardo text-xl text-left mt-5 font-normal'>+Show More</h1></div>
+    ))}
+    {Object.entries(languageCounts).length > 5 && (
+      <div>
+        <h1 
+          className='font-cardo text-xl text-left mt-5 font-normal cursor-pointer'
+          onClick={() => setShowAllLanguage(!showAllLanguage)}
+        >
+          {showAllLanguage ? "Show Less" : "Show More"}
+        </h1>
+      </div>
+    )}
     </div>
     <div class='level'>
-    <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Level</h1></div>
+    <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Experience Level</h1></div>
+    {Object.entries(expCounts).map(([exp, count]) => (
             <div className='flex flex-row mt-4'>
         <div className='basis-8/12'>
             <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
+                <input 
+          className="hidden" 
+          type="checkbox"
+          value={exp}
+          onChange={() => {
+            if (expFilter.includes(exp)) {
+              setExpFilter(prev => prev.filter(c => c !== exp));
+            } else {
+              setExpFilter(prev => [...prev, exp]);
+            }
+          }}
+        />
                 <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                   
                     <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
                 </div>
                      <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">Entry Level</span>
+                <span class="font-normal text-[#797979]">{exp ? exp.replace(/_/g, ' '):'NA'}</span>
             </label>
         </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(45)</div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div>
     </div>
-    <div className='flex flex-row mt-3'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">Intermediate Level</span>
-            </label>
-        </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(25)</div>
-    </div>
-    <div className='flex flex-row mt-3'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input class="hidden" type="checkbox" />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">Expert Level</span>
-            </label>
-        </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(95)</div>
-    </div>
+    ))}
     </div>
   </div>
   
@@ -530,7 +531,29 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
         </Link>
         </div> */}
         </div>
-      <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-4'>{free.about}</p>
+        <div>
+        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-4 inline-block'>
+    {getDisplayedText(free.about, showMoreDes[free.id]?.showAllDes)}
+</p>
+{free.about && free.about.split(' ').length > 20 && (
+    <button
+        onClick={() => toggleShowMoreDes(free.id)}
+        className='font-inter text-green-600 text-[14px] cursor-pointer font-bold inline-block mb-2'
+    >
+        {showMoreDes[free.id] && showMoreDes[free.id].showAllDes ? 'See Less' : 'See More'}
+    </button>
+)}</div>
+
+      {/* <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-4'>{free.about}</p>
+      {free.about &&
+                    free.about.length > 20 && (
+                        <button
+                            onClick={() => toggleShowMoreDes(free.id)}
+                            className='font-inter text-green-600 text-[14px] cursor-pointer font-bold'
+                        >
+                            {showMoreDes[free.id] && showMoreDes[free.id].showAllDes ? ' Less' : ' More'}
+                        </button>
+                    )} */}
   {free.skills &&
                     JSON.parse(free.skills.replace(/'/g, '"')).map((skill, skillIndex) => (
                         <Link to={''} key={skillIndex}>
@@ -560,10 +583,11 @@ const chunkedFree = chunkArray(viewallfreelancer, 6);
           <img src={verify} alt="" className='inline-block h-3 w-3 mr-1'/>
           <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>Account verified</p>
           <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>
-          <p className='font-inter text-[#0A142F] text-[14px] opacity-80 inline-block mr-1'>$0.00/Hr</p>
-          <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-3'>Fixed Rate</p>
-          <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
-          <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>{free.Address}</p>
+          <p className='font-inter text-[#0A142F] text-[14px] opacity-80 inline-block mr-1'>${free.hourly_rate ? free.hourly_rate:0}/Hr</p>
+          <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-3'>Hourly Rate</p>
+          <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-2'>{free.experience_level.replace(/_/g, ' ')}</p>
+          <img src={locations} alt="" className='inline-block h-3 w-3 mr-1'/>
+          <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>{free.Address ? free.Address : 'NA'}</p>
           </div>
           {/* <div className=" absolute bottom-2 right-6 items-center space-x-2 ml-auto">
         <Link to=''>
