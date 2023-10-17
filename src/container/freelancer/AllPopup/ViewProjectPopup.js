@@ -129,8 +129,8 @@ function ViewProjectPopup() {
                             <div className=' flex flex-row'>
                                 <div className=' basis-2/12'><img src={money} alt="" /></div>
                                 <div className=' basis-10/12'>
-                                    <h1 className=' font-cardo font-normal text-lg text-left'>{project.budget}</h1>
-                                    <p className=' font-inter font-normal text-base text-left opacity-[50%]'>Fixed-price</p>
+                                    <h1 className=' font-cardo font-normal text-lg text-left'>${project.rate == 'Hourly' ? project.min_hourly_rate+"/hr" +" - "+ "$"+project.max_hourly_rate+"/hr" : project.fixed_budget }</h1>
+                                    <p className=' font-inter font-normal text-base text-left opacity-[50%]'>{project.rate}</p>
                                 </div>
                             </div>
                         </div>
@@ -138,8 +138,8 @@ function ViewProjectPopup() {
                         <div className=' flex flex-row'>
                                 <div className=' basis-2/12'><img src={rating} alt="" /></div>
                                 <div className=' basis-10/12'>
-                                    <h1 className=' font-cardo font-normal text-lg text-left'>Expert</h1>
-                                    <p className=' font-inter font-normal text-base text-left opacity-[50%]'>I am willing to pay higher rates for the most experienced freelancers</p>
+                                    <h1 className=' font-cardo font-normal text-lg text-left'>{project.experience_level}</h1>
+                                    <p className=' font-inter font-normal text-base text-left opacity-[50%]'>Experience Level</p>
                                 </div>
                             </div>
                         </div>

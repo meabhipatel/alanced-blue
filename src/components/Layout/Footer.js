@@ -36,7 +36,7 @@ const Footer = () => {
           <Link to='/contact-us' onClick={() => window.scrollTo(0, 0)}>
           <li class="mb-2 hover:text-green-600 hover:underline">Support</li>
           </Link>
-          <li class="mb-2 hover:text-green-600 hover:underline">Alanced Foundation</li>
+          <Link to='/why-alanced' onClick={() => window.scroll(0,0)}><li class="mb-2 hover:text-green-600 hover:underline">Alanced Foundation</li></Link>
         </ul>
     </div>
     <div class="p-4 text-left">

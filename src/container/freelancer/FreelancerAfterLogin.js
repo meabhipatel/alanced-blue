@@ -421,7 +421,7 @@ const chunkedFree = chunkArray(projectsToDisplay);
             </>
         )
     })}
-    <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>Fixed-price - Expert - Est. Budget: ${project.budget} - {timeAgo}</p>
+    <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>{project.rate} - {project.experience_level} - Est. Budget: ${project.rate == 'Hourly' ? project.min_hourly_rate+"/hr" +" - "+ "$"+project.max_hourly_rate+"/hr" : project.fixed_budget } - {timeAgo}</p>
     <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>
                 Job Description: {displayWords.join(' ')} 
                 {words.length > 50 && (

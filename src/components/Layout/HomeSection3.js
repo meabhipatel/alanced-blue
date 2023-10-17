@@ -41,7 +41,7 @@ const HomeSection3 = () => {
     </div>
         </div>
         <div className='mt-5 text-center'>
-            <Link to=''><span class="text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Why Choose Alanced</span></Link>
+            <Link to='/why-alanced' onClick={() => window.scroll(0, 0)}><span class="text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Why Choose Alanced</span></Link>
         </div>
     </div>
     <div>
