@@ -3,6 +3,7 @@ import React from 'react'
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const EditJobDescPopup = ({closeJobDesc,project}) => {
 
@@ -21,6 +22,7 @@ const EditJobDescPopup = ({closeJobDesc,project}) => {
             });
 
             if (response.data.status === 200) {
+                toast.success("Job description Updated Successfully")
                 closeJobDesc();
             } else {
                 console.log(response.data.message || 'Error updating the job description');

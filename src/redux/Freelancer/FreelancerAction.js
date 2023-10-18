@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom'
-import { AddFreelancer,GetFreelancerSelfProfile,GetViewAllProjectList,UpdateFreelancerProfile, AddBidAmount,GetFreelancerSelfBid, GetFreelancerSelfBidProject, AddFreelancerEmployment} from '../services/Freelancer'
+import { AddFreelancer,GetFreelancerSelfProfile,GetViewAllProjectList,UpdateFreelancerProfile, AddBidAmount,GetFreelancerSelfBid, GetFreelancerSelfBidProject, AddFreelancerEmployment, GetViewAllSavedJobs} from '../services/Freelancer'
 import { ADD_NEW_FREELANCER_REQUEST,
 ADD_NEW_FREELANCER_SUCCESS,
 GET_FREELANCER_SELF_PROFILE_REQUEST,
@@ -17,6 +17,8 @@ GET_FREELANCER_SELF_BID_PROJECT_SUCCESS,
 SERVER_ERROR,
 ADD_NEW_FREELANCER_EMPLOYMENT_REQUEST,
 ADD_NEW_FREELANCER_EMPLOYMENT_SUCCESS,
+GET_VIEW_ALL_SAVEDJOBS_REQUEST,
+GET_VIEW_ALL_SAVEDJOBS_SUCCESS,
 } from './FreelancerConstant'
 
 
@@ -111,28 +113,28 @@ export const UpdateFreelancerProfileAction = (data, token, navigate) => dispatch
   });
 };
 
-// export const GetViewAllSavedJobsAction = (token) => dispatch => {
+export const GetViewAllSavedJobsAction = (token) => dispatch => {
   
-//   dispatch({
-//     type: GET_VIEW_ALL_SAVEDJOBS_REQUEST,
-//     payload: []
-//   });
+  dispatch({
+    type: GET_VIEW_ALL_SAVEDJOBS_REQUEST,
+    payload: []
+  });
 
-//   GetViewAllSavedJobs(token).then(res => {
-//     console.log(res, "view jobs");
-//     if (res.status === 200) {
-//       dispatch({
-//         type: GET_VIEW_ALL_SAVEDJOBS_SUCCESS,
-//         payload: res.data
-//       });
-//     } else {
-//       dispatch({
-//         type: SERVER_ERROR,
-//         payload: res
-//       });
-//     }
-//   });
-// };
+  GetViewAllSavedJobs(token).then(res => {
+    console.log(res, "view jobs");
+    if (res.status === 200) {
+      dispatch({
+        type: GET_VIEW_ALL_SAVEDJOBS_SUCCESS,
+        payload: res.data
+      });
+    } else {
+      dispatch({
+        type: SERVER_ERROR,
+        payload: res
+      });
+    }
+  });
+};
 
 
 // export const SaveUnsaveJobAction = (data,token,id) => dispatch => {

@@ -57,6 +57,17 @@ const formatDate = (dateStr) => {
     return `${day}-${month}-${year}`;
   };
 
+  function formatDateInput(inputDate) {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  
+    const dateObj = new Date(inputDate);
+    const month = months[dateObj.getMonth()];
+    const day = dateObj.getDate();
+    const year = dateObj.getFullYear();
+  
+    return `${month} ${day}, ${year}`;
+  }
+
   return (
     <>
     <Navbar/>
@@ -66,7 +77,7 @@ const formatDate = (dateStr) => {
     <div class="flex flex-col md:flex-row">
     <div class="w-full md:w-[70%] bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
-        <p className="font-inter text-green-700 text-[16px] font-medium">{project.category.replace(/_/g, ' ')}</p>
+        <p className="font-inter text-green-700 text-[16px] font-medium">{project.category}</p>
         <p className="font-inter text-[#031136] opacity-50 text-sm font-medium py-1">posted {timeAgo(project.Project_created_at)}</p>
         <p className="font-inter text-[#031136] text-sm font-normal py-3"><i class="bi bi-geo-alt-fill text-green-700"></i> Worldwide</p>
         </div>
@@ -79,8 +90,8 @@ const formatDate = (dateStr) => {
     <div className="flex-1 py-4 flex">
         <i class="bi bi-coin flex-shrink-0 mr-3"></i>
         <div>
-            <p className="font-inter text-[#031136] text-md font-medium"> ${project.budget}</p>
-            <p className="font-inter text-[#031136] text-sm font-medium opacity-50">Fixed</p>
+            <p className="font-inter text-[#031136] text-md font-medium"> ${project.Project_Rate == 'Hourly' ? project.Project_Min_Hourly_Rate+"/hr" +" - "+ "$"+project.Project_Max_Hourly_Rate+"/hr" : project.Project_Fixed_Budget }</p>
+            <p className="font-inter text-[#031136] text-sm font-medium opacity-50">{project.Project_Rate}</p>
         </div> 
     </div>
 
@@ -178,7 +189,7 @@ const formatDate = (dateStr) => {
         <p className="font-inter text-[#031136] text-md font-medium">India</p>
         <p className="font-inter text-[#031136] opacity-50 text-md font-medium">{getCurrentTime()}</p>
         <p className="font-inter text-[#031136] text-md font-medium py-2">{viewhirerselfproject && viewhirerselfproject ? viewhirerselfproject.length : 0} job posted</p>
-        <p className="font-inter text-[#031136] text-sm font-medium opacity-50">Member since Sep 20, 2023</p>
+        <p className="font-inter text-[#031136] text-sm font-medium opacity-50">Member since {formatDateInput(project.project_owner_created)}</p>
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
         <p className="font-inter text-[#031136] text-lg font-medium py-4">Job link</p>

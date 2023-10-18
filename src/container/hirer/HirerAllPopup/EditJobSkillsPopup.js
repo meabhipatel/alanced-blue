@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import SkillsList from '../../freelancer/AllSelectionData/SkillsList';
 
 const EditJobSkillsPopup = ({closeJobSkills,project}) => {
 
@@ -69,9 +71,57 @@ const EditJobSkillsPopup = ({closeJobSkills,project}) => {
         }
     };
 
-    
+    const allSkills = SkillsList;
+
+const [searchTermSkill, setSearchTermSkill] = useState(''); 
+const [isOpenSkill, setIsOpenSkill] = useState(false);
+const wrapperRefSkill = useRef(null);
+
+const filteredSkills = allSkills.filter(
+    skill => skill.toLowerCase().includes(searchTermSkill.toLowerCase()) && !jobskills.includes(skill)
+);
+
+const handleClickOutsideSkill = (event) => {
+    if (wrapperRefSkill.current && !wrapperRefSkill.current.contains(event.target)) {
+        setIsOpenSkill(false);
+    }
+};
+
+useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutsideSkill);
+    return () => {
+        document.removeEventListener('mousedown', handleClickOutsideSkill);
+    };
+}, []);
   
     return (
+        <>
+         <style>
+    {`
+    .dropdown-list {
+        border: 1px solid #ccc;
+        max-height: 200px;
+        overflow-y: auto;
+        position: absolute;
+        width: 100%;
+        z-index: 1000;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background-color: #fff;
+        margin-top:11px;
+    }
+    
+    .dropdown-list li {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .dropdown-list li:hover {
+        background-color: #f7f7f7;
+    }
+    `}
+</style>
       <div className="fixed z-10 inset-0 overflow-y-auto mt-10">
       <div className="fixed inset-0 bg-black opacity-50"></div>
       <div className="flex items-center justify-center min-h-screen">
@@ -93,7 +143,7 @@ const EditJobSkillsPopup = ({closeJobSkills,project}) => {
               </button>
           </div>
       ))}
-      <div className="flex items-center relative w-full">
+      {/* <div className="flex items-center relative w-full">
           <input 
               type="text" 
               value={currentSkills} 
@@ -110,7 +160,42 @@ const EditJobSkillsPopup = ({closeJobSkills,project}) => {
               +
           </button>
       </div>
-  </div>
+  </div> */}
+  <div ref={wrapperRefSkill} className="relative w-full">
+        <input 
+            type="text" 
+            value={searchTermSkill} 
+            onClick={() => setIsOpenSkill(!isOpenSkill)} 
+            onChange={e => setSearchTermSkill(e.target.value)} 
+            className='outline-none w-full'
+            placeholder="Search & Select Skills"
+        />
+        {isOpenSkill && (
+            <ul className="dropdown-list w-full">
+                {filteredSkills.length > 0 ? (
+                  filteredSkills.map((skill, index) => (
+                    <li 
+                        key={index} 
+                        onClick={() => {
+                            if (jobskills.length < 15) {
+                                setJobSkills(prev => [...prev, skill]);
+                                setSearchTermSkill('');
+                                setIsOpenSkill(false);
+                            } else {
+                                setError('You can add a maximum of 15 skills.');
+                            }
+                        }}
+                    >
+                        {skill}
+                    </li>
+                ))
+                ) : (
+                    <li>No results found</li>
+                )}
+            </ul>
+        )}
+    </div>
+</div>
                   {error && <p className="text-red-500 mt-2">{error}</p>}
               </div>
               <div className="mt-8 flex justify-end">
@@ -122,6 +207,7 @@ const EditJobSkillsPopup = ({closeJobSkills,project}) => {
           </div>
       </div>
   </div>
+  </>
     )
   }
   

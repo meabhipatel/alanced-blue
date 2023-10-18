@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { UpdateProjectAction } from '../../../redux/Hirer/HirerAction';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 const EditJobTitlePopup = ({closeJobTitle,project}) => {
@@ -23,6 +24,7 @@ const EditJobTitlePopup = ({closeJobTitle,project}) => {
             });
 
             if (response.data.status === 200) {
+                toast.success("Job title updated Successfully")
                 closeJobTitle();
             } else {
                 console.log(response.data.message || 'Error updating the job title');
