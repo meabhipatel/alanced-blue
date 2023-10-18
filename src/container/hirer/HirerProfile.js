@@ -18,6 +18,9 @@ import plus from '../../components/images/plus.png'
 // import cupbook from '../../components/images/cupbook.png'
 import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
+import HirerAccountPopup from '../hirer/HirerAllPopup/AccountPopup'
+import HirerCompanyPopup from '../hirer/HirerAllPopup/CompanyPopup'
+import HirerContactPopup from './HirerAllPopup/ContactPopup'
 import { useDispatch, useSelector } from 'react-redux'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { GetHirerSelfProfileAction } from '../../redux/Hirer/HirerAction'
@@ -224,10 +227,31 @@ function combinedClick() {
         inputRef.current.click();
       }
       
+      const [hirerUpdate, sethirerUpdate] = React.useState(hirerData)
 
+      const onChange = e => {
+        sethirerUpdate({
+          ...hirerUpdate,
+          [e.target.name]: e.target.value
+        });
+      };
+console.log("______________",hirerUpdate)
+const [first_Name, setfirst_Name] = useState("")
+console.log("++++++++++++++",first_Name)
       const handleImageSave = async () => {
     const formData = new FormData();
     formData.append("images_logo", selectedFile);
+    // formData.append("first_Name", hirerUpdate.first_Name);
+    // formData.append("last_Name", hirerUpdate.last_Name);
+    // formData.append("email", hirerUpdate.email);
+    
+    // const d = {
+    //     ...(selectedFile !== undefined && { "image_and_logo": selectedFile }),
+    //     "first_Name": hirerUpdate.first_Name,
+    //     "last_Name": hirerUpdate.last_Name,
+    //     "email": hirerUpdate.email,
+            
+    // }
 
     // if(hirerData && hirerData){
     //     hirerData.images_logo = URL.createObjectURL(selectedFile);
@@ -237,7 +261,7 @@ function combinedClick() {
     axios.put('https://aparnawiz91.pythonanywhere.com/account/hirer/profile/update',formData,{
         headers: {
             "Authorization":`Bearer ${accessToken}`
-          }
+          },first_Name: first_Name
     })
     .then(response => {
         if (response.data.status === 200) {
@@ -353,8 +377,10 @@ function combinedClick() {
                     <input 
                     type='file' 
                     ref={inputRef} 
+                    // name='images_logo'
                     style={{display:"none"}}
                     onChange={handleFileChange}
+                    accept="image/*"
                 />
                         </div>
                         <p className="font-cardo text-[17px] text-[#031136] font-normal pt-2 text-left">Must Be An Actual Photo Of You.</p>
@@ -423,7 +449,7 @@ function combinedClick() {
                 </div>
     
    </div>
-   {isAccount && (
+   {/* {isAccount && (
                 <div className="fixed z-10 inset-0 overflow-y-auto mt-10">
                     <div className="fixed inset-0 bg-black opacity-50"></div>
                     <div className="flex items-center justify-center min-h-screen">
@@ -439,16 +465,16 @@ function combinedClick() {
                     <div className='flex gap-5 w-full'>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>First Name</span>
-                    <input type="text" defaultValue={hirerData.first_Name} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input type="text" name='first_Name' defaultValue={hirerData.first_Name} onChange={e => {setfirst_Name(e.target.value)}} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
                     </div>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Last Name</span>
-                    <input type="text" defaultValue={hirerData.last_Name} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input type="text" name='last_Name' defaultValue={hirerData.last_Name} onChange={onChange} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
                     </div>
                     </div>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Email</span>
-                    <input type="text" defaultValue={hirerData.email} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input type="text" name='email' defaultValue={hirerData.email} onChange={onChange} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
                     </div>
                     <div className="flex justify-start items-center space-x-4 gap-6 mt-3 mr-auto"> 
             <label className="flex items-center">
@@ -462,8 +488,8 @@ function combinedClick() {
             </div>
                         </div>
                         
-                            <div className="mt-8 flex justify-end">
-                            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold">Save</span></Link>
+                            <div className="mt-8 flex justify-end" onClick={handleImageSave}>
+                            <Link to='/hirer/profile-edit'><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold">Save</span></Link>
                             <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
                                 <Link to=''><button class="px-2 py-1 bg-white rounded-sm" onClick={handleAccountClose}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
                             </div>     
@@ -472,7 +498,8 @@ function combinedClick() {
                         </div>
                     </div>
                 </div>
-            )}
+            )} */}
+            {isAccount && <HirerAccountPopup isAvailable={isAvailable} setIsAvailable={setIsAvailable} handleAccountClose={handleAccountClose}/>}
    <div className='border-b flex border-gray-200 border-opacity-30 text-left py-6 px-4 md:px-8' id='workHistory'>
     <div className='flex flex-col'>
     <span className='text-xl text-[#00BF58] font-bold'>Company Details</span>
@@ -493,7 +520,7 @@ function combinedClick() {
     
    
    </div>
-   {isDetails && (
+   {/* {isDetails && (
                 <div className="fixed z-10 inset-0 overflow-y-auto mt-10">
                     <div className="fixed inset-0 bg-black opacity-50"></div>
                     <div className="flex items-center justify-center min-h-screen">
@@ -533,7 +560,8 @@ function combinedClick() {
                         </div>
                     </div>
                 </div>
-            )}
+            )} */}
+            { isDetails && <HirerCompanyPopup handleDetailsClose={handleDetailsClose}/>}
    <div className='border-b flex border-gray-200 border-opacity-30 text-left py-6 px-4 md:px-8' id='workHistory'>
     <div className='flex flex-col'>
     <span className='text-xl text-[#00BF58] font-bold'>Company Contacts</span>
@@ -550,7 +578,7 @@ function combinedClick() {
                     <img src={edit} alt="edit" />
                 </div>
    </div>
-   {isContacts && (
+   {/* {isContacts && (
                 <div className="fixed z-10 inset-0 overflow-y-auto mt-10">
                     <div className="fixed inset-0 bg-black opacity-50"></div>
                     <div className="flex items-center justify-center min-h-screen">
@@ -590,7 +618,9 @@ function combinedClick() {
                         </div>
                     </div>
                 </div>
-            )}
+            )} */}
+            
+            {isContacts && <HirerContactPopup handleContactsClose={handleContactsClose}/>}
    </div>
    </div>
     
