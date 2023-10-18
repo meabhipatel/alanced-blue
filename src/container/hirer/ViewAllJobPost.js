@@ -11,12 +11,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GetViewHirerSelfProjectssAction } from '../../redux/Hirer/HirerAction'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import axios from 'axios'
 
 const ViewAllJobPost = () => {
     
    const viewhirerselfproject = useSelector(state => state.hirer.viewhirerselfproject)
    const accessToken = useSelector(state => state.login.accessToken); 
    const dispatch = useDispatch();
+   const id = viewhirerselfproject && viewhirerselfproject.id ? viewhirerselfproject.id : '';
    
    React.useEffect(() => {
     dispatch(GetViewHirerSelfProjectssAction(accessToken))
@@ -127,6 +129,50 @@ function timeAgo(postedTimeStr) {
   }
 }
 
+// useEffect(() => {
+//   if(id) { 
+//       axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View/bids/${id}`)
+//           .then(response => {
+//               if (response.data.status === 200) {
+//                   setBid(response.data.data);
+//               } else {
+//                   console.log(response.data.message || 'Error fetching bids');
+//               }
+//           })
+//           .catch(err => {
+//               console.log(err.message);
+//           });
+//   }
+// }, [id]); 
+
+const [bidsCount, setBidsCount] = useState({});
+
+    useEffect(() => {
+        const fetchBidsForAllProjects = async () => {
+            const bids = {};
+
+            for (const project of viewhirerselfproject || []) {
+                try {
+                    const response = await axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View/bids/${project.id}`);
+                    if (response.data.status === 200) {
+                        bids[project.id] = response.data.data.length; 
+                    } else {
+                        console.log(response.data.message || 'Error fetching bids');
+                        bids[project.id] = 0;
+                    }
+                } catch (err) {
+                    console.log(err.message);
+                    bids[project.id] = 0;
+                }
+            }
+
+            setBidsCount(bids);
+        };
+
+        fetchBidsForAllProjects();
+    }, [viewhirerselfproject]);
+
+
   return (
     <>
     <Navbar/>
@@ -175,7 +221,6 @@ function timeAgo(postedTimeStr) {
                 //   const now = new Date();
                 //   return now < deadlineDate;
                 // }
-
                 return(<>
     <div className='px-4 md:px-8 py-5 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30' key={index}>
 <div class="flex">
@@ -191,7 +236,7 @@ function timeAgo(postedTimeStr) {
   </div>
   <div class="flex-[40%] flex">
     <div class="flex-1 p-2">
-    <p className="font-inter text-[#0A142F] text-[16px] font-medium">7</p>
+    <p className="font-inter text-[#0A142F] text-[16px] font-medium">{bidsCount[project.id]}</p>
     <p className="font-inter text-[#0A142F] opacity-50 text-[16px] font-medium">Proposals</p>
     </div>
     <div class="flex-1 p-2">

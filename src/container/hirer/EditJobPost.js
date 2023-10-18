@@ -71,6 +71,11 @@ const EditJobPost = () => {
         setIsJobSkillsOpen(false);
       };
 
+      const formatDate = (dateStr) => {
+        const [year, month, day] = dateStr.split('-');
+        return `${day}-${month}-${year}`;
+      };
+
   return (
     <>
     <Navbar/>
@@ -134,7 +139,7 @@ const EditJobPost = () => {
 <div className='flex justify-between items-center mt-5'>
     <div className="flex flex-col">
         <h1 className="font-inter text-lg text-[#031136] font-semibold text-left pb-2">Scope</h1>
-        <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">Project Deadline : {project.deadline}</h1>
+        <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">Project Deadline : {formatDate(project.deadline)}</h1>
         <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">Experience Level : Expert </h1> 
     </div>
     <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={()=>openJobScope(project)}>
@@ -145,7 +150,8 @@ const EditJobPost = () => {
 <div className='flex justify-between items-center mt-5'>
     <div className="flex flex-col">
         <h1 className="font-inter text-lg text-[#031136] font-semibold text-left pb-2">Budget</h1>
-        <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">${project.budget} /hr</h1>
+        <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">${project.Project_Rate == 'Hourly' ? project.Project_Min_Hourly_Rate+"/hr" +" - "+ "$"+project.Project_Max_Hourly_Rate+"/hr" : project.Project_Fixed_Budget }</h1>
+        <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">{project.Project_Rate} Rate</h1>
         </div>
     <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={()=>openJobBudget(project)}>
         <img src={edit} alt="more" />
