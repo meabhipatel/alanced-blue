@@ -87,3 +87,19 @@ export const GetHirerSelfProfile = async (token) => {
        return handleError(err);
      });
  };
+
+ export const HirerUpdate = async (data, token) => {
+  setHeadersWithAccessToken(token);
+   return await DataService.put(API.Hirers.Hirer.HirerUpdate, data,{
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+     .then((res) => {
+       console.log("hirer data : ",res);
+       return res.data;
+     })
+     .catch((err) => {
+       return handleError(err);
+     });
+ };
