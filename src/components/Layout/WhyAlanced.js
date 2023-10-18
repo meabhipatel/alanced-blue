@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import HomeSection4 from './HomeSection4'
 import { Link } from 'react-router-dom'
-import topimg from '../images/whysearch.png'
+import topimg from '../images/searchg.png'
 import create from '../images/screate.png'
 import earn from '../images/searn.png'
 import  pay from '../images/spay.png'
@@ -31,7 +31,7 @@ const WhyAlanced = () => {
             </div></Link>
             </div>
         </div>
-        <div className=' basis-4/12'><img src={topimg} alt="" className='h-48 mt-[6%] mb-[5%] mx-auto'/></div>
+        <div className=' basis-4/12'><img src={topimg} alt="" className='h-40 mt-[6%] mb-[5%] mx-auto'/></div>
       </div>
       <div className=' mt-12'>
         <div className=' flex flex-row'>

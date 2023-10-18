@@ -159,15 +159,15 @@ const [showFullDescription, setShowFullDescription] = useState(false);
                     <div className=' flex flex-row ml-4'>
                         <div className=' basis-3/12'><i class="fa fa-user-secret" aria-hidden="true"></i></div>
                         <div className=' basis-6/12'>
-                            <p className=' text-[14px] font-normal text-left'>Expert</p>
+                            <p className=' text-[14px] font-normal text-left'>{projectData.project.experience_level}</p>
                             <p className=' text-[12px] font-normal text-left opacity-50'>Experience level</p>
                         </div>
                     </div>
                     <div className=' flex flex-row ml-4 mt-4'>
                         <div className=' basis-3/12'><i class="bi bi-alarm-fill"></i></div>
                         <div className=' basis-6/12'>
-                            <p className=' text-[14px] font-normal text-left'>$18.00 - $50.00</p>
-                            <p className=' text-[12px] font-normal text-left opacity-50'>Hourly Range</p>
+                            <p className=' text-[14px] font-normal text-left'>${projectData.project.rate == 'Hourly' ? projectData.project.min_hourly_rate+"/hr" +" - "+ "$"+projectData.project.max_hourly_rate+"/hr" : projectData.project.fixed_budget }</p>
+                            <p className=' text-[12px] font-normal text-left opacity-50'>{projectData.project.rate}</p>
                         </div>
                     </div>
                     <div className=' flex flex-row ml-4 mt-4'>
