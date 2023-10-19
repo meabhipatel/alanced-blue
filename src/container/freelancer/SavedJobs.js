@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GetViewAllSavedJobsAction } from '../../redux/Freelancer/FreelancerAction'
 import axios from 'axios'
 import { useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 const SavedJobs = () => {
 
@@ -19,8 +20,6 @@ const SavedJobs = () => {
     const [savedJobs, setSavedJobs] = useState(initialSavedJobs);
     
     const dispatch = useDispatch();
-    const [selectedButton, setSelectedButton] = useState('Saved Jobs');
-    const commonStyle = "inline-block text-sm py-[10px] mt-4 lg:mt-0 border rounded font-semibold"; 
 
     useEffect(() => {
         dispatch(GetViewAllSavedJobsAction(accessToken));
@@ -49,15 +48,24 @@ const SavedJobs = () => {
                     }
                 }
             );
-
-            if (response.status === 200 && response.data.isSaved === false) {
-                const updatedJobs = savedJobs.filter(job => job.Project_id !== jobId);
-                setSavedJobs(updatedJobs);
+    
+            const isSaved = response.data.isSaved;
+    
+            // Update localStorage
+            localStorage.setItem(`isSaved_${jobId}`, JSON.stringify(isSaved));
+    
+            if (response.status === 200) {
+                if (response.data.isSaved === false) {
+                    toast.success("Job unsaved successfully!"); 
+                    const updatedJobs = savedJobs.filter(job => job.Project_id !== jobId);
+                    setSavedJobs(updatedJobs);
+                } 
             }
         } catch (error) {
             console.error("Error toggling the job save status", error);
         }
     };
+    
 
    
     function timeAgo(postedTimeStr) {
@@ -92,21 +100,7 @@ const SavedJobs = () => {
     <>
     <Navbar/>
     <div className='mt-2 mx-[9%]'>
-    <div className='my-3 flex flex-wrap'>
-    <Link to='/saved-jobs' className="flex-grow md:flex-none p-1">
-                <span 
-                    className={`${commonStyle} px-3 my-3 md:px-8 text-base font-inter font-bold ${selectedButton === 'Saved Jobs' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
-                    onClick={() => setSelectedButton('Saved Jobs')}>
-                    Saved Jobs
-                </span>
-            </Link>  
-            <Link to='/search-jobs'className="flex-grow md:flex-none p-1">
-                <span className={`${commonStyle} px-3 md:px-8 font-inter font-normal text-sm text-[#797979] opacity-[50%] ${selectedButton === 'Search' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-[50%]"} mr-3`}
-                    onClick={() => setSelectedButton('Search')}>
-                    Search
-                </span>
-            </Link>
-    </div>
+    <h1 className="font-cardo text-[26px] text-[#031136] text-left font-normal p-3">Saved Jobs</h1>
     <div className='my-4 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left'>
     {savedJobs && <>{savedJobs.map((job,index)=> {
         const words = job.Project_Description.split(' ');

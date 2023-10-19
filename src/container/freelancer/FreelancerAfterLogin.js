@@ -191,57 +191,17 @@ const calculateTimeAgo = (projectCreationDate) => {
 
 const chunkedFree = chunkArray(projectsToDisplay);
 
-
-// const toggleSaveProject = async (project) => {
-//     try {
-//         let response;
-
-//         if (project.isSaved) {
-//             // Unsave the project if it's already saved
-//             response = await axios.delete(`https://aparnawiz91.pythonanywhere.com/freelance/saved-projects/${project.id}`, {
-//                 headers: {
-//                     'Authorization': `Bearer ${accessToken}`
-//                 }
-//             });
-//             toast.success("Job unsaved successfully!"); 
-//         } else {
-//             // Save the project if it's not saved
-//             response = await axios.post(`https://aparnawiz91.pythonanywhere.com/freelance/saved-projects/${project.id}`, {}, {
-//                 headers: {
-//                     'Authorization': `Bearer ${accessToken}`
-//                 }
-//             });
-//             toast.success("Job saved successfully!"); 
-//         }
-        
-//         const updatedJob = response.data;
-
-//         const updatedProjects = projectsToDisplay.map(p => {
-//             if (p.id === updatedJob.id) {
-//                 return updatedJob;
-//             }
-//             return p;
-//         });
-//         projectsToDisplay(updatedProjects);
-
-//     } catch (error) {
-//         console.error("Error toggling job save state", error);
-//     }
-// };
-
 const toggleSaveProject = async (project) => {
     try {
         let response;
 
         if (project.isSaved) {
-            // Unsave the project if it's already saved
             response = await axios.delete(`https://aparnawiz91.pythonanywhere.com/freelance/saved-projects/${project.id}`, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
             });
         } else {
-            // Save the project if it's not saved
             response = await axios.post(`https://aparnawiz91.pythonanywhere.com/freelance/saved-projects/${project.id}`, {}, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
@@ -250,6 +210,10 @@ const toggleSaveProject = async (project) => {
         }
 
         const updatedJob = response.data;
+       
+        localStorage.setItem(`isSaved_${project.id}`, JSON.stringify(updatedJob.isSaved));
+
+
         if (updatedJob.isSaved) {
             toast.success("Job saved successfully!");
         } else {
@@ -271,12 +235,42 @@ const toggleSaveProject = async (project) => {
 };
 
 
+
 const handleClick = (event, index,project) => {
     event.stopPropagation();
     event.preventDefault();
     handleToggleDescription(index);
     toggleSaveProject(project);
 };
+
+
+const [bidsCount, setBidsCount] = useState({});
+
+    useEffect(() => {
+        const fetchBidsForAllProjects = async () => {
+            const bids = {};
+
+            for (const project of viewallprojects || []) {
+                try {
+                    const response = await axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View/bids/${project.id}`);
+                    if (response.data.status === 200) {
+                        bids[project.id] = response.data.data.length; 
+                    } else {
+                        console.log(response.data.message || 'Error fetching bids');
+                        bids[project.id] = 0;
+                    }
+                } catch (err) {
+                    console.log(err.message);
+                    bids[project.id] = 0;
+                }
+            }
+
+            setBidsCount(bids);
+        };
+
+        fetchBidsForAllProjects();
+    }, [viewallprojects]);
+
   
   return (
     <>
@@ -371,15 +365,13 @@ const handleClick = (event, index,project) => {
     <div className="flex items-center justify-between">
     <p className="font-inter text-[#0A142F] text-[18px] font-semibold">{project.title}</p>
     <div className="flex items-center space-x-2">
-        <div className="p-1 w-8 h-8 bg-white rounded-full border border-gray-200" onClick={(event) => handleClick(event, index,project)}>
-        {/* <img 
-            src={project.isSaved ? jobsave : heart} 
-            alt="Save/Unsave Icon" 
-        /> */}
-
-        {project.isSaved ? <i class="fa fa-heart p-1 text-green-600"></i>:<i class="fa fa-heart-o p-1"></i>}
-
-        </div>
+    <div className="p-1 w-8 h-8 bg-white rounded-full border border-gray-200" onClick={(event) => handleClick(event, index,project)}>
+    { 
+        localStorage.getItem(`isSaved_${project.id}`) === 'true' 
+        ? <i className="fa fa-heart p-1 text-green-600"></i>
+        : <i className="fa fa-heart-o p-1"></i> 
+    }
+</div>
     </div>
     </div>
     {AllProposals && AllProposals.map((all, proposal) => {
@@ -408,7 +400,7 @@ const handleClick = (event, index,project) => {
             </span>
         </Link>
          ))}
-        <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>Proposals : <span className='opacity-50'>Less than 5</span></p>
+        <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>Proposals : <span className='opacity-50'>{bidsCount[project.id]}</span></p>
         <img src={verify} alt="" className='inline-block h-3 w-3 mr-1'/>
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>Payment verified</p>
         <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>
