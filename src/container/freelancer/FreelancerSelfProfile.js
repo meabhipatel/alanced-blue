@@ -44,6 +44,7 @@ import TestimonialPopup from './AllPopup/TestimonialPopup'
 import FreelancerProjectsPopup from './AllPopup/FreelancerProjectsPopup'
 import axios from 'axios'
 import EditExperienceLevelPopup from './AllPopup/EditExperienceLevelPopup'
+import EditFreelancerProjectsPopup from './AllPopup/EditFreelancerProjectsPopup'
 
 const FreelancerSelfProfile = () => {
 
@@ -83,16 +84,6 @@ function formatDateToDayMonthYear(dateStr) {
     if (element) element.scrollIntoView({ behavior: 'smooth' });
   }
 
-
-//   useEffect(() => {
-//     const hash = window.location.hash;
-//     if (hash) {
-//       const targetElement = document.querySelector(hash);
-//       if (targetElement) {
-//         targetElement.scrollIntoView({ behavior: 'smooth' });
-//       }
-//     }
-//   }, []);
 
   function handleMouseEnter() {
     setIsHovered(true);
@@ -272,7 +263,7 @@ const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 3);
   const [isAddEmploymentOpen, setIsAddEmploymentOpen] = useState(false);
   const [isEditEmploymentOpen, setIsEditEmploymentOpen] = useState(false);
   const [isTestimonialOpen, setIsTestimonialOpen] = useState(false);
-  const [isFreeProjectOpen, setIsFreeProjectOpen] = useState(false);
+//   const [isFreeProjectOpen, setIsFreeProjectOpen] = useState(false);
   const [isExperienceLevelOpen, setIsExperienceLevelOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const inputRef = useRef(null)
@@ -286,16 +277,27 @@ const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 3);
     setIsExperienceLevelOpen(false);
   };
 
-  const openFreeProject = (project) => {
-    setSelectedProject(project);
-    setIsFreeProjectOpen(true);
-};
+//   const openFreeProject = (project) => {
+//     setSelectedProject(project);
+//     setIsFreeProjectOpen(true);
+// };
 
-const closeFreeProject = () => {
-    setSelectedProject(null);
-    setIsFreeProjectOpen(false);
-};
+// const closeFreeProject = () => {
+//     setSelectedProject(null);
+//     setIsFreeProjectOpen(false);
+// };
 
+const [isEditFreeProjectOpen, setIsEditFreeProjectOpen] = useState(false);
+  
+    const openEditFreeProject = (project) => {
+      setSelectedProject(project);
+      setIsEditFreeProjectOpen(true);
+  };
+  
+  const closeEditFreeProject = () => {
+      setSelectedProject(null);
+      setIsEditFreeProjectOpen(false);
+  };
 
   const openTestimonial = () => {
     setIsTestimonialOpen(true);
@@ -903,7 +905,7 @@ const closeFreeProject = () => {
     </div>
     <div className="flex flex-wrap -mx-2">  
     {chunkedProjects[active - 1] && chunkedProjects[active - 1].map((pro, index) => (
-        <div className='w-1/3 px-2 cursor-pointer' key={index} onClick={() => openFreeProject(pro)}>  
+        <div className='w-1/3 px-2 cursor-pointer' key={index} onClick={() => openEditFreeProject(pro)}>  
             <div className='w-full h-[165px] mt-4 border border-gray-100 overflow-hidden'>
                 <img 
                     src={"https://aparnawiz91.pythonanywhere.com/"+pro.images_logo} 
@@ -920,7 +922,7 @@ const closeFreeProject = () => {
             <p className='font-inter text-green-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-green-700 underline font-semibold'>{pro.project_title}</p>
         </div>
     ))}
-    {isFreeProjectOpen && <FreelancerProjectsPopup project={selectedProject} closeFreeProject={closeFreeProject} />}
+    {isEditFreeProjectOpen && <EditFreelancerProjectsPopup project={selectedProject} closeEditFreeProject={closeEditFreeProject} />}
 </div>
    <div className="flex justify-end items-center gap-6 mt-5">
 {freelancerproject.length > 6 && (

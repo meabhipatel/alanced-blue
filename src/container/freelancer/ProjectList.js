@@ -31,11 +31,11 @@ function ProjectList() {
   console.log(category,"category")
   const viewallprojects = useSelector(state => state.freelancer.viewallprojects)
   const accessToken = useSelector(state => state.login.accessToken);
-  const [categoryFilter, setCategoryFilter] = useState([]);
-  const [locationFilter, setLocationFilter] = useState([]);
-  const [skillFilter, setSkillFilter] = useState('');
-  const [rateFilter, setRateFilter] = useState([]);
-  const [expFilter, setExpFilter] = useState([]);
+  // const [categoryFilter, setCategoryFilter] = useState([]);
+  // const [locationFilter, setLocationFilter] = useState([]);
+  // const [skillFilter, setSkillFilter] = useState('');
+  // const [rateFilter, setRateFilter] = useState([]);
+  // const [expFilter, setExpFilter] = useState([]);
   // const projectData = { viewallprojects }
   const dispatch = useDispatch();
 
@@ -171,22 +171,22 @@ function ProjectList() {
    
     const filteredJobs = viewallprojects?.filter(project => {
     
-      const withinPriceRange = isDefaultRange || (project.fixed_budget >= range[0] && project.fixed_budget <= range[1]);
+      // const withinPriceRange = isDefaultRange || (project.fixed_budget >= range[0] && project.fixed_budget <= range[1]);
 
       return (
-        project.category.toLowerCase().includes(categorySearch.toLowerCase()) &&
+        project.category.toLowerCase().includes(categorySearch.toLowerCase()) 
     
-        (categoryFilter.length === 0 || categoryFilter.includes(project.category)) &&
+        // (categoryFilter.length === 0 || categoryFilter.includes(project.category)) &&
         
-        (expFilter.length === 0 || expFilter.includes(project.experience_level)) &&
+        // (expFilter.length === 0 || expFilter.includes(project.experience_level)) &&
         
-        (locationFilter.length === 0 || locationFilter.includes(project.project_owner_location)) &&
+        // (locationFilter.length === 0 || locationFilter.includes(project.project_owner_location)) &&
         
-        (skillFilter.length === 0 || 
-          JSON.parse(project.skills_required.replace(/'/g,'"')).some(skill => skillFilter.includes(skill))) &&
+        // (skillFilter.length === 0 || 
+        //   JSON.parse(project.skills_required.replace(/'/g,'"')).some(skill => skillFilter.includes(skill))) &&
         
-        (rateFilter.length === 0 || rateFilter.includes(project.rate)) &&
-        withinPriceRange
+        // (rateFilter.length === 0 || rateFilter.includes(project.rate)) &&
+        // withinPriceRange
       );
     }) || [];
     
@@ -207,71 +207,71 @@ function ProjectList() {
     };
 
 
-    const categoryCounts = {};
+//     const categoryCounts = {};
 
-    viewallprojects?.forEach(project => {
-        if (categoryCounts[project.category]) {
-            categoryCounts[project.category]++;
-        } else {
-            categoryCounts[project.category] = 1;
-        }
-    });
+//     viewallprojects?.forEach(project => {
+//         if (categoryCounts[project.category]) {
+//             categoryCounts[project.category]++;
+//         } else {
+//             categoryCounts[project.category] = 1;
+//         }
+//     });
     
-    const expCounts = {};
+//     const expCounts = {};
     
-    viewallprojects?.forEach(project => {
-        if (expCounts[project.experience_level]) {
-            expCounts[project.experience_level]++;
-        } else {
-            expCounts[project.experience_level] = 1;
-        }
-    });
+//     viewallprojects?.forEach(project => {
+//         if (expCounts[project.experience_level]) {
+//             expCounts[project.experience_level]++;
+//         } else {
+//             expCounts[project.experience_level] = 1;
+//         }
+//     });
     
-    const skillCounts = {};
+//     const skillCounts = {};
     
-    viewallprojects?.forEach(project => {
-        const skills = JSON.parse(project.skills_required.replace(/'/g, '"'));
-        skills.forEach(skill => {
-            if (skillCounts[skill]) {
-                skillCounts[skill]++;
-            } else {
-                skillCounts[skill] = 1;
-            }
-        });
-    });
+//     viewallprojects?.forEach(project => {
+//         const skills = JSON.parse(project.skills_required.replace(/'/g, '"'));
+//         skills.forEach(skill => {
+//             if (skillCounts[skill]) {
+//                 skillCounts[skill]++;
+//             } else {
+//                 skillCounts[skill] = 1;
+//             }
+//         });
+//     });
     
     
-    const ProjecttypeCounts = {};
+//     const ProjecttypeCounts = {};
     
-    viewallprojects?.forEach(project => {
-        if (ProjecttypeCounts[project.rate]) {
-          ProjecttypeCounts[project.rate]++;
-        } else {
-          ProjecttypeCounts[project.rate] = 1;
-        }
-    });
+//     viewallprojects?.forEach(project => {
+//         if (ProjecttypeCounts[project.rate]) {
+//           ProjecttypeCounts[project.rate]++;
+//         } else {
+//           ProjecttypeCounts[project.rate] = 1;
+//         }
+//     });
     
-    const locationCounts = {};
+//     const locationCounts = {};
     
-    viewallprojects?.forEach(project => {
-        if (locationCounts[project.project_owner_location]) {
-          locationCounts[project.project_owner_location]++;
-        } else {
-          locationCounts[project.project_owner_location] = 1;
-        }
-    });
+//     viewallprojects?.forEach(project => {
+//         if (locationCounts[project.project_owner_location]) {
+//           locationCounts[project.project_owner_location]++;
+//         } else {
+//           locationCounts[project.project_owner_location] = 1;
+//         }
+//     });
 
-    const [showAllCategory, setShowAllCategory] = useState(false);
+//     const [showAllCategory, setShowAllCategory] = useState(false);
 
-const displayedCategories = showAllCategory ? Object.entries(categoryCounts) : Object.entries(categoryCounts).slice(0, 5);
+// const displayedCategories = showAllCategory ? Object.entries(categoryCounts) : Object.entries(categoryCounts).slice(0, 5);
 
-const [showAllSkill, setShowAllSkill] = useState(false);
+// const [showAllSkill, setShowAllSkill] = useState(false);
 
-const displayedSkills = showAllSkill ? Object.entries(skillCounts) : Object.entries(skillCounts).slice(0, 5);
+// const displayedSkills = showAllSkill ? Object.entries(skillCounts) : Object.entries(skillCounts).slice(0, 5);
 
-const [showAllLocation, setShowAllLocation] = useState(false);
+// const [showAllLocation, setShowAllLocation] = useState(false);
 
-const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Object.entries(locationCounts).slice(0, 5);
+// const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Object.entries(locationCounts).slice(0, 5);
 
 
   return (
@@ -305,33 +305,33 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
         <div className='flex flex-row'>
           <div className=' basis-3/12 mt-6'>
             <div><h1 className='font-cardo text-xl text-left font-normal'>Category</h1></div>
-            {displayedCategories.map(([category, count]) => (
+            {/* {displayedCategories.map(([category, count]) => ( */}
             <div className='flex flex-row mt-4'>
         <div className='basis-8/12'>
             <label class="flex items-center font-inter relative cursor-pointer">
                 <input 
           className="hidden" 
           type="checkbox"
-          value={category}
-          onChange={() => {
-            if (categoryFilter.includes(category)) {
-              setCategoryFilter(prev => prev.filter(c => c !== category));
-            } else {
-              setCategoryFilter(prev => [...prev, category]);
-            }
-          }}
+          // value={category}
+          // onChange={() => {
+          //   if (categoryFilter.includes(category)) {
+          //     setCategoryFilter(prev => prev.filter(c => c !== category));
+          //   } else {
+          //     setCategoryFilter(prev => [...prev, category]);
+          //   }
+          // }}
         />
                 <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                   
                     <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
                 </div>
                      <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">{category}</span>
+                <span class="font-normal text-[#797979]">Web Development</span>
             </label>
         </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(4)</div>
     </div>
-    ))}
+    {/* ))}
     {Object.entries(categoryCounts).length > 5 && (
       <div>
         <h1 
@@ -341,58 +341,59 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
           {showAllCategory ? "Show Less" : "Show More"}
         </h1>
       </div>
-    )}
+    )} */}
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Experience Level</h1></div>
-            {Object.entries(expCounts).map(([exp, count]) => (
+            {/* {Object.entries(expCounts).map(([exp, count]) => ( */}
             <div className='flex flex-row mt-4'>
         <div className='basis-8/12'>
             <label class="flex items-center font-inter relative cursor-pointer">
                 <input 
           className="hidden" 
           type="checkbox"
-          value={exp}
-          onChange={() => {
-            if (expFilter.includes(exp)) {
-              setExpFilter(prev => prev.filter(c => c !== exp));
-            } else {
-              setExpFilter(prev => [...prev, exp]);
-            }
-          }}
+          // value={exp}
+          // onChange={() => {
+          //   if (expFilter.includes(exp)) {
+          //     setExpFilter(prev => prev.filter(c => c !== exp));
+          //   } else {
+          //     setExpFilter(prev => [...prev, exp]);
+          //   }
+          // }}
         />
                 <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                   
                     <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
                 </div>
                      <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">{exp.replace(/_/g, ' ')}</span>
+                <span class="font-normal text-[#797979]">Expert</span>
             </label>
         </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(2)</div>
     </div>
-    ))}
+    {/* ))} */}
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Project Type</h1></div>
-            {Object.entries(ProjecttypeCounts).map(([protype, count]) => (
+            {/* {Object.entries(ProjecttypeCounts).map(([protype, count]) => ( */}
             <div className='flex flex-row mt-4'>
               <div className=' basis-8/12 text-left'>
                 <label class="relative inline-flex items-center mr-5 cursor-pointer">
               <input 
           class="sr-only peer" 
           type="checkbox"
-          value={protype}
-          onChange={() => {
-            if (rateFilter.includes(protype)) {
-              setRateFilter(prev => prev.filter(c => c !== protype));
-            } else {
-              setRateFilter(prev => [...prev, protype]);
-            }
-          }}
+          // value={protype}
+          // onChange={() => {
+          //   if (rateFilter.includes(protype)) {
+          //     setRateFilter(prev => prev.filter(c => c !== protype));
+          //   } else {
+          //     setRateFilter(prev => [...prev, protype]);
+          //   }
+          // }}
         />
               <div class="w-11 h-6 bg-white border-2  border-green-300 rounded-full peer dark:bg-white-700 peer-focus:ring-0 peer-focus:ring-green-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-gradient-to-r  after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r from-[#00BF58] to-[#E3FF75]"></div>
-              <span class="ml-3 text-base font-normal font-inter text-[#797979]">{protype}</span>
+              <span class="ml-3 text-base font-normal font-inter text-[#797979]">Fixed</span>
             </label>
               </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div>
-            </div>))}
+              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(3)</div>
+            </div>
+            {/* ))} */}
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Project Rate</h1></div>
             <div className="pt-4 w-[85%]">
               <Slider
@@ -445,34 +446,34 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
               </div>
             </div>
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Skills</h1></div>
-            {displayedSkills.map(([skill, count]) => (
-        <div key={skill} className='flex flex-row mt-4'>
+            {/* {displayedSkills.map(([skill, count]) => ( */}
+        <div className='flex flex-row mt-4'>
             <div className='basis-8/12'>
                 <label className="flex items-center font-inter relative cursor-pointer">
                     <input 
           className="hidden" 
           type="checkbox"
-          value={skill}
-          onChange={() => {
-            if (skillFilter.includes(skill)) {
-              setSkillFilter(prev => prev.filter(c => c !== skill));
-            } else {
-              setSkillFilter(prev => [...prev, skill]);
-            }
-          }}
+          // value={skill}
+          // onChange={() => {
+          //   if (skillFilter.includes(skill)) {
+          //     setSkillFilter(prev => prev.filter(c => c !== skill));
+          //   } else {
+          //     setSkillFilter(prev => [...prev, skill]);
+          //   }
+          // }}
         />
                     <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                         <span className="checkmark hidden"><i className="bi bi-check-lg pr-2 pt-2"></i></span>
                     </div>
                     <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                    <span className="font-normal text-[#797979]">{skill}</span>
+                    <span className="font-normal text-[#797979]">Python</span>
                 </label>
             </div>
             <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
-                ({count})
+                (7)
             </div>
         </div>
-    ))}
+    {/* ))}
     {Object.entries(skillCounts).length > 5 && (
       <div>
         <h1 
@@ -482,36 +483,36 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
           {showAllSkill ? "Show Less" : "Show More"}
         </h1>
       </div>
-    )}
+    )} */}
            
               <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Citys</h1></div>
-              {displayedLocation.map(([location, count]) => (
+              {/* {displayedLocation.map(([location, count]) => ( */}
              <div className='flex flex-row mt-4'>
         <div className='basis-8/12'>
             <label class="flex items-center font-inter relative cursor-pointer">
                 <input 
           className="hidden" 
           type="checkbox"
-          value={location}
-          onChange={() => {
-            if (locationFilter.includes(location)) {
-              setLocationFilter(prev => prev.filter(c => c !== location));
-            } else {
-              setLocationFilter(prev => [...prev, location]);
-            }
-          }}
+          // value={location}
+          // onChange={() => {
+          //   if (locationFilter.includes(location)) {
+          //     setLocationFilter(prev => prev.filter(c => c !== location));
+          //   } else {
+          //     setLocationFilter(prev => [...prev, location]);
+          //   }
+          // }}
         />
                 <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                   
                     <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
                 </div>
                      <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">{location? location:'NA'}</span>
+                <span class="font-normal text-[#797979]">Indore</span>
             </label>
         </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(9)</div>
     </div>
-    ))}
+    {/* ))}
              {Object.entries(locationCounts).length > 5 && (
       <div>
         <h1 
@@ -521,7 +522,7 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
           {showAllLocation ? "Show Less" : "Show More"}
         </h1>
       </div>
-    )}
+    )} */}
           </div>
           { viewallprojects != null ? 
           <div className=' basis-9/12 mt-10'>

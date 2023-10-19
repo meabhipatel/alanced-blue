@@ -30,19 +30,19 @@ const FindTalent = () => {
     console.log(category,"category")
     const viewallfreelancer = useSelector(state => state.hirer.viewallfreelancer)
 
-    function parsedata(str) {
-        try {
-            return JSON.parse(str.replace(/'/g, '"'));
-        } catch (error) {
-            console.error("Error parsing JSON:", error);
-            return [];
-        }
-    }
+    // function parsedata(str) {
+    //     try {
+    //         return JSON.parse(str.replace(/'/g, '"'));
+    //     } catch (error) {
+    //         console.error("Error parsing JSON:", error);
+    //         return [];
+    //     }
+    // }
 
-    const [locationFilter, setLocationFilter] = useState([]);
-    const [expFilter, setExpFilter] = useState([]);
-    const [languageFilter, setLanguageFilter] = useState('');
-    const [skillFilter, setSkillFilter] = useState('');
+    // const [locationFilter, setLocationFilter] = useState([]);
+    // const [expFilter, setExpFilter] = useState([]);
+    // const [languageFilter, setLanguageFilter] = useState('');
+    // const [skillFilter, setSkillFilter] = useState('');
     // console.log(";;;;;;;;;;;;;;;;;;;;;;;",viewallfreelancer.length)
     console.log(useSelector(state => state.login.accessToken))
     const dispatch = useDispatch();
@@ -157,18 +157,18 @@ const FindTalent = () => {
     const isDefaultRange = range[0] === 1 && range[1] === 1000;
 
     const filteredJobs = viewallfreelancer?.filter(project => {
-        const languages = parsedata(project.Language);
-        const skills = parsedata(project.skills);
+        // const languages = parsedata(project.Language);
+        // const skills = parsedata(project.skills);
         
-        const withinPriceRange = isDefaultRange || (project.hourly_rate >= range[0] && project.hourly_rate <= range[1]);
+        // const withinPriceRange = isDefaultRange || (project.hourly_rate >= range[0] && project.hourly_rate <= range[1]);
     
         return (
-            project.category.toLowerCase().includes(categorySearch.toLowerCase()) &&
-            (locationFilter.length === 0 || locationFilter.includes(project.Address)) &&
-            (expFilter.length === 0 || expFilter.includes(project.experience_level)) &&
-            (languageFilter.length === 0 || languages.some(language => languageFilter.includes(language))) &&
-            (skillFilter.length === 0 || skills.some(skill => skillFilter.includes(skill))) &&
-            withinPriceRange  
+            project.category.toLowerCase().includes(categorySearch.toLowerCase()) 
+            // (locationFilter.length === 0 || locationFilter.includes(project.Address)) &&
+            // (expFilter.length === 0 || expFilter.includes(project.experience_level)) &&
+            // (languageFilter.length === 0 || languages.some(language => languageFilter.includes(language))) &&
+            // (skillFilter.length === 0 || skills.some(skill => skillFilter.includes(skill))) &&
+            // withinPriceRange  
         );
     }) || [];
     
@@ -203,63 +203,63 @@ const FindTalent = () => {
 const chunkedFree = chunkArray(viewallfreelancer, 6);
 
 
-const languageCounts = {};
-viewallfreelancer?.forEach(project => {
-    const languages = parsedata(project.Language);
-    languages.forEach(language => {
-        if (languageCounts[language]) {
-            languageCounts[language]++;
-        } else {
-            languageCounts[language] = 1;
-        }
-    });
-});
+// const languageCounts = {};
+// viewallfreelancer?.forEach(project => {
+//     const languages = parsedata(project.Language);
+//     languages.forEach(language => {
+//         if (languageCounts[language]) {
+//             languageCounts[language]++;
+//         } else {
+//             languageCounts[language] = 1;
+//         }
+//     });
+// });
 
-const skillCounts = {};
-viewallfreelancer?.forEach(project => {
-    const skills = parsedata(project.skills);
-    skills.forEach(skill => {
-        if (skillCounts[skill]) {
-            skillCounts[skill]++;
-        } else {
-            skillCounts[skill] = 1;
-        }
-    });
-});
+// const skillCounts = {};
+// viewallfreelancer?.forEach(project => {
+//     const skills = parsedata(project.skills);
+//     skills.forEach(skill => {
+//         if (skillCounts[skill]) {
+//             skillCounts[skill]++;
+//         } else {
+//             skillCounts[skill] = 1;
+//         }
+//     });
+// });
 
 
-const expCounts = {};
+// const expCounts = {};
     
-    viewallfreelancer?.forEach(project => {
-        if (expCounts[project.experience_level]) {
-            expCounts[project.experience_level]++;
-        } else {
-            expCounts[project.experience_level] = 1;
-        }
-    });
+//     viewallfreelancer?.forEach(project => {
+//         if (expCounts[project.experience_level]) {
+//             expCounts[project.experience_level]++;
+//         } else {
+//             expCounts[project.experience_level] = 1;
+//         }
+//     });
 
 
-const locationCounts = {};
+// const locationCounts = {};
     
-    viewallfreelancer?.forEach(project => {
-        if (locationCounts[project.Address]) {
-          locationCounts[project.Address]++;
-        } else {
-          locationCounts[project.Address] = 1;
-        }
-    });
+//     viewallfreelancer?.forEach(project => {
+//         if (locationCounts[project.Address]) {
+//           locationCounts[project.Address]++;
+//         } else {
+//           locationCounts[project.Address] = 1;
+//         }
+//     });
 
-const [showAllLocation, setShowAllLocation] = useState(false);
+// const [showAllLocation, setShowAllLocation] = useState(false);
 
-const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Object.entries(locationCounts).slice(0, 5);
+// const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Object.entries(locationCounts).slice(0, 5);
 
-const [showAllLanguage, setShowAllLanguage] = useState(false);
+// const [showAllLanguage, setShowAllLanguage] = useState(false);
 
-const displayedLanguages = showAllLanguage ? Object.entries(languageCounts) : Object.entries(languageCounts).slice(0, 5);
+// const displayedLanguages = showAllLanguage ? Object.entries(languageCounts) : Object.entries(languageCounts).slice(0, 5);
 
-const [showAllSkill, setShowAllSkill] = useState(false);
+// const [showAllSkill, setShowAllSkill] = useState(false);
 
-const displayedSkills = showAllSkill ? Object.entries(skillCounts) : Object.entries(skillCounts).slice(0, 5);
+// const displayedSkills = showAllSkill ? Object.entries(skillCounts) : Object.entries(skillCounts).slice(0, 5);
 
     return (
       <>
@@ -284,35 +284,35 @@ const displayedSkills = showAllSkill ? Object.entries(skillCounts) : Object.entr
   <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
   <div class='skills'>
   <div><h1 className='font-cardo text-xl text-left font-normal'>Skills</h1></div>
-  {displayedSkills.map(([skill, count]) => (
-        <div key={skill} className='flex flex-row mt-4'>
+  {/* {displayedSkills.map(([skill, count]) => ( */}
+        <div className='flex flex-row mt-4'>
             <div className='basis-8/12'>
                 <label className="flex items-center font-inter relative cursor-pointer">
                     <input 
           className="hidden" 
           type="checkbox"
-          value={skill}
-          onChange={() => {
-            if (skillFilter.includes(skill)) {
-              setSkillFilter(prev => prev.filter(c => c !== skill));
-            } else {
-              setSkillFilter(prev => [...prev, skill]);
-            }
-          }}
+          // value={skill}
+          // onChange={() => {
+          //   if (skillFilter.includes(skill)) {
+          //     setSkillFilter(prev => prev.filter(c => c !== skill));
+          //   } else {
+          //     setSkillFilter(prev => [...prev, skill]);
+          //   }
+          // }}
         />
                     <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                         <span className="checkmark hidden"><i className="bi bi-check-lg pr-2 pt-2"></i></span>
                     </div>
                     <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                    <span className="font-normal text-[#797979]">{skill}</span>
+                    <span className="font-normal text-[#797979]">Web Development</span>
                 </label>
             </div>
             <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
-                ({count})
+                (21)
             </div>
         </div>
-    ))}
-    {Object.entries(skillCounts).length > 5 && (
+    {/* ))} */}
+    {/* {Object.entries(skillCounts).length > 5 && (
       <div>
         <h1 
           className='font-cardo text-xl text-left mt-5 font-normal cursor-pointer'
@@ -321,7 +321,7 @@ const displayedSkills = showAllSkill ? Object.entries(skillCounts) : Object.entr
           {showAllSkill ? "Show Less" : "Show More"}
         </h1>
       </div>
-    )}
+    )} */}
            
   </div>
   <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Freelancer Rate</h1></div>
@@ -377,34 +377,34 @@ const displayedSkills = showAllSkill ? Object.entries(skillCounts) : Object.entr
             </div>
     <div class='location'>
     <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Citys</h1></div>
-    {displayedLocation.map(([location, count]) => (
+    {/* {displayedLocation.map(([location, count]) => ( */}
   <div className='flex flex-row mt-4'>
     <div className='basis-8/12'>
       <label className="flex items-center font-inter relative cursor-pointer">
         <input 
           className="hidden" 
           type="checkbox"
-          value={location}
-          onChange={() => {
-            if (locationFilter.includes(location)) {
-              setLocationFilter(prev => prev.filter(c => c !== location));
-            } else {
-              setLocationFilter(prev => [...prev, location]);
-            }
-          }}
+          // value={location}
+          // onChange={() => {
+          //   if (locationFilter.includes(location)) {
+          //     setLocationFilter(prev => prev.filter(c => c !== location));
+          //   } else {
+          //     setLocationFilter(prev => [...prev, location]);
+          //   }
+          // }}
         />
         <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
           <span className="checkmark hidden"><i className="bi bi-check-lg pr-2 pt-2"></i></span>
         </div>
         <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-        <span className="font-normal text-[#797979]">{location || 'NA'}</span>
+        <span className="font-normal text-[#797979]">Indore</span>
       </label>
     </div>
     <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
-      ({count})
+      (5)
     </div>
   </div>
-))}
+{/* ))}
 {Object.entries(locationCounts).length > 5 && (
       <div>
         <h1 
@@ -414,38 +414,38 @@ const displayedSkills = showAllSkill ? Object.entries(skillCounts) : Object.entr
           {showAllLocation ? "Show Less" : "Show More"}
         </h1>
       </div>
-    )}
+    )} */}
     </div>
     <div class='language'>
     <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Languages</h1></div>
-    {displayedLanguages.map(([language, count]) => (
-        <div key={language} className='flex flex-row mt-4'>
+    {/* {displayedLanguages.map(([language, count]) => ( */}
+        <div className='flex flex-row mt-4'>
             <div className='basis-8/12'>
                 <label className="flex items-center font-inter relative cursor-pointer">
                     <input 
           className="hidden" 
           type="checkbox"
-          value={language}
-          onChange={() => {
-            if (languageFilter.includes(language)) {
-              setLanguageFilter(prev => prev.filter(c => c !== language));
-            } else {
-              setLanguageFilter(prev => [...prev, language]);
-            }
-          }}
+          // value={language}
+          // onChange={() => {
+          //   if (languageFilter.includes(language)) {
+          //     setLanguageFilter(prev => prev.filter(c => c !== language));
+          //   } else {
+          //     setLanguageFilter(prev => [...prev, language]);
+          //   }
+          // }}
         />
                     <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                         <span className="checkmark hidden"><i className="bi bi-check-lg pr-2 pt-2"></i></span>
                     </div>
                     <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                    <span className="font-normal text-[#797979]">{language}</span>
+                    <span className="font-normal text-[#797979]">Hindi</span>
                 </label>
             </div>
             <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
-                ({count})
+                (22)
             </div>
         </div>
-    ))}
+    {/* ))}
     {Object.entries(languageCounts).length > 5 && (
       <div>
         <h1 
@@ -455,37 +455,37 @@ const displayedSkills = showAllSkill ? Object.entries(skillCounts) : Object.entr
           {showAllLanguage ? "Show Less" : "Show More"}
         </h1>
       </div>
-    )}
+    )} */}
     </div>
     <div class='level'>
     <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Experience Level</h1></div>
-    {Object.entries(expCounts).map(([exp, count]) => (
+    {/* {Object.entries(expCounts).map(([exp, count]) => ( */}
             <div className='flex flex-row mt-4'>
         <div className='basis-8/12'>
             <label class="flex items-center font-inter relative cursor-pointer">
                 <input 
           className="hidden" 
           type="checkbox"
-          value={exp}
-          onChange={() => {
-            if (expFilter.includes(exp)) {
-              setExpFilter(prev => prev.filter(c => c !== exp));
-            } else {
-              setExpFilter(prev => [...prev, exp]);
-            }
-          }}
+          // value={exp}
+          // onChange={() => {
+          //   if (expFilter.includes(exp)) {
+          //     setExpFilter(prev => prev.filter(c => c !== exp));
+          //   } else {
+          //     setExpFilter(prev => [...prev, exp]);
+          //   }
+          // }}
         />
                 <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                   
                     <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
                 </div>
                      <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">{exp ? exp.replace(/_/g, ' '):'NA'}</span>
+                <span class="font-normal text-[#797979]">Expert</span>
             </label>
         </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div>
+        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(23)</div>
     </div>
-    ))}
+    {/* ))} */}
     </div>
   </div>
   

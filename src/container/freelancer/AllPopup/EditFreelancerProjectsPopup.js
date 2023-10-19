@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import edit from '../../../components/images/edit.png'
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import SkillsList from '../AllSelectionData/SkillsList';
+import { toast } from 'react-toastify';
+import CategoryList from '../AllSelectionData/CategoryList';
 
 const EditFreelancerProjectsPopup = ({closeEditFreeProject,project}) => {
 
@@ -26,34 +29,28 @@ const EditFreelancerProjectsPopup = ({closeEditFreeProject,project}) => {
         }
       }, [project]);
   
-    const addSkill = () => {
-      if (currentSkill.trim() && skills.length < 15) {
-        setSkills(prevSkills => [...prevSkills, currentSkill.trim()]);
-        setCurrentSkill('');
-        setError('');
-      } else if (skills.length >= 15) {
-        setError('You can add a maximum of 15 skills.');
-      }
-    };
   
     const removeSkill = (index) => {
       setSkills(prevSkills => prevSkills.filter((_, idx) => idx !== index));
       setError('');
     };
     
-    const [uploadedImage, setUploadedImage] = useState(null);
-    const fileInputRef = useRef(null);
+    const [uploadedImage, setUploadedImage] = useState("https://aparnawiz91.pythonanywhere.com" + project.images_logo);
 
-    const handleImageUpload = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setUploadedImage(reader.result);
-            }
-            reader.readAsDataURL(file);
+    const fileInputRef = useRef(null);
+    const [uploadedFile, setUploadedFile] = useState(null); 
+
+const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setUploadedImage(reader.result);  // set the Data URL for preview purposes
+            setUploadedFile(file);  // store the File object
         }
-    };
+        reader.readAsDataURL(file);
+    }
+};
 
     const handleEditIconClick = () => {
         fileInputRef.current.click();
@@ -61,22 +58,33 @@ const EditFreelancerProjectsPopup = ({closeEditFreeProject,project}) => {
 
     const handleSave = async () => {
         try {
-            const updatedData = {
-                images_logo: uploadedImage, 
-                project_title: title,
-                category,
-                project_link: projectLink,
-                skills_used: JSON.stringify(skills),  
-                project_description: description,
-            };
-
-            const response = await axios.put(`https://aparnawiz91.pythonanywhere.com/freelance/update/Freelancer/Self-project/${id}`, updatedData, {
+            let formData = new FormData();
+        
+            // If an image file has been uploaded, append it
+            if (uploadedFile) {
+                formData.append('images_logo', uploadedFile);
+            }
+        
+            formData.append('project_title', title);
+            formData.append('category', category);
+            formData.append('project_link', projectLink);
+            
+            // Appending skills_used as an array of strings
+            skills.forEach((skill, index) => {
+                formData.append(`skills_used[${index}]`, skill);
+            });
+    
+            formData.append('project_description', description);
+        
+            const response = await axios.put(`https://aparnawiz91.pythonanywhere.com/freelance/update/Freelancer/Self-project/${id}`, formData, {
                 headers: {
-                    Authorization: `Bearer ${accessToken}`
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'multipart/form-data'
                 }
             });
-
+        
             if (response.data.status === 200) {
+                toast.success("Portfolio Data Updated Successfully")
                 closeEditFreeProject();
             } else {
                 console.log(response.data.message || 'Error updating the project');
@@ -85,9 +93,107 @@ const EditFreelancerProjectsPopup = ({closeEditFreeProject,project}) => {
             console.log(err.message);
         }
     };
+    
+    const allSkills = SkillsList;
+    const [searchTermSkill, setSearchTermSkill] = useState(''); 
+    const [isOpenSkill, setIsOpenSkill] = useState(false);
+    const wrapperRefSkill = useRef(null);
+    
+
+    const filteredSkills = allSkills.filter(
+        skill => skill.toLowerCase().includes(searchTermSkill.toLowerCase()) && !skills.includes(skill)
+    );
+
+    
+
+    const handleClickOutsideSkill = (event) => {
+        if (wrapperRefSkill.current && !wrapperRefSkill.current.contains(event.target)) {
+            setIsOpenSkill(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutsideSkill);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutsideSkill);
+        };
+    }, []);
+
+    const [categories] = useState(CategoryList);
+
+
+const [searchTerm, setSearchTerm] = useState(category || ""); 
+const [isOpen, setIsOpen] = useState(false);
+const wrapperRef = useRef(null);
+
+const filteredCategories = categories.filter(
+    category => category.toLowerCase().includes(searchTerm.toLowerCase())
+);
+
+const handleClickOutside = (event) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setIsOpen(false);
+    }
+};
+
+useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+    };
+}, []);
 
   return (
     <>
+      <style>
+    {`
+    .dropdown-list {
+        border: 1px solid #ccc;
+        max-height: 200px;
+        overflow-y: auto;
+        position: absolute;
+        width: 100%;
+        z-index: 1000;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background-color: #fff;
+        margin-top:11px;
+    }
+    
+    .dropdown-list li {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .dropdown-list li:hover {
+        background-color: #f7f7f7;
+    }
+    `}
+    {`
+    .cat-dropdown-list {
+        border: 1px solid #ccc;
+        max-height: 200px;
+        overflow-y: auto;
+        position: absolute;
+        width: 91%;
+        z-index: 1000;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background-color: #fff;
+    }
+    
+    .cat-dropdown-list li {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .cat-dropdown-list li:hover {
+        background-color: #f7f7f7;
+    }
+    `}
+</style>
     <div className="fixed z-10 inset-0 overflow-y-auto mt-24">
                     <div className="fixed inset-0 bg-black opacity-50"></div>
                     <div className="flex items-center justify-center min-h-screen">
@@ -99,13 +205,6 @@ const EditFreelancerProjectsPopup = ({closeEditFreeProject,project}) => {
                         </button>
                     </div>
                     <div className='mt-8'>
-                    {/* <img src={"https://aparnawiz91.pythonanywhere.com/"+project.images_logo} alt="" className='w-full h-[250px] mb-2'/> */}
-                    {/* <div className="relative">
-                    <img src={"https://aparnawiz91.pythonanywhere.com/"+project.images_logo} alt="" className='w-full h-[250px] mb-4'/>
-                    <div className="absolute top-2 right-2 p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer">
-                        <img src={edit} alt="edit" />
-                    </div>
-                </div> */}
 <div className="relative">
                 <img src={uploadedImage || "https://aparnawiz91.pythonanywhere.com/" + project.images_logo} alt="" className='w-full h-[250px] mb-4' />
                 <div className="absolute top-2 right-2 p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={handleEditIconClick}>
@@ -117,43 +216,89 @@ const EditFreelancerProjectsPopup = ({closeEditFreeProject,project}) => {
                     <input type="text" value={title}
                 onChange={(e) => setTitle(e.target.value)} className='border mb-3 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 opacity-50' placeholder=''/>
                     <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Category</h1>
-                    <select value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                    className='border mb-3 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white opacity-50'>
-                        <option>
-                           {category}
-                        </option>
-                </select>
+                    <div ref={wrapperRef}>
+    <input 
+        type="text" 
+        value={category} 
+        onClick={() => setIsOpen(!isOpen)} 
+        onChange={e => {
+            setSearchTerm(e.target.value);
+            setCategory(e.target.value);
+            setIsOpen(true);
+        }} 
+        className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'
+        placeholder="Select Category" 
+    />
+    {isOpen && (
+    <ul className="cat-dropdown-list">
+        {filteredCategories.length > 0 ? (
+            filteredCategories.map((cat, index) => (
+                <li 
+                    key={index} 
+                    onClick={() => {
+                        setSearchTerm(cat);
+                        setCategory(cat);
+                        setIsOpen(false);
+                    }}
+                >
+                    {cat}
+                </li>
+            ))
+        ) : (
+            <li>No results found</li>
+        )}
+    </ul>
+)}
+
+</div>
+                
                 <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Project Link</h1>
                     <input type="text" value={projectLink}
                 onChange={(e) => setProjectLink(e.target.value)} className='border mb-3 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 opacity-50' placeholder=''/>
                     <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Skills</h1>
-                    <div className="border rounded-md p-2 flex items-center flex-wrap mb-3">
-    {Array.isArray(skills) && skills.map((skill, index) => (
-        <div key={index} className="bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border-none text-white font-semibold rounded px-2 py-1.5 mr-3 my-2 flex items-center">
-            <span>{skill}</span>
-            <button onClick={() => removeSkill(index)} className="ml-2 mt-1 pb-0.5 text-sm bg-white text-green-500 rounded-full w-4 h-4 flex justify-center items-center">
-                &times;
-            </button>
-        </div>
-    ))}
-    <div className="flex items-center relative w-full">
-        <input 
-            type="text" 
-            value={currentSkill} 
-            onChange={(e) => setCurrentSkill(e.target.value)}
-            placeholder="Enter Skills here"
-            className="outline-none w-full"
-        />
-        <span id="hiddenText" style={{visibility: 'hidden', whiteSpace: 'pre', position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)'}}>{currentSkill}</span>
-        <button 
-            onClick={addSkill} 
-            style={{position: 'absolute', left: `${document.getElementById("hiddenText")?.offsetWidth || 0}px`, top: '47%', transform: 'translateY(-50%)'}}
-            className={`ml-4 mt-1 pb-0.5 text-sm bg-lime-500 text-white rounded-full w-4 h-4 flex justify-center items-center ${currentSkill.trim() ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
-        >
-            +
-        </button>
-    </div>
+                    <div className="border rounded-md p-2 flex items-center flex-wrap my-3">
+                {Array.isArray(skills) && skills.map((skill, index) => (
+                    <div key={index} className="bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border-none text-white font-semibold rounded px-2 py-1.5 mr-3 my-2 flex items-center">
+                        <span>{skill}</span>
+                        <button onClick={() => removeSkill(index)} className="ml-2 mt-1 pb-0.5 text-sm bg-white text-green-500 rounded-full w-4 h-4 flex justify-center items-center">
+                            &times;
+                        </button>
+                    </div>
+                ))}
+                <div ref={wrapperRefSkill} className="relative w-full">
+                    <input 
+                        type="text" 
+                        value={searchTermSkill} 
+                        onClick={() => setIsOpenSkill(!isOpenSkill)} 
+                        onChange={e => setSearchTermSkill(e.target.value)} 
+                        className='outline-none w-full'
+                        placeholder="Search & Select Skills"
+                    />
+                    {isOpenSkill && (
+                        <ul className="dropdown-list w-full">
+                            {filteredSkills.length > 0 ? (
+                                filteredSkills.map((skill, index) => (
+                                    <li 
+                                        key={index} 
+                                        onClick={() => {
+                                            if (skills.length < 15) {
+                                                setSkills(prev => [...prev, skill]);
+                                                setSearchTermSkill('');
+                                                setIsOpenSkill(false);
+                                            } else {
+                                                setError('You can add a maximum of 15 skills.');
+                                            }
+                                        }}
+                                    >
+                                        {skill}
+                                    </li>
+                                ))
+                            ) : (
+                                <li>No results found</li>
+                            )}
+                        </ul>
+                    )}
+                </div>
 </div>
 {error && <p className="text-red-500 mt-2">{error}</p>}
                 <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Description</h1>
