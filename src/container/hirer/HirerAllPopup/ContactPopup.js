@@ -1,15 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { HirerUpdateAction, GetHirerSelfProfileAction } from '../../../redux/Hirer/HirerAction';
 
 
 const HirerContactPopup = ({ handleContactsClose }) => {
 
+    const dispatch = useDispatch()
+    const accessToken = useSelector(state => state.login.accessToken);
     const hirerselfprofile = useSelector(state => state.hirer.hirerselfprofile)
     var hirerData = useState(null)
     if(hirerselfprofile != null){
         hirerData = hirerselfprofile
         console.log("hirer profile data on AccountPopup page : ",hirerData)
+    }
+
+    const [contact, setcontact] = useState('')
+    const [Address, setAddress] = useState('')
+
+    const handleSave = () => {
+        dispatch(HirerUpdateAction({
+            contact: contact,
+            Address: Address,
+        }, accessToken));
+        handleContactsClose();
+        dispatch(GetHirerSelfProfileAction(accessToken))
     }
 
     return(
@@ -33,18 +48,18 @@ const HirerContactPopup = ({ handleContactsClose }) => {
                     </div>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Phone</span>
-                    <input type="tel" defaultValue={hirerData.contact} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input type="tel" defaultValue={hirerData.contact} onChange={e => {setcontact(e.target.value)}} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
                     </div>
                     </div>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Address</span>
-                    <input type="text" defaultValue={hirerData.Address} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input type="text" defaultValue={hirerData.Address} onChange={e => {setAddress(e.target.value)}} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
                     </div>
             
                         </div>
                         
                             <div className="mt-8 flex justify-end">
-                            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold">Save</span></Link>
+                            <Link to='' onClick={handleSave}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold">Save</span></Link>
                             <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
                                 <Link to=''><button class="px-2 py-1 bg-white rounded-sm" onClick={handleContactsClose}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
                             </div>     

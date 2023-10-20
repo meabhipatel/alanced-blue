@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { HirerUpdateAction } from '../../../redux/Hirer/HirerAction';
+import { HirerUpdateAction, GetHirerSelfProfileAction } from '../../../redux/Hirer/HirerAction';
 
 
 const HirerAccountPopup = ({ isAvailable,setIsAvailable,handleAccountClose }) => {
@@ -30,6 +30,7 @@ const HirerAccountPopup = ({ isAvailable,setIsAvailable,handleAccountClose }) =>
             availableStatus: localAvailability
         }, accessToken));
         handleAccountClose();
+        dispatch(GetHirerSelfProfileAction(accessToken))
     }
 
 
