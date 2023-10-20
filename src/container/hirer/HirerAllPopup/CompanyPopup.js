@@ -61,7 +61,7 @@ const HirerCompanyPopup = ({ handleDetailsClose }) => {
                     </div>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Establish</span>
-                    <input type="date" defaultValue={formatToDDMMYYYY(hirerData.Company_Establish)} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' onChange={e => {setCompany_Establish(formatToYYYYMMDD(e.target.value))}} placeholder=''/>
+                    <input type="date" defaultValue={hirerData.Company_Establish} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' onChange={e => {setCompany_Establish(formatToYYYYMMDD(e.target.value))}} placeholder=''/>
                     </div>
                     </div>
                     <div className='flex flex-col w-full'>
