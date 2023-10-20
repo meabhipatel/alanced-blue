@@ -13,7 +13,7 @@ import heart from '../../components/images/heart.png'
 import verify from '../../components/images/verify.png'
 import location from '../../components/images/location.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import ViewProjectPopup from './AllPopup/ViewProjectPopup'
 import { GetViewAllProjectsListAction } from '../../redux/Freelancer/FreelancerAction'
 import Skeleton from 'react-loading-skeleton'
@@ -34,6 +34,7 @@ const FreelancerAfterLogin = () => {
   const accessToken = useSelector(state => state.login.accessToken);
   const [searchTerm, setSearchTerm] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   
  
 
@@ -216,8 +217,10 @@ const toggleSaveProject = async (project) => {
 
         if (updatedJob.isSaved) {
             toast.success("Job saved successfully!");
+            navigate('/freelancer/profile')
         } else {
             toast.success("Job unsaved successfully!");
+            navigate('/freelancer/profile')
         }
 
         const updatedProjects = projectsToDisplay.map(p => {
