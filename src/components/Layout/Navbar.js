@@ -8,10 +8,13 @@ import search from '../images/SearchOutlined.png'
 import searchbtn from '../images/searchbtn.png'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import profilepic from '../../components/images/profilepic.png'
+import { GetHirerSelfProfileAction } from '../../redux/Hirer/HirerAction'
+import { GetViewAllFreelancersAction } from '../../redux/Hirer/HirerAction'
 
 const Navbar = () => {
   
   const accessToken = localStorage.getItem('accessToken')
+  const AccessToken = useSelector(state => state.login.accessToken);
   const loginType = useSelector(state => state.login.type)
   const logindata = useSelector(state => state.login.login_data)
   const googleUserName = localStorage.getItem('googleUserName')
@@ -21,7 +24,16 @@ const Navbar = () => {
   const [Findworkdropdown, setFindworkDropdown] = useState(false)
   const [MyJobsdropdown, setMyJobsDropdown] = useState(false)
   const [Reportsdropdown, setReportsDropdown] = useState(false)
- 
+  const hirerImage = useSelector(state => state.hirerImage.hirerimageprofile)
+  var imagedata = useState(null)
+  if(hirerImage != null){
+  imagedata = hirerImage
+  console.log("hirer image ========> ", hirerImage.images_logo)
+  console.log("image data ========> ", imagedata.images_logo)
+}
+else{
+  imagedata = logindata
+}
 
   let displayName;
 
@@ -31,6 +43,14 @@ const Navbar = () => {
       displayName = logindata?.first_Name+" "+logindata?.last_Name;
   }
  
+  
+    React.useEffect(() => {
+      if (loginType == 'HIRER'){
+      dispatch(GetHirerSelfProfileAction(AccessToken))
+      // dispatch(GetViewAllFreelancersAction())
+    }
+    }, [AccessToken])
+  
 
   const isLoggedIn = Boolean(accessToken || googleUserName)
 
@@ -191,7 +211,7 @@ const Navbar = () => {
       <div className='relative inline-block'>
       {/* {logindata && logindata.images_logo !== "/media/images/blank.png" ? ( */}
         <img 
-            src={"https://aparnawiz91.pythonanywhere.com/" + logindata.images_logo} 
+            src={"https://aparnawiz91.pythonanywhere.com/" + imagedata.images_logo} 
             alt="Profile" 
             className="h-10 w-10 rounded-full cursor-pointer" 
             onClick={() => setDropdownVisible(!dropdownVisible)}
@@ -209,7 +229,7 @@ const Navbar = () => {
             <div className="py-1">
                       {/* {logindata && logindata.images_logo !== "/media/images/blank.png" ? ( */}
         <img 
-            src={"https://aparnawiz91.pythonanywhere.com/" + logindata.images_logo} 
+            src={"https://aparnawiz91.pythonanywhere.com/" + imagedata.images_logo} 
             alt="Profile" 
             className="h-20 w-20 rounded-full cursor-pointer mx-auto my-5 border border-gray-200 p-0.5" 
             onClick={() => setDropdownVisible(!dropdownVisible)}

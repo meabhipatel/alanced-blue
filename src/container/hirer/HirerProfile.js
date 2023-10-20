@@ -26,6 +26,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { GetHirerSelfProfileAction } from '../../redux/Hirer/HirerAction'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { toast } from "react-toastify";
 
 import axios from 'axios'
 
@@ -33,7 +34,7 @@ const HirerSelfProfile = () => {
 
   const accessToken = useSelector(state => state.login.accessToken);
   console.log("hirer self profile access token", accessToken)  
-  const hirerselfprofile = useSelector(state => state.hirer.hirerselfprofile)
+  const hirerselfprofile = useSelector(state => state.hirerImage.hirerimageprofile)
   var hirerData = useState(null)
   if(hirerselfprofile != null){
     hirerData = hirerselfprofile
@@ -55,7 +56,7 @@ const HirerSelfProfile = () => {
 
   React.useEffect(() => {
     dispatch(GetHirerSelfProfileAction(accessToken))
-  }, [])
+  }, [accessToken])
 
   function handleMouseEnter() {
     setIsHovered(true);
@@ -166,6 +167,7 @@ console.log("++++++++++++++",first_Name)
         if (response.data.status === 200) {
             setReviews(response.data.data);
             dispatch(GetHirerSelfProfileAction(accessToken))
+            toast.success('profile image updated',{className: 'mt-[100px]'})
         } else {
             console.log(response.data.message || 'Error fetching reviews');
         }
@@ -174,7 +176,7 @@ console.log("++++++++++++++",first_Name)
         console.log(err.message);
     });
     setIsModalOpen(false);
-    navigate('/hirer/profile-edit');
+    // navigate('/hirer/profile-edit');
 }
 
   const underlineStyle = {
