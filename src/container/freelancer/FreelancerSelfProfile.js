@@ -57,6 +57,7 @@ const FreelancerSelfProfile = () => {
   const [freelancerproject, setfreelancerproject] = useState([]);
   const [freelanceremployment, setfreelanceremployment] = useState([]);
   const id = freelancerselfprofile && freelancerselfprofile[0].id ? freelancerselfprofile[0].id : '';
+  const navigate = useNavigate();
 
   function formatDate(dateStr) {
     if (!dateStr) return "present";
@@ -168,7 +169,6 @@ useEffect(() => {
     }, []); 
   
   const [isAvailable, setIsAvailable] = useState(localStorage.getItem('userAvailability') || 'available');
-  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem('userAvailability', isAvailable);
