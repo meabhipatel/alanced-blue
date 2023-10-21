@@ -161,12 +161,43 @@ function ProjectList() {
   }, []);
   console.log("/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/",AllProposals)
 
+//(=//=//=//=//=//=//=//=//=)filter API integrtion(//=//=//=//=//=//=//=//=//=)
+
+  const [filteredApiData, setFilteredApiData] = useState([]);
+
   const handleCategoryFilterChange = (e) => {
     const category = e.target.value;
     if (e.target.checked) {
       setCategoryFilter((prevFilters) => [...prevFilters, category]);
     } else {
       setCategoryFilter((prevFilters) => prevFilters.filter((filter) => filter !== category));
+    }
+  };
+
+  const handleSkillFilterChange = (e) => {
+   const skills = e.target.value;
+   if (e.target.checked){
+    setSkillFilter((prevFilters) => [...prevFilters, skills]);
+   } else {
+    setSkillFilter((prevFilters) => prevFilters.filter((filter) => filter !== skills));
+   }
+  };
+
+  const handleExpFilterChange = (e) => {
+    const exp = e.target.value;
+    if (e.target.checked){
+      setExpFilter((prevFilters) => [...prevFilters, exp]);
+    } else {
+      setExpFilter((prevFilters) => prevFilters.filter((filter) => filter !== exp));
+    }
+  };
+
+  const handleRateFilterChange = (e) => {
+    const protype = e.target.value;
+    if (e.target.checked){
+      setRateFilter((prevFilters) => [...prevFilters, protype]);
+    } else {
+      setRateFilter((prevFilters) => prevFilters.filter((filter) => filter !== protype));
     }
   };
 
@@ -198,7 +229,7 @@ function ProjectList() {
       .get(`http://127.0.0.1:8000/freelance/filter/?${queryString}`)
       .then((response) => {
         // Handle the response and update the filtered data
-        setFilteredProjects(response.data);
+        setFilteredApiData(response.data);
       })
       .catch((error) => {
         // Handle errors
@@ -409,13 +440,14 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
     )}
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Experience Level</h1></div>
             {Object.entries(expCounts).map(([exp, count]) => (
-            <div className='flex flex-row mt-4'>
+            <div key={exp} className='flex flex-row mt-4'>
         <div className='basis-8/12'>
             <label class="flex items-center font-inter relative cursor-pointer">
                 <input 
           className="hidden" 
           type="checkbox"
           value={exp}
+          onChange={handleExpFilterChange}
         />
                 <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                   
@@ -437,6 +469,7 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
           class="sr-only peer" 
           type="checkbox"
           value={protype}
+          onChange={handleRateFilterChange}
         />
               <div class="w-11 h-6 bg-white border-2  border-green-300 rounded-full peer dark:bg-white-700 peer-focus:ring-0 peer-focus:ring-green-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-gradient-to-r  after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r from-[#00BF58] to-[#E3FF75]"></div>
               <span class="ml-3 text-base font-normal font-inter text-[#797979]">{protype}</span>
@@ -496,20 +529,21 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
               </div>
             </div>
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Skills</h1></div>
-            {displayedSkills.map(([skill, count]) => (
-        <div key={skill} className='flex flex-row mt-4'>
+            {displayedSkills.map(([skills, count]) => (
+        <div key={skills} className='flex flex-row mt-4'>
             <div className='basis-8/12'>
                 <label className="flex items-center font-inter relative cursor-pointer">
                     <input 
           className="hidden" 
           type="checkbox"
-          value={skill}
+          value={skills}
+          onChange={handleSkillFilterChange}
         />
                     <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                         <span className="checkmark hidden"><i className="bi bi-check-lg pr-2 pt-2"></i></span>
                     </div>
                     <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                    <span className="font-normal text-[#797979]">{skill}</span>
+                    <span className="font-normal text-[#797979]">{skills}</span>
                 </label>
             </div>
             <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
