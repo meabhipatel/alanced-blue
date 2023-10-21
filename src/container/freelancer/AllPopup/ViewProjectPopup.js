@@ -4,7 +4,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import frame from '../../../components/images/Frame.png'
 import money from '../../../components/images/money.png'
 import rating from '../../../components/images/superstart.png'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import AddBidAmount from '../AddBidAmount'
 // import { GetFreelancerSelfBidAction } from '../../../redux/Freelancer/FreelancerAction'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,6 +14,7 @@ import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
 import Navbar from '../../../components/Layout/Navbar';
 import HomeSection4 from '../../../components/Layout/HomeSection4';
 import Footer from '../../../components/Layout/Footer';
+import { toast } from 'react-toastify';
 
 
 
@@ -24,7 +25,7 @@ function ViewProjectPopup() {
   // console.log(findproject,"send_praposal")
   const projectData = { project };
 //   const dispatch = useDispatch();
-
+const navigate = useNavigate();
   const accessToken = useSelector(state => state.login.accessToken);  
 //   const freelancerselfbid = useSelector(state => state.freelancer.freelancerselfbid)
 //   console.log(freelancerselfbid,"/*/*/*/*/*/*/*/*/*/*/*/*/*/*/")
@@ -91,6 +92,58 @@ function ViewProjectPopup() {
         return `${years} year ago`;
     }
   }
+
+  const toggleSaveProject = async (project) => {
+    try {
+        let response;
+
+        if (project.isSaved) {
+            response = await axios.delete(`https://aparnawiz91.pythonanywhere.com/freelance/saved-projects/${project.id}`, {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            });
+        } else {
+            response = await axios.post(`https://aparnawiz91.pythonanywhere.com/freelance/saved-projects/${project.id}`, {}, {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            });
+        }
+
+        const updatedJob = response.data;
+       
+        localStorage.setItem(`isSaved_${project.id}`, JSON.stringify(updatedJob.isSaved));
+
+
+        if (updatedJob.isSaved) {
+            toast.success("Job saved successfully!");
+            navigate('/view-project/full-detail')
+        } else {
+            toast.success("Job unsaved successfully!");
+            navigate('/view-project/full-detail')
+        }
+
+        // const updatedProjects = projectsToDisplay.map(p => {
+        //     if (p.id === updatedJob.id) {
+        //         return updatedJob;
+        //     }
+        //     return p;
+        // });
+
+        // projectsToDisplay(updatedProjects);
+
+    } catch (error) {
+        console.error("Error toggling job save state", error);
+    }
+};
+
+const handleClick = (event,project) => {
+  event.stopPropagation();
+  event.preventDefault();
+  toggleSaveProject(project);
+};
+
 
 
   // if (!isOpen) {
@@ -182,7 +235,11 @@ function ViewProjectPopup() {
                 <Link to="/freelancer/add-bid" style={{pointerEvents: clickable ? 'none' : ''}} state={{ projectData }} onClick={() => window.scrollTo(0, 0)}><span class={clickable ? 'px-12 py-[15px] lg:mt-0 bg-slate-200 border rounded border-none text-white font-inter text-base font-normal':'px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal'}>Apply Now</span></Link>
                 </div>
                 <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-8 ml-[30%]">
-                <button class="rounded-sm px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-inter font-bold text-base py-[4px] px-8"><i class="bi bi-suit-heart"></i>  Save Job</p></button>
+                <button class="rounded-sm px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-inter font-bold text-base py-[4px] px-8" onClick={(event) => handleClick(event,project)}>{ 
+        localStorage.getItem(`isSaved_${project.id}`) === 'true' 
+        ? <><i className="fa fa-heart p-1 text-green-600"></i> Unsave Job</>
+        : <><i className="fa fa-heart-o p-1"></i> Save Job</> 
+    }</p></button>
                 </div> 
                 <div className='mt-8 text-sm font-inter font-normal text-[#0A142F] text-center ml-9'><i class="bi bi-flag-fill"></i><span className=' opacity-[50%] ml-2'>Flag as inappropriate</span></div>
                 <div className='mt-2 text-sm font-inter font-normal text-[#0A142F] text-center ml-9 opacity-[50%]'>Send a proposal for: 8 Connects</div>

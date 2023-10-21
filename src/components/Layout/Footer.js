@@ -4,9 +4,55 @@ import linkedin from '../images/linkedin.png';
 import twitter from '../images/twitter.png';
 import fb from '../images/fb.png';
 import arrow from '../images/arrow.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { AddUserSubscriptionAction } from '../../redux/User/UserAction';
+import { toast } from 'react-toastify';
 
 const Footer = () => {
+
+  const [addUserSub, setAddUserSub] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // const addsub = useSelector(state => state.user.addsub);
+  //   const [show, toogleShow] = useState(false);
+
+  //   const Loader = () =>{
+  //     if(addsub ==false || addsub == true){
+  //         toogleShow(false)
+  //         navigate('/')
+  //     }
+  //     return(
+  //         <>
+  //         <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-white mx-auto"></div>
+  //         </>
+  //     )
+  // }
+
+  const AddUserSubscribe = () => {
+
+    if (!addUserSub.email) {
+      toast.error("Email is Required");
+      return;
+  }
+
+    const formData = new URLSearchParams();
+    formData.append("email",addUserSub.email);
+  
+
+    dispatch(AddUserSubscriptionAction(formData));
+    // toogleShow(true)
+}
+
+const onChange = e =>{
+    setAddUserSub({
+        ...addUserSub,[e.target.name]: e.target.value
+    });
+}
+
+
   return (
     <>
     <footer className="footer-1 bg-white py-8 sm:py-12">
@@ -56,8 +102,8 @@ const Footer = () => {
     <div class="p-4">
     <div className='bg-[#F4F5F9] lg:h-[220px] lg:w-[350px] -mt-6 lg:-ml-[100px]'>
         <h5 class="text-xl font-bold font-cardo pt-[22px] text-start ml-[23px]">Subscribe</h5>
-        <input type="email" className='mt-3 lg:-ml-[60px] p-2 text-sm focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Email Address'/>
-        <button class="inline-block text-sm px-4 py-[12px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold"><img src={arrow} alt="" /></button>
+        <input type="email" className='mt-3 lg:-ml-[60px] p-2 text-sm focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Email Address' name='email' onChange={onChange}/>
+        <button class="inline-block text-sm px-4 py-[12px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold" onClick={AddUserSubscribe}><img src={arrow} alt=""/></button>
         <p className='text-[14px] pt-3 text-left pl-6 opacity-50'>Hello, we are Lift Media. Our goal is to translate <br />the positive effects from revolutionizing how <br /> companies engage with their clients & their <br /> team.</p>
         </div>
     </div>

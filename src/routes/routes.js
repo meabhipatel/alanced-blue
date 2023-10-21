@@ -61,6 +61,7 @@ import PrivacyPolicy from '../components/Layout/PrivacyPolicy';
 import Cookies from '../components/Layout/Cookies';
 import ViewMoreProjectDetail from "../container/freelancer/ViewMoreProjectDetail";
 import FreelancerFullDetailAfterLogin from "../container/hirer/FreelancerFullDetailAfterLogin";
+import Notifications from '../components/Layout/Notifications'
 
   const AppRouter = (props) => {
     
@@ -128,6 +129,7 @@ import FreelancerFullDetailAfterLogin from "../container/hirer/FreelancerFullDet
           <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
           <Route path="/view-more/project-detail" element={<ViewMoreProjectDetail/>}></Route>
           <Route path="/view-freelancer/full-detail" element={<FreelancerFullDetailAfterLogin/>}></Route>
+          <Route path="/notifications" element={<Notifications/>}/>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   

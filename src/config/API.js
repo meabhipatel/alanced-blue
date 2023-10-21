@@ -14,7 +14,6 @@ const API = {
       ViewFreelancerSelfBid: '/freelance/view/freelancer-self/bid',
       ViewFreelancerSelfBidProject: '/freelance/view/freelancer-self/project-bid',
       AddFreelancerEmployment:'/freelance/Add/Freelancer/Employment',
-      // SavedUnsavedJobs:'/freelance/saved-projects',
       ViewAllSavedJobs:'/freelance/View-all/SavedProjects'
     }
   },
@@ -28,7 +27,14 @@ const API = {
       UpdateProject:'/freelance/update/project',
       AddProject:'/freelance/Add/Project',
       HirerProfile:'/account/hirer/selfprofile/view',
-      HirerUpdate: '/account/hirer/profile/update'
+      HirerUpdate: '/account/hirer/profile/update',
+    }
+  },
+
+  Users:{
+    User:{
+      AddUserContact:'/freelance/user/contact-us',
+      AddUserSubscription:'/freelance/add/subscribe'
     }
   }
 };

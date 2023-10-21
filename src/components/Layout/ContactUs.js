@@ -1,10 +1,74 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from'./Navbar'
 import HomeSection4 from './HomeSection4'
 import Footer from './Footer'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { AddUserContactAction } from '../../redux/User/UserAction'
+import { toast } from 'react-toastify'
+
 
 const ContactUs = () => {
+
+    const [addUser, setAddUser] = useState('');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const adduser = useSelector(state => state.user.adduser);
+    const [show, toogleShow] = useState(false);
+
+    const Loader = () =>{
+      if(adduser ==false || adduser == true){
+          toogleShow(false)
+          navigate('/contact-us')
+      }
+      return(
+          <>
+          <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-white mx-auto"></div>
+          </>
+      )
+  }
+
+
+  const validateContact = (contact) => {
+    if (isNaN(contact)) {
+        return false;
+    }
+    if (contact.length !== 10) {
+        return false;
+    }
+    return true;
+}
+
+
+  const AddUserContact = () => {
+
+    if (!validateContact(addUser.Applicant_Contact)) {
+      toast.error("Enter a valid Contact Number with 10 digits");
+      return;
+    }
+
+    if (!addUser.Applicant_Email) {
+      toast.error("Email is Required");
+      return;
+  }
+
+    const formData = new URLSearchParams();
+    formData.append("Applicant_Email",addUser.Applicant_Email);
+    formData.append("Applicant_Name",addUser.Applicant_Name);
+    formData.append("Applicant_Contact",addUser.Applicant_Contact);
+    formData.append("Message",addUser.Message);
+    
+
+    dispatch(AddUserContactAction(formData));
+    toogleShow(true)
+}
+
+const onChange = e =>{
+    setAddUser({
+        ...addUser,[e.target.name]: e.target.value
+    });
+}
+
   return (
     <>
     <Navbar/>
@@ -25,11 +89,11 @@ const ContactUs = () => {
     </div>
     <div class="md:flex my-4">
   <div class="flex-1 py-4">
-  <input type="text" className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Your Name'/>
-  <input type="text" className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Email'/>
-  <input type="text" className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Phone'/>
-  <textarea name="" id="" cols="30" rows="4" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Your Message'></textarea>
-  <Link to='' onClick={() => window.scrollTo(0, 0)}><span class="w-full inline-block px-8 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold text-center text-md">Submit</span></Link>
+  <input type="text" className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Your Name' name='Applicant_Name' onChange={onChange} />
+  <input type="text" className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Email' name='Applicant_Email' onChange={onChange}/>
+  <input type="text" className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Phone' name='Applicant_Contact' onChange={onChange}/>
+  <textarea id="" cols="30" rows="4" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Your Message' name='Message' onChange={onChange}></textarea>
+  <Link to='/contact-us' onClick={AddUserContact}><span class="w-full inline-block px-8 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold text-center text-md">{show ? <div><Loader/></div> : "Submit"}</span></Link>
   </div>
   <div class="flex-1 px-8">
   <h1 className="font-inter text-lg  text-[#031136] text-left font-semibold pt-5">Reach Out Directly:</h1>
