@@ -10,6 +10,9 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import profilepic from '../../components/images/profilepic.png'
 import { GetHirerSelfProfileAction } from '../../redux/Hirer/HirerAction'
 import { GetViewAllFreelancersAction } from '../../redux/Hirer/HirerAction'
+import axios from 'axios'
+import { useEffect } from 'react'
+import alancedlogo from '../images/Alanced-footer.png'
 
 const Navbar = () => {
   
@@ -62,6 +65,165 @@ else{
 
     dispatch(LogoutAction())
 }
+
+const [clientnotifications, setClientNotifications] = useState([]);
+const [freenotifications, setFreeNotifications] = useState([]);
+const [isNotificationsDropdownVisible, setIsNotificationsDropdownVisible] = useState(false);
+
+const fetchClientNotifications = async () => {
+  try {
+      const response = await axios.get('https://aparnawiz91.pythonanywhere.com/freelance/view/client-notifications', {
+          headers: {
+              'Authorization': `Bearer ${AccessToken}`
+          }
+      });
+
+      if (response.data.status === 200) {
+          setClientNotifications(response.data.data);
+      } else {
+          console.log(response.data.message || 'Error fetching notification');
+      }
+  } catch (err) {
+      console.log(err.message);
+  }
+};
+
+useEffect(() => {
+  fetchClientNotifications(); 
+  const interval = setInterval(fetchClientNotifications, 2000); 
+  return () => clearInterval(interval); 
+}, []);
+
+const markAsReadClient = async (notifId) => {
+  try {
+      const response = await axios.put(`https://aparnawiz91.pythonanywhere.com/freelance/read/client-notification/${notifId}`, {}, {
+          headers: {
+              'Authorization': `Bearer ${AccessToken}`
+          }
+      });
+
+      if (response.data.status === 200) {
+          fetchClientNotifications(); 
+      } else {
+          console.log(response.data.message || 'Error marking notification as read');
+      }
+  } catch (err) {
+      console.log(err.message);
+  }
+};
+
+const toggleNotificationDropdown = () => {
+    setIsNotificationsDropdownVisible(!isNotificationsDropdownVisible);
+};
+const unreadclientCount = clientnotifications.filter(notif => !notif.is_read).length;
+
+function timeAgo(postedTimeStr) {
+  const postedTime = new Date(postedTimeStr);
+  const currentTime = new Date();
+
+  const deltaInMilliseconds = currentTime - postedTime;
+  const deltaInSeconds = Math.floor(deltaInMilliseconds / 1000);
+  const deltaInMinutes = Math.floor(deltaInSeconds / 60);
+  const deltaInHours = Math.floor(deltaInMinutes / 60);
+  const deltaInDays = Math.floor(deltaInHours / 24);
+
+  if (deltaInMinutes < 1) {
+      return "just now";
+  } else if (deltaInMinutes < 60) {
+      return `${deltaInMinutes}m`;
+  } else if (deltaInHours < 24) {
+      return `${deltaInHours}h`;
+  } else if (deltaInDays < 30) {
+      return `${deltaInDays}d`;
+  } else if (deltaInDays < 365) {
+      const months = Math.floor(deltaInDays / 30);
+      return `${months} month`;
+  } else {
+      const years = Math.floor(deltaInDays / 365);
+      return `${years} year`;
+  }
+}
+
+
+const deleteClientNotification = async (notifId) => {
+  try {
+      const response = await axios.delete(`https://aparnawiz91.pythonanywhere.com/freelance/delete/client-notification/${notifId}`, {
+          headers: {
+              'Authorization': `Bearer ${AccessToken}`
+          }
+      });
+
+      if (response.data.status === 200) {
+          fetchClientNotifications(); 
+      } else {
+          console.log(response.data.message || 'Error deleting notification');
+      }
+  } catch (err) {
+      console.log(err.message);
+  }
+};
+
+const fetchFreeNotifications = async () => {
+    try {
+        const response = await axios.get('https://aparnawiz91.pythonanywhere.com/freelance/view/freelancer-notifications', {
+            headers: {
+                'Authorization': `Bearer ${AccessToken}`
+            }
+        });
+  
+        if (response.data.status === 200) {
+            setFreeNotifications(response.data.data);
+        } else {
+            console.log(response.data.message || 'Error fetching notification');
+        }
+    } catch (err) {
+        console.log(err.message);
+    }
+  };
+  
+  useEffect(() => {
+    fetchFreeNotifications(); 
+    const interval = setInterval(fetchFreeNotifications, 2000);
+    return () => clearInterval(interval); 
+  }, []);
+  
+  const markAsReadFree = async (notifId) => {
+    try {
+        const response = await axios.put(`https://aparnawiz91.pythonanywhere.com/freelance/read/freelancer-notification/${notifId}`, {}, {
+            headers: {
+                'Authorization': `Bearer ${AccessToken}`
+            }
+        });
+  
+        if (response.data.status === 200) {
+            fetchFreeNotifications(); 
+        } else {
+            console.log(response.data.message || 'Error marking notification as read');
+        }
+    } catch (err) {
+        console.log(err.message);
+    }
+  };
+  
+  const deleteFreeNotification = async (notifId) => {
+    try {
+        const response = await axios.delete(`https://aparnawiz91.pythonanywhere.com/freelance/delete/freelancer-notification/${notifId}`, {
+            headers: {
+                'Authorization': `Bearer ${AccessToken}`
+            }
+        });
+  
+        if (response.data.status === 200) {
+            fetchFreeNotifications(); 
+        } else {
+            console.log(response.data.message || 'Error deleting notification');
+        }
+    } catch (err) {
+        console.log(err.message);
+    }
+  };
+
+  const unreadfreeCount = freenotifications.filter(notif => !notif.is_read).length;
 
 
   return (
@@ -205,8 +367,84 @@ else{
 <div className='lg:mr-[100px]'>
    <div className="flex items-center space-x-12">
       <div className='relative inline-block pt-1'>
-         <i className="bi bi-bell text-2xl"></i>
-         <span className="absolute top-1.5 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 border-2 border-white"></span>
+      <i 
+                    className="bi bi-bell text-2xl cursor-pointer" 
+                    onClick={toggleNotificationDropdown}
+                ></i>
+                {loginType=='HIRER' && unreadclientCount > 0 && 
+                    <span className="absolute top-1.5 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 border-2 border-white"></span>
+                }
+                {loginType=='FREELANCER' && unreadfreeCount > 0 && 
+                    <span className="absolute top-1.5 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 border-2 border-white"></span>
+                }
+
+{loginType=='HIRER' && isNotificationsDropdownVisible && (
+    <div className="drop absolute right-[-18px] mt-5 w-72 bg-white rounded-md shadow-lg text-left">
+        {clientnotifications.length > 0 ? (
+            <>
+                {clientnotifications.slice(0, 3).map(notif => (
+                    <div key={notif.id} className={`border-b cursor-pointer p-3 px-5 hover:bg-[#F6FAFD] ${!notif.is_read ? 'bg-[#f4f8fc]' : 'bg-white'} relative group`} onClick={() => markAsReadClient(notif.id)}>
+                        <div className='flex items-center justify-between mt-1'>
+                            <div className="flex items-center">
+                                <img src={alancedlogo} alt="" className='h-[18px] w-[18px] mr-2'/>
+                                <h4 className="font-bold text-md">{notif.title}</h4>
+                            </div>
+                            <p className='opacity-50 text-xs'>{timeAgo(notif.timestamp)}</p>
+                        </div>
+                        <p className='opacity-50 text-sm pt-1'>{notif.message}</p>
+                        <i 
+                            className="bi bi-x absolute top-1 right-1 text-[#031136] opacity-0 group-hover:opacity-100" 
+                            onClick={(e) => {
+                                e.stopPropagation();  
+                                deleteClientNotification(notif.id);
+                            }}
+                        ></i>
+                    </div>
+                ))}
+                {clientnotifications.length > 3 && (
+                    <Link to='/notifications' className="block text-left text-md font-semibold p-3">Show More Notifications</Link>
+                )}
+            </>
+        ) : (
+            <div className='p-4'><h4 className="font-bold text-md">No New Notifications</h4></div>
+        )}
+    </div>
+)}
+
+{loginType=='FREELANCER' && isNotificationsDropdownVisible && (
+    <div className="drop absolute right-[-18px] mt-5 w-72 bg-white rounded-md shadow-lg text-left">
+        {freenotifications.length > 0 ? (
+            <>
+                {freenotifications.slice(0, 3).map(notif => (
+                    <div key={notif.id} className={`border-b cursor-pointer p-3 px-5 hover:bg-[#F6FAFD] ${!notif.is_read ? 'bg-[#f4f8fc]' : 'bg-white'} relative group`} onClick={() => markAsReadFree(notif.id)}>
+                        <div className='flex items-center justify-between mt-1'>
+                            <div className="flex items-center">
+                                <img src={alancedlogo} alt="" className='h-[18px] w-[18px] mr-2'/>
+                                <h4 className="font-bold text-md">{notif.title}</h4>
+                            </div>
+                            <p className='opacity-50 text-xs'>{timeAgo(notif.timestamp)}</p>
+                        </div>
+                        <p className='opacity-50 text-sm pt-1'>{notif.message}</p>
+                        <i 
+                            className="bi bi-x absolute top-1 right-1 text-[#031136] opacity-0 group-hover:opacity-100" 
+                            onClick={(e) => {
+                                e.stopPropagation();  
+                                deleteFreeNotification(notif.id);
+                            }}
+                        ></i>
+                    </div>
+                ))}
+                {freenotifications.length > 3 && (
+                    <Link to='/notifications' className="block text-left text-md font-semibold p-3">Show More Notifications</Link>
+                )}
+            </>
+        ) : (
+            <div className='p-4'><h4 className="font-bold text-md">No New Notifications</h4></div>
+        )}
+    </div>
+)}
+         {/* <i className="bi bi-bell text-2xl"></i>
+         <span className="absolute top-1.5 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 border-2 border-white"></span> */}
       </div>
       <div className='relative inline-block'>
       {/* {logindata && logindata.images_logo !== "/media/images/blank.png" ? ( */}

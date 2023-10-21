@@ -38,9 +38,9 @@ const FreelancerAfterLogin = () => {
   
  
 
-  React.useEffect(() => {
-    dispatch(GetViewAllProjectsListAction())
-  }, [])
+//   React.useEffect(() => {
+//     dispatch(GetViewAllProjectsListAction(currentPage, jobsPerPage))
+//   }, [currentPage, jobsPerPage, dispatch])
 
   let displayName;
 
@@ -156,7 +156,7 @@ const calculateTimeAgo = (projectCreationDate) => {
       setCurrentPage(1);
   }, [categorySearch]);
 
-  const jobsPerPage = 5;
+  const jobsPerPage = 8;
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   
@@ -164,20 +164,47 @@ const calculateTimeAgo = (projectCreationDate) => {
       project.skills_required.toLowerCase().includes(categorySearch.toLowerCase())
   ) || [];
 
-  const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
-  const totalPages = Math.ceil((filteredJobs.length || 0) / jobsPerPage);
+//   const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
+const currentJobs = filteredJobs;
+const [totalProjectCount, setTotalProjectCount] = useState(0);
+  const totalPages = Math.ceil(totalProjectCount / jobsPerPage);
 
-  const next = () => {
-      window.scrollTo(0, 0);
-      if (currentPage === totalPages) return;
-      setCurrentPage(currentPage + 1);
-  };
+  React.useEffect(() => {
+    const fetchData = async () => {
+        const response = dispatch(GetViewAllProjectsListAction(currentPage, jobsPerPage));
+        if (response && response.totalCount) {
+            setTotalProjectCount(response.totalCount);
+        }
+    };
 
-  const prev = () => {
-      window.scrollTo(0, 0);
-      if (currentPage === 1) return;
-      setCurrentPage(currentPage - 1);
-  };
+    fetchData();
+}, [currentPage, jobsPerPage, dispatch]);
+ 
+
+//   const next = () => {
+//       window.scrollTo(0, 0);
+//       if (currentPage === totalPages) return;
+//       setCurrentPage(currentPage + 1);
+//   };
+
+//   const prev = () => {
+//       window.scrollTo(0, 0);
+//       if (currentPage === 1) return;
+//       setCurrentPage(currentPage - 1);
+//   };
+
+const next = () => {
+    if (currentPage < totalPages) {
+        setCurrentPage((prev) => prev + 1);
+    }
+};
+
+const prev = () => {
+    if (currentPage > 1) {
+        setCurrentPage((prev) => prev - 1);
+    }
+};
+
   
  // 1. Chunk the Array
  const chunkArray = (array, size) => {
