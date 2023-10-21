@@ -13,6 +13,8 @@ import { GetViewAllFreelancersAction } from '../../redux/Hirer/HirerAction'
 import axios from 'axios'
 import { useEffect } from 'react'
 import alancedlogo from '../images/Alanced-footer.png'
+import { GetFreelancerSelfProfileAction } from '../../redux/Freelancer/FreelancerAction'
+import { GetViewAllProjectsListAction } from '../../redux/Freelancer/FreelancerAction'
 
 const Navbar = () => {
   
@@ -28,14 +30,20 @@ const Navbar = () => {
   const [MyJobsdropdown, setMyJobsDropdown] = useState(false)
   const [Reportsdropdown, setReportsDropdown] = useState(false)
   const hirerImage = useSelector(state => state.hirerImage.hirerimageprofile)
+  const freelanceImage = useSelector(state => state.freelancerImage.freelancerimageprofile)
+  console.log("freelancer data on navbar", freelanceImage)
   var imagedata = useState(null)
   if(hirerImage != null){
   imagedata = hirerImage
   console.log("hirer image ========> ", hirerImage.images_logo)
   console.log("image data ========> ", imagedata.images_logo)
 }
-else{
-  imagedata = logindata
+if(loginType == 'FREELANCER'){
+  
+  if(freelanceImage != null){
+    imagedata = freelanceImage[0]
+    console.log("freelancer data on navbar", freelanceImage[0].images_logo)
+  }
 }
 
   let displayName;
@@ -49,8 +57,14 @@ else{
   
     React.useEffect(() => {
       if (loginType == 'HIRER'){
+        dispatch(GetViewAllFreelancersAction())
       dispatch(GetHirerSelfProfileAction(AccessToken))
-      // dispatch(GetViewAllFreelancersAction())
+      
+    }
+    if (loginType == 'FREELANCER'){
+      dispatch(GetViewAllProjectsListAction())
+      dispatch(GetFreelancerSelfProfileAction(AccessToken))
+      
     }
     }, [AccessToken])
   
