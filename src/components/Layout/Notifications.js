@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 import alancedlogo from '../images/Alanced-footer.png';
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { formatDateInput } from '../../container/freelancer/TimeFunctions'
 
 const Notifications = () => {
 
@@ -139,16 +140,16 @@ const Notifications = () => {
     }
   };
 
-  function formatDateInput(inputDate) {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+//   function formatDateInput(inputDate) {
+//     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   
-    const dateObj = new Date(inputDate);
-    const month = months[dateObj.getMonth()];
-    const day = dateObj.getDate();
-    const year = dateObj.getFullYear();
+//     const dateObj = new Date(inputDate);
+//     const month = months[dateObj.getMonth()];
+//     const day = dateObj.getDate();
+//     const year = dateObj.getFullYear();
   
-    return `${month} ${day}, ${year}`;
-  }
+//     return `${month} ${day}, ${year}`;
+//   }
 
   const convertToFormattedTime = (timestamp) => {
     const date = new Date(timestamp);

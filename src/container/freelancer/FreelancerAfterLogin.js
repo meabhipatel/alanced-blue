@@ -23,6 +23,7 @@ import TaskOutlinedIcon from '@mui/icons-material/TaskOutlined';
 import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { toast } from 'react-toastify'
+import { timeAgo } from './TimeFunctions'
 
 
 const FreelancerAfterLogin = () => {
@@ -38,9 +39,9 @@ const FreelancerAfterLogin = () => {
   
  
 
-//   React.useEffect(() => {
-//     dispatch(GetViewAllProjectsListAction(currentPage, jobsPerPage))
-//   }, [currentPage, jobsPerPage, dispatch])
+  React.useEffect(() => {
+    dispatch(GetViewAllProjectsListAction())
+  }, [])
 
   let displayName;
 
@@ -109,25 +110,6 @@ const handleToggleDescription = (index) => {
 const { day, formattedDate, greeting } = getCurrentDateAndGreeting();
 
 
-const calculateTimeAgo = (projectCreationDate) => {
-    const currentDate = new Date();
-    const creationDate = new Date(projectCreationDate);
-    const timeDifference = currentDate - creationDate;
-
-    const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-    const hoursAgo = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
-    const minutesAgo = Math.floor((timeDifference / 1000 / 60) % 60);
-
-    if (daysAgo > 0) {
-      return `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
-    } else if (hoursAgo > 0) {
-      return `${hoursAgo} hour${hoursAgo > 1 ? 's' : ''} ago`;
-    } else {
-      return `${minutesAgo} minute${minutesAgo > 1 ? 's' : ''} ago`;
-    }
-  };
-
-
   const [AllProposals, setAllProposals] = useState('')
 
   React.useEffect(() => {
@@ -156,7 +138,7 @@ const calculateTimeAgo = (projectCreationDate) => {
       setCurrentPage(1);
   }, [categorySearch]);
 
-  const jobsPerPage = 8;
+  const jobsPerPage = 5;
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   
@@ -164,49 +146,21 @@ const calculateTimeAgo = (projectCreationDate) => {
       project.skills_required.toLowerCase().includes(categorySearch.toLowerCase())
   ) || [];
 
-//   const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
-const currentJobs = filteredJobs;
-const [totalProjectCount, setTotalProjectCount] = useState(0);
-  const totalPages = Math.ceil(totalProjectCount / jobsPerPage);
+  const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
+  const totalPages = Math.ceil((filteredJobs.length || 0) / jobsPerPage);
+  const next = () => {
+      window.scrollTo(0, 0);
+      if (currentPage === totalPages) return;
+      setCurrentPage(currentPage + 1);
+  };
 
-  React.useEffect(() => {
-    const fetchData = async () => {
-        const response = dispatch(GetViewAllProjectsListAction(currentPage, jobsPerPage));
-        if (response && response.totalCount) {
-            setTotalProjectCount(response.totalCount);
-        }
-    };
+  const prev = () => {
+      window.scrollTo(0, 0);
+      if (currentPage === 1) return;
+      setCurrentPage(currentPage - 1);
+  };
 
-    fetchData();
-}, [currentPage, jobsPerPage, dispatch]);
- 
 
-//   const next = () => {
-//       window.scrollTo(0, 0);
-//       if (currentPage === totalPages) return;
-//       setCurrentPage(currentPage + 1);
-//   };
-
-//   const prev = () => {
-//       window.scrollTo(0, 0);
-//       if (currentPage === 1) return;
-//       setCurrentPage(currentPage - 1);
-//   };
-
-const next = () => {
-    if (currentPage < totalPages) {
-        setCurrentPage((prev) => prev + 1);
-    }
-};
-
-const prev = () => {
-    if (currentPage > 1) {
-        setCurrentPage((prev) => prev - 1);
-    }
-};
-
-  
- // 1. Chunk the Array
  const chunkArray = (array, size) => {
   let chunked = [];
   if(viewallprojects != null){
@@ -384,9 +338,6 @@ const [bidsCount, setBidsCount] = useState({});
     {viewallprojects != null ?
     <div>
     {currentJobs && currentJobs.map((project, index) => {
-        const timeAgo = calculateTimeAgo(project.project_creation_date);
-    {/* {filteredProjects && filteredProjects.map((project, index) => { */}
-    {/* {viewallprojects && <>{viewallprojects.map((project,index)=> { */}
         const words = project.description.split(' ');
         const displayWords = expandedProjects[index] || words.length <= 50 ? words : words.slice(0, 50);
               return(<>
@@ -411,7 +362,7 @@ const [bidsCount, setBidsCount] = useState({});
             </>
         )
     })}
-    <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>{project.rate} - {project.experience_level} - Est. Budget: ${project.rate == 'Hourly' ? project.min_hourly_rate+"/hr" +" - "+ "$"+project.max_hourly_rate+"/hr" : project.fixed_budget } - {timeAgo}</p>
+    <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>{project.rate} - {project.experience_level} - Est. Budget: ${project.rate == 'Hourly' ? project.min_hourly_rate+"/hr" +" - "+ "$"+project.max_hourly_rate+"/hr" : project.fixed_budget } - Posted {timeAgo(project.project_creation_date)}</p>
     <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>
                 Job Description: {displayWords.join(' ')} 
                 {words.length > 50 && (

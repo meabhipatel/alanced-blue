@@ -9,7 +9,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AddBidAmountAction } from '../../redux/Freelancer/FreelancerAction';
-
+import { timeAgo } from './TimeFunctions';
 
 
 
@@ -88,32 +88,6 @@ const closeDialog = () => {
     setShowDialog(false);
   };
 
-  function timeAgo(postedTimeStr) {
-    const postedTime = new Date(postedTimeStr);
-    const currentTime = new Date();
-  
-    const deltaInMilliseconds = currentTime - postedTime;
-    const deltaInSeconds = Math.floor(deltaInMilliseconds / 1000);
-    const deltaInMinutes = Math.floor(deltaInSeconds / 60);
-    const deltaInHours = Math.floor(deltaInMinutes / 60);
-    const deltaInDays = Math.floor(deltaInHours / 24);
-  
-    if (deltaInMinutes < 1) {
-        return "just now";
-    } else if (deltaInMinutes < 60) {
-        return `${deltaInMinutes} minute ago`;
-    } else if (deltaInHours < 24) {
-        return `${deltaInHours} hour ago`;
-    } else if (deltaInDays < 30) {
-        return `${deltaInDays} day ago`;
-    } else if (deltaInDays < 365) {
-        const months = Math.floor(deltaInDays / 30);
-        return `${months} month ago`;
-    } else {
-        const years = Math.floor(deltaInDays / 365);
-        return `${years} year ago`;
-    }
-  }
 
 const [showFullDescription, setShowFullDescription] = useState(false);
 

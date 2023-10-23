@@ -15,6 +15,7 @@ import { useEffect } from 'react'
 import alancedlogo from '../images/Alanced-footer.png'
 import { GetFreelancerSelfProfileAction } from '../../redux/Freelancer/FreelancerAction'
 import { GetViewAllProjectsListAction } from '../../redux/Freelancer/FreelancerAction'
+import { timeAgo } from '../../container/freelancer/TimeFunctions'
 
 const Navbar = () => {
   
@@ -55,18 +56,18 @@ if(loginType == 'FREELANCER'){
   }
  
   
-    React.useEffect(() => {
-      if (loginType == 'HIRER'){
-        dispatch(GetViewAllFreelancersAction())
-      dispatch(GetHirerSelfProfileAction(AccessToken))
+    // React.useEffect(() => {
+    //   if (loginType == 'HIRER'){
+    //     dispatch(GetViewAllFreelancersAction())
+    //   dispatch(GetHirerSelfProfileAction(AccessToken))
       
-    }
-    if (loginType == 'FREELANCER'){
-      dispatch(GetViewAllProjectsListAction())
-      dispatch(GetFreelancerSelfProfileAction(AccessToken))
+    // }
+    // if (loginType == 'FREELANCER'){
+    //   dispatch(GetViewAllProjectsListAction())
+    //   dispatch(GetFreelancerSelfProfileAction(AccessToken))
       
-    }
-    }, [AccessToken])
+    // }
+    // }, [AccessToken])
   
 
   const isLoggedIn = Boolean(accessToken || googleUserName)
@@ -131,32 +132,32 @@ const toggleNotificationDropdown = () => {
 };
 const unreadclientCount = clientnotifications.filter(notif => !notif.is_read).length;
 
-function timeAgo(postedTimeStr) {
-  const postedTime = new Date(postedTimeStr);
-  const currentTime = new Date();
+// function timeAgo(postedTimeStr) {
+//   const postedTime = new Date(postedTimeStr);
+//   const currentTime = new Date();
 
-  const deltaInMilliseconds = currentTime - postedTime;
-  const deltaInSeconds = Math.floor(deltaInMilliseconds / 1000);
-  const deltaInMinutes = Math.floor(deltaInSeconds / 60);
-  const deltaInHours = Math.floor(deltaInMinutes / 60);
-  const deltaInDays = Math.floor(deltaInHours / 24);
+//   const deltaInMilliseconds = currentTime - postedTime;
+//   const deltaInSeconds = Math.floor(deltaInMilliseconds / 1000);
+//   const deltaInMinutes = Math.floor(deltaInSeconds / 60);
+//   const deltaInHours = Math.floor(deltaInMinutes / 60);
+//   const deltaInDays = Math.floor(deltaInHours / 24);
 
-  if (deltaInMinutes < 1) {
-      return "just now";
-  } else if (deltaInMinutes < 60) {
-      return `${deltaInMinutes}m`;
-  } else if (deltaInHours < 24) {
-      return `${deltaInHours}h`;
-  } else if (deltaInDays < 30) {
-      return `${deltaInDays}d`;
-  } else if (deltaInDays < 365) {
-      const months = Math.floor(deltaInDays / 30);
-      return `${months} month`;
-  } else {
-      const years = Math.floor(deltaInDays / 365);
-      return `${years} year`;
-  }
-}
+//   if (deltaInMinutes < 1) {
+//       return "just now";
+//   } else if (deltaInMinutes < 60) {
+//       return `${deltaInMinutes}m`;
+//   } else if (deltaInHours < 24) {
+//       return `${deltaInHours}h`;
+//   } else if (deltaInDays < 30) {
+//       return `${deltaInDays}d`;
+//   } else if (deltaInDays < 365) {
+//       const months = Math.floor(deltaInDays / 30);
+//       return `${months} month`;
+//   } else {
+//       const years = Math.floor(deltaInDays / 365);
+//       return `${years} year`;
+//   }
+// }
 
 
 const deleteClientNotification = async (notifId) => {
@@ -463,7 +464,7 @@ const fetchFreeNotifications = async () => {
       <div className='relative inline-block'>
       {/* {logindata && logindata.images_logo !== "/media/images/blank.png" ? ( */}
         <img 
-            src={"https://aparnawiz91.pythonanywhere.com/" + imagedata.images_logo} 
+            src={"https://aparnawiz91.pythonanywhere.com/" + logindata.images_logo} 
             alt="Profile" 
             className="h-10 w-10 rounded-full cursor-pointer" 
             onClick={() => setDropdownVisible(!dropdownVisible)}
@@ -481,7 +482,7 @@ const fetchFreeNotifications = async () => {
             <div className="py-1">
                       {/* {logindata && logindata.images_logo !== "/media/images/blank.png" ? ( */}
         <img 
-            src={"https://aparnawiz91.pythonanywhere.com/" + imagedata.images_logo} 
+            src={"https://aparnawiz91.pythonanywhere.com/" + logindata.images_logo} 
             alt="Profile" 
             className="h-20 w-20 rounded-full cursor-pointer mx-auto my-5 border border-gray-200 p-0.5" 
             onClick={() => setDropdownVisible(!dropdownVisible)}

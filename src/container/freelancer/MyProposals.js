@@ -9,6 +9,7 @@ import edit from '../../components/images/edit.png'
 import { GetFreelancerSelfBidAction } from '../../redux/Freelancer/FreelancerAction'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { timeAgo } from './TimeFunctions'
 
 
 
@@ -23,23 +24,6 @@ React.useEffect(() => {
     dispatch(GetFreelancerSelfBidAction(accessToken))
   }, [])
 
-  const calculateTimeAgo = (projectCreationDate) => {
-    const currentDate = new Date();
-    const creationDate = new Date(projectCreationDate);
-    const timeDifference = currentDate - creationDate;
-
-    const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-    const hoursAgo = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
-    const minutesAgo = Math.floor((timeDifference / 1000 / 60) % 60);
-
-    if (daysAgo > 0) {
-      return `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
-    } else if (hoursAgo > 0) {
-      return `${hoursAgo} hour${hoursAgo > 1 ? 's' : ''} ago`;
-    } else {
-      return `${minutesAgo} minute${minutesAgo > 1 ? 's' : ''} ago`;
-    }
-  };
 
   const [selectedButton, setSelectedButton] = useState('Active');
   const commonStyle = "inline-block text-sm py-[10px] mt-4 lg:mt-0 border rounded font-semibold"; 
@@ -113,7 +97,6 @@ React.useEffect(() => {
 <h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Submitted Proposals ({bidCount})</h1>
 {freelancerselfbid != null ? <div>
 {freelancerselfbid && <>{freelancerselfbid.map((bid,index) => {
-    const timeAgo = calculateTimeAgo(bid.bid_time);
     const bidTime = new Date(bid.bid_time);
 
     // Calculate the time difference
@@ -131,7 +114,7 @@ React.useEffect(() => {
         <div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
         <div className='flex flex-col w-1/4'>
             <h1 className='font-cardo text-[18px] text-[#031136]'>Initiated {formattedDate}</h1>
-            <p className='font-inter text-[14px] text-[#031136] opacity-50'>{timeAgo}</p>
+            <p className='font-inter text-[14px] text-[#031136] opacity-50'>{timeAgo(bid.bid_time)}</p>
         </div>
 
         <div className='flex-grow pl-[180px]'>

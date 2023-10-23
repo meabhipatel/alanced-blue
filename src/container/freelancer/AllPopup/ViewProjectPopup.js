@@ -15,6 +15,7 @@ import Navbar from '../../../components/Layout/Navbar';
 import HomeSection4 from '../../../components/Layout/HomeSection4';
 import Footer from '../../../components/Layout/Footer';
 import { toast } from 'react-toastify';
+import { timeAgo } from '../TimeFunctions';
 
 
 
@@ -66,32 +67,6 @@ const navigate = useNavigate();
     //     dispatch(GetFreelancerSelfBidAction(accessToken))
     // }, [])
   
-  function timeAgo(postedTimeStr) {
-    const postedTime = new Date(postedTimeStr);
-    const currentTime = new Date();
-  
-    const deltaInMilliseconds = currentTime - postedTime;
-    const deltaInSeconds = Math.floor(deltaInMilliseconds / 1000);
-    const deltaInMinutes = Math.floor(deltaInSeconds / 60);
-    const deltaInHours = Math.floor(deltaInMinutes / 60);
-    const deltaInDays = Math.floor(deltaInHours / 24);
-  
-    if (deltaInMinutes < 1) {
-        return "just now";
-    } else if (deltaInMinutes < 60) {
-        return `${deltaInMinutes} minute ago`;
-    } else if (deltaInHours < 24) {
-        return `${deltaInHours} hour ago`;
-    } else if (deltaInDays < 30) {
-        return `${deltaInDays} day ago`;
-    } else if (deltaInDays < 365) {
-        const months = Math.floor(deltaInDays / 30);
-        return `${months} month ago`;
-    } else {
-        const years = Math.floor(deltaInDays / 365);
-        return `${years} year ago`;
-    }
-  }
 
   const toggleSaveProject = async (project) => {
     try {
@@ -167,7 +142,7 @@ const handleClick = (event,project) => {
                     <h1 className='text-xl font-normal font-cardo'>{project.title}</h1>
                     <p className='mt-4 text-base font-normal font-cardo'>{project.category}</p>
                     <div className='flex flex-row mt-2'>
-                        <div className=' basis-6/12'><p className=' font-inter font-normal text-base text-[#797979]'>Posted in {timeAgo(project.project_creation_date)}</p></div>
+                        <div className=' basis-6/12'><p className=' font-inter font-normal text-base text-[#797979]'>Posted {timeAgo(project.project_creation_date)}</p></div>
                         <div className=' basis-6/12'>
                             <div className=' text-right font-inter text-base font-normal opacity-[50%]'><i class="bi bi-geo-alt"></i>  Worldwide</div>
                         </div>
