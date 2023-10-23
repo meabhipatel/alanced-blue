@@ -12,6 +12,7 @@ import { GetViewHirerSelfProjectssAction } from '../../redux/Hirer/HirerAction'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import axios from 'axios'
+import { timeAgo } from '../freelancer/TimeFunctions'
 
 const ViewAllJobPost = () => {
     
@@ -100,33 +101,6 @@ const ViewAllJobPost = () => {
     const deadlineDate = new Date(deadline);
     const now = new Date();
     return now < deadlineDate;
-}
-
-function timeAgo(postedTimeStr) {
-  const postedTime = new Date(postedTimeStr);
-  const currentTime = new Date();
-
-  const deltaInMilliseconds = currentTime - postedTime;
-  const deltaInSeconds = Math.floor(deltaInMilliseconds / 1000);
-  const deltaInMinutes = Math.floor(deltaInSeconds / 60);
-  const deltaInHours = Math.floor(deltaInMinutes / 60);
-  const deltaInDays = Math.floor(deltaInHours / 24);
-
-  if (deltaInMinutes < 1) {
-      return "just now";
-  } else if (deltaInMinutes < 60) {
-      return `${deltaInMinutes}m ago`;
-  } else if (deltaInHours < 24) {
-      return `${deltaInHours}h ago`;
-  } else if (deltaInDays < 30) {
-      return `${deltaInDays}d ago`;
-  } else if (deltaInDays < 365) {
-      const months = Math.floor(deltaInDays / 30);
-      return `${months} month ago`;
-  } else {
-      const years = Math.floor(deltaInDays / 365);
-      return `${years} year ago`;
-  }
 }
 
 // useEffect(() => {
