@@ -62,6 +62,8 @@ import Cookies from '../components/Layout/Cookies';
 import ViewMoreProjectDetail from "../container/freelancer/ViewMoreProjectDetail";
 import FreelancerFullDetailAfterLogin from "../container/hirer/FreelancerFullDetailAfterLogin";
 import Notifications from '../components/Layout/Notifications'
+import ResetPassword from "../components/Layout/ResetPassword";
+import SendPasswordResetEmail from "../components/Layout/SendPasswordResetEmail";
 
   const AppRouter = (props) => {
     
@@ -130,6 +132,8 @@ import Notifications from '../components/Layout/Notifications'
           <Route path="/view-more/project-detail" element={<ViewMoreProjectDetail/>}></Route>
           <Route path="/view-freelancer/full-detail" element={<FreelancerFullDetailAfterLogin/>}></Route>
           <Route path="/notifications" element={<Notifications/>}/>
+          <Route path="/reset-user-password/:uid/:token" element={<ResetPassword />} />
+          <Route path="/reset-password" element={<SendPasswordResetEmail/>}/>
           <Route path="*" element={<Navigate to="/" replace />} /> 
         </Routes>
   

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from'./Navbar'
 import HomeSection4 from './HomeSection4'
 import Footer from './Footer'
@@ -10,11 +10,24 @@ import { toast } from 'react-toastify'
 
 const ContactUs = () => {
 
-    const [addUser, setAddUser] = useState('');
+  const initialUserState = {
+    Applicant_Name: '',
+    Applicant_Email: '',
+    Applicant_Contact: '',
+    Message: ''
+};
+
+    const [addUser, setAddUser] = useState(initialUserState);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const adduser = useSelector(state => state.user.adduser);
     const [show, toogleShow] = useState(false);
+
+    useEffect(() => {
+      if (adduser) {
+          setAddUser(initialUserState);
+      }
+  }, [adduser]);
 
     const Loader = () =>{
       if(adduser ==false || adduser == true){
@@ -41,6 +54,11 @@ const ContactUs = () => {
 
 
   const AddUserContact = () => {
+
+    if (!addUser.Applicant_Name || !addUser.Applicant_Email || !addUser.Applicant_Contact || !addUser.Message) {
+      toast.error("All fields are required");
+      return;
+  }
 
     if (!validateContact(addUser.Applicant_Contact)) {
       toast.error("Enter a valid Contact Number with 10 digits");
@@ -89,10 +107,10 @@ const onChange = e =>{
     </div>
     <div class="md:flex my-4">
   <div class="flex-1 py-4">
-  <input type="text" className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Your Name' name='Applicant_Name' onChange={onChange} />
-  <input type="text" className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Email' name='Applicant_Email' onChange={onChange}/>
-  <input type="text" className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Phone' name='Applicant_Contact' onChange={onChange}/>
-  <textarea id="" cols="30" rows="4" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Your Message' name='Message' onChange={onChange}></textarea>
+  <input type="text" className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Your Name' name='Applicant_Name' onChange={onChange} value={addUser.Applicant_Name}/>
+  <input type="text" className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Email' name='Applicant_Email' onChange={onChange} value={addUser.Applicant_Email}/>
+  <input type="text" className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Phone' name='Applicant_Contact' onChange={onChange} value={addUser.Applicant_Contact}/>
+  <textarea id="" cols="30" rows="4" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Your Message' name='Message' onChange={onChange} value={addUser.Message}></textarea>
   <Link to='/contact-us' onClick={AddUserContact}><span class="w-full inline-block px-8 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold text-center text-md">{show ? <div><Loader/></div> : "Submit"}</span></Link>
   </div>
   <div class="flex-1 px-8">

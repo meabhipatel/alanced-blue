@@ -12,12 +12,6 @@ export const LoginHandler = async (data) => {
 }
 
 
-export const ForgetPassword = async (data) => {
-    return await DataService.post('').then((res) => {
-        return res
-    }).catch((err) => {
-        return handleError(err.response.data)
-    })
-}
+
 
 

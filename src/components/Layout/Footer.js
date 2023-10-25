@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import logo from '../images/Alanced-footer.png';
 import linkedin from '../images/linkedin.png';
 import twitter from '../images/twitter.png';
@@ -12,25 +12,21 @@ import { toast } from 'react-toastify';
 
 const Footer = () => {
 
-  const [addUserSub, setAddUserSub] = useState('');
+  const initialUserState = {
+    email: ''
+  }
+
+  const [addUserSub, setAddUserSub] = useState(initialUserState);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  // const addsub = useSelector(state => state.user.addsub);
-  //   const [show, toogleShow] = useState(false);
+  const addsub = useSelector(state => state.user.addsub);
 
-  //   const Loader = () =>{
-  //     if(addsub ==false || addsub == true){
-  //         toogleShow(false)
-  //         navigate('/')
-  //     }
-  //     return(
-  //         <>
-  //         <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-white mx-auto"></div>
-  //         </>
-  //     )
-  // }
-
+    useEffect(() => {
+      if (addsub) {
+          setAddUserSub(initialUserState); 
+      }
+  }, [addsub]);
+  
   const AddUserSubscribe = () => {
 
     if (!addUserSub.email) {
@@ -43,7 +39,6 @@ const Footer = () => {
   
 
     dispatch(AddUserSubscriptionAction(formData));
-    // toogleShow(true)
 }
 
 const onChange = e =>{
@@ -102,7 +97,7 @@ const onChange = e =>{
     <div class="p-4">
     <div className='bg-[#F4F5F9] lg:h-[220px] lg:w-[350px] -mt-6 lg:-ml-[100px]'>
         <h5 class="text-xl font-bold font-cardo pt-[22px] text-start ml-[23px]">Subscribe</h5>
-        <input type="email" className='mt-3 lg:-ml-[60px] p-2 text-sm focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Email Address' name='email' onChange={onChange}/>
+        <input type="email" className='mt-3 lg:-ml-[60px] p-2 text-sm focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Email Address' name='email' onChange={onChange} value={addUserSub.email}/>
         <button class="inline-block text-sm px-4 py-[12px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold" onClick={AddUserSubscribe}><img src={arrow} alt=""/></button>
         <p className='text-[14px] pt-3 text-left pl-6 opacity-50'>Hello, we are Lift Media. Our goal is to translate <br />the positive effects from revolutionizing how <br /> companies engage with their clients & their <br /> team.</p>
         </div>
