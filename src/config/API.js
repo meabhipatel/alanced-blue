@@ -34,7 +34,9 @@ const API = {
   Users:{
     User:{
       AddUserContact:'/freelance/user/contact-us',
-      AddUserSubscription:'/freelance/add/subscribe'
+      AddUserSubscription:'/freelance/add/subscribe',
+      ForgotPassword:"/account/forgot-password",
+      ResetPassword:"/account/password/reset"
     }
   }
 };

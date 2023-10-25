@@ -217,7 +217,7 @@ const Login = (props) => {
                                         Remember me
                                     </span>
                                 </label>
-                                <Link to=''><span class="text-xs font-inter text-yellow-400">
+                                <Link to='/reset-password'><span class="text-xs font-inter text-yellow-400">
                                     Reset Password
                                 </span></Link>
                             </div>

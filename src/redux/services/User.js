@@ -23,3 +23,24 @@ export const AddUserSubscriptions = async (data) =>{
         return handleError(err);
     });
 };
+
+export const ForgotPassword = async (data) =>{
+    return DataService.post(API.Users.User.ForgotPassword, data)
+    .then(res => {
+        return res.data;
+    })
+    .catch(err => {
+        return handleError(err);
+    });
+};
+
+
+export const ResetPassword = async (uid, token, data) => {
+    return DataService.post(`${API.Users.User.ResetPassword}/${uid}/${token}`, data)
+    .then(res => {
+        return res.data;
+    })
+    .catch(err => {
+        return handleError(err);
+    });
+};
