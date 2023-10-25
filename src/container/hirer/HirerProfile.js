@@ -301,7 +301,7 @@ console.log("++++++++++++++",first_Name)
                 </div>
             )}
    <div class="md:w-[70%] border border-gray-200 border-opacity-30">
-   <div className='border-b border-gray-200 border-opacity-30 flex flex-col md:flex-row py-3.5'>
+   {/* <div className='border-b border-gray-200 border-opacity-30 flex flex-col md:flex-row py-3.5'>
    <div class="w-full md:w-3/4 pt-3 text-left pl-8">
             <div className="flex items-center">
                 
@@ -327,7 +327,7 @@ console.log("++++++++++++++",first_Name)
             </div>
         </div>
         
-   </div>
+   </div> */}
    
    <div className="flex justify-between items-center">
     <div className="flex items-center">

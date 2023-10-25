@@ -103,11 +103,11 @@ const fetchClientNotifications = async () => {
   }
 };
 
-useEffect(() => {
-  fetchClientNotifications(); 
-  const interval = setInterval(fetchClientNotifications, 2000); 
-  return () => clearInterval(interval); 
-}, []);
+// useEffect(() => {
+//   fetchClientNotifications(); 
+//   const interval = setInterval(fetchClientNotifications, 2000); 
+//   return () => clearInterval(interval); 
+// }, []);
 
 const markAsReadClient = async (notifId) => {
   try {
@@ -196,11 +196,11 @@ const fetchFreeNotifications = async () => {
     }
   };
   
-  useEffect(() => {
-    fetchFreeNotifications(); 
-    const interval = setInterval(fetchFreeNotifications, 2000);
-    return () => clearInterval(interval); 
-  }, []);
+//   useEffect(() => {
+//     fetchFreeNotifications(); 
+//     const interval = setInterval(fetchFreeNotifications, 2000);
+//     return () => clearInterval(interval); 
+//   }, []);
   
   const markAsReadFree = async (notifId) => {
     try {
