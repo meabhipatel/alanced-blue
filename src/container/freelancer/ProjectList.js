@@ -29,7 +29,7 @@ function ProjectList() {
   const searchParams = new URLSearchParams(location.search);
   const category = searchParams.get('category');
   console.log(category,"category")
-  const viewallprojects = useSelector(state => state.freelancer.viewallprojects)
+  // const viewallprojects = useSelector(state => state.freelancer.viewallprojects)
   const accessToken = useSelector(state => state.login.accessToken);
   // const [categoryFilter, setCategoryFilter] = useState([]);
   // const [locationFilter, setLocationFilter] = useState([]);
@@ -41,27 +41,122 @@ function ProjectList() {
   const [skillFilter, setSkillFilter] = useState([]);
   const [expFilter, setExpFilter] = useState([]);
   const [rateFilter, setRateFilter] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [cityFilter, setCityFilter] = useState([]);
   // const projectData = { viewallprojects }
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    dispatch(GetViewAllProjectsListAction())
-  }, [])
+  // React.useEffect(() => {
+  //   dispatch(GetViewAllProjectsListAction())
+  // }, [])
 
-  React.useEffect(() => {
-    if (category) {
-      const filteredData = viewallprojects.filter(project => {
-          return project.category.toLowerCase() === category.toLowerCase();
-        });
-      setFilteredProjects(filteredData);
+  // const [viewProject, setViewproject] = useState([]);
+  // console.log(viewProject,"project, project")
+
+   const handleCategoryFilterChange = (e) => {
+    const category = e.target.value;
+    if (e.target.checked) {
+      setCategoryFilter((prevFilters) => [...prevFilters, category]);
     } else {
-      setFilteredProjects(viewallprojects);
+      setCategoryFilter((prevFilters) => prevFilters.filter((filter) => filter !== category));
     }
-  }, [category, viewallprojects]);
+  };
+
+  const handleSkillFilterChange = (e) => {
+   const skills = e.target.value;
+   if (e.target.checked){
+    setSkillFilter((prevFilters) => [...prevFilters, skills]);
+   } else {
+    setSkillFilter((prevFilters) => prevFilters.filter((filter) => filter !== skills));
+   }
+  };
+
+  const handleExpFilterChange = (e) => {
+    const exp = e.target.value;
+    if (e.target.checked){
+      setExpFilter((prevFilters) => [...prevFilters, exp]);
+    } else {
+      setExpFilter((prevFilters) => prevFilters.filter((filter) => filter !== exp));
+    }
+  };
+
+  const handleRateFilterChange = (e) => {
+    const protype = e.target.value;
+    if (e.target.checked){
+      setRateFilter((prevFilters) => [...prevFilters, protype]);
+    } else {
+      setRateFilter((prevFilters) => prevFilters.filter((filter) => filter !== protype));
+    }
+  };
+
+  const handleCityFilterChange = (e) => {
+    const city = e.target.value;
+    if (e.target.checked) {
+        setCityFilter((prevFilters) => [...prevFilters, city]);
+    } else {
+        setCityFilter((prevFilters) => prevFilters.filter((filter) => filter !== city));
+    }
+};
+
+  const [viewProject, setViewProject] = useState([]);
+  console.log(viewProject,"project, project")
+
+  useEffect(() => {
+    const queryParameters = [];
+
+    if (categoryFilter.length > 0) {
+      queryParameters.push(`category=${categoryFilter.join('&category=')}`);
+    }
+
+    if (skillFilter.length > 0) {
+      queryParameters.push(`skills_required=${skillFilter.join('&skills_required=')}`);
+    }
+
+    if (expFilter.length > 0) {
+      queryParameters.push(`experience_level=${expFilter.join('&experience_level=')}`);
+    }
+
+    if (rateFilter.length > 0) {
+      queryParameters.push(`rate=${rateFilter.join('&rate=')}`);
+    }
+
+    if (cityFilter.length > 0) {
+      queryParameters.push(`project_owner_location=${cityFilter.join('&project_owner_location=')}`);
+    }
+
+    if (searchQuery) {
+      queryParameters.push(`search_query=${searchQuery}`);
+    }
+
+    const queryString = queryParameters.join('&');
+
+    axios
+      .get(`http://127.0.0.1:8000/freelance/view-all/Project/?${queryString}`)
+      .then((response) => {
+        setViewProject(response.data.data); // Access the 'data' field
+      })
+      .catch((error) => {
+        console.error('Error fetching filtered data:', error);
+      });
+  }, [categoryFilter, skillFilter, expFilter, rateFilter, searchQuery, cityFilter]);
 
 
-  const [filteredProjects, setFilteredProjects] = useState([]);
-  console.log(filteredProjects, "filter freelancer");
+
+
+  // React.useEffect(() => {
+  //   if (category) {
+  //     const filteredData = viewallprojects.filter(project => {
+  //         return project.category.toLowerCase() === category.toLowerCase();
+  //       });
+  //     setFilteredProjects(filteredData);
+  //   } else {
+  //     setFilteredProjects(viewallprojects);
+  //   }
+  // }, [category, viewallprojects]);
+
+
+  // const [filteredProjects, setFilteredProjects] = useState([]);
+  // console.log(filteredProjects, "filter freelancer");
 
   const [range, setRange] = useState([1, 10000]);
 
@@ -139,7 +234,7 @@ function ProjectList() {
     // Rest of your handleClick code, if any...
 };
 
-  const [AllProposals, setAllProposals] = useState('')
+  const [AllProposals, setAllProposals] = useState([])
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -165,77 +260,77 @@ function ProjectList() {
 
   const [filteredApiData, setFilteredApiData] = useState([]);
 
-  const handleCategoryFilterChange = (e) => {
-    const category = e.target.value;
-    if (e.target.checked) {
-      setCategoryFilter((prevFilters) => [...prevFilters, category]);
-    } else {
-      setCategoryFilter((prevFilters) => prevFilters.filter((filter) => filter !== category));
-    }
-  };
+  // const handleCategoryFilterChange = (e) => {
+  //   const category = e.target.value;
+  //   if (e.target.checked) {
+  //     setCategoryFilter((prevFilters) => [...prevFilters, category]);
+  //   } else {
+  //     setCategoryFilter((prevFilters) => prevFilters.filter((filter) => filter !== category));
+  //   }
+  // };
 
-  const handleSkillFilterChange = (e) => {
-   const skills = e.target.value;
-   if (e.target.checked){
-    setSkillFilter((prevFilters) => [...prevFilters, skills]);
-   } else {
-    setSkillFilter((prevFilters) => prevFilters.filter((filter) => filter !== skills));
-   }
-  };
+  // const handleSkillFilterChange = (e) => {
+  //  const skills = e.target.value;
+  //  if (e.target.checked){
+  //   setSkillFilter((prevFilters) => [...prevFilters, skills]);
+  //  } else {
+  //   setSkillFilter((prevFilters) => prevFilters.filter((filter) => filter !== skills));
+  //  }
+  // };
 
-  const handleExpFilterChange = (e) => {
-    const exp = e.target.value;
-    if (e.target.checked){
-      setExpFilter((prevFilters) => [...prevFilters, exp]);
-    } else {
-      setExpFilter((prevFilters) => prevFilters.filter((filter) => filter !== exp));
-    }
-  };
+  // const handleExpFilterChange = (e) => {
+  //   const exp = e.target.value;
+  //   if (e.target.checked){
+  //     setExpFilter((prevFilters) => [...prevFilters, exp]);
+  //   } else {
+  //     setExpFilter((prevFilters) => prevFilters.filter((filter) => filter !== exp));
+  //   }
+  // };
 
-  const handleRateFilterChange = (e) => {
-    const protype = e.target.value;
-    if (e.target.checked){
-      setRateFilter((prevFilters) => [...prevFilters, protype]);
-    } else {
-      setRateFilter((prevFilters) => prevFilters.filter((filter) => filter !== protype));
-    }
-  };
+  // const handleRateFilterChange = (e) => {
+  //   const protype = e.target.value;
+  //   if (e.target.checked){
+  //     setRateFilter((prevFilters) => [...prevFilters, protype]);
+  //   } else {
+  //     setRateFilter((prevFilters) => prevFilters.filter((filter) => filter !== protype));
+  //   }
+  // };
 
-  useEffect(() => {
-    // Construct the query string
-    const queryParameters = [];
+  // useEffect(() => {
+  //   // Construct the query string
+  //   const queryParameters = [];
 
-    if (categoryFilter.length > 0) {
-      queryParameters.push(`category=${categoryFilter.join('&category=')}`);
-    }
+  //   if (categoryFilter.length > 0) {
+  //     queryParameters.push(`category=${categoryFilter.join('&category=')}`);
+  //   }
 
-    if (skillFilter.length > 0) {
-      queryParameters.push(`skills=${skillFilter.join('&skills=')}`);
-    }
+  //   if (skillFilter.length > 0) {
+  //     queryParameters.push(`skills=${skillFilter.join('&skills=')}`);
+  //   }
 
-    if (expFilter.length > 0) {
-      queryParameters.push(`experience_level=${expFilter.join('&experience_level=')}`);
-    }
+  //   if (expFilter.length > 0) {
+  //     queryParameters.push(`experience_level=${expFilter.join('&experience_level=')}`);
+  //   }
 
-    if (rateFilter.length > 0) {
-      queryParameters.push(`rate=${rateFilter.join('&rate=')}`);
-    }
+  //   if (rateFilter.length > 0) {
+  //     queryParameters.push(`rate=${rateFilter.join('&rate=')}`);
+  //   }
 
-    // Combine the query parameters
-    const queryString = queryParameters.join('&');
+  //   // Combine the query parameters
+  //   const queryString = queryParameters.join('&');
 
-    // Make the API request with the query string
-    axios
-      .get(`http://127.0.0.1:8000/freelance/filter/?${queryString}`)
-      .then((response) => {
-        // Handle the response and update the filtered data
-        setFilteredApiData(response.data);
-      })
-      .catch((error) => {
-        // Handle errors
-        console.error('Error fetching filtered data:', error);
-      });
-  }, [categoryFilter, skillFilter, expFilter, rateFilter]);
+  //   // Make the API request with the query string
+  //   axios
+  //     .get(`http://127.0.0.1:8000/freelance/filter/?${queryString}`)
+  //     .then((response) => {
+  //       // Handle the response and update the filtered data
+  //       setFilteredApiData(response.data);
+  //     })
+  //     .catch((error) => {
+  //       // Handle errors
+  //       console.error('Error fetching filtered data:', error);
+  //     });
+  // }, [categoryFilter, skillFilter, expFilter, rateFilter]);
 
   // const [FilterData, setFilterData] = useState('')
 
@@ -261,57 +356,57 @@ function ProjectList() {
   const [currentPage, setCurrentPage] = useState(1);
     const [categorySearch, setCategorySearch] = useState('');
 
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [categorySearch]);
+    // useEffect(() => {
+    //     setCurrentPage(1);
+    // }, [categorySearch]);
 
-    const jobsPerPage = 7;
-    const indexOfLastJob = currentPage * jobsPerPage;
-    const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+    // const jobsPerPage = 7;
+    // const indexOfLastJob = currentPage * jobsPerPage;
+    // const indexOfFirstJob = indexOfLastJob - jobsPerPage;
     
-    const isDefaultRange = range[0] === 1 && range[1] === 10000;
+    // const isDefaultRange = range[0] === 1 && range[1] === 10000;
    
-    const filteredJobs = viewallprojects?.filter(project => {
+    // const filteredJobs = viewallprojects?.filter(project => {
     
-      const withinPriceRange = isDefaultRange || (project.fixed_budget >= range[0] && project.fixed_budget <= range[1]);
+    //   const withinPriceRange = isDefaultRange || (project.fixed_budget >= range[0] && project.fixed_budget <= range[1]);
 
-      return (
-        project.category.toLowerCase().includes(categorySearch.toLowerCase()) &&
+    //   return (
+    //     project.category.toLowerCase().includes(categorySearch.toLowerCase()) &&
     
-        (categoryFilter.length === 0 || categoryFilter.includes(project.category)) &&
+    //     (categoryFilter.length === 0 || categoryFilter.includes(project.category)) &&
         
-        (expFilter.length === 0 || expFilter.includes(project.experience_level)) &&
+    //     (expFilter.length === 0 || expFilter.includes(project.experience_level)) &&
         
-        // (locationFilter.length === 0 || locationFilter.includes(project.project_owner_location)) &&
+    //     // (locationFilter.length === 0 || locationFilter.includes(project.project_owner_location)) &&
         
-        (skillFilter.length === 0 || 
-          JSON.parse(project.skills_required.replace(/'/g,'"')).some(skill => skillFilter.includes(skill))) &&
+    //     (skillFilter.length === 0 || 
+    //       JSON.parse(project.skills_required.replace(/'/g,'"')).some(skill => skillFilter.includes(skill))) &&
         
-        (rateFilter.length === 0 || rateFilter.includes(project.rate)) &&
-        withinPriceRange
-      );
-    }) || [];
+    //     (rateFilter.length === 0 || rateFilter.includes(project.rate)) &&
+    //     withinPriceRange
+    //   );
+    // }) || [];
     
 
-    const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
-    const totalPages = Math.ceil((filteredJobs.length || 0) / jobsPerPage);
+    // const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
+    // const totalPages = Math.ceil((filteredJobs.length || 0) / jobsPerPage);
 
-    const next = () => {
-        window.scrollTo(0, 0);
-        if (currentPage === totalPages) return;
-        setCurrentPage(currentPage + 1);
-    };
+    // const next = () => {
+    //     window.scrollTo(0, 0);
+    //     if (currentPage === totalPages) return;
+    //     setCurrentPage(currentPage + 1);
+    // };
 
-    const prev = () => {
-        window.scrollTo(0, 0);
-        if (currentPage === 1) return;
-        setCurrentPage(currentPage - 1);
-    };
+    // const prev = () => {
+    //     window.scrollTo(0, 0);
+    //     if (currentPage === 1) return;
+    //     setCurrentPage(currentPage - 1);
+    // };
 
 
     const categoryCounts = {};
 
-    viewallprojects?.forEach(project => {
+    viewProject?.forEach(project => {
         if (categoryCounts[project.category]) {
             categoryCounts[project.category]++;
         } else {
@@ -321,7 +416,7 @@ function ProjectList() {
     
     const expCounts = {};
     
-    viewallprojects?.forEach(project => {
+    viewProject?.forEach(project => {
         if (expCounts[project.experience_level]) {
             expCounts[project.experience_level]++;
         } else {
@@ -331,7 +426,7 @@ function ProjectList() {
     
     const skillCounts = {};
     
-    viewallprojects?.forEach(project => {
+    viewProject?.forEach(project => {
         const skills = JSON.parse(project.skills_required.replace(/'/g, '"'));
         skills.forEach(skill => {
             if (skillCounts[skill]) {
@@ -345,7 +440,7 @@ function ProjectList() {
     
     const ProjecttypeCounts = {};
     
-    viewallprojects?.forEach(project => {
+    viewProject?.forEach(project => {
         if (ProjecttypeCounts[project.rate]) {
           ProjecttypeCounts[project.rate]++;
         } else {
@@ -355,7 +450,7 @@ function ProjectList() {
     
     const locationCounts = {};
     
-    viewallprojects?.forEach(project => {
+    viewProject?.forEach(project => {
         if (locationCounts[project.project_owner_location]) {
           locationCounts[project.project_owner_location]++;
         } else {
@@ -571,6 +666,7 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
           className="hidden" 
           type="checkbox"
           value={location}
+          onChange={handleCityFilterChange}
         />
                 <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                   
@@ -594,9 +690,9 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
       </div>
     )}
           </div>
-          { viewallprojects != null ? 
+          { viewProject != null ? 
           <div className=' basis-9/12 mt-10'>
-            {currentJobs && <>{currentJobs.map((project,index)=> {
+            {viewProject && <>{viewProject.map((project,index)=> {
               const words = project.description.split(' ');
               const displayWords = expandedProjects[index] || words.length <= 30 ? words : words.slice(0, 30);
               // const isAlreadyApplied = Array.isArray(AllProposals) && AllProposals.some(all => project.id === all.project_id);
@@ -708,7 +804,7 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
           </div>
           }
         </div>
-        {viewallprojects?.length > 5 && (
+        {/* {viewallprojects?.length > 5 && (
                     <div className="flex justify-end items-center gap-6 m-4">
                         <IconButton
                             size="sm"
@@ -743,7 +839,7 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
                             <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
                     </div>
-                )}
+                )} */}
       </div>
       <HomeSection4 />
       <Footer />
