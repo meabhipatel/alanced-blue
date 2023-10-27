@@ -22,6 +22,11 @@ import axios from 'axios'
 import TaskOutlinedIcon from '@mui/icons-material/TaskOutlined';
 import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
+import CategoryList from './AllSelectionData/CategoryList'
+import ExperienceLevel from './AllSelectionData/ExperienceLevel'
+import ProjectRate from './AllSelectionData/ProjectRate'
+import CityList from './AllSelectionData/CityList'
+import SkillsList from './AllSelectionData/SkillsList'
 
 
 function ProjectList() {
@@ -31,11 +36,6 @@ function ProjectList() {
   console.log(category,"category")
   // const viewallprojects = useSelector(state => state.freelancer.viewallprojects)
   const accessToken = useSelector(state => state.login.accessToken);
-  // const [categoryFilter, setCategoryFilter] = useState([]);
-  // const [locationFilter, setLocationFilter] = useState([]);
-  // const [skillFilter, setSkillFilter] = useState('');
-  // const [rateFilter, setRateFilter] = useState([]);
-  // const [expFilter, setExpFilter] = useState([]);
 
   const [categoryFilter, setCategoryFilter] = useState([]);
   const [skillFilter, setSkillFilter] = useState([]);
@@ -43,6 +43,7 @@ function ProjectList() {
   const [rateFilter, setRateFilter] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [cityFilter, setCityFilter] = useState([]);
+  const [priceRange, setPriceRange] = useState([1, 100]);
   // const projectData = { viewallprojects }
   const dispatch = useDispatch();
 
@@ -98,6 +99,16 @@ function ProjectList() {
     }
 };
 
+  const handleSliderChange = (newPriceRange) => {
+    setPriceRange(newPriceRange);
+  };
+
+  const handleInputChange = (index, newValue) => {
+    const updatedPriceRange = [...priceRange];
+    updatedPriceRange[index] = Number(newValue);
+    setPriceRange(updatedPriceRange);
+  };
+
   const [viewProject, setViewProject] = useState([]);
   console.log(viewProject,"project, project")
 
@@ -127,6 +138,11 @@ function ProjectList() {
     if (searchQuery) {
       queryParameters.push(`search_query=${searchQuery}`);
     }
+    
+    if (priceRange[0] !== 1 || priceRange[1] !== 10000) {
+      queryParameters.push(`min_hourly_rate=${priceRange[0]}`);
+      queryParameters.push(`max_hourly_rate=${priceRange[1]}`);
+    }
 
     const queryString = queryParameters.join('&');
 
@@ -138,37 +154,14 @@ function ProjectList() {
       .catch((error) => {
         console.error('Error fetching filtered data:', error);
       });
-  }, [categoryFilter, skillFilter, expFilter, rateFilter, searchQuery, cityFilter]);
+  }, [categoryFilter, skillFilter, expFilter, rateFilter, searchQuery, cityFilter, priceRange]);
 
+  const [cate] = useState(CategoryList);
+  const [expe] = useState(ExperienceLevel);
+  const [type] = useState(ProjectRate)
+  const [city] = useState(CityList)
+  const [req_skill ] = useState(SkillsList)
 
-
-
-  // React.useEffect(() => {
-  //   if (category) {
-  //     const filteredData = viewallprojects.filter(project => {
-  //         return project.category.toLowerCase() === category.toLowerCase();
-  //       });
-  //     setFilteredProjects(filteredData);
-  //   } else {
-  //     setFilteredProjects(viewallprojects);
-  //   }
-  // }, [category, viewallprojects]);
-
-
-  // const [filteredProjects, setFilteredProjects] = useState([]);
-  // console.log(filteredProjects, "filter freelancer");
-
-  const [range, setRange] = useState([1, 10000]);
-
-    const handleSliderChange = (newRange) => {
-        setRange(newRange);
-    };
-    
-    const handleInputChange = (index, newValue) => {
-        const updatedRange = [...range];
-        updatedRange[index] = Number(newValue);  
-        setRange(updatedRange);
-    };
 
   // const [range, setRange] = useState([1, 1000]);
 
@@ -260,216 +253,72 @@ function ProjectList() {
 
   const [filteredApiData, setFilteredApiData] = useState([]);
 
-  // const handleCategoryFilterChange = (e) => {
-  //   const category = e.target.value;
-  //   if (e.target.checked) {
-  //     setCategoryFilter((prevFilters) => [...prevFilters, category]);
-  //   } else {
-  //     setCategoryFilter((prevFilters) => prevFilters.filter((filter) => filter !== category));
-  //   }
-  // };
-
-  // const handleSkillFilterChange = (e) => {
-  //  const skills = e.target.value;
-  //  if (e.target.checked){
-  //   setSkillFilter((prevFilters) => [...prevFilters, skills]);
-  //  } else {
-  //   setSkillFilter((prevFilters) => prevFilters.filter((filter) => filter !== skills));
-  //  }
-  // };
-
-  // const handleExpFilterChange = (e) => {
-  //   const exp = e.target.value;
-  //   if (e.target.checked){
-  //     setExpFilter((prevFilters) => [...prevFilters, exp]);
-  //   } else {
-  //     setExpFilter((prevFilters) => prevFilters.filter((filter) => filter !== exp));
-  //   }
-  // };
-
-  // const handleRateFilterChange = (e) => {
-  //   const protype = e.target.value;
-  //   if (e.target.checked){
-  //     setRateFilter((prevFilters) => [...prevFilters, protype]);
-  //   } else {
-  //     setRateFilter((prevFilters) => prevFilters.filter((filter) => filter !== protype));
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   // Construct the query string
-  //   const queryParameters = [];
-
-  //   if (categoryFilter.length > 0) {
-  //     queryParameters.push(`category=${categoryFilter.join('&category=')}`);
-  //   }
-
-  //   if (skillFilter.length > 0) {
-  //     queryParameters.push(`skills=${skillFilter.join('&skills=')}`);
-  //   }
-
-  //   if (expFilter.length > 0) {
-  //     queryParameters.push(`experience_level=${expFilter.join('&experience_level=')}`);
-  //   }
-
-  //   if (rateFilter.length > 0) {
-  //     queryParameters.push(`rate=${rateFilter.join('&rate=')}`);
-  //   }
-
-  //   // Combine the query parameters
-  //   const queryString = queryParameters.join('&');
-
-  //   // Make the API request with the query string
-  //   axios
-  //     .get(`http://127.0.0.1:8000/freelance/filter/?${queryString}`)
-  //     .then((response) => {
-  //       // Handle the response and update the filtered data
-  //       setFilteredApiData(response.data);
-  //     })
-  //     .catch((error) => {
-  //       // Handle errors
-  //       console.error('Error fetching filtered data:', error);
-  //     });
-  // }, [categoryFilter, skillFilter, expFilter, rateFilter]);
-
-  // const [FilterData, setFilterData] = useState('')
-
-  // React.useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       // Fetch doc API
-  //       const response1 = await axios.get('http://127.0.0.1:8000//freelance/filter/');
-  //       setFilterData(response1.data.data);
-  
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-  
-  //   fetchData(); 
-  // }, []);
-  // console.log("/=/=/=/=/Filter API",FilterData)
-
- 
-
 
   const [currentPage, setCurrentPage] = useState(1);
-    const [categorySearch, setCategorySearch] = useState('');
+    // const [categorySearch, setCategorySearch] = useState('');
 
-    // useEffect(() => {
-    //     setCurrentPage(1);
-    // }, [categorySearch]);
 
-    // const jobsPerPage = 7;
-    // const indexOfLastJob = currentPage * jobsPerPage;
-    // const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+      const [showAll, setShowAll] = useState(false);
+      const initialCategoryCount = 5; // Initial number of categories to show
     
-    // const isDefaultRange = range[0] === 1 && range[1] === 10000;
-   
-    // const filteredJobs = viewallprojects?.filter(project => {
+      const [visibleCategories, setVisibleCategories] = useState(cate.slice(0, initialCategoryCount));
     
-    //   const withinPriceRange = isDefaultRange || (project.fixed_budget >= range[0] && project.fixed_budget <= range[1]);
-
-    //   return (
-    //     project.category.toLowerCase().includes(categorySearch.toLowerCase()) &&
+      const handleShowMore = () => {
+        setVisibleCategories(cate); // Show all categories
+        setShowAll(true);
+      };
     
-    //     (categoryFilter.length === 0 || categoryFilter.includes(project.category)) &&
-        
-    //     (expFilter.length === 0 || expFilter.includes(project.experience_level)) &&
-        
-    //     // (locationFilter.length === 0 || locationFilter.includes(project.project_owner_location)) &&
-        
-    //     (skillFilter.length === 0 || 
-    //       JSON.parse(project.skills_required.replace(/'/g,'"')).some(skill => skillFilter.includes(skill))) &&
-        
-    //     (rateFilter.length === 0 || rateFilter.includes(project.rate)) &&
-    //     withinPriceRange
-    //   );
-    // }) || [];
+      const handleShowLess = () => {
+        setVisibleCategories(cate.slice(0, initialCategoryCount)); // Show the initial count
+        setShowAll(false);
+      };
     
 
-    // const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
-    // const totalPages = Math.ceil((filteredJobs.length || 0) / jobsPerPage);
+      const [showAllSkills, setShowAllSkills] = useState(false);
+      const initialSkillCount = 5; // Initial number of skills to show
 
-    // const next = () => {
-    //     window.scrollTo(0, 0);
-    //     if (currentPage === totalPages) return;
-    //     setCurrentPage(currentPage + 1);
-    // };
+      const [visibleSkills, setVisibleSkills] = useState(req_skill.slice(0, initialSkillCount));
 
-    // const prev = () => {
-    //     window.scrollTo(0, 0);
-    //     if (currentPage === 1) return;
-    //     setCurrentPage(currentPage - 1);
-    // };
+      const handleShowMoreSkills = () => {
+        setVisibleSkills(req_skill); // Show all skills
+        setShowAllSkills(true);
+      };
+
+      const handleShowLessSkills = () => {
+        setVisibleSkills(req_skill.slice(0, initialSkillCount)); // Show the initial count
+        setShowAllSkills(false);
+      };
 
 
-    const categoryCounts = {};
+      const [showAllCity, setShowAllCity] = useState(false);
+      const initialCityCount = 5; // Initial number of cities to show
 
-    viewProject?.forEach(project => {
-        if (categoryCounts[project.category]) {
-            categoryCounts[project.category]++;
-        } else {
-            categoryCounts[project.category] = 1;
+      const [visibleCities, setVisibleCities] = useState(city.slice(0, initialCityCount));
+
+      const handleShowMoreCity = () => {
+        setVisibleCities(city); // Show all cities
+        setShowAllCity(true);
+      };
+
+      const handleShowLessCity = () => {
+        setVisibleCities(city.slice(0, initialCityCount)); // Show the initial count
+        setShowAllCity(false);
+      };
+
+      function highlightText(text, query) {
+        if (!query) {
+          return text;
         }
-    });
-    
-    const expCounts = {};
-    
-    viewProject?.forEach(project => {
-        if (expCounts[project.experience_level]) {
-            expCounts[project.experience_level]++;
-        } else {
-            expCounts[project.experience_level] = 1;
-        }
-    });
-    
-    const skillCounts = {};
-    
-    viewProject?.forEach(project => {
-        const skills = JSON.parse(project.skills_required.replace(/'/g, '"'));
-        skills.forEach(skill => {
-            if (skillCounts[skill]) {
-                skillCounts[skill]++;
-            } else {
-                skillCounts[skill] = 1;
-            }
+      
+        const regex = new RegExp(`(${query})`, 'gi');
+        return text.split(regex).map((part, index) => {
+          if (index % 2 === 1) {
+            return <span key={index} style={{ backgroundColor: '#a3e635' }}>{part}</span>;
+          } else {
+            return <span key={index}>{part}</span>;
+          }
         });
-    });
-    
-    
-    const ProjecttypeCounts = {};
-    
-    viewProject?.forEach(project => {
-        if (ProjecttypeCounts[project.rate]) {
-          ProjecttypeCounts[project.rate]++;
-        } else {
-          ProjecttypeCounts[project.rate] = 1;
-        }
-    });
-    
-    const locationCounts = {};
-    
-    viewProject?.forEach(project => {
-        if (locationCounts[project.project_owner_location]) {
-          locationCounts[project.project_owner_location]++;
-        } else {
-          locationCounts[project.project_owner_location] = 1;
-        }
-    });
-
-    const [showAllCategory, setShowAllCategory] = useState(false);
-
-const displayedCategories = showAllCategory ? Object.entries(categoryCounts) : Object.entries(categoryCounts).slice(0, 5);
-
-const [showAllSkill, setShowAllSkill] = useState(false);
-
-const displayedSkills = showAllSkill ? Object.entries(skillCounts) : Object.entries(skillCounts).slice(0, 5);
-
-const [showAllLocation, setShowAllLocation] = useState(false);
-
-const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Object.entries(locationCounts).slice(0, 5);
-
+      }
 
   return (
     <>
@@ -481,7 +330,7 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
           <div className='lg:w-[44vw] bg-white p-3 lg:h-14 rounded-2xl lg:flex items-center mt-4 shadow-md'>
             <div className='flex flex-row'>
               <img className='w-5 h-5' src={search}></img>
-              <input className='w-96 font-inter text-base ml-3 outline-none' placeholder='Search Job by Category' value={categorySearch} onChange={(e) => setCategorySearch(e.target.value)}></input>
+              <input className='w-96 font-inter text-base ml-3 outline-none' placeholder='Search Job by Category' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
             </div>
             <div className=''>
               <button className='rounded h-8 w-24 lg:ml-6 font-semibold text-base text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>Search</button>
@@ -502,9 +351,9 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
         <div className='flex flex-row'>
           <div className=' basis-3/12 mt-6'>
             <div><h1 className='font-cardo text-xl text-left font-normal'>Category</h1></div>
-            {displayedCategories.map(([category, count]) => (
-            <div key={category} className='flex flex-row mt-4'>
-        <div className='basis-8/12'>
+    {visibleCategories.map((category, index) =>(
+      <div key={category} className='flex flex-row mt-4'>
+      <div className='basis-10/12'>
             <label class="flex items-center font-inter relative cursor-pointer">
                 <input 
           className="hidden" 
@@ -520,44 +369,47 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
                 <span class="font-normal text-[#797979]">{category}</span>
             </label>
         </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div>
-    </div>
+      {/* <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(1,945)</div> */}
+  </div>
     ))}
-    {Object.entries(categoryCounts).length > 5 && (
-      <div>
-        <h1 
-          className='font-cardo text-xl text-left mt-5 font-normal cursor-pointer'
-          onClick={() => setShowAllCategory(!showAllCategory)}
-        >
-          {showAllCategory ? "Show Less" : "Show More"}
-        </h1>
-      </div>
-    )}
-            <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Experience Level</h1></div>
-            {Object.entries(expCounts).map(([exp, count]) => (
-            <div key={exp} className='flex flex-row mt-4'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input 
-          className="hidden" 
-          type="checkbox"
-          value={exp}
-          onChange={handleExpFilterChange}
-        />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
-                </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">{exp.replace(/_/g, ' ')}</span>
-            </label>
+    {showAll ? (
+        <div>
+          <h1 className='font-cardo text-xl text-left mt-5 font-normal cursor-pointer' onClick={handleShowLess}>
+            Show Less
+          </h1>
         </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div>
-    </div>
-    ))}
+      ) : (
+        <div>
+          <h1 className='font-cardo text-xl text-left mt-5 font-normal cursor-pointer' onClick={handleShowMore}>
+            +{cate.length - initialCategoryCount} More
+          </h1>
+        </div>
+      )}
+            <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Experience Level</h1></div>
+            {expe.map((exp,index) => (
+              <div key={exp} className='flex flex-row mt-4'>
+              <div className='basis-8/12'>
+                  <label class="flex items-center font-inter relative cursor-pointer">
+                      <input 
+                className="hidden" 
+                type="checkbox"
+                value={exp}
+                onChange={handleExpFilterChange}
+              />
+                      <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                        
+                          <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                      </div>
+                           <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                      <span class="font-normal text-[#797979]">{exp.replace(/_/g, ' ')}</span>
+                  </label>
+              </div>
+              {/* <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div> */}
+          </div>
+            ))}
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Project Type</h1></div>
-            {Object.entries(ProjecttypeCounts).map(([protype, count]) => (
-            <div className='flex flex-row mt-4'>
+            {type.map((protype, index) => (
+              <div className='flex flex-row mt-4'>
               <div className=' basis-8/12 text-left'>
                 <label class="relative inline-flex items-center mr-5 cursor-pointer">
               <input 
@@ -570,16 +422,17 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
               <span class="ml-3 text-base font-normal font-inter text-[#797979]">{protype}</span>
             </label>
               </div>
-              <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div>
-            </div>))}
+              {/* <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div> */}
+            </div>
+            ))}
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Project Rate</h1></div>
             <div className="pt-4 w-[85%]">
               <Slider
                 min={1}
-                max={10000}
+                max={100}
                 step={1}
                 range
-                value={range}
+                value={priceRange} // Use priceRange
                 onChange={handleSliderChange}
                 railStyle={{ background: 'lightgray' }}
                 trackStyle={[
@@ -608,7 +461,7 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
               <div className='flex flex-row mt-4'>
                 <div className='basis-5/12'><input
                 type="text"
-                value={range[0]}
+                value={priceRange[0]}
                 onChange={(e) => handleInputChange(0, e.target.value)}
                 className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-60
                 focus:outline-none'
@@ -616,7 +469,7 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
               <div className='basis-2/12 m-auto mt-4'><i class="bi bi-dash-lg text-[#475569]"></i></div>
                 <div className='basis-5/12'><input
                 type="text"
-                value={range[1]}
+                value={priceRange[1]}
                 onChange={(e) => handleInputChange(1, e.target.value)}
                 className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-60
                 focus:outline-none'
@@ -624,71 +477,76 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
               </div>
             </div>
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Skills</h1></div>
-            {displayedSkills.map(([skills, count]) => (
-        <div key={skills} className='flex flex-row mt-4'>
-            <div className='basis-8/12'>
-                <label className="flex items-center font-inter relative cursor-pointer">
-                    <input 
-          className="hidden" 
-          type="checkbox"
-          value={skills}
-          onChange={handleSkillFilterChange}
-        />
-                    <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                        <span className="checkmark hidden"><i className="bi bi-check-lg pr-2 pt-2"></i></span>
-                    </div>
-                    <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                    <span className="font-normal text-[#797979]">{skills}</span>
-                </label>
-            </div>
-            <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
-                ({count})
-            </div>
-        </div>
-    ))}
-    {Object.entries(skillCounts).length > 5 && (
-      <div>
-        <h1 
-          className='font-cardo text-xl text-left mt-5 font-normal cursor-pointer'
-          onClick={() => setShowAllSkill(!showAllSkill)}
-        >
-          {showAllSkill ? "Show Less" : "Show More"}
-        </h1>
-      </div>
-    )}
-           
-              <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Citys</h1></div>
-              {displayedLocation.map(([location, count]) => (
-             <div className='flex flex-row mt-4'>
-        <div className='basis-8/12'>
-            <label class="flex items-center font-inter relative cursor-pointer">
-                <input 
-          className="hidden" 
-          type="checkbox"
-          value={location}
-          onChange={handleCityFilterChange}
-        />
-                <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                  
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+              {visibleSkills.map((skills,index) => (
+                  <div key={skills} className='flex flex-row mt-4'>
+                  <div className='basis-8/12'>
+                      <label className="flex items-center font-inter relative cursor-pointer">
+                          <input 
+                className="hidden" 
+                type="checkbox"
+                value={skills}
+                onChange={handleSkillFilterChange}
+              />
+                          <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                              <span className="checkmark hidden"><i className="bi bi-check-lg pr-2 pt-2"></i></span>
+                          </div>
+                          <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                          <span className="font-normal text-[#797979]">{skills}</span>
+                      </label>
+                  </div>
+                  {/* <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
+                      ({count})
+                  </div> */}
+              </div>
+              ))}
+             {showAllSkills ? (
+                <div>
+                  <h1 className='font-cardo text-xl text-left mt-5 font-normal cursor-pointer' onClick={handleShowLessSkills}>
+                    Show Less
+                  </h1>
                 </div>
-                     <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                <span class="font-normal text-[#797979]">{location? location:'NA'}</span>
-            </label>
-        </div>
-        <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div>
-    </div>
-    ))}
-             {Object.entries(locationCounts).length > 5 && (
-      <div>
-        <h1 
-          className='font-cardo text-xl text-left mt-5 font-normal cursor-pointer'
-          onClick={() => setShowAllLocation(!showAllLocation)}
-        >
-          {showAllLocation ? "Show Less" : "Show More"}
-        </h1>
-      </div>
-    )}
+              ) : (
+                <div>
+                  <h1 className='font-cardo text-xl text-left mt-5 font-normal cursor-pointer' onClick={handleShowMoreSkills}>
+                    +{req_skill.length - initialSkillCount} More
+                  </h1>
+                </div>
+              )}
+              <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Citys</h1></div>
+            {visibleCities.map((location,index) => (
+              <div className='flex flex-row mt-4'>
+              <div className='basis-8/12'>
+                  <label class="flex items-center font-inter relative cursor-pointer">
+                      <input 
+                className="hidden" 
+                type="checkbox"
+                value={location}
+                onChange={handleCityFilterChange}
+              />
+                      <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                        
+                          <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                      </div>
+                           <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                      <span class="font-normal text-[#797979]">{location}</span>
+                  </label>
+              </div>
+              {/* <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div> */}
+          </div>
+            ))}
+             {showAllCity ? (
+              <div>
+                <h1 className='font-cardo text-xl text-left mt-5 font-normal cursor-pointer' onClick={handleShowLessCity}>
+                  Show Less
+                </h1>
+              </div>
+            ) : (
+              <div>
+                <h1 className='font-cardo text-xl text-left mt-5 font-normal cursor-pointer' onClick={handleShowMoreCity}>
+                  +{city.length - initialCityCount} More
+                </h1>
+              </div>
+            )}
           </div>
           { viewProject != null ? 
           <div className=' basis-9/12 mt-10'>
@@ -702,7 +560,7 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
                 {/* <Avatar src={profilepic} alt="avatar" variant="rounded" /> */}
               </div>
               <div className=' basis-9/12 text-left mb-7'>
-                <h1 className='font-cardo text-lg'>{project.title}</h1>
+                <h1 className='font-cardo text-lg'>{highlightText(project.title, searchQuery)}</h1>
                 {AllProposals && AllProposals.map((all, proposal) => {
                     return(
                         <>
@@ -714,7 +572,7 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
                   <div className=' basis-4/12 border-2 border-r-[#797979] mr-2 border-t-0 border-b-0 border-l-0'>
                     <div className='flex flex-row'>
                       <div className=' basis-2/12'><i class="bi bi-geo-alt"></i></div>
-                      <div className=' basis-10/12 font-inter text-[#797979]'>{ project.project_owner_location ? project.project_owner_location : "NA"}</div>
+                      <div className=' basis-10/12 font-inter text-[#797979]'>{highlightText(project.project_owner_location ? project.project_owner_location : "NA", searchQuery)}</div>
                     </div>
                   </div>
                   <div className=' basis-4/12 border-2 border-r-[#797979] mr-2 border-t-0 border-b-0 border-l-0'>
@@ -732,7 +590,7 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
                 </div>
                 {/* <p className='font-inter text-base font-normal text-[#797979] mt-3'>{project.description}</p> */}
                 <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>
-                Job Description: {displayWords.join(' ')} 
+                Job Description: {highlightText(displayWords.join(' '), searchQuery)}
                 {words.length > 30 && (
                     <span 
                         className="font-cardo text-[#031136] text-[18px] font-semibold cursor-pointer pl-2" 
@@ -745,7 +603,7 @@ const displayedLocation = showAllLocation ? Object.entries(locationCounts) : Obj
                 {JSON.parse(project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
                   // <div key={index} className='mt-3 bg-white shadow-lg text-center rounded-xl inline-block mr-3 py-1 px-2  border'>{skill}</div>
                   <span key={index} className='border px-4 py-1 border-gray-300 opacity-60 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2'>
-                  {skill}
+                  {highlightText(skill, searchQuery)}
                     </span>
                 ))}
               </div>
