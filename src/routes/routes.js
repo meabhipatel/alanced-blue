@@ -83,7 +83,7 @@ import SendPasswordResetEmail from "../components/Layout/SendPasswordResetEmail"
 
     return (
       <>
-        <Routes>
+        {/* <Routes>
           <Route path="/" element={<Header />} />
           <Route path="/login" element={<Login />} />
           <Route path="/freelancer/registration" element={<FreelancerRegistration />} />
@@ -135,6 +135,71 @@ import SendPasswordResetEmail from "../components/Layout/SendPasswordResetEmail"
           <Route path="/reset-user-password/:uid/:token" element={<ResetPassword />} />
           <Route path="/reset-password" element={<SendPasswordResetEmail/>}/>
           <Route path="*" element={<Navigate to="/" replace />} /> 
+        </Routes> */}
+
+        <Routes>
+          <Route path="/" element={<Header />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/freelancer/registration" element={<FreelancerRegistration />} />
+          <Route path="/hirer/registration" element={<HirerRegistration/>}/>
+          <Route path="/sign-up" element={<Choose />} />
+          <Route path="/projects" element={<ProjectList/>}/>
+          <Route path="/view-all/freelancer" element={<FindTalent/>}/>
+          <Route path="/about-us" element={<AboutUs/>}/>
+          <Route path="/contact-us" element={<ContactUs/>}/>
+          <Route path="/FAQ" element={<FAQ/>}/>
+          <Route path='/enterprises' element={<Enterprises/>}></Route>
+          <Route path="/why-alanced" element={<WhyAlanced/>}></Route>
+          <Route path="/safety-security" element={<SafetyAndSecurity/>}></Route>
+          <Route path="/terms" element={<TermsConditions/>}/>
+          <Route path="/cookies" element={<Cookies/>}/>
+          <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
+          <Route path="/view-more/project-detail" element={<ViewMoreProjectDetail/>}></Route>
+          <Route path="/view-freelancer/full-detail" element={<FreelancerFullDetailAfterLogin/>}></Route>
+          <Route path="/reset-user-password/:uid/:token" element={<ResetPassword />} />
+          <Route path="/reset-password" element={<SendPasswordResetEmail/>}/>
+
+
+          {(loginType == 'FREELANCER') && <>
+            <Route path="/freelancer/edit-profile" element={<FreelancerSelfProfile/>}/>
+            <Route path="/freelancer/profile" element={<FreelancerAfterLogin/>}/>
+            <Route path="/freelancer/view-project/detail" element={<ViewProjectNewTab/>}/>
+            <Route path="/freelancer/view-referals" element={<MyProposalReferrals/>}/>
+            <Route path="/saved-jobs" element={<SavedJobs/>}/>
+            <Route path="/my-proposals" element={<MyProposals/>}/>
+            <Route path="/my-jobs" element={<MyJobs/>}/>
+            <Route path="/messages" element={<Messages/>}/>
+            <Route path="/freelancer/all-contracts" element={<AllContracts/>}/>
+            <Route path="/freelancer/my-reports" element={<MyReports/>}/>
+            <Route path="/freelancer/add/portfolio" element={<AddPortfolio/>}/>
+            <Route path="/freelancer/select/templete" element={<SelectTemplete/>}/>
+            <Route path="/freelancer/add-bid" element={<AddBidAmount/>}/>
+            <Route path="/freelancer/send-proposal" element={<SendProposal/>}/>
+            <Route path="/View/freelancer/proposal" element={<ViewProposal/>}/>
+            <Route path="/View/bid-details" element={<ViewBidDetailAfterAdd/>}/>
+            <Route path="/view-project/full-detail" element={<ViewProjectPopup/>}/>
+            <Route path='/send-proposal/detail' element={<ViewSendPraposalAfterAdd/>}></Route>
+            <Route path="/view/SelfBidProject" element={<SelfBidProject/>}></Route>
+            <Route path="/notifications" element={<Notifications/>}/>
+          </>}
+
+
+          {(loginType == 'HIRER') && <>
+            <Route path="/hirer/profile" element={<HirerAfterLogin/>}/>
+            <Route path="/View-all/Job-post" element={<ViewAllJobPost/>}/>
+            <Route path="/View-all/proposals" element={<ViewAllProposals/>}/>
+            <Route path="/View/proposal" element={<ViewProposalPopup/>}/>
+            <Route path="/View/Job-post" element={<ViewJobPost/>}/>
+            <Route path="/edit/Job-post" element={<EditJobPost/>}/>
+            <Route path="/add/Job-post" element={<AddJobPost/>}/>
+            <Route path="/hirer/profile-edit" element={<HirerSelfProfile/>}></Route>
+            <Route path="/notifications" element={<Notifications/>}/>
+            <Route path="/messages" element={<Messages/>}/>
+            <Route path="/freelancer/my-reports" element={<MyReports/>}/>
+          </>}
+
+          <Route path="*" element={<Navigate to="/" replace />} />
+
         </Routes>
   
         <ToastContainer />
