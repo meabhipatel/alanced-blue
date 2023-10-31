@@ -121,7 +121,7 @@ const FindTalent = () => {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`http://127.0.0.1:8000/account/freelancer/profile/view-all/?${queryString}`)
+      .get(`https://aparnawiz91.pythonanywhere.com/account/freelancer/profile/view-all/?${queryString}`)
       .then((response) => {
         setViewFreelancer(response.data.data); // Access the 'data' field
       })
@@ -303,7 +303,7 @@ const FindTalent = () => {
         </div>
           )}
   </div>
-  <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Freelancer Rate</h1></div>
+  {/* <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Freelancer Rate</h1></div>
   <div className="pt-4 w-[75%]">
               <Slider
                 min={1}
@@ -353,7 +353,7 @@ const FindTalent = () => {
                 focus:outline-none'
               /></div>
               </div>
-            </div>
+            </div> */}
     <div class='location'>
     <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Citys</h1></div>
     
@@ -488,7 +488,7 @@ const FindTalent = () => {
                 
       <div className='px-4 w-[26vw] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4'>
         <div className="flex items-center">
-            <Avatar src={"http://127.0.0.1:8000"+free.images_logo} alt="" variant="rounded" className="mr-4 h-24 w-24" />
+            <Avatar src={"https://aparnawiz91.pythonanywhere.com"+free.images_logo} alt="" variant="rounded" className="mr-4 h-24 w-24" />
             <div>
             <p className="font-inter text-[#0A142F] text-[18px] font-semibold">{highlightText(free.first_Name + " " + free.last_Name, searchQuery)}</p>
             <p className='font-inter opacity-50 text-[#0A142F] text-[14px]'>{highlightText(free.category,searchQuery)}</p>
