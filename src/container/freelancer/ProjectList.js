@@ -139,15 +139,15 @@ function ProjectList() {
       queryParameters.push(`search_query=${searchQuery}`);
     }
     
-    if (priceRange[0] !== 1 || priceRange[1] !== 10000) {
-      queryParameters.push(`min_hourly_rate=${priceRange[0]}`);
-      queryParameters.push(`max_hourly_rate=${priceRange[1]}`);
-    }
+    // if (priceRange[0] !== 1 || priceRange[1] !== 10000) {
+    //   queryParameters.push(`min_hourly_rate=${priceRange[0]}`);
+    //   queryParameters.push(`max_hourly_rate=${priceRange[1]}`);
+    // }
 
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`http://127.0.0.1:8000/freelance/view-all/Project/?${queryString}`)
+      .get(`https://aparnawiz91.pythonanywhere.com/freelance/view-all/Project/?${queryString}`)
       .then((response) => {
         setViewProject(response.data.data); // Access the 'data' field
       })
@@ -426,7 +426,7 @@ function ProjectList() {
             </div>
             ))}
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Project Rate</h1></div>
-            <div className="pt-4 w-[85%]">
+            {/* <div className="pt-4 w-[85%]">
               <Slider
                 min={1}
                 max={100}
@@ -475,7 +475,7 @@ function ProjectList() {
                 focus:outline-none'
               /></div>
               </div>
-            </div>
+            </div> */}
             <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Skills</h1></div>
               {visibleSkills.map((skills,index) => (
                   <div key={skills} className='flex flex-row mt-4'>
