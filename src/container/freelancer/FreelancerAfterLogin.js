@@ -36,12 +36,14 @@ const FreelancerAfterLogin = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('');
  
 
-  React.useEffect(() => {
-    dispatch(GetViewAllProjectsListAction())
-  }, [])
+//   React.useEffect(() => {
+//     dispatch(GetViewAllProjectsListAction())
+//   }, [])
 
   let displayName;
 
@@ -64,13 +66,50 @@ const FreelancerAfterLogin = () => {
   const projectsToDisplay = searchFilteredProjects.length > 0 ? searchFilteredProjects : viewallprojects;
   const [expandedProjects, setExpandedProjects] = useState([]);
 
+  const [viewProject, setViewProject] = useState([]);
+//   const userCategory = logindata?.category
+
+  useEffect(() => {
+    const queryParameters = [];
+  
+    if (searchQuery) {
+      queryParameters.push(`search_query=${searchQuery}`);
+    }
+    
+    queryParameters.push(`page=${currentPage}`);
+
+    const queryString = queryParameters.join('&');
+
+    axios
+      .get(`https://aparnawiz91.pythonanywhere.com/freelance/view-all/Project/?${queryString}`)
+      .then((response) => {
+        setViewProject(response.data.data); 
+        setTotalPages(Math.ceil(response.data.count / 8));
+        // const projectsMatchingCategory = response.data.results.filter(project => project.category === userCategory);
+        // setViewProject(projectsMatchingCategory);
+        // setTotalPages(Math.ceil(projectsMatchingCategory.length / 8));
+      })
+      .catch((error) => {
+        console.error('Error fetching filtered data:', error);
+      });
+  }, [searchQuery, currentPage]);
+
+
 const handleToggleDescription = (index) => {
     const updatedState = [...expandedProjects];
     updatedState[index] = !updatedState[index];
     setExpandedProjects(updatedState);
 };
 
+const prev = () => {
+    window.scrollTo(0, 0);
+    setCurrentPage(prev => Math.max(prev - 1, 1));
+};
 
+const next = () => {
+    window.scrollTo(0, 0);
+    setCurrentPage(prev => Math.min(prev + 1, totalPages));
+};
 
   function getCurrentDateAndGreeting() {
     const current = new Date();
@@ -131,34 +170,34 @@ const { day, formattedDate, greeting } = getCurrentDateAndGreeting();
   }, []);
   console.log("/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/",AllProposals)
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [categorySearch, setCategorySearch] = useState('');
+//   const [currentPage, setCurrentPage] = useState(1);
+//   const [categorySearch, setCategorySearch] = useState('');
 
-  useEffect(() => {
-      setCurrentPage(1);
-  }, [categorySearch]);
+//   useEffect(() => {
+//       setCurrentPage(1);
+//   }, [categorySearch]);
 
-  const jobsPerPage = 5;
-  const indexOfLastJob = currentPage * jobsPerPage;
-  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+//   const jobsPerPage = 5;
+//   const indexOfLastJob = currentPage * jobsPerPage;
+//   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   
-  const filteredJobs = projectsToDisplay?.filter(project => 
-      project.skills_required.toLowerCase().includes(categorySearch.toLowerCase())
-  ) || [];
+//   const filteredJobs = projectsToDisplay?.filter(project => 
+//       project.skills_required.toLowerCase().includes(categorySearch.toLowerCase())
+//   ) || [];
 
-  const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
-  const totalPages = Math.ceil((filteredJobs.length || 0) / jobsPerPage);
-  const next = () => {
-      window.scrollTo(0, 0);
-      if (currentPage === totalPages) return;
-      setCurrentPage(currentPage + 1);
-  };
+//   const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
+//   const totalPages = Math.ceil((filteredJobs.length || 0) / jobsPerPage);
+//   const next = () => {
+//       window.scrollTo(0, 0);
+//       if (currentPage === totalPages) return;
+//       setCurrentPage(currentPage + 1);
+//   };
 
-  const prev = () => {
-      window.scrollTo(0, 0);
-      if (currentPage === 1) return;
-      setCurrentPage(currentPage - 1);
-  };
+//   const prev = () => {
+//       window.scrollTo(0, 0);
+//       if (currentPage === 1) return;
+//       setCurrentPage(currentPage - 1);
+//   };
 
 
  const chunkArray = (array, size) => {
@@ -255,6 +294,22 @@ const [bidsCount, setBidsCount] = useState({});
         fetchBidsForAllProjects();
     }, [viewallprojects]);
 
+
+    function highlightText(text, query) {
+        if (!query) {
+          return text;
+        }
+      
+        const regex = new RegExp(`(${query})`, 'gi');
+        return text.split(regex).map((part, index) => {
+          if (index % 2 === 1) {
+            return <span key={index} style={{ backgroundColor: '#a3e635' }}>{part}</span>;
+          } else {
+            return <span key={index}>{part}</span>;
+          }
+        });
+      }
+
   
   return (
     <>
@@ -327,7 +382,7 @@ const [bidsCount, setBidsCount] = useState({});
     <div className="flex items-center">
     <div className='flex items-center mr-1 space-x-1 border p-1 w-[200px] rounded-md'>
         <img src={search} alt="Search Icon" className="h-4 w-4 mr-1 ml-1" />
-        <input className='w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none' placeholder='Search Jobs by skills' value={categorySearch} onChange={(e) => setCategorySearch(e.target.value)} />
+        <input className='w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none' placeholder='Search Jobs by skills' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
     </div>
     </div>
 </div>
@@ -335,16 +390,16 @@ const [bidsCount, setBidsCount] = useState({});
     <div className='px-4 md:px-8 py-2'>
       <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse jobs that match your experience to a client's hiring preferences.<br/> Ordered by most relevant.</p>
     </div>
-    {viewallprojects != null ?
+    {viewProject != null ?
     <div>
-    {currentJobs && currentJobs.map((project, index) => {
+    {viewProject && viewProject.map((project, index) => {
         const words = project.description.split(' ');
         const displayWords = expandedProjects[index] || words.length <= 50 ? words : words.slice(0, 50);
               return(<>
     <Link to='/view-project/full-detail' state={{ project }} onClick={() => window.scrollTo(0, 0)}>
     <div className='px-4 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer'>
     <div className="flex items-center justify-between">
-    <p className="font-inter text-[#0A142F] text-[18px] font-semibold">{project.title}</p>
+    <p className="font-inter text-[#0A142F] text-[18px] font-semibold">{highlightText(project.title, searchQuery)}</p>
     <div className="flex items-center space-x-2">
     <div className="p-1 w-8 h-8 bg-white rounded-full border border-gray-200" onClick={(event) => handleClick(event, index,project)}>
     { 
@@ -362,9 +417,9 @@ const [bidsCount, setBidsCount] = useState({});
             </>
         )
     })}
-    <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>{project.rate} - {project.experience_level} - Est. Budget: ${project.rate == 'Hourly' ? project.min_hourly_rate+"/hr" +" - "+ "$"+project.max_hourly_rate+"/hr" : project.fixed_budget } - Posted {timeAgo(project.project_creation_date)}</p>
+    <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>{highlightText(project.rate,searchQuery)} - {highlightText(project.experience_level, searchQuery)} - Est. Budget: ${project.rate == 'Hourly' ? project.min_hourly_rate+"/hr" +" - "+ "$"+project.max_hourly_rate+"/hr" : project.fixed_budget } - Posted {timeAgo(project.project_creation_date)}</p>
     <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>
-                Job Description: {displayWords.join(' ')} 
+                Job Description: {highlightText(displayWords.join(' '), searchQuery)}
                 {words.length > 50 && (
                     <span 
                         className="font-cardo text-[#031136] text-[18px] font-semibold cursor-pointer pl-2" 
@@ -377,7 +432,7 @@ const [bidsCount, setBidsCount] = useState({});
     {JSON.parse(project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
     <Link to=''>
             <span className='border px-4 py-1 border-gray-300 opacity-50 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2'>
-           {skill}
+            {highlightText(skill, searchQuery)}
             </span>
         </Link>
          ))}
@@ -386,7 +441,7 @@ const [bidsCount, setBidsCount] = useState({});
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>Payment verified</p>
         <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>
         <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/>
-        <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>{ project.project_owner_location ? project.project_owner_location : "NA"}</p>
+        <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>{highlightText(project.project_owner_location ? project.project_owner_location : "NA", searchQuery)}</p>
     </div>
     </Link>
     </>
@@ -407,7 +462,7 @@ const [bidsCount, setBidsCount] = useState({});
     );})}
     </div>}
     <div>
-    {projectsToDisplay?.length > 5 && (
+    {/* {projectsToDisplay?.length > 5 && (
                     <div className="flex justify-end items-center gap-6 m-4">
                         <IconButton
                             size="sm"
@@ -442,7 +497,47 @@ const [bidsCount, setBidsCount] = useState({});
                             <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
                     </div>
-                )}
+                )} */}
+                 {totalPages > 1 && (
+                    <div className="flex justify-end items-center gap-6 m-4">
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={prev}
+                            disabled={currentPage === 1}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                        
+                        {[...Array(totalPages)].map((_, index) => {
+                            const pageNumber = index + 1;
+                            return (
+                                <span
+                                    key={pageNumber}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    onClick={() => {
+                                        window.scrollTo(0, 0);
+                                        setCurrentPage(pageNumber);
+                                    }}
+                                    
+                                >
+                                    {pageNumber}
+                                </span>
+                            );
+                        })}
+
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={next}
+                            disabled={currentPage === totalPages}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                    </div>
+    )}
   </div>
 </div>  
 </div>
