@@ -115,7 +115,7 @@ const ViewSendPraposalAfterAdd = () => {
                 <h1 className='text-base font-medium font-inter text-left mt-5'>Skills & Experties</h1>
                 <div className="text-left mt-5">
                 {JSON.parse(projectdata.project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
-                    <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
+                    <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%] mt-4">
                     <p className=" text-center">{skill}</p>
                 </div>
                 ))}
@@ -140,7 +140,7 @@ const ViewSendPraposalAfterAdd = () => {
                 <hr className=' mt-5' />
                 <p className='text-[15px] font-medium font-inter text-left mt-5'>You'll Receive</p>
                 <p className='text-[15px] font-medium font-inter text-left opacity-70'>The estimated payment, after service fees.</p>
-                <p className='text-base font-medium font-inter text-left mt-5 opacity-70'>$400.00</p>
+                <p className='text-base font-medium font-inter text-left mt-5 opacity-70'>$ {addedbid.bid_amount-(addedbid.bid_amount/10)}</p>
                 {/* <div className=' flex flex-row mt-5  mb-5'>
             <div className=' basis-3/12' ><button className='h-10 w-40 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded'>Change Terms</button></div>
             <div class="p-0.5 mt-5 rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] ml-5">

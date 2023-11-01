@@ -34,7 +34,8 @@ const BidAdd = () => {
     const prodata ={
         "project_id": id,
         "description":addBid.description,
-        "bid_amount":addBid.bid_amount,  
+        "bid_amount":addBid.bid_amount,
+        "bid_type": addBid.bid_type  
       }
       console.log("/-/-/-/-/-/-/-/-/-/-/",prodata)
     dispatch(AddBidAmountAction(prodata, accessToken));
@@ -181,7 +182,32 @@ const [showFullDescription, setShowFullDescription] = useState(false);
             <div>
             <div className="flex items-center mt-4">
                 <div className="flex flex-col justify-center w-2/3"> 
-                    <h1 className="font-medium text-[18px] text-[#031136] font-cardo text-left">Hourly Rate</h1>
+                    <h1 className="font-medium text-[18px] text-[#031136] font-cardo text-left">Rate Type</h1>
+                    <p className="font-inter text-[14px] text-[#031136] font-normal text-left opacity-50">Choose Rate Type.</p>
+                </div>
+                <div className="flex items-center space-x-2"> 
+                    {/* <input
+                        type="text"
+                        placeholder='$0.00'
+                        className='border py-1.5 px-2 rounded-md w-56 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 text-right'
+                        name='bid_amount'
+                        value="Bid Rate"
+                        // onChange={onChange}
+                        // value={userInput}  // Use the userInput as value
+                        // onChange={(e) => setUserInput(e.target.value)}
+                    />  */}
+                    <select
+                    className="w-[220px] border py-1.5 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
+                    name="bid_type" value={addBid.bid_type} onChange={onChange}>
+                    <option disabled selected value="">Choose</option>
+                    <option value="Hourly">Hourly</option>
+                    <option value="Fixed">Fixed</option>
+                </select>
+                </div>
+            </div>
+            <div className="flex items-center mt-6">
+                <div className="flex flex-col justify-center w-2/3"> 
+                    <h1 className="font-medium text-[18px] text-[#031136] font-cardo text-left">Bid Amount</h1>
                     <p className="font-inter text-[14px] text-[#031136] font-normal text-left opacity-50">Total amount the client will see</p>
                 </div>
                 <div className="flex items-center space-x-2"> 
@@ -196,7 +222,7 @@ const [showFullDescription, setShowFullDescription] = useState(false);
                         // onChange={(e) => setUserInput(e.target.value)}
                     /> 
                     
-                    <span>/hr</span>
+                    {/* <span>/hr</span> */}
                     {/* <input type='text' name='project_id' value={addBid.project_id}
                     placeholder={id} defaultValue={id} onChange={onChange}/> */}
                 </div>
@@ -216,7 +242,7 @@ const [showFullDescription, setShowFullDescription] = useState(false);
                         value={`-$${serviceFee.toFixed(2)}`}
                         disabled
                     /> 
-                    <span>/hr</span>
+                    {/* <span>/hr</span> */}
                 </div>
             </div>
 
@@ -235,12 +261,12 @@ const [showFullDescription, setShowFullDescription] = useState(false);
                         value={`$${totalAfterFee.toFixed(2)}`}
                         disabled
                     /> 
-                    <span>/hr</span>
+                    {/* <span>/hr</span> */}
                 </div>
             </div>
         </div>
             </div>
-            <div className=' basis-4/12' onClick={openDialog}>
+            <div className=' basis-4/12'>
             <img src={dollarimg} alt="" className=' h-28 w-28 mx-auto' />
             <p className=' opacity-[50%] font-normal text-sm mt-3'>Includes Alanced Hourly Protection.</p>
             </div>
