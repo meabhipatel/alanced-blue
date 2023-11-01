@@ -8,7 +8,7 @@ const API = {
       FreelancerRegistration: '/account/freelancer/registration',
       FreelancerSelfProfileView: '/account/freelancer/selfprofile/view',
       FreelancerViewReviews:'/freelance/View-all/Review',
-      ViewAllProjects: '/freelance/view-all/Project',
+      ViewAllProjects: '/freelance/view-all/Project/',
       UpdateFreelancerProfile: '/account/freelancer/profile/update',
       AddBidAmount: '/freelance/Add/bid',
       ViewFreelancerSelfBid: '/freelance/view/freelancer-self/bid',
@@ -21,7 +21,7 @@ const API = {
   Hirers: {
     Hirer: {
       HirerRegistration: '/account/hirer/registration',
-      ViewAllFreelancers:'/account/freelancer/profile/view-all',
+      ViewAllFreelancers:'/account/freelancer/profile/view-all/',
       ViewHirerSelfProject:'/freelance/view/hirer-self/Project',
       ViewAllBids:'/freelance/View/bids',
       UpdateProject:'/freelance/update/project',
