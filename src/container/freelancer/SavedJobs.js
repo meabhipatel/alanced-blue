@@ -13,22 +13,49 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { timeAgo } from './TimeFunctions'
+import { IconButton, Typography } from "@material-tailwind/react";
+import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 const SavedJobs = () => {
 
     const accessToken = useSelector(state => state.login.accessToken);  
-    const initialSavedJobs = useSelector(state => state.freelancer.viewallsavedjob);
-    const [savedJobs, setSavedJobs] = useState(initialSavedJobs);
+    // const initialSavedJobs = useSelector(state => state.freelancer.viewallsavedjob);
+    // const [savedJobs, setSavedJobs] = useState(initialSavedJobs);
     
     const dispatch = useDispatch();
+    const [savedJobs, setSavedJobs] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
-    useEffect(() => {
-        dispatch(GetViewAllSavedJobsAction(accessToken));
-    }, [dispatch, accessToken]);
+    // useEffect(() => {
+    //     dispatch(GetViewAllSavedJobsAction(accessToken));
+    // }, [dispatch, accessToken]);
 
-    useEffect(() => {
-        setSavedJobs(initialSavedJobs);
-    }, [initialSavedJobs]);
+    // useEffect(() => {
+    //     setSavedJobs(initialSavedJobs);
+    // }, [initialSavedJobs]);
+
+    const fetchSavedJobs = async () => {
+        try {
+            const response = await axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/SavedProjects?page=${currentPage}`, {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            });
+    
+            if (response.status === 200) {
+                // setSavedJobs(response.data.results);
+                setSavedJobs(response.data.data);
+                setTotalPages(Math.ceil(response.data.count / 8));
+            } else {
+                console.error("Error fetching saved jobs:", response.data);
+            }
+    
+        } catch (error) {
+            console.error("Error fetching saved jobs:", error.message);
+        }
+    };
+    
 
     const [expandedProjects, setExpandedProjects] = useState([]);
 
@@ -60,6 +87,7 @@ const SavedJobs = () => {
                     toast.success("Job unsaved successfully!"); 
                     const updatedJobs = savedJobs.filter(job => job.Project_id !== jobId);
                     setSavedJobs(updatedJobs);
+                    fetchSavedJobs();
                 } 
             }
         } catch (error) {
@@ -67,7 +95,21 @@ const SavedJobs = () => {
         }
     };
     
+    useEffect(() => {
+        fetchSavedJobs();
+    }, [accessToken, currentPage]);
+    
 
+    const prev = () => {
+        window.scrollTo(0, 0);
+        setCurrentPage(prev => Math.max(prev - 1, 1));
+    };
+
+    const next = () => {
+        window.scrollTo(0, 0);
+        setCurrentPage(prev => Math.min(prev + 1, totalPages));
+    };
+    
 
   return (
     <>
@@ -120,6 +162,47 @@ const SavedJobs = () => {
     </div>
       )
     })}</>}
+    {totalPages > 1 && (
+                    <div className="flex justify-end items-center gap-6 m-4">
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={prev}
+                            disabled={currentPage === 1}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                        
+                        {[...Array(totalPages)].map((_, index) => {
+                            const pageNumber = index + 1;
+                            return (
+                                <span
+                                    key={pageNumber}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    // onClick={() => setCurrentPage(pageNumber)}
+                                    onClick={() => {
+                                        window.scrollTo(0, 0);
+                                        setCurrentPage(pageNumber);
+                                    }}
+                                    
+                                >
+                                    {pageNumber}
+                                </span>
+                            );
+                        })}
+
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={next}
+                            disabled={currentPage === totalPages}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                    </div>
+    )}
     </div>
     </div>
     <HomeSection4/>

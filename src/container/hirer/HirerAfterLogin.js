@@ -60,7 +60,8 @@ const HirerAfterLogin = () => {
     const [languageFilter, setLanguageFilter] = useState([]);
     // console.log(useSelector(state => state.login.accessToken))
     const dispatch = useDispatch();
-   
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
   
     // React.useEffect(() => {
     //   dispatch(GetViewAllFreelancersAction())
@@ -74,6 +75,7 @@ const HirerAfterLogin = () => {
       } else {
        setSkillFilter((prevFilters) => prevFilters.filter((filter) => filter !== skills));
       }
+      setCurrentPage(1);
      };
    
      const handleExpFilterChange = (e) => {
@@ -83,6 +85,7 @@ const HirerAfterLogin = () => {
        } else {
          setExpFilter((prevFilters) => prevFilters.filter((filter) => filter !== exp));
        }
+       setCurrentPage(1);
      };
 
      const handleCityFilterChange = (e) => {
@@ -92,6 +95,7 @@ const HirerAfterLogin = () => {
       } else {
           setCityFilter((prevFilters) => prevFilters.filter((filter) => filter !== city));
       }
+      setCurrentPage(1);
   };
 
   const handleLanguageFilterChange = (e) => {
@@ -101,6 +105,7 @@ const HirerAfterLogin = () => {
     } else {
      setLanguageFilter((prevFilters) => prevFilters.filter((filter) => filter !== language));
     }
+    setCurrentPage(1);
    };
   
     const [viewFreelancer, setViewFreelancer] = useState([]);
@@ -130,17 +135,21 @@ const HirerAfterLogin = () => {
       queryParameters.push(`Language=${languageFilter.join('&Language=')}`);
     }
 
+    queryParameters.push(`page=${currentPage}`);
+
     const queryString = queryParameters.join('&');
 
     axios
       .get(`https://aparnawiz91.pythonanywhere.com/account/freelancer/profile/view-all/?${queryString}`)
       .then((response) => {
-        setViewFreelancer(response.data.data); // Access the 'data' field
+        // setViewFreelancer(response.data.results); 
+        setViewFreelancer(response.data.data); 
+        setTotalPages(Math.ceil(response.data.count / 8));
       })
       .catch((error) => {
         console.error('Error fetching filtered data:', error);
       });
-  }, [skillFilter, expFilter, searchQuery, cityFilter, languageFilter]);
+  }, [skillFilter, expFilter, searchQuery, cityFilter, languageFilter, currentPage]);
 
 
 
@@ -304,6 +313,17 @@ const HirerAfterLogin = () => {
       }
     });
   }
+
+  const prev = () => {
+    window.scrollTo(0, 0);
+    setCurrentPage(prev => Math.max(prev - 1, 1));
+};
+
+const next = () => {
+    window.scrollTo(0, 0);
+    setCurrentPage(prev => Math.min(prev + 1, totalPages));
+};
+
 
     return (
       <>
@@ -615,6 +635,46 @@ const HirerAfterLogin = () => {
   </div>
     }
   <div>
+  {totalPages > 1 && (
+                    <div className="flex justify-end items-center gap-6 m-4">
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={prev}
+                            disabled={currentPage === 1}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                        
+                        {[...Array(totalPages)].map((_, index) => {
+                            const pageNumber = index + 1;
+                            return (
+                                <span
+                                    key={pageNumber}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    onClick={() => {
+                                        window.scrollTo(0, 0);
+                                        setCurrentPage(pageNumber);
+                                    }}
+                                    
+                                >
+                                    {pageNumber}
+                                </span>
+                            );
+                        })}
+
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={next}
+                            disabled={currentPage === totalPages}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                    </div>
+    )}
   {/* {viewallfreelancer?.length > 5 && (
                     <div className="flex justify-end items-center gap-6 m-4">
                         <IconButton
