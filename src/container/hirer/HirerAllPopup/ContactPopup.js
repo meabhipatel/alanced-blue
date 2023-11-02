@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { HirerUpdateAction, GetHirerSelfProfileAction } from '../../../redux/Hirer/HirerAction';
+import CityList from '../../freelancer/AllSelectionData/CityList';
 
 
 const HirerContactPopup = ({ handleContactsClose }) => {
@@ -26,6 +27,9 @@ const HirerContactPopup = ({ handleContactsClose }) => {
         handleContactsClose();
         dispatch(GetHirerSelfProfileAction(accessToken))
     }
+
+    const[city] = useState(CityList)
+    console.log(city,"city")
 
     return(
         <>
@@ -53,9 +57,17 @@ const HirerContactPopup = ({ handleContactsClose }) => {
                     </div>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Address</span>
-                    <input type="text" defaultValue={hirerData.Address} onChange={e => {setAddress(e.target.value)}} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    {/* <input type="text" defaultValue={hirerData.Address} onChange={e => {setAddress(e.target.value)}} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/> */}
+                    <select defaultValue={hirerData.Address} onChange={e => setAddress(e.target.value)} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white'>
+                    {city.map((location, index) => (
+                        <option value={location}>{location}</option>
+                    ))}
+                    {/* <option value="">Select an address</option>
+                    <option value="Indore">Indore</option>
+                    <option value="Ujjain">Ujjain</option>
+                    <option value="Bhopal">Bhopal</option> */}
+                </select>
                     </div>
-            
                         </div>
                         
                             <div className="mt-8 flex justify-end">
