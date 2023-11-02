@@ -37,9 +37,12 @@ const BidAdd = () => {
         "bid_amount":addBid.bid_amount,
         "bid_type": addBid.bid_type  
       }
-      console.log("/-/-/-/-/-/-/-/-/-/-/",prodata)
+    //   console.log("/-/-/-/-/-/-/-/-/-/-/",prodata)
+    console.log(addBid.bid_amount,"bid amount//-//-//")
+    console.log(addBid.bid_type,"bid_type//-//-//")
+    console.log(addBid.description,"bid_discriptions//-//-//")
     dispatch(AddBidAmountAction(prodata, accessToken));
-    if(prodata.bid_amount >= 0 && prodata.description != null){
+    if(prodata.bid_amount >= 0 && prodata.description != null && prodata.bid_type != null){
     navigate('/View/bid-details', { state: { bidData: prodata, projectdetail: projectData,} })
     }
     if(prodata.bid_amount < 0){
@@ -197,7 +200,7 @@ const [showFullDescription, setShowFullDescription] = useState(false);
                         // onChange={(e) => setUserInput(e.target.value)}
                     />  */}
                     <select
-                    className="w-[220px] border py-1.5 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
+                    className="w-[220px] border py-1.5 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white"
                     name="bid_type" value={addBid.bid_type} onChange={onChange}>
                     <option disabled selected value="">Choose</option>
                     <option value="Hourly">Hourly</option>

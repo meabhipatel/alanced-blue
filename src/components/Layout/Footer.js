@@ -116,7 +116,7 @@ const onChange = e =>{
       </Link>
       </div>
       <div className="flex-1 flex justify-center p-4 pt-1">
-      <div class="flex space-x-4 w-full md:pl-20">
+      {/* <div class="flex space-x-4 w-full md:pl-20">
       <Link to='/terms' onClick={() => window.scrollTo(0, 0)}>
       <div class="flex-1 p-2 font-bold font-larsseit text-[14px] hover:text-green-600 hover:underline">Terms</div>
       </Link>
@@ -126,7 +126,8 @@ const onChange = e =>{
       <Link to='/cookies' onClick={() => window.scrollTo(0, 0)}>
       <div class="flex-1 p-2 font-bold font-larsseit text-[14px] hover:text-green-600 hover:underline">Cookies</div>
       </Link>
-    </div>
+    </div> */}
+      <p className=' font-cardo font-bold text-sm'>©Copyright 2023 Wiz91 All Rights Reserved</p>
       </div>
       <div className="flex-1 flex justify-end p-4 pr-0 pt-1">
       <div class="flex sm:justify-center xl:justify-start md:justify-end">

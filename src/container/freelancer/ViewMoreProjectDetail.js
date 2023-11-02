@@ -215,6 +215,8 @@ const handleClick = (event,project) => {
                 </div>
             </div>
         </div>
+        <HomeSection4/>
+        <Footer/>
     </>
   )
 }
