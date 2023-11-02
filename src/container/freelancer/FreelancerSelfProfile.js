@@ -58,6 +58,9 @@ const FreelancerSelfProfile = () => {
   const [freelanceremployment, setfreelanceremployment] = useState([]);
   const id = freelancerselfprofile && freelancerselfprofile[0].id ? freelancerselfprofile[0].id : '';
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [ProjectCount, setProjectCount] = useState(0);
 
   function formatDate(dateStr) {
     if (!dateStr) return "present";
@@ -117,20 +120,40 @@ useEffect(() => {
 
 
 useEffect(() => {
-    if(id) { 
-        axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}`)
-            .then(response => {
-                if (response.data.status === 200) {
-                    setfreelancerproject(response.data.data);
-                } else {
-                    console.log(response.data.message || 'Error fetching project');
-                }
-            })
-            .catch(err => {
-                console.log(err.message);
-            });
-    }
-}, [id]); 
+    const queryParameters = [];
+  
+    queryParameters.push(`page=${currentPage}`);
+
+    const queryString = queryParameters.join('&');
+
+    axios
+      .get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`)
+      .then((response) => {
+        setfreelancerproject(response.data.results); 
+        setProjectCount(response.data.count);
+        setTotalPages(Math.ceil(response.data.count / 6));
+      })
+      .catch((error) => {
+        console.error('Error fetching filtered data:', error);
+      });
+  }, [currentPage]);
+
+
+// useEffect(() => {
+//     if(id) { 
+//         axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}`)
+//             .then(response => {
+//                 if (response.data.status === 200) {
+//                     setfreelancerproject(response.data.data);
+//                 } else {
+//                     console.log(response.data.message || 'Error fetching project');
+//                 }
+//             })
+//             .catch(err => {
+//                 console.log(err.message);
+//             });
+//     }
+// }, [id]); 
 
 
 useEffect(() => {
@@ -176,16 +199,27 @@ useEffect(() => {
 
 
   const [active, setActive] = React.useState(1);
- 
-  const next = () => {
-      if (active === Math.ceil(freelancerproject.length / 6)) return;
-      setActive(active + 1);
-  };
+
 
   const prev = () => {
-      if (active === 1) return;
-      setActive(active - 1);
+    // window.scrollTo(0, 0);
+    setCurrentPage(prev => Math.max(prev - 1, 1));
   };
+  
+  const next = () => {
+    // window.scrollTo(0, 0);
+    setCurrentPage(prev => Math.min(prev + 1, totalPages));
+  };
+ 
+//   const next = () => {
+//       if (active === Math.ceil(freelancerproject.length / 6)) return;
+//       setActive(active + 1);
+//   };
+
+//   const prev = () => {
+//       if (active === 1) return;
+//       setActive(active - 1);
+//   };
 
   const chunkArray = (array, size) => {
       let chunked = [];
@@ -896,7 +930,7 @@ const [isEditFreeProjectOpen, setIsEditFreeProjectOpen] = useState(false);
    </div>
    <div className='border-b border-gray-200 border-opacity-30 text-left pt-3 px-4 md:px-8 py-8' id='freeselfpro'>
    <div className="flex items-center justify-between">
-    <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Portfolio ({freelancerproject && freelancerproject ? freelancerproject.length : 0})</h1>
+    <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Portfolio ({ProjectCount})</h1>
     <div className="flex items-center space-x-2">
         <Link to='/freelancer/add/portfolio'><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={plus} alt="More" />
@@ -904,7 +938,8 @@ const [isEditFreeProjectOpen, setIsEditFreeProjectOpen] = useState(false);
     </div>
     </div>
     <div className="flex flex-wrap -mx-2">  
-    {chunkedProjects[active - 1] && chunkedProjects[active - 1].map((pro, index) => (
+    {/* {chunkedProjects[active - 1] && chunkedProjects[active - 1].map((pro, index) => ( */}
+    {freelancerproject && freelancerproject.map((pro,index) => (
         <div className='w-1/3 px-2 cursor-pointer' key={index} onClick={() => openEditFreeProject(pro)}>  
             <div className='w-full h-[165px] mt-4 border border-gray-100 overflow-hidden'>
                 <img 
@@ -925,7 +960,7 @@ const [isEditFreeProjectOpen, setIsEditFreeProjectOpen] = useState(false);
     {isEditFreeProjectOpen && <EditFreelancerProjectsPopup project={selectedProject} closeEditFreeProject={closeEditFreeProject} />}
 </div>
    <div className="flex justify-end items-center gap-6 mt-5">
-{freelancerproject.length > 6 && (
+{/* {freelancerproject.length > 6 && (
   <>
     <IconButton
       size="sm"
@@ -960,7 +995,47 @@ const [isEditFreeProjectOpen, setIsEditFreeProjectOpen] = useState(false);
       <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
     </IconButton>
   </>
-)}
+)} */}
+{totalPages > 1 && (
+                    <div className="flex justify-end items-center gap-6 m-4">
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={prev}
+                            disabled={currentPage === 1}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                        
+                        {[...Array(totalPages)].map((_, index) => {
+                            const pageNumber = index + 1;
+                            return (
+                                <span
+                                    key={pageNumber}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    onClick={() => {
+                                        window.scrollTo(0, 0);
+                                        setCurrentPage(pageNumber);
+                                    }}
+                                    
+                                >
+                                    {pageNumber}
+                                </span>
+                            );
+                        })}
+
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={next}
+                            disabled={currentPage === totalPages}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                    </div>
+    )}
 </div>
    </div>
    <div className='border-b border-gray-200 border-opacity-30 text-left pt-3 px-4 md:px-8 py-8'>

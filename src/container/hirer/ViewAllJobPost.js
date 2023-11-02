@@ -20,14 +20,78 @@ const ViewAllJobPost = () => {
    const accessToken = useSelector(state => state.login.accessToken); 
    const dispatch = useDispatch();
    const id = viewhirerselfproject && viewhirerselfproject.id ? viewhirerselfproject.id : '';
+   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('');
+ 
    
-   React.useEffect(() => {
-    dispatch(GetViewHirerSelfProjectssAction(accessToken))
-  }, [])
+  //  React.useEffect(() => {
+  //   dispatch(GetViewHirerSelfProjectssAction(accessToken))
+  // }, [])
   
 
     const [selectedButton, setSelectedButton] = useState('All Job Posts');
     const commonStyle = "inline-block text-sm py-[10px] mt-4 lg:mt-0 border rounded font-semibold"; 
+
+
+    const [viewhirerProject, setViewhirerProject] = useState([]);
+    //   const userCategory = logindata?.category
+    
+      useEffect(() => {
+        const queryParameters = [];
+      
+        if (searchQuery) {
+          queryParameters.push(`search_query=${searchQuery}`);
+        }
+        
+        queryParameters.push(`page=${currentPage}`);
+    
+        const queryString = queryParameters.join('&');
+    
+        axios
+          // .get(`https://aparnawiz91.pythonanywhere.com/freelance/view/hirer-self/Project?${queryString}`,{
+            .get(`https://aparnawiz91.pythonanywhere.com/freelance/view/hirer-self/Project`,{
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+          .then((response) => {
+            setViewhirerProject(response.data.data); 
+            // setViewhirerProject(response.data.results); 
+            // setTotalPages(Math.ceil(response.data.count / 8));
+          })
+          .catch((error) => {
+            console.error('Error fetching filtered data:', error);
+          });
+      // }, [searchQuery, currentPage]);
+    }, []);
+
+
+      const prev = () => {
+        window.scrollTo(0, 0);
+        setCurrentPage(prev => Math.max(prev - 1, 1));
+    };
+    
+    const next = () => {
+        window.scrollTo(0, 0);
+        setCurrentPage(prev => Math.min(prev + 1, totalPages));
+    };
+
+
+    function highlightText(text, query) {
+      if (!query) {
+        return text;
+      }
+    
+      const regex = new RegExp(`(${query})`, 'gi');
+      return text.split(regex).map((part, index) => {
+        if (index % 2 === 1) {
+          return <span key={index} style={{ backgroundColor: '#a3e635' }}>{part}</span>;
+        } else {
+          return <span key={index}>{part}</span>;
+        }
+      });
+    }
 
 
   // const [active, setActive] = React.useState(1);
@@ -46,35 +110,35 @@ const ViewAllJobPost = () => {
   //   setActive(active - 1);
   // };
 
-  const [currentPage, setCurrentPage] = useState(1);
-    const [categorySearch, setCategorySearch] = useState('');
+  // const [currentPage, setCurrentPage] = useState(1);
+    // const [categorySearch, setCategorySearch] = useState('');
 
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [categorySearch]);
+    // useEffect(() => {
+    //     setCurrentPage(1);
+    // }, [categorySearch]);
 
-    const jobsPerPage = 5;
-    const indexOfLastJob = currentPage * jobsPerPage;
-    const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+    // const jobsPerPage = 5;
+    // const indexOfLastJob = currentPage * jobsPerPage;
+    // const indexOfFirstJob = indexOfLastJob - jobsPerPage;
     
-    const filteredJobs = viewhirerselfproject?.filter(project => 
-        project.category.replace(/_/g, ' ').toLowerCase().includes(categorySearch.toLowerCase())
-    ) || [];
+    // const filteredJobs = viewhirerselfproject?.filter(project => 
+    //     project.category.replace(/_/g, ' ').toLowerCase().includes(categorySearch.toLowerCase())
+    // ) || [];
 
-    const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
-    const totalPages = Math.ceil((filteredJobs.length || 0) / jobsPerPage);
+    // const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
+    // const totalPages = Math.ceil((filteredJobs.length || 0) / jobsPerPage);
 
-    const next = () => {
-        window.scrollTo(0, 0);
-        if (currentPage === totalPages) return;
-        setCurrentPage(currentPage + 1);
-    };
+    // const next = () => {
+    //     window.scrollTo(0, 0);
+    //     if (currentPage === totalPages) return;
+    //     setCurrentPage(currentPage + 1);
+    // };
 
-    const prev = () => {
-        window.scrollTo(0, 0);
-        if (currentPage === 1) return;
-        setCurrentPage(currentPage - 1);
-    };
+    // const prev = () => {
+    //     window.scrollTo(0, 0);
+    //     if (currentPage === 1) return;
+    //     setCurrentPage(currentPage - 1);
+    // };
 
 
 //   const [currentPage, setCurrentPage] = useState(1);
@@ -125,11 +189,11 @@ const [bidsCount, setBidsCount] = useState({});
         const fetchBidsForAllProjects = async () => {
             const bids = {};
 
-            for (const project of viewhirerselfproject || []) {
+            for (const project of viewhirerProject || []) {
                 try {
                     const response = await axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View/bids/${project.id}`);
-                    if (response.data.status === 200) {
-                        bids[project.id] = response.data.data.length; 
+                    if (response.status === 200) {
+                        bids[project.id] = response.data.count; 
                     } else {
                         console.log(response.data.message || 'Error fetching bids');
                         bids[project.id] = 0;
@@ -144,7 +208,7 @@ const [bidsCount, setBidsCount] = useState({});
         };
 
         fetchBidsForAllProjects();
-    }, [viewhirerselfproject]);
+    }, [viewhirerProject]);
 
 
   return (
@@ -172,9 +236,8 @@ const [bidsCount, setBidsCount] = useState({});
                         <img src={search} alt="Search Icon" className="h-3 w-3" />
                         <input 
                             className='w-28 lg:w-40 xl:w-[30rem] h-7 text-xs lg:text-sm outline-none' 
-                            placeholder='Search by Category' 
-                            value={categorySearch}
-                            onChange={(e) => setCategorySearch(e.target.value)}
+                            placeholder='Search Projects' 
+                            value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
                         />
                     </div>
     {/* <div className='flex items-center mr-1 space-x-1'>
@@ -185,9 +248,9 @@ const [bidsCount, setBidsCount] = useState({});
         <img src={searchbtn} alt="Search Icon" />
     </button>
 </section>
-{viewhirerselfproject != null ? 
+{viewhirerProject != null ? 
 <div>
-{currentJobs && currentJobs.map((project, index) => {
+{viewhirerProject && viewhirerProject.map((project, index) => {
 {/* {viewhirerselfproject && viewhirerselfproject.map((project, index) => { */}
                  
                 //  const isJobOpen = (deadline) => {
@@ -200,17 +263,17 @@ const [bidsCount, setBidsCount] = useState({});
 <div class="flex">
   <div class="flex-[40%]">
   <Link to='/View/Job-post' state={{project}} onClick={() => window.scrollTo(0, 0)}>
-  <p className="font-inter text-[#0A142F] text-[16px] font-medium hover:underline hover:text-green-600">{project.title}</p>
+  <p className="font-inter text-[#0A142F] text-[16px] font-medium hover:underline hover:text-green-600">{highlightText(project.title,searchQuery)}</p>
   </Link>
-  <p className='font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-1'>{project.Project_Rate} Rate - Intermediate - Posted {timeAgo(project.Project_created_at)}</p>
-  {/* <span className='border px-4 py-1 border-gray-300 rounded bg-[#E4EBE4] font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 font-semibold'>Open</span> */}
+  {/* <p className='font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-1'>{highlightText(project.Project_Rate,searchQuery)} Rate - {highlightText(project.experience_level.replace(/_/g, ' '),searchQuery)} - Posted {timeAgo(project.Project_created_at)}</p> */}
+  <p className='font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-1'>{highlightText(project.Project_Rate,searchQuery)} Rate - Expert - Posted {timeAgo(project.Project_created_at)}</p>
   <span className={`px-4 py-1 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 font-semibold ${isJobOpen(project.deadline) ? 'bg-[#E4EBE4] text-green-800 border border-green-800' : 'bg-yellow-100 text-yellow-700 border border-yellow-700'}`}>
               {isJobOpen(project.deadline) ? 'Open' : 'Closed'}
             </span>
   </div>
   <div class="flex-[40%] flex">
     <div class="flex-1 p-2">
-    <p className="font-inter text-[#0A142F] text-[16px] font-medium">{bidsCount[project.id]}</p>
+    <p className="font-inter text-[#0A142F] text-[16px] font-medium">{bidsCount[project.id] ? bidsCount[project.id] : 0}</p>
     <p className="font-inter text-[#0A142F] opacity-50 text-[16px] font-medium">Proposals</p>
     </div>
     <div class="flex-1 p-2">
@@ -250,7 +313,47 @@ const [bidsCount, setBidsCount] = useState({});
     </div>
     
     }
-    {viewhirerselfproject?.length > 5 && (
+    {totalPages > 1 && (
+                    <div className="flex justify-end items-center gap-6 m-4">
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={prev}
+                            disabled={currentPage === 1}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                        
+                        {[...Array(totalPages)].map((_, index) => {
+                            const pageNumber = index + 1;
+                            return (
+                                <span
+                                    key={pageNumber}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    onClick={() => {
+                                        window.scrollTo(0, 0);
+                                        setCurrentPage(pageNumber);
+                                    }}
+                                    
+                                >
+                                    {pageNumber}
+                                </span>
+                            );
+                        })}
+
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={next}
+                            disabled={currentPage === totalPages}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                    </div>
+    )}
+    {/* {viewhirerselfproject?.length > 5 && (
                     <div className="flex justify-end items-center gap-6 m-4">
                         <IconButton
                             size="sm"
@@ -285,7 +388,7 @@ const [bidsCount, setBidsCount] = useState({});
                             <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
                     </div>
-                )}
+                )} */}
     {/* <div className="flex justify-end items-center gap-6 m-4">
   <IconButton
     size="sm"
