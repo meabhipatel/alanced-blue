@@ -24,36 +24,114 @@ const ViewProposalPopup = ({ closeViewProposal }) => {
   const accessToken = useSelector(state => state.login.accessToken);  
   const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile)
   const [freelancerproject, setfreelancerproject] = useState([]);
-  const id = freelancerselfprofile && freelancerselfprofile[0].id ? freelancerselfprofile[0].id : '';
+  const [freelanceremp, setfreelanceremp] = useState([]);
+  // const id = freelancerselfprofile && freelancerselfprofile[0].id ? freelancerselfprofile[0].id : '';
+  const id = bid.freelancer_id
   const [selectedProjects, setSelectedProjects] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [projectCount, setProjectCount] = useState(0);
 
   useEffect(() => {
-    if(id) { 
-        axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}`)
-            .then(response => {
-                if (response.data.status === 200) {
-                    setfreelancerproject(response.data.data);
-                } else {
-                    console.log(response.data.message || 'Error fetching project');
-                }
-            })
-            .catch(err => {
-                console.log(err.message);
-            });
-    }
-}, [id]); 
+    const queryParameters = [];
+  
+    queryParameters.push(`page=${currentPage}`);
+
+    const queryString = queryParameters.join('&');
+
+    axios
+      .get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`)
+      .then((response) => {
+        setfreelancerproject(response.data.results); 
+        setProjectCount(response.data.count);
+        setTotalPages(Math.ceil(response.data.count / 6));
+        // const projectsMatchingCategory = response.data.results.filter(project => project.category === userCategory);
+        // setViewProject(projectsMatchingCategory);
+        // setTotalPages(Math.ceil(projectsMatchingCategory.length / 8));
+      })
+      .catch((error) => {
+        console.error('Error fetching filtered data:', error);
+      });
+  }, [currentPage]);
+
+
+//   useEffect(() => {
+//     if(id) { 
+//         axios.get(`http://127.0.0.1:8000/freelance/View-all/Freelancer/Self-Project/${id}`)
+//             .then(response => {
+//                 if (response.data.status === 200) {
+//                     setfreelancerproject(response.data.data);
+//                 } else {
+//                     console.log(response.data.message || 'Error fetching project');
+//                 }
+//             })
+//             .catch(err => {
+//                 console.log(err.message);
+//             });
+//     }
+// }, [id]); 
+
+
+useEffect(() => {
+  if(id) { 
+      axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/Freelancer/Employment/${id}`)
+          .then(response => {
+              if (response.data.status === 200) {
+                  setfreelanceremp(response.data.data);
+              } else {
+                  console.log(response.data.message || 'Error fetching project');
+              }
+          })
+          .catch(err => {
+              console.log(err.message);
+          });
+  }
+}, [id]);
+
+function formatDate(dateStr) {
+  if (!dateStr) return "present";
+
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const dateObj = new Date(dateStr);
+
+  return dateObj.toLocaleDateString(undefined, options);
+}
+
+
+const [startIdx, setStartIdx] = useState(0); 
+const sortedEmployments = [...freelanceremp].sort((a, b) => new Date(b.Company_Joining_date) - new Date(a.Company_Joining_date));
+
+const showMoreHandlers = () => {
+    setStartIdx(prevIdx => prevIdx + 3);
+}
+
+const showLessHandlers = () => {
+    setStartIdx(0);
+}
+
+const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 3);
+
+const prev = () => {
+  // window.scrollTo(0, 0);
+  setCurrentPage(prev => Math.max(prev - 1, 1));
+};
+
+const next = () => {
+  // window.scrollTo(0, 0);
+  setCurrentPage(prev => Math.min(prev + 1, totalPages));
+};
 
 const [active, setActive] = React.useState(1);
  
-  const next = () => {
-      if (active === Math.ceil(freelancerproject.length / 6)) return;
-      setActive(active + 1);
-  };
+  // const next = () => {
+  //     if (active === Math.ceil(freelancerproject.length / 6)) return;
+  //     setActive(active + 1);
+  // };
 
-  const prev = () => {
-      if (active === 1) return;
-      setActive(active - 1);
-  };
+  // const prev = () => {
+  //     if (active === 1) return;
+  //     setActive(active - 1);
+  // };
 
   // 1. Chunk the Array
   const chunkArray = (array, size) => {
@@ -126,15 +204,15 @@ const [active, setActive] = React.useState(1);
     <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2">{bid.freelancer_Name} has applied to or been invited to your or your company's job {project.title} </p>
     <h1 className="font-cardo text-xl text-[#031136] font-normal pt-4">Hourly Rate</h1>
     {/* <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2">$5.00/hr</p> */}
-    <h1 className="font-cardo text-xl text-[#031136] font-semibold inline-block py-2 opacity-50">$5.00/hr</h1>
-    <h1 className="font-cardo text-xl text-[#031136] font-normal pt-4">Entry Level</h1>
+    <h1 className="font-cardo text-xl text-[#031136] font-semibold inline-block py-2 opacity-50">${bid.freelancer_hourly_rate ? bid.freelancer_hourly_rate: 0 }/hr</h1>
+    <h1 className="font-cardo text-xl text-[#031136] font-normal pt-4">{bid.freelancer_experience_level.replace(/_/g, ' ')}</h1>
     </div>
     <div class="w-full md:w-[70%] py-4 px-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
     <div className="flex justify-between items-center">
     <h1 className="font-cardo text-2xl text-[#031136] font-normal">Proposal Details</h1>
     <div>
-        <h1 className="font-cardo text-xl text-[#031136] font-semibold">${bid.bid_amount}/hr</h1>
-        <p className="text-[#031136] opacity-50 text-[14px] font-inter font-semibold">Proposed bid</p>
+        <h1 className="font-cardo text-xl text-[#031136] font-semibold">${bid.bid_amount}{bid.bid_type=='Hourly' ? '/hr':''}</h1>
+        <p className="text-[#031136] opacity-50 text-[14px] font-inter font-semibold">Proposed bid ({bid.bid_type})</p>
     </div>
 </div>
 <div className="border-b opacity-60 my-3"></div>
@@ -151,10 +229,15 @@ const [active, setActive] = React.useState(1);
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
     <h1 className="font-cardo text-xl text-[#031136] font-normal">Languages</h1>
-    <p className='font-inter text-[#0A142F] text-[14px] py-1'>English : <span className='opacity-50'>Native or Bilingual</span></p>
-    <p className='font-inter text-[#0A142F] text-[14px]'>Hindi : <span className='opacity-50'>Native or Bilingual</span></p>
+    {
+  bid.Freelancer_Languages ? 
+    JSON.parse(bid.Freelancer_Languages.replace(/'/g, '"')).map((language, index) => (
+      <p key={index} className='font-inter text-[#0A142F] text-[14px] py-1'>{language}</p>
+    )) 
+  : null
+}
     <h1 className="font-cardo text-xl text-[#031136] font-normal pt-6">Education</h1>
-    <p className='font-inter text-[#0A142F] text-[14px] py-1'>B.Tech</p>
+    <p className='font-inter text-[#0A142F] text-[14px] py-1'>{bid.Freelancer_qualification ? bid.Freelancer_qualification:'NA'}</p>
         </div>
     </div>
     <div class="w-full md:w-[70%] bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
@@ -162,15 +245,16 @@ const [active, setActive] = React.useState(1);
         <div className="flex justify-between items-center">
     <h1 className="font-cardo text-2xl text-[#031136] font-normal">{bid.freelancer_category.replace(/_/g, ' ')}</h1>
     <div>
-        <h1 className="font-cardo text-xl text-[#031136] font-semibold inline-block">$5.00/hr</h1>
+        <h1 className="font-cardo text-xl text-[#031136] font-semibold inline-block">${bid.freelancer_hourly_rate ? bid.freelancer_hourly_rate:0 }/hr</h1>
     </div>
 </div>
-<p className="text-[#031136] opacity-50 text-[14px] font-inter py-5">Hello, I am software developer working as a full stack Mean developer, I can do this work with good efficiency in less time, please let me know when we can connect and discuss further for this and other projects.</p>
+<p className="text-[#031136] opacity-50 text-[14px] font-inter py-5">{bid.freelancer_about}</p>
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
-        <h1 className="font-cardo text-2xl text-[#031136] font-normal">Portfolio ({freelancerproject && freelancerproject ? freelancerproject.length : 0})</h1>
+        <h1 className="font-cardo text-2xl text-[#031136] font-normal">Portfolio ({projectCount})</h1>
     <div className="flex flex-wrap -mx-2">  
-    {chunkedProjects[active - 1] && chunkedProjects[active - 1].map((pro, index) => (
+    {/* {chunkedProjects[active - 1] && chunkedProjects[active - 1].map((pro, index) => ( */}
+    {freelancerproject && freelancerproject.map((pro, index) => (
         <div className='w-1/3 px-2 cursor-pointer' key={index} onClick={() => openPortfolio(pro)}>  
             <div className='w-full h-[165px] mt-4 border border-gray-100 overflow-hidden'>
                 <img 
@@ -191,7 +275,7 @@ const [active, setActive] = React.useState(1);
     {isPortfolioOpen && <Portfolio project={selectedProjects} closePortfolio={closePortfolio} />}
 </div>
    <div className="flex justify-end items-center gap-6 mt-5">
-{freelancerproject.length > 6 && (
+{/* {freelancerproject.length > 6 && (
   <>
     <IconButton
       size="sm"
@@ -226,7 +310,47 @@ const [active, setActive] = React.useState(1);
       <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
     </IconButton>
   </>
-)}
+)} */}
+ {totalPages > 1 && (
+                    <div className="flex justify-end items-center gap-6 m-4">
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={prev}
+                            disabled={currentPage === 1}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                        
+                        {[...Array(totalPages)].map((_, index) => {
+                            const pageNumber = index + 1;
+                            return (
+                                <span
+                                    key={pageNumber}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    onClick={() => {
+                                        window.scrollTo(0, 0);
+                                        setCurrentPage(pageNumber);
+                                    }}
+                                    
+                                >
+                                    {pageNumber}
+                                </span>
+                            );
+                        })}
+
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={next}
+                            disabled={currentPage === totalPages}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                    </div>
+    )}
 </div>
     </div>
         {/* <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
@@ -279,13 +403,20 @@ const [active, setActive] = React.useState(1);
     <div className='my-6 p-4 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-40 text-left'>
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Employment history</h1>
     <div class="border-b opacity-50 my-3"></div>
-    <h1 className="font-cardo text-[18px] text-[#031136] font-normal mr-1">Graphic Designer | Wiz91 Technologies</h1>
-    <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>January 2021 - Present</p>
+    {visibleEmp && visibleEmp.map((emp, index) => (<>
+    <h1 className="font-cardo text-[18px] text-[#031136] font-normal mr-1">{emp.Company_Designation} | {emp.Freelancer_Company_Name}</h1>
+    <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>{formatDate(emp.Company_Joining_date)} - {formatDate(emp.Company_Leaving_date)}</p>
     <div class="border-b opacity-50 my-3"></div>
-    <h1 className="font-cardo text-[18px] text-[#031136] font-normal mr-1">UI/UX Designer | ABC Technologies</h1>
+    </>))}
+    {/* <h1 className="font-cardo text-[18px] text-[#031136] font-normal mr-1">UI/UX Designer | ABC Technologies</h1>
     <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>April 2020 - January 2021</p>
-    <div class="border-b opacity-50 my-3"></div>
-    <h1 className="font-cardo text-[20px] text-[#031136] font-normal cursor-pointer">Show More</h1>
+    <div class="border-b opacity-50 my-3"></div> */}
+    {/* <h1 className="font-cardo text-[20px] text-[#031136] font-normal cursor-pointer">Show More</h1> */}
+    {freelanceremp.length > 3 && (
+  startIdx + 3 < freelanceremp.length ? 
+    <h1 className="font-cardo text-[20px] text-[#031136] font-normal mx-auto cursor-pointer" onClick={showMoreHandlers}>Show More</h1> :
+    <h1 className="font-cardo text-[20px] text-[#031136] font-normal mx-auto cursor-pointer" onClick={showLessHandlers}>Show Less</h1>
+)}
     </div>
     {/* </div> */}
     {/* </div> */}

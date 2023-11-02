@@ -273,11 +273,11 @@ const [bidsCount, setBidsCount] = useState({});
         const fetchBidsForAllProjects = async () => {
             const bids = {};
 
-            for (const project of viewallprojects || []) {
+            for (const project of viewProject || []) {
                 try {
                     const response = await axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View/bids/${project.id}`);
-                    if (response.data.status === 200) {
-                        bids[project.id] = response.data.data.length; 
+                    if (response.status === 200) {
+                        bids[project.id] = response.data.count; 
                     } else {
                         console.log(response.data.message || 'Error fetching bids');
                         bids[project.id] = 0;
@@ -436,7 +436,7 @@ const [bidsCount, setBidsCount] = useState({});
             </span>
         </Link>
          ))}
-        <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>Proposals : <span className='opacity-50'>{bidsCount[project.id]}</span></p>
+        <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>Proposals : <span className='opacity-50'>{bidsCount[project.id] ? bidsCount[project.id]:0}</span></p>
         <img src={verify} alt="" className='inline-block h-3 w-3 mr-1'/>
         <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>Payment verified</p>
         <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>

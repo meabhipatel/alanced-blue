@@ -15,6 +15,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
+import axios from 'axios'
 
 const ViewAllProposals = () => {
 
@@ -24,11 +25,14 @@ const ViewAllProposals = () => {
 
    const viewallbids = useSelector(state => state.hirer.viewallbids)
    const dispatch = useDispatch();
+   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('');
 //    const id = viewhirerselfproject && viewhirerselfproject[0].id ? viewhirerselfproject[0].id : '';
 
-   React.useEffect(() => {
-    dispatch(GetViewAllBidsAction(id))
-  }, [])
+//    React.useEffect(() => {
+//     dispatch(GetViewAllBidsAction(id))
+//   }, [])
 
   const convertToDateObject = (dateString) => {
     const [date, time, period] = dateString.split(' ');
@@ -78,40 +82,96 @@ const ViewAllProposals = () => {
 
   const id = project.id
 
-const [currentPage, setCurrentPage] = useState(1);
+// const [currentPage, setCurrentPage] = useState(1);
 
 
-useEffect(() => {
-    setCurrentPage(1);
-}, [categorySearch]);
+// useEffect(() => {
+//     setCurrentPage(1);
+// }, [categorySearch]);
 
-const jobsPerPage = 4;
-const indexOfLastJob = currentPage * jobsPerPage;
-const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+// const jobsPerPage = 4;
+// const indexOfLastJob = currentPage * jobsPerPage;
+// const indexOfFirstJob = indexOfLastJob - jobsPerPage;
 
-const sortedBids = sortBids(viewallbids);
-const filteredData = sortedBids?.filter(bid => 
-  bid.freelancer_category.replace(/_/g, ' ').toLowerCase().includes(categorySearch.toLowerCase())) || [];
+// const sortedBids = sortBids(viewallbids);
+// const filteredData = sortedBids?.filter(bid => 
+//   bid.freelancer_category.replace(/_/g, ' ').toLowerCase().includes(categorySearch.toLowerCase())) || [];
 
 
 // const filteredData = viewallbids?.filter(bid => 
 //   bid.freelancer_category.replace(/_/g, ' ').toLowerCase().includes(categorySearch.toLowerCase())
 // ) || [];
 
-const currentJobs = filteredData.slice(indexOfFirstJob, indexOfLastJob);
-const totalPages = Math.ceil((filteredData.length || 0) / jobsPerPage);
+// const currentJobs = filteredData.slice(indexOfFirstJob, indexOfLastJob);
+// const totalPages = Math.ceil((filteredData.length || 0) / jobsPerPage);
+
+// const next = () => {
+//     window.scrollTo(0, 0);
+//     if (currentPage === totalPages) return;
+//     setCurrentPage(currentPage + 1);
+// };
+
+// const prev = () => {
+//     window.scrollTo(0, 0);
+//     if (currentPage === 1) return;
+//     setCurrentPage(currentPage - 1);
+// };
+
+const [viewbids, setViewBids] = useState([]);
+
+  useEffect(() => {
+    const queryParameters = [];
+  
+    if (searchQuery) {
+      queryParameters.push(`search_query=${searchQuery}`);
+    }
+    
+    queryParameters.push(`page=${currentPage}`);
+
+    const queryString = queryParameters.join('&');
+
+    axios
+      .get(`https://aparnawiz91.pythonanywhere.com/freelance/View/bids/${id}?${queryString}`)
+      .then((response) => {
+        setViewBids(response.data.results); 
+        setTotalPages(Math.ceil(response.data.count / 8));
+        // const projectsMatchingCategory = response.data.results.filter(project => project.category === userCategory);
+        // setViewProject(projectsMatchingCategory);
+        // setTotalPages(Math.ceil(projectsMatchingCategory.length / 8));
+      })
+      .catch((error) => {
+        console.error('Error fetching filtered data:', error);
+      });
+  }, [searchQuery, currentPage]);
+
+
+  const prev = () => {
+    window.scrollTo(0, 0);
+    setCurrentPage(prev => Math.max(prev - 1, 1));
+};
 
 const next = () => {
     window.scrollTo(0, 0);
-    if (currentPage === totalPages) return;
-    setCurrentPage(currentPage + 1);
+    setCurrentPage(prev => Math.min(prev + 1, totalPages));
 };
 
-const prev = () => {
-    window.scrollTo(0, 0);
-    if (currentPage === 1) return;
-    setCurrentPage(currentPage - 1);
-};
+
+function highlightText(text, query) {
+  if (!query) {
+    return text;
+  }
+
+  const regex = new RegExp(`(${query})`, 'gi');
+  return text.split(regex).map((part, index) => {
+    if (index % 2 === 1) {
+      return <span key={index} style={{ backgroundColor: '#a3e635' }}>{part}</span>;
+    } else {
+      return <span key={index}>{part}</span>;
+    }
+  });
+}
+
+const sortedBids = sortBids(viewbids);
 
   const [isViewProposalOpen, setIsViewProposalOpen] = useState(false);
   const [selectedbid, setSelectedbid] = useState(null);
@@ -204,8 +264,7 @@ const handleClick = (event, index) => {
                                         <section className='flex items-center p-2 bg-white rounded-lg m-5 border w-[49%]'>
         <div className='flex items-center mr-1 space-x-1'>
             <img src={search} alt="Search Icon" className="h-3 w-3" />
-            <input className='w-28 lg:w-40 xl:w-[30rem] h-7 text-xs lg:text-sm outline-none' placeholder='Search' value={categorySearch}
-                            onChange={(e) => setCategorySearch(e.target.value)} />
+            <input className='w-28 lg:w-40 xl:w-[30rem] h-7 text-xs lg:text-sm outline-none' placeholder='Search' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
         </div>
         <button className='rounded h-7 w-7 p-2 text-xs lg:text-sm font-semibold text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>
             <img src={searchbtn} alt="Search Icon" />
@@ -217,8 +276,8 @@ const handleClick = (event, index) => {
         <option selected disabled value="bestMatch">Best Match</option>
         <option value="newest">Newest Applicants</option>
         <option value="oldest">Oldest Applicants</option>
-        <option value="highestRate">Highest Hourly Rate</option>
-        <option value="lowestRate">Lowest Hourly Rate</option>
+        <option value="highestRate">Highest Rate</option>
+        <option value="lowestRate">Lowest Rate</option>
     </select>
                     </div>
                 )
@@ -232,9 +291,9 @@ const handleClick = (event, index) => {
                         </div>
                     </div>
                 ) : (
-                    <>{viewallbids != null ? 
+                    <>{viewbids != null ? 
                         <div>
-                        {currentJobs && currentJobs.map((bid, index) => {
+                        {sortedBids && sortedBids.map((bid, index) => {
                           const words = bid.description.split(' ');
                           const displayWords = expandedProjects[index] || words.length <= 50 ? words : words.slice(0, 50);
                             return(<>
@@ -263,13 +322,14 @@ const handleClick = (event, index) => {
                           </div>
                           <h1 className="font-cardo opacity-50 text-lg text-[#031136]">{bid.freelancer_category.replace(/_/g, ' ')}</h1>
                            <div style={{ display: 'flex' }}>
-                            <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">${bid.bid_amount} <span className='opacity-50 font-medium'>/hr</span></h1>
-                            <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">$0 <span className='opacity-50 font-medium'>earned</span></h1>
+                            <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">${bid.bid_amount} <span className='opacity-50 font-medium'>{bid.bid_type=='Fixed'? '':'/hr'}</span></h1>
+                            {/* <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">$0 <span className='opacity-50 font-medium'>earned</span></h1> */}
+                            <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">{highlightText(bid.bid_type,searchQuery)}</h1>
                             <h1 className="font-cardo text-lg text-[#031136] py-3 flex-1">{bid.freelancer_address}</h1>
                             <h1 className="font-cardo text-lg text-[#031136] py-3 flex-1"></h1>
                         </div>
                             <p className='font-inter text-[#0A142F] text-[14px]'>Cover Letter - <span className='opacity-50'>
-                            {displayWords.join(' ')} 
+                            {highlightText(displayWords.join(' '),searchQuery)} 
                 {words.length > 50 && (
                     <span 
                         className="font-cardo text-[#031136] text-[18px] font-semibold cursor-pointer pl-2" 
@@ -309,7 +369,7 @@ const handleClick = (event, index) => {
                               </>
                                 )
                         })}
-                        {viewallbids?.length > 4 && (
+                        {/* {viewallbids?.length > 4 && (
                     <div className="flex justify-end items-center gap-6 m-4">
                         <IconButton
                             size="sm"
@@ -344,7 +404,47 @@ const handleClick = (event, index) => {
                             <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
                     </div>
-                )}
+                )} */}
+                {totalPages > 1 && (
+                    <div className="flex justify-end items-center gap-6 m-4">
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={prev}
+                            disabled={currentPage === 1}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                        
+                        {[...Array(totalPages)].map((_, index) => {
+                            const pageNumber = index + 1;
+                            return (
+                                <span
+                                    key={pageNumber}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    onClick={() => {
+                                        window.scrollTo(0, 0);
+                                        setCurrentPage(pageNumber);
+                                    }}
+                                    
+                                >
+                                    {pageNumber}
+                                </span>
+                            );
+                        })}
+
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={next}
+                            disabled={currentPage === totalPages}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                    </div>
+    )}
                         </div> : <div>
                         {[...Array(8)].map((_) => {
                           return (
