@@ -34,12 +34,12 @@ const Notifications = () => {
     }
   };
   
-//   useEffect(() => {
-//     fetchClientNotifications(); // Fetch notifications immediately when component mounts
-//     const interval = setInterval(fetchClientNotifications, 2000); // Set up interval to fetch notifications every 2 minutes
+  useEffect(() => {
+    fetchClientNotifications(); // Fetch notifications immediately when component mounts
+    const interval = setInterval(fetchClientNotifications, 60000); // Set up interval to fetch notifications every 2 minutes
   
-//     return () => clearInterval(interval); // Clear the interval when the component is unmounted
-//   }, []);
+    return () => clearInterval(interval); // Clear the interval when the component is unmounted
+  }, []);
   
   const markAsReadClient = async (notifId) => {
     try {
@@ -97,12 +97,12 @@ const Notifications = () => {
     }
   };
   
-//   useEffect(() => {
-//     fetchFreeNotifications(); // Fetch notifications immediately when component mounts
-//     const interval = setInterval(fetchFreeNotifications, 2000); // Set up interval to fetch notifications every 2 minutes
+  useEffect(() => {
+    fetchFreeNotifications(); // Fetch notifications immediately when component mounts
+    const interval = setInterval(fetchFreeNotifications, 60000); // Set up interval to fetch notifications every 2 minutes
   
-//     return () => clearInterval(interval); // Clear the interval when the component is unmounted
-//   }, []);
+    return () => clearInterval(interval); // Clear the interval when the component is unmounted
+  }, []);
   
   const markAsReadFree = async (notifId) => {
     try {
