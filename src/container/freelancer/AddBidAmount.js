@@ -38,9 +38,6 @@ const BidAdd = () => {
         "bid_type": addBid.bid_type  
       }
     //   console.log("/-/-/-/-/-/-/-/-/-/-/",prodata)
-    console.log(addBid.bid_amount,"bid amount//-//-//")
-    console.log(addBid.bid_type,"bid_type//-//-//")
-    console.log(addBid.description,"bid_discriptions//-//-//")
     dispatch(AddBidAmountAction(prodata, accessToken));
     if(prodata.bid_amount >= 0 && prodata.description != null && prodata.bid_type != null){
     navigate('/View/bid-details', { state: { bidData: prodata, projectdetail: projectData,} })
@@ -59,6 +56,20 @@ const BidAdd = () => {
     });
     // setAddBid.project_id(id)
 }
+
+const isButtonEnabled = () => {
+    return addBid.bid_amount > 0 && addBid.bid_type && addBid.description;
+  };
+
+  const handleButtonClick = () => {
+    if (!isButtonEnabled()) {
+      toast.error('Please fill out all required fields.');
+    } else {
+      // Proceed with the action
+      BidAdd();
+      window.scrollTo(0, 0);
+    }
+  };
 
 const [userInput, setUserInput] = useState('')
 const [hourlyRate, setHourlyRate] = useState('');
@@ -295,7 +306,13 @@ const [showFullDescription, setShowFullDescription] = useState(false);
         </div>
         </div>
         <div className=' flex flex-row mt-5  mb-5'>
-        <div className=' basis-3/12' ><button className='h-10 w-52 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded' onClick={()=>{ BidAdd(); window.scrollTo(0, 0); }}>Send Proposal</button></div>
+        <div className=' basis-3/12' >
+            {/* <button className='h-10 w-52 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded' onClick={()=>{ BidAdd(); window.scrollTo(0, 0); }}>Send Proposal</button> */}
+            <button
+            className={`h-10 w-52 text-white text-base font-semibold mt-5 rounded ${isButtonEnabled()? 'bg-gradient-to-r from-[#00BF58] to-[#E3FF75]': 'bg-gray-300'}`} onClick={handleButtonClick}disabled={!isButtonEnabled()}>
+            Send Proposal
+            </button>
+            </div>
         <div class="p-0.5 mt-5 rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
         <Link to='/freelancer/profile' onClick={() => window.scrollTo(0, 0)}><button class="px-2 py-1 bg-[#f8faf9] rounded-sm"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-bold text-sm py-[4px] px-[16px]">Cancel</p></button></Link>
         </div>

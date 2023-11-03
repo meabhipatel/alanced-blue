@@ -54,43 +54,66 @@ const onChange = e =>{
   <div className="container mx-auto px-4">
     <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:px-20">
     <div class="p-4 text-left">
-    <h5 class="text-xl font-bold font-cardo mb-6">Product</h5>
-        <ul class="list-none footer-links text-gray-500">
-          <Link to='/view-all/freelancer' onClick={() => window.scrollTo(0, 0)}>
-          <li class="mb-2 hover:text-green-600 hover:underline">Recruiting</li>
-          </Link>
-          <Link to='/projects' onClick={() => window.scrollTo(0, 0)}>
-          <li class="mb-2 hover:text-green-600 hover:underline">Career</li>
+    <h5 class="text-xl font-bold font-cardo mb-6">Company Info</h5>
+        {/* <ul class="list-none footer-links text-gray-500">
+          <Link to='/why-alanced' onClick={() => window.scrollTo(0, 0)}>
+          <li class="mb-2 hover:text-green-600 hover:underline">Alanced Foundation</li>
           </Link>
           <Link to='/enterprises' onClick={() => window.scrollTo(0, 0)}>
-          <li class="mb-2 hover:text-green-600 hover:underline">Enterprise Solution</li>
+          <li class="mb-2 hover:text-green-600 hover:underline">Enterprise </li>
           </Link>
-        </ul>
-    </div>
-    <div class="p-4 text-left">
-    <h5 class="text-xl font-bold mb-6 font-cardo">Information</h5>
+          <Link to='/FAQ' onClick={() => window.scrollTo(0, 0)}>
+          <li class="mb-2 hover:text-green-600 hover:underline">FAQ</li>
+          </Link>
+        </ul> */}
         <ul class="list-none footer-links text-gray-500">
-        <Link to='/FAQ' onClick={() => window.scrollTo(0, 0)}>
-        <li class="mb-2 hover:text-green-600 hover:underline">FAQ</li>
+        <Link to='/about-us' onClick={() => window.scrollTo(0, 0)}>
+        <li class="mb-2 hover:text-green-600 hover:underline">About us</li>
         </Link>
           {/* <li class="mb-2 hover:text-green-600 hover:underline">Blog</li> */}
           <Link to='/contact-us' onClick={() => window.scrollTo(0, 0)}>
-          <li class="mb-2 hover:text-green-600 hover:underline">Support</li>
+          <li class="mb-2 hover:text-green-600 hover:underline">Contact us</li>
           </Link>
-          <Link to='/why-alanced' onClick={() => window.scroll(0,0)}><li class="mb-2 hover:text-green-600 hover:underline">Alanced Foundation</li></Link>
+          <Link to='/safety-security' onClick={() => window.scroll(0,0)}><li class="mb-2 hover:text-green-600 hover:underline">Safety & Security</li></Link>
         </ul>
     </div>
     <div class="p-4 text-left">
-    <h5 class="text-xl font-bold mb-6 font-cardo">Company</h5>
-        <ul class="list-none footer-links text-gray-500">
+    <h5 class="text-xl font-bold mb-6 font-cardo">About</h5>
+        {/* <ul class="list-none footer-links text-gray-500">
         <Link to='/about-us' onClick={() => window.scrollTo(0, 0)}>
-          <li class="mb-2 hover:text-green-600 hover:underline">About us</li>
-          </Link>
+        <li class="mb-2 hover:text-green-600 hover:underline">About us</li>
+        </Link>
           <Link to='/contact-us' onClick={() => window.scrollTo(0, 0)}>
           <li class="mb-2 hover:text-green-600 hover:underline">Contact us</li>
           </Link>
-          <Link to='/safety-security' onClick={() => window.scrollTo(0, 0)}>
-          <li class="mb-2 hover:text-green-600 hover:underline">Safety & Security</li>
+          <Link to='/safety-security' onClick={() => window.scroll(0,0)}><li class="mb-2 hover:text-green-600 hover:underline">Safety & Security</li></Link>
+        </ul> */}
+        <ul class="list-none footer-links text-gray-500">
+          {/* <Link to='/why-alanced' onClick={() => window.scrollTo(0, 0)}>
+          <li class="mb-2 hover:text-green-600 hover:underline">Alanced Foundation</li>
+          </Link> */}
+          <Link to='/enterprises' onClick={() => window.scrollTo(0, 0)}>
+          <li class="mb-2 hover:text-green-600 hover:underline">Enterprise </li>
+          </Link>
+          <Link to='/FAQ' onClick={() => window.scrollTo(0, 0)}>
+          <li class="mb-2 hover:text-green-600 hover:underline">FAQ</li>
+          </Link>
+          <Link to='/why-alanced' onClick={() => window.scrollTo(0, 0)}>
+          <li class="mb-2 hover:text-green-600 hover:underline">Alanced Foundation</li>
+          </Link>
+        </ul>
+    </div>
+    <div class="p-4 text-left">
+    <h5 class="text-xl font-bold mb-6 font-cardo">Policies</h5>
+        <ul class="list-none footer-links text-gray-500">
+        <Link to='/terms' onClick={() => window.scrollTo(0, 0)}>
+          <li class="mb-2 hover:text-green-600 hover:underline">Terms</li>
+          </Link>
+          <Link to='/privacy-policy' onClick={() => window.scrollTo(0, 0)}>
+          <li class="mb-2 hover:text-green-600 hover:underline">Privacy</li>
+          </Link>
+          <Link to='/cookies' onClick={() => window.scrollTo(0, 0)}>
+          <li class="mb-2 hover:text-green-600 hover:underline">Cookies</li>
           </Link>
         </ul>
     </div>
