@@ -38,7 +38,7 @@ const AddPortfolio = () => {
                         </div> 
                         </div>
                         <div className=' basis-6/12'>
-                        <Link to='/freelancer/select/templete'><span class="inline-block text-sm px-6 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded-full border-none text-white mr-2 font-bold ml-[8rem]">Go To Select Templete</span></Link>
+                        <span class="inline-block text-sm px-6 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded-full border-none text-white mr-2 font-bold ml-[8rem]">Go To Select Templete</span>
                         </div>
                     </div>
                 </div>

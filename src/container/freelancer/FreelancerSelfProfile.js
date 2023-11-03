@@ -932,7 +932,7 @@ const [isEditFreeProjectOpen, setIsEditFreeProjectOpen] = useState(false);
    <div className="flex items-center justify-between">
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Portfolio ({ProjectCount})</h1>
     <div className="flex items-center space-x-2">
-        <Link to='/freelancer/add/portfolio'><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
+        <Link to='/freelancer/add-portfolio' onClick={() => window.scroll(0, 0)}><div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
             <img src={plus} alt="More" />
         </div></Link>
     </div>

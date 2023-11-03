@@ -32,7 +32,6 @@ import MyProposalArchived from "../container/freelancer/MyProposalArchived";
 import AllContracts from "../container/freelancer/AllContracts";
 import MyReports from "../container/freelancer/MyReports";
 import AddPortfolio from "../container/freelancer/portfolio/AddPortfolio";
-import SelectTemplete from "../container/freelancer/portfolio/SelectTemplete";
 import AddBidAmount from "../container/freelancer/AddBidAmount";
 import SendProposal from "../container/freelancer/SendProposal";
 import HirerAfterLogin from "../container/hirer/HirerAfterLogin";
@@ -64,6 +63,7 @@ import FreelancerFullDetailAfterLogin from "../container/hirer/FreelancerFullDet
 import Notifications from '../components/Layout/Notifications'
 import ResetPassword from "../components/Layout/ResetPassword";
 import SendPasswordResetEmail from "../components/Layout/SendPasswordResetEmail";
+import AddPortfolioForm from "../container/freelancer/portfolio/AddPortfolioForm";
 
   const AppRouter = (props) => {
     
@@ -103,7 +103,6 @@ import SendPasswordResetEmail from "../components/Layout/SendPasswordResetEmail"
           <Route path="/freelancer/all-contracts" element={<AllContracts/>}/>
           <Route path="/freelancer/my-reports" element={<MyReports/>}/>
           <Route path="/freelancer/add/portfolio" element={<AddPortfolio/>}/>
-          <Route path="/freelancer/select/templete" element={<SelectTemplete/>}/>
           <Route path="/freelancer/add-bid" element={<AddBidAmount/>}/>
           <Route path="/freelancer/send-proposal" element={<SendProposal/>}/>
           <Route path="/hirer/profile" element={<HirerAfterLogin/>}/>
@@ -172,7 +171,6 @@ import SendPasswordResetEmail from "../components/Layout/SendPasswordResetEmail"
             <Route path="/freelancer/all-contracts" element={<AllContracts/>}/>
             <Route path="/freelancer/my-reports" element={<MyReports/>}/>
             <Route path="/freelancer/add/portfolio" element={<AddPortfolio/>}/>
-            <Route path="/freelancer/select/templete" element={<SelectTemplete/>}/>
             <Route path="/freelancer/add-bid" element={<AddBidAmount/>}/>
             <Route path="/freelancer/send-proposal" element={<SendProposal/>}/>
             <Route path="/View/freelancer/proposal" element={<ViewProposal/>}/>
@@ -181,6 +179,7 @@ import SendPasswordResetEmail from "../components/Layout/SendPasswordResetEmail"
             <Route path='/send-proposal/detail' element={<ViewSendPraposalAfterAdd/>}></Route>
             <Route path="/view/SelfBidProject" element={<SelfBidProject/>}></Route>
             <Route path="/notifications" element={<Notifications/>}/>
+            <Route path="/freelancer/add-portfolio" element={<AddPortfolioForm/>}></Route>
           </>}
 
 
