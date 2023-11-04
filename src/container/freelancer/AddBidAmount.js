@@ -212,7 +212,7 @@ const [showFullDescription, setShowFullDescription] = useState(false);
                     />  */}
                     <select
                     className="w-[220px] border py-1.5 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white"
-                    name="bid_type" value={addBid.bid_type} onChange={onChange}>
+                    name="bid_type" value={addBid.bid_type} onChange={onChange} required>
                     <option disabled selected value="">Choose</option>
                     <option value="Hourly">Hourly</option>
                     <option value="Fixed">Fixed</option>
@@ -232,6 +232,7 @@ const [showFullDescription, setShowFullDescription] = useState(false);
                         name='bid_amount'
                         value={addBid.bid_amount}
                         onChange={onChange}
+                        required
                         // value={userInput}  // Use the userInput as value
                         // onChange={(e) => setUserInput(e.target.value)}
                     /> 
@@ -302,7 +303,7 @@ const [showFullDescription, setShowFullDescription] = useState(false);
             <div class="w-full mx-auto">
             <textarea id="message" name="description"
             value={addBid.description}
-            onChange={onChange}  class="mt-3 w-full  px-3 py-2 border-2 rounded-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500  dark:focus:ring-green-500 dark:focus:border-green-500" rows='15'></textarea>
+            onChange={onChange} required  class="mt-3 w-full  px-3 py-2 border-2 rounded-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500  dark:focus:ring-green-500 dark:focus:border-green-500" rows='15'></textarea>
         </div>
         </div>
         <div className=' flex flex-row mt-5  mb-5'>

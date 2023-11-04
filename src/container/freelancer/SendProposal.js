@@ -57,6 +57,20 @@ const BidAdd = () => {
     // setAddBid.project_id(id)
 }
 
+const isButtonEnabled = () => {
+    return addBid.bid_amount > 0 && addBid.bid_type && addBid.description;
+  };
+
+  const handleButtonClick = () => {
+    if (!isButtonEnabled()) {
+      toast.error('Please fill out all required fields.');
+    } else {
+      // Proceed with the action
+      BidAdd();
+      window.scrollTo(0, 0);
+    }
+  };
+
 const [userInput, setUserInput] = useState('')
 const [hourlyRate, setHourlyRate] = useState('');
 const [serviceFee, setServiceFee] = useState(0);
@@ -187,13 +201,14 @@ const [showFullDescription, setShowFullDescription] = useState(false);
                 <div className="flex items-center space-x-2"> 
                     <select
                     className="w-[220px] border py-1.5 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white"
-                    name="bid_type" value={addBid.bid_type} onChange={onChange}>
+                    name="bid_type" value={addBid.bid_type} onChange={onChange} required>
                     <option disabled selected value="">Choose</option>
                     <option value="Hourly">Hourly</option>
                     <option value="Fixed">Fixed</option>
                 </select>
                 </div>
-            </div>   
+            </div>  
+            <div> 
             <div className="flex items-center mt-4">
                 <div className="flex flex-col justify-center w-2/3"> 
                     <h1 className="font-medium text-[18px] text-[#031136] font-cardo text-left">Hourly Rate</h1>
@@ -207,13 +222,8 @@ const [showFullDescription, setShowFullDescription] = useState(false);
                         name='bid_amount'
                         value={addBid.bid_amount}
                         onChange={onChange}
-                        // value={userInput}  // Use the userInput as value
-                        // onChange={(e) => setUserInput(e.target.value)}
+                        required
                     /> 
-                    
-                    {/* <span>/hr</span> */}
-                    {/* <input type='text' name='project_id' value={addBid.project_id}
-                    placeholder={id} defaultValue={id} onChange={onChange}/> */}
                 </div>
             </div>
 
@@ -231,7 +241,6 @@ const [showFullDescription, setShowFullDescription] = useState(false);
                         value={`-$${serviceFee.toFixed(2)}`}
                         disabled
                     /> 
-                    {/* <span>/hr</span> */}
                 </div>
             </div>
 
@@ -250,8 +259,8 @@ const [showFullDescription, setShowFullDescription] = useState(false);
                         value={`$${totalAfterFee.toFixed(2)}`}
                         disabled
                     /> 
-                    {/* <span>/hr</span> */}
                 </div>
+            </div>
             </div>
         </div>
             </div>
@@ -277,11 +286,17 @@ const [showFullDescription, setShowFullDescription] = useState(false);
             <div class="w-full mx-auto">
             <textarea id="message" name="description"
             value={addBid.description}
-            onChange={onChange}  class="mt-3 w-full  px-3 py-2 border-2 rounded-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500  dark:focus:ring-green-500 dark:focus:border-green-500" rows='15'></textarea>
+            onChange={onChange} required  class="mt-3 w-full  px-3 py-2 border-2 rounded-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500  dark:focus:ring-green-500 dark:focus:border-green-500" rows='15'></textarea>
         </div>
         </div>
         <div className=' flex flex-row mt-5  mb-5'>
-        <div className=' basis-3/12' ><button className='h-10 w-52 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded' onClick={()=>{ BidAdd(); window.scrollTo(0, 0); }}>Send Proposal</button></div>
+        <div className=' basis-3/12' >
+            {/* <button className='h-10 w-52 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded' onClick={()=>{ BidAdd(); window.scrollTo(0, 0); }}>Send Proposal</button> */}
+            <button
+            className={`h-10 w-52 text-white text-base font-semibold mt-5 rounded ${isButtonEnabled()? 'bg-gradient-to-r from-[#00BF58] to-[#E3FF75]': 'bg-gray-300'}`} onClick={handleButtonClick}disabled={!isButtonEnabled()}>
+            Send Proposal
+            </button>
+        </div>
         <div class="p-0.5 mt-5 rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
         <Link to='/projects' onClick={() => window.scrollTo(0, 0)}><button class="px-2 py-1 bg-[#f8faf9] rounded-sm"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-bold text-sm py-[4px] px-[16px]">Cancel</p></button></Link>
         </div>
