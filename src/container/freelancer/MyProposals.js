@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Navbar from '../../components/Layout/Navbar'
 import HomeSection4 from '../../components/Layout/HomeSection4'
@@ -10,7 +10,9 @@ import { GetFreelancerSelfBidAction } from '../../redux/Freelancer/FreelancerAct
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { timeAgo } from './TimeFunctions'
-
+import axios from 'axios'
+import { IconButton, Typography } from "@material-tailwind/react";
+import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 
 const MyProposals = () => {
@@ -19,10 +21,48 @@ const accessToken = useSelector(state => state.login.accessToken);
 const freelancerselfbid = useSelector(state => state.freelancer.freelancerselfbid)
 const bidCount = freelancerselfbid?.length || 0;
 const dispatch = useDispatch();
+const [currentPage, setCurrentPage] = useState(1);
+const [totalPages, setTotalPages] = useState(0);
+const [BidsCount, setBidsCount] = useState(0);
 
-React.useEffect(() => {
-    dispatch(GetFreelancerSelfBidAction(accessToken))
-  }, [])
+// React.useEffect(() => {
+//     dispatch(GetFreelancerSelfBidAction(accessToken))
+//   }, [])
+
+const [viewfreebid, setViewFreeBid] = useState([]);
+//   const userCategory = logindata?.category
+
+  useEffect(() => {
+    const queryParameters = [];
+  
+    queryParameters.push(`page=${currentPage}`);
+
+    const queryString = queryParameters.join('&');
+
+    axios
+      .get(`https://aparnawiz91.pythonanywhere.com/freelance/view/freelancer-self/bid?${queryString}`,{
+        headers: {
+          "Authorization":`Bearer ${accessToken}`
+        }
+      })
+      .then((response) => {
+        setViewFreeBid(response.data.data);
+        // setViewFreeBid(response.data.results); 
+        setBidsCount(response.data.count);
+        setTotalPages(Math.ceil(response.data.count / 8));
+      })
+      .catch((error) => {
+        console.error('Error fetching filtered data:', error);
+      });
+  }, [currentPage]);
+
+  const prev = () => {
+    setCurrentPage(prev => Math.max(prev - 1, 1));
+};
+
+const next = () => {
+    setCurrentPage(prev => Math.min(prev + 1, totalPages));
+};
 
 
   const [selectedButton, setSelectedButton] = useState('Active');
@@ -30,17 +70,17 @@ React.useEffect(() => {
 
   const [active, setActive] = React.useState(1);
  
-  const next = () => {
-    if (active === 5) return;
+  // const next = () => {
+  //   if (active === 5) return;
  
-    setActive(active + 1);
-  };
+  //   setActive(active + 1);
+  // };
  
-  const prev = () => {
-    if (active === 1) return;
+  // const prev = () => {
+  //   if (active === 1) return;
  
-    setActive(active - 1);
-  };
+  //   setActive(active - 1);
+  // };
 
   const [isAvailable, setIsAvailable] = useState(true);
 
@@ -94,9 +134,9 @@ React.useEffect(() => {
     </div>
 </div> */}
 <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2] text-left'>
-<h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Submitted Proposals ({bidCount})</h1>
-{freelancerselfbid != null ? <div>
-{freelancerselfbid && <>{freelancerselfbid.map((bid,index) => {
+<h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Submitted Proposals ({BidsCount})</h1>
+{viewfreebid != null ? <div>
+{viewfreebid && <>{viewfreebid.map((bid,index) => {
     const bidTime = new Date(bid.bid_time);
 
     // Calculate the time difference
@@ -138,7 +178,47 @@ React.useEffect(() => {
   <Skeleton height={20} width={200} style={{marginLeft: 180}}/>
   </div>);})}
   </div>}
-<div className="flex justify-end items-center p-5">
+  {totalPages > 1 && (
+                    <div className="flex justify-end items-center gap-6 m-4">
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={prev}
+                            disabled={currentPage === 1}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                        
+                        {[...Array(totalPages)].map((_, index) => {
+                            const pageNumber = index + 1;
+                            return (
+                                <span
+                                    key={pageNumber}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    onClick={() => {
+                                        window.scrollTo(0, 0);
+                                        setCurrentPage(pageNumber);
+                                    }}
+                                    
+                                >
+                                    {pageNumber}
+                                </span>
+                            );
+                        })}
+
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={next}
+                            disabled={currentPage === totalPages}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                    </div>
+    )}
+{/* <div className="flex justify-end items-center p-5">
   <div className="flex items-center justify-center w-8 h-8 text-gray-500 border border-gray-200 p-1 cursor-pointer" onClick={prev}
     disabled={active === 1}>
     -
@@ -166,7 +246,7 @@ React.useEffect(() => {
     +
   </div>
 
-</div>
+</div> */}
 </div>
 <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2]  text-left'>
 <h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Active Proposals (5)</h1>
