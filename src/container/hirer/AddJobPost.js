@@ -94,7 +94,7 @@ const AddJobPost = () => {
     const [error, setError] = useState('');
   
   
-    const [categories] = useState(CategoryList);
+    const [categories] = useState(CategoryList.sort());
 
 
 const [searchTerm, setSearchTerm] = useState(""); 
@@ -169,7 +169,7 @@ useEffect(() => {
     };
 
 
-    const allSkills = SkillsList;
+    const allSkills = SkillsList.sort();
 
 const [searchTermSkill, setSearchTermSkill] = useState(''); 
 const [isOpenSkill, setIsOpenSkill] = useState(false);

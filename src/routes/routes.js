@@ -68,7 +68,8 @@ import AddPortfolioForm from "../container/freelancer/portfolio/AddPortfolioForm
   const AppRouter = (props) => {
     
    
-    const loginType = useSelector((state) => state.login.type);
+    // const loginType = useSelector((state) => state.login.type);
+    const loginType = useSelector(state => state.login.type) || localStorage.getItem('loginType');
     const state = useSelector((state) => state)
     const navigate = useNavigate();
     

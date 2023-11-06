@@ -502,11 +502,11 @@ const FindTalent = () => {
         <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse Freelancers that match your jobs</p>
       </div> */}
       {viewFreelancer != null ? 
-      <div className='grid grid-cols-2 w-[70%] md:w-full pl-3.5'>
+      <div className='grid md:grid-cols-2 grid-cols-1 w-full pl-3.5'>
       {viewFreelancer && viewFreelancer.map((free, index) => {
                 return(<>
                 
-      <div className='px-4 w-[26vw] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4'>
+      <div className='px-4 md:w-[26vw] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4'>
         <div className="flex items-center">
             <Avatar src={"https://aparnawiz91.pythonanywhere.com"+free.images_logo} alt="" variant="rounded" className="mr-4 h-24 w-24" />
             <div>

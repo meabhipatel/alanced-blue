@@ -46,7 +46,7 @@ const freelancerselfprofile = useSelector(state => state.freelancer.freelancerse
 //     'Hindi', 'English', 'Gujarati', 'Marathi', 'French', 'German', 'Spanish', 'Tamil','Punjabi','Arabic','Urdu','Russian','Japanese','Bengali','Turkish','Korean','Italian'
 // ];
 
-const allLanguages = LanguageList;
+const allLanguages = LanguageList.sort();
 
 const [searchTermLanguage, setSearchTermLanguage] = useState(''); 
 const [isOpenLanguage, setIsOpenLanguage] = useState(false);

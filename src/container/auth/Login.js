@@ -130,6 +130,7 @@ const Login = (props) => {
                     localStorage.setItem('googleUserName', res.data.name);
                     localStorage.setItem('isLoggedIn', 'true');
                     localStorage.setItem('loginMethod', 'google');
+                    localStorage.setItem('loginType', emailCheckResponse.type);
                     console.log(emailCheckResponse.type,"ckhfff")
                     // Navigate based on user type
                     if (emailCheckResponse.type === 'FREELANCER') {

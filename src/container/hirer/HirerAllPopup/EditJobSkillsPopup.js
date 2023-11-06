@@ -71,7 +71,7 @@ const EditJobSkillsPopup = ({closeJobSkills,project}) => {
         }
     };
 
-    const allSkills = SkillsList;
+    const allSkills = SkillsList.sort();
 
 const [searchTermSkill, setSearchTermSkill] = useState(''); 
 const [isOpenSkill, setIsOpenSkill] = useState(false);

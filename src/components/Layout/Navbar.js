@@ -21,7 +21,8 @@ const Navbar = () => {
   
   const accessToken = localStorage.getItem('accessToken')
   const AccessToken = useSelector(state => state.login.accessToken);
-  const loginType = useSelector(state => state.login.type)
+//   const loginType = useSelector(state => state.login.type)
+  const loginType = useSelector(state => state.login.type) || localStorage.getItem('loginType');
   const logindata = useSelector(state => state.login.login_data)
   const googleUserName = localStorage.getItem('googleUserName')
   const loginMethod = localStorage.getItem('loginMethod')
@@ -77,6 +78,7 @@ if(loginType == 'FREELANCER'){
     localStorage.removeItem('googleUserName')
     localStorage.removeItem('accessToken')
     localStorage.removeItem('loginMethod')
+    localStorage.removeItem('loginType')
 
     dispatch(LogoutAction())
 }
@@ -299,7 +301,7 @@ const fetchFreeNotifications = async () => {
       {loginType=='FREELANCER' ? <>
       <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setFindworkDropdown(true)}>Find Work <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
       {Findworkdropdown && (
-        <div className="absolute right-[47.5rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+        <div className="absolute md:right-[47.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
             <Link to='/projects' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Find Work</span>
@@ -323,7 +325,7 @@ const fetchFreeNotifications = async () => {
       <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setMyJobsDropdown(true)} 
     >My Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
       {MyJobsdropdown && (
-        <div className="absolute right-[39.5rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+        <div className="absolute md:right-[39.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
             <Link to='/my-jobs' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Jobs</span>
@@ -337,7 +339,7 @@ const fetchFreeNotifications = async () => {
     <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setMyJobsDropdown(true)} 
   > Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
     {MyJobsdropdown && (
-      <div className="absolute right-[41rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+      <div className="absolute md:right-[41rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
           <div className="py-1">
           <Link to='/add/Job-post' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Post A Job</span>
@@ -351,7 +353,7 @@ const fetchFreeNotifications = async () => {
   {loginType=='FREELANCER' ? <>
       <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setReportsDropdown(true)}> Reports <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
       {Reportsdropdown && (
-        <div className="absolute right-[31.5rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+        <div className="absolute md:right-[31.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
             <Link to='/freelancer/my-reports' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Reports</span>
@@ -364,7 +366,7 @@ const fetchFreeNotifications = async () => {
     )}</>:<>
     <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setReportsDropdown(true)}> Reports <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
       {Reportsdropdown && (
-        <div className="absolute right-[33rem] mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+        <div className="absolute md:right-[33rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
             <Link to='/freelancer/my-reports' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Reports</span>
@@ -379,7 +381,7 @@ const fetchFreeNotifications = async () => {
       <Link to='/messages' onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]">Messages</span></Link>
     </div>
     
-<div className='lg:mr-[100px]'>
+<div className='lg:mr-[100px] lg:ml-0 ml-[15rem]'>
    <div className="flex items-center space-x-12">
       <div className='relative inline-block pt-1'>
       <i 
@@ -462,39 +464,39 @@ const fetchFreeNotifications = async () => {
          <span className="absolute top-1.5 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 border-2 border-white"></span> */}
       </div>
       <div className='relative inline-block'>
-      {/* {logindata && logindata.images_logo !== "/media/images/blank.png" ? ( */}
+      {logindata && logindata.images_logo ? (
         <img 
             src={"https://aparnawiz91.pythonanywhere.com/" + logindata.images_logo} 
             alt="Profile" 
             className="h-10 w-10 rounded-full cursor-pointer" 
             onClick={() => setDropdownVisible(!dropdownVisible)}
         />
-    {/* ) : (
+     ) : (
         <div 
             className="h-10 w-10 rounded-full cursor-pointer flex items-center justify-center bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white font-bold font-cardo text-xl p-1"
             onClick={() => setDropdownVisible(!dropdownVisible)}
         >
             {displayName && displayName[0].toUpperCase()}
         </div>
-    )} */}
+    )} 
     {dropdownVisible && (
         <div className="drop absolute right-[-10px] mt-5 w-[14rem] rounded-md shadow-lg bg-white">
             <div className="py-1">
-                      {/* {logindata && logindata.images_logo !== "/media/images/blank.png" ? ( */}
+                      {logindata && logindata.images_logo ? (
         <img 
             src={"https://aparnawiz91.pythonanywhere.com/" + logindata.images_logo} 
             alt="Profile" 
             className="h-20 w-20 rounded-full cursor-pointer mx-auto my-5 border border-gray-200 p-0.5" 
             onClick={() => setDropdownVisible(!dropdownVisible)}
         />
-    {/* ) : (
+     ) : (
         <div 
             className="h-20 w-20 rounded-full cursor-pointer flex items-center justify-center bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white font-bold font-cardo text-4xl p-1 mx-auto my-5"
             onClick={() => setDropdownVisible(!dropdownVisible)}
         >
             {displayName && displayName[0].toUpperCase()}
         </div>
-    )} */}
+    )} 
                      <h1 className="font-cardo text-[19px] text-[#031136]  text-center px-2">{displayName}</h1>
                      <h1 className="font-cardo text-lg text-gray-500  text-center  mb-3">{loginType=='FREELANCER'? loginType.toLowerCase(): 'client'}</h1>
                      {loginType=='FREELANCER'? <Link to='/freelancer/edit-profile' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2 hover:bg-gray-100" >

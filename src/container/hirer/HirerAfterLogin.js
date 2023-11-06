@@ -539,7 +539,7 @@ const next = () => {
       <div className="flex items-center">
       <div className='flex items-center mr-1 space-x-1 border p-1 w-[200px] rounded-md'>
           <img src={search} alt="Search Icon" className="h-4 w-4 mr-1 ml-1" />
-          <input className='w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none' placeholder='Search by Category' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+          <input className='w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none' placeholder='Search' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
       </div>
       </div>
   </div>
@@ -548,11 +548,11 @@ const next = () => {
         <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Explore freelancers who are a perfect fit for your projects.</p>
       </div>
       {viewFreelancer != null ? 
-      <div className='grid grid-cols-2 w-[70%] md:w-full pl-3.5'>
+      <div className='grid md:grid-cols-2 grid-cols-1 md:w-full pl-3.5'>
       {viewFreelancer && viewFreelancer.map((free, index) => {
                 return(<>
                 
-      <div className='px-4 w-[26vw] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4'>
+      <div className='px-4 md:w-[26vw] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4'>
         <div className="flex items-center">
             <Avatar src={"https://aparnawiz91.pythonanywhere.com"+free.images_logo} alt="" variant="rounded" className="mr-4 h-24 w-24" />
             <div>
