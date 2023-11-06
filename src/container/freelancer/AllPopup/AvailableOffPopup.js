@@ -38,7 +38,7 @@ const AvailableOffPopup = ({ isAvailable,setIsAvailable,closeAvailableOff }) => 
     //     'Indore','Ujjain','Bhopal','Delhi','Gujarat','Pune','Surat','Punjab','Mumbai','Bombay','Bengaluru','Kolkata','Chennai','Hyderabad','Ahmedabad','Jaipur'
     //   ]);
 
-    const [cities] = useState(CityList)
+    const [cities] = useState(CityList.sort())
     
       const [searchTermAddress, setSearchTermAddress] = useState(address || "");
       const [isOpenAddress, setIsOpenAddress] = useState(false);

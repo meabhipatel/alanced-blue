@@ -55,7 +55,7 @@ const EditSkillPopup = ({ closeEditSkill }) => {
 //     'React','Angular','Vue','JavaScript','Python','Java','Ruby','C','C++','MongoDB','SQL','Postgresql','DBMS','Oracle','Django','HTML','CSS','Jquery','Bootstrap','Tailwind CSS','Wordpress','Shopify','Magento','Flutter','DRF','RestAPI'
 // ];
 
-const allSkills = SkillsList;
+const allSkills = SkillsList.sort();
 
 const [searchTermSkill, setSearchTermSkill] = useState(''); 
 const [isOpenSkill, setIsOpenSkill] = useState(false);

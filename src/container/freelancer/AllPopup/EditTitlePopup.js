@@ -36,7 +36,7 @@ const EditTitlePopup = ({ closeEditTitle }) => {
 // ]);
 
 
-const [categories] = useState(CategoryList);
+const [categories] = useState(CategoryList.sort());
 
 
 const [searchTerm, setSearchTerm] = useState(category || ""); 
