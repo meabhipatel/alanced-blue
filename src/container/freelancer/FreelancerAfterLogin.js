@@ -81,9 +81,9 @@ const FreelancerAfterLogin = () => {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://aparnawiz91.pythonanywhere.com/freelance/view-all/Project/?${queryString}`)
+      .get(`https://alanced.pythonanywhere.com/freelance/view-all/Project/?${queryString}`)
       .then((response) => {
-        setViewProject(response.data.data); 
+        setViewProject(response.data.results); 
         setTotalPages(Math.ceil(response.data.count / 8));
         // const projectsMatchingCategory = response.data.results.filter(project => project.category === userCategory);
         // setViewProject(projectsMatchingCategory);
@@ -154,12 +154,12 @@ const { day, formattedDate, greeting } = getCurrentDateAndGreeting();
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response1 = await axios.get('https://aparnawiz91.pythonanywhere.com/freelance/view/freelancer-self/bid',{
+        const response1 = await axios.get('https://alanced.pythonanywhere.com/freelance/view/freelancer-self/bid',{
           headers: {
             "Authorization":`Bearer ${accessToken}`
           }
         });
-        setAllProposals(response1.data.data);
+        setAllProposals(response1.data.results);
   
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -217,13 +217,13 @@ const toggleSaveProject = async (project) => {
         let response;
 
         if (project.isSaved) {
-            response = await axios.delete(`https://aparnawiz91.pythonanywhere.com/freelance/saved-projects/${project.id}`, {
+            response = await axios.delete(`https://alanced.pythonanywhere.com/freelance/saved-projects/${project.id}`, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
             });
         } else {
-            response = await axios.post(`https://aparnawiz91.pythonanywhere.com/freelance/saved-projects/${project.id}`, {}, {
+            response = await axios.post(`https://alanced.pythonanywhere.com/freelance/saved-projects/${project.id}`, {}, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
@@ -275,7 +275,7 @@ const [bidsCount, setBidsCount] = useState({});
 
             for (const project of viewProject || []) {
                 try {
-                    const response = await axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View/bids/${project.id}`);
+                    const response = await axios.get(`https://alanced.pythonanywhere.com/freelance/View/bids/${project.id}`);
                     if (response.status === 200) {
                         bids[project.id] = response.data.count; 
                     } else {

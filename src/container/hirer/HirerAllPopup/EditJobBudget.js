@@ -27,7 +27,7 @@ const EditJobBudget = ({closeJobBudget,project}) => {
         let maxHourlyRateValue = jobrate === "Fixed" ? 0 : jobmaxhr;
 
         try {
-            const response = await axios.put(`https://aparnawiz91.pythonanywhere.com/freelance/update/project/${id}`, {
+            const response = await axios.put(`https://alanced.pythonanywhere.com/freelance/update/project/${id}`, {
                 rate: jobrate,
                 fixed_budget: fixedBudgetValue,
                 min_hourly_rate: minHourlyRateValue,

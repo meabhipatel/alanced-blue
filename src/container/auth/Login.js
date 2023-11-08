@@ -112,7 +112,7 @@ const Login = (props) => {
     //----- updated code commented Below ,which is to be applied with checkemail-API updation -----
 
     const checkEmailExists = async (email,type) => {
-        const response = await axios.post('https://aparnawiz91.pythonanywhere.com/account/check-email/', { email ,type });
+        const response = await axios.post('https://alanced.pythonanywhere.com/account/check-email/', { email ,type });
         return response.data; 
     };
     

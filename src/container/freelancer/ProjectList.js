@@ -156,10 +156,9 @@ function ProjectList() {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://aparnawiz91.pythonanywhere.com/freelance/view-all/Project/?${queryString}`)
+      .get(`https://alanced.pythonanywhere.com/freelance/view-all/Project/?${queryString}`)
       .then((response) => {
-        // setViewProject(response.data.results);
-        setViewProject(response.data.data); 
+        setViewProject(response.data.results);
         setTotalPages(Math.ceil(response.data.count / 8));
       })
       .catch((error) => {
@@ -244,12 +243,12 @@ function ProjectList() {
     const fetchData = async () => {
       try {
         // Fetch doc API
-        const response1 = await axios.get('https://aparnawiz91.pythonanywhere.com/freelance/view/freelancer-self/bid',{
+        const response1 = await axios.get('https://alanced.pythonanywhere.com/freelance/view/freelancer-self/bid',{
           headers: {
             "Authorization":`Bearer ${accessToken}`
           }
         });
-        setAllProposals(response1.data.data);
+        setAllProposals(response1.data.results);
   
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -263,6 +262,7 @@ function ProjectList() {
 //(=//=//=//=//=//=//=//=//=)filter API integrtion(//=//=//=//=//=//=//=//=//=)
 
   const [filteredApiData, setFilteredApiData] = useState([]);
+  
 
 
   // const [currentPage, setCurrentPage] = useState(1);

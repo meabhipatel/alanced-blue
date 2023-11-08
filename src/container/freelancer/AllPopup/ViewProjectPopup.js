@@ -38,12 +38,12 @@ const navigate = useNavigate();
     const fetchData = async () => {
       try {
         // Fetch doc API
-        const response1 = await axios.get('https://aparnawiz91.pythonanywhere.com/freelance/view/freelancer-self/bid',{
+        const response1 = await axios.get('https://alanced.pythonanywhere.com/freelance/view/freelancer-self/bid',{
           headers: {
             "Authorization":`Bearer ${accessToken}`
           }
         });
-        setAllProposals(response1.data.data);
+        setAllProposals(response1.data.results);
   
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -73,13 +73,13 @@ const navigate = useNavigate();
         let response;
 
         if (project.isSaved) {
-            response = await axios.delete(`https://aparnawiz91.pythonanywhere.com/freelance/saved-projects/${project.id}`, {
+            response = await axios.delete(`https://alanced.pythonanywhere.com/freelance/saved-projects/${project.id}`, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
             });
         } else {
-            response = await axios.post(`https://aparnawiz91.pythonanywhere.com/freelance/saved-projects/${project.id}`, {}, {
+            response = await axios.post(`https://alanced.pythonanywhere.com/freelance/saved-projects/${project.id}`, {}, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }

@@ -40,14 +40,14 @@ const [viewfreebid, setViewFreeBid] = useState([]);
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://aparnawiz91.pythonanywhere.com/freelance/view/freelancer-self/bid?${queryString}`,{
+      .get(`https://alanced.pythonanywhere.com/freelance/view/freelancer-self/bid?${queryString}`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }
       })
       .then((response) => {
-        setViewFreeBid(response.data.data);
-        // setViewFreeBid(response.data.results); 
+        // setViewFreeBid(response.data.data);
+        setViewFreeBid(response.data.results); 
         setBidsCount(response.data.count);
         setTotalPages(Math.ceil(response.data.count / 8));
       })
