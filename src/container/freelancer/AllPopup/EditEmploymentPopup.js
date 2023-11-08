@@ -45,7 +45,7 @@ const EditEmploymentPopup = ({ closeEditEmployment, employment }) => {
                 Company_Leaving_date: isCurrentlyWorking ? null : leavedate
             };
 
-            const response = await axios.put(`https://aparnawiz91.pythonanywhere.com/freelance/update/Freelancer/Employment/${id}`, updatedData, {
+            const response = await axios.put(`https://alanced.pythonanywhere.com/freelance/update/Freelancer/Employment/${id}`, updatedData, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }

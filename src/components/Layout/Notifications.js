@@ -18,7 +18,7 @@ const Notifications = () => {
 
   const fetchClientNotifications = async () => {
     try {
-        const response = await axios.get('https://aparnawiz91.pythonanywhere.com/freelance/view/client-notifications', {
+        const response = await axios.get('https://alanced.pythonanywhere.com/freelance/view/client-notifications', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -43,7 +43,7 @@ const Notifications = () => {
   
   const markAsReadClient = async (notifId) => {
     try {
-        const response = await axios.put(`https://aparnawiz91.pythonanywhere.com/freelance/read/client-notification/${notifId}`, {}, {
+        const response = await axios.put(`https://alanced.pythonanywhere.com/freelance/read/client-notification/${notifId}`, {}, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -62,7 +62,7 @@ const Notifications = () => {
   
   const deleteClientNotification = async (notifId) => {
     try {
-        const response = await axios.delete(`https://aparnawiz91.pythonanywhere.com/freelance/delete/client-notification/${notifId}`, {
+        const response = await axios.delete(`https://alanced.pythonanywhere.com/freelance/delete/client-notification/${notifId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -81,7 +81,7 @@ const Notifications = () => {
 
   const fetchFreeNotifications = async () => {
     try {
-        const response = await axios.get('https://aparnawiz91.pythonanywhere.com/freelance/view/freelancer-notifications', {
+        const response = await axios.get('https://alanced.pythonanywhere.com/freelance/view/freelancer-notifications', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -106,7 +106,7 @@ const Notifications = () => {
   
   const markAsReadFree = async (notifId) => {
     try {
-        const response = await axios.put(`https://aparnawiz91.pythonanywhere.com/freelance/read/freelancer-notification/${notifId}`, {}, {
+        const response = await axios.put(`https://alanced.pythonanywhere.com/freelance/read/freelancer-notification/${notifId}`, {}, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -124,7 +124,7 @@ const Notifications = () => {
   
   const deleteFreeNotification = async (notifId) => {
     try {
-        const response = await axios.delete(`https://aparnawiz91.pythonanywhere.com/freelance/delete/freelancer-notification/${notifId}`, {
+        const response = await axios.delete(`https://alanced.pythonanywhere.com/freelance/delete/freelancer-notification/${notifId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

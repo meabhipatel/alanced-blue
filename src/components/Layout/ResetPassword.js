@@ -41,17 +41,17 @@ const ResetPassword = () => {
       }
   }, [resetpass]);
 
-  const Loader = () =>{
-    if(resetpass==false || resetpass == true){
-        toogleShow(false)
-        navigate('/login')
-    }
-    return(
-        <>
-        <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-white mx-auto"></div>
-        </>
-    )
-}
+//   const Loader = () =>{
+//     if(resetpass==false || resetpass == true){
+//         toogleShow(false)
+//         navigate('/login')
+//     }
+//     return(
+//         <>
+//         <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-white mx-auto"></div>
+//         </>
+//     )
+// }
   
   const ResetUserPassword = () => {
 
@@ -66,7 +66,7 @@ const ResetPassword = () => {
   
 
     dispatch(ResetPasswordAction(uid, token,formData));
-    toogleShow(true)
+    // toogleShow(true)
 }
 
 const onChange = e =>{
@@ -130,8 +130,7 @@ const onChange = e =>{
     </div>
    {/* <input type="password" className='border mt-2 mb-5 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='•••••••••••' name='password2' onChange={onChange} value={resetuserpass.password2}/> */}
    <button onClick={ResetUserPassword}
-    class="block w-full px-4 py-2 mt-2 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-md  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold">{show ? <div><Loader/></div> : "Reset Password"}
-</button>
+    class="block w-full px-4 py-2 mt-2 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-md  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold">Reset Password</button>
    </div>
 </div>
   )

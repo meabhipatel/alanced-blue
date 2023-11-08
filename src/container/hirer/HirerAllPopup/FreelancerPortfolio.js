@@ -14,7 +14,7 @@ const FreelancerPortfolio = ({closePortfolio,project}) => {
                         </button>
                     </div>
                     <div className='mt-8'>
-                        <img src={"https://aparnawiz91.pythonanywhere.com/"+project.images_logo} alt="" className='w-full h-[300px]'/>
+                        <img src={"https://alanced.pythonanywhere.com/"+project.images_logo} alt="" className='w-full h-[300px]'/>
                         <h1 className="font-cardo text-lg text-[#031136] font-normal text-left pt-5">Skills and Deliverables</h1>
                         <div className="text-left mt-5">
                         {JSON.parse(project.skills_used.replace(/'/g, '"')).map((skill, index) => (

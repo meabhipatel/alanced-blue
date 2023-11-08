@@ -37,15 +37,15 @@ const SavedJobs = () => {
 
     const fetchSavedJobs = async () => {
         try {
-            const response = await axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/SavedProjects?page=${currentPage}`, {
+            const response = await axios.get(`https://alanced.pythonanywhere.com/freelance/View-all/SavedProjects?page=${currentPage}`, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
             });
     
             if (response.status === 200) {
-                // setSavedJobs(response.data.results);
-                setSavedJobs(response.data.data);
+                setSavedJobs(response.data.results);
+                // setSavedJobs(response.data.data);
                 setTotalPages(Math.ceil(response.data.count / 8));
             } else {
                 console.error("Error fetching saved jobs:", response.data);
@@ -68,7 +68,7 @@ const SavedJobs = () => {
     const toggleJobSaveStatus = async (jobId) => {
         try {
             const response = await axios.post(
-                `https://aparnawiz91.pythonanywhere.com/freelance/saved-projects/${jobId}`,
+                `https://alanced.pythonanywhere.com/freelance/saved-projects/${jobId}`,
                 {},
                 {
                     headers: {

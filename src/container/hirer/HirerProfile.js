@@ -158,7 +158,7 @@ console.log("++++++++++++++",first_Name)
     const formData = new FormData();
     formData.append("images_logo", selectedFile);
     
-    axios.put('https://aparnawiz91.pythonanywhere.com/account/hirer/profile/update',formData,{
+    axios.put('https://alanced.pythonanywhere.com/account/hirer/profile/update',formData,{
         headers: {
             "Authorization":`Bearer ${accessToken}`
           },first_Name: first_Name
@@ -222,7 +222,7 @@ console.log("++++++++++++++",first_Name)
    <div className='border-b border-gray-200 border-opacity-30 py-8 p-4 mb-4 md:mb-0 relative'>
    <div className="relative w-28 h-28 mx-auto">
     {hirerselfprofile != null ? 
-                    <img  alt="Profile" src={hirerData && hirerData ? "https://aparnawiz91.pythonanywhere.com/"+hirerData.images_logo : ''} className="rounded-full w-full h-full border border-gray-200" /> : 
+                    <img  alt="Profile" src={hirerData && hirerData ? "https://alanced.pythonanywhere.com/"+hirerData.images_logo : ''} className="rounded-full w-full h-full border border-gray-200" /> : 
                     <div className='h-full w-full border border-gray-200 rounded-full'><Skeleton className='z-0' height={104} width={104} style={{borderRadius: 100}}/></div>}
                     <div className="absolute top-1 left-2 p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={handleEditClick}>
                         <img src={edit} alt="edit" />
@@ -254,28 +254,28 @@ console.log("++++++++++++++",first_Name)
                             {selectedFile ? 
                             <img className="absolute inset-0 w-full h-full object-cover" src={URL.createObjectURL(selectedFile)} alt="Profile" /> 
                             : 
-                            <img className="absolute inset-0 w-full h-full object-cover" src={hirerData && hirerData ? "https://aparnawiz91.pythonanywhere.com/"+hirerData.images_logo : ''} alt="Profile" />
+                            <img className="absolute inset-0 w-full h-full object-cover" src={hirerData && hirerData ? "https://alanced.pythonanywhere.com/"+hirerData.images_logo : ''} alt="Profile" />
                             }
                             </div>
                             <div className="relative w-28 h-28 overflow-hidden">
                             {selectedFile ? 
                             <img className="absolute inset-0 w-full h-full object-cover" src={URL.createObjectURL(selectedFile)} alt="Profile" /> 
                             : 
-                            <img className="absolute inset-0 w-full h-full object-cover" src={hirerData && hirerData ? "https://aparnawiz91.pythonanywhere.com/"+hirerData.images_logo : ''} alt="Profile" />
+                            <img className="absolute inset-0 w-full h-full object-cover" src={hirerData && hirerData ? "https://alanced.pythonanywhere.com/"+hirerData.images_logo : ''} alt="Profile" />
                             }
                             </div>
                             <div className="relative w-20 h-20 overflow-hidden">
                             {selectedFile ? 
                             <img className="absolute inset-0 w-full h-full object-cover" src={URL.createObjectURL(selectedFile)} alt="Profile" /> 
                             : 
-                            <img className="absolute inset-0 w-full h-full object-cover" src={hirerData && hirerData ? "https://aparnawiz91.pythonanywhere.com/"+hirerData.images_logo : ''} alt="Profile" />
+                            <img className="absolute inset-0 w-full h-full object-cover" src={hirerData && hirerData ? "https://alanced.pythonanywhere.com/"+hirerData.images_logo : ''} alt="Profile" />
                             }
                             </div>
                             <div className="relative w-16 h-16 overflow-hidden">
                             {selectedFile ? 
                             <img className="absolute inset-0 w-full h-full object-cover" src={URL.createObjectURL(selectedFile)} alt="Profile" /> 
                             : 
-                            <img className="absolute inset-0 w-full h-full object-cover" src={hirerData && hirerData ? "https://aparnawiz91.pythonanywhere.com/"+hirerData.images_logo : ''} alt="Profile" />
+                            <img className="absolute inset-0 w-full h-full object-cover" src={hirerData && hirerData ? "https://alanced.pythonanywhere.com/"+hirerData.images_logo : ''} alt="Profile" />
                             }
                             </div>
                     <input 

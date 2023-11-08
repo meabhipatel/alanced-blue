@@ -35,7 +35,7 @@ const EditFreelancerProjectsPopup = ({closeEditFreeProject,project}) => {
       setError('');
     };
     
-    const [uploadedImage, setUploadedImage] = useState("https://aparnawiz91.pythonanywhere.com" + project.images_logo);
+    const [uploadedImage, setUploadedImage] = useState("https://alanced.pythonanywhere.com/" + project.images_logo);
 
     const fileInputRef = useRef(null);
     const [uploadedFile, setUploadedFile] = useState(null); 
@@ -76,7 +76,7 @@ const handleImageUpload = (e) => {
     
             formData.append('project_description', description);
         
-            const response = await axios.put(`https://aparnawiz91.pythonanywhere.com/freelance/update/Freelancer/Self-project/${id}`, formData, {
+            const response = await axios.put(`https://alanced.pythonanywhere.com/freelance/update/Freelancer/Self-project/${id}`, formData, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                     'Content-Type': 'multipart/form-data'
@@ -206,7 +206,7 @@ useEffect(() => {
                     </div>
                     <div className='mt-8'>
 <div className="relative">
-                <img src={uploadedImage || "https://aparnawiz91.pythonanywhere.com/" + project.images_logo} alt="" className='w-full h-[250px] mb-4' />
+                <img src={uploadedImage || "https://alanced.pythonanywhere.com/" + project.images_logo} alt="" className='w-full h-[250px] mb-4' />
                 <div className="absolute top-2 right-2 p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={handleEditIconClick}>
                     <img src={edit} alt="edit" />
                 </div>

@@ -15,7 +15,7 @@ const EditJobTitlePopup = ({closeJobTitle,project}) => {
 
     const handleSave = async () => {
         try {
-            const response = await axios.put(`https://aparnawiz91.pythonanywhere.com/freelance/update/project/${id}`, {
+            const response = await axios.put(`https://alanced.pythonanywhere.com/freelance/update/project/${id}`, {
                 title: jobTitle,
             }, {
                 headers: {

@@ -49,22 +49,19 @@ const ViewAllJobPost = () => {
         const queryString = queryParameters.join('&');
     
         axios
-          // .get(`https://aparnawiz91.pythonanywhere.com/freelance/view/hirer-self/Project?${queryString}`,{
-            .get(`https://aparnawiz91.pythonanywhere.com/freelance/view/hirer-self/Project`,{
+          .get(`https://alanced.pythonanywhere.com/freelance/view/hirer-self/Project?${queryString}`,{
             headers: {
                 'Authorization': `Bearer ${accessToken}`
             }
         })
           .then((response) => {
-            setViewhirerProject(response.data.data); 
-            // setViewhirerProject(response.data.results); 
-            // setTotalPages(Math.ceil(response.data.count / 8));
+            setViewhirerProject(response.data.results); 
+            setTotalPages(Math.ceil(response.data.count / 8));
           })
           .catch((error) => {
             console.error('Error fetching filtered data:', error);
           });
-      // }, [searchQuery, currentPage]);
-    }, []);
+      }, [searchQuery, currentPage]);
 
 
       const prev = () => {
@@ -191,7 +188,7 @@ const [bidsCount, setBidsCount] = useState({});
 
             for (const project of viewhirerProject || []) {
                 try {
-                    const response = await axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View/bids/${project.id}`);
+                    const response = await axios.get(`https://alanced.pythonanywhere.com/freelance/View/bids/${project.id}`);
                     if (response.status === 200) {
                         bids[project.id] = response.data.count; 
                     } else {

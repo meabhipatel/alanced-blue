@@ -131,7 +131,7 @@ const [viewbids, setViewBids] = useState([]);
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://aparnawiz91.pythonanywhere.com/freelance/View/bids/${id}?${queryString}`)
+      .get(`https://alanced.pythonanywhere.com/freelance/View/bids/${id}?${queryString}`)
       .then((response) => {
         setViewBids(response.data.results); 
         setTotalPages(Math.ceil(response.data.count / 8));
@@ -302,7 +302,7 @@ const handleClick = (event, index) => {
                               <div class="flex">
                             <div class="flex-[10%] p-4">
                             <div className="relative w-24 h-24 mx-auto">
-                                              <img src={"https://aparnawiz91.pythonanywhere.com/"+bid.freelancer_profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
+                                              <img src={"https://alanced.pythonanywhere.com/"+bid.freelancer_profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
                                               <div class="absolute bottom-2 right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                                           </div>
                             </div>

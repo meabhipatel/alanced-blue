@@ -27,34 +27,65 @@ const FreelancerFullDetailAfterLogin = () => {
 //   const [freelancerproject, setfreelancerproject] = useState([]);
 //   const id = freelancerselfprofile && freelancerselfprofile[0].id ? freelancerselfprofile[0].id : '';
   const [selectedProjects, setSelectedProjects] = useState(null);
+  const [ProjectCount, setProjectCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
+// useEffect(() => {
+//   if(id) { 
+//       axios.get(`https://alanced.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}`)
+//           .then(response => {
+//               if (response.data.status === 200) {
+//                   setfreelancerproject(response.data.results);
+//               } else {
+//                   console.log(response.data.message || 'Error fetching project');
+//               }
+//           })
+//           .catch(err => {
+//               console.log(err.message);
+//           });
+//   }
+// }, [id]); 
 
 useEffect(() => {
-  if(id) { 
-      axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}`)
-          .then(response => {
-              if (response.data.status === 200) {
-                  setfreelancerproject(response.data.data);
-              } else {
-                  console.log(response.data.message || 'Error fetching project');
-              }
-          })
-          .catch(err => {
-              console.log(err.message);
-          });
-  }
-}, [id]); 
+  const queryParameters = [];
+
+  queryParameters.push(`page=${currentPage}`);
+
+  const queryString = queryParameters.join('&');
+
+  axios
+    .get(`https://alanced.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`)
+    .then((response) => {
+      setfreelancerproject(response.data.results); 
+      setProjectCount(response.data.count);
+      setTotalPages(Math.ceil(response.data.count / 6));
+    })
+    .catch((error) => {
+      console.error('Error fetching filtered data:', error);
+    });
+}, [currentPage]);
 
 const [active, setActive] = React.useState(1);
- 
-  const next = () => {
-      if (active === Math.ceil(freelancerproject.length / 6)) return;
-      setActive(active + 1);
-  };
+const prev = () => {
+  // window.scrollTo(0, 0);
+  setCurrentPage(prev => Math.max(prev - 1, 1));
+};
 
-  const prev = () => {
-      if (active === 1) return;
-      setActive(active - 1);
-  };
+const next = () => {
+  // window.scrollTo(0, 0);
+  setCurrentPage(prev => Math.min(prev + 1, totalPages));
+};
+ 
+  // const next = () => {
+  //     if (active === Math.ceil(freelancerproject.length / 6)) return;
+  //     setActive(active + 1);
+  // };
+
+  // const prev = () => {
+  //     if (active === 1) return;
+  //     setActive(active - 1);
+  // };
 
   // 1. Chunk the Array
   const chunkArray = (array, size) => {
@@ -84,7 +115,7 @@ const [active, setActive] = React.useState(1);
     <div className=' flex flex-row'>
       <div className=' basis-3/12 pl-14'>
       <div className="relative w-24 h-24">
-            <img src={"https://aparnawiz91.pythonanywhere.com/"+freelancer.images_logo} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
+            <img src={"https://alanced.pythonanywhere.com/"+freelancer.images_logo} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
             <div class="absolute bottom-3 right-0.5 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
         </div>
         <div className='text-left pl-2 mt-10'>
@@ -165,17 +196,17 @@ const [active, setActive] = React.useState(1);
             </div>
         </div>
         <div className='mt-8'>
-        <p className='font-cardo text-[22px] fond-semibold text-left'>Portfolio ({freelancerproject ? freelancerproject.length : 0})</p>
+        <p className='font-cardo text-[22px] fond-semibold text-left'>Portfolio ({ProjectCount})</p>
         <div class="w-20  mt-2 ml-1 relative">
         <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
         <div class="border-gray-600 border-b-2 rounded-lg"></div>
       </div>
       <div className="flex flex-wrap -mx-2">  
-    {chunkedProjects[active - 1] && chunkedProjects[active - 1].map((pro, index) => (
+      {freelancerproject && freelancerproject.map((pro,index) => (
         <div className='w-1/3 px-2 cursor-pointer' key={index} onClick={() => openPortfolio(pro)}>  
             <div className='w-full h-[165px] mt-4 border border-gray-100 overflow-hidden'>
                 <img 
-                    src={"https://aparnawiz91.pythonanywhere.com/"+pro.images_logo} 
+                    src={"https://alanced.pythonanywhere.com/"+pro.images_logo} 
                     alt="" 
                     style={{
                         maxWidth: '100%',
@@ -192,7 +223,7 @@ const [active, setActive] = React.useState(1);
     {isPortfolioOpen && <FreelancerPortfolio project={selectedProjects} closePortfolio={closePortfolio} />}
 </div>
 <div className="flex justify-end items-center gap-6 mt-5">
-{freelancerproject.length > 6 && (
+{/* {freelancerproject.length > 6 && (
   <>
     <IconButton
       size="sm"
@@ -227,7 +258,47 @@ const [active, setActive] = React.useState(1);
       <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
     </IconButton>
   </>
-)}
+)} */}
+{totalPages > 1 && (
+                    <div className="flex justify-end items-center gap-6 m-4">
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={prev}
+                            disabled={currentPage === 1}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                        
+                        {[...Array(totalPages)].map((_, index) => {
+                            const pageNumber = index + 1;
+                            return (
+                                <span
+                                    key={pageNumber}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    onClick={() => {
+                                        window.scrollTo(0, 0);
+                                        setCurrentPage(pageNumber);
+                                    }}
+                                    
+                                >
+                                    {pageNumber}
+                                </span>
+                            );
+                        })}
+
+                        <IconButton
+                            size="sm"
+                            variant="outlined"
+                            onClick={next}
+                            disabled={currentPage === totalPages}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                        >
+                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
+                        </IconButton>
+                    </div>
+    )}
 </div>
         </div>
       </div>
