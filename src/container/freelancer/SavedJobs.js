@@ -15,6 +15,7 @@ import { toast } from 'react-toastify'
 import { timeAgo } from './TimeFunctions'
 import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
+import experiences from '../../components/images/experience.png'
 
 const SavedJobs = () => {
 
@@ -117,6 +118,7 @@ const SavedJobs = () => {
     <div className='mt-2 mx-[9%]'>
     <h1 className="font-cardo text-[26px] text-[#031136] text-left font-normal p-3">Saved Jobs</h1>
     <div className='my-4 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left'>
+    {savedJobs && savedJobs.length > 0 ? (<>
     {savedJobs && <>{savedJobs.map((job,index)=> {
         const words = job.Project_Description.split(' ');
         const displayWords = expandedProjects[index] || words.length <= 50 ? words : words.slice(0, 50);
@@ -142,7 +144,7 @@ const SavedJobs = () => {
     </div>
     </div>
     <p className='font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-3'>
-            {job.Project_Rate} - Intermediate - Est. Budget: ${job.Project_Rate == 'Hourly' ? job.Project_Min_Hourly_Rate+"/hr" +" - "+ "$"+job.Project_Max_Hourly_Rate+"/hr" : job.Project_Fixed_Budget } - Posted {timeAgo(job.Project_Created)}
+            {job.Project_Rate} - {job.Project_Experience_level} - Est. Budget: ${job.Project_Rate == 'Hourly' ? job.Project_Min_Hourly_Rate+"/hr" +" - "+ "$"+job.Project_Max_Hourly_Rate+"/hr" : job.Project_Fixed_Budget } - Posted {timeAgo(job.Project_Created)}
         </p>
     <p className='font-inter text-opacity-50 text-[#0A142F] text-[16px] font-normal py-3'>{displayWords.join(' ')} 
                 {words.length > 50 && (
@@ -158,10 +160,15 @@ const SavedJobs = () => {
         <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>
         {/* <img src={location} alt="" className='inline-block h-3 w-3 mr-1'/> */}
         <i class="bi bi-geo-alt inline-block  mr-1"></i>
-        <p className='font-inter text-[#0A142F] text-[16px] font-normal opacity-50 inline-block'>India</p>
+        <p className='font-inter text-[#0A142F] text-[16px] font-normal opacity-50 inline-block'>{job.Project_Hirer_Location ? job.Project_Hirer_Location:'NA'}</p>
     </div>
       )
-    })}</>}
+    })}</>}</>):(<div className='my-8'> 
+    <img src={experiences} alt="" className='mx-auto mt-2' />
+    <div className='px-4 md:px-8 py-5 text-center text-2xl opacity-50'>
+        No Saved Jobs Found
+    </div>
+</div>)}
     {totalPages > 1 && (
                     <div className="flex justify-end items-center gap-6 m-4">
                         <IconButton

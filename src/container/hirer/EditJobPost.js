@@ -118,7 +118,7 @@ const EditJobPost = () => {
             return skillsArray.map((skill, index) => (
                 <div
                 key={index}
-                className="mr-3 my-2 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
+                className="mr-3 my-2 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  text-green-800 px-4 py-1 text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
                 >
                 <p className="text-center">{skill}</p>
                 </div>
@@ -140,7 +140,7 @@ const EditJobPost = () => {
     <div className="flex flex-col">
         <h1 className="font-inter text-lg text-[#031136] font-semibold text-left pb-2">Scope</h1>
         <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">Project Deadline : {formatDate(project.deadline)}</h1>
-        <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">Experience Level : Expert </h1> 
+        <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">Experience Level : {project.experience_level} </h1> 
     </div>
     <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={()=>openJobScope(project)}>
         <img src={edit} alt="more" />
