@@ -183,7 +183,7 @@ const handleClick = (event,project) => {
                     <div className=' mt-2'><h1 className=' font-inter font-normal text-base'>Unanswered invites:<span className=' opacity-[50%]'> 0</span></h1></div>
                 </div>
                 <div className=' basis-4/12'>
-                <div className='mt-6 ml-[30%]'>
+                <div className='mt-6 ml-[16%]'>
                 {/* <Link to="/freelancer/send-proposal" style={{pointerEvents: clickable ? 'none' : ''}} state={{ projectData }} onClick={() => window.scrollTo(0, 0)}><span class={clickable ? 'px-12 py-[15px] lg:mt-0 bg-slate-200 border rounded border-none text-white font-inter text-base font-normal':'px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal'}>Apply Now</span></Link> */}
                 { accessToken ? (
                     <Link to="/freelancer/send-proposal" style={{pointerEvents: clickable ? 'none' : ''}} state={{ projectData }} onClick={() => window.scrollTo(0, 0)}><span class={clickable ? 'px-12 py-[15px] lg:mt-0 bg-slate-200 border rounded border-none text-white font-inter text-base font-normal':'px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal'}>Apply Now</span></Link>
@@ -191,13 +191,13 @@ const handleClick = (event,project) => {
                     <Link to="/login"  onClick={() => window.scrollTo(0, 0)}><span class='px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal'>Apply Now</span></Link>
                 )}
                 </div>
-                <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-8 ml-[30%]">
+                {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-8 ml-[30%]">
                 <button class="rounded-sm px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-inter font-bold text-base py-[4px] px-8" onClick={(event) => handleClick(event,project)}>{ 
         localStorage.getItem(`isSaved_${project.id}`) === 'true' 
         ? <><i className="fa fa-heart p-1 text-green-600"></i> Unsave Job</>
         : <><i className="fa fa-heart-o p-1"></i> Save Job</> 
     }</p></button>
-                </div> 
+                </div>  */}
                 <div className='mt-8 text-sm font-inter font-normal text-[#0A142F] text-center ml-9'><i class="bi bi-flag-fill"></i><span className=' opacity-[50%] ml-2'>Flag as inappropriate</span></div>
                 <div className='mt-2 text-sm font-inter font-normal text-[#0A142F] text-center ml-9 opacity-[50%]'>Send a proposal for: 8 Connects</div>
                 <div className='mt-2 text-sm font-inter font-normal text-[#0A142F] text-center ml-9 opacity-[50%]'>Available Connects: 10</div>

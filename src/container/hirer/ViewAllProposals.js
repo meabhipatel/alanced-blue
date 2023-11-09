@@ -259,7 +259,8 @@ const handleClick = (event, index) => {
     {isOpen ? (
                     <>
                             {
-                                !(error && error.includes("No bids found for this project")) && (
+                                // !(error && error.includes("No bids found for this project")) && (
+                                  !(viewbids != null && viewbids.length == 0) && (
                                     <div className="flex justify-between items-center">
                                         <section className='flex items-center p-2 bg-white rounded-lg m-5 border w-[49%]'>
         <div className='flex items-center mr-1 space-x-1'>
@@ -283,14 +284,23 @@ const handleClick = (event, index) => {
                 )
             }
             {
-                error && error.includes("No bids found for this project") ? (
-                    <div className='my-8'> 
-                        <img src={experience} alt="" className='mx-auto mt-2' />
-                        <div className='px-4 md:px-8 py-5 text-center text-2xl opacity-50'>
-                            No proposals found for this project
-                        </div>
-                    </div>
-                ) : (
+                // error && error.includes("No bids found for this project") ? (
+                //     <div className='my-8'> 
+                //         <img src={experience} alt="" className='mx-auto mt-2' />
+                //         <div className='px-4 md:px-8 py-5 text-center text-2xl opacity-50'>
+                //             No proposals found for this project
+                //         </div>
+                //     </div>
+                // )
+                viewbids != null && viewbids.length == 0 ? (
+                  <div className='my-8'> 
+                      <img src={experience} alt="" className='mx-auto mt-2' />
+                      <div className='px-4 md:px-8 py-5 text-center text-2xl opacity-50'>
+                          No proposals found for this project
+                      </div>
+                  </div>
+              )
+                 : (
                     <>{viewbids != null ? 
                         <div>
                         {sortedBids && sortedBids.map((bid, index) => {

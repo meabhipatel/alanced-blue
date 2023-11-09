@@ -7,13 +7,36 @@ import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { timeAgo,formatDateInput } from '../freelancer/TimeFunctions'
+import axios from 'axios'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 const ViewJobPost = () => {
 
     const location = useLocation();
   const project = location.state && location.state.project;
   const viewhirerselfproject = useSelector(state => state.hirer.viewhirerselfproject)
+  const [bidcount,setBidCount] = useState(0);
+  const id = project.id
+  const accessToken = useSelector(state => state.login.accessToken);
+
+
+  const [viewhirerProjectcount, setViewhirerProjectCount] = useState(0);
   
+    useEffect(() => {
+      axios
+        .get(`https://alanced.pythonanywhere.com/freelance/view/hirer-self/Project`,{
+          headers: {
+              'Authorization': `Bearer ${accessToken}`
+          }
+      })
+        .then((response) => {
+          setViewhirerProjectCount(response.data.count); 
+        })
+        .catch((error) => {
+          console.error('Error fetching filtered data:', error);
+        });
+    }, []);
 
   function getCurrentTime() {
     const now = new Date();
@@ -30,6 +53,18 @@ const formatDate = (dateStr) => {
     const [year, month, day] = dateStr.split('-');
     return `${day}-${month}-${year}`;
   };
+
+
+  useEffect(() => {
+   axios
+    .get(`https://alanced.pythonanywhere.com/freelance/View/bids/${id}`)
+      .then((response) => {
+        setBidCount(response.data.count);
+      })
+      .catch((error) => {
+        console.error('Error fetching filtered data:', error);
+      });
+  }, []);
 
 
   return (
@@ -125,7 +160,7 @@ const formatDate = (dateStr) => {
         <p className="font-inter text-[#031136] text-lg font-medium">Skills and Expertise</p> 
         <div className="text-left mt-5">
         {JSON.parse(project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
-                <div className="mr-3 my-2 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
+                <div className="mr-3 my-2 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full text-green-800 px-4 py-1 text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
                 <p className=" text-center">{skill}</p>
             </div>
             ))}
@@ -133,7 +168,7 @@ const formatDate = (dateStr) => {
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
         <p className="font-inter text-[#031136] text-lg font-medium py-4">Activity on this job</p> 
-        <p className="font-inter text-[#031136] text-md font-medium py-1">Proposals : <i class="bi bi-question-circle-fill text-green-700"></i><span className='opacity-50'> 10 to 15</span></p>
+        <p className="font-inter text-[#031136] text-md font-medium py-1">Proposals : <span className='opacity-50'>{bidcount}</span></p>
         <p className="font-inter text-[#031136] text-md font-medium py-1">Messaged : <span className='opacity-50'> 0</span></p>
         <p className="font-inter text-[#031136] text-md font-medium py-1">Hired : <span className='opacity-50'> 0</span></p>
         {/* <p className="font-inter text-[#031136] text-md font-medium py-1">Unanswered invites : <span className='opacity-50'> 0</span></p> */}
@@ -152,7 +187,7 @@ const formatDate = (dateStr) => {
         <p className="font-inter text-[#031136] opacity-50 text-md font-medium py-2 mr-2 inline-block">Payment method not verified</p><i class="bi bi-question-circle-fill text-green-700 inline-block"></i>
         <p className="font-inter text-[#031136] text-md font-medium">India</p>
         <p className="font-inter text-[#031136] opacity-50 text-md font-medium">{getCurrentTime()}</p>
-        <p className="font-inter text-[#031136] text-md font-medium py-2">{viewhirerselfproject && viewhirerselfproject ? viewhirerselfproject.length : 0} job posted</p>
+        <p className="font-inter text-[#031136] text-md font-medium py-2">{viewhirerProjectcount} job posted</p>
         <p className="font-inter text-[#031136] text-sm font-medium opacity-50">Member since {formatDateInput(project.project_owner_created)}</p>
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
