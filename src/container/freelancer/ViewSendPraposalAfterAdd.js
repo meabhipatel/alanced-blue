@@ -65,7 +65,7 @@ const ViewSendPraposalAfterAdd = () => {
                     <div className=' basis-8/12'>
                     <h1 className=' text-xl font-inter font-medium text-left'>{projectdata.project.title}</h1>
                     <div className=' flex flex-row'>
-                    <div className=' basis-4/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-green-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  w-[90%] bg-opacity-[60%]">{projectdata.project.category}</div></div>
+                    <div className=' basis-5/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-green-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  bg-opacity-[60%]">{projectdata.project.category}</div></div>
                     <div className=' basis-4/12 mt-5 ml-2'><p className=' text-sm font-medium font-inter text-left opacity-[50%]'>Posted {timeAgo(projectdata.project.project_creation_date)}</p></div>
                     </div>
                     {/* <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>
