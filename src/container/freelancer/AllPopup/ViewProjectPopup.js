@@ -184,20 +184,16 @@ const handleClick = (event,project) => {
                     <div className='mt-10 font-cardo text-lg font-normal '>Skills and Expertise</div>
                     <div className=' mt-2 text-sm font-inter font-normal '>{project.category} Deliverables</div>
                     {JSON.parse(project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
-    <Link to=''>
             <span className='border px-5 py-1 border-gray-300 rounded font-inter text-[#797979] text-base inline-block mr-4 my-3 focus:border-none'>
            {skill}
             </span>
-        </Link>
          ))}
                     
                     <div className=' mt-6 text-sm font-inter font-normal text-[#0A142F]'>Other</div>
                     {JSON.parse(project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
-    <Link to=''>
             <span className='border px-5 py-1 border-gray-300 rounded font-inter text-[#797979] text-base inline-block mr-4 my-3 focus:border-none'>
            {skill}
             </span>
-        </Link>
          ))}
                     <div className='mt-14 font-cardo text-lg font-normal text-[#031136]'>Activity on this job</div>
                     <div className=' mt-5'><h1 className=' font-inter font-normal text-base'>Proposals:<span className=' opacity-[50%]'> Native or Bilingual</span></h1></div>
@@ -227,9 +223,9 @@ const handleClick = (event,project) => {
                 <div className='mt-2 text-base font-inter font-normal text-[#0A142F] ml-10 opacity-[50%]'>Member since Aug 28, 2023</div>
                 <div className=' mt-16 text-xl font-cardo font-normal text-[#0A142F] ml-10'>Job link</div>
                 <div class="p-0.5 inline-block rounded bg-black opacity-[30%] mt-5 ml-10">
-                <Link to=''><button class="px-1 py-1 bg-white"><p class="font-inter font-normal text-sm py-[10px] px-4 opacity-[90%] text-black">www.upwork.com/nx/find-work</p></button></Link>
+                <button class="px-1 py-1 bg-white"><p class="font-inter font-normal text-sm py-[10px] px-4 opacity-[90%] text-black cursor-not-allowed bg-[#E4EBE4]">https://www.alanced.com/find-work</p></button>
                 </div>
-                <div className=' mt-5 text-base font-cardo font-bold text-[#0A142F] ml-10'>Copy link</div>
+                {/* <div className=' mt-5 text-base font-cardo font-bold text-[#0A142F] ml-10'>Copy link</div> */}
                 </div>
             </div>
         </div>
