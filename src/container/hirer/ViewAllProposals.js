@@ -16,6 +16,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import axios from 'axios'
+import AddHiringRequestPopup from './HirerAllPopup/AddHiringRequestPopup'
 
 const ViewAllProposals = () => {
 
@@ -28,6 +29,11 @@ const ViewAllProposals = () => {
    const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isHiringOpen, setIsHiringOpen] = useState(false);
+
+  
+  
+
 //    const id = viewhirerselfproject && viewhirerselfproject[0].id ? viewhirerselfproject[0].id : '';
 
 //    React.useEffect(() => {
@@ -81,6 +87,14 @@ const ViewAllProposals = () => {
   const isOpen = location.state && location.state.isOpen;
 
   const id = project.id
+
+  const openHiring = () => {
+    setIsHiringOpen(true);
+  };
+
+  const closeHiring = () => {
+    setIsHiringOpen(false);
+  };
 
 // const [currentPage, setCurrentPage] = useState(1);
 
@@ -156,13 +170,30 @@ const next = () => {
 };
 
 
+// function highlightText(text, query) {
+//   if (!query) {
+//     return text;
+//   }
+
+//   const regex = new RegExp(`(${query})`, 'gi');
+//   return text.split(regex).map((part, index) => {
+//     if (index % 2 === 1) {
+//       return <span key={index} style={{ backgroundColor: '#a3e635' }}>{part}</span>;
+//     } else {
+//       return <span key={index}>{part}</span>;
+//     }
+//   });
+// }
+
 function highlightText(text, query) {
-  if (!query) {
+  if (!query || (typeof text !== 'string' && typeof text !== 'number')) {
     return text;
   }
 
+  const textString = String(text);
   const regex = new RegExp(`(${query})`, 'gi');
-  return text.split(regex).map((part, index) => {
+  
+  return textString.split(regex).map((part, index) => {
     if (index % 2 === 1) {
       return <span key={index} style={{ backgroundColor: '#a3e635' }}>{part}</span>;
     } else {
@@ -170,6 +201,7 @@ function highlightText(text, query) {
     }
   });
 }
+
 
 const sortedBids = sortBids(viewbids);
 
@@ -203,6 +235,12 @@ const handleToggleDescription = (index) => {
 const handleButtonClick = (event) => {
   event.stopPropagation();
   event.preventDefault();
+};
+
+const handleBtnClick = (event) => {
+  event.stopPropagation();
+  event.preventDefault();
+  openHiring();
 };
 
 const handleClick = (event, index) => {
@@ -318,24 +356,25 @@ const handleClick = (event, index) => {
                             </div>
                             <div class="flex-[90%] p-4">
                             <div class="flex items-center justify-between">
-                            <p className="font-cardo text-[#0A142F] text-2xl font-medium">{bid.freelancer_Name}</p>
+                            <p className="font-cardo text-[#0A142F] text-2xl font-medium">{highlightText(bid.freelancer_name,searchQuery)}</p>
                               
                               <div class="flex items-center space-x-4">
                                       <span class="inline-block text-sm px-10 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold" onClick={handleButtonClick}>Message</span>
                           
-                                  <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={handleButtonClick}>
+                                  <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={handleBtnClick}>
                                           <button class="px-10 py-1 bg-white">
                                               <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p>
-                                          </button>
+                                          </button>        
                                   </div>
+                                  {isHiringOpen && <AddHiringRequestPopup closeHiring={closeHiring} bid={bid}/>}
                               </div>
                           </div>
-                          <h1 className="font-cardo opacity-50 text-lg text-[#031136]">{bid.freelancer_category.replace(/_/g, ' ')}</h1>
+                          <h1 className="font-cardo opacity-50 text-lg text-[#031136]">{highlightText(bid.freelancer_category.replace(/_/g, ' '),searchQuery)}</h1>
                            <div style={{ display: 'flex' }}>
-                            <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">${bid.bid_amount} <span className='opacity-50 font-medium'>{bid.bid_type=='Fixed'? '':'/hr'}</span></h1>
+                            <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">${highlightText(bid.bid_amount,searchQuery)} <span className='opacity-50 font-medium'>{bid.bid_type=='Fixed'? '':'/hr'}</span></h1>
                             {/* <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">$0 <span className='opacity-50 font-medium'>earned</span></h1> */}
                             <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">{highlightText(bid.bid_type,searchQuery)}</h1>
-                            <h1 className="font-cardo text-lg text-[#031136] py-3 flex-1">{bid.freelancer_address}</h1>
+                            <h1 className="font-cardo text-lg text-[#031136] py-3 flex-1">{highlightText(bid.freelancer_address,searchQuery)}</h1>
                             <h1 className="font-cardo text-lg text-[#031136] py-3 flex-1"></h1>
                         </div>
                             <p className='font-inter text-[#0A142F] text-[14px]'>Cover Letter - <span className='opacity-50'>
@@ -351,16 +390,16 @@ const handleClick = (event, index) => {
                 )}
                               </span></p> 
                             <div className="text-left mt-5">
-            {bid.Freelancer_skills && 
+            {bid.freelancer_skills && 
   (() => {
     try {
-      const skillsArray = JSON.parse(bid.Freelancer_skills.replace(/'/g, '"'));
+      const skillsArray = JSON.parse(bid.freelancer_skills.replace(/'/g, '"'));
       return skillsArray.map((skill, index) => (
         <div
           key={index}
           className="mr-3 my-2 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
         >
-          <p className="text-center">{skill}</p>
+          <p className="text-center">{highlightText(skill,searchQuery)}</p>
         </div>
       ));
     } catch (error) {

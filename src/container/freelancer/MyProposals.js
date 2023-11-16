@@ -6,7 +6,7 @@ import Footer from '../../components/Layout/Footer'
 import { Link } from 'react-router-dom'
 import availablenow from '../../components/images/availablenow.png'
 import edit from '../../components/images/edit.png'
-import { GetFreelancerSelfBidAction } from '../../redux/Freelancer/FreelancerAction'
+import { GetFreelancerHiringRequestAction, GetFreelancerSelfBidAction } from '../../redux/Freelancer/FreelancerAction'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { timeAgo } from './TimeFunctions'
@@ -19,15 +19,16 @@ const MyProposals = () => {
 
 const accessToken = useSelector(state => state.login.accessToken); 
 const freelancerselfbid = useSelector(state => state.freelancer.freelancerselfbid)
+const freelancerhiringreq = useSelector(state => state.freelancer.freelancerhiringreq)
 const bidCount = freelancerselfbid?.length || 0;
 const dispatch = useDispatch();
 const [currentPage, setCurrentPage] = useState(1);
 const [totalPages, setTotalPages] = useState(0);
 const [BidsCount, setBidsCount] = useState(0);
 
-// React.useEffect(() => {
-//     dispatch(GetFreelancerSelfBidAction(accessToken))
-//   }, [])
+React.useEffect(() => {
+    dispatch(GetFreelancerHiringRequestAction(accessToken))
+  }, [])
 
 const [viewfreebid, setViewFreeBid] = useState([]);
 //   const userCategory = logindata?.category
@@ -49,7 +50,7 @@ const [viewfreebid, setViewFreeBid] = useState([]);
         // setViewFreeBid(response.data.data);
         setViewFreeBid(response.data.results); 
         setBidsCount(response.data.count);
-        setTotalPages(Math.ceil(response.data.count / 8));
+        setTotalPages(Math.ceil(response.data.count / 6));
       })
       .catch((error) => {
         console.error('Error fetching filtered data:', error);
@@ -157,7 +158,7 @@ const next = () => {
             <p className='font-inter text-[14px] text-[#031136] opacity-50'>{timeAgo(bid.bid_time)}</p>
         </div>
 
-        <div className='flex-grow pl-[180px]'>
+        <div className='flex-grow ml-[100px]'>
             <Link to="/View/freelancer/proposal" state={{ bid }} onClick={() => window.scrollTo(0, 0)}><h1 className='font-cardo text-[18px] text-green-600 hover:underline'>{bid.project.title}</h1></Link>
         </div>
 
@@ -249,63 +250,26 @@ const next = () => {
 </div> */}
 </div>
 <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2]  text-left'>
-<h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Active Proposals (5)</h1>
-<div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
+<h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Invitations (5)</h1>
+{freelancerhiringreq && freelancerhiringreq.map((index,hire)=>{
+    return(
+        <div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center' key={index}>
     <div className='flex flex-col w-1/4'>
         <h1 className='font-cardo text-[18px] text-[#031136]'>Received Aug 30, 2023</h1>
         <p className='font-inter text-[14px] text-[#031136] opacity-50'>3 days ago</p>
     </div>
 
     <div className='flex-grow pl-[180px]'>
-        <h1 className='font-cardo text-[18px] text-[#031136]'>Mobile App UI/UX Flat Design</h1>
+        <h1 className='font-cardo text-[18px] text-[#031136]'>{hire.project_title}</h1>
     </div>
 
     <div className='flex flex-col w-1/4 items-end pr-4'>
         <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
     </div>
 </div>
-<div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
-    <div className='flex flex-col w-1/4'>
-        <h1 className='font-cardo text-[18px] text-[#031136]'>Received Aug 22, 2023</h1>
-        <p className='font-inter text-[14px] text-[#031136] opacity-50'>3 days ago</p>
-    </div>
+    )    
+})}
 
-    <div className='flex-grow pl-[180px]'>
-        <h1 className='font-cardo text-[18px] text-[#031136]'>Diseñador gráfico UI/UX web - medio tiempo </h1>
-    </div>
-
-    <div className='flex flex-col w-1/4 items-end pr-4'>
-        <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
-    </div>
-</div>
-<div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
-    <div className='flex flex-col w-1/4'>
-        <h1 className='font-cardo text-[18px] text-[#031136]'>Received Aug 2, 2023</h1>
-        <p className='font-inter text-[14px] text-[#031136] opacity-50'>3 days ago</p>
-    </div>
-
-    <div className='flex-grow pl-[180px]'>
-        <h1 className='font-cardo text-[18px] text-[#031136]'>Need a figma designer for my startup</h1>
-    </div>
-
-    <div className='flex flex-col w-1/4 items-end pr-4'>
-        <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
-    </div>
-</div>
-<div className='px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center'>
-    <div className='flex flex-col w-1/4'>
-        <h1 className='font-cardo text-[18px] text-[#031136]'>Received Jul 19, 2023</h1>
-        <p className='font-inter text-[14px] text-[#031136] opacity-50'>3 days ago</p>
-    </div>
-
-    <div className='flex-grow pl-[180px]'>
-        <h1 className='font-cardo text-[18px] text-[#031136]'>Looking for UI/UX Designer</h1>
-    </div>
-
-    <div className='flex flex-col w-1/4 items-end pr-4'>
-        <p className='font-inter text-[16px] text-[#031136] opacity-50'>General Profile</p>
-    </div>
-</div>
 </div>
     </div>
     <HomeSection4/>
