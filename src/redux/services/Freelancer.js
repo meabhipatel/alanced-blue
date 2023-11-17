@@ -132,14 +132,14 @@ export const AddFreelancerEmployment = async (data,token) =>{
 };  
 
 
-export const GetFreelancerHiringRequest = async (token) => {    
-  setHeadersWithAccessToken(token);
-  return await DataService.get(API.Freelancers.Freelancer.ViewAllHiringRequest)
-    .then((res) => {
-      console.log("Freelancer Hiring Request",res);
-      return res.data;
-    })
-    .catch((err) => {
-      return handleError(err);
-    });
-};
+// export const GetFreelancerHiringRequest = async (token) => {    
+//   setHeadersWithAccessToken(token);
+//   return await DataService.get(API.Freelancers.Freelancer.ViewAllHiringRequest)
+//     .then((res) => {
+//       console.log("Freelancer Hiring Request",res);
+//       return res.data;
+//     })
+//     .catch((err) => {
+//       return handleError(err);
+//     });
+// };

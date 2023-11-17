@@ -9,7 +9,7 @@ const EditHrRatePopup = ({ closeHrRate }) => {
   const dispatch = useDispatch();
   const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile);
   const [userInput, setUserInput] = useState('$0.00');
-  const [hourlyRate, setHourlyRate] = useState(freelancerselfprofile[0]?.hourly_rate || 0);
+  const [hourlyRate, setHourlyRate] = useState(freelancerselfprofile && freelancerselfprofile[0] ? freelancerselfprofile[0].hourly_rate : 0);
   const [serviceFee, setServiceFee] = useState(0);
   const [totalAfterFee, setTotalAfterFee] = useState(0);
 

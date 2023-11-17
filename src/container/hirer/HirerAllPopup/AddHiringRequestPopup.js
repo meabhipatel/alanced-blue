@@ -23,6 +23,12 @@ const AddHiringRequestPopup = ({closeHiring,bid}) => {
     
 
     const handleSave = async () => {
+
+        if (!Title || !HiringBudget || !HiringBudgetType || !msg) {
+            toast.error("All fields are required");
+            return;
+        }
+
         try {
             const response = await axios.post(`http://127.0.0.1:8000/freelance/hire/${id}`, {
                 project:proid,

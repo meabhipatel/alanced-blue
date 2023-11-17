@@ -64,6 +64,7 @@ import Notifications from '../components/Layout/Notifications'
 import ResetPassword from "../components/Layout/ResetPassword";
 import SendPasswordResetEmail from "../components/Layout/SendPasswordResetEmail";
 import AddPortfolioForm from "../container/freelancer/portfolio/AddPortfolioForm";
+import ViewHiringDetail from "../container/freelancer/ViewHiringDetail";
 
   const AppRouter = (props) => {
     
@@ -181,6 +182,7 @@ import AddPortfolioForm from "../container/freelancer/portfolio/AddPortfolioForm
             <Route path="/view/SelfBidProject" element={<SelfBidProject/>}></Route>
             <Route path="/notifications" element={<Notifications/>}/>
             <Route path="/freelancer/add-portfolio" element={<AddPortfolioForm/>}></Route>
+            <Route path="/view/hiring-detail" element={<ViewHiringDetail/>}></Route>
           </>}
 
 

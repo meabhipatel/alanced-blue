@@ -36,3 +36,20 @@ export function formatDateInput(inputDate) {
 
     return `${month} ${day}, ${year}`;
 }  
+
+
+export function getCurrentTime() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    const formattedHours = hours % 12 || 12; 
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes; 
+    return `${formattedHours}:${formattedMinutes} ${ampm}`;
+}
+
+
+export const formatDate = (dateStr) => {
+    const [year, month, day] = dateStr.split('-');
+    return `${day}-${month}-${year}`;
+  };

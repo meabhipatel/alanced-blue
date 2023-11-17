@@ -6,7 +6,7 @@ import frame from '../../components/images/Frame.png'
 import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { timeAgo,formatDateInput } from '../freelancer/TimeFunctions'
+import { timeAgo,formatDateInput, getCurrentTime, formatDate } from '../freelancer/TimeFunctions'
 import axios from 'axios'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -37,22 +37,6 @@ const ViewJobPost = () => {
           console.error('Error fetching filtered data:', error);
         });
     }, []);
-
-  function getCurrentTime() {
-    const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const ampm = hours >= 12 ? 'pm' : 'am';
-    const formattedHours = hours % 12 || 12; 
-    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes; 
-    return `${formattedHours}:${formattedMinutes} ${ampm}`;
-}
-
-
-const formatDate = (dateStr) => {
-    const [year, month, day] = dateStr.split('-');
-    return `${day}-${month}-${year}`;
-  };
 
 
   useEffect(() => {

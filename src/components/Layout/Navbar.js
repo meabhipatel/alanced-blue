@@ -396,7 +396,7 @@ const fetchFreeNotifications = async () => {
                 }
 
 {loginType=='HIRER' && isNotificationsDropdownVisible && (
-    <div className="drop absolute right-[-18px] mt-5 w-72 bg-white rounded-md shadow-lg text-left">
+    <div className="drop absolute right-[-18px] mt-5 w-80 bg-white rounded-md shadow-lg text-left">
         {clientnotifications.length > 0 ? (
             <>
                 {clientnotifications.slice(0, 3).map(notif => (
@@ -429,7 +429,7 @@ const fetchFreeNotifications = async () => {
 )}
 
 {loginType=='FREELANCER' && isNotificationsDropdownVisible && (
-    <div className="drop absolute right-[-18px] mt-5 w-72 bg-white rounded-md shadow-lg text-left">
+    <div className="drop absolute right-[-18px] mt-5 w-80 bg-white rounded-md shadow-lg text-left">
         {freenotifications.length > 0 ? (
             <>
                 {freenotifications.slice(0, 3).map(notif => (
