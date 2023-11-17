@@ -250,25 +250,25 @@ export const AddFreelancerEmploymentAction = (data,token) => dispatch => {
     });
 };
 
-export const GetFreelancerHiringRequestAction = (token) => dispatch => {
+// export const GetFreelancerHiringRequestAction = (token) => dispatch => {
   
-  dispatch({
-    type: GET_VIEW_ALL_HIRING_REQUEST,
-    payload: []
-  });
+//   dispatch({
+//     type: GET_VIEW_ALL_HIRING_REQUEST,
+//     payload: []
+//   });
 
-  GetFreelancerHiringRequest(token).then(res => {
-    console.log(res, "Data");
-    if (res.status === 200) {
-      dispatch({
-        type: GET_VIEW_ALL_HIRING_SUCCESS,
-        payload: res.data
-      });
-    } else {
-      dispatch({
-        type: SERVER_ERROR,
-        payload: res
-      });
-    }
-  });
-};
+//   GetFreelancerHiringRequest(token).then(res => {
+//     console.log(res, "Data");
+//     if (res.status === 200) {
+//       dispatch({
+//         type: GET_VIEW_ALL_HIRING_SUCCESS,
+//         payload: res.data
+//       });
+//     } else {
+//       dispatch({
+//         type: SERVER_ERROR,
+//         payload: res
+//       });
+//     }
+//   });
+// };

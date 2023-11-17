@@ -181,7 +181,7 @@ const [active, setActive] = React.useState(1);
   </div>
   <div className="flex-[30%] py-6">
   <div className="flex items-center">
-                <h1 className="font-cardo text-[24px] text-[#031136] font-normal mr-1">{bid.freelancer_Name}
+                <h1 className="font-cardo text-[24px] text-[#031136] font-normal mr-1">{bid.freelancer_name}
             </h1>
                 <img className="h-4 w-4" src={verify} alt="Verification" />
             </div>
@@ -201,7 +201,7 @@ const [active, setActive] = React.useState(1);
         <div class="flex flex-col md:flex-row">
     <div class="w-full md:w-[30%] py-4 px-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
     <h1 className="font-cardo text-xl text-[#031136] font-normal">Applicant</h1>
-    <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2">{bid.freelancer_Name} has applied to or been invited to your or your company's job {project.title} </p>
+    <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2">{bid.freelancer_name} has applied to or been invited to your or your company's job {project.title} </p>
     <h1 className="font-cardo text-xl text-[#031136] font-normal pt-4">Hourly Rate</h1>
     {/* <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2">$5.00/hr</p> */}
     <h1 className="font-cardo text-xl text-[#031136] font-semibold inline-block py-2 opacity-50">${bid.freelancer_hourly_rate ? bid.freelancer_hourly_rate: 0 }/hr</h1>
@@ -378,10 +378,10 @@ const [active, setActive] = React.useState(1);
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
     <h1 className="font-cardo text-2xl text-[#031136] font-normal">Skills</h1>
     <div className="text-left mt-5">
-    {bid.Freelancer_skills && 
+    {bid.freelancer_skills && 
   (() => {
     try {
-      const skillsArray = JSON.parse(bid.Freelancer_skills.replace(/'/g, '"'));
+      const skillsArray = JSON.parse(bid.freelancer_skills.replace(/'/g, '"'));
       return skillsArray.map((skill, index) => (
         <div
           key={index}

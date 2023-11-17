@@ -77,10 +77,10 @@ const FreelancerReducer =(state = initialState, action) => {
             return { loading: true};
         case GET_VIEW_ALL_SAVEDJOBS_SUCCESS: 
             return { viewallsavedjob: action.payload };   
-        case GET_VIEW_ALL_HIRING_REQUEST:
-            return { loading: true};
-        case GET_VIEW_ALL_HIRING_SUCCESS: 
-            return { freelancerhiringreq: action.payload };     
+        // case GET_VIEW_ALL_HIRING_REQUEST:
+        //     return { loading: true};
+        // case GET_VIEW_ALL_HIRING_SUCCESS: 
+        //     return { freelancerhiringreq: action.payload };     
         // case ADD_NEW_SAVEUNSAVEJOB_REQUEST:
         //     return { loading: true };
         // case ADD_NEW_SAVEUNSAVEJOB_SUCCESS:
