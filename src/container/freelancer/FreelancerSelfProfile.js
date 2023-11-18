@@ -491,18 +491,35 @@ const [isEditFreeProjectOpen, setIsEditFreeProjectOpen] = useState(false);
         inputRef.current.click();
       }
 
-      const handleImageSave = async () => {
-    const formData = new FormData();
-    formData.append("images_logo", selectedFile);
+//       const handleImageSave = async () => {
+//     const formData = new FormData();
+//     formData.append("images_logo", selectedFile);
 
-    if(freelancerselfprofile && freelancerselfprofile[0]){
-        freelancerselfprofile[0].images_logo = URL.createObjectURL(selectedFile);
+//     if(freelancerselfprofile && freelancerselfprofile[0]){
+//         freelancerselfprofile[0].images_logo = URL.createObjectURL(selectedFile);
+//     }
+
+//     dispatch(UpdateFreelancerProfileAction(formData, accessToken));
+//     setIsModalOpen(false);
+//     navigate('/freelancer/edit-profile');
+// }
+
+
+const handleImageSave = async () => {
+    if (selectedFile) {
+        const formData = new FormData();
+        formData.append("images_logo", selectedFile);
+
+        if (freelancerselfprofile && freelancerselfprofile[0]) {
+            freelancerselfprofile[0].images_logo = URL.createObjectURL(selectedFile);
+        }
+
+        dispatch(UpdateFreelancerProfileAction(formData, accessToken));
     }
 
-    dispatch(UpdateFreelancerProfileAction(formData, accessToken));
     setIsModalOpen(false);
     navigate('/freelancer/edit-profile');
-}
+};
 
   const underlineStyle = {
         content: '""',

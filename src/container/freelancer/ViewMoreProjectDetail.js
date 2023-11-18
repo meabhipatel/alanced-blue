@@ -34,7 +34,7 @@ const navigate = useNavigate();
     const fetchData = async () => {
       try {
         // Fetch doc API
-        const response1 = await axios.get('https://aparnawiz91.pythonanywhere.com/freelance/view/freelancer-self/bid',{
+        const response1 = await axios.get('https://alanced.pythonanywhere.com/freelance/view/freelancer-all-self/bid',{
           headers: {
             "Authorization":`Bearer ${accessToken}`
           }
@@ -48,7 +48,7 @@ const navigate = useNavigate();
   
     fetchData(); 
   }, []);
-//   console.log("/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/",AllProposals)
+  console.log("/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/,find work",AllProposals)
   if (project != null && AllProposals != ''){
     for (const key in AllProposals){
         // console.log("++++++++++++++++++",key,AllProposals[key].project_id)
@@ -68,13 +68,13 @@ const navigate = useNavigate();
         let response;
 
         if (project.isSaved) {
-            response = await axios.delete(`https://aparnawiz91.pythonanywhere.com/freelance/saved-projects/${project.id}`, {
+            response = await axios.delete(`https://alanced.pythonanywhere.com/freelance/saved-projects/${project.id}`, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
             });
         } else {
-            response = await axios.post(`https://aparnawiz91.pythonanywhere.com/freelance/saved-projects/${project.id}`, {}, {
+            response = await axios.post(`https://alanced.pythonanywhere.com/freelance/saved-projects/${project.id}`, {}, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
