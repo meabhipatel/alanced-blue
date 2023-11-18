@@ -38,12 +38,12 @@ const navigate = useNavigate();
     const fetchData = async () => {
       try {
         // Fetch doc API
-        const response1 = await axios.get('https://alanced.pythonanywhere.com/freelance/view/freelancer-self/bid',{
+        const response1 = await axios.get('https://alanced.pythonanywhere.com/freelance/view/freelancer-all-self/bid',{
           headers: {
             "Authorization":`Bearer ${accessToken}`
           }
         });
-        setAllProposals(response1.data.results);
+        setAllProposals(response1.data.data);
   
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -52,7 +52,7 @@ const navigate = useNavigate();
   
     fetchData(); 
   }, []);
-//   console.log("/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/",AllProposals)
+  console.log("/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/Main",AllProposals)
   if (project != null && AllProposals != ''){
     for (const key in AllProposals){
         // console.log("++++++++++++++++++",key,AllProposals[key].project_id)
