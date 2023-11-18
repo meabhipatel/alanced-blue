@@ -29,6 +29,7 @@ import LanguageList from '../freelancer/AllSelectionData/LanguageList'
 import CityList from '../freelancer/AllSelectionData/CityList'
 import ExperienceLevel from '../freelancer/AllSelectionData/ExperienceLevel'
 import axios from 'axios'
+import AddFreeHireRequest from './HirerAllPopup/AddFreeHireRequest'
 
 
 
@@ -37,6 +38,7 @@ const HirerAfterLogin = () => {
     const googleUserName = localStorage.getItem('googleUserName')
     const loginMethod = localStorage.getItem('loginMethod')
     // const viewallfreelancer = useSelector(state => state.hirer.viewallfreelancer)
+    const [isFreeHiringOpen, setIsFreeHiringOpen] = useState(false);
 
 
     const [expe] = useState(ExperienceLevel);
@@ -62,6 +64,14 @@ const HirerAfterLogin = () => {
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
+
+    const openFreeHiring = () => {
+      setIsFreeHiringOpen(true);
+    };
+  
+    const closeFreeHiring = () => {
+      setIsFreeHiringOpen(false);
+    };
   
     // React.useEffect(() => {
     //   dispatch(GetViewAllFreelancersAction())
@@ -609,12 +619,12 @@ const next = () => {
           </div>
         <div className=' flex flex-row'>
             <div className=' basis-8/12 absolute bottom-4 items-center font-inter text-green-600 text-[14px] cursor-pointer font-bold hover:underline'><Link to='/view-freelancer/full-detail' state={{ free }} onClick={() => window.scroll(0, 0) }><p>View more detail</p></Link></div>
-            <div className=' basis-4/12 absolute bottom-2 right-6 items-center space-x-2 ml-auto'><Link to=''>
-            <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
-        </Link></div>
+            <div className=' basis-4/12 absolute bottom-2 right-6 items-center space-x-2 ml-auto'>
+            <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold" onClick={openFreeHiring}>Hire Now</span>
         </div>
+        </div>
+        {isFreeHiringOpen && <AddFreeHireRequest closeFreeHiring={closeFreeHiring} free={free}/>}
       </div>
-      
       </>
       )
       })}

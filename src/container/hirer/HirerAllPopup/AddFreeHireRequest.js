@@ -1,25 +1,43 @@
 import axios from 'axios';
-import React from 'react'
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify';
 
-const AddHiringRequestPopup = ({closeHiring,bid}) => {
-
+const AddFreeHireRequest = ({closeFreeHiring,free}) => {
     const handleClickInsidePopup = (event) => {
         event.stopPropagation();
         event.preventDefault();
       };
 
     const accessToken = useSelector(state => state.login.accessToken);
-    const Protitle= bid.project.title
-    const [Title, setTitle] = useState(Protitle);
+    const [ProjectId, setProjectId] = useState("");
+    const [Title, setTitle] = useState("");
     const [HiringBudget, setHiringBudget] = useState("");
     const [HiringBudgetType, setHiringBudgetType] = useState("");
     const [msg, setMsg] = useState("");
-    const id = bid.freelancer_id
-    const proid = bid.project_id
+    const id = free.id
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const [viewhirerProject, setViewhirerProject] = useState([]);
+    
+      useEffect(() => {
+        axios
+          .get(`https://alanced.pythonanywhere.com/freelance/view/hirer-self/Project`,{
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+          .then((response) => {
+            setViewhirerProject(response.data.results); 
+          })
+          .catch((error) => {
+            console.error('Error fetching filtered data:', error);
+          });
+      }, []);
+      
+      
     
 
     const handleSave = async () => {
@@ -31,7 +49,7 @@ const AddHiringRequestPopup = ({closeHiring,bid}) => {
 
         try {
             const response = await axios.post(`https://alanced.pythonanywhere.com/freelance/hire/${id}`, {
-                project:proid,
+                project:ProjectId,
                 project_title: Title,
                 hiring_budget:HiringBudget,
                 message:msg,
@@ -44,7 +62,7 @@ const AddHiringRequestPopup = ({closeHiring,bid}) => {
 
             if (response.data.status === 200) {
                 toast.success("Hiring Request Sent Successfully")
-                closeHiring();
+                closeFreeHiring();
             } else {
                 console.log(response.data.message);
                 toast.error(response.data.message);
@@ -63,18 +81,41 @@ const AddHiringRequestPopup = ({closeHiring,bid}) => {
                     <div className="bg-white rounded-lg w-[90%] md:w-[50%] p-6 px-8 relative z-20">
                     <div className="flex justify-between items-center">
                         <h1 className="font-cardo text-[26px] text-[#031136] font-normal">Add Data</h1>
-                        <button onClick={closeHiring} className="text-gray-500 hover:text-gray-700">
+                        <button onClick={closeFreeHiring} className="text-gray-500 hover:text-gray-700">
                             <i class="bi bi-x-lg"></i>
                         </button>
                     </div>
                     <div className='mt-8'>
                             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Project Title <span class="text-red-500">*</span></h1>
-                            <input type="text" value={Title} className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='' required/>
+                            {/* <input type="text" value={Title} className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='' required/> */}
+                            <select
+        className="w-full border my-2 py-1.5 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white"
+        name="" value={Title} onChange={(e) => {
+          setTitle(e.target.value);
+          // Find the selected project in the viewhirerProject array and set its id
+          const selectedProject = viewhirerProject.find(project => project.title === e.target.value);
+          if (selectedProject) {
+            setProjectId(selectedProject.id);
+            console.log(selectedProject.id,'chkproidddsec')
+          }
+        }}
+      >
+        <option disabled selected value="">Choose Project Title</option>
+        {viewhirerProject.map((project) => (
+          <option key={project.id} value={project.title}>
+            {project.title}
+          </option>
+        ))}
+      </select>
                             {/* <select
                             className="w-full border my-2 py-1.5 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white"
                             name="" value={Title} onChange={e => setTitle(e.target.value)}>
                             <option disabled selected value="">Choose Project Title</option>
-                            <option value={Title}></option>
+                            {viewhirerProject.map((project) => (
+                            <option key={project.id} value={project.title}>
+                                {project.title}
+                            </option>
+                            ))}
                             </select> */}
                             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Hiring Budget <span class="text-red-500">*</span></h1>
                             <input type="text" value={HiringBudget} onChange={e => setHiringBudget(e.target.value)} className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='' required/>
@@ -90,7 +131,7 @@ const AddHiringRequestPopup = ({closeHiring,bid}) => {
                           <textarea name="" id="" cols="30" rows="5" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' value={msg} onChange={e => setMsg(e.target.value)} required></textarea> 
                             <div className="mt-8 flex justify-end">
                             <button onClick={handleSave}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" >Hire</span></button>
-                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={closeHiring}>
+                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={closeFreeHiring}>
                                 <button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button>
                             </div>     
                             </div>
@@ -102,4 +143,4 @@ const AddHiringRequestPopup = ({closeHiring,bid}) => {
   )
 }
 
-export default AddHiringRequestPopup
+export default AddFreeHireRequest

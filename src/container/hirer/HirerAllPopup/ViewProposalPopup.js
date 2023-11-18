@@ -12,6 +12,7 @@ import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Navbar from '../../../components/Layout/Navbar'
 import HomeSection4 from '../../../components/Layout/HomeSection4'
 import Footer from '../../../components/Layout/Footer'
+import AddHiringRequestPopup from './AddHiringRequestPopup'
 
 
 const ViewProposalPopup = ({ closeViewProposal }) => {
@@ -31,6 +32,15 @@ const ViewProposalPopup = ({ closeViewProposal }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [projectCount, setProjectCount] = useState(0);
+  const [isHiringOpen, setIsHiringOpen] = useState(false);
+
+  const openHiring = () => {
+    setIsHiringOpen(true);
+  };
+
+  const closeHiring = () => {
+    setIsHiringOpen(false);
+  };
 
   useEffect(() => {
     const queryParameters = [];
@@ -194,8 +204,9 @@ const [active, setActive] = React.useState(1);
   <div className="flex-[50%] p-6 text-right">
   <span class="inline-block text-sm px-10 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold">Message</span>
             <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
-                <button class="px-11 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p></button>
+                <button class="px-11 py-1 bg-white" onClick={openHiring}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p></button>
             </div>
+            {isHiringOpen && <AddHiringRequestPopup closeHiring={closeHiring} bid={bid}/>}
   </div>
 </div>
         <div class="flex flex-col md:flex-row">

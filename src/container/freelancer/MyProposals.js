@@ -78,7 +78,7 @@ const [viewallhiring, setViewAllHiring] = useState([]);
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`http://127.0.0.1:8000/freelance/View-all/hire-request?${queryString}`,{
+      .get(`https://alanced.pythonanywhere.com/freelance/View-all/hire-request?${queryString}`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }
