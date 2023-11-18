@@ -12,6 +12,7 @@ import Navbar from '../../components/Layout/Navbar'
 import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
 import FreelancerPortfolio from './HirerAllPopup/FreelancerPortfolio'
+import AddFreeHireRequest from './HirerAllPopup/AddFreeHireRequest'
 
 const FreelancerFullDetailAfterLogin = () => {
 
@@ -30,6 +31,14 @@ const FreelancerFullDetailAfterLogin = () => {
   const [ProjectCount, setProjectCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [isFreeHiringOpen, setIsFreeHiringOpen] = useState(false);
+  const openFreeHiring = () => {
+    setIsFreeHiringOpen(true);
+  };
+
+  const closeFreeHiring = () => {
+    setIsFreeHiringOpen(false);
+  };
 
 // useEffect(() => {
 //   if(id) { 
@@ -164,8 +173,9 @@ const next = () => {
           </div>
           <div className=' basis-3/12 text-left'>
           <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]  mr-2">
-                <button class="px-11 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p></button>
+                <button class="px-11 py-1 bg-white" onClick={openFreeHiring}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p></button>
             </div>
+            {isFreeHiringOpen && <AddFreeHireRequest closeFreeHiring={closeFreeHiring} free={freelancer}/>}
           </div>
         </div>
         <div className='mt-[8%]'>
