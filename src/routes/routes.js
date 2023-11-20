@@ -65,6 +65,9 @@ import ResetPassword from "../components/Layout/ResetPassword";
 import SendPasswordResetEmail from "../components/Layout/SendPasswordResetEmail";
 import AddPortfolioForm from "../container/freelancer/portfolio/AddPortfolioForm";
 import ViewHiringDetail from "../container/freelancer/ViewHiringDetail";
+import AllInvitedFreelancers from "../container/hirer/AllInvitedFreelancers";
+import ViewInvitationDetail from "../container/hirer/ViewInvitationDetail";
+
 
   const AppRouter = (props) => {
     
@@ -198,6 +201,8 @@ import ViewHiringDetail from "../container/freelancer/ViewHiringDetail";
             <Route path="/notifications" element={<Notifications/>}/>
             <Route path="/messages" element={<Messages/>}/>
             <Route path="/freelancer/my-reports" element={<MyReports/>}/>
+            <Route path="/view-all/invited-freelancers" element={<AllInvitedFreelancers/>}/>
+            <Route path="/view/invitation-Detail" element={<ViewInvitationDetail/>}/>
           </>}
 
           <Route path="*" element={<Navigate to="/" replace />} />
