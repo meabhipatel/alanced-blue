@@ -91,9 +91,7 @@ const ViewHiringDetail = () => {
         <Navbar/>
         <div className='container-sm px-36'>
             <h1 className='font-inter text-2xl text-left mt-5'>Hiring Details</h1>
-            <div className=' flex flex-row my-3'>
-                <div className=' basis-9/12'>
-                <div className=' mt-8  border border-[#E7E8F2] py-8 px-8 rounded-lg'>
+                <div className=' my-8  border border-[#E7E8F2] py-8 px-8 rounded-lg'>
             <h1 className=' text-2xl font-cardo font-semibold text-left'>Job Details</h1>
                 <div className=' flex flex-row mt-6'>
                     <div className=' basis-8/12'>
@@ -139,9 +137,8 @@ const ViewHiringDetail = () => {
                         </div>
                     </div>
                 </div>
-                <hr className=' mt-5' />
                 <h1 className='text-base font-medium font-inter text-left mt-5'>Skills & Experties</h1>
-                <div className="text-left mt-5">
+                <div className="text-left mt-3">
                 {JSON.parse(findhiring && findhiring.project_skills.replace(/'/g,'"')).map((skill,index)=>(
                     <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%] mt-4">
                     <p className=" text-center">{skill}</p>
@@ -152,27 +149,22 @@ const ViewHiringDetail = () => {
                 <div className=' flex flex-row'>
                     <div className=' basis-6/12'><h1 className='mt-4 text-2xl font-cardo font-semibold text-left'>Hiring Details</h1></div>
                 </div>
-                <div>
-                <p className='text-[15px] font-medium font-inter text-left mt-5'>Client's Hiring Budget</p>
+                <div className=' flex flex-row mt-6'>
+                    <div className=' basis-8/12'>
+                    <p className='text-[15px] font-medium font-inter text-left mt-5'>Client's Hiring Budget</p>
                 <p className='text-[15px] font-medium font-inter text-left opacity-70'>${findhiring && findhiring.hiring_budget ? findhiring.hiring_budget:""}</p>
                 <p className='text-[15px] font-medium font-inter text-left mt-5'>Client's Budget Type</p>
                 <p className='text-[15px] font-medium font-inter text-left opacity-70'>{findhiring && findhiring.hiring_budget_type ? findhiring.hiring_budget_type:""}</p>
                 <p className='text-[15px] font-medium font-inter text-left mt-5'>Client's Message</p>
                 <p className='text-[15px] font-medium font-inter text-left opacity-70'>{findhiring && findhiring.message ? findhiring.message:""}</p>
-                <hr className='mt-5' />
-                <div className='mt-4 text-left'>
-        <span class="inline-block text-sm px-8 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold cursor-pointer" onClick={handleAcceptProject}>Accept</span>
-      <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
-      <button class="px-8 py-1 bg-[#E2F9EE]"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px] cursor-pointer" onClick={handleRejectProject}>Reject</p></button>
-</div> 
-</div>   
-                </div>
-            </div>
-           
-                </div>
-                <div className=' basis-3/12'>
-                    <div className='mt-8 ml-7'>
-                        <p className=' text-[17px] font-inter font-normal text-left'>About the client</p>
+                    </div>
+                    <div className=' basis-1/12'></div>
+                    <div className=' basis-3/12 border-l border-[#E7E8F2]'>
+                    <div className='ml-7'>
+                        <p className=' text-xl font-cardo font-normal text-left'>About the client</p>
+                    </div>
+                    <div className='mt-5 ml-7'>
+                        <p className='text-[17px] font-inter font-normal text-left opacity-50'>{findhiring && findhiring.hired_by ? findhiring.hired_by:""}</p>
                     </div>
                     <div className='mt-5 ml-7'>
                         <p className=' text-[17px] font-inter font-normal text-left'>Location</p>
@@ -183,9 +175,19 @@ const ViewHiringDetail = () => {
                         <p className=' text-[17px] font-inter font-normal text-left'>History</p>
                         <p className='text-[12px] font-inter font-normal opacity-75 mt-2 text-left'>Member since {formatDateInput(findhiring && findhiring.hirer_creation_date ? findhiring.hirer_creation_date:"")}</p>
                     </div>
+                    </div>
+                </div>
+                <div>
+                <hr className='mt-5' />
+                <div className='mt-4 text-left'>
+        <span class="inline-block text-sm px-8 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold cursor-pointer" onClick={handleAcceptProject}>Accept</span>
+      <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
+      <button class="px-8 py-1 bg-[#E2F9EE]"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px] cursor-pointer" onClick={handleRejectProject}>Reject</p></button>
+</div> 
+</div>   
                 </div>
             </div>
-        </div>
+                </div>
         <HomeSection4/>
         <Footer/>
         </>

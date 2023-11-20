@@ -347,6 +347,9 @@ const fetchFreeNotifications = async () => {
           <Link to='/View-all/Job-post' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">All Jobs</span>
                     </Link>
+                    <Link to='/view-all/invited-freelancers' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
+                        <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Invited Freelancers</span>
+                    </Link>
           </div>
       </div>
   )} </> }

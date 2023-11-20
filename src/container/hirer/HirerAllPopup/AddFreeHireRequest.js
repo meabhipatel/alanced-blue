@@ -24,13 +24,13 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
     
       useEffect(() => {
         axios
-          .get(`https://alanced.pythonanywhere.com/freelance/view/hirer-self/Project`,{
+          .get(`https://alanced.pythonanywhere.com/freelance/view-all/hirer-self/Project`,{
             headers: {
                 'Authorization': `Bearer ${accessToken}`
             }
         })
           .then((response) => {
-            setViewhirerProject(response.data.results); 
+            setViewhirerProject(response.data.data); 
           })
           .catch((error) => {
             console.error('Error fetching filtered data:', error);
@@ -87,7 +87,6 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
                     </div>
                     <div className='mt-8'>
                             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Project Title <span class="text-red-500">*</span></h1>
-                            {/* <input type="text" value={Title} className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='' required/> */}
                             <select
         className="w-full border my-2 py-1.5 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white"
         name="" value={Title} onChange={(e) => {
@@ -107,18 +106,9 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
           </option>
         ))}
       </select>
-                            {/* <select
-                            className="w-full border my-2 py-1.5 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white"
-                            name="" value={Title} onChange={e => setTitle(e.target.value)}>
-                            <option disabled selected value="">Choose Project Title</option>
-                            {viewhirerProject.map((project) => (
-                            <option key={project.id} value={project.title}>
-                                {project.title}
-                            </option>
-                            ))}
-                            </select> */}
+                           
                             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Hiring Budget <span class="text-red-500">*</span></h1>
-                            <input type="text" value={HiringBudget} onChange={e => setHiringBudget(e.target.value)} className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='' required/>
+                            <input type="number" value={HiringBudget} onChange={e => setHiringBudget(e.target.value)} className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='' required/>
                             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Budget Type <span class="text-red-500">*</span></h1>
                             <select
                             className="w-full border my-2 py-1.5 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white"

@@ -22,9 +22,11 @@ const freelancerselfbid = useSelector(state => state.freelancer.freelancerselfbi
 // const freelancerhiringreq = useSelector(state => state.freelancer.freelancerhiringreq)
 const bidCount = freelancerselfbid?.length || 0;
 const dispatch = useDispatch();
+const [currentBidPage, setCurrentBidPage] = useState(1);
+const [totalBidPages, setTotalBidPages] = useState(0);
+const [BidsCount, setBidsCount] = useState(0);
 const [currentPage, setCurrentPage] = useState(1);
 const [totalPages, setTotalPages] = useState(0);
-const [BidsCount, setBidsCount] = useState(0);
 const [hiringCount, setHiringCount] = useState(0);
 
 // React.useEffect(() => {
@@ -37,7 +39,7 @@ const [viewfreebid, setViewFreeBid] = useState([]);
   useEffect(() => {
     const queryParameters = [];
   
-    queryParameters.push(`page=${currentPage}`);
+    queryParameters.push(`page=${currentBidPage}`);
 
     const queryString = queryParameters.join('&');
 
@@ -51,20 +53,21 @@ const [viewfreebid, setViewFreeBid] = useState([]);
         // setViewFreeBid(response.data.data);
         setViewFreeBid(response.data.results); 
         setBidsCount(response.data.count);
-        setTotalPages(Math.ceil(response.data.count / 6));
+        setTotalBidPages(Math.ceil(response.data.count / 6));
       })
       .catch((error) => {
         console.error('Error fetching filtered data:', error);
       });
-  }, [currentPage]);
+  }, [currentBidPage]);
 
-  const prev = () => {
-    setCurrentPage(prev => Math.max(prev - 1, 1));
+  const Bidprev = () => {
+    setCurrentBidPage(prev => Math.max(prev - 1, 1));
 };
 
-const next = () => {
-    setCurrentPage(prev => Math.min(prev + 1, totalPages));
+const Bidnext = () => {
+    setCurrentBidPage(prev => Math.min(prev + 1, totalBidPages));
 };
+
 
 
 const [viewallhiring, setViewAllHiring] = useState([]);
@@ -93,6 +96,14 @@ const [viewallhiring, setViewAllHiring] = useState([]);
         console.error('Error fetching filtered data:', error);
       });
   }, [currentPage]);
+
+  const prev = () => {
+    setCurrentPage(prev => Math.max(prev - 1, 1));
+};
+
+const next = () => {
+    setCurrentPage(prev => Math.min(prev + 1, totalPages));
+};
 
   
   const [selectedButton, setSelectedButton] = useState('Active');
@@ -141,28 +152,9 @@ const [viewallhiring, setViewAllHiring] = useState([]);
             </Link> */}
     </div>
     <div class="flex-1 border-t-2 border-gray-200 opacity-30 my-4"></div>
-    <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2] text-left'>
+    {/* <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2] text-left'>
       <h1 className='font-inter text-[16px] font-semibold text-[#031136] p-3'>Offers (0)</h1>
-    </div>
-    {/* <div className='my-4 bg-[#FFFFFF] border p-3 border-[#E7E8F2] text-left flex items-center justify-between'>
-    <h1 className='font-inter text-[16px] font-semibold text-[#031136]'>Invitations to Interview (0)</h1>
-    <div className="flex space-x-1">
-        <button
-            onClick={() => setIsAvailable(true)}
-            className={`flex items-center justify-center text-[#0A142F] font-inter opacity-50 text-[13px] py-2 px-4 focus:outline-none rounded-full ${isAvailable ? 'ring-1 ring-gray-400' : ''}`}>
-            <img src={availablenow} alt="" className='h-[16px] mr-2' />
-            Available now
-        </button>
-        <button
-            onClick={() => setIsAvailable(false)}
-            className={`text-center text-[#0A142F] font-inter opacity-50 text-[13px] py-2 px-4 focus:outline-none rounded-full ${!isAvailable ? 'ring-1 ring-gray-400' : ''}`}>
-            Off
-        </button>
-        <div class="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 mt-1">
-            <img src={edit} alt="edit" />
-        </div>
-    </div>
-</div> */}
+    </div> */}
 <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2] text-left'>
 <h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Submitted Proposals ({BidsCount})</h1>
 {viewfreebid != null ? <div>
@@ -208,27 +200,27 @@ const [viewallhiring, setViewAllHiring] = useState([]);
   <Skeleton height={20} width={200} style={{marginLeft: 180}}/>
   </div>);})}
   </div>}
-  {totalPages > 1 && (
+  {totalBidPages > 1 && (
                     <div className="flex justify-end items-center gap-6 m-4">
                         <IconButton
                             size="sm"
                             variant="outlined"
-                            onClick={prev}
-                            disabled={currentPage === 1}
+                            onClick={Bidprev}
+                            disabled={currentBidPage === 1}
                             style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
                         >
                             <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
                         
-                        {[...Array(totalPages)].map((_, index) => {
+                        {[...Array(totalBidPages)].map((_, index) => {
                             const pageNumber = index + 1;
                             return (
                                 <span
                                     key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    className={`px-0 py-1 ${currentBidPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
                                     onClick={() => {
                                         window.scrollTo(0, 0);
-                                        setCurrentPage(pageNumber);
+                                        setCurrentBidPage(pageNumber);
                                     }}
                                     
                                 >
@@ -240,43 +232,14 @@ const [viewallhiring, setViewAllHiring] = useState([]);
                         <IconButton
                             size="sm"
                             variant="outlined"
-                            onClick={next}
-                            disabled={currentPage === totalPages}
+                            onClick={Bidnext}
+                            disabled={currentBidPage === totalBidPages}
                             style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
                         >
                             <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
                     </div>
     )}
-{/* <div className="flex justify-end items-center p-5">
-  <div className="flex items-center justify-center w-8 h-8 text-gray-500 border border-gray-200 p-1 cursor-pointer" onClick={prev}
-    disabled={active === 1}>
-    -
-  </div>
-  <div className="flex border-t border-b border-gray-200 p-1 gap-4">
-    {[...Array(5)].map((_, index) => {
-      const pageNumber = index + 1;
-      return (
-        <span
-          key={pageNumber}
-          className={`w-6 h-6 flex items-center justify-center cursor-pointer ${
-            active === pageNumber
-              ? 'bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-white text-xs rounded-sm'
-              : 'text-gray-500 font-bold font-inter text-xs'
-          }`}
-          onClick={() => setActive(pageNumber)}
-        >
-          {pageNumber}
-        </span>
-      );
-    })}
-  </div>
-  <div className="flex items-center justify-center w-8 h-8 text-gray-500 border border-gray-200 p-1 cursor-pointer" onClick={next}
-    disabled={active === 5}>
-    +
-  </div>
-
-</div> */}
 </div>
 <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2]  text-left'>
 <h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Invitations ({hiringCount})</h1>
@@ -302,7 +265,7 @@ const [viewallhiring, setViewAllHiring] = useState([]);
         <p className='font-inter text-[14px] text-[#031136] opacity-50'>{timeAgo(hire.Received_time)}</p>
     </div>
 
-    <div className='flex-grow pl-[180px]'>
+    <div className='flex-grow ml-[100px]'>
     <Link to="/view/hiring-detail" state={{ hire }} onClick={() => window.scrollTo(0, 0)}><h1 className='font-cardo text-[18px] text-green-600 hover:underline'>{hire.project_title}</h1></Link>
     </div>
 
