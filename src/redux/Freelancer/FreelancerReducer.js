@@ -20,6 +20,8 @@ GET_VIEW_ALL_SAVEDJOBS_REQUEST,
 GET_VIEW_ALL_SAVEDJOBS_SUCCESS,
 GET_VIEW_ALL_HIRING_REQUEST,
 GET_VIEW_ALL_HIRING_SUCCESS,
+ADD_FREELANCER_SELF_PROJECT_REQUEST,
+ADD_FREELANCER_SELF_PROJECT_SUCCESS
 } from "./FreelancerConstant"
 
 import '../../index.css'
@@ -76,7 +78,12 @@ const FreelancerReducer =(state = initialState, action) => {
         case GET_VIEW_ALL_SAVEDJOBS_REQUEST:
             return { loading: true};
         case GET_VIEW_ALL_SAVEDJOBS_SUCCESS: 
-            return { viewallsavedjob: action.payload };   
+            return { viewallsavedjob: action.payload };
+        case ADD_FREELANCER_SELF_PROJECT_REQUEST:
+            return { loading: true };
+        case ADD_FREELANCER_SELF_PROJECT_SUCCESS:
+            toast.success("Project Added Successfully")
+            return { loading: false, addFreelancerProject:true}    
         // case GET_VIEW_ALL_HIRING_REQUEST:
         //     return { loading: true};
         // case GET_VIEW_ALL_HIRING_SUCCESS: 

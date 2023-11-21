@@ -15,7 +15,8 @@ const API = {
       ViewFreelancerSelfBidProject: '/freelance/view/freelancer-self/project-bid',
       AddFreelancerEmployment:'/freelance/Add/Freelancer/Employment',
       ViewAllSavedJobs:'/freelance/View-all/SavedProjects',
-      ViewAllHiringRequest:'/freelance/View-all/hire-request'
+      ViewAllHiringRequest:'/freelance/View-all/hire-request',
+      AddFreelancerSelfProject:'/freelance/Add/Freelancer/Self-Project'
     }
   },
   
