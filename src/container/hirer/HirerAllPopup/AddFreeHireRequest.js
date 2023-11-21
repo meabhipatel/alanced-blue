@@ -16,6 +16,7 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
     const [HiringBudgetType, setHiringBudgetType] = useState("");
     const [msg, setMsg] = useState("");
     const id = free.id
+    console.log(id,'chkfreelancerrriddddd')
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [searchQuery, setSearchQuery] = useState('');

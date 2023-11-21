@@ -67,6 +67,7 @@ import AddPortfolioForm from "../container/freelancer/portfolio/AddPortfolioForm
 import ViewHiringDetail from "../container/freelancer/ViewHiringDetail";
 import AllInvitedFreelancers from "../container/hirer/AllInvitedFreelancers";
 import ViewInvitationDetail from "../container/hirer/ViewInvitationDetail";
+import AllHirerContracts from "../container/hirer/AllHirerContracts";
 
 
   const AppRouter = (props) => {
@@ -203,6 +204,7 @@ import ViewInvitationDetail from "../container/hirer/ViewInvitationDetail";
             <Route path="/freelancer/my-reports" element={<MyReports/>}/>
             <Route path="/view-all/invited-freelancers" element={<AllInvitedFreelancers/>}/>
             <Route path="/view/invitation-Detail" element={<ViewInvitationDetail/>}/>
+            <Route path="/view-all/hirer-contracts" element={<AllHirerContracts/>}/>
           </>}
 
           <Route path="*" element={<Navigate to="/" replace />} />

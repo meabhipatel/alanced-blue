@@ -80,11 +80,29 @@ const descriptionToShow = showFullDescription ? (findinvite && findinvite.freela
                     )):""}
                     <h1 className='text-base font-medium font-inter text-left mt-5'>Skills</h1>
                 <div className="text-left">
-                {JSON.parse(findinvite && findinvite.freelancer_skills.replace(/'/g,'"')).map((skill,index)=>(
+                {findinvite && findinvite.freelancer_skills && 
+  (() => {
+    try {
+      const skillsArray = JSON.parse(findinvite.freelancer_skills.replace(/'/g, '"'));
+      return skillsArray.map((skill, index) => (
+        <div
+          key={index}
+          className="mr-3 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-green-800 px-3 py-[3px] my-1 text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
+        >
+          <p className="text-center">{skill}</p>
+        </div>
+      ));
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return null;
+    }
+  })()
+} 
+                {/* {JSON.parse(findinvite && findinvite.freelancer_skills.replace(/'/g,'"')).map((skill,index)=>(
                     <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full text-green-800 px-4 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%] mt-4">
                     <p className=" text-center">{skill}</p>
                 </div>
-                ))}
+                ))} */}
                 </div>
                     </div>
                     <div className=' basis-1/12'></div>

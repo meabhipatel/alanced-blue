@@ -9,22 +9,22 @@ import gradientdot from '../../components/images/gradientdot.png'
 import threedot from '../../components/images/threedot.png'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { formatDateInput, timeAgo } from './TimeFunctions'
 import axios from 'axios'
 import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { formatDateInput } from '../freelancer/TimeFunctions'
 
-const AllContracts = () => {
+const AllHirerContracts = () => {
 
     const accessToken = useSelector(state => state.login.accessToken); 
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [searchQuery, setSearchQuery] = useState('');
 
-    const [viewallfreecontracts, setViewAllfreecontracts] = useState([]);
+    const [viewallhirercontracts, setViewAllhirercontracts] = useState([]);
 
   useEffect(() => {
     const queryParameters = [];
@@ -38,14 +38,14 @@ const AllContracts = () => {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://alanced.pythonanywhere.com/freelance/View-all/freelancer-contracts?${queryString}`,{
+      .get(`http://127.0.0.1:8000/freelance/View-all/hirer-contracts?${queryString}`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }
       })
       .then((response) => {
         // setViewFreeBid(response.data.data);
-        setViewAllfreecontracts(response.data.results); 
+        setViewAllhirercontracts(response.data.results); 
         setTotalPages(Math.ceil(response.data.count / 8));
       })
       .catch((error) => {
@@ -85,11 +85,27 @@ function highlightText(text, query) {
   }
 
 
+    // const [active, setActive] = React.useState(1);
+ 
+    // const next = () => {
+    //   if (active === 5) return;
+   
+    //   setActive(active + 1);
+    // };
+   
+    // const prev = () => {
+    //   if (active === 1) return;
+   
+    //   setActive(active - 1);
+    // };
+
   return (
     <>
     <Navbar/>
     <div className='mt-5 container-sm px-40'>
         <h1 className=' font-cardo font-normal text-2xl text-left'>All Contracts</h1>
+        {/* <div className=' flex flex-row'> */}
+            {/* <div className=' basis-11/12'> */}
             <section className='flex items-center p-1 rounded-lg border border-[#E7E8F2] mt-4'>
                 <div className='flex items-center mr-1 space-x-1 w-full'>
                     <img src={search} alt="Search Icon" className="h-5 w-5" />
@@ -99,9 +115,12 @@ function highlightText(text, query) {
                     <img src={searchbtn} alt="Search Icon" />
                 </button>
             </section>
+            {/* </div> */}
+            {/* <div className=' basis-1/12 mt-4'><i class="bi bi-sliders text-3xl mr-9"></i></div> */}
+        {/* </div> */}
         <div className='my-8  border border-[#E7E8F2] py-5 px-5 rounded'>
-        {viewallfreecontracts != null ? <div>
-{viewallfreecontracts && <>{viewallfreecontracts.map((contract,index) => {
+        {viewallhirercontracts != null ? <div>
+{viewallhirercontracts && <>{viewallhirercontracts.map((contract,index) => {
     return(
         <div className='my-5 bg-[#FFFFFF] border-b border-[#E7E8F2]'>
         <div className=' flex flex-row'>
@@ -109,24 +128,30 @@ function highlightText(text, query) {
                 <h1 className=' font-cardo text-lg font-normal text-left'>{highlightText(contract.project_title,searchQuery)}</h1>
                 <p className='font-inter text-[14px] text-[#031136]  mt-3 text-left font-normal'>Budget: <span className='opacity-50'>${highlightText(contract.hiring_budget,searchQuery)} {highlightText(contract.hiring_budget_type,searchQuery)}</span></p>
             </div>
+            {/* <div className=' basis-3/12'><Link to=''><button className='rounded h-8 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-sm font-bold ml-20'>See Timesheet</button></Link></div> */}
             <div className=' basis-3/12'></div>
             <div className='basis-1/12'>
             <div className={isJobOpen(contract.project_deadline) ? 'text-green-600 mt-1 font-semibold' : 'text-yellow-600 mt-1 font-semibold'}>
                 {isJobOpen(contract.project_deadline) ? 'Active' : 'Completed'}
             </div>
             </div>
+
+            {/* <div className=' basis-1/12'><div class="text-green-600 mt-1">{isJobOpen(contract.project_deadline) ? 'Active' : 'Completed'}
+            </div> 
+         </div> */}
         </div>
         <div className=' flex flex-row'>
             <div className=' basis-5/12'>
-            <p className='font-inter text-[14px] text-[#031136] py-2 font-normal text-left'>Hired by: <span className='opacity-50'>{highlightText(contract.hired_by,searchQuery)}</span></p>
+            <p className='font-inter text-[14px] text-[#031136] py-2 font-normal text-left'>Hired Freelancer: <span className='opacity-50'>{highlightText(contract.hired_freelancer_name,searchQuery)}</span></p>
             </div>
             <div className=' basis-5/12'>
             <p className='font-inter text-[14px] text-[#031136] font-normal text-left'>
-        Received: <span className='text-[#03C058]'>{formatDateInput(contract.Received_time)}</span></p>
+        Sent: <span className='text-[#03C058]'>{formatDateInput(contract.Sent_time)}</span></p>
             </div>
             <div className=' basis-2/12'>
             <p className='font-inter text-[14px] text-[#031136] font-normal text-left'>
         Deadline: <span className='text-[#03C058]'>{formatDateInput(contract.project_deadline)}</span></p>
+            {/* <p className='font-inter text-[14px] text-[#0A142F] opacity-50 font-normal text-center'></p> */}
             </div>
         </div>
         </div>
@@ -192,4 +217,4 @@ function highlightText(text, query) {
   )
 }
 
-export default AllContracts
+export default AllHirerContracts
