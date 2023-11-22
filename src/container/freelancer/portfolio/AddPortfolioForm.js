@@ -5,10 +5,52 @@ import HomeSection4 from '../../../components/Layout/HomeSection4'
 import { Link } from 'react-router-dom'
 import CategoryList from '../AllSelectionData/CategoryList'
 import SkillsList from '../AllSelectionData/SkillsList'
+import { AddFreelancerSelfProjectAction } from '../../../redux/Freelancer/FreelancerAction'
+import { useDispatch, useSelector } from 'react-redux'
 
 const AddPortfolioForm = () => {
 
+    const accessToken = useSelector(state => state.login.accessToken);
+    const [addFreelancerProject, setAddFreelancerProject] = useState('');
+    const dispatch = useDispatch();
     const[cate] = useState(CategoryList)
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [preview, setPreview] = useState('');
+    const [skills, setSkills] = useState([]);
+
+    const AddProjects = () => {  
+            
+        const formData = new URLSearchParams();
+            formData.append("project_title",addFreelancerProject.project_title);
+            formData.append("project_description",addFreelancerProject.project_description);
+            formData.append("skills_used",addFreelancerProject.skills_used);
+            formData.append("category",addFreelancerProject.category);
+            formData.append("project_link",addFreelancerProject.project_link)
+            formData.append("images_logo",selectedFile)
+    
+        const x = {
+            "project_title": addFreelancerProject.project_title,
+            "project_description":addFreelancerProject.project_description,
+            "skills_used":skills,
+            "category":addFreelancerProject.category,
+            "project_link":addFreelancerProject.project_link,
+            ...(selectedFile !== undefined && { "images_logo": selectedFile }),
+
+        }    
+            dispatch(AddFreelancerSelfProjectAction(x,accessToken));
+            console.log(x,"check x")
+        };
+
+    const handleFileChange = (event) => {
+        setSelectedFile(event.target.files[0]);
+        const file = event.target.files[0]
+        if (file) {
+            const imageURL = URL.createObjectURL(file);
+            setPreview(imageURL);
+        }
+        };
+
+    const [isValid, setIsValid] = useState(false);
 
     const [step, setStep] = useState(1);
 
@@ -23,16 +65,15 @@ const AddPortfolioForm = () => {
         // Add more step labels as needed
     ];
 
-    const [addProject, setAddProject] = useState('');
     const [error, setError] = useState('');
-    const [skills, setSkills] = useState([]);
+   
     
 
     const removeSkill = (index) => {
         const newSkills = skills.filter((_, idx) => idx !== index);
     
         setSkills(newSkills);
-        setAddProject(prevProject => ({
+        setAddFreelancerProject(prevProject => ({
             ...prevProject,
             skills_required: newSkills
         }));
@@ -62,6 +103,22 @@ const AddPortfolioForm = () => {
             document.removeEventListener('mousedown', handleClickOutsideSkill);
         };
     }, []);
+
+
+    // const onChange = e => {
+    //     setAddFreelancerProject({
+    //       ...addFreelancerProject,
+    //       [e.target.name]: e.target.value
+    //     });
+    //   };
+    const onChange = e => {
+        // const { name, value } = e.target;
+        // setAddFreelancerProject(prevData => ({ ...prevData, [name]: value }));
+        setAddFreelancerProject(prevProject => ({
+            ...prevProject,
+            [e.target.name]: e.target.value
+        }));
+      };
 
   return (
     <>
@@ -139,13 +196,15 @@ const AddPortfolioForm = () => {
                             <p className='text-left mt-1 font-inter  text-[14px] text-black opacity-70'>Enter a brief but descriptive title.</p>
                             <input 
                                 type="text" 
-                                name="title"
+                                name="project_title"
+                                value={addFreelancerProject.project_title}
+                                onChange={onChange}
                                 className='border my-2 py-2 px-3 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 font-inter text-sm' 
                                 placeholder="Enter Project Heading" 
                             />
                             <p className=' text-left mt-8 font-inter text-lg font-normal'>Project Description<span className=' text-md font-bold opacity-[50%] text-red-700'>*</span></p>
                             <p className='text-left mt-1 font-inter text-[14px] text-black opacity-70'>Describe what you did on the project.</p>
-                                <textarea id="message" name="description"
+                                <textarea id="message" name="project_description" value={addFreelancerProject.project_description} onChange={onChange}
                                 required  class="mt-3 w-full  px-3 py-2 border font-inter rounded-lg text-gray-700 focus:border-lime-400 focus:outline-none focus:ring-1 text-sm focus:ring-lime-600"  rows='7' placeholder="Enter Project Overview"></textarea>
                         </div>
                     </div>
@@ -175,7 +234,7 @@ const AddPortfolioForm = () => {
                                 className='border my-2 py-2 px-3 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' 
                                 placeholder="Describe What you did on the Project" 
                             /> */}
-                                <select className='border mt-2  mb-6 py-1.5 px-2 rounded-md w-full font-inter text-sm focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white'>
+                                <select className='border mt-2  mb-6 py-1.5 px-2 rounded-md w-full font-inter text-sm focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white' name="category" value={addFreelancerProject.category} onChange={onChange}>
                                 <option disabled selected  >Category</option>
                                 {cate.map((cat, index) => (
                                     <option value={cat} className=' text-black'>{cat}</option>
@@ -252,13 +311,15 @@ const AddPortfolioForm = () => {
                             <p className='text-left mt-1 font-inter text-[14px] text-black opacity-70'>Provide the Project Web Address</p>
                             <input 
                                 type="text" 
-                                name="title"
+                                name="project_link"
+                                value={addFreelancerProject.project_link}
+                                onChange={onChange}
                                 className='border my-2 py-2 px-3 font-inter text-sm rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' 
                                 placeholder="Enter Project Url" 
                             />
                             <p className=' text-left mt-8 font-inter text-lg font-normal'>Select Project Image<span className=' text-md font-bold opacity-[50%] text-red-700'>*</span></p>
                             {/* <p className='text-left mt-1 font-inter text-[14px] text-black opacity-70'>Provide the Project Web Address</p> */}
-                            <input class="block border my-2 py-2 px-3 font-inter rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600" id="default_size" type="file"></input>
+                            <input class="block border my-2 py-2 px-3 font-inter rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600" id="default_size" type="file" name="images_logo" onChange={handleFileChange}></input>
                                 
                         </div>
                     </div>
@@ -267,7 +328,10 @@ const AddPortfolioForm = () => {
         )}
         <div className="flex justify-between mt-5 ml-64">
             {step > 1 && <button onClick={() => {prevStep(); window.scrollTo(0,0)}} className="bg-gray-300 px-4 py-2 rounded">Back</button>}
-            {step < 3 && <button onClick={() => {nextStep(); window.scrollTo(0,0)}} className="text-white px-4 py-2 rounded bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-cardo">Next: {stepsLabels[step]}</button>}
+            {/* {step < 3 && <button onClick={() => {nextStep(); window.scrollTo(0,0)}} className="text-white px-4 py-2 rounded bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-cardo">Next: {stepsLabels[step]}</button>} */}
+            {step < 3 ? (
+            <button onClick={() => {nextStep(); window.scrollTo(0,0)}} className="text-white px-4 py-2 rounded bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-cardo">Next: {stepsLabels[step]}</button>
+            ) : (<button className="text-white px-4 py-2 rounded bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-cardo" onClick={AddProjects}>Add Project</button>)}
         </div>
     </div>
     <Footer />

@@ -143,3 +143,19 @@ export const AddFreelancerEmployment = async (data,token) =>{
 //       return handleError(err);
 //     });
 // };
+
+
+export const AddFreelancerProject = async (data,token) =>{
+  setHeadersWithAccessToken(token);
+  return DataService.post(API.Freelancers.Freelancer.AddFreelancerSelfProject, data,{
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+  .then(res => {
+      return res.data;
+  })
+  .catch(err => {
+      return handleError(err);
+  });
+};  
