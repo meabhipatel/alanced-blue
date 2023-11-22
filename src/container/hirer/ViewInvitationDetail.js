@@ -41,14 +41,13 @@ const descriptionToShow = showFullDescription ? (findinvite && findinvite.freela
     <p className="text-xl font-medium font-cardo text-left mt-5">
       Invited Freelancer : <span className="opacity-70">{findinvite && findinvite.freelancer_name ? findinvite.freelancer_name : ""}</span></p>
  </div>
-  <div>
-    <p className="text-xl font-medium font-cardo text-left">
+</div>
+<div>
+<div>
+    <p className="text-xl font-medium font-cardo text-left mt-4">
       Message : <span className="opacity-70">{findinvite && findinvite.message ? findinvite.message : ""}</span>
     </p>
   </div>
-  
-</div>
-<div>
     <p className="text-xl font-medium font-cardo text-left mt-4">
       Invite Status : <span className="opacity-70 inline-block">{findinvite && findinvite.freelancer_accepted ? (
                   <h1 className='font-cardo text-[18px] text-green-600'>Accepted</h1>

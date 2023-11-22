@@ -30,8 +30,13 @@ const ViewAllProposals = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [isHiringOpen, setIsHiringOpen] = useState(false);
+  const location = useLocation();
+  const project = location.state && location.state.project;
+  const isOpen = location.state && location.state.isOpen;
 
-  
+  const id = project.id
+
+  const accessToken = useSelector(state => state.login.accessToken);
   
 
 //    const id = viewhirerselfproject && viewhirerselfproject[0].id ? viewhirerselfproject[0].id : '';
@@ -82,11 +87,7 @@ const ViewAllProposals = () => {
 }
 
 
-  const location = useLocation();
-  const project = location.state && location.state.project;
-  const isOpen = location.state && location.state.isOpen;
-
-  const id = project.id
+  
 
   const openHiring = () => {
     setIsHiringOpen(true);
@@ -169,6 +170,26 @@ const next = () => {
     setCurrentPage(prev => Math.min(prev + 1, totalPages));
 };
 
+const [viewinvites, setViewinvites] = useState([]);
+    
+  useEffect(() => {
+    
+    axios
+      .get(`https://alanced.pythonanywhere.com/freelance/View-all/invited-freelancers`,{
+        headers: {
+          "Authorization":`Bearer ${accessToken}`
+        }
+      })
+      .then((response) => {
+        // setViewFreeBid(response.data.data);
+        setViewinvites(response.data.results); 
+      })
+      .catch((error) => {
+        console.error('Error fetching filtered data:', error);
+      });
+  }, []);
+  
+ 
 
 // function highlightText(text, query) {
 //   if (!query) {
@@ -360,12 +381,23 @@ const handleClick = (event, index) => {
                               
                               <div class="flex items-center space-x-4">
                                       <span class="inline-block text-sm px-10 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold" onClick={handleButtonClick}>Message</span>
+                                      {viewinvites && viewinvites.map((all, invite) => {
+        return(
+            <>
+            {bid.freelancer_id == all.freelancer_id && bid.project_id == all.project_id ? <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={handleBtnClick}>
+                                          <button class="px-10 py-1 bg-white">
+                                              <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hired</p>
+                                          </button>        
+                                  </div> : ''}
+            </>
+        )
+    })}
                           
-                                  <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={handleBtnClick}>
+                                  {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={handleBtnClick}>
                                           <button class="px-10 py-1 bg-white">
                                               <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p>
                                           </button>        
-                                  </div>
+                                  </div> */}
                                   {isHiringOpen && <AddHiringRequestPopup closeHiring={closeHiring} bid={bid}/>}
                               </div>
                           </div>

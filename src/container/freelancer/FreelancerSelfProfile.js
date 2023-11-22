@@ -935,7 +935,7 @@ const handleImageSave = async () => {
     {visibleReviews.map((review, index) => (<>
     <div key={index}>
         <div className="flex justify-between items-center">
-        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-1'>{review.Project_Name}</p>
+        <p className='font-inter text-[#0A142F] text-[14px] py-1'>{review.Project_Name}</p>
         <div className="flex items-center space-x-2">
         <StarRating rating={review.rating} />
             {/* <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 inline-block">

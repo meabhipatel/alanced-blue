@@ -81,7 +81,7 @@ const [viewallhiring, setViewAllHiring] = useState([]);
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://alanced.pythonanywhere.com/freelance/View-all/hire-request?${queryString}`,{
+      .get(`https://alanced.pythonanywhere.com/freelance/View-all/pending-hire-request?${queryString}`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }
@@ -242,7 +242,7 @@ const next = () => {
     )}
 </div>
 <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2]  text-left'>
-<h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Invitations ({hiringCount})</h1>
+<h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Pending Invitations ({hiringCount})</h1>
 {viewallhiring != null ? <div>
 {viewallhiring && <>{viewallhiring.map((hire,index) => {
    const hiredTime = new Date(hire.Received_time);
