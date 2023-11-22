@@ -7,6 +7,7 @@ import CategoryList from '../AllSelectionData/CategoryList'
 import SkillsList from '../AllSelectionData/SkillsList'
 import { AddFreelancerSelfProjectAction } from '../../../redux/Freelancer/FreelancerAction'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const AddPortfolioForm = () => {
 
@@ -17,28 +18,34 @@ const AddPortfolioForm = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [preview, setPreview] = useState('');
     const [skills, setSkills] = useState([]);
+    const navigate = useNavigate();
 
     const AddProjects = () => {  
             
-        const formData = new URLSearchParams();
+        const formData = new FormData();
             formData.append("project_title",addFreelancerProject.project_title);
             formData.append("project_description",addFreelancerProject.project_description);
-            formData.append("skills_used",addFreelancerProject.skills_used);
+            skills.forEach((skill, index) => {
+                formData.append(`skills_used[${index}]`, skill);
+            });
+            // formData.append("skills_used",skills);
+            // formData.append("skills_used", skills.join(','));
             formData.append("category",addFreelancerProject.category);
             formData.append("project_link",addFreelancerProject.project_link)
             formData.append("images_logo",selectedFile)
     
-        const x = {
-            "project_title": addFreelancerProject.project_title,
-            "project_description":addFreelancerProject.project_description,
-            "skills_used":skills,
-            "category":addFreelancerProject.category,
-            "project_link":addFreelancerProject.project_link,
-            ...(selectedFile !== undefined && { "images_logo": selectedFile }),
+        // const x = {
+        //     "project_title": addFreelancerProject.project_title,
+        //     "project_description":addFreelancerProject.project_description,
+        //     "skills_used":skills,
+        //     "category":addFreelancerProject.category,
+        //     "project_link":addFreelancerProject.project_link,
+        //     ...(selectedFile !== undefined && { "images_logo": selectedFile }),
 
-        }    
-            dispatch(AddFreelancerSelfProjectAction(x,accessToken));
-            console.log(x,"check x")
+        // }    
+            dispatch(AddFreelancerSelfProjectAction(formData,accessToken));
+            navigate('/freelancer/edit-profile')
+            console.log(formData,"check formdata")
         };
 
     const handleFileChange = (event) => {
@@ -49,8 +56,6 @@ const AddPortfolioForm = () => {
             setPreview(imageURL);
         }
         };
-
-    const [isValid, setIsValid] = useState(false);
 
     const [step, setStep] = useState(1);
 
@@ -75,7 +80,7 @@ const AddPortfolioForm = () => {
         setSkills(newSkills);
         setAddFreelancerProject(prevProject => ({
             ...prevProject,
-            skills_required: newSkills
+            skills_used: newSkills
         }));
         setError('');
     };
