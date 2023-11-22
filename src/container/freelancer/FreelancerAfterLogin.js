@@ -292,7 +292,7 @@ const [bidsCount, setBidsCount] = useState({});
         };
 
         fetchBidsForAllProjects();
-    }, [viewallprojects]);
+    }, [viewProject]);
 
 
     function highlightText(text, query) {

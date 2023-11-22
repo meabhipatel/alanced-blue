@@ -38,7 +38,8 @@ const HirerAfterLogin = () => {
     const googleUserName = localStorage.getItem('googleUserName')
     const loginMethod = localStorage.getItem('loginMethod')
     // const viewallfreelancer = useSelector(state => state.hirer.viewallfreelancer)
-    const [isFreeHiringOpen, setIsFreeHiringOpen] = useState(false);
+    // const [isFreeHiringOpen, setIsFreeHiringOpen] = useState(false);
+    const [isFreeHiringOpen, setIsFreeHiringOpen] = useState({});
 
 
     const [expe] = useState(ExperienceLevel);
@@ -65,12 +66,21 @@ const HirerAfterLogin = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
-    const openFreeHiring = () => {
-      setIsFreeHiringOpen(true);
-    };
+    // const openFreeHiring = () => {
+    //   setIsFreeHiringOpen(true);
+    // };
   
-    const closeFreeHiring = () => {
-      setIsFreeHiringOpen(false);
+    // const closeFreeHiring = () => {
+    //   setIsFreeHiringOpen(false);
+    // };
+
+    const openFreeHiring = (freelancerId) => {
+      setIsFreeHiringOpen((prev) => ({ ...prev, [freelancerId]: true }));
+    };
+    
+    // Function to close hiring popup for a specific freelancer
+    const closeFreeHiring = (freelancerId) => {
+      setIsFreeHiringOpen((prev) => ({ ...prev, [freelancerId]: false }));
     };
   
     // React.useEffect(() => {
@@ -562,7 +572,7 @@ const next = () => {
       {viewFreelancer && viewFreelancer.map((free, index) => {
                 return(<>
                 
-      <div className='px-4 md:w-[26vw] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4'>
+      <div className='px-4 md:w-[26vw] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4' key={index}>
         <div className="flex items-center">
             <Avatar src={"https://alanced.pythonanywhere.com/"+free.images_logo} alt="" variant="rounded" className="mr-4 h-24 w-24" />
             <div>
@@ -620,10 +630,12 @@ const next = () => {
         <div className=' flex flex-row'>
             <div className=' basis-8/12 absolute bottom-4 items-center font-inter text-green-600 text-[14px] cursor-pointer font-bold hover:underline'><Link to='/view-freelancer/full-detail' state={{ free }} onClick={() => window.scroll(0, 0) }><p>View more detail</p></Link></div>
             <div className=' basis-4/12 absolute bottom-2 right-6 items-center space-x-2 ml-auto'>
-            <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold" onClick={openFreeHiring}>Hire Now</span>
+            <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold" onClick={() => openFreeHiring(free.id)}>Hire Now</span>
         </div>
+        {isFreeHiringOpen[free.id] && (
+        <AddFreeHireRequest closeFreeHiring={() => closeFreeHiring(free.id)} free={free} />
+      )}
         </div>
-        {isFreeHiringOpen && <AddFreeHireRequest closeFreeHiring={closeFreeHiring} free={free}/>}
       </div>
       </>
       )
@@ -685,42 +697,6 @@ const next = () => {
                         </IconButton>
                     </div>
     )}
-  {/* {viewallfreelancer?.length > 5 && (
-                    <div className="flex justify-end items-center gap-6 m-4">
-                        <IconButton
-                            size="sm"
-                            variant="outlined"
-                            onClick={prev}
-                            disabled={currentPage === 1}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
-                        >
-                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
-                        </IconButton>
-                        
-                        {[...Array(totalPages)].map((_, index) => {
-                            const pageNumber = index + 1;
-                            return (
-                                <span
-                                    key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
-                                    onClick={() => setCurrentPage(pageNumber)}
-                                >
-                                    {pageNumber}
-                                </span>
-                            );
-                        })}
-
-                        <IconButton
-                            size="sm"
-                            variant="outlined"
-                            onClick={next}
-                            disabled={currentPage === totalPages}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
-                        >
-                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
-                        </IconButton>
-                    </div>
-                )} */}
   </div>
   </div>
   </div>

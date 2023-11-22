@@ -220,7 +220,7 @@ const [bidsCount, setBidsCount] = useState({});
                     All Job Posts
                 </span>
             </Link>  
-            <Link to=''className="flex-grow md:flex-none p-1">
+            <Link to='/view-all/hirer-contracts'className="flex-grow md:flex-none p-1">
                 <span className={`${commonStyle} px-3 md:px-8 font-inter font-normal text-sm text-[#797979] opacity-[50%] ${selectedButton === 'All Contracts' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-[50%]"} mr-3`}
                     onClick={() => setSelectedButton('All Contracts')}>
                     All Contracts

@@ -262,6 +262,33 @@ function ProjectList() {
 //(=//=//=//=//=//=//=//=//=)filter API integrtion(//=//=//=//=//=//=//=//=//=)
 
   const [filteredApiData, setFilteredApiData] = useState([]);
+
+  const [bidsCount, setBidsCount] = useState({});
+
+    useEffect(() => {
+        const fetchBidsForAllProjects = async () => {
+            const bids = {};
+
+            for (const project of viewProject || []) {
+                try {
+                    const response = await axios.get(`https://alanced.pythonanywhere.com/freelance/View/bids/${project.id}`);
+                    if (response.status === 200) {
+                        bids[project.id] = response.data.count; 
+                    } else {
+                        console.log(response.data.message || 'Error fetching bids');
+                        bids[project.id] = 0;
+                    }
+                } catch (err) {
+                    console.log(err.message);
+                    bids[project.id] = 0;
+                }
+            }
+
+            setBidsCount(bids);
+        };
+
+        fetchBidsForAllProjects();
+    }, [viewProject]);
   
 
 
@@ -605,7 +632,7 @@ function ProjectList() {
                   <div className=' basis-4/12'>
                     <div className='flex flex-row'>
                       <div className=' basis-2/12'><i class="bi bi-file-text"></i></div>
-                      <div className=' basis-10/12 font-inter text-[#797979]'>1 Received</div>
+                      <div className=' basis-10/12 font-inter text-[#797979]'>{bidsCount[project.id] ? bidsCount[project.id]:0} Received</div>
                     </div>
                   </div>
                 </div>
