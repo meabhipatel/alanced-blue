@@ -8,6 +8,7 @@ import alancedlogo from '../images/Alanced-footer.png';
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { formatDateInput } from '../../container/freelancer/TimeFunctions'
+import { useNavigate } from 'react-router-dom'
 
 const Notifications = () => {
 
@@ -15,6 +16,7 @@ const Notifications = () => {
   const [freenotifications, setFreeNotifications] = useState([]);
   const token = useSelector(state => state.login.accessToken)
   const loginType = useSelector(state => state.login.type)
+  const navigate = useNavigate();
 
   const fetchClientNotifications = async () => {
     try {
@@ -179,7 +181,37 @@ function groupByDate(notifications) {
     }, {});
 }
 
+const getNotificationRedirectPath = (notif) => {
+    if (notif.type === 'bid') {
+      return '/View-all/Job-post'; 
+    } else if (notif.type === 'AllInvite') {
+      return '/view-all/invited-freelancers';  // Redirect to the invitation page
+    }else if (notif.type === 'AllHirereq') {
+      return '/my-proposals';  // Redirect to the invitation page
+    }else if (notif.type === 'review') {
+      return '/freelancer/edit-profile';  // Redirect to the invitation page
+    }
+     else {
+      return '/notifications';  // Default redirect path
+    }
+  };   
 
+//   const handleNotificationClick = (notification) => {
+//     const redirectPath = getNotificationRedirectPath(notification);
+//     navigate(redirectPath);
+//   };
+
+const handleClientNotificationClick = (notif) => {
+    markAsReadClient(notif.id); // Mark the notification as read
+    const redirectPath = getNotificationRedirectPath(notif);
+    navigate(redirectPath); // Redirect to the appropriate page
+  };
+
+  const handleFreeNotificationClick = (notif) => {
+    markAsReadFree(notif.id); // Mark the notification as read
+    const redirectPath = getNotificationRedirectPath(notif);
+    navigate(redirectPath); // Redirect to the appropriate page
+  };
 
   return (
     <>
@@ -196,7 +228,7 @@ function groupByDate(notifications) {
             <div key={date}>
                 <div className="text-lg font-bold p-5">{date}</div>
                 {notifs.map(notif => (
-                    <div key={notif.id} className={`border-b cursor-pointer p-5 hover:bg-[#F6FAFD] ${!notif.is_read ? 'bg-[#f4f8fc]' : 'bg-white'} relative group`} onClick={() => markAsReadClient(notif.id)}>
+                    <div key={notif.id} className={`border-b cursor-pointer p-5 hover:bg-[#F6FAFD] ${!notif.is_read ? 'bg-[#f4f8fc]' : 'bg-white'} relative group`} onClick={() => handleClientNotificationClick(notif)}>
                         <div className="flex justify-between items-center">
                             <div className="flex items-center">
                                 <img src={alancedlogo} alt="" className='h-[18px] w-[18px] mr-3'/>
@@ -233,7 +265,7 @@ function groupByDate(notifications) {
             <div key={date}>
                 <div className="text-lg font-bold p-5">{date}</div>
                 {notifs.map(notif => (
-                    <div key={notif.id} className={`border-b cursor-pointer p-5 hover:bg-[#F6FAFD] ${!notif.is_read ? 'bg-[#f4f8fc]' : 'bg-white'} relative group`} onClick={() => markAsReadFree(notif.id)}>
+                    <div key={notif.id} className={`border-b cursor-pointer p-5 hover:bg-[#F6FAFD] ${!notif.is_read ? 'bg-[#f4f8fc]' : 'bg-white'} relative group`} onClick={() => handleFreeNotificationClick(notif)}>
                         <div className="flex justify-between items-center">
                             <div className="flex items-center">
                                 <img src={alancedlogo} alt="" className='h-[18px] w-[18px] mr-3'/>

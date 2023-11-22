@@ -16,6 +16,7 @@ import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { formatDateInput } from '../freelancer/TimeFunctions'
+import AddReviewPopup from './HirerAllPopup/AddReviewPopup'
 
 const AllHirerContracts = () => {
 
@@ -23,6 +24,25 @@ const AllHirerContracts = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [searchQuery, setSearchQuery] = useState('');
+    // const [isReviewOpen, setIsReviewOpen] = useState(false);
+
+    // const openReview = () => {
+    //   setIsReviewOpen(true);
+    // };
+  
+    // const closeReview = () => {
+    //   setIsReviewOpen(false);
+    // };
+
+    const [isReviewOpen, setIsReviewOpen] = React.useState({});
+
+  const openReview = (contractId) => {
+    setIsReviewOpen((prev) => ({ ...prev, [contractId]: true }));
+  };
+
+  const closeReview = (contractId) => {
+    setIsReviewOpen((prev) => ({ ...prev, [contractId]: false }));
+  };
 
     const [viewallhirercontracts, setViewAllhirercontracts] = useState([]);
 
@@ -38,7 +58,7 @@ const AllHirerContracts = () => {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`http://127.0.0.1:8000/freelance/View-all/hirer-contracts?${queryString}`,{
+      .get(`https://alanced.pythonanywhere.com/freelance/View-all/hirer-contracts?${queryString}`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }
@@ -129,12 +149,19 @@ function highlightText(text, query) {
                 <p className='font-inter text-[14px] text-[#031136]  mt-3 text-left font-normal'>Budget: <span className='opacity-50'>${highlightText(contract.hiring_budget,searchQuery)} {highlightText(contract.hiring_budget_type,searchQuery)}</span></p>
             </div>
             {/* <div className=' basis-3/12'><Link to=''><button className='rounded h-8 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-sm font-bold ml-20'>See Timesheet</button></Link></div> */}
-            <div className=' basis-3/12'></div>
+            <div className=' basis-1/12'></div>
             <div className='basis-1/12'>
             <div className={isJobOpen(contract.project_deadline) ? 'text-green-600 mt-1 font-semibold' : 'text-yellow-600 mt-1 font-semibold'}>
                 {isJobOpen(contract.project_deadline) ? 'Active' : 'Completed'}
             </div>
             </div>
+            <div className='basis-2/12'>
+            <span class="inline-block text-sm px-6 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold cursor-pointer" onClick={() => openReview(contract.hire_id)}>Add Review</span>
+            {/* <div class="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 mt-1" onClick={() => openReview(contract.hire_id)}>
+        <img src={threedot} alt="" />
+    </div> */}
+    </div>
+    {isReviewOpen[contract.hire_id] && <AddReviewPopup closeReview={()=>closeReview(contract.hire_id)} contract={contract}/>} 
 
             {/* <div className=' basis-1/12'><div class="text-green-600 mt-1">{isJobOpen(contract.project_deadline) ? 'Active' : 'Completed'}
             </div> 

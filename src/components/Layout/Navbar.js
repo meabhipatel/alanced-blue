@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import logo from '../images/Alanced.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import navback from '../images/Nav_Background.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { LogoutAction } from '../../redux/Auth/AuthAction'
@@ -17,8 +17,11 @@ import { GetFreelancerSelfProfileAction } from '../../redux/Freelancer/Freelance
 import { GetViewAllProjectsListAction } from '../../redux/Freelancer/FreelancerAction'
 import { timeAgo } from '../../container/freelancer/TimeFunctions'
 
+
+
 const Navbar = () => {
-  
+
+const navigate = useNavigate();
   const accessToken = localStorage.getItem('accessToken')
   const AccessToken = useSelector(state => state.login.accessToken);
 //   const loginType = useSelector(state => state.login.type)
@@ -242,6 +245,38 @@ const fetchFreeNotifications = async () => {
 
   const unreadfreeCount = freenotifications.filter(notif => !notif.is_read).length;
 
+  const getNotificationRedirectPath = (notif) => {
+    if (notif.type === 'bid') {
+      return '/View-all/Job-post'; 
+    } else if (notif.type === 'AllInvite') {
+      return '/view-all/invited-freelancers';  // Redirect to the invitation page
+    }else if (notif.type === 'AllHirereq') {
+      return '/my-proposals';  // Redirect to the invitation page
+    }else if (notif.type === 'review') {
+      return '/freelancer/edit-profile';  // Redirect to the invitation page
+    }
+     else {
+      return '/notifications';  // Default redirect path
+    }
+  };   
+
+//   const handleNotificationClick = (notification) => {
+//     const redirectPath = getNotificationRedirectPath(notification);
+//     navigate(redirectPath);
+//   };
+
+const handleClientNotificationClick = (notif) => {
+    markAsReadClient(notif.id); // Mark the notification as read
+    const redirectPath = getNotificationRedirectPath(notif);
+    navigate(redirectPath); // Redirect to the appropriate page
+  };
+
+  const handleFreeNotificationClick = (notif) => {
+    markAsReadFree(notif.id); // Mark the notification as read
+    const redirectPath = getNotificationRedirectPath(notif);
+    navigate(redirectPath); // Redirect to the appropriate page
+  };
+  
 
   return (
 <div className='sticky z-50 top-0 bg-cover bg-top' style={{ backgroundImage: `url(${navback})`}} onMouseLeave={(e)=>{setFindworkDropdown(); setMyJobsDropdown(); setReportsDropdown()}}>
@@ -403,7 +438,7 @@ const fetchFreeNotifications = async () => {
         {clientnotifications.length > 0 ? (
             <>
                 {clientnotifications.slice(0, 3).map(notif => (
-                    <div key={notif.id} className={`border-b cursor-pointer p-3 px-5 hover:bg-[#F6FAFD] ${!notif.is_read ? 'bg-[#f4f8fc]' : 'bg-white'} relative group`} onClick={() => markAsReadClient(notif.id)}>
+                    <div key={notif.id} to={getNotificationRedirectPath(notif)} className={`border-b cursor-pointer p-3 px-5 hover:bg-[#F6FAFD] ${!notif.is_read ? 'bg-[#f4f8fc]' : 'bg-white'} relative group`} onClick={() => handleClientNotificationClick(notif)}>
                         <div className='flex items-center justify-between mt-1'>
                             <div className="flex items-center">
                                 <img src={alancedlogo} alt="" className='h-[18px] w-[18px] mr-2'/>
@@ -436,7 +471,7 @@ const fetchFreeNotifications = async () => {
         {freenotifications.length > 0 ? (
             <>
                 {freenotifications.slice(0, 3).map(notif => (
-                    <div key={notif.id} className={`border-b cursor-pointer p-3 px-5 hover:bg-[#F6FAFD] ${!notif.is_read ? 'bg-[#f4f8fc]' : 'bg-white'} relative group`} onClick={() => markAsReadFree(notif.id)}>
+                    <div key={notif.id} className={`border-b cursor-pointer p-3 px-5 hover:bg-[#F6FAFD] ${!notif.is_read ? 'bg-[#f4f8fc]' : 'bg-white'} relative group`} onClick={() => handleFreeNotificationClick(notif)}>
                         <div className='flex items-center justify-between mt-1'>
                             <div className="flex items-center">
                                 <img src={alancedlogo} alt="" className='h-[18px] w-[18px] mr-2'/>
@@ -463,6 +498,7 @@ const fetchFreeNotifications = async () => {
         )}
     </div>
 )}
+
          {/* <i className="bi bi-bell text-2xl"></i>
          <span className="absolute top-1.5 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 border-2 border-white"></span> */}
       </div>
