@@ -362,8 +362,8 @@ const handleClientNotificationClick = (notif) => {
       {MyJobsdropdown && (
         <div className="absolute md:right-[39.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
-            <Link to='/my-jobs' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Jobs</span>
+            <Link to='/all-invitations' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">All Invitations</span>
                       </Link>
                       <Link to='/freelancer/all-contracts' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">All Contracts</span>
@@ -385,33 +385,36 @@ const handleClientNotificationClick = (notif) => {
                     <Link to='/view-all/invited-freelancers' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Invited Freelancers</span>
                     </Link>
+                    <Link to='/view-all/hirer-contracts' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
+                        <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">All Contracts</span>
+                      </Link>
           </div>
       </div>
   )} </> }
   {loginType=='FREELANCER' ? <>
-      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setReportsDropdown(true)}> Reports <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
+      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setReportsDropdown(true)}> Payments <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
       {Reportsdropdown && (
         <div className="absolute md:right-[31.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
             <Link to='/freelancer/my-reports' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Reports</span>
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Transaction History</span>
                       </Link>
-                      <Link to='' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
+                      {/* <Link to='' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Connects History</span>
-                      </Link>
+                      </Link> */}
              </div>
         </div>
     )}</>:<>
-    <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setReportsDropdown(true)}> Reports <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
+    <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setReportsDropdown(true)}> Payments <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
       {Reportsdropdown && (
         <div className="absolute md:right-[33rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
             <Link to='/freelancer/my-reports' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">My Reports</span>
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Transaction History</span>
                       </Link>
-                      <Link to='/view-all/hirer-contracts' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
+                      {/* <Link to='/view-all/hirer-contracts' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">All Contracts</span>
-                      </Link>
+                      </Link> */}
              </div>
         </div>
     )}

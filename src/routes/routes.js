@@ -68,6 +68,7 @@ import ViewHiringDetail from "../container/freelancer/ViewHiringDetail";
 import AllInvitedFreelancers from "../container/hirer/AllInvitedFreelancers";
 import ViewInvitationDetail from "../container/hirer/ViewInvitationDetail";
 import AllHirerContracts from "../container/hirer/AllHirerContracts";
+import AllInvitations from "../container/freelancer/AllInvitations";
 
 
   const AppRouter = (props) => {
@@ -187,6 +188,7 @@ import AllHirerContracts from "../container/hirer/AllHirerContracts";
             <Route path="/notifications" element={<Notifications/>}/>
             <Route path="/freelancer/add-portfolio" element={<AddPortfolioForm/>}></Route>
             <Route path="/view/hiring-detail" element={<ViewHiringDetail/>}></Route>
+            <Route path="/all-invitations" element={<AllInvitations/>}></Route>
           </>}
 
 

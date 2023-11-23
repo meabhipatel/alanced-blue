@@ -952,7 +952,9 @@ const handleImageSave = async () => {
         <div class="">
         <p className='font-cardo text-[#031136] text-[16px] font-bold'>{review.project_Rate}</p>
         </div>
-        <div class=""></div>
+        <div class="">
+        <p className='font-cardo text-[#031136] text-[16px] font-bold'>{review.Reviewer}</p>
+        </div>
     </div>   
     <div class="border-b opacity-50 my-4"></div>
     </div>

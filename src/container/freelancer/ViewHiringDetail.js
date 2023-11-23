@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../../components/Layout/Navbar';
 import HomeSection4 from '../../components/Layout/HomeSection4';
 import Footer from '../../components/Layout/Footer';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { formatDate, formatDateInput, getCurrentTime } from './TimeFunctions';
 import axios from 'axios';
@@ -15,6 +15,7 @@ const ViewHiringDetail = () => {
     const findhiring = location.state && location.state.hire;
     const hire_id = findhiring && findhiring.hire_id ? findhiring.hire_id :"";
     console.log(hire_id,"chkhireid")
+    const navigate = useNavigate();
     
     const [showFullDescription, setShowFullDescription] = useState(false);
     
@@ -35,6 +36,7 @@ const ViewHiringDetail = () => {
             });
             if (response.data.status === 200) {
                 toast.success("Hiring Request Accepted Successfully")
+                navigate('/my-proposals')
             } 
 
         } catch (error) {
@@ -51,6 +53,7 @@ const ViewHiringDetail = () => {
             });
             if (response.data.status === 200) {
                 toast.success("You have Rejected the Hiring Request")
+                navigate('/my-proposals')
             } 
 
         } catch (error) {

@@ -284,7 +284,7 @@ const Registration = () => {
                         </div>
 
                         <button class=" w-full px-4 py-2 text-sm leading-5 text-center transition-colors duration-150 border border-gray-200 rounded-lg focus:outline-none focus:shadow-outline-blue bg-white text-black font-semibold flex items-center justify-center font-jost" onClick={logins}><img src={google} alt="" class="mr-2" /> Sign Up with Google</button>
-                        <p className="text-xs text-left pt-3 font-inter">Already have and Account? <Link to='/login'><span className="text-yellow-400">Sign in</span></Link></p>
+                        <p className="text-xs text-left pt-3 font-inter">Already have an Account? <Link to='/login'><span className="text-yellow-400">Sign in</span></Link></p>
                 </div>
             </div>
         </div>
