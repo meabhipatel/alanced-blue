@@ -29,7 +29,7 @@ const ViewAllProposals = () => {
    const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
-  const [isHiringOpen, setIsHiringOpen] = useState(false);
+  const [isHiringOpen, setIsHiringOpen] = useState({});
   const location = useLocation();
   const project = location.state && location.state.project;
   const isOpen = location.state && location.state.isOpen;
@@ -89,12 +89,21 @@ const ViewAllProposals = () => {
 
   
 
-  const openHiring = () => {
-    setIsHiringOpen(true);
-  };
+  // const openHiring = () => {
+  //   setIsHiringOpen(true);
+  // };
 
-  const closeHiring = () => {
-    setIsHiringOpen(false);
+  // const closeHiring = () => {
+  //   setIsHiringOpen(false);
+  // };
+
+  const openHiring = (freelancerId) => {
+    setIsHiringOpen((prev) => ({ ...prev, [freelancerId]: true }));
+  };
+  
+  // Function to close hiring popup for a specific freelancer
+  const closeHiring = (freelancerId) => {
+    setIsHiringOpen((prev) => ({ ...prev, [freelancerId]: false }));
   };
 
 // const [currentPage, setCurrentPage] = useState(1);
@@ -258,10 +267,16 @@ const handleButtonClick = (event) => {
   event.preventDefault();
 };
 
-const handleBtnClick = (event) => {
+// const handleBtnClick = (event) => {
+//   event.stopPropagation();
+//   event.preventDefault();
+//   openHiring();
+// };
+
+const handleBtnClick = (event, freelancerId) => {
   event.stopPropagation();
   event.preventDefault();
-  openHiring();
+  openHiring(freelancerId); 
 };
 
 const handleClick = (event, index) => {
@@ -365,6 +380,11 @@ const handleClick = (event, index) => {
                         {sortedBids && sortedBids.map((bid, index) => {
                           const words = bid.description.split(' ');
                           const displayWords = expandedProjects[index] || words.length <= 50 ? words : words.slice(0, 50);
+
+                          const isInvited = viewinvites && viewinvites.some((invitation) => 
+                bid.freelancer_id === invitation.freelancer_id &&
+                bid.project_id === invitation.project_id
+            );
                             return(<>
                             <Link to='/View/proposal' state={{ project, bid}} onClick={() => window.scrollTo(0, 0)}>
                               <div className='px-4 md:px-8 py-2 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30'>
@@ -381,24 +401,32 @@ const handleClick = (event, index) => {
                               
                               <div class="flex items-center space-x-4">
                                       <span class="inline-block text-sm px-10 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold" onClick={handleButtonClick}>Message</span>
-                                      {viewinvites && viewinvites.map((all, invite) => {
-        return(
-            <>
-            {bid.freelancer_id == all.freelancer_id && bid.project_id == all.project_id ? <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={handleBtnClick}>
-                                          <button class="px-10 py-1 bg-white">
-                                              <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hired</p>
-                                          </button>        
-                                  </div> : ''}
-            </>
-        )
-    })}
+                          
+                        {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={isInvited ? null : handleBtnClick}>
+    <button class={`px-10 py-1 bg-white ${isInvited ? 'cursor-not-allowed' : ''}`} disabled={isInvited}>
+        <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">
+            {isInvited ? 'Hired' : 'Hire'}
+        </p>
+    </button>
+</div> */}
+<div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={isInvited ? null : (event) => handleBtnClick(event, bid.freelancer_id)}>
+  <button class={`px-10 py-1 bg-white ${isInvited ? 'cursor-not-allowed' : ''}`} disabled={isInvited}>
+    <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">
+      {isInvited ? 'Hired' : 'Hire'}
+    </p>
+  </button>
+</div>
+
                           
                                   {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={handleBtnClick}>
                                           <button class="px-10 py-1 bg-white">
                                               <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p>
                                           </button>        
                                   </div> */}
-                                  {isHiringOpen && <AddHiringRequestPopup closeHiring={closeHiring} bid={bid}/>}
+                                   {isHiringOpen[bid.freelancer_id] && (
+        <AddHiringRequestPopup closeHiring={() => closeHiring(bid.freelancer_id)} bid={bid} />
+      )}
+                                  {/* {isHiringOpen && <AddHiringRequestPopup closeHiring={closeHiring} bid={bid}/>} */}
                               </div>
                           </div>
                           <h1 className="font-cardo opacity-50 text-lg text-[#031136]">{highlightText(bid.freelancer_category.replace(/_/g, ' '),searchQuery)}</h1>

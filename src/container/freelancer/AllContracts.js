@@ -16,6 +16,7 @@ import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import contractimg from '../../components/images/Frame.png'
 
 const AllContracts = () => {
 
@@ -100,9 +101,10 @@ function highlightText(text, query) {
                 </button>
             </section>
         <div className='my-8  border border-[#E7E8F2] py-5 px-5 rounded'>
-        {viewallfreecontracts != null ? <div>
-{viewallfreecontracts && <>{viewallfreecontracts.map((contract,index) => {
-    return(
+        {viewallfreecontracts != null ? (<div>
+{/* {viewallfreecontracts && <>{viewallfreecontracts.map((contract,index) => { */}
+{viewallfreecontracts.length > 0 ? (
+                                viewallfreecontracts.map((contract, index) => (
         <div className='my-5 bg-[#FFFFFF] border-b border-[#E7E8F2]'>
         <div className=' flex flex-row'>
             <div className=' basis-8/12'>
@@ -131,8 +133,16 @@ function highlightText(text, query) {
         </div>
         </div>
         
-         )
-        })}</>}</div> : 
+        ))
+        ) : (<>
+          <img src={contractimg} alt="" className='mx-auto'/>
+          <div className='px-4 md:px-8 py-5 text-center text-2xl opacity-50'>
+        No Contracts Found
+    </div>
+            </>
+        )}
+    </div>
+) : 
         <div>{[...Array(8)].map((_) => {
               return (
           <div className='flex mt-4'>

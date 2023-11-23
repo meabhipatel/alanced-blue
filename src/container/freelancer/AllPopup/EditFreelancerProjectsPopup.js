@@ -206,7 +206,7 @@ useEffect(() => {
                     </div>
                     <div className='mt-8'>
 <div className="relative">
-                <img src={uploadedImage || "https://alanced.pythonanywhere.com/" + project.images_logo} alt="" className='w-full h-[250px] mb-4' />
+                <img src={uploadedImage || "https://alanced.pythonanywhere.com/" + project.images_logo} alt="" className='w-[500px] h-[250px] mb-4 mx-auto' />
                 <div className="absolute top-2 right-2 p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={handleEditIconClick}>
                     <img src={edit} alt="edit" />
                 </div>

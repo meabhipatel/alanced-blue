@@ -13,15 +13,18 @@ import Navbar from '../../components/Layout/Navbar';
 import Footer from '../../components/Layout/Footer';
 import HomeSection4 from '../../components/Layout/HomeSection4';
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 
 const ViewMoreProjectDetail = () => {
     const location = useLocation();
   const project = location.state && location.state.project;
+  const id = project.id
   // console.log(findproject,"send_praposal")
   const projectData = { project };
 //   const dispatch = useDispatch();
 const navigate = useNavigate();
+const [BidCount,setBidCount]=useState(0)
 
   const accessToken = useSelector(state => state.login.accessToken);  
 //   const freelancerselfbid = useSelector(state => state.freelancer.freelancerselfbid)
@@ -105,6 +108,17 @@ const handleClick = (event,project) => {
   toggleSaveProject(project);
 };
 
+useEffect(() => {
+    axios
+     .get(`https://alanced.pythonanywhere.com/freelance/View/bids/${id}`)
+       .then((response) => {
+         setBidCount(response.data.count);
+       })
+       .catch((error) => {
+         console.error('Error fetching filtered data:', error);
+       });
+   }, []);
+
 
   return (
     <>
@@ -173,7 +187,7 @@ const handleClick = (event,project) => {
             </span>
          ))}
                     <div className='mt-14 font-cardo text-lg font-normal text-[#031136]'>Activity on this job</div>
-                    <div className=' mt-5'><h1 className=' font-inter font-normal text-base'>Proposals:<span className=' opacity-[50%]'> Native or Bilingual</span></h1></div>
+                    <div className=' mt-5'><h1 className=' font-inter font-normal text-base'>Proposals:<span className=' opacity-[50%]'> {BidCount ? BidCount :0}</span></h1></div>
                     <div className=' mt-2'><h1 className=' font-inter font-normal text-base'>Interviewing:<span className=' opacity-[50%]'> 0</span></h1></div>
                     <div className=' mt-2'><h1 className=' font-inter font-normal text-base'>Invites sent:<span className=' opacity-[50%]'> 0</span></h1></div>
                     <div className=' mt-2'><h1 className=' font-inter font-normal text-base'>Unanswered invites:<span className=' opacity-[50%]'> 0</span></h1></div>

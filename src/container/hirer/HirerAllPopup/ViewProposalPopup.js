@@ -98,6 +98,31 @@ useEffect(() => {
   }
 }, [id]);
 
+
+const [viewinvites, setViewinvites] = useState([]);
+    
+  useEffect(() => {
+    
+    axios
+      .get(`https://alanced.pythonanywhere.com/freelance/View-all/invited-freelancers`,{
+        headers: {
+          "Authorization":`Bearer ${accessToken}`
+        }
+      })
+      .then((response) => {
+        // setViewFreeBid(response.data.data);
+        setViewinvites(response.data.results); 
+      })
+      .catch((error) => {
+        console.error('Error fetching filtered data:', error);
+      });
+  }, []);
+
+  const isInvited = viewinvites && viewinvites.some((invitation) =>
+  bid.freelancer_id === invitation.freelancer_id &&
+  bid.project_id === invitation.project_id
+);
+
 function formatDate(dateStr) {
   if (!dateStr) return "present";
 
@@ -203,9 +228,22 @@ const [active, setActive] = React.useState(1);
   </div>
   <div className="flex-[50%] p-6 text-right">
   <span class="inline-block text-sm px-10 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold">Message</span>
-            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
+            {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
                 <button class="px-11 py-1 bg-white" onClick={openHiring}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p></button>
-            </div>
+            </div> */}
+           
+  <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
+  <button
+    class={`px-11 py-1 bg-white ${isInvited ? 'cursor-not-allowed' : ''}`}
+    onClick={isInvited ? null : openHiring}
+    disabled={isInvited}
+  >
+    <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">
+      {isInvited ? 'Hired' : 'Hire'}
+    </p>
+  </button>
+</div>
+
             {isHiringOpen && <AddHiringRequestPopup closeHiring={closeHiring} bid={bid}/>}
   </div>
 </div>

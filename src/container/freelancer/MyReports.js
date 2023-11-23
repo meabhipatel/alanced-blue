@@ -11,7 +11,7 @@ const MyReports = () => {
     <>
     <Navbar/>
     <div className='mt-5 container-sm px-40'>
-        <h1 className=' font-cardo font-normal text-2xl text-left'>My reports</h1>
+        <h1 className=' font-cardo font-normal text-2xl text-left'>My Payments</h1>
         <div className='mt-8  border border-[#E7E8F2] py-5 px-5 rounded'>
             <div className=' flex flex-row'>
                 <div className=' basis-10/12'>
