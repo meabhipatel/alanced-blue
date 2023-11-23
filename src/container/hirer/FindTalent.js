@@ -27,6 +27,7 @@ import SkillsList from '../freelancer/AllSelectionData/SkillsList'
 import CityList from '../freelancer/AllSelectionData/CityList'
 import LanguageList from '../freelancer/AllSelectionData/LanguageList'
 import ExperienceLevel from '../freelancer/AllSelectionData/ExperienceLevel'
+import Bag from '../../components/images/bagcolor.jpg'
 
 const FindTalent = () => {
     const location = useLocation();
@@ -501,8 +502,9 @@ const FindTalent = () => {
       {/* <div className='px-4 md:px-8 py-4'>
         <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse Freelancers that match your jobs</p>
       </div> */}
-      {viewFreelancer != null ? 
-      <div className='grid md:grid-cols-2 grid-cols-1 w-full pl-3.5'>
+      {viewFreelancer != null ? (
+        viewFreelancer.length > 0 ? (
+          <div className='grid md:grid-cols-2 grid-cols-1 w-full pl-3.5'>
       {viewFreelancer && viewFreelancer.map((free, index) => {
                 return(<>
                 
@@ -595,7 +597,15 @@ const FindTalent = () => {
       )
       })}
   
-  </div> : 
+  </div>
+        ):(
+          <div className=' mt-20'>
+                <img src={Bag} alt=""  className='w-[20%] mx-auto'/>
+                <p className=' mt-5 font-cardo text-xl opacity-70 text-center'>There are no results that match your search.</p>
+                <p className=' mt-3 font-cardo text-sm opacity-60 text-center'>Please try adjusting your search keywords or filters.</p>
+              </div>
+        )
+       ): (
   <div className='grid grid-cols-2 w-[70%] md:w-full pl-3.5'>
     {[...Array(6)].map((_) => {
       return (
@@ -609,7 +619,7 @@ const FindTalent = () => {
       
     </div>);})}
   </div>
-    }
+    )}
   <div>
   {totalPages > 1 && (
                     <div className="flex justify-end items-center gap-6 m-4">
