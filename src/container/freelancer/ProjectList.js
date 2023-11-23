@@ -27,6 +27,7 @@ import ExperienceLevel from './AllSelectionData/ExperienceLevel'
 import ProjectRate from './AllSelectionData/ProjectRate'
 import CityList from './AllSelectionData/CityList'
 import SkillsList from './AllSelectionData/SkillsList'
+import Bag from '../../components/images/bagcolor.jpg'
 
 
 function ProjectList() {
@@ -596,8 +597,9 @@ function ProjectList() {
               </div>
             )}
           </div>
-          { viewProject != null ? 
-          <div className=' basis-9/12 mt-10'>
+          { viewProject != null ? (
+            viewProject.length > 0 ? (
+              <div className=' basis-9/12 mt-10'>
             {viewProject && <>{viewProject.map((project,index)=> {
               const words = project.description.split(' ');
               const displayWords = expandedProjects[index] || words.length <= 30 ? words : words.slice(0, 30);
@@ -689,7 +691,16 @@ function ProjectList() {
             </div>
               )
             })}</>}
-          </div> : <div className=' basis-9/12 mt-10'>
+          </div>
+            ): (
+              // <p>Project Not Found</p>
+              <div className=' mx-auto'>
+                <img src={Bag} alt=""  className='h-[10%] ml-[30%] mt-[20%]'/>
+                <p className=' mt-5 font-cardo text-xl opacity-70'>There are no results that match your search.</p>
+                <p className=' mt-3 font-cardo text-sm opacity-60'>Please try adjusting your search keywords or filters.</p>
+              </div>
+            )
+          ) : (<div className=' basis-9/12 mt-10'>
             <Skeleton height={50} width={50} inline={true} style={{ float: 'left'}}/>
             <Skeleton height={110} width={700} style={{ float: 'left', marginLeft: 20}}/>
             <Skeleton height={40} width={100} style={{ marginTop: 40}}/><br/>
@@ -708,7 +719,7 @@ function ProjectList() {
             <Skeleton height={40} width={100} inline={true} style={{marginTop:5, marginLeft:70, float:'left'}}/>
             <Skeleton height={40} width={100} inline={true} count={2} style={{ marginTop:5, marginLeft:5, float:'left'}}/>
           </div>
-          }
+          )}
         </div>
         {totalPages > 1 && (
                     <div className="flex justify-end items-center gap-6 m-4">
