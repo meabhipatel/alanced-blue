@@ -4,8 +4,11 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { GetFreelancerSelfProfileAction } from '../../../redux/Freelancer/FreelancerAction';
 
 const EditEmploymentPopup = ({ closeEditEmployment, employment }) => {
+
+    const dispatch = useDispatch()
 
     const formatToYYYYMMDD = (dateStr) => {
         if (!dateStr) return '';
@@ -54,6 +57,7 @@ const EditEmploymentPopup = ({ closeEditEmployment, employment }) => {
             if (response.data.status === 200) {
                 toast.success("Employment Data Updated");
                 closeEditEmployment();
+                dispatch(GetFreelancerSelfProfileAction(accessToken));
             } else {
                 console.log(response.data.message || 'Error updating the employment');
             }

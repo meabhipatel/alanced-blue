@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { UpdateFreelancerProfileAction } from '../../../redux/Freelancer/FreelancerAction';
+import { GetFreelancerSelfProfileAction, UpdateFreelancerProfileAction } from '../../../redux/Freelancer/FreelancerAction';
 
 const EditEducationPopup = ({ closeEditEducation }) => {
 
@@ -19,6 +19,7 @@ const EditEducationPopup = ({ closeEditEducation }) => {
   const handleSave = () => {
       dispatch(UpdateFreelancerProfileAction({ qualification },accessToken));
       closeEditEducation();
+      dispatch(GetFreelancerSelfProfileAction(accessToken));
   }
 
 

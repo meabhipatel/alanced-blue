@@ -13,6 +13,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import axios from 'axios'
 import { timeAgo } from '../freelancer/TimeFunctions'
+import experiences from '../../components/images/experience.png'
 
 const ViewAllJobPost = () => {
     
@@ -91,94 +92,12 @@ const ViewAllJobPost = () => {
     }
 
 
-  // const [active, setActive] = React.useState(1);
- 
-  // const next = () => {
-  //   window.scrollTo(0, 0)
-  //   if (active === 5) return;
- 
-  //   setActive(active + 1);
-  // };
- 
-  // const prev = () => {
-  //   window.scrollTo(0, 0)
-  //   if (active === 1) return;
- 
-  //   setActive(active - 1);
-  // };
-
-  // const [currentPage, setCurrentPage] = useState(1);
-    // const [categorySearch, setCategorySearch] = useState('');
-
-    // useEffect(() => {
-    //     setCurrentPage(1);
-    // }, [categorySearch]);
-
-    // const jobsPerPage = 5;
-    // const indexOfLastJob = currentPage * jobsPerPage;
-    // const indexOfFirstJob = indexOfLastJob - jobsPerPage;
-    
-    // const filteredJobs = viewhirerselfproject?.filter(project => 
-    //     project.category.replace(/_/g, ' ').toLowerCase().includes(categorySearch.toLowerCase())
-    // ) || [];
-
-    // const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
-    // const totalPages = Math.ceil((filteredJobs.length || 0) / jobsPerPage);
-
-    // const next = () => {
-    //     window.scrollTo(0, 0);
-    //     if (currentPage === totalPages) return;
-    //     setCurrentPage(currentPage + 1);
-    // };
-
-    // const prev = () => {
-    //     window.scrollTo(0, 0);
-    //     if (currentPage === 1) return;
-    //     setCurrentPage(currentPage - 1);
-    // };
-
-
-//   const [currentPage, setCurrentPage] = useState(1);
-//   const next = () => {
-//     window.scrollTo(0, 0);
-//     if (currentPage === totalPages) return;
-//     setCurrentPage(currentPage + 1);
-// };
-
-// const prev = () => {
-//     window.scrollTo(0, 0);
-//     if (currentPage === 1) return;
-//     setCurrentPage(currentPage - 1);
-// };
-
-//     const jobsPerPage = 5;
-//     const indexOfLastJob = currentPage * jobsPerPage;
-//     const indexOfFirstJob = indexOfLastJob - jobsPerPage;
-//     const currentJobs = viewhirerselfproject?.slice(indexOfFirstJob, indexOfLastJob) || [];
-//     const totalPages = Math.ceil((viewhirerselfproject?.length || 0) / jobsPerPage);
-
-
   const isJobOpen = (deadline) => {
     const deadlineDate = new Date(deadline);
     const now = new Date();
     return now < deadlineDate;
 }
 
-// useEffect(() => {
-//   if(id) { 
-//       axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View/bids/${id}`)
-//           .then(response => {
-//               if (response.data.status === 200) {
-//                   setBid(response.data.data);
-//               } else {
-//                   console.log(response.data.message || 'Error fetching bids');
-//               }
-//           })
-//           .catch(err => {
-//               console.log(err.message);
-//           });
-//   }
-// }, [id]); 
 
 const [bidsCount, setBidsCount] = useState({});
 
@@ -205,6 +124,37 @@ const [bidsCount, setBidsCount] = useState({});
         };
 
         fetchBidsForAllProjects();
+    }, [viewhirerProject]);
+
+    const [invitesCount, setInvitesCount] = useState({});
+
+    useEffect(() => {
+        const fetchInvitesForAllProjects = async () => {
+            const invites = {};
+
+            for (const project of viewhirerProject || []) {
+                try {
+                    const response = await axios.get(`https://alanced.pythonanywhere.com/freelance/View/project-invitations-count/${project.id}`,{
+                      headers: {
+                      Authorization: `Bearer ${accessToken}`,
+                  },
+              });
+                    if (response.status === 200) {
+                        invites[project.id] = response.data.data; 
+                    } else {
+                        console.log(response.data.message || 'Error fetching bids');
+                        invites[project.id] = 0;
+                    }
+                } catch (err) {
+                    console.log(err.message);
+                    invites[project.id] = 0;
+                }
+            }
+
+            setInvitesCount(invites);
+        };
+
+        fetchInvitesForAllProjects();
     }, [viewhirerProject]);
 
 
@@ -245,53 +195,56 @@ const [bidsCount, setBidsCount] = useState({});
         <img src={searchbtn} alt="Search Icon" />
     </button>
 </section>
-{viewhirerProject != null ? 
-<div>
-{viewhirerProject && viewhirerProject.map((project, index) => {
-{/* {viewhirerselfproject && viewhirerselfproject.map((project, index) => { */}
-                 
-                //  const isJobOpen = (deadline) => {
-                //   const deadlineDate = new Date(deadline);
-                //   const now = new Date();
-                //   return now < deadlineDate;
-                // }
-                return(<>
-    <div className='px-4 md:px-8 py-5 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30' key={index}>
-<div class="flex">
-  <div class="flex-[40%]">
-  <Link to='/View/Job-post' state={{project}} onClick={() => window.scrollTo(0, 0)}>
-  <p className="font-inter text-[#0A142F] text-[16px] font-medium hover:underline hover:text-green-600">{highlightText(project.title,searchQuery)}</p>
-  </Link>
-  {/* <p className='font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-1'>{highlightText(project.Project_Rate,searchQuery)} Rate - {highlightText(project.experience_level.replace(/_/g, ' '),searchQuery)} - Posted {timeAgo(project.Project_created_at)}</p> */}
-  <p className='font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-1'>{highlightText(project.Project_Rate,searchQuery)} Rate - Expert - Posted {timeAgo(project.Project_created_at)}</p>
-  <span className={`px-4 py-1 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 font-semibold ${isJobOpen(project.deadline) ? 'bg-[#E4EBE4] text-green-800 border border-green-800' : 'bg-yellow-100 text-yellow-700 border border-yellow-700'}`}>
-              {isJobOpen(project.deadline) ? 'Open' : 'Closed'}
-            </span>
-  </div>
-  <div class="flex-[40%] flex">
-    <div class="flex-1 p-2">
-    <p className="font-inter text-[#0A142F] text-[16px] font-medium">{bidsCount[project.id] ? bidsCount[project.id] : 0}</p>
-    <p className="font-inter text-[#0A142F] opacity-50 text-[16px] font-medium">Proposals</p>
+{viewhirerProject !== null ? (viewhirerProject &&
+            viewhirerProject.length > 0 ? (
+              <div>
+                {viewhirerProject && viewhirerProject.map((project, index) => (
+                  <div className='px-4 md:px-8 py-5 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30' key={index}>
+                    <div class="flex">
+                      <div class="flex-[40%]">
+                        <Link to='/View/Job-post' state={{ project }} onClick={() => window.scrollTo(0, 0)}>
+                          <p className="font-inter text-[#0A142F] text-[16px] font-medium hover:underline hover:text-green-600">{highlightText(project.title, searchQuery)}</p>
+                        </Link>
+                        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-1'>{highlightText(project.Project_Rate, searchQuery)} Rate - Expert - Posted {timeAgo(project.Project_created_at)}</p>
+                        <span className={`px-4 py-1 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 font-semibold ${isJobOpen(project.deadline) ? 'bg-[#E4EBE4] text-green-800 border border-green-800' : 'bg-yellow-100 text-yellow-700 border border-yellow-700'}`}>
+                          {isJobOpen(project.deadline) ? 'Open' : 'Closed'}
+                        </span>
+                      </div>
+                      <div class="flex-[40%] flex">
+                        <div class="flex-1 p-2">
+                          <p className="font-inter text-[#0A142F] text-[16px] font-medium">{bidsCount[project.id] ? bidsCount[project.id] : 0}</p>
+                          <p className="font-inter text-[#0A142F] opacity-50 text-[16px] font-medium">Proposals</p>
+                        </div>
+                        <div class="flex-1 p-2">
+                          <p className="font-inter text-[#0A142F] text-[16px] font-medium">0</p>
+                          <p className="font-inter text-[#0A142F] opacity-50 text-[16px] font-medium">Messaged</p>
+                        </div>
+                        <div class="flex-1 p-2">
+                          <p className="font-inter text-[#0A142F] text-[16px] font-medium">{invitesCount[project.id] ? invitesCount[project.id] : 0}</p>
+                          <p className="font-inter text-[#0A142F] opacity-50 text-[16px] font-medium">Invitations</p>
+                        </div>
+                      </div>
+                      <div class="flex-[20%] text-center">
+                        <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
+                          <Link to='/View-all/proposals' state={{ project, isOpen: isJobOpen(project.deadline) }} onClick={() => window.scrollTo(0, 0)}>
+                            <button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">View Proposals</p></button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className='mt-16 mb-8'> 
+    <img src={experiences} alt="" className='mx-auto mt-2' />
+    <div className='px-4 md:px-8 py-5 text-center text-2xl opacity-50'>
+        Jobs Not Found
     </div>
-    <div class="flex-1 p-2">
-    <p className="font-inter text-[#0A142F] text-[16px] font-medium">0</p>
-    <p className="font-inter text-[#0A142F] opacity-50 text-[16px] font-medium">Messaged</p>
-    </div>
-    <div class="flex-1 p-2">
-    <p className="font-inter text-[#0A142F] text-[16px] font-medium">0</p>
-    <p className="font-inter text-[#0A142F] opacity-50 text-[16px] font-medium">Hired</p>
-    </div>
-  </div>
-  <div class="flex-[20%] text-center">
-  <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
-                <Link to='/View-all/proposals' state={{ project, isOpen: isJobOpen(project.deadline) }} onClick={() => window.scrollTo(0, 0)}><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">View Proposals</p></button></Link>
-            </div>
-  </div>
 </div>
-    </div>
-    </>
-      )
-  })}</div>: <div>
+            )
+          ) 
+  : <div>
     {[...Array(8)].map((_) => {
       return (
   <div className='flex mt-5'>
@@ -350,77 +303,6 @@ const [bidsCount, setBidsCount] = useState({});
                         </IconButton>
                     </div>
     )}
-    {/* {viewhirerselfproject?.length > 5 && (
-                    <div className="flex justify-end items-center gap-6 m-4">
-                        <IconButton
-                            size="sm"
-                            variant="outlined"
-                            onClick={prev}
-                            disabled={currentPage === 1}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
-                        >
-                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
-                        </IconButton>
-                        
-                        {[...Array(totalPages)].map((_, index) => {
-                            const pageNumber = index + 1;
-                            return (
-                                <span
-                                    key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
-                                    onClick={() => setCurrentPage(pageNumber)}
-                                >
-                                    {pageNumber}
-                                </span>
-                            );
-                        })}
-
-                        <IconButton
-                            size="sm"
-                            variant="outlined"
-                            onClick={next}
-                            disabled={currentPage === totalPages}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
-                        >
-                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
-                        </IconButton>
-                    </div>
-                )} */}
-    {/* <div className="flex justify-end items-center gap-6 m-4">
-  <IconButton
-    size="sm"
-    variant="outlined"
-    onClick={prev}
-    disabled={active === 1}
-    style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
-  >
-    <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
-  </IconButton>
-
-  
-  {[...Array(5)].map((_, index) => {
-    const pageNumber = index + 1;
-    return (
-      <span
-        key={pageNumber}
-        className={`px-0 py-1 ${active === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
-        onClick={() => setActive(pageNumber)}
-      >
-        {pageNumber}
-      </span>
-    );
-  })}
-
-  <IconButton
-    size="sm"
-    variant="outlined"
-    onClick={next}
-    disabled={active === 5}
-    style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
-  >
-    <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
-  </IconButton>
-</div> */}
     </div>
     </div>
     <HomeSection4/>

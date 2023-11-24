@@ -468,14 +468,14 @@ useEffect(() => {
                         <div className="flex flex-col">
                             <label className="block text-xl mt-3 font-cardo" htmlFor="fromInput">From</label>
                             <div className="flex items-center">
-                                <input id="fromInput" type="text" placeholder="" className="flex-1 w-36 mr-1 p-2 border my-1 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"  onChange={onChange} name="min_hourly_rate" value={addProject.min_hourly_rate || ''}/>
+                                <input id="fromInput" type="number" placeholder="" className="flex-1 w-36 mr-1 p-2 border my-1 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"  onChange={onChange} name="min_hourly_rate" value={addProject.min_hourly_rate || ''}/>
                                 <span>/hr</span>
                             </div>
                         </div>
                         <div className="flex flex-col">
                             <label className="block text-xl mt-3 font-cardo" htmlFor="toInput">To</label>
                             <div className="flex items-center">
-                                <input id="toInput" type="text" placeholder="" className="flex-1 w-36 mr-1 p-2 border my-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"  onChange={onChange} name="max_hourly_rate" value={addProject.max_hourly_rate || ''}/>
+                                <input id="toInput" type="number" placeholder="" className="flex-1 w-36 mr-1 p-2 border my-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"  onChange={onChange} name="max_hourly_rate" value={addProject.max_hourly_rate || ''}/>
                                 <span>/hr</span>
                             </div>
                         </div>
@@ -487,7 +487,7 @@ useEffect(() => {
             {selectedOption === 'fixed' && (
                 <div>
                     <label className="block text-xl mt-3 font-cardo" htmlFor="maxBudgetInput">Maximum Budget</label> 
-                    <input id="maxBudgetInput" type="text" className='border my-2 p-2 rounded-md w-52 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='' onChange={onChange} name="fixed_budget" value={addProject.fixed_budget || ''}/>
+                    <input id="maxBudgetInput" type="number" className='border my-2 p-2 rounded-md w-52 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='' onChange={onChange} name="fixed_budget" value={addProject.fixed_budget || ''}/>
                     <p className="text-lg opacity-50 font-cardo font-medium py-2">Set your Project Budget</p>
                 </div>
             )}

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { UpdateFreelancerProfileAction } from '../../../redux/Freelancer/FreelancerAction';
+import { GetFreelancerSelfProfileAction, UpdateFreelancerProfileAction } from '../../../redux/Freelancer/FreelancerAction';
 import CityList from '../AllSelectionData/CityList';
 
 const AvailableOffPopup = ({ isAvailable,setIsAvailable,closeAvailableOff }) => {
@@ -32,6 +32,7 @@ const AvailableOffPopup = ({ isAvailable,setIsAvailable,closeAvailableOff }) => 
             availableStatus: localAvailability
         }, accessToken));
         closeAvailableOff();
+        dispatch(GetFreelancerSelfProfileAction(accessToken));
     }
 
     // const [cities] = useState([

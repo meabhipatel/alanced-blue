@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { UpdateFreelancerProfileAction } from "../../../redux/Freelancer/FreelancerAction";
+import { GetFreelancerSelfProfileAction, UpdateFreelancerProfileAction } from "../../../redux/Freelancer/FreelancerAction";
 
 const EditHrRatePopup = ({ closeHrRate }) => {
 
@@ -37,6 +37,7 @@ const EditHrRatePopup = ({ closeHrRate }) => {
   const handleSave = () => {
     dispatch(UpdateFreelancerProfileAction({ hourly_rate: hourlyRate }, accessToken));
     closeHrRate();
+    dispatch(GetFreelancerSelfProfileAction(accessToken));
   }
 
   // const accessToken = useSelector(state => state.login.accessToken);  

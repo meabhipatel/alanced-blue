@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { UpdateFreelancerProfileAction } from '../../../redux/Freelancer/FreelancerAction';
+import { GetFreelancerSelfProfileAction, UpdateFreelancerProfileAction } from '../../../redux/Freelancer/FreelancerAction';
 import SkillsList from '../AllSelectionData/SkillsList';
 
 const EditSkillPopup = ({ closeEditSkill }) => {
@@ -48,6 +48,7 @@ const EditSkillPopup = ({ closeEditSkill }) => {
     const formattedSkills = formatSkillsForDispatch(skills);
     dispatch(UpdateFreelancerProfileAction(formattedSkills, accessToken));
     closeEditSkill();
+    dispatch(GetFreelancerSelfProfileAction(accessToken));
   };
 
 

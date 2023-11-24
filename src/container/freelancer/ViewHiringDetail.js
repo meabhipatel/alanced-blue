@@ -36,7 +36,7 @@ const ViewHiringDetail = () => {
             });
             if (response.data.status === 200) {
                 toast.success("Hiring Request Accepted Successfully")
-                navigate('/my-proposals')
+                navigate('/all-invitations')
             } 
 
         } catch (error) {
@@ -53,7 +53,7 @@ const ViewHiringDetail = () => {
             });
             if (response.data.status === 200) {
                 toast.success("You have Rejected the Hiring Request")
-                navigate('/my-proposals')
+                navigate('/all-invitations')
             } 
 
         } catch (error) {
@@ -95,7 +95,29 @@ const ViewHiringDetail = () => {
         <div className='container-sm px-36'>
             <h1 className='font-inter text-2xl text-left mt-5'>Hiring Details</h1>
                 <div className=' my-8  border border-[#E7E8F2] py-8 px-8 rounded-lg'>
-            <h1 className=' text-2xl font-cardo font-semibold text-left'>Job Details</h1>
+            {/* <h1 className=' text-2xl font-cardo font-semibold text-left'>Job Details</h1>
+            <div className='mt-4 text-left'>
+        <span class="inline-block text-sm px-8 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold cursor-pointer" onClick={handleAcceptProject}>Accept</span>
+      <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
+      <button class="px-8 py-1 bg-[#E2F9EE]"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px] cursor-pointer" onClick={handleRejectProject}>Reject</p></button>
+</div> 
+</div>    */}
+<div className='flex justify-between items-center'>
+  <h1 className='text-2xl font-cardo font-semibold text-left'>Job Details</h1>
+  <div className='mt-4 text-right'>
+    <span className="inline-block text-sm px-8 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold cursor-pointer" onClick={handleAcceptProject}>
+      Accept
+    </span>
+    <div className="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
+      <button className="px-8 py-1 bg-white">
+        <p className="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px] cursor-pointer" onClick={handleRejectProject}>
+          Reject
+        </p>
+      </button>
+    </div>
+  </div>
+</div>
+
                 <div className=' flex flex-row mt-6'>
                     <div className=' basis-8/12'>
                     <h1 className=' text-xl font-inter font-medium text-left'>{findhiring && findhiring.project_title ? findhiring.project_title : ""}</h1>
@@ -116,7 +138,7 @@ const ViewHiringDetail = () => {
                     )):""}
                     </div>
                     <div className=' basis-1/12'></div>
-                    <div className=' basis-3/12 border-l border-[#E7E8F2]'>
+                    <div className=' basis-3/12 border-l border-[#E7E8F2] mt-4'>
                         <div className=' flex flex-row ml-4'>
                             <div className=' basis-3/12'><i class="fa fa-user-secret" aria-hidden="true"></i></div>
                             <div className=' basis-6/12'>
@@ -181,13 +203,13 @@ const ViewHiringDetail = () => {
                     </div>
                 </div>
                 <div>
-                <hr className='mt-5' />
-                <div className='mt-4 text-left'>
+                {/* <hr className='mt-5' /> */}
+                {/* <div className='mt-4 text-left'>
         <span class="inline-block text-sm px-8 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold cursor-pointer" onClick={handleAcceptProject}>Accept</span>
       <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
       <button class="px-8 py-1 bg-[#E2F9EE]"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px] cursor-pointer" onClick={handleRejectProject}>Reject</p></button>
 </div> 
-</div>   
+</div>    */}
                 </div>
             </div>
                 </div>

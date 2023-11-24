@@ -39,12 +39,6 @@ const ViewAllProposals = () => {
   const accessToken = useSelector(state => state.login.accessToken);
   
 
-//    const id = viewhirerselfproject && viewhirerselfproject[0].id ? viewhirerselfproject[0].id : '';
-
-//    React.useEffect(() => {
-//     dispatch(GetViewAllBidsAction(id))
-//   }, [])
-
   const convertToDateObject = (dateString) => {
     const [date, time, period] = dateString.split(' ');
     const [year, month, day] = date.split('-');
@@ -87,16 +81,7 @@ const ViewAllProposals = () => {
 }
 
 
-  
-
-  // const openHiring = () => {
-  //   setIsHiringOpen(true);
-  // };
-
-  // const closeHiring = () => {
-  //   setIsHiringOpen(false);
-  // };
-
+ 
   const openHiring = (freelancerId) => {
     setIsHiringOpen((prev) => ({ ...prev, [freelancerId]: true }));
   };
@@ -106,40 +91,6 @@ const ViewAllProposals = () => {
     setIsHiringOpen((prev) => ({ ...prev, [freelancerId]: false }));
   };
 
-// const [currentPage, setCurrentPage] = useState(1);
-
-
-// useEffect(() => {
-//     setCurrentPage(1);
-// }, [categorySearch]);
-
-// const jobsPerPage = 4;
-// const indexOfLastJob = currentPage * jobsPerPage;
-// const indexOfFirstJob = indexOfLastJob - jobsPerPage;
-
-// const sortedBids = sortBids(viewallbids);
-// const filteredData = sortedBids?.filter(bid => 
-//   bid.freelancer_category.replace(/_/g, ' ').toLowerCase().includes(categorySearch.toLowerCase())) || [];
-
-
-// const filteredData = viewallbids?.filter(bid => 
-//   bid.freelancer_category.replace(/_/g, ' ').toLowerCase().includes(categorySearch.toLowerCase())
-// ) || [];
-
-// const currentJobs = filteredData.slice(indexOfFirstJob, indexOfLastJob);
-// const totalPages = Math.ceil((filteredData.length || 0) / jobsPerPage);
-
-// const next = () => {
-//     window.scrollTo(0, 0);
-//     if (currentPage === totalPages) return;
-//     setCurrentPage(currentPage + 1);
-// };
-
-// const prev = () => {
-//     window.scrollTo(0, 0);
-//     if (currentPage === 1) return;
-//     setCurrentPage(currentPage - 1);
-// };
 
 const [viewbids, setViewBids] = useState([]);
 
@@ -159,9 +110,6 @@ const [viewbids, setViewBids] = useState([]);
       .then((response) => {
         setViewBids(response.data.results); 
         setTotalPages(Math.ceil(response.data.count / 8));
-        // const projectsMatchingCategory = response.data.results.filter(project => project.category === userCategory);
-        // setViewProject(projectsMatchingCategory);
-        // setTotalPages(Math.ceil(projectsMatchingCategory.length / 8));
       })
       .catch((error) => {
         console.error('Error fetching filtered data:', error);
@@ -199,21 +147,6 @@ const [viewinvites, setViewinvites] = useState([]);
   }, []);
   
  
-
-// function highlightText(text, query) {
-//   if (!query) {
-//     return text;
-//   }
-
-//   const regex = new RegExp(`(${query})`, 'gi');
-//   return text.split(regex).map((part, index) => {
-//     if (index % 2 === 1) {
-//       return <span key={index} style={{ backgroundColor: '#a3e635' }}>{part}</span>;
-//     } else {
-//       return <span key={index}>{part}</span>;
-//     }
-//   });
-// }
 
 function highlightText(text, query) {
   if (!query || (typeof text !== 'string' && typeof text !== 'number')) {
@@ -256,11 +189,6 @@ const handleToggleDescription = (index) => {
     setExpandedProjects(updatedState);
 };
 
-// const handleClick = (event, index) => {
-//   event.stopPropagation();
-
-//   handleToggleDescription(index);
-// };
 
 const handleButtonClick = (event) => {
   event.stopPropagation();
@@ -315,7 +243,7 @@ const handleClick = (event, index) => {
         {selected === 'All Proposals' && <span style={underlineStyle}></span>}
     </p>
 
-    <p 
+    {/* <p 
         className={`font-inter opacity-50 text-[#0A142F] text-[13px] py-2 inline-block pr-10 relative cursor-pointer`} 
         onClick={() => setSelected('Shortlisted')}
     >
@@ -328,7 +256,7 @@ const handleClick = (event, index) => {
     >
         Messaged
         {selected === 'Messaged' && <span style={underlineStyle}></span>}
-    </p>
+    </p> */}
     </div>
     {isOpen ? (
                     <>
@@ -358,22 +286,14 @@ const handleClick = (event, index) => {
                 )
             }
             {
-                // error && error.includes("No bids found for this project") ? (
-                //     <div className='my-8'> 
-                //         <img src={experience} alt="" className='mx-auto mt-2' />
-                //         <div className='px-4 md:px-8 py-5 text-center text-2xl opacity-50'>
-                //             No proposals found for this project
-                //         </div>
-                //     </div>
-                // )
-                viewbids != null && viewbids.length == 0 ? (
+                (viewbids != null && viewbids.length === 0) || !viewbids ? (
                   <div className='my-8'> 
                       <img src={experience} alt="" className='mx-auto mt-2' />
                       <div className='px-4 md:px-8 py-5 text-center text-2xl opacity-50'>
                           No proposals found for this project
                       </div>
                   </div>
-              )
+              ) 
                  : (
                     <>{viewbids != null ? 
                         <div>
@@ -478,42 +398,7 @@ const handleClick = (event, index) => {
                               </>
                                 )
                         })}
-                        {/* {viewallbids?.length > 4 && (
-                    <div className="flex justify-end items-center gap-6 m-4">
-                        <IconButton
-                            size="sm"
-                            variant="outlined"
-                            onClick={prev}
-                            disabled={currentPage === 1}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
-                        >
-                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
-                        </IconButton>
-                        
-                        {[...Array(totalPages)].map((_, index) => {
-                            const pageNumber = index + 1;
-                            return (
-                                <span
-                                    key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
-                                    onClick={() => setCurrentPage(pageNumber)}
-                                >
-                                    {pageNumber}
-                                </span>
-                            );
-                        })}
-
-                        <IconButton
-                            size="sm"
-                            variant="outlined"
-                            onClick={next}
-                            disabled={currentPage === totalPages}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
-                        >
-                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
-                        </IconButton>
-                    </div>
-                )} */}
+          
                 {totalPages > 1 && (
                     <div className="flex justify-end items-center gap-6 m-4">
                         <IconButton
@@ -579,127 +464,6 @@ const handleClick = (event, index) => {
                         </div>
                     </div>
                 )}
-    {/* {
-  !(error && error.includes("No bids found for this project")) && (
-    <div className="flex justify-between items-center">
-    {/* Search Section *
-    <section className='flex items-center p-2 bg-white rounded-lg m-5 border w-[49%]'>
-        <div className='flex items-center mr-1 space-x-1'>
-            <img src={search} alt="Search Icon" className="h-3 w-3" />
-            <input className='w-28 lg:w-40 xl:w-[30rem] h-7 text-xs lg:text-sm outline-none' placeholder='Search' />
-        </div>
-        <button className='rounded h-7 w-7 p-2 text-xs lg:text-sm font-semibold text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>
-            <img src={searchbtn} alt="Search Icon" />
-        </button>
-    </section>
-    <select id="countries" class="bg-gray-50 border border-gray-300 text-[#797979] text-sm font-inter font-normal rounded-lg focus:ring-green-500 focus:border-green-500 block w-[22%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 mr-12">
-        <option selected>Best Match</option>
-        <option value="">Newest Applicants</option>
-        <option value="">Oldest Applicants</option>
-        <option value="">Highest Hourly Rate</option>
-        <option value="">Lowest Hourly Rate</option>
-    </select>
-</div>)
-}
-{
-  error && error.includes("No bids found for this project") ? (
-  <div className='my-8'> 
-  <img src={experience} alt="" className='mx-auto mt-2'/>
-    <div className='px-4 md:px-8 py-5 text-center text-2xl opacity-50'>
-      No proposals found for this project
-    </div>
-    </div>
-  ):
-  (
-    <>
-{viewallbids && viewallbids.map((bid, index) => {
-                return(<>
-    <div className='px-4 md:px-8 py-2 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30'>
-    <div class="flex">
-  <div class="flex-[10%] p-4">
-  <div className="relative w-24 h-24 mx-auto">
-                    <img src={profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
-                    <div class="absolute bottom-2 right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
-                </div>
-  </div>
-  <div class="flex-[90%] p-4">
-  <div class="flex items-center justify-between">
-  <p className="font-cardo text-[#0A142F] text-2xl font-medium">{bid.freelancer_first_Name}</p>
-    
-    <div class="flex items-center space-x-4">
-            <span class="inline-block text-sm px-10 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Message</span>
-
-        <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
-                <button class="px-10 py-1 bg-white">
-                    <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p>
-                </button>
-        </div>
-    </div>
-</div>
-<h1 className="font-cardo opacity-50 text-lg text-[#031136]">Python Developer</h1>
-  <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 inline-block pr-28">${bid.bid_amount} <span className='opacity-50 font-medium'>/hr</span></h1>
-  <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 inline-block pr-28">$0 <span className='opacity-50 font-medium'>earned</span></h1>
-  <h1 className="font-cardo text-lg text-[#031136] py-3 inline-block">Indore, India</h1>
-  <p className='font-inter text-[#0A142F] text-[14px]'>Cover Letter - <span className='opacity-50'>{bid.description}</span></p> 
-  <div className="text-left mt-5">
-                <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
-                <p className=" text-center">html</p>
-            </div>
-            <div className="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-24 text-green-800 px-3 py-[3px] font-semibold text-sm dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
-                <p className="text-center">React</p>
-            </div>
-            </div>
-  </div>
-</div>
-    </div>
-    </>
-      )
-  })}
-    </>
-  )} */}
-
-    {/* <div className='px-4 md:px-8 py-2 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30'>
-    <div class="flex">
-  <div class="flex-[10%] p-4">
-  <div className="relative w-24 h-24 mx-auto">
-                    <img src={profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
-                    <div class="absolute bottom-2 right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
-                </div>
-  </div>
-  <div class="flex-[90%] p-4">
-  <div class="flex items-center justify-between">
-  <p className="font-cardo text-[#0A142F] text-2xl font-medium">Rohit Sharma</p>
-    
-    <div class="flex items-center space-x-4">
-        <Link to=''>
-            <span class="inline-block text-sm px-10 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Message</span>
-        </Link>
-
-        <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
-            <Link to=''>
-                <button class="px-10 py-1 bg-white">
-                    <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p>
-                </button>
-            </Link>
-        </div>
-    </div>
-</div>
-<h1 className="font-cardo opacity-50 text-lg text-[#031136]">UI/UX Designer</h1>
-  <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 inline-block pr-28">$20.00 <span className='opacity-50 font-medium'>/hr</span></h1>
-  <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 inline-block pr-28">$32 <span className='opacity-50 font-medium'>earned</span></h1>
-  <h1 className="font-cardo text-lg text-[#031136] py-3 inline-block">Indore, India</h1>
-  <p className='font-inter text-[#0A142F] text-[14px]'>Cover Letter - <span className='opacity-50'>I've been a graphic designer for more than 6+ years, assisting organizations and people to successfully market themselves. I have worked as a freelancer for both profit and nonprofit organizations. All facets of design, from letterhead, newsletters, and invitations to huge graphics and website banners, as well as website maintenance, are under my area of expertise....</span></p> 
-  <div className="text-left mt-5">
-                <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
-                <p className=" text-center">html</p>
-            </div>
-            <div className="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-24 text-green-800 px-3 py-[3px] font-semibold text-sm dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
-                <p className="text-center">React</p>
-            </div>
-            </div>
-  </div>
-</div>
-    </div> */}
     </div>
     </div>
     <HomeSection4/>
