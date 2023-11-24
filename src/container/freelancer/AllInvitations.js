@@ -11,6 +11,7 @@ import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from 'react'
 import { useEffect } from 'react'
+import Bag from '../../components/images/experience.png'
 
 const AllInvitations = () => {
     const accessToken = useSelector(state => state.login.accessToken);
@@ -55,7 +56,9 @@ const AllInvitations = () => {
       <div className='mt-2 mx-[10rem]'>
         <h1 className='font-cardo text-[21px] text-[#031136] font-normal pt-4 text-left'>All Invitations</h1>
         <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2]  text-left'>
-   {viewallinvites != null ? <div>
+   {viewallinvites != null ? (
+    viewallinvites.length > 0 ? (
+      <div>
   {viewallinvites && <>{viewallinvites.map((inv,index) => {
     const inviteTime = new Date(inv.Received_time);
     const currentTime = new Date();
@@ -90,7 +93,14 @@ const AllInvitations = () => {
                 </div>
       </div>
       </>)
-    })}</>}</div>:<div>{[...Array(8)].map((_) => {
+    })}</>}</div>
+    ):(
+      <div className=' mx-auto'>
+        <img src={Bag} alt=""  className='h-[10%] ml-[44%] mt-10'/>
+        <p className=' mt-5 font-cardo text-xl opacity-70 text-center mb-8'>No Invitations Found</p>
+        </div>
+    )
+   ):(<div>{[...Array(8)].map((_) => {
       return (
   <div className='flex mt-4'>
   <div className='ml-10 mr-60'>
@@ -100,7 +110,7 @@ const AllInvitations = () => {
   <Skeleton height={20} width={300} />
   <Skeleton height={20} width={200} style={{marginLeft: 180}}/>
   </div>);})}
-  </div> }
+  </div>) }
   {totalPages > 1 && (
                       <div className="flex justify-end items-center gap-6 m-4">
                           <IconButton

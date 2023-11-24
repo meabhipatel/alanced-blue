@@ -13,6 +13,7 @@ import { timeAgo } from './TimeFunctions'
 import axios from 'axios'
 import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
+import Bag from '../../components/images/experience.png'
 
 
 const MyProposals = () => {
@@ -157,7 +158,9 @@ const next = () => {
     </div> */}
 <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2] text-left'>
 <h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Submitted Proposals ({BidsCount})</h1>
-{viewfreebid != null ? <div>
+{viewfreebid != null ? (
+    viewfreebid.length > 0 ? (
+        <div>
 {viewfreebid && <>{viewfreebid.map((bid,index) => {
     const bidTime = new Date(bid.bid_time);
 
@@ -188,7 +191,14 @@ const next = () => {
         </div>
     </div>
     )
-})}</>}</div> : 
+})}</>}</div>
+    ): (
+        <div className=' mx-auto'>
+        <img src={Bag} alt=""  className='h-[10%] ml-[44%]'/>
+        <p className=' mt-5 font-cardo text-xl opacity-70 text-center mb-5'>No Proposals Found</p>
+        </div>
+    )
+ ): (
 <div>{[...Array(8)].map((_) => {
       return (
   <div className='flex mt-4'>
@@ -199,7 +209,7 @@ const next = () => {
   <Skeleton height={20} width={300} />
   <Skeleton height={20} width={200} style={{marginLeft: 180}}/>
   </div>);})}
-  </div>}
+  </div>)}
   {totalBidPages > 1 && (
                     <div className="flex justify-end items-center gap-6 m-4">
                         <IconButton
@@ -243,7 +253,9 @@ const next = () => {
 </div>
 <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2]  text-left'>
 <h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>Pending Invitations ({hiringCount})</h1>
-{viewallhiring != null ? <div>
+{viewallhiring != null ? (
+    viewallhiring.length > 0 ? (
+        <div>
 {viewallhiring && <>{viewallhiring.map((hire,index) => {
    const hiredTime = new Date(hire.Received_time);
 
@@ -274,7 +286,14 @@ const next = () => {
     </div>
 </div>
    )
-  })}</>}</div> : 
+  })}</>}</div>
+    ): (
+        <div className=' mx-auto'>
+        <img src={Bag} alt=""  className='h-[10%] ml-[44%]'/>
+        <p className=' mt-5 font-cardo text-xl opacity-70 text-center mb-5'>No Invitations Found</p>
+        </div>
+    )
+): (
   <div>{[...Array(8)].map((_) => {
         return (
     <div className='flex mt-4'>
@@ -285,7 +304,7 @@ const next = () => {
     <Skeleton height={20} width={300} />
     <Skeleton height={20} width={200} style={{marginLeft: 180}}/>
     </div>);})}
-    </div>}
+    </div>)}
     {totalPages > 1 && (
                       <div className="flex justify-end items-center gap-6 m-4">
                           <IconButton
