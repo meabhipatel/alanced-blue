@@ -27,7 +27,7 @@ import ExperienceLevel from './AllSelectionData/ExperienceLevel'
 import ProjectRate from './AllSelectionData/ProjectRate'
 import CityList from './AllSelectionData/CityList'
 import SkillsList from './AllSelectionData/SkillsList'
-import Bag from '../../components/images/bagcolor.jpg'
+import Bag from '../../components/images/experience.png'
 
 
 function ProjectList() {

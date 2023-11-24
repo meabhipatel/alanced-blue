@@ -24,7 +24,7 @@ import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { toast } from 'react-toastify'
 import { timeAgo } from './TimeFunctions'
-
+import Bag from '../../components/images/experience.png'
 
 const FreelancerAfterLogin = () => {
 
@@ -358,7 +358,7 @@ const [bidsCount, setBidsCount] = useState({});
             <img src={ladder} alt="" className='mx-auto h-16 w-16 mt-2'/>
         </div>
     </div></Link>
-    <Link to='/my-jobs' onClick={() => window.scrollTo(0, 0)}>
+    <Link to='/all-invitations' onClick={() => window.scrollTo(0, 0)}>
     <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#E2F9EE] rounded-lg p-4 mx-4 relative z-10 shadow-sm">
         <div>
         <h1 className='font-cardo text-lg text-[#031136] text-left'>My Jobs</h1>
@@ -390,8 +390,9 @@ const [bidsCount, setBidsCount] = useState({});
     <div className='px-4 md:px-8 py-2'>
       <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse jobs that match your experience to a client's hiring preferences.<br/> Ordered by most relevant.</p>
     </div>
-    {viewProject != null ?
-    <div>
+    {viewProject != null ? (
+        viewProject.length > 0 ? (
+            <div>
     {viewProject && viewProject.map((project, index) => {
         const words = project.description.split(' ');
         const displayWords = expandedProjects[index] || words.length <= 50 ? words : words.slice(0, 50);
@@ -447,7 +448,15 @@ const [bidsCount, setBidsCount] = useState({});
     </>
     )
 })}
-</div> : <div>
+</div>
+        ): (
+            <div className=' mx-auto'>
+                <img src={Bag} alt=""  className='h-[10%] ml-[42%] mt-[20%]'/>
+                <p className=' mt-5 font-cardo text-xl opacity-70 text-center'>There are no results that match your search.</p>
+                <p className=' mt-3 font-cardo text-sm opacity-60 text-center'>Please try adjusting your search keywords or filters.</p>
+              </div>
+        )
+     ): (<div>
 {[...Array(8)].map((_) => {
       return (
     <div className='mb-5'>
@@ -460,7 +469,7 @@ const [bidsCount, setBidsCount] = useState({});
     <Skeleton height={20} width={250} style={{ marginLeft: 20, marginTop:10 }}/>
     </div>
     );})}
-    </div>}
+    </div>)}
     <div>
     {/* {projectsToDisplay?.length > 5 && (
                     <div className="flex justify-end items-center gap-6 m-4">

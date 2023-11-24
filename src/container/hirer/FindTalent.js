@@ -27,7 +27,7 @@ import SkillsList from '../freelancer/AllSelectionData/SkillsList'
 import CityList from '../freelancer/AllSelectionData/CityList'
 import LanguageList from '../freelancer/AllSelectionData/LanguageList'
 import ExperienceLevel from '../freelancer/AllSelectionData/ExperienceLevel'
-import Bag from '../../components/images/bagcolor.jpg'
+import Bag from '../../components/images/experience.png'
 
 const FindTalent = () => {
     const location = useLocation();
@@ -600,7 +600,7 @@ const FindTalent = () => {
   </div>
         ):(
           <div className=' mt-20'>
-                <img src={Bag} alt=""  className='w-[20%] mx-auto'/>
+                <img src={Bag} alt=""  className='w-[18%] mx-auto'/>
                 <p className=' mt-5 font-cardo text-xl opacity-70 text-center'>There are no results that match your search.</p>
                 <p className=' mt-3 font-cardo text-sm opacity-60 text-center'>Please try adjusting your search keywords or filters.</p>
               </div>
