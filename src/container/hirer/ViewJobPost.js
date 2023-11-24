@@ -17,6 +17,7 @@ const ViewJobPost = () => {
   const project = location.state && location.state.project;
   const viewhirerselfproject = useSelector(state => state.hirer.viewhirerselfproject)
   const [bidcount,setBidCount] = useState(0);
+  const [invitescount,setInvitesCount] = useState(0);
   const id = project.id
   const accessToken = useSelector(state => state.login.accessToken);
 
@@ -50,6 +51,22 @@ const ViewJobPost = () => {
       });
   }, []);
 
+
+  useEffect(() => {
+    axios
+     .get(`https://alanced.pythonanywhere.com/freelance/View/project-invitations-count/${id}`,{
+      headers: {
+      Authorization: `Bearer ${accessToken}`,
+  },
+})
+       .then((response) => {
+         setInvitesCount(response.data.data);
+       })
+       .catch((error) => {
+         console.error('Error fetching filtered data:', error);
+       });
+   }, []);
+ 
 
   return (
     <>
@@ -154,7 +171,7 @@ const ViewJobPost = () => {
         <p className="font-inter text-[#031136] text-lg font-medium py-4">Activity on this job</p> 
         <p className="font-inter text-[#031136] text-md font-medium py-1">Proposals : <span className='opacity-50'>{bidcount ? bidcount:0}</span></p>
         <p className="font-inter text-[#031136] text-md font-medium py-1">Messaged : <span className='opacity-50'> 0</span></p>
-        <p className="font-inter text-[#031136] text-md font-medium py-1">Hired : <span className='opacity-50'> 0</span></p>
+        <p className="font-inter text-[#031136] text-md font-medium py-1">Invitations : <span className='opacity-50'> {invitescount ? invitescount:0}</span></p>
         {/* <p className="font-inter text-[#031136] text-md font-medium py-1">Unanswered invites : <span className='opacity-50'> 0</span></p> */}
         </div>
         </div>

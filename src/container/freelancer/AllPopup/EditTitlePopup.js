@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { UpdateFreelancerProfileAction } from '../../../redux/Freelancer/FreelancerAction';
+import { GetFreelancerSelfProfileAction, UpdateFreelancerProfileAction } from '../../../redux/Freelancer/FreelancerAction';
 import CategoryList from '../AllSelectionData/CategoryList';
 
 const EditTitlePopup = ({ closeEditTitle }) => {
@@ -21,6 +21,7 @@ const EditTitlePopup = ({ closeEditTitle }) => {
   const handleSave = () => {
       dispatch(UpdateFreelancerProfileAction({ category:category,about:description },accessToken));
       closeEditTitle();
+      dispatch(GetFreelancerSelfProfileAction(accessToken));
   }
 
 //   const [categories] = useState([

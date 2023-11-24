@@ -17,6 +17,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { formatDateInput } from '../freelancer/TimeFunctions'
 import AddReviewPopup from './HirerAllPopup/AddReviewPopup'
+import contractimg from '../../components/images/Frame.png'
 
 const AllHirerContracts = () => {
 
@@ -139,9 +140,10 @@ function highlightText(text, query) {
             {/* <div className=' basis-1/12 mt-4'><i class="bi bi-sliders text-3xl mr-9"></i></div> */}
         {/* </div> */}
         <div className='my-8  border border-[#E7E8F2] py-5 px-5 rounded'>
-        {viewallhirercontracts != null ? <div>
-{viewallhirercontracts && <>{viewallhirercontracts.map((contract,index) => {
-    return(
+        {viewallhirercontracts != null ? (<div>
+{/* {viewallhirercontracts && <>{viewallhirercontracts.map((contract,index) => { */}
+{viewallhirercontracts.length > 0 ? (
+                                viewallhirercontracts.map((contract, index) => (
         <div className='my-5 bg-[#FFFFFF] border-b border-[#E7E8F2]'>
         <div className=' flex flex-row'>
             <div className=' basis-8/12'>
@@ -183,8 +185,18 @@ function highlightText(text, query) {
         </div>
         </div>
         
-         )
-        })}</>}</div> : 
+        //  )
+        // })}</>}</div> : 
+        ))
+        ) : (<>
+          <img src={contractimg} alt="" className='mx-auto'/>
+          <div className='px-4 md:px-8 py-5 text-center text-2xl opacity-50'>
+        No Contracts Found
+    </div>
+            </>
+        )}
+    </div>
+   ) : 
         <div>{[...Array(8)].map((_) => {
               return (
           <div className='flex mt-4'>
