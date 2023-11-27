@@ -13,6 +13,9 @@ import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
 import FreelancerPortfolio from './HirerAllPopup/FreelancerPortfolio'
 import AddFreeHireRequest from './HirerAllPopup/AddFreeHireRequest'
+import { formateDate, formatDateToDayMonthYear } from '../freelancer/TimeFunctions'
+import StarRating from '../freelancer/StarRating'
+import experiences from '../../components/images/experience.png'
 
 const FreelancerFullDetailAfterLogin = () => {
 
@@ -31,6 +34,8 @@ const FreelancerFullDetailAfterLogin = () => {
   const [ProjectCount, setProjectCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [reviews,setReviews]=useState([]);
+  const [freelanceremployment,setfreelanceremployment]=useState([]);
   const [isFreeHiringOpen, setIsFreeHiringOpen] = useState(false);
   const openFreeHiring = () => {
     setIsFreeHiringOpen(true);
@@ -85,6 +90,35 @@ const next = () => {
   // window.scrollTo(0, 0);
   setCurrentPage(prev => Math.min(prev + 1, totalPages));
 };
+
+
+useEffect(() => {
+  if(id) { 
+      axios.get(`https://alanced.pythonanywhere.com/freelance/View-all/Review/${id}`)
+          .then(response => {
+              if (response.data.status === 200) {
+                  setReviews(response.data.data);
+              } else {
+                  console.log(response.data.message || 'Error fetching reviews');
+              }
+          })
+          .catch(err => {
+              console.log(err.message);
+          });
+  }
+}, [id]); 
+
+const [startIdx, setStartIdx] = useState(0);  
+
+const showMoreHandler = () => {
+    setStartIdx(prevIdx => prevIdx + 3);
+}
+
+const showLessHandler = () => {
+    setStartIdx(0);
+}
+
+const visibleReviews = reviews.slice(startIdx, startIdx + 3);
  
   // const next = () => {
   //     if (active === Math.ceil(freelancerproject.length / 6)) return;
@@ -117,10 +151,41 @@ const next = () => {
     setIsPortfolioOpen(false);
   };
 
+  useEffect(() => {
+    if(id) { 
+        axios.get(`https://alanced.pythonanywhere.com/freelance/View-all/Freelancer/Employment/${id}`)
+            .then(response => {
+                if (response.data.status === 200) {
+                    setfreelanceremployment(response.data.data);
+                } else {
+                    console.log(response.data.message || 'Error fetching Employment data');
+                }
+            })
+            .catch(err => {
+                console.log(err.message);
+            });
+    }
+}, [id]); 
+
+
+  const sortedEmployments = [...freelanceremployment].sort((a, b) => new Date(b.Company_Joining_date) - new Date(a.Company_Joining_date));
+
+const showMoreHandlers = () => {
+    setStartIdx(prevIdx => prevIdx + 2);
+}
+
+const showLessHandlers = () => {
+    setStartIdx(0);
+}
+
+const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 2);
+
+
+
   return (
     <>
     <Navbar/>
-   <div className=' container-sm px-28 mt-14'>
+   <div className=' container-sm px-28 mt-14 mb-6'>
     <div className=' flex flex-row'>
       <div className=' basis-3/12 pl-14'>
       <div className="relative w-24 h-24">
@@ -233,42 +298,6 @@ const next = () => {
     {isPortfolioOpen && <FreelancerPortfolio project={selectedProjects} closePortfolio={closePortfolio} />}
 </div>
 <div className="flex justify-end items-center gap-6 mt-5">
-{/* {freelancerproject.length > 6 && (
-  <>
-    <IconButton
-      size="sm"
-      variant="outlined"
-      onClick={prev}
-      disabled={active === 1}
-      style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
-    >
-      <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
-    </IconButton>
-
-    {[...Array(Math.ceil(freelancerproject.length / 6))].map((_, index) => {
-      const pageNumber = index + 1;
-      return (
-        <span
-          key={pageNumber}
-          className={`px-0 py-1 ${active === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
-          onClick={() => setActive(pageNumber)}
-        >
-          {pageNumber}
-        </span>
-      );
-    })}
-
-    <IconButton
-      size="sm"
-      variant="outlined"
-      onClick={next}
-      disabled={active === Math.ceil(freelancerproject.length / 6)}
-      style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
-    >
-      <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
-    </IconButton>
-  </>
-)} */}
 {totalPages > 1 && (
                     <div className="flex justify-end items-center gap-6 m-4">
                         <IconButton
@@ -310,9 +339,90 @@ const next = () => {
                     </div>
     )}
 </div>
+<div className=' mt-6'>
+        <p className='font-cardo text-[22px] fond-semibold text-left'>Work History ({reviews && reviews ? reviews.length : 0})</p>
+        <div class="w-32 mt-2 ml-1 relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
+        <div class="border-gray-600 border-b-2 rounded-lg"></div>
+      </div>
+    {visibleReviews.map((review, index) => (<>
+    <div key={index} className='text-left my-3'>
+        <div className="flex justify-between items-center">
+        <p className='font-inter text-[#0A142F] text-[14px] py-1'>{review.Project_Name}</p>
+        <div className="flex items-center space-x-2">
+        <StarRating rating={review.rating} />
+        </div>
+    </div>
+        <p className='font-inter opacity-50 text-[#0A142F] text-[12px]'>{formatDateToDayMonthYear(review.reviews_created_date)}</p>
+        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-3'>{review.review}</p>
+        <div class="grid grid-cols-3 gap-4 my-6">
+        <div class="">
+        <p className='font-cardo text-[#031136] text-[16px] font-bold'>${review.project_Rate == 'Hourly' ? review.project_Min_Hourly_Rate+"/hr" : review.project_Budget}</p>
+        </div>
+        <div class="">
+        <p className='font-cardo text-[#031136] text-[16px] font-bold'>{review.project_Rate}</p>
+        </div>
+        <div class="">
+        <p className='font-cardo text-[#031136] text-[16px] font-bold'>{review.Reviewer}</p>
+        </div>
+    </div>   
+    <div class="border-b opacity-50 my-4"></div>
+    </div>
+    </>       
+     ))}           
+{reviews.length > 3 && (
+  startIdx + 3 < reviews.length ? 
+    <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-right cursor-pointer" onClick={showMoreHandler}>Show More</h1> :
+    <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-right cursor-pointer" onClick={showLessHandler}>Show Less</h1>
+)}
+   </div>
         </div>
       </div>
     </div>
+    <div className=' mt-12 text-left border border-gray-100 p-4'>
+        <p className='font-cardo text-[22px] fond-semibold text-left'>Employment History</p>
+        <div class="w-48 mt-2 ml-1 relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
+        <div class="border-gray-600 border-b-2 rounded-lg"></div>
+      </div>
+    <div class="border-b opacity-50 my-8"></div>
+    {visibleEmp.length === 0 ? (<>
+      <img src={experiences} alt="" className='mx-auto mt-5' />
+      <h1 className='font-cardo text-2xl text-center py-3'>No Data Found</h1>
+    </>
+   
+) : (
+    visibleEmp.map((emp, index) => (
+        <>
+            <div key={index} className='my-5'>
+                <h1 className="font-cardo text-[18px] text-[#031136] font-normal mr-1">
+                    {emp.Company_Designation} | {emp.Freelancer_Company_Name}
+                </h1>
+                <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>
+                    {formateDate(emp.Company_Joining_date)} - {formateDate(emp.Company_Leaving_date)}
+                </p>
+                <div class="border-b opacity-50 my-3"></div>
+            </div>
+        </>
+    ))
+)}
+
+    {/* {visibleEmp.map((emp, index) => (<>
+    <div key={index} className='my-5'>
+    <h1 className="font-cardo text-[18px] text-[#031136] font-normal mr-1">{emp.Company_Designation}  |  {emp.Freelancer_Company_Name}</h1>
+    <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>
+    {formateDate(emp.Company_Joining_date)} - {formateDate(emp.Company_Leaving_date)}
+</p>
+    <div class="border-b opacity-50 my-3"></div>
+    </div>
+    </>       
+     ))} */}
+     {freelanceremployment.length > 2 && (
+  startIdx + 2 < freelanceremployment.length ? 
+    <h1 className="font-cardo text-[20px] text-[#031136] font-normal mx-auto cursor-pointer" onClick={showMoreHandlers}>Show More</h1> :
+    <h1 className="font-cardo text-[20px] text-[#031136] font-normal mx-auto cursor-pointer" onClick={showLessHandlers}>Show Less</h1>
+)}
+</div>
    </div>
   <HomeSection4/>
   <Footer/>
