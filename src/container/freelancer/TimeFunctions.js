@@ -53,3 +53,16 @@ export const formatDate = (dateStr) => {
     const [year, month, day] = dateStr.split('-');
     return `${day}-${month}-${year}`;
   };
+
+
+
+
+export function formatDateToDayMonthYear(dateStr) {
+    if (!dateStr) return "";
+
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const dateObj = new Date(dateStr);
+
+    return dateObj.toLocaleDateString(undefined, options);
+}  
+

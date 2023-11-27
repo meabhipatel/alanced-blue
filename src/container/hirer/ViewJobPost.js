@@ -170,7 +170,7 @@ const ViewJobPost = () => {
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
         <p className="font-inter text-[#031136] text-lg font-medium py-4">Activity on this job</p> 
         <p className="font-inter text-[#031136] text-md font-medium py-1">Proposals : <span className='opacity-50'>{bidcount ? bidcount:0}</span></p>
-        <p className="font-inter text-[#031136] text-md font-medium py-1">Messaged : <span className='opacity-50'> 0</span></p>
+        <p className="font-inter text-[#031136] text-md font-medium py-1">Messaged : <span className='opacity-50'> {invitescount ? invitescount:0}</span></p>
         <p className="font-inter text-[#031136] text-md font-medium py-1">Invitations : <span className='opacity-50'> {invitescount ? invitescount:0}</span></p>
         {/* <p className="font-inter text-[#031136] text-md font-medium py-1">Unanswered invites : <span className='opacity-50'> 0</span></p> */}
         </div>

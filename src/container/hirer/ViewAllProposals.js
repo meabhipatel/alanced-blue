@@ -258,7 +258,7 @@ const handleClick = (event, index) => {
         {selected === 'Messaged' && <span style={underlineStyle}></span>}
     </p> */}
     </div>
-    {isOpen ? (
+    {!isOpen ? (
                     <>
                             {
                                 // !(error && error.includes("No bids found for this project")) && (
