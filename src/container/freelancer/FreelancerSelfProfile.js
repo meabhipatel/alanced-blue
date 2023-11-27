@@ -45,7 +45,7 @@ import FreelancerProjectsPopup from './AllPopup/FreelancerProjectsPopup'
 import axios from 'axios'
 import EditExperienceLevelPopup from './AllPopup/EditExperienceLevelPopup'
 import EditFreelancerProjectsPopup from './AllPopup/EditFreelancerProjectsPopup'
-import { formatDateToDayMonthYear } from './TimeFunctions'
+import { formateDate, formatDateToDayMonthYear } from './TimeFunctions'
 
 const FreelancerSelfProfile = () => {
 
@@ -63,14 +63,14 @@ const FreelancerSelfProfile = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [ProjectCount, setProjectCount] = useState(0);
 
-  function formatDate(dateStr) {
-    if (!dateStr) return "present";
+//   function formatDate(dateStr) {
+//     if (!dateStr) return "present";
 
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const dateObj = new Date(dateStr);
+//     const options = { year: 'numeric', month: 'long', day: 'numeric' };
+//     const dateObj = new Date(dateStr);
 
-    return dateObj.toLocaleDateString(undefined, options);
-}
+//     return dateObj.toLocaleDateString(undefined, options);
+// }
 
 
 // function formatDateToDayMonthYear(dateStr) {
@@ -1142,7 +1142,7 @@ const handleImageSave = async () => {
     </div>
     </div>
     <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>
-    {formatDate(emp.Company_Joining_date)} - {formatDate(emp.Company_Leaving_date)}
+    {formateDate(emp.Company_Joining_date)} - {formateDate(emp.Company_Leaving_date)}
 </p>
     <div class="border-b opacity-50 my-3"></div>
     </div>

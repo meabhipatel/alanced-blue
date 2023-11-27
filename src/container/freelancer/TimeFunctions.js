@@ -66,3 +66,13 @@ export function formatDateToDayMonthYear(dateStr) {
     return dateObj.toLocaleDateString(undefined, options);
 }  
 
+
+export function formateDate(dateStr) {
+    if (!dateStr) return "present";
+
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const dateObj = new Date(dateStr);
+
+    return dateObj.toLocaleDateString(undefined, options);
+}
+
