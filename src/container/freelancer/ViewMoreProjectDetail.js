@@ -128,7 +128,7 @@ useEffect(() => {
         <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><LightbulbOutlinedIcon/><span className='ml-4'>You have already submitted a proposal for this project.</span><br/><span className='text-green-700 font-bold ml-10'><Link to="/view/SelfBidProject" state={{ project }}>View Proposal</Link></span></div>:  '' } */}
         {clickable ?  
         <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><LightbulbOutlinedIcon/><span className='ml-4'>You have already submitted a proposal for this project.</span></div>:  '' }
-            <div className=' flex flex-row mt-6'>
+            <div className=' flex flex-row my-6'>
                 <div className=' basis-8/12 text-left'>
                     <h1 className='text-xl font-normal font-cardo'>{project.title}</h1>
                     <p className='mt-4 text-base font-normal font-cardo'>{project.category}</p>
@@ -188,9 +188,9 @@ useEffect(() => {
          ))}
                     <div className='mt-14 font-cardo text-lg font-normal text-[#031136]'>Activity on this job</div>
                     <div className=' mt-5'><h1 className=' font-inter font-normal text-base'>Proposals:<span className=' opacity-[50%]'> {BidCount ? BidCount :0}</span></h1></div>
-                    <div className=' mt-2'><h1 className=' font-inter font-normal text-base'>Interviewing:<span className=' opacity-[50%]'> 0</span></h1></div>
+                    {/* <div className=' mt-2'><h1 className=' font-inter font-normal text-base'>Interviewing:<span className=' opacity-[50%]'> 0</span></h1></div>
                     <div className=' mt-2'><h1 className=' font-inter font-normal text-base'>Invites sent:<span className=' opacity-[50%]'> 0</span></h1></div>
-                    <div className=' mt-2'><h1 className=' font-inter font-normal text-base'>Unanswered invites:<span className=' opacity-[50%]'> 0</span></h1></div>
+                    <div className=' mt-2'><h1 className=' font-inter font-normal text-base'>Unanswered invites:<span className=' opacity-[50%]'> 0</span></h1></div> */}
                 </div>
                 <div className=' basis-4/12'>
                 <div className='mt-6 ml-[16%]'>

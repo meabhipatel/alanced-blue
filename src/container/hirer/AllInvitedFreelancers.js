@@ -59,7 +59,7 @@ const next = () => {
     <div className='mt-2 mx-[10rem]'>
       <h1 className='font-cardo text-[21px] text-[#031136] font-normal pt-4 text-left'>All Invited Freelancers</h1>
       <div className='my-4 bg-[#FFFFFF] border border-[#E7E8F2]  text-left'>
-      <h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>All Invitations ({invitesCount})</h1>
+      <h1 className='font-inter text-[16px] font-bold text-[#031136] p-3'>All Invitations ({invitesCount ? invitesCount:0})</h1>
       {viewinvites && viewinvites.length > 0 ? (
         viewinvites && <>{viewinvites.map((inv,index) => {
           const inviteTime = new Date(inv.hired_at);

@@ -45,6 +45,7 @@ import FreelancerProjectsPopup from './AllPopup/FreelancerProjectsPopup'
 import axios from 'axios'
 import EditExperienceLevelPopup from './AllPopup/EditExperienceLevelPopup'
 import EditFreelancerProjectsPopup from './AllPopup/EditFreelancerProjectsPopup'
+import { formatDateToDayMonthYear } from './TimeFunctions'
 
 const FreelancerSelfProfile = () => {
 
@@ -72,14 +73,14 @@ const FreelancerSelfProfile = () => {
 }
 
 
-function formatDateToDayMonthYear(dateStr) {
-    if (!dateStr) return "";
+// function formatDateToDayMonthYear(dateStr) {
+//     if (!dateStr) return "";
 
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const dateObj = new Date(dateStr);
+//     const options = { year: 'numeric', month: 'long', day: 'numeric' };
+//     const dateObj = new Date(dateStr);
 
-    return dateObj.toLocaleDateString(undefined, options);
-}
+//     return dateObj.toLocaleDateString(undefined, options);
+// }
 
 
 

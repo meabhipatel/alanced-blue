@@ -206,8 +206,8 @@ const [bidsCount, setBidsCount] = useState({});
                           <p className="font-inter text-[#0A142F] text-[16px] font-medium hover:underline hover:text-green-600">{highlightText(project.title, searchQuery)}</p>
                         </Link>
                         <p className='font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-1'>{highlightText(project.Project_Rate, searchQuery)} Rate - Expert - Posted {timeAgo(project.Project_created_at)}</p>
-                        <span className={`px-4 py-1 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 font-semibold ${isJobOpen(project.deadline) ? 'bg-[#E4EBE4] text-green-800 border border-green-800' : 'bg-yellow-100 text-yellow-700 border border-yellow-700'}`}>
-                          {isJobOpen(project.deadline) ? 'Open' : 'Closed'}
+                        <span className={`px-4 py-1 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 font-semibold ${project.is_hired ? 'bg-yellow-100 text-yellow-700 border border-yellow-700' : 'bg-[#E4EBE4] text-green-800 border border-green-800'}`}>
+                          {project.is_hired ? 'Closed' : 'Open'}
                         </span>
                       </div>
                       <div class="flex-[40%] flex">
@@ -216,7 +216,7 @@ const [bidsCount, setBidsCount] = useState({});
                           <p className="font-inter text-[#0A142F] opacity-50 text-[16px] font-medium">Proposals</p>
                         </div>
                         <div class="flex-1 p-2">
-                          <p className="font-inter text-[#0A142F] text-[16px] font-medium">0</p>
+                          <p className="font-inter text-[#0A142F] text-[16px] font-medium">{invitesCount[project.id] ? invitesCount[project.id] : 0}</p>
                           <p className="font-inter text-[#0A142F] opacity-50 text-[16px] font-medium">Messaged</p>
                         </div>
                         <div class="flex-1 p-2">
@@ -226,7 +226,7 @@ const [bidsCount, setBidsCount] = useState({});
                       </div>
                       <div class="flex-[20%] text-center">
                         <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
-                          <Link to='/View-all/proposals' state={{ project, isOpen: isJobOpen(project.deadline) }} onClick={() => window.scrollTo(0, 0)}>
+                          <Link to='/View-all/proposals' state={{ project, isOpen: project.is_hired }} onClick={() => window.scrollTo(0, 0)}>
                             <button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">View Proposals</p></button>
                           </Link>
                         </div>
