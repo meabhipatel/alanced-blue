@@ -19,7 +19,7 @@ const Portfolio = ({closePortfolio,project}) => {
                         <h1 className="font-cardo text-lg text-[#031136] font-normal text-left pt-5">Skills and Deliverables</h1>
                         <div className="text-left mt-5">
                         {JSON.parse(project.skills_used.replace(/'/g, '"')).map((skill, index) => (
-                <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]" key={index}>
+                <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  text-green-800 px-4 py-1 my-2 text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]" key={index}>
                 <p className=" text-center">{skill}</p>
             </div>))}
             </div> 

@@ -931,7 +931,7 @@ const handleImageSave = async () => {
    </div>
    <div className='border-b border-gray-200 border-opacity-30 text-left py-6 px-4 md:px-8' id='workHistory'>
    <div className="flex items-center justify-between">
-    <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1 pb-3">Work History ({reviews && reviews ? reviews.length : 0})</h1>
+    <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1 pb-3">Reviews ({reviews && reviews ? reviews.length : 0})</h1>
     </div>
     {visibleReviews.map((review, index) => (<>
     <div key={index}>

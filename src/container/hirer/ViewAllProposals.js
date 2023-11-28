@@ -329,9 +329,16 @@ const handleClick = (event, index) => {
         </p>
     </button>
 </div> */}
-<div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={isInvited ? null : (event) => handleBtnClick(event, bid.freelancer_id)}>
+{/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={isInvited ? null : (event) => handleBtnClick(event, bid.freelancer_id)}>
   <button class={`px-10 py-1 bg-white ${isInvited ? 'cursor-not-allowed' : ''}`} disabled={isInvited}>
     <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">
+      {isInvited ? 'Hired' : 'Hire'}
+    </p>
+  </button>
+</div> */}
+<div class={` ${isInvited ? 'p-0.5 inline-block rounded bg-gradient-to-b from-[gray] to-[lightgray]' : 'p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]'}`} onClick={isInvited ? null : (event) => handleBtnClick(event, bid.freelancer_id)}>
+  <button class={`px-10 py-1 bg-white ${isInvited ? 'cursor-not-allowed' : ''}`} disabled={isInvited}>
+    <p class={`${isInvited ? 'bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]' : 'bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]'}`}>
       {isInvited ? 'Hired' : 'Hire'}
     </p>
   </button>
