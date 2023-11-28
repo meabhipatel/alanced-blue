@@ -474,7 +474,7 @@ function ProjectList() {
               {/* <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div> */}
             </div>
             ))}
-            <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Project Rate</h1></div>
+            {/* <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Project Rate</h1></div> */}
             {/* <div className="pt-4 w-[85%]">
               <Slider
                 min={1}

@@ -3,12 +3,15 @@ import Navbar from '../../components/Layout/Navbar'
 import Footer from '../../components/Layout/Footer'
 import HomeSection4 from '../../components/Layout/HomeSection4'
 import { Link, useLocation,useNavigate } from 'react-router-dom'
+import { format } from 'date-fns';
 
 
 const ViewProposal = () => {
     const location = useLocation();
     const findbid = location.state && location.state.bid;
     console.log(findbid,"find bid")
+
+    const normaltime = format(new Date(findbid.project.created_at), 'yyyy-MM-dd HH:mm');
     
     const [showFullDescription, setShowFullDescription] = useState(false);
     
@@ -163,9 +166,9 @@ const ViewProposal = () => {
                     </div>
                     <div className='mt-5 ml-7'>
                         <p className=' text-[17px] font-inter font-normal text-left'>History</p>
-                        <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>20 to 50 proposals<span className=' ml-3 text-green-600'><i class="bi bi-question-circle-fill"></i></span></p>
-                        <p className='text-[14px] font-inter font-normal opacity-75 mt-2 text-left'>1 job posted</p>
-                        <p className='text-[12px] font-inter font-normal opacity-75 mt-2 text-left'>Member since Sep 18, 2023</p>
+                        {/* <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>20 to 50 proposals<span className=' ml-3 text-green-600'><i class="bi bi-question-circle-fill"></i></span></p>
+                        <p className='text-[14px] font-inter font-normal opacity-75 mt-2 text-left'>1 job posted</p> */}
+                        <p className='text-[12px] font-inter font-normal opacity-75 mt-2 text-left'>{normaltime}</p>
                     </div>
                 </div>
             </div>
