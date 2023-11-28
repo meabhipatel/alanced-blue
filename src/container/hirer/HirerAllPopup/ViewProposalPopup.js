@@ -13,6 +13,8 @@ import Navbar from '../../../components/Layout/Navbar'
 import HomeSection4 from '../../../components/Layout/HomeSection4'
 import Footer from '../../../components/Layout/Footer'
 import AddHiringRequestPopup from './AddHiringRequestPopup'
+import StarRating from '../../freelancer/StarRating'
+import { formatDateToDayMonthYear } from '../../freelancer/TimeFunctions'
 
 
 const ViewProposalPopup = ({ closeViewProposal }) => {
@@ -26,6 +28,7 @@ const ViewProposalPopup = ({ closeViewProposal }) => {
   const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile)
   const [freelancerproject, setfreelancerproject] = useState([]);
   const [freelanceremp, setfreelanceremp] = useState([]);
+  const [reviews, setReviews] = useState([]);
   // const id = freelancerselfprofile && freelancerselfprofile[0].id ? freelancerselfprofile[0].id : '';
   const id = bid.freelancer_id
   const [selectedProjects, setSelectedProjects] = useState(null);
@@ -80,6 +83,7 @@ const ViewProposalPopup = ({ closeViewProposal }) => {
 //             });
 //     }
 // }, [id]); 
+
 
 
 useEffect(() => {
@@ -145,6 +149,35 @@ const showLessHandlers = () => {
 }
 
 const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 3);
+
+
+useEffect(() => {
+  if(id) { 
+      axios.get(`https://alanced.pythonanywhere.com/freelance/View-all/Review/${id}`)
+          .then(response => {
+              if (response.data.status === 200) {
+                  setReviews(response.data.data);
+              } else {
+                  console.log(response.data.message || 'Error fetching reviews');
+              }
+          })
+          .catch(err => {
+              console.log(err.message);
+          });
+  }
+}, [id]); 
+
+
+
+const showMoreHandler = () => {
+    setStartIdx(prevIdx => prevIdx + 3);
+}
+
+const showLessHandler = () => {
+    setStartIdx(0);
+}
+
+const visibleReviews = reviews.slice(startIdx, startIdx + 3);
 
 const prev = () => {
   // window.scrollTo(0, 0);
@@ -232,13 +265,20 @@ const [active, setActive] = React.useState(1);
                 <button class="px-11 py-1 bg-white" onClick={openHiring}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p></button>
             </div> */}
            
-  <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
+  {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
   <button
     class={`px-11 py-1 bg-white ${isInvited ? 'cursor-not-allowed' : ''}`}
     onClick={isInvited ? null : openHiring}
     disabled={isInvited}
   >
     <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">
+      {isInvited ? 'Hired' : 'Hire'}
+    </p>
+  </button>
+</div> */}
+<div class={` ${isInvited ? 'p-0.5 inline-block rounded bg-gradient-to-b from-[gray] to-[lightgray] mt-3 mr-2' : 'p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2'}`}>
+  <button class={`px-11 py-1 bg-white ${isInvited ? 'cursor-not-allowed' : ''}`} disabled={isInvited} onClick={isInvited ? null : openHiring}>
+    <p class={`${isInvited ? 'bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]' : 'bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]'}`}>
       {isInvited ? 'Hired' : 'Hire'}
     </p>
   </button>
@@ -274,7 +314,7 @@ const [active, setActive] = React.useState(1);
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
         <h1 className="font-cardo text-xl text-[#031136] font-normal">View Profile</h1>
     <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2 pb-6">{bid.freelancer_category.replace(/_/g, ' ')}</p>
-    <span class="text-sm px-16 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">All Work</span>
+    {/* <span class="text-sm px-16 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">All Work</span> */}
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
     <h1 className="font-cardo text-xl text-[#031136] font-normal">Languages</h1>
@@ -299,6 +339,44 @@ const [active, setActive] = React.useState(1);
 </div>
 <p className="text-[#031136] opacity-50 text-[14px] font-inter py-5">{bid.freelancer_about}</p>
         </div>
+        <div className='border-b border-gray-200 border-opacity-30 text-left py-6 px-4 md:px-8' id='workHistory'>
+   <div className="flex items-center justify-between">
+    <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1 pb-3">Reviews ({reviews && reviews ? reviews.length : 0})</h1>
+    </div>
+    {visibleReviews.map((review, index) => (<>
+    <div key={index}>
+        <div className="flex justify-between items-center">
+        <p className='font-inter text-[#0A142F] text-[14px] py-1'>{review.Project_Name}</p>
+        <div className="flex items-center space-x-2">
+        <StarRating rating={review.rating} />
+            {/* <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 inline-block">
+                <img src={share} alt="share" />
+            </div> */}
+        </div>
+    </div>
+        <p className='font-inter opacity-50 text-[#0A142F] text-[12px]'>{formatDateToDayMonthYear(review.reviews_created_date)}</p>
+        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-3'>{review.review}</p>
+        <div class="grid grid-cols-3 gap-4 my-6">
+        <div class="">
+        <p className='font-cardo text-[#031136] text-[16px] font-bold'>${review.project_Rate == 'Hourly' ? review.project_Min_Hourly_Rate+"/hr" : review.project_Budget}</p>
+        </div>
+        <div class="">
+        <p className='font-cardo text-[#031136] text-[16px] font-bold'>{review.project_Rate}</p>
+        </div>
+        <div class="">
+        <p className='font-cardo text-[#031136] text-[16px] font-bold'>{review.Reviewer}</p>
+        </div>
+    </div>   
+    <div class="border-b opacity-50 my-4"></div>
+    </div>
+    </>       
+     ))}           
+{reviews.length > 3 && (
+  startIdx + 3 < reviews.length ? 
+    <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-right cursor-pointer" onClick={showMoreHandler}>Show More</h1> :
+    <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-right cursor-pointer" onClick={showLessHandler}>Show Less</h1>
+)}
+   </div>
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
         <h1 className="font-cardo text-2xl text-[#031136] font-normal">Portfolio ({projectCount})</h1>
     <div className="flex flex-wrap -mx-2">  

@@ -292,7 +292,7 @@ const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 2);
                     }}
                 />
             </div>
-            <p className='font-inter text-green-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-green-700 underline font-semibold'>{pro.project_title}</p>
+            <p className='font-inter text-green-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-green-700 underline font-semibold text-left'>{pro.project_title}</p>
         </div>
     ))}
     {isPortfolioOpen && <FreelancerPortfolio project={selectedProjects} closePortfolio={closePortfolio} />}
@@ -340,8 +340,8 @@ const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 2);
     )}
 </div>
 <div className=' mt-6'>
-        <p className='font-cardo text-[22px] fond-semibold text-left'>Work History ({reviews && reviews ? reviews.length : 0})</p>
-        <div class="w-32 mt-2 ml-1 relative">
+        <p className='font-cardo text-[22px] fond-semibold text-left'>Reviews ({reviews && reviews ? reviews.length : 0})</p>
+        <div class="w-24 mt-2 ml-1 relative">
         <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
         <div class="border-gray-600 border-b-2 rounded-lg"></div>
       </div>
