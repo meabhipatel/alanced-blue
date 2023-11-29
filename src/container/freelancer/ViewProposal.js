@@ -89,7 +89,7 @@ const ViewProposal = () => {
                         <div className=' flex flex-row ml-4'>
                             <div className=' basis-3/12'><i class="fa fa-user-secret" aria-hidden="true"></i></div>
                             <div className=' basis-6/12'>
-                                <p className=' text-[14px] font-normal text-left'>{findbid.project.experience_level}</p>
+                                <p className=' text-[14px] font-normal text-left'>{findbid.project.Project_experience_level}</p>
                                 <p className=' text-[12px] font-normal text-left opacity-50'>Experience level</p>
                             </div>
                         </div>
@@ -103,8 +103,8 @@ const ViewProposal = () => {
                         <div className=' flex flex-row ml-4 mt-4'>
                             <div className=' basis-3/12'><i class="bi bi-calendar2-check-fill"></i></div>
                             <div className=' basis-8/12'>
-                                <p className=' text-[14px] font-normal text-left'>3 to 6 months</p>
-                                <p className=' text-[12px] font-normal text-left opacity-50'>Project Length</p>
+                                <p className=' text-[14px] font-normal text-left'>Project Deadline</p>
+                                <p className=' text-[12px] font-normal text-left opacity-50'>{findbid.project.deadline}</p>
                             </div>
                         </div>
                     </div>

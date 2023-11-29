@@ -5,6 +5,7 @@ import HomeSection4 from '../../components/Layout/HomeSection4'
 import { Link, useLocation,useNavigate } from 'react-router-dom'
 import { GetFreelancerSelfBidProjectAction } from '../../redux/Freelancer/FreelancerAction'
 import { useDispatch, useSelector } from "react-redux";
+import { format } from 'date-fns'
 
 
 const SelfBidProject = () => {
@@ -12,7 +13,7 @@ const SelfBidProject = () => {
     const location = useLocation();
     const findbid = location.state && location.state.project.id;
     console.log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+",findbid )
-    console.log(findbid.id,"find bid")
+    console.log(findbid,"find bid")
     const accessToken = useSelector(state => state.login.accessToken);
     // const [BidData, setBidData ] = useState(null)
     const BidData = useSelector(state => state.freelancer.viewselfproject)
@@ -34,6 +35,8 @@ const SelfBidProject = () => {
 //         BidDataArray = BidData[i]
 //         console.log("-+-+-+-+-+-++++++++++++",BidDataArray.id)
 //       }}
+      console.log(BidData,"Bid Data")
+    const normaltime = BidData && format(new Date(BidData.project.created_at), 'yyyy-MM-dd HH:mm');
     
     const [showFullDescription, setShowFullDescription] = useState(false);
     
@@ -103,14 +106,14 @@ const SelfBidProject = () => {
                     )}
                     {/* <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>{findbid.project.description}</p>
                     <p className=' mt-3 text-base font-semibold text-green-600 text-left'>more</p> */}
-                    <p className='mb-5 mt-5 text-base font-semibold text-green-600 text-left'>View job posting</p>
+                    {/* <p className='mb-5 mt-5 text-base font-semibold text-green-600 text-left'>View job posting</p> */}
                     </div>
                     <div className=' basis-1/12'></div>
                     <div className=' basis-3/12 border-l border-[#E7E8F2]'>
                         <div className=' flex flex-row ml-4'>
                             <div className=' basis-3/12'><i class="fa fa-user-secret" aria-hidden="true"></i></div>
                             <div className=' basis-6/12'>
-                                <p className=' text-[14px] font-normal text-left'>Entry,</p>
+                                <p className=' text-[14px] font-normal text-left'>{BidData.project.experience_level}</p>
                                 <p className=' text-[12px] font-normal text-left opacity-50'>Experience level</p>
                             </div>
                         </div>
@@ -118,14 +121,14 @@ const SelfBidProject = () => {
                             <div className=' basis-3/12'><i class="bi bi-tag-fill"></i></div>
                             <div className=' basis-9/12'>
                                 <p className=' text-[14px] font-normal text-left'>porpose your terms</p>
-                                <p className=' text-[12px] font-normal text-left opacity-50'>Fixed price</p>
+                                <p className=' text-[12px] font-normal text-left opacity-50'>{BidData.project.rate} price</p>
                             </div>
                         </div>
                         <div className=' flex flex-row ml-4 mt-4'>
                             <div className=' basis-3/12'><i class="bi bi-calendar2-check-fill"></i></div>
                             <div className=' basis-8/12'>
-                                <p className=' text-[14px] font-normal text-left'>3 to 6 months</p>
-                                <p className=' text-[12px] font-normal text-left opacity-50'>Project Length</p>
+                                <p className=' text-[14px] font-normal text-left'>Project Deadline</p>
+                                <p className=' text-[12px] font-normal text-left opacity-50'>{BidData.project.deadline}</p>
                             </div>
                         </div>
                     </div>
@@ -148,7 +151,7 @@ const SelfBidProject = () => {
                 <hr className=' mt-8' />
                 <div className=' flex flex-row'>
                     <div className=' basis-6/12'><p className='text-base font-medium font-inter text-left mt-5'>Your proposed terms</p></div>
-                    <div className=' basis-6/12'><p className='text-base font-medium opacity-50 font-inter text-right mt-5'>Client's budget: ${BidData.project.budget}</p></div>
+                    <div className=' basis-6/12'><p className='text-base font-medium opacity-50 font-inter text-right mt-5'>Client's budget: ${BidData.project.rate == 'Hourly' ? BidData.project.min_hourly_rate+"/hr" +" - "+ "$"+BidData.project.max_hourly_rate+"/hr" : BidData.project.fixed_budget }</p></div>
                 </div>
                 <div>
                 <p className='text-[15px] font-medium font-inter text-left mt-5'>How do you want to be paid?</p>
@@ -188,9 +191,9 @@ const SelfBidProject = () => {
                     </div>
                     <div className='mt-5 ml-7'>
                         <p className=' text-[17px] font-inter font-normal text-left'>History</p>
-                        <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>20 to 50 proposals<span className=' ml-3 text-green-600'><i class="bi bi-question-circle-fill"></i></span></p>
-                        <p className='text-[14px] font-inter font-normal opacity-75 mt-2 text-left'>1 job posted</p>
-                        <p className='text-[12px] font-inter font-normal opacity-75 mt-2 text-left'>Member since Sep 18, 2023</p>
+                        {/* <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>20 to 50 proposals<span className=' ml-3 text-green-600'><i class="bi bi-question-circle-fill"></i></span></p>
+                        <p className='text-[14px] font-inter font-normal opacity-75 mt-2 text-left'>1 job posted</p> */}
+                        <p className='text-[12px] font-inter font-normal opacity-75 mt-2 text-left'>Member since {normaltime}</p>
                     </div>
                 </div>
             </div>

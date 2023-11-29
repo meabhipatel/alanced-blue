@@ -152,24 +152,25 @@ const [showFullDescription, setShowFullDescription] = useState(false);
                         </div>
                     </div>
                     <div className=' flex flex-row ml-4 mt-4'>
-                        <div className=' basis-3/12'><i class="bi bi-alarm-fill"></i></div>
+                        <div className=' basis-3/12'><i class="bi bi-coin"></i></div>
                         <div className=' basis-6/12'>
                             <p className=' text-[14px] font-normal text-left'>${projectData.project.rate == 'Hourly' ? projectData.project.min_hourly_rate+"/hr" +" - "+ "$"+projectData.project.max_hourly_rate+"/hr" : projectData.project.fixed_budget }</p>
-                            <p className=' text-[12px] font-normal text-left opacity-50'>{projectData.project.rate}</p>
+                            <p className=' text-[12px] font-normal text-left opacity-50'>Project Budget</p>
+                            {/* <p className=' text-[12px] font-normal text-left opacity-50'>{projectData.project.rate}</p> */}
                         </div>
                     </div>
                     <div className=' flex flex-row ml-4 mt-4'>
                         <div className=' basis-3/12'><i class="bi bi-clock-history"></i></div>
                         <div className=' basis-9/12'>
-                            <p className=' text-[14px] font-normal text-left'>More than 30 hrs/week</p>
-                            <p className=' text-[12px] font-normal text-left opacity-50'>Hourly</p>
+                            <p className=' text-[14px] font-normal text-left'>{projectData.project.rate}</p>
+                            <p className=' text-[12px] font-normal text-left opacity-50'>Budget Type</p>
                         </div>
                     </div>
                     <div className=' flex flex-row ml-4 mt-4'>
                         <div className=' basis-3/12'><i class="bi bi-calendar-check"></i></div>
                         <div className=' basis-8/12'>
-                            <p className=' text-[14px] font-normal text-left'>More than 6 months</p>
-                            <p className=' text-[12px] font-normal text-left opacity-50'>Project Length</p>
+                            <p className=' text-[14px] font-normal text-left'>{projectData.project.deadline}</p>
+                            <p className=' text-[12px] font-normal text-left opacity-50'>Project Deadline</p>
                         </div>
                     </div>
                 </div>

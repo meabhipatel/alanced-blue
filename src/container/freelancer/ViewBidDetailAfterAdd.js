@@ -3,6 +3,7 @@ import Navbar from '../../components/Layout/Navbar'
 import Footer from '../../components/Layout/Footer'
 import HomeSection4 from '../../components/Layout/HomeSection4'
 import { Link, useLocation,useNavigate } from 'react-router-dom'
+import { format } from 'date-fns'
 
 
 const ViewBidDetailAfterAdd = () => {
@@ -10,7 +11,7 @@ const ViewBidDetailAfterAdd = () => {
     const addedbid = location.state && location.state.bidData;
     const projectdata = location.state && location.state.projectdetail;
     console.log(addedbid,"added bid")
-    console.log(projectdata,"project data")
+    console.log(projectdata,"project data++++++++++++++++")
 
     const [showFullDescription, setShowFullDescription] = useState(false);
 
@@ -48,6 +49,8 @@ const ViewBidDetailAfterAdd = () => {
                 return `${years} year ago`;
             }
           }
+
+        // const normaltime = projectdata && format(new Date(projectdata.project.created_at), 'yyyy-MM-dd HH:mm');
 
     return (
         <>
@@ -105,8 +108,8 @@ const ViewBidDetailAfterAdd = () => {
                         <div className=' flex flex-row ml-4 mt-4'>
                             <div className=' basis-3/12'><i class="bi bi-calendar2-check-fill"></i></div>
                             <div className=' basis-8/12'>
-                                <p className=' text-[14px] font-normal text-left'>3 to 6 months</p>
-                                <p className=' text-[12px] font-normal text-left opacity-50'>Project Length</p>
+                                <p className=' text-[14px] font-normal text-left'>Project Deadline</p>
+                                <p className=' text-[12px] font-normal text-left opacity-50'>{projectdata.project.deadline}</p>
                             </div>
                         </div>
                     </div>
@@ -162,15 +165,19 @@ const ViewBidDetailAfterAdd = () => {
                         <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>Payment method not verified</p>
                     </div>
                     <div className='mt-5 ml-7'>
+                        <p className=' text-[17px] font-inter font-normal text-left'>Owner Name</p>
+                        <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>{projectdata.project.project_owner_name}</p>
+                    </div>
+                    <div className='mt-5 ml-7'>
                         <p className=' text-[17px] font-inter font-normal text-left'>Location</p>
-                        <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>Nepal</p>
-                        <p className='text-[15px] font-inter font-normal opacity-75  text-left'>kathmandu 04:42 PM</p>
+                        <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>{projectdata.project.project_owner_location}</p>
+                        {/* <p className='text-[15px] font-inter font-normal opacity-75  text-left'>kathmandu 04:42 PM</p> */}
                     </div>
                     <div className='mt-5 ml-7'>
                         <p className=' text-[17px] font-inter font-normal text-left'>History</p>
-                        <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>20 to 50 proposals<span className=' ml-3 text-green-600'><i class="bi bi-question-circle-fill"></i></span></p>
-                        <p className='text-[14px] font-inter font-normal opacity-75 mt-2 text-left'>1 job posted</p>
-                        <p className='text-[12px] font-inter font-normal opacity-75 mt-2 text-left'>Member since Sep 18, 2023</p>
+                        {/* <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>20 to 50 proposals<span className=' ml-3 text-green-600'><i class="bi bi-question-circle-fill"></i></span></p>
+                        <p className='text-[14px] font-inter font-normal opacity-75 mt-2 text-left'>1 job posted</p> */}
+                        <p className='text-[12px] font-inter font-normal opacity-75 mt-2 text-left'>Member since</p>
                     </div>
                 </div>
             </div>
