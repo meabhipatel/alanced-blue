@@ -17,7 +17,7 @@ import Footer from '../../../components/Layout/Footer';
 import { toast } from 'react-toastify';
 import { timeAgo } from '../TimeFunctions';
 import { useEffect } from 'react';
-
+import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 
 
 function ViewProjectPopup() {
@@ -151,6 +151,8 @@ useEffect(() => {
         <div className=' container-sm px-40'>
         {clickable ?  
         <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><LightbulbOutlinedIcon/><span className='ml-4'>You have already submitted a proposal for this project.</span><br/><span className='text-green-700 font-bold ml-10'><Link to="/view/SelfBidProject" state={{ project }}>View Proposal</Link></span></div>:  '' }
+        {project.is_hired && !clickable ? 
+        <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><HighlightOffOutlinedIcon/><span className='ml-4'>This project is closed ,you can't add proposal now</span></div>:  '' }
             <div className=' flex flex-row my-6'>
                 <div className=' basis-8/12 text-left'>
                     <h1 className='text-xl font-normal font-cardo'>{project.title}</h1>
@@ -217,7 +219,7 @@ useEffect(() => {
                 </div>
                 <div className=' basis-4/12'>
                 <div className='mt-6 ml-[16%]'>
-                <Link to="/freelancer/add-bid" style={{pointerEvents: clickable ? 'none' : ''}} state={{ projectData }} onClick={() => window.scrollTo(0, 0)}><span class={clickable ? 'px-12 py-[15px] lg:mt-0 bg-slate-200 border rounded border-none text-white font-inter text-base font-normal':'px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal'}>Apply Now</span></Link>
+                <Link to="/freelancer/add-bid" style={{pointerEvents: clickable|| project.is_hired ? 'none' : ''}} state={{ projectData }} onClick={() => window.scrollTo(0, 0)}><span class={clickable || project.is_hired? 'px-12 py-[15px] lg:mt-0 bg-slate-200 border rounded border-none text-white font-inter text-base font-normal':'px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal'}>Apply Now</span></Link>
                 </div>
                 {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-8 ml-[30%]">
                 <button class="rounded-sm px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-inter font-bold text-base py-[4px] px-8" onClick={(event) => handleClick(event,project)}>{ 
