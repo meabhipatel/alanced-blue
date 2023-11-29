@@ -14,6 +14,7 @@ import Footer from '../../components/Layout/Footer';
 import HomeSection4 from '../../components/Layout/HomeSection4';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
+import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 
 
 const ViewMoreProjectDetail = () => {
@@ -128,6 +129,8 @@ useEffect(() => {
         <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><LightbulbOutlinedIcon/><span className='ml-4'>You have already submitted a proposal for this project.</span><br/><span className='text-green-700 font-bold ml-10'><Link to="/view/SelfBidProject" state={{ project }}>View Proposal</Link></span></div>:  '' } */}
         {clickable ?  
         <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><LightbulbOutlinedIcon/><span className='ml-4'>You have already submitted a proposal for this project.</span></div>:  '' }
+        {project.is_hired && !clickable ?  
+        <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><HighlightOffOutlinedIcon/><span className='ml-4'>This project is closed ,you can't add proposal now</span></div>:  '' }
             <div className=' flex flex-row my-6'>
                 <div className=' basis-8/12 text-left'>
                     <h1 className='text-xl font-normal font-cardo'>{project.title}</h1>
@@ -196,7 +199,7 @@ useEffect(() => {
                 <div className='mt-6 ml-[16%]'>
                 {/* <Link to="/freelancer/send-proposal" style={{pointerEvents: clickable ? 'none' : ''}} state={{ projectData }} onClick={() => window.scrollTo(0, 0)}><span class={clickable ? 'px-12 py-[15px] lg:mt-0 bg-slate-200 border rounded border-none text-white font-inter text-base font-normal':'px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal'}>Apply Now</span></Link> */}
                 { accessToken ? (
-                    <Link to="/freelancer/send-proposal" style={{pointerEvents: clickable ? 'none' : ''}} state={{ projectData }} onClick={() => window.scrollTo(0, 0)}><span class={clickable ? 'px-12 py-[15px] lg:mt-0 bg-slate-200 border rounded border-none text-white font-inter text-base font-normal':'px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal'}>Apply Now</span></Link>
+                    <Link to="/freelancer/send-proposal" style={{pointerEvents: clickable || project.is_hired ? 'none' : ''}} state={{ projectData }} onClick={() => window.scrollTo(0, 0)}><span class={clickable || project.is_hired ? 'px-12 py-[15px] lg:mt-0 bg-slate-200 border rounded border-none text-white font-inter text-base font-normal':'px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal'}>Apply Now</span></Link>
                 ):(
                     <Link to="/login"  onClick={() => window.scrollTo(0, 0)}><span class='px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal'>Apply Now</span></Link>
                 )}
