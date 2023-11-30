@@ -18,6 +18,7 @@ import { toast } from 'react-toastify';
 import { timeAgo } from '../TimeFunctions';
 import { useEffect } from 'react';
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
+import DoDisturbAltOutlinedIcon from '@mui/icons-material/DoDisturbAltOutlined';
 
 
 function ViewProjectPopup() {
@@ -152,7 +153,7 @@ useEffect(() => {
         {clickable ?  
         <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><LightbulbOutlinedIcon/><span className='ml-4'>You have already submitted a proposal for this project.</span><br/><span className='text-green-700 font-bold ml-10'><Link to="/view/SelfBidProject" state={{ project }}>View Proposal</Link></span></div>:  '' }
         {project.is_hired && !clickable ? 
-        <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><HighlightOffOutlinedIcon/><span className='ml-4'>This project is closed ,you can't add proposal now</span></div>:  '' }
+        <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><DoDisturbAltOutlinedIcon/><span className='ml-4'>This project is closed ,you can't add proposal now</span></div>:  '' }
             <div className=' flex flex-row my-6'>
                 <div className=' basis-8/12 text-left'>
                     <h1 className='text-xl font-normal font-cardo'>{project.title}</h1>
