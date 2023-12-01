@@ -30,7 +30,7 @@ const AddHiringRequestPopup = ({closeHiring,bid}) => {
         }
 
         try {
-            const response = await axios.post(`https://alanced.pythonanywhere.com/freelance/hire/${id}`, {
+            const response = await axios.post(`http://51.21.1.122:8000/freelance/hire/${id}`, {
                 project:proid,
                 project_title: Title,
                 hiring_budget:HiringBudget,

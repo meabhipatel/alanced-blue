@@ -4,25 +4,15 @@ import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
 import profilebg from '../../components/images/profilebg.png'
 import search from '../../components/images/SearchOutlined.png'
-import certifybadge from '../../components/images/certifybadge.png'
-import ladder from '../../components/images/ladder.png'
-import bag from '../../components/images/bag.png'
-import downarrow from '../../components/images/downarrow.png'
-import thumbdown from '../../components/images/thumbdown.png'
-import heart from '../../components/images/heart.png'
 import verify from '../../components/images/verify.png'
 import location from '../../components/images/location.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { GetViewAllProjectsListAction } from '../../redux/Freelancer/FreelancerAction'
-import { GetViewAllFreelancersAction } from '../../redux/Hirer/HirerAction'
 import { Avatar } from '@material-tailwind/react'
-import profilepic from '../../components/images/profilepic.png'
 import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import SkillsList from '../freelancer/AllSelectionData/SkillsList'
 import LanguageList from '../freelancer/AllSelectionData/LanguageList'
@@ -38,8 +28,6 @@ const HirerAfterLogin = () => {
     const logindata = useSelector(state => state.login.login_data);  
     const googleUserName = localStorage.getItem('googleUserName')
     const loginMethod = localStorage.getItem('loginMethod')
-    // const viewallfreelancer = useSelector(state => state.hirer.viewallfreelancer)
-    // const [isFreeHiringOpen, setIsFreeHiringOpen] = useState(false);
     const [isFreeHiringOpen, setIsFreeHiringOpen] = useState({});
 
 
@@ -48,32 +36,16 @@ const HirerAfterLogin = () => {
     const [req_skill ] = useState(SkillsList)
     const [language] = useState(LanguageList)
 
-    function parsedata(str) {
-        try {
-            return JSON.parse(str.replace(/'/g, '"'));
-        } catch (error) {
-            console.error("Error parsing JSON:", error);
-            return [];
-        }
-    }
 
     const [skillFilter, setSkillFilter] = useState([]);
     const [expFilter, setExpFilter] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [cityFilter, setCityFilter] = useState([]);
     const [languageFilter, setLanguageFilter] = useState([]);
-    // console.log(useSelector(state => state.login.accessToken))
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
-    // const openFreeHiring = () => {
-    //   setIsFreeHiringOpen(true);
-    // };
-  
-    // const closeFreeHiring = () => {
-    //   setIsFreeHiringOpen(false);
-    // };
 
     const openFreeHiring = (freelancerId) => {
       setIsFreeHiringOpen((prev) => ({ ...prev, [freelancerId]: true }));
@@ -84,10 +56,6 @@ const HirerAfterLogin = () => {
       setIsFreeHiringOpen((prev) => ({ ...prev, [freelancerId]: false }));
     };
   
-    // React.useEffect(() => {
-    //   dispatch(GetViewAllFreelancersAction())
-    //   // setviewallfreelancer(freelancers)
-    // }, [])
 
     const handleSkillFilterChange = (e) => {
       const skills = e.target.value;
@@ -161,10 +129,9 @@ const HirerAfterLogin = () => {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://alanced.pythonanywhere.com/account/freelancer/profile/view-all/?${queryString}`)
+      .get(`http://51.21.1.122:8000/account/freelancer/profile/view-all/?${queryString}`)
       .then((response) => {
         setViewFreelancer(response.data.results); 
-        // setViewFreelancer(response.data.data); 
         setTotalPages(Math.ceil(response.data.count / 8));
       })
       .catch((error) => {

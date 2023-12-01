@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import profilepic from '../../components/images/profilepic.png'
 import verify from '../../components/images/verify.png'
 import locations from '../../components/images/location.png'
 import { useState } from 'react'
@@ -27,9 +26,6 @@ const FreelancerFullDetailAfterLogin = () => {
   const accessToken = useSelector(state => state.login.accessToken);  
   const [freelancerproject, setfreelancerproject] = useState([]);
   const id = freelancer.id
-//   const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile)
-//   const [freelancerproject, setfreelancerproject] = useState([]);
-//   const id = freelancerselfprofile && freelancerselfprofile[0].id ? freelancerselfprofile[0].id : '';
   const [selectedProjects, setSelectedProjects] = useState(null);
   const [ProjectCount, setProjectCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -45,21 +41,6 @@ const FreelancerFullDetailAfterLogin = () => {
     setIsFreeHiringOpen(false);
   };
 
-// useEffect(() => {
-//   if(id) { 
-//       axios.get(`https://alanced.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}`)
-//           .then(response => {
-//               if (response.data.status === 200) {
-//                   setfreelancerproject(response.data.results);
-//               } else {
-//                   console.log(response.data.message || 'Error fetching project');
-//               }
-//           })
-//           .catch(err => {
-//               console.log(err.message);
-//           });
-//   }
-// }, [id]); 
 
 useEffect(() => {
   const queryParameters = [];
@@ -69,7 +50,7 @@ useEffect(() => {
   const queryString = queryParameters.join('&');
 
   axios
-    .get(`https://alanced.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`)
+    .get(`http://51.21.1.122:8000/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`)
     .then((response) => {
       setfreelancerproject(response.data.results); 
       setProjectCount(response.data.count);
@@ -80,7 +61,6 @@ useEffect(() => {
     });
 }, [currentPage]);
 
-const [active, setActive] = React.useState(1);
 const prev = () => {
   // window.scrollTo(0, 0);
   setCurrentPage(prev => Math.max(prev - 1, 1));
@@ -94,7 +74,7 @@ const next = () => {
 
 useEffect(() => {
   if(id) { 
-      axios.get(`https://alanced.pythonanywhere.com/freelance/View-all/Review/${id}`)
+      axios.get(`http://51.21.1.122:8000/freelance/View-all/Review/${id}`)
           .then(response => {
               if (response.data.status === 200) {
                   setReviews(response.data.data);
@@ -120,26 +100,15 @@ const showLessHandler = () => {
 
 const visibleReviews = reviews.slice(startIdx, startIdx + 3);
  
-  // const next = () => {
-  //     if (active === Math.ceil(freelancerproject.length / 6)) return;
-  //     setActive(active + 1);
-  // };
+  // const chunkArray = (array, size) => {
+  //     let chunked = [];
+  //     for (let i = 0; i < array.length; i += size) {
+  //         chunked.push(array.slice(i, i + size));
+  //     }
+  //     return chunked;
+  // }
 
-  // const prev = () => {
-  //     if (active === 1) return;
-  //     setActive(active - 1);
-  // };
-
-  // 1. Chunk the Array
-  const chunkArray = (array, size) => {
-      let chunked = [];
-      for (let i = 0; i < array.length; i += size) {
-          chunked.push(array.slice(i, i + size));
-      }
-      return chunked;
-  }
-
-  const chunkedProjects = chunkArray(freelancerproject, 6);
+  // const chunkedProjects = chunkArray(freelancerproject, 6);
   
   const openPortfolio = (project) => {
     setSelectedProjects(project);
@@ -153,7 +122,7 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 3);
 
   useEffect(() => {
     if(id) { 
-        axios.get(`https://alanced.pythonanywhere.com/freelance/View-all/Freelancer/Employment/${id}`)
+        axios.get(`http://51.21.1.122:8000/freelance/View-all/Freelancer/Employment/${id}`)
             .then(response => {
                 if (response.data.status === 200) {
                     setfreelanceremployment(response.data.data);
@@ -189,7 +158,7 @@ const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 2);
     <div className=' flex flex-row'>
       <div className=' basis-3/12 pl-14'>
       <div className="relative w-24 h-24">
-            <img src={"https://alanced.pythonanywhere.com/"+freelancer.images_logo} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
+            <img src={"http://51.21.1.122:8000"+freelancer.images_logo} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
             <div class="absolute bottom-3 right-0.5 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
         </div>
         <div className='text-left pl-2 mt-10'>
@@ -217,8 +186,7 @@ const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 2);
     )) 
   : null
 }
-          {/* <p className='font-cardo text-lg fond-semibold text-gray-500'>English</p>
-          <p className='font-cardo text-lg fond-semibold text-gray-500'>Hindi</p> */}
+         
         </div>
       </div>
       <div className=' basis-9/12'>
@@ -281,7 +249,7 @@ const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 2);
         <div className='w-1/3 px-2 cursor-pointer' key={index} onClick={() => openPortfolio(pro)}>  
             <div className='w-full h-[165px] mt-4 border border-gray-100 overflow-hidden'>
                 <img 
-                    src={"https://alanced.pythonanywhere.com/"+pro.images_logo} 
+                    src={"http://51.21.1.122:8000"+pro.images_logo} 
                     alt="" 
                     style={{
                         maxWidth: '100%',
@@ -407,16 +375,6 @@ const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 2);
     ))
 )}
 
-    {/* {visibleEmp.map((emp, index) => (<>
-    <div key={index} className='my-5'>
-    <h1 className="font-cardo text-[18px] text-[#031136] font-normal mr-1">{emp.Company_Designation}  |  {emp.Freelancer_Company_Name}</h1>
-    <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>
-    {formateDate(emp.Company_Joining_date)} - {formateDate(emp.Company_Leaving_date)}
-</p>
-    <div class="border-b opacity-50 my-3"></div>
-    </div>
-    </>       
-     ))} */}
      {freelanceremployment.length > 2 && (
   startIdx + 2 < freelanceremployment.length ? 
     <h1 className="font-cardo text-[20px] text-[#031136] font-normal mx-auto cursor-pointer" onClick={showMoreHandlers}>Show More</h1> :

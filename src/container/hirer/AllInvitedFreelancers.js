@@ -28,13 +28,12 @@ const [invitesCount, setInvitesCount] = useState(0);
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://alanced.pythonanywhere.com/freelance/View-all/invited-freelancers?${queryString}`,{
+      .get(`http://51.21.1.122:8000/freelance/View-all/invited-freelancers?${queryString}`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }
       })
       .then((response) => {
-        // setViewFreeBid(response.data.data);
         setViewinvites(response.data.results); 
         setInvitesCount(response.data.count);
         setTotalPages(Math.ceil(response.data.count / 8));
@@ -44,14 +43,16 @@ const [invitesCount, setInvitesCount] = useState(0);
       });
   }, [currentPage]);
       
-  const prev = () => {
-    setCurrentPage(prev => Math.max(prev - 1, 1));
+
+const prev = () => {
+  window.scrollTo(0, 0);
+  setCurrentPage(prev => Math.max(prev - 1, 1));
 };
 
 const next = () => {
-    setCurrentPage(prev => Math.min(prev + 1, totalPages));
+  window.scrollTo(0, 0);
+  setCurrentPage(prev => Math.min(prev + 1, totalPages));
 };
-
 
   return (
     <>
@@ -114,9 +115,6 @@ const next = () => {
           <p className=' mt-5 font-cardo text-xl opacity-70 ml-[44%] mb-5'>
             {viewinvites !== null ? 'No Invitations Found': 'Loading...'}
           </p>
-          {/* { viewinvites === null && (
-            <p className=' mt-3 font-cardo text-sm opacity-60 text-center '>Please try adjusting your search keywords or filters.</p>
-          )} */}
         </div>
       )
       }

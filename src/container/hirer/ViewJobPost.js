@@ -26,7 +26,7 @@ const ViewJobPost = () => {
   
     useEffect(() => {
       axios
-        .get(`https://alanced.pythonanywhere.com/freelance/view/hirer-self/Project`,{
+        .get(`http://51.21.1.122:8000/freelance/view/hirer-self/Project`,{
           headers: {
               'Authorization': `Bearer ${accessToken}`
           }
@@ -42,7 +42,7 @@ const ViewJobPost = () => {
 
   useEffect(() => {
    axios
-    .get(`https://alanced.pythonanywhere.com/freelance/View/bids/${id}`)
+    .get(`http://51.21.1.122:8000/freelance/View/bids/${id}`)
       .then((response) => {
         setBidCount(response.data.count);
       })
@@ -54,7 +54,7 @@ const ViewJobPost = () => {
 
   useEffect(() => {
     axios
-     .get(`https://alanced.pythonanywhere.com/freelance/View/project-invitations-count/${id}`,{
+     .get(`http://51.21.1.122:8000/freelance/View/project-invitations-count/${id}`,{
       headers: {
       Authorization: `Bearer ${accessToken}`,
   },
@@ -98,7 +98,7 @@ const ViewJobPost = () => {
     <div className="flex-1 py-4 flex">
         <i class="bi bi-mortarboard-fill flex-shrink-0 mr-3"></i>
         <div>
-            <p className="font-inter text-[#031136] text-md font-medium">Expert</p>
+            <p className="font-inter text-[#031136] text-md font-medium">{project.experience_level.replace(/_/g, ' ')}</p>
             <p className="font-inter text-[#031136] text-sm font-medium opacity-50">Experience Level</p>
         </div> 
     </div>
@@ -111,47 +111,10 @@ const ViewJobPost = () => {
     </div>
   </div>
 </div>
-
-        {/* <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
-  <div className="flex mb-4">
-  <div className="flex-1 py-4 flex">
-    <i class="bi bi-alarm flex-shrink-0 mr-3"></i> 
-    <div>
-        <p className="font-inter text-[#031136] text-md font-medium">Less than 30 hrs/week</p>
-        <p className="font-inter text-[#031136] text-sm font-medium opacity-50">Hourly</p>
-    </div>
-</div>
-
-    <div className="flex-1 py-4 flex">
-    <i class="bi bi-calendar-minus flex-shrink-0 mr-3"></i>
-    <div>
-        <p className="font-inter text-[#031136] text-md font-medium">Less than a month</p>
-        <p className="font-inter text-[#031136] text-sm font-medium opacity-50">Project Length</p>
-    </div> 
-    </div>
-  </div>
-  <div className="flex">
-    <div className="flex-1 py-4 flex">
-    <i class="bi bi-coin flex-shrink-0 mr-3"></i>
-    <div>
-        <p className="font-inter text-[#031136] text-md font-medium"> ${project.budget}</p>
-        <p className="font-inter text-[#031136] text-sm font-medium opacity-50">Fixed</p>
-    </div> 
-    </div>
-    <div className="flex-1 py-4 flex">
-    <i class="bi bi-mortarboard-fill flex-shrink-0 mr-3"></i>
-    <div>
-        <p className="font-inter text-[#031136] text-md font-medium">Expert</p>
-        <p className="font-inter text-[#031136] text-sm font-medium opacity-50">Experience Level</p>
-    </div> 
-    </div>
-  </div>
-</div> */}
 <div className='border-b border-gray-200 border-opacity-30 py-6 px-8 flex items-center'>
     <div className="flex-1"> 
         <p className="font-inter text-[#031136] text-lg font-medium">Contract-to-hire opportunity</p>  
         <p className="font-inter text-[#031136] opacity-50 text-md font-medium py-2">This lets talent know that this job could become full time.</p>
-        {/* <p className="font-inter text-green-700 text-md font-semibold py-3 cursor-pointer">Learn more</p> */}
     </div>
     <div className="ml-4"> 
         <img src={frame} alt="" className='h-32 w-32'/>
@@ -172,7 +135,6 @@ const ViewJobPost = () => {
         <p className="font-inter text-[#031136] text-md font-medium py-1">Proposals : <span className='opacity-50'>{bidcount ? bidcount:0}</span></p>
         <p className="font-inter text-[#031136] text-md font-medium py-1">Messaged : <span className='opacity-50'> {invitescount ? invitescount:0}</span></p>
         <p className="font-inter text-[#031136] text-md font-medium py-1">Invitations : <span className='opacity-50'> {invitescount ? invitescount:0}</span></p>
-        {/* <p className="font-inter text-[#031136] text-md font-medium py-1">Unanswered invites : <span className='opacity-50'> 0</span></p> */}
         </div>
         </div>
         <div class="w-full md:w-[30%] bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
@@ -194,7 +156,6 @@ const ViewJobPost = () => {
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
         <p className="font-inter text-[#031136] text-lg font-medium py-4">Job link</p>
         <input type="text" className='border my-2 py-1.5 px-2 rounded-md w-full bg-[#E4EBE4] cursor-not-allowed' disabled placeholder='https://www.alanced.com/jobs'/>
-        {/* <p className="font-inter text-green-700 text-md font-semibold py-3 cursor-pointer">copy link</p> */}
         </div>
         </div>
         </div>
