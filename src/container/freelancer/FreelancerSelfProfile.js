@@ -105,7 +105,7 @@ function combinedClick() {
 
 useEffect(() => {
     if(id) { 
-        axios.get(`https://alanced.pythonanywhere.com/freelance/View-all/Review/${id}`)
+        axios.get(`http://51.21.1.122:8000/freelance/View-all/Review/${id}`)
             .then(response => {
                 if (response.data.status === 200) {
                     setReviews(response.data.data);
@@ -128,7 +128,7 @@ useEffect(() => {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://alanced.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`)
+      .get(`http://51.21.1.122:8000/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`)
       .then((response) => {
         setfreelancerproject(response.data.results); 
         setProjectCount(response.data.count);
@@ -159,7 +159,7 @@ useEffect(() => {
 
 useEffect(() => {
     if(id) { 
-        axios.get(`https://alanced.pythonanywhere.com/freelance/View-all/Freelancer/Employment/${id}`)
+        axios.get(`http://51.21.1.122:8000/freelance/View-all/Freelancer/Employment/${id}`)
             .then(response => {
                 if (response.data.status === 200) {
                     setfreelanceremployment(response.data.data);
@@ -198,7 +198,7 @@ useEffect(() => {
 
 
 useEffect(() => { 
-        axios.get('https://alanced.pythonanywhere.com/freelance/view/freelancer-self/bid',{
+        axios.get('http://51.21.1.122:8000/freelance/view/freelancer-self/bid',{
             headers: {
                 'Authorization': `Bearer ${accessToken}`
             }
@@ -574,7 +574,7 @@ const handleImageSave = async () => {
    <div className="md:w-[30%] bg-white border border-gray-200 border-opacity-30">
    <div className='border-b border-gray-200 border-opacity-30 py-8 p-4 mb-4 md:mb-0 relative'>
    <div className="relative w-28 h-28 mx-auto">
-                    <img src={freelancerselfprofile && freelancerselfprofile[0] ? "https://alanced.pythonanywhere.com/"+freelancerselfprofile[0].images_logo : ''} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
+                    <img src={freelancerselfprofile && freelancerselfprofile[0] ? "http://51.21.1.122:8000"+freelancerselfprofile[0].images_logo : ''} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
                     <div className="absolute top-1 left-2 p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={handleEditClick}>
                         <img src={edit} alt="edit" />
                     </div>
@@ -720,28 +720,28 @@ const handleImageSave = async () => {
                             {selectedFile ? 
                             <img className="absolute inset-0 w-full h-full object-cover" src={URL.createObjectURL(selectedFile)} alt="Profile" /> 
                             : 
-                            <img className="absolute inset-0 w-full h-full object-cover" src={freelancerselfprofile && freelancerselfprofile[0] ? "https://alanced.pythonanywhere.com/" + freelancerselfprofile[0].images_logo : ''} alt="Profile" />
+                            <img className="absolute inset-0 w-full h-full object-cover" src={freelancerselfprofile && freelancerselfprofile[0] ? "http://51.21.1.122:8000" + freelancerselfprofile[0].images_logo : ''} alt="Profile" />
                             }
                             </div>
                             <div className="relative w-28 h-28 overflow-hidden">
                             {selectedFile ? 
                             <img className="absolute inset-0 w-full h-full object-cover" src={URL.createObjectURL(selectedFile)} alt="Profile" /> 
                             : 
-                            <img className="absolute inset-0 w-full h-full object-cover" src={freelancerselfprofile && freelancerselfprofile[0] ? "https://alanced.pythonanywhere.com/" + freelancerselfprofile[0].images_logo : ''} alt="Profile" />
+                            <img className="absolute inset-0 w-full h-full object-cover" src={freelancerselfprofile && freelancerselfprofile[0] ? "http://51.21.1.122:8000" + freelancerselfprofile[0].images_logo : ''} alt="Profile" />
                             }
                             </div>
                             <div className="relative w-20 h-20 overflow-hidden">
                             {selectedFile ? 
                             <img className="absolute inset-0 w-full h-full object-cover" src={URL.createObjectURL(selectedFile)} alt="Profile" /> 
                             : 
-                            <img className="absolute inset-0 w-full h-full object-cover" src={freelancerselfprofile && freelancerselfprofile[0] ? "https://alanced.pythonanywhere.com/" + freelancerselfprofile[0].images_logo : ''} alt="Profile" />
+                            <img className="absolute inset-0 w-full h-full object-cover" src={freelancerselfprofile && freelancerselfprofile[0] ? "http://51.21.1.122:8000" + freelancerselfprofile[0].images_logo : ''} alt="Profile" />
                             }
                             </div>
                             <div className="relative w-16 h-16 overflow-hidden">
                             {selectedFile ? 
                             <img className="absolute inset-0 w-full h-full object-cover" src={URL.createObjectURL(selectedFile)} alt="Profile" /> 
                             : 
-                            <img className="absolute inset-0 w-full h-full object-cover" src={freelancerselfprofile && freelancerselfprofile[0] ? "https://alanced.pythonanywhere.com/" + freelancerselfprofile[0].images_logo : ''} alt="Profile" />
+                            <img className="absolute inset-0 w-full h-full object-cover" src={freelancerselfprofile && freelancerselfprofile[0] ? "http://51.21.1.122:8000" + freelancerselfprofile[0].images_logo : ''} alt="Profile" />
                             }
                             </div>
                     <input 
@@ -982,7 +982,7 @@ const handleImageSave = async () => {
         <div className='w-1/3 px-2 cursor-pointer' key={index} onClick={() => openEditFreeProject(pro)}>  
             <div className='w-full h-[165px] mt-4 border border-gray-100 overflow-hidden'>
                 <img 
-                    src={"https://alanced.pythonanywhere.com/"+pro.images_logo} 
+                    src={"http://51.21.1.122:8000"+pro.images_logo} 
                     alt="" 
                     style={{
                         maxWidth: '100%',

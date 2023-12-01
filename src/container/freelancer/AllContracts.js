@@ -39,7 +39,7 @@ const AllContracts = () => {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://alanced.pythonanywhere.com/freelance/View-all/freelancer-contracts?${queryString}`,{
+      .get(`http://51.21.1.122:8000/freelance/View-all/freelancer-contracts?${queryString}`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }

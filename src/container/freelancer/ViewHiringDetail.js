@@ -29,7 +29,7 @@ const ViewHiringDetail = () => {
 
     const handleAcceptProject = async () => {
         try {
-            const response = await axios.put(`https://alanced.pythonanywhere.com/freelance/projects/accept/${hire_id}`, {}, {
+            const response = await axios.put(`http://51.21.1.122:8000/freelance/projects/accept/${hire_id}`, {}, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }
@@ -46,7 +46,7 @@ const ViewHiringDetail = () => {
 
     const handleRejectProject = async () => {
         try {
-            const response = await axios.put(`https://alanced.pythonanywhere.com/freelance/projects/reject/${hire_id}`, {}, {
+            const response = await axios.put(`http://51.21.1.122:8000/freelance/projects/reject/${hire_id}`, {}, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }

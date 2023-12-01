@@ -188,7 +188,7 @@ const Registration = () => {
                     type: 'FREELANCER'
                 };
     
-                const registrationResponse = await axios.post('https://alanced.pythonanywhere.com/account/google-login/', payload);
+                const registrationResponse = await axios.post('http://51.21.1.122:8000/account/google-login/', payload);
                 if (registrationResponse.data && registrationResponse.data.status === 200 && registrationResponse.data.message === "Email already exists") {
                     toast.error("This email already exists");
                 } else {
