@@ -45,7 +45,7 @@ const [viewfreebid, setViewFreeBid] = useState([]);
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://alanced.pythonanywhere.com/freelance/view/freelancer-self/bid?${queryString}`,{
+      .get(`http://51.21.1.122:8000/freelance/view/freelancer-self/bid?${queryString}`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }
@@ -82,7 +82,7 @@ const [viewallhiring, setViewAllHiring] = useState([]);
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://alanced.pythonanywhere.com/freelance/View-all/pending-hire-request?${queryString}`,{
+      .get(`http://51.21.1.122:8000/freelance/View-all/pending-hire-request?${queryString}`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }

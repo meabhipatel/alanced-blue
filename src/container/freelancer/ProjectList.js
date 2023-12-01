@@ -157,7 +157,7 @@ function ProjectList() {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://alanced.pythonanywhere.com/freelance/view-all/Project/?${queryString}`)
+      .get(`http://51.21.1.122:8000/freelance/view-all/Project/?${queryString}`)
       .then((response) => {
         setViewProject(response.data.results);
         setTotalPages(Math.ceil(response.data.count / 8));
@@ -244,7 +244,7 @@ function ProjectList() {
     const fetchData = async () => {
       try {
         // Fetch doc API
-        const response1 = await axios.get('https://alanced.pythonanywhere.com/freelance/view/freelancer-all-self/bid',{
+        const response1 = await axios.get('http://51.21.1.122:8000/freelance/view/freelancer-all-self/bid',{
           headers: {
             "Authorization":`Bearer ${accessToken}`
           }
@@ -272,7 +272,7 @@ function ProjectList() {
 
             for (const project of viewProject || []) {
                 try {
-                    const response = await axios.get(`https://alanced.pythonanywhere.com/freelance/View/bids/${project.id}`);
+                    const response = await axios.get(`http://51.21.1.122:8000/freelance/View/bids/${project.id}`);
                     if (response.status === 200) {
                         bids[project.id] = response.data.count; 
                     } else {

@@ -42,7 +42,7 @@ const [BidCount,setBidCount]=useState(0)
     const fetchData = async () => {
       try {
         // Fetch doc API
-        const response1 = await axios.get('https://alanced.pythonanywhere.com/freelance/view/freelancer-all-self/bid',{
+        const response1 = await axios.get('http://51.21.1.122:8000/freelance/view/freelancer-all-self/bid',{
           headers: {
             "Authorization":`Bearer ${accessToken}`
           }
@@ -77,13 +77,13 @@ const [BidCount,setBidCount]=useState(0)
         let response;
 
         if (project.isSaved) {
-            response = await axios.delete(`https://alanced.pythonanywhere.com/freelance/saved-projects/${project.id}`, {
+            response = await axios.delete(`http://51.21.1.122:8000/freelance/saved-projects/${project.id}`, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
             });
         } else {
-            response = await axios.post(`https://alanced.pythonanywhere.com/freelance/saved-projects/${project.id}`, {}, {
+            response = await axios.post(`http://51.21.1.122:8000/freelance/saved-projects/${project.id}`, {}, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
@@ -125,7 +125,7 @@ const handleClick = (event,project) => {
 
 useEffect(() => {
   axios
-   .get(`https://alanced.pythonanywhere.com/freelance/View/bids/${id}`)
+   .get(`http://51.21.1.122:8000/freelance/View/bids/${id}`)
      .then((response) => {
        setBidCount(response.data.count);
      })
