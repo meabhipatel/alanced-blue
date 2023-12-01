@@ -13,7 +13,7 @@ const EditJobDescPopup = ({closeJobDesc,project}) => {
 
     const handleSave = async () => {
         try {
-            const response = await axios.put(`https://alanced.pythonanywhere.com/freelance/update/project/${id}`, {
+            const response = await axios.put(`http://51.21.1.122:8000/freelance/update/project/${id}`, {
                 description : jobdesc,
             }, {
                 headers: {

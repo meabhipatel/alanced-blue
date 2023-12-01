@@ -53,7 +53,7 @@ const ViewProposalPopup = ({ closeViewProposal }) => {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://alanced.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`)
+      .get(`http://51.21.1.122:8000/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`)
       .then((response) => {
         setfreelancerproject(response.data.results); 
         setProjectCount(response.data.count);
@@ -88,7 +88,7 @@ const ViewProposalPopup = ({ closeViewProposal }) => {
 
 useEffect(() => {
   if(id) { 
-      axios.get(`https://alanced.pythonanywhere.com/freelance/View-all/Freelancer/Employment/${id}`)
+      axios.get(`http://51.21.1.122:8000/freelance/View-all/Freelancer/Employment/${id}`)
           .then(response => {
               if (response.data.status === 200) {
                   setfreelanceremp(response.data.data);
@@ -108,7 +108,7 @@ const [viewinvites, setViewinvites] = useState([]);
   useEffect(() => {
     
     axios
-      .get(`https://alanced.pythonanywhere.com/freelance/View-all/invited-freelancers`,{
+      .get(`http://51.21.1.122:8000/freelance/View-all/invited-freelancers`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }
@@ -153,7 +153,7 @@ const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 3);
 
 useEffect(() => {
   if(id) { 
-      axios.get(`https://alanced.pythonanywhere.com/freelance/View-all/Review/${id}`)
+      axios.get(`http://51.21.1.122:8000/freelance/View-all/Review/${id}`)
           .then(response => {
               if (response.data.status === 200) {
                   setReviews(response.data.data);
@@ -243,7 +243,7 @@ const [active, setActive] = React.useState(1);
     <div className="flex mt-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30">
   <div className="flex-[20%] p-6">
   <div className="relative w-24 h-24">
-                    <img src={"https://alanced.pythonanywhere.com/"+bid.freelancer_profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
+                    <img src={"http://51.21.1.122:8000"+bid.freelancer_profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
                     <div class="absolute bottom-3 right-0.5 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                 </div>
   </div>
@@ -385,7 +385,7 @@ const [active, setActive] = React.useState(1);
         <div className='w-1/3 px-2 cursor-pointer' key={index} onClick={() => openPortfolio(pro)}>  
             <div className='w-full h-[165px] mt-4 border border-gray-100 overflow-hidden'>
                 <img 
-                    src={"https://alanced.pythonanywhere.com/"+pro.images_logo} 
+                    src={"http://51.21.1.122:8000"+pro.images_logo} 
                     alt="" 
                     style={{
                         maxWidth: '100%',

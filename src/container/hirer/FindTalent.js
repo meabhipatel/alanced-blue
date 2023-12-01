@@ -2,27 +2,18 @@ import React, { useState, useEffect} from 'react'
 import Navbar from '../../components/Layout/Navbar'
 import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
-import profilebg from '../../components/images/profilebg.png'
 import search from '../../components/images/SearchOutlined.png'
-import certifybadge from '../../components/images/certifybadge.png'
-import ladder from '../../components/images/ladder.png'
-import bag from '../../components/images/bag.png'
-import downarrow from '../../components/images/downarrow.png'
-import thumbdown from '../../components/images/thumbdown.png'
-import heart from '../../components/images/heart.png'
 import verify from '../../components/images/verify.png'
 import locations from '../../components/images/location.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link , useLocation } from 'react-router-dom'
 import mybg from '../../components/images/profile_list.png'
-import { GetViewAllFreelancersAction } from '../../redux/Hirer/HirerAction'
 import { Avatar } from '@material-tailwind/react'
 import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import axios from 'axios'
-import Slider from 'rc-slider'
 import SkillsList from '../freelancer/AllSelectionData/SkillsList'
 import CityList from '../freelancer/AllSelectionData/CityList'
 import LanguageList from '../freelancer/AllSelectionData/LanguageList'
@@ -33,16 +24,13 @@ const FindTalent = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get('category');
-    // console.log(category,"category")
-    // const viewallfreelancer = useSelector(state => state.hirer.viewallfreelancer)
-
+   
     const [expe] = useState(ExperienceLevel);
     const [city] = useState(CityList)
     const [req_skill ] = useState(SkillsList)
     const [language] = useState(LanguageList)
    
-    // console.log(";;;;;;;;;;;;;;;;;;;;;;;",viewallfreelancer.length)
-    // console.log(useSelector(state => state.login.accessToken))
+
     const [skillFilter, setSkillFilter] = useState([]);
     const [expFilter, setExpFilter] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -54,9 +42,6 @@ const FindTalent = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
   
-    // React.useEffect(() => {
-    //   dispatch(GetViewAllFreelancersAction())
-    // }, [])
 
     const handleSkillFilterChange = (e) => {
       const skills = e.target.value;
@@ -130,10 +115,9 @@ const FindTalent = () => {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://alanced.pythonanywhere.com/account/freelancer/profile/view-all/?${queryString}`)
+      .get(`http://51.21.1.122:8000/account/freelancer/profile/view-all/?${queryString}`)
       .then((response) => {
         setViewFreelancer(response.data.results);
-        // setViewFreelancer(response.data.data);
         setTotalPages(Math.ceil(response.data.count / 8));
       })
       .catch((error) => {
@@ -480,28 +464,14 @@ const FindTalent = () => {
   
   <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
       <div className='px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30'>
-      {/* <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1> */}
-      {/* <div className="flex justify-between items-center"> */}
       <div className="flex items-center">
       <h1  className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Freelancers that Matches your Job</h1>
       </div>
       <div class="w-40  mt-3 relative">
       <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
       <div class="border-gray-600 border-b-2 rounded-lg"></div>
-    </div>
-      {/* <div className="flex items-center">
-      <div className='flex items-center mr-1 space-x-1 border p-1 w-[200px] rounded-md'>
-          <img src={search} alt="Search Icon" className="h-4 w-4 mr-1 ml-1" />
-          <input className='w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none' placeholder='Search Freelancers' value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)} />
+    </div>   
       </div>
-      </div> */}
-  {/* </div> */}
-      
-      </div>
-      {/* <div className='px-4 md:px-8 py-4'>
-        <p className='font-inter opacity-50 text-[#0A142F] text-[13px]'>Browse Freelancers that match your jobs</p>
-      </div> */}
       {viewFreelancer != null ? (
         viewFreelancer.length > 0 ? (
           <div className='grid md:grid-cols-2 grid-cols-1 w-full pl-3.5'>
@@ -515,15 +485,9 @@ const FindTalent = () => {
             <p className="font-inter text-[#0A142F] text-[18px] font-semibold">{highlightText(free.first_Name + " " + free.last_Name, searchQuery)}</p>
             <p className='font-inter opacity-50 text-[#0A142F] text-[14px]'>{highlightText(free.category,searchQuery)}</p>
         </div>
-        {/* <div className="flex items-center space-x-2 ml-auto">
-        <Link to=''>
-            <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
-        </Link>
-        </div> */}
         </div>
         <div>
         <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-4 inline-block'>
-    {/* {getDisplayedText(free.about, showMoreDes[free.id]?.showAllDes)} */}
     {highlightText(getDisplayedText(free.about, showMoreDes[free.id]?.showAllDes), searchQuery)}
 </p>
 {free.about && free.about.split(' ').length > 20 && (
@@ -535,16 +499,6 @@ const FindTalent = () => {
     </button>
 )}</div>
 
-      {/* <p className='font-inter opacity-50 text-[#0A142F] text-[14px] py-4'>{free.about}</p>
-      {free.about &&
-                    free.about.length > 20 && (
-                        <button
-                            onClick={() => toggleShowMoreDes(free.id)}
-                            className='font-inter text-green-600 text-[14px] cursor-pointer font-bold'
-                        >
-                            {showMoreDes[free.id] && showMoreDes[free.id].showAllDes ? ' Less' : ' More'}
-                        </button>
-                    )} */}
   {free.skills &&
                     JSON.parse(free.skills.replace(/'/g, '"')).map((skill, skillIndex) => (
                         <Link to={''} key={skillIndex}>
@@ -580,11 +534,7 @@ const FindTalent = () => {
           <img src={locations} alt="" className='inline-block h-3 w-3 mr-1'/>
           <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>{highlightText(free.Address ? free.Address : 'NA', searchQuery)}</p>
           </div>
-          {/* <div className=" absolute bottom-2 right-6 items-center space-x-2 ml-auto">
-        <Link to=''>
-            <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
-        </Link>
-        </div> */}
+         
         <div className=' flex flex-row'>
             <div className=' basis-8/12 absolute bottom-4 items-center font-inter text-green-600 text-[14px] cursor-pointer font-bold hover:underline'><Link to='/view-freelancer/full-detail' state={{ free }} onClick={() => window.scroll(0, 0) }><p>View more detail</p></Link></div>
             <div className=' basis-4/12 absolute bottom-2 right-6 items-center space-x-2 ml-auto'><Link to='/login'>
@@ -661,42 +611,7 @@ const FindTalent = () => {
                         </IconButton>
                     </div>
     )}
-  {/* {viewallfreelancer?.length > 5 && (
-                    <div className="flex justify-end items-center gap-6 m-4">
-                        <IconButton
-                            size="sm"
-                            variant="outlined"
-                            onClick={prev}
-                            disabled={currentPage === 1}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
-                        >
-                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
-                        </IconButton>
-                        
-                        {[...Array(totalPages)].map((_, index) => {
-                            const pageNumber = index + 1;
-                            return (
-                                <span
-                                    key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
-                                    onClick={() => setCurrentPage(pageNumber)}
-                                >
-                                    {pageNumber}
-                                </span>
-                            );
-                        })}
-
-                        <IconButton
-                            size="sm"
-                            variant="outlined"
-                            onClick={next}
-                            disabled={currentPage === totalPages}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
-                        >
-                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
-                        </IconButton>
-                    </div>
-                )} */}
+  
   </div>
   </div>
   </div>

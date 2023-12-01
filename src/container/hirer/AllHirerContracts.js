@@ -4,9 +4,6 @@ import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
 import search from '../../components/images/SearchOutlined.png'
 import searchbtn from '../../components/images/searchbtn.png'
-import { Link } from 'react-router-dom'
-import gradientdot from '../../components/images/gradientdot.png'
-import threedot from '../../components/images/threedot.png'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import axios from 'axios'
@@ -25,15 +22,7 @@ const AllHirerContracts = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [searchQuery, setSearchQuery] = useState('');
-    // const [isReviewOpen, setIsReviewOpen] = useState(false);
-
-    // const openReview = () => {
-    //   setIsReviewOpen(true);
-    // };
-  
-    // const closeReview = () => {
-    //   setIsReviewOpen(false);
-    // };
+   
 
     const [isReviewOpen, setIsReviewOpen] = React.useState({});
 
@@ -59,13 +48,12 @@ const AllHirerContracts = () => {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://alanced.pythonanywhere.com/freelance/View-all/hirer-contracts?${queryString}`,{
+      .get(`http://51.21.1.122:8000/freelance/View-all/hirer-contracts?${queryString}`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }
       })
       .then((response) => {
-        // setViewFreeBid(response.data.data);
         setViewAllhirercontracts(response.data.results); 
         setTotalPages(Math.ceil(response.data.count / 8));
       })
@@ -106,27 +94,11 @@ function highlightText(text, query) {
   }
 
 
-    // const [active, setActive] = React.useState(1);
- 
-    // const next = () => {
-    //   if (active === 5) return;
-   
-    //   setActive(active + 1);
-    // };
-   
-    // const prev = () => {
-    //   if (active === 1) return;
-   
-    //   setActive(active - 1);
-    // };
-
   return (
     <>
     <Navbar/>
     <div className='mt-5 container-sm px-40'>
         <h1 className=' font-cardo font-normal text-2xl text-left'>All Contracts</h1>
-        {/* <div className=' flex flex-row'> */}
-            {/* <div className=' basis-11/12'> */}
             <section className='flex items-center p-1 rounded-lg border border-[#E7E8F2] mt-4'>
                 <div className='flex items-center mr-1 space-x-1 w-full'>
                     <img src={search} alt="Search Icon" className="h-5 w-5" />
@@ -136,12 +108,8 @@ function highlightText(text, query) {
                     <img src={searchbtn} alt="Search Icon" />
                 </button>
             </section>
-            {/* </div> */}
-            {/* <div className=' basis-1/12 mt-4'><i class="bi bi-sliders text-3xl mr-9"></i></div> */}
-        {/* </div> */}
         <div className='my-8  border border-[#E7E8F2] py-5 px-5 rounded'>
         {viewallhirercontracts != null ? (<div>
-{/* {viewallhirercontracts && <>{viewallhirercontracts.map((contract,index) => { */}
 {viewallhirercontracts.length > 0 ? (
                                 viewallhirercontracts.map((contract, index) => (
         <div className='my-5 bg-[#FFFFFF] border-b border-[#E7E8F2]'>
@@ -150,7 +118,6 @@ function highlightText(text, query) {
                 <h1 className=' font-cardo text-lg font-normal text-left'>{highlightText(contract.project_title,searchQuery)}</h1>
                 <p className='font-inter text-[14px] text-[#031136]  mt-3 text-left font-normal'>Budget: <span className='opacity-50'>${highlightText(contract.hiring_budget,searchQuery)} {highlightText(contract.hiring_budget_type,searchQuery)}</span></p>
             </div>
-            {/* <div className=' basis-3/12'><Link to=''><button className='rounded h-8 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-sm font-bold ml-20'>See Timesheet</button></Link></div> */}
             <div className=' basis-1/12'></div>
             <div className='basis-1/12'>
             <div className={isJobOpen(contract.project_deadline) ? 'text-green-600 mt-1 font-semibold' : 'text-yellow-600 mt-1 font-semibold'}>
@@ -159,15 +126,8 @@ function highlightText(text, query) {
             </div>
             <div className='basis-2/12'>
             <span class="inline-block text-sm px-6 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold cursor-pointer" onClick={() => openReview(contract.hire_id)}>Add Review</span>
-            {/* <div class="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 mt-1" onClick={() => openReview(contract.hire_id)}>
-        <img src={threedot} alt="" />
-    </div> */}
     </div>
     {isReviewOpen[contract.hire_id] && <AddReviewPopup closeReview={()=>closeReview(contract.hire_id)} contract={contract}/>} 
-
-            {/* <div className=' basis-1/12'><div class="text-green-600 mt-1">{isJobOpen(contract.project_deadline) ? 'Active' : 'Completed'}
-            </div> 
-         </div> */}
         </div>
         <div className=' flex flex-row'>
             <div className=' basis-5/12'>
@@ -180,13 +140,9 @@ function highlightText(text, query) {
             <div className=' basis-2/12'>
             <p className='font-inter text-[14px] text-[#031136] font-normal text-left'>
         Deadline: <span className='text-[#03C058]'>{formatDateInput(contract.project_deadline)}</span></p>
-            {/* <p className='font-inter text-[14px] text-[#0A142F] opacity-50 font-normal text-center'></p> */}
             </div>
         </div>
         </div>
-        
-        //  )
-        // })}</>}</div> : 
         ))
         ) : (<>
           <img src={contractimg} alt="" className='mx-auto'/>

@@ -18,7 +18,7 @@ const toggleDescription = () => {
 
 const descriptionToShow = showFullDescription ? (findinvite && findinvite.freelancer_description
 ? findinvite.freelancer_description:"")
-: findinvite.freelancer_description.slice(0, 300);
+: findinvite.freelancer_description.slice(0, 400);
 
   return (
     <>
@@ -69,7 +69,7 @@ const descriptionToShow = showFullDescription ? (findinvite && findinvite.freela
                     <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>
                      {descriptionToShow}  
                     </p>
-                    {findinvite && findinvite.freelancer_description ? (findinvite.freelancer_description.length > 200 && (
+                    {findinvite && findinvite.freelancer_description ? (findinvite.freelancer_description.length > 400 && (
                         <p
                         className='mt-3 text-base font-semibold text-green-600 text-left cursor-pointer'
                         onClick={toggleDescription}
@@ -77,7 +77,7 @@ const descriptionToShow = showFullDescription ? (findinvite && findinvite.freela
                         {showFullDescription ? 'less' : 'more'}
                         </p>
                     )):""}
-                    <h1 className='text-base font-medium font-inter text-left mt-5'>Skills</h1>
+                    <h1 className='text-xl font-medium font-cardo text-left mt-5'>Skills</h1>
                 <div className="text-left">
                 {findinvite && findinvite.freelancer_skills && 
   (() => {
@@ -97,11 +97,7 @@ const descriptionToShow = showFullDescription ? (findinvite && findinvite.freela
     }
   })()
 } 
-                {/* {JSON.parse(findinvite && findinvite.freelancer_skills.replace(/'/g,'"')).map((skill,index)=>(
-                    <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full text-green-800 px-4 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%] mt-4">
-                    <p className=" text-center">{skill}</p>
-                </div>
-                ))} */}
+              
                 </div>
                     </div>
                     <div className=' basis-1/12'></div>
@@ -124,11 +120,23 @@ const descriptionToShow = showFullDescription ? (findinvite && findinvite.freela
                             <div className=' basis-3/12'><i class="bi bi-translate"></i></div>
                             <div className=' basis-8/12'>
                                 <p className=' text-[12px] font-normal text-left opacity-50'>Languages Known</p>
-                                {JSON.parse(findinvite && findinvite.freelancer_language.replace(/'/g,'"')).map((lang,index)=>(
-                    <div className="mt-2 text-green-800 text-sm font-semibold text-left">
-                    <p>{lang}</p>
-                </div>
-                ))}
+                                {findinvite && findinvite.freelancer_language && 
+                              (() => {
+                                try {
+                                  const languageArray = JSON.parse(findinvite.freelancer_language.replace(/'/g, '"'));
+                                  return languageArray.map((language, index) => (
+                                    <div
+                                      key={index} className="mt-2 text-green-800 text-sm font-semibold text-left">
+                                      <p>{language}</p>
+                                    </div>
+                                  ));
+                                } catch (error) {
+                                  console.error("Error parsing JSON:", error);
+                                  return null;
+                                }
+                              })()
+                            } 
+                       
                             </div>
                         </div>
                     </div>

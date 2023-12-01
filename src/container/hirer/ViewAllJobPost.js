@@ -50,7 +50,7 @@ const ViewAllJobPost = () => {
         const queryString = queryParameters.join('&');
     
         axios
-          .get(`https://alanced.pythonanywhere.com/freelance/view/hirer-self/Project?${queryString}`,{
+          .get(`http://51.21.1.122:8000/freelance/view/hirer-self/Project?${queryString}`,{
             headers: {
                 'Authorization': `Bearer ${accessToken}`
             }
@@ -107,7 +107,7 @@ const [bidsCount, setBidsCount] = useState({});
 
             for (const project of viewhirerProject || []) {
                 try {
-                    const response = await axios.get(`https://alanced.pythonanywhere.com/freelance/View/bids/${project.id}`);
+                    const response = await axios.get(`http://51.21.1.122:8000/freelance/View/bids/${project.id}`);
                     if (response.status === 200) {
                         bids[project.id] = response.data.count; 
                     } else {
@@ -134,7 +134,7 @@ const [bidsCount, setBidsCount] = useState({});
 
             for (const project of viewhirerProject || []) {
                 try {
-                    const response = await axios.get(`https://alanced.pythonanywhere.com/freelance/View/project-invitations-count/${project.id}`,{
+                    const response = await axios.get(`http://51.21.1.122:8000/freelance/View/project-invitations-count/${project.id}`,{
                       headers: {
                       Authorization: `Bearer ${accessToken}`,
                   },
@@ -205,7 +205,7 @@ const [bidsCount, setBidsCount] = useState({});
                         <Link to='/View/Job-post' state={{ project }} onClick={() => window.scrollTo(0, 0)}>
                           <p className="font-inter text-[#0A142F] text-[16px] font-medium hover:underline hover:text-green-600">{highlightText(project.title, searchQuery)}</p>
                         </Link>
-                        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-1'>{highlightText(project.Project_Rate, searchQuery)} Rate - Expert - Posted {timeAgo(project.Project_created_at)}</p>
+                        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-1'>{highlightText(project.Project_Rate, searchQuery)} Rate - {highlightText(project.experience_level.replace(/_/g, ' '), searchQuery)} - Posted {timeAgo(project.Project_created_at)}</p>
                         <span className={`px-4 py-1 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 font-semibold ${project.is_hired ? 'bg-yellow-100 text-yellow-700 border border-yellow-700' : 'bg-[#E4EBE4] text-green-800 border border-green-800'}`}>
                           {project.is_hired ? 'Closed' : 'Open'}
                         </span>

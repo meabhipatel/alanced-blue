@@ -4,7 +4,6 @@ import HomeSection4 from '../../components/Layout/HomeSection4'
 import Footer from '../../components/Layout/Footer'
 import edit from '../../components/images/edit.png'
 import { Link, useLocation } from 'react-router-dom'
-import ProjectList from '../freelancer/ProjectList'
 import EditJobTitlePopup from './HirerAllPopup/EditJobTitlePopup'
 import EditJobDescPopup from './HirerAllPopup/EditJobDescPopup'
 import EditCategoryPopup from './HirerAllPopup/EditCategoryPopup'
@@ -140,7 +139,7 @@ const EditJobPost = () => {
     <div className="flex flex-col">
         <h1 className="font-inter text-lg text-[#031136] font-semibold text-left pb-2">Scope</h1>
         <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">Project Deadline : {formatDate(project.deadline)}</h1>
-        <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">Experience Level : {project.experience_level} </h1> 
+        <h1 className="font-inter text-md opacity-50 text-[#031136] font-normal text-left py-1">Experience Level : {project.experience_level.replace(/_/g, ' ')} </h1> 
     </div>
     <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={()=>openJobScope(project)}>
         <img src={edit} alt="more" />

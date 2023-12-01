@@ -25,7 +25,7 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
     
       useEffect(() => {
         axios
-          .get(`https://alanced.pythonanywhere.com/freelance/view-all/hirer-self/Project`,{
+          .get(`http://51.21.1.122:8000/freelance/view-all/hirer-self/Project`,{
             headers: {
                 'Authorization': `Bearer ${accessToken}`
             }
@@ -49,7 +49,7 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
         }
 
         try {
-            const response = await axios.post(`https://alanced.pythonanywhere.com/freelance/hire/${id}`, {
+            const response = await axios.post(`http://51.21.1.122:8000/freelance/hire/${id}`, {
                 project:ProjectId,
                 project_title: Title,
                 hiring_budget:HiringBudget,

@@ -6,11 +6,8 @@ import { Link, useLocation } from 'react-router-dom'
 import search from '../../components/images/SearchOutlined.png'
 import searchbtn from '../../components/images/searchbtn.png'
 import { useState } from 'react'
-import profilepic from '../../components/images/profilepic.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { GetViewAllBidsAction } from '../../redux/Hirer/HirerAction'
 import experience from '../../components/images/experience.png'
-import ViewProposalPopup from './HirerAllPopup/ViewProposalPopup'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { IconButton, Typography } from "@material-tailwind/react";
@@ -22,7 +19,6 @@ const ViewAllProposals = () => {
 
   const [sortCriterion, setSortCriterion] = useState('bestMatch');
     const error = useSelector(state => state.hirer.error);
-    const [categorySearch, setCategorySearch] = useState('');
 
    const viewallbids = useSelector(state => state.hirer.viewallbids)
    const dispatch = useDispatch();
@@ -106,7 +102,7 @@ const [viewbids, setViewBids] = useState([]);
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`https://alanced.pythonanywhere.com/freelance/View/bids/${id}?${queryString}`)
+      .get(`http://51.21.1.122:8000/freelance/View/bids/${id}?${queryString}`)
       .then((response) => {
         setViewBids(response.data.results); 
         setTotalPages(Math.ceil(response.data.count / 8));
@@ -132,13 +128,12 @@ const [viewinvites, setViewinvites] = useState([]);
   useEffect(() => {
     
     axios
-      .get(`https://alanced.pythonanywhere.com/freelance/View-all/invited-freelancers`,{
+      .get(`http://51.21.1.122:8000/freelance/View-all/invited-freelancers`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }
       })
       .then((response) => {
-        // setViewFreeBid(response.data.data);
         setViewinvites(response.data.results); 
       })
       .catch((error) => {
@@ -311,7 +306,7 @@ const handleClick = (event, index) => {
                               <div class="flex">
                             <div class="flex-[10%] p-4">
                             <div className="relative w-24 h-24 mx-auto">
-                                              <img src={"https://alanced.pythonanywhere.com/"+bid.freelancer_profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
+                                              <img src={"http://51.21.1.122:8000"+bid.freelancer_profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
                                               <div class="absolute bottom-2 right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                                           </div>
                             </div>
@@ -359,7 +354,6 @@ const handleClick = (event, index) => {
                           <h1 className="font-cardo opacity-50 text-lg text-[#031136]">{highlightText(bid.freelancer_category.replace(/_/g, ' '),searchQuery)}</h1>
                            <div style={{ display: 'flex' }}>
                             <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">${highlightText(bid.bid_amount,searchQuery)} <span className='opacity-50 font-medium'>{bid.bid_type=='Fixed'? '':'/hr'}</span></h1>
-                            {/* <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">$0 <span className='opacity-50 font-medium'>earned</span></h1> */}
                             <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">{highlightText(bid.bid_type,searchQuery)}</h1>
                             <h1 className="font-cardo text-lg text-[#031136] py-3 flex-1">{highlightText(bid.freelancer_address,searchQuery)}</h1>
                             <h1 className="font-cardo text-lg text-[#031136] py-3 flex-1"></h1>
