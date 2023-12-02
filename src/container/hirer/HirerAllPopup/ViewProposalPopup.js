@@ -23,6 +23,16 @@ const ViewProposalPopup = ({ closeViewProposal }) => {
   const project = location.state && location.state.project;
   const bid = location.state && location.state.bid;
 
+  const [conversationName, setConversationName] = useState("")
+  useEffect(() => {
+    if (project && bid != null || undefined){
+      setConversationName({
+        "hirer": project.project_owner_id,
+        "freelancer": bid.freelancer_id,
+      })
+    }
+  }, [project, bid]);
+
   const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
   const accessToken = useSelector(state => state.login.accessToken);  
   const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile)
@@ -260,7 +270,8 @@ const [active, setActive] = React.useState(1);
             {/* <p className="text-green-600 text-[16px] font-inter py-3 font-semibold cursor-pointer hover:underline">View Profile</p> */}
   </div>
   <div className="flex-[50%] p-6 text-right">
-  <span class="inline-block text-sm px-10 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold">Message</span>
+  <Link to="/messages" state={{conversationName}} >
+  <span class="inline-block text-sm px-10 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold">Message</span></Link>
             {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
                 <button class="px-11 py-1 bg-white" onClick={openHiring}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p></button>
             </div> */}

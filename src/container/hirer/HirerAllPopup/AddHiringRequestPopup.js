@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify';
+import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 const AddHiringRequestPopup = ({closeHiring,bid}) => {
 
@@ -13,6 +14,7 @@ const AddHiringRequestPopup = ({closeHiring,bid}) => {
       };
 
     const accessToken = useSelector(state => state.login.accessToken);
+    const hirer = useSelector(state => state.login.login_data);
     const Protitle= bid.project.title
     const [Title, setTitle] = useState(Protitle);
     const [HiringBudget, setHiringBudget] = useState("");
@@ -20,7 +22,42 @@ const AddHiringRequestPopup = ({closeHiring,bid}) => {
     const [msg, setMsg] = useState("");
     const id = bid.freelancer_id
     const proid = bid.project_id
+
+    function createConversationName(){
+        const names = [hirer.id, id].sort()
+        return `${names[0]}__${names[1]}`
+      }
+      
+      const { readyState, sendJsonMessage } = useWebSocket(`ws://51.21.1.122:8000/${createConversationName()}`, {
+        onOpen: () => {
+          console.log("Connected !")
+        },
+        onClose : () => {
+          console.log("Disconnected !")
+        },
+        onMessage: (e) => {
+          const data = JSON.parse(e.data);
+          console.log("data :", data)
+        }
+      })
+  
+      const connectionStatus = {
+        [ReadyState.CONNECTING]: "Connecting",
+        [ReadyState.OPEN]: "Open",
+        [ReadyState.CLOSING]: "Closing",
+        [ReadyState.CLOSED]: "Closed",
+        [ReadyState.UNINSTANTIATED]: "Uninstantiated"
+      }[readyState];
     
+      console.log("connection status -------------- ",connectionStatus)
+  
+      function handleSubmit() {
+        sendJsonMessage({
+          type: "chat_message",
+          message: "you are invited by "+hirer.first_Name,
+          name : hirer.id
+        })
+      }
 
     const handleSave = async () => {
 
@@ -44,6 +81,7 @@ const AddHiringRequestPopup = ({closeHiring,bid}) => {
 
             if (response.data.status === 200) {
                 toast.success("Hiring Request Sent Successfully")
+                handleSubmit();
                 closeHiring();
             } else {
                 console.log(response.data.message);

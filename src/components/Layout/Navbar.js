@@ -40,14 +40,14 @@ const navigate = useNavigate();
   var imagedata = useState(null)
   if(hirerImage != null){
   imagedata = hirerImage
-  console.log("hirer image ========> ", hirerImage.images_logo)
-  console.log("image data ========> ", imagedata.images_logo)
+//   console.log("hirer image ========> ", hirerImage.images_logo) // 39 @
+//   console.log("image data ========> ", imagedata.images_logo)
 }
 if(loginType == 'FREELANCER'){
   
   if(freelanceImage != null){
     imagedata = freelanceImage[0]
-    console.log("freelancer data on navbar", freelanceImage[0].images_logo)
+    // console.log("freelancer data on navbar", freelanceImage[0].images_logo) // 46 @
   }
 }
 
@@ -108,11 +108,11 @@ const fetchClientNotifications = async () => {
   }
 };
 
-useEffect(() => {
-  fetchClientNotifications(); 
-  const interval = setInterval(fetchClientNotifications, 60000); 
-  return () => clearInterval(interval); 
-}, []);
+// useEffect(() => { // 106 @
+//   fetchClientNotifications(); 
+//   const interval = setInterval(fetchClientNotifications, 60000); 
+//   return () => clearInterval(interval); 
+// }, []);
 
 const markAsReadClient = async (notifId) => {
   try {
@@ -201,11 +201,11 @@ const fetchFreeNotifications = async () => {
     }
   };
   
-  useEffect(() => {
-    fetchFreeNotifications(); 
-    const interval = setInterval(fetchFreeNotifications, 60000);
-    return () => clearInterval(interval); 
-  }, []);
+//   useEffect(() => {   // 199 @
+//     fetchFreeNotifications(); 
+//     const interval = setInterval(fetchFreeNotifications, 60000);
+//     return () => clearInterval(interval); 
+//   }, []);
   
   const markAsReadFree = async (notifId) => {
     try {

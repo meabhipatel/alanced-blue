@@ -112,7 +112,18 @@ const [viewbids, setViewBids] = useState([]);
       });
   }, [searchQuery, currentPage]);
 
+  const [conversationName, setConversationName] = useState("")
+  useEffect(() => {
+    if (viewbids && viewbids[0] != undefined){
+      setConversationName({
+        "hirer": project.project_owner_id,
+        "freelancer": viewbids[0].freelancer_id,
+      })
+    }
+  }, [viewbids, project]);
 
+  console.log("conversation name on: ",conversationName)
+  
   const prev = () => {
     window.scrollTo(0, 0);
     setCurrentPage(prev => Math.max(prev - 1, 1));
@@ -315,7 +326,8 @@ const handleClick = (event, index) => {
                             <p className="font-cardo text-[#0A142F] text-2xl font-medium">{highlightText(bid.freelancer_name,searchQuery)}</p>
                               
                               <div class="flex items-center space-x-4">
-                                      <span class="inline-block text-sm px-10 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold" onClick={handleButtonClick}>Message</span>
+                              <Link to="/messages" state={{conversationName}} >
+                                      <span class="inline-block text-sm px-10 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Message</span></Link>
                           
                         {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={isInvited ? null : handleBtnClick}>
     <button class={`px-10 py-1 bg-white ${isInvited ? 'cursor-not-allowed' : ''}`} disabled={isInvited}>

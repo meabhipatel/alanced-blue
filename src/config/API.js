@@ -23,7 +23,7 @@ const API = {
   Hirers: {
     Hirer: {
       HirerRegistration: '/account/hirer/registration',
-      ViewAllFreelancers:'/account/freelancer/profile/view-all/',
+      ViewAllFreelancers:'/account/freelancer/profile/view-all/', // 24 @
       ViewHirerSelfProject:'/freelance/view/hirer-self/Project',
       ViewAllBids:'/freelance/View/bids',
       UpdateProject:'/freelance/update/project',
