@@ -167,11 +167,19 @@ useEffect(() => {
                             </div>
                         </div>
                     </div>
-                    <div className=' mt-16'><h1 className=' font-cardo font-normal text-lg text-left'>Contract-to-hire opportunity</h1></div>
+                    {/* <div className=' mt-16'><h1 className=' font-cardo font-normal text-lg text-left'>Contract-to-hire opportunity</h1></div>
                     <div className=' flex flex-row mt-3'>
                         <div className=' basis-8/12'>
                             <p className=' font-inter font-normal text-base opacity-[50%]'>This lets talent know that this job could become full time.</p>
                             <p className=' font-inter font-normal text-base opacity-[80%]'>Learn more</p>
+                        </div>
+                        <div className=' basis-4/12'><img src={frame} alt="" className='h-[80%]' /></div>
+                    </div> */}
+                    <div className=' flex flex-row mt-16'>
+                        <div className=' basis-8/12'>
+                        <h1 className=' font-cardo font-normal text-lg text-left'>Contract-to-hire opportunity</h1>
+                            <p className=' font-inter font-normal text-base opacity-[50%] mt-3'>This lets talent know that this job could become full time.</p>
+                            {/* <p className=' font-inter font-normal text-base opacity-[80%]'>Learn more</p> */}
                         </div>
                         <div className=' basis-4/12'><img src={frame} alt="" className='h-[80%]' /></div>
                     </div>
@@ -212,15 +220,17 @@ useEffect(() => {
         : <><i className="fa fa-heart-o p-1"></i> Save Job</> 
     }</p></button>
                 </div>  */}
-                <div className='mt-8 text-sm font-inter font-normal text-[#0A142F] text-center ml-9'><i class="bi bi-flag-fill"></i><span className=' opacity-[50%] ml-2'>Flag as inappropriate</span></div>
-                <div className='mt-2 text-sm font-inter font-normal text-[#0A142F] text-center ml-9 opacity-[50%]'>Send a proposal for: 8 Connects</div>
-                <div className='mt-2 text-sm font-inter font-normal text-[#0A142F] text-center ml-9 opacity-[50%]'>Available Connects: 10</div>
+                {/* <div className='mt-8 text-sm font-inter font-normal text-[#0A142F] text-center ml-9'><i class="bi bi-flag-fill"></i><span className=' opacity-[50%] ml-2'>Flag as inappropriate</span></div> */}
+                {/* <div className='mt-2 text-sm font-inter font-normal text-[#0A142F] text-center ml-9 opacity-[50%]'>Send a proposal for: 8 Connects</div>
+                <div className='mt-2 text-sm font-inter font-normal text-[#0A142F] text-center ml-9 opacity-[50%]'>Available Connects: 10</div> */}
                 <div className='mt-12 text-xl font-cardo font-normal text-[#0A142F] ml-10'>About the client</div>
                 <div className='mt-3 text-sm font-inter font-normal text-[#0A142F] ml-10 opacity-[50%]'>Payment method not verified</div>
-                <div className='mt-5 text-base font-inter font-normal text-[#0A142F] ml-10'>India</div>
-                <div className='mt-2 text-base font-inter font-normal text-[#0A142F] ml-10 opacity-[50%]'>{project.project_owner_location ? project.project_owner_location : "NA"} 2:42 pm</div>
-                <div className='mt-5 text-base font-inter font-normal text-[#0A142F] ml-10'>2 jobs posted</div>
-                <div className='mt-2 text-base font-inter font-normal text-[#0A142F] ml-10 opacity-[50%]'>Member since Aug 28, 2023</div>
+                <div className='mt-5 text-base font-inter font-normal text-[#0A142F] ml-10'>Owner Name</div>
+                <div className='mt-2 text-base font-inter font-normal text-[#0A142F] ml-10 opacity-[50%]'>{project.project_owner_name}</div>
+                <div className='mt-5 text-base font-inter font-normal text-[#0A142F] ml-10'>Location</div>
+                <div className='mt-2 text-base font-inter font-normal text-[#0A142F] ml-10 opacity-[50%]'>{project.project_owner_location ? project.project_owner_location : "NA"}</div>
+                <div className='mt-5 text-base font-inter font-normal text-[#0A142F] ml-10'>Histroy</div>
+                <div className='mt-2 text-base font-inter font-normal text-[#0A142F] ml-10 opacity-[50%]'>Member since {project.project_owner_date_of_creation}</div>
                 <div className=' mt-16 text-xl font-cardo font-normal text-[#0A142F] ml-10'>Job link</div>
                 <div class="p-0.5 inline-block rounded bg-black opacity-[30%] mt-5 ml-10">
                 <button class="px-1 py-1 bg-white"><p class="font-inter font-normal text-sm py-[10px] px-4 opacity-[90%] text-black bg-[#E4EBE4] cursor-not-allowed">https://www.alanced.com/find-work</p></button>

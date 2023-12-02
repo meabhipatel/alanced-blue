@@ -175,7 +175,7 @@ const ViewSendPraposalAfterAdd = () => {
                         <p className=' text-[17px] font-inter font-normal text-left'>History</p>
                         {/* <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>20 to 50 proposals<span className=' ml-3 text-green-600'><i class="bi bi-question-circle-fill"></i></span></p>
                         <p className='text-[14px] font-inter font-normal opacity-75 mt-2 text-left'>1 job posted</p> */}
-                        <p className='text-[12px] font-inter font-normal opacity-75 mt-2 text-left'>Member since</p>
+                        <p className='text-[12px] font-inter font-normal opacity-75 mt-2 text-left'>Member since {projectdata.project.project_owner_date_of_creation}</p>
                     </div>
                 </div>
             </div>

@@ -524,7 +524,7 @@ const FindTalent = () => {
                     )}
   
             <div className='mb-12'>
-          <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>completed projects : <span className='opacity-50'>More than 50</span></p>
+          {/* <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>completed projects : <span className='opacity-50'>More than 50</span></p> */}
           <img src={verify} alt="" className='inline-block h-3 w-3 mr-1'/>
           <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>Account verified</p>
           <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>
