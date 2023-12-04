@@ -543,7 +543,7 @@ const next = () => {
                 
       <div className='px-4 md:w-[26vw] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4' key={index}>
         <div className="flex items-center">
-            <Avatar src={"https://alanced.pythonanywhere.com/"+free.images_logo} alt="" variant="rounded" className="mr-4 h-24 w-24" />
+            <Avatar src={"http://51.21.1.122:8000"+free.images_logo} alt="" variant="rounded" className="mr-4 h-24 w-24" />
             <div>
             <p className="font-inter text-[#0A142F] text-[18px] font-semibold">{highlightText(free.first_Name + " " + free.last_Name, searchQuery)}</p>
             <p className='font-inter opacity-50 text-[#0A142F] text-[14px]'>{highlightText(free.category, searchQuery)}</p>
@@ -586,7 +586,7 @@ const next = () => {
                     )}
   
             <div className='mb-12'>
-          <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>completed projects : <span className='opacity-50'>More than 50</span></p>
+          {/* <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>completed projects : <span className='opacity-50'>More than 50</span></p> */}
           <img src={verify} alt="" className='inline-block h-3 w-3 mr-1'/>
           <p className='font-inter text-[#0A142F] text-[14px] opacity-50 inline-block'>Account verified</p>
           <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>
