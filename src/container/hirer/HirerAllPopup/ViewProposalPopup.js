@@ -32,7 +32,7 @@ const ViewProposalPopup = ({ closeViewProposal }) => {
       })
     }
   }, [project, bid]);
-
+console.log("bid on ViewPropsalPopup : ",bid)
   const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
   const accessToken = useSelector(state => state.login.accessToken);  
   const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile)

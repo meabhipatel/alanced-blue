@@ -44,9 +44,9 @@ const Messages = () => {
   const [conversation, setConversation] = useState(null);
   useEffect(() => {
   if(conversationName){
-    const names = [conversationName.hirer, conversationName.freelancer.freelancer_id].sort();
+    const names = [conversationName.hirer, conversationName.freelancer].sort();
     setConversation(`${names[0]}__${names[1]}`)
-    setConvouser(conversationName.freelancer)
+    // setConvouser(conversationName.freelancer)
     console.log("names -------- ",names,conversation)
   }
 }, [conversationName])
@@ -60,9 +60,14 @@ console.log("names -------- ",conversationName,"-----",conversation)
                 setConversations(Data)
                 console.log("conversations",conversations)
                   console.log("--------------------",response.data.data[0].name);
+                  if(conversationName != null){
                   for(let i = 0; i < response.data.data.length; i++){
                     console.log("================ >",response.data.data[i].name)
-                  }
+                    if(conversationName.freelancer == response.data.data[i].from_user.id || conversationName.freelancer == response.data.data[i].to_user.id){
+                      setConvouser(response.data.data[i].from_user.id != logindata.id ? response.data.data[i].from_user : response.data.data[i].to_user)
+                      console.log(conversationName.freelancer,"------",response.data.data[i].from_user.id,"-----",response.data.data[i].to_user.id)
+                    }
+                  }}
                   if(conversationName == null){
                   setConvouser(Data[0].from_user.id != logindata.id ? Data[0].from_user : Data[0].to_user)
                   }
