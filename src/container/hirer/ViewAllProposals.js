@@ -117,12 +117,12 @@ const [viewbids, setViewBids] = useState([]);
     if (viewbids && viewbids[0] != undefined){
       setConversationName({
         "hirer": project.project_owner_id,
-        "freelancer": viewbids[0].freelancer_id,
+        "freelancer": viewbids[0],
       })
     }
   }, [viewbids, project]);
 
-  console.log("conversation name on: ",conversationName)
+  console.log("conversation name on ViewAllProposal : ",conversationName)
   
   const prev = () => {
     window.scrollTo(0, 0);
