@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 const AddFreeHireRequest = ({closeFreeHiring,free}) => {
     const handleClickInsidePopup = (event) => {
@@ -10,6 +11,7 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
       };
 
     const accessToken = useSelector(state => state.login.accessToken);
+    const hirer = useSelector(state => state.login.login_data);
     const [ProjectId, setProjectId] = useState("");
     const [Title, setTitle] = useState("");
     const [HiringBudget, setHiringBudget] = useState("");
@@ -23,6 +25,41 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
 
     const [viewhirerProject, setViewhirerProject] = useState([]);
     
+    function createConversationName(){
+      const names = [hirer.id, id].sort()
+      return `${names[0]}__${names[1]}`
+    }
+    
+    const { readyState, sendJsonMessage } = useWebSocket(`ws://51.21.1.122:8000/${createConversationName()}`, {
+      onOpen: () => {
+        console.log("Connected !")
+      },
+      onClose : () => {
+        console.log("Disconnected !")
+      },
+      onMessage: (e) => {
+        const data = JSON.parse(e.data);
+        console.log("data :", data)
+      }
+    })
+
+    const connectionStatus = {
+      [ReadyState.CONNECTING]: "Connecting",
+      [ReadyState.OPEN]: "Open",
+      [ReadyState.CLOSING]: "Closing",
+      [ReadyState.CLOSED]: "Closed",
+      [ReadyState.UNINSTANTIATED]: "Uninstantiated"
+    }[readyState];
+  
+    console.log("connection status -------------- ",connectionStatus)
+
+    function handleSubmit() {
+      sendJsonMessage({
+        type: "chat_message",
+        message: "you are invited by "+hirer.first_Name,
+        name : hirer.id
+      })
+    }
       useEffect(() => {
         axios
           .get(`http://51.21.1.122:8000/freelance/view-all/hirer-self/Project`,{
@@ -64,6 +101,7 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
             if (response.data.status === 200) {
                 toast.success("Hiring Request Sent Successfully")
                 closeFreeHiring();
+                handleSubmit();
             } else {
                 console.log(response.data.message);
                 toast.error(response.data.message);

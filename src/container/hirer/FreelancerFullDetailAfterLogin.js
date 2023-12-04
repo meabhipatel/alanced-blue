@@ -20,6 +20,7 @@ const FreelancerFullDetailAfterLogin = () => {
 
   const location = useLocation();
   const freelancer = location.state && location.state.free;
+  const hirer = useSelector(state => state.login.login_data); // 20 @
   console.log(freelancer,"freelancer_detail")
 
   const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
@@ -41,6 +42,10 @@ const FreelancerFullDetailAfterLogin = () => {
     setIsFreeHiringOpen(false);
   };
 
+  const conversationName = {
+    "hirer": hirer.id,
+    "freelancer": freelancer,
+  }
 
 useEffect(() => {
   const queryParameters = [];
@@ -202,7 +207,8 @@ const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 2);
             </div>
           </div>
           <div className=' basis-3/12 text-right'>
-          <span class="inline-block text-sm px-10 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold">Message</span>
+          <Link to="/messages" state={{conversationName}} >
+          <span class="inline-block text-sm px-10 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold">Message</span></Link>
           </div>
           <div className=' basis-3/12 text-left'>
           <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]  mr-2">
@@ -239,13 +245,13 @@ const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 2);
             </div>
         </div>
         <div className='mt-8'>
-        <p className='font-cardo text-[22px] fond-semibold text-left'>Portfolio ({ProjectCount})</p>
+        <p className='font-cardo text-[22px] fond-semibold text-left'>Portfolio ({freelancerproject ? freelancerproject.length : 0})</p>
         <div class="w-20  mt-2 ml-1 relative">
         <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
         <div class="border-gray-600 border-b-2 rounded-lg"></div>
       </div>
       <div className="flex flex-wrap -mx-2">  
-      {freelancerproject && freelancerproject.map((pro,index) => (
+    {freelancerproject && freelancerproject.map((pro, index) => (
         <div className='w-1/3 px-2 cursor-pointer' key={index} onClick={() => openPortfolio(pro)}>  
             <div className='w-full h-[165px] mt-4 border border-gray-100 overflow-hidden'>
                 <img 

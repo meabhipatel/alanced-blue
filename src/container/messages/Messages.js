@@ -15,9 +15,203 @@ import vthreedots from '../../components/images/vthreedots.svg'
 import AudioVisualizer from './AudioVisualizer'
 import file_example_MP3_5MG from '../../components/images/file_example_MP3_5MG.mp3'
 import AudioMessages from './AudioMessages'
+import { useSelector } from 'react-redux'
+import useWebSocket, { ReadyState } from "react-use-websocket";
+import InfiniteScroll from "react-infinite-scroll-component";
+import {useState, useEffect} from "react";
+import { useLocation } from "react-router-dom";
+import axios from 'axios';
 
 const Messages = () => {
-    const audioSrc = {file_example_MP3_5MG}
+  const audioSrc = {file_example_MP3_5MG}
+  const location = useLocation()
+  const logindata = useSelector(state => state.login.login_data)
+  const conversationName = location.state && location.state.conversationName
+  console.log("conversationName : ",conversationName)
+  console.log("logindata :", logindata)
+  const [welcomeMessage, setWelcomeMessage] = useState("");
+  const [message, setMessage] = useState("");
+  const [page, setPage] = useState(2)
+  const [hasMoreMessages, setHasMoreMessages] = useState(false)
+  const [name, setName] = useState(logindata.id);
+  const [messageHistory, setMessageHistory] = useState([])
+  const [conversations, setConversations] = useState([])
+  const [convouser, setConvouser] = useState("")
+  console.log("--------------",messageHistory)
+  const chatid = logindata.id
+  // const { sendJsonMessage } = useWebSocket("ws://51.21.1.122:8000/4__2");
+  
+  const [conversation, setConversation] = useState(null);
+  useEffect(() => {
+  if(conversationName){
+    const names = [conversationName.hirer, conversationName.freelancer.id].sort();
+    setConversation(`${names[0]}__${names[1]}`)
+    setConvouser(conversationName.freelancer)
+    console.log("names -------- ",names,conversation)
+  }
+}, [conversationName])
+console.log("names -------- ",conversation)
+// useEffect(() => {
+   function chat_data(chatid) {
+      axios.get(`http://51.21.1.122:8000/chat/conversations/${chatid}`)
+          .then(response => {
+              if (response.data.status === 200) {
+                let Data = response.data.data
+                setConversations(Data)
+                console.log("conversations",conversations)
+                  console.log("--------------------",response.data.data[0].name);
+                  for(let i = 0; i < response.data.data.length; i++){
+                    console.log("================ >",response.data.data[i].name)
+                  }
+                  if(conversationName == null){
+                  setConvouser(Data[0].from_user.id != logindata.id ? Data[0].from_user : Data[0].to_user)
+                  }
+                  if(conversationName == null) {
+                  setConversation(Data[0].name)
+                }
+              } else {
+                  console.log(response.data.message || 'Error fetching project');
+              }
+          })
+          .catch(err => {
+              console.log(err.message);
+          });
+        }
+// }, [logindata.id]);
+useEffect(() => {
+  chat_data(chatid)
+}, [logindata.id]);
+console.log("conversations",conversations)
+// `ws://51.21.1.122:8000/${conversation}`
+  const { readyState, sendJsonMessage } = useWebSocket(`ws://51.21.1.122:8000/${conversation}`, {
+    onOpen: () => {
+      console.log("Connected!");
+    },
+    onClose: () => {
+      console.log("Disconnected!");
+    },
+    onMessage: (e) => {
+      const data = JSON.parse(e.data);
+      console.log("data :",data)
+      switch (data.type) {
+        case "welcome_message":
+          setWelcomeMessage(data.message);
+          break;
+        case "chat_message_echo":
+          // setMessageHistory((prev) => [...prev, data.message]);
+          setMessageHistory((prev) => [data.message, ...prev]);
+          console.log("message from chat_message_echo : ",messageHistory,"-------", data.message)
+          break;
+        case "last_50_messages":
+          if (data != undefined){
+          setMessageHistory(data.messages.slice())
+          setHasMoreMessages(data.has_more)
+          console.log("message from last_50_messages : ",messageHistory,"-------", data.messages)
+          }
+          
+          break;
+        default:
+          console.error("Unknown message type!");
+          break;
+      }
+      
+    }
+    
+  });
+ 
+  const connectionStatus = {
+    [ReadyState.CONNECTING]: "Connecting",
+    [ReadyState.OPEN]: "Open",
+    [ReadyState.CLOSING]: "Closing",
+    [ReadyState.CLOSED]: "Closed",
+    [ReadyState.UNINSTANTIATED]: "Uninstantiated"
+  }[readyState];
+
+  console.log("connection status -------------- ",connectionStatus)
+
+  // useEffect(() => {
+  //   // Attach scroll event listener
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     // Detach scroll event listener on component unmount
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, [messageHistory, hasMoreMessages]);
+
+  // const handleScroll = () => {
+  //   // Check if the user has scrolled to the bottom
+  //   if (
+  //     window.innerHeight + document.documentElement.scrollTop ===
+  //     document.documentElement.offsetHeight
+  //   ) {
+  //     fetchMessages();
+  //   }
+  // };
+
+   const fetchMessages = async () => {
+    const apiRes = await fetch(
+      `http://51.21.1.122:8000/chat/messages/?conversation=${conversation}&page=${page}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+    if (apiRes.status === 200) {
+      const data = await apiRes.json();
+      setHasMoreMessages(data.next !== null);
+      setPage(page + 1);
+      if(data.results.length > 0){
+      // for (let i = 0; i < data.results.length; i++){
+      //   console.log("iiiiiiiii",data.results[i])
+        setMessageHistory((prev) => [...prev, ...data.results])
+      // }
+    }else{
+      setHasMoreMessages(false);
+    }
+      console.log(" Message fetched ------ >", data.results)
+    }
+  }
+
+  function handleChangeMessage(e){
+    setMessage(e.target.value)
+  }
+  console.log("message -------- ",message)
+  // function handleChangeName(e){
+  //   setName(e.target.value);
+  // }
+
+  function formatTimeStamp(timestamp){
+    const date = new Date(timestamp);
+    return date.toLocaleTimeString();
+  }
+
+  function convoname(name, user){
+    setConversation(name)
+    setPage(2)
+    setConvouser(user)
+    console.log("convo name : ", name)
+    console.log("convo user : ",convouser)
+  }
+  console.log("convo user : ",convouser)
+  // useEffect(() => {
+  //   console.log("convo name after update:", conversation);
+  // }, [conversation]);
+  
+  function handleSubmit() {
+    // setName("manoj")
+    sendJsonMessage({
+      type: "chat_message",
+      message,
+      name
+    });
+    // setName("");
+    setMessage("");
+    fetchMessages()
+    chat_data(chatid)
+    console.log("connection status -------------- ",connectionStatus)
+  }
     return(
         <>
         <Navbar/>
@@ -61,11 +255,13 @@ const Messages = () => {
           </div>
         </div>
         <div className="overflow-y-scroll">
-        <div class="flex flex-row py-4 px-2 justify-center items-center border-b-2">
+          {conversations != null ? conversations.map((convo, index) => (
+          // <>{convo.from_user.id != logindata.id ?
+        <div key={index} onClick={() => convoname(convo.name, convo.from_user.id != logindata.id ? convo.from_user : convo.to_user)} class="flex flex-row py-4 px-2 justify-center items-center border-b-2">
           <div class="w-1/4 ml-4">
             <div className="relative">
               <img
-                src="https://source.unsplash.com/_7LbC5J-jw4/600x600"
+                src={convo.from_user.id != logindata.id ? "http://51.21.1.122:8000"+convo.from_user.images_logo : "http://51.21.1.122:8000"+convo.to_user.images_logo}
                 class="object-cover h-12 w-12 rounded-full"
                 alt=""
               />
@@ -73,14 +269,17 @@ const Messages = () => {
             </div>
           </div>
           <div class="w-full">
-            <div class="text-lg text-[#031136] font-cardo w-fit font-semibold">Anthony Daugloi</div>
+            <div class="text-lg text-[#031136] font-cardo w-fit font-semibold">{convo.from_user.id != logindata.id ? <>{convo.from_user.first_Name} {convo.from_user.last_Name}</> : <>{convo.to_user.first_Name} {convo.to_user.last_Name}</>}</div>
             <div className="flex-row">
-              <span class="text-[#8A8A8A] text-xs float-left">UI Designer - Complex</span>
-              <span class="text-[#8A8A8A] text-[10px] float-left">You: do you have any reference card?</span>
+              <span class="text-[#8A8A8A] text-xs float-left text-left w-full">{convo.from_user.id != logindata.id ? <>{convo.from_user.category}</> : <>{convo.to_user.category}</>}</span>
+              <span class="text-[#8A8A8A] text-[10px] float-left">{convo.content.length == 32 ? convo.content.substring(0, 29) + "..." : convo.content}</span>
             </div>
           </div>
-        </div>
-        <div class="flex flex-row py-4 px-2 items-center border-b-2">
+        </div> 
+        // : <></>}
+        // </>
+        )) : <></>}
+        {/* <div class="flex flex-row py-4 px-2 items-center border-b-2">
           <div class="w-1/4 ml-4">
             <div className="relative">
               <img
@@ -174,7 +373,7 @@ const Messages = () => {
               <span class="text-[#8A8A8A] text-[10px] float-left">You: do you have any reference card?</span>
             </div>
           </div>
-        </div>
+        </div> */}
         </div>
         {/* <div
           class="flex flex-row py-4 px-2 items-center border-b-2"
@@ -238,9 +437,12 @@ const Messages = () => {
           <div>
           <div className="flex items-center gap-2 w-fit">
           <div className="border-2 border-[#07BC00] h-3 w-3 rounded-full"></div>
-          <span className="text-[20px] font-cardo text-[#031136]">David Lynch</span>
+          <span className="text-[20px] font-cardo text-[#031136]">{convouser.first_Name} {convouser.last_Name}</span>
           </div>
-          <span className="text-[12px] text-[#8A8A8A] float-left ml-5">3:06 PM EDTAlgorithm and Software Developer</span>
+          <span className="text-[12px] text-[#8A8A8A] float-left ml-5">
+            3:06 PM EDTAlgorithm and Software Developer
+            {convouser.category}
+            </span>
           </div>
           <div className="flex gap-2 items-center float-right">
             <img className="h-[19px] w-[19px]" src={phone}/>
@@ -248,8 +450,8 @@ const Messages = () => {
           </div>
         </div>
         <div className="px-5 pr-0">
-        <div class="flex flex-col h-[54vh] overflow-y-auto pr-2 mt-5">
-        <div class="flex justify-between mb-4">
+        <div id="scrollableDiv" class="flex flex-col-reverse h-[54vh] overflow-y-auto pr-2 mt-5">
+        {/* <div class="flex justify-between mb-4">
           <div className="flex justify-start">
             <img
               src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
@@ -281,9 +483,9 @@ const Messages = () => {
               class="object-cover h-8 w-8 rounded-full"
               alt=""
             /> */}
-            <img className="w-fit h-fit" src={vthreedots}/>
-          </div>
-          <div class="flex justify-between mb-4">
+            {/* <img className="w-fit h-fit" src={vthreedots}/>
+          </div> */}
+          {/* <div class="flex justify-between mb-4">
             <div className="flex justify-start">
             <img
               src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
@@ -300,15 +502,28 @@ const Messages = () => {
             </div>
             </div>
             <img className="h-fit w-fit" src={vthreedots} alt=""/>
-          </div>
-          <div class="flex justify-end mb-4">
+          </div> */}
+          <InfiniteScroll
+          dataLength={messageHistory.length}
+          next={() => fetchMessages()}
+          hasMore={hasMoreMessages}
+          loader={<h1>Loading...</h1>}
+          inverse={true}
+          className="flex flex-col-reverse"
+          scrollableTarget="scrollableDiv"
+          endMessage={<p>no more messages...</p>}
+          >
+          {messageHistory != null ? messageHistory.map((message) => (
+          <div className={message.from_user.id == logindata.id ? "flex justify-end mb-4" : "flex justify-between mb-4"}>
             <div className="flex-row">
             <div
-              class="mr-2 py-3 px-4 w-[45vw] text-left bg-[#F6FAFD] rounded-md text-[#0A142F]"
+              class="mr-2 py-3 px-4 min:w-fit max:w-[45vw] text-left bg-[#F6FAFD] rounded-md text-[#0A142F]"
+              className={message.from_user.id == logindata.id ? "mr-2 py-3 px-4 w-[45vw] text-left bg-[#F6FAFD] rounded-md text-[#0A142F]" : "mr-2 py-3 px-4 w-[45vw] text-left rounded-md text-[#0A142F]"}
             >
-              Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+              {/* Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,  */}
+              {message.content}  {message.timestamp}
             </div>
-            <span className="text-xs text-[#D7D7D7] float-right mr-3">Yesterday at 8:00 pm</span>
+            <span className="text-xs text-[#D7D7D7] float-right mr-3">{Date(message.timestamp)}{formatTimeStamp(message.timestamp)}</span>
             </div>
             {/* <img
               src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
@@ -316,18 +531,21 @@ const Messages = () => {
               alt=""
             /> */}
             <img className="w-fit h-fit" src={vthreedots}/>
-          </div>
+          </div>)) : <></>}
+          </InfiniteScroll>
+          {/* {hasMoreMessages && <p>Loading...</p>}
+      {!hasMoreMessages && <p>No more messages...</p>} */}
           <div class="flex justify-end mb-4">
-            <div className="flex-row">
+            {/* <div className="flex-row">
             <AudioMessages/>
             <span className="text-xs text-[#D7D7D7] float-right mr-3">Yesterday at 8:00 pm</span>
-            </div>
+            </div> */}
             {/* <img
               src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
               class="object-cover h-8 w-8 rounded-full"
               alt=""
             /> */}
-            <img className="w-fit h-fit mt-2 ml-2" src={vthreedots}/>
+            {/* <img className="w-fit h-fit mt-2 ml-2" src={vthreedots}/> */}
           </div>
           
           {/* <AudioVisualizer audioSrc={file_example_MP3_5MG}/> */}
@@ -374,12 +592,14 @@ const Messages = () => {
             placeholder="type your message here..."
           /> */}
           <div className="rounded-lg border-2 border-[#E7E8F2] p-1 pb-2">
-            <textarea rows="3" class="block p-2.5 w-full text-sm outline-none resize-none" placeholder="Type Message Here ..."></textarea>
+            <textarea rows="3" class="block p-2.5 w-full text-sm outline-none resize-none" name="message" value={message} required maxLength={511} onChange={handleChangeMessage} placeholder="Type Message Here ..."></textarea>
             <div className="flex justify-end gap-2 mr-2">
             <img src={smiley}/>
             <img src={attherate}/>
             <img src={paperpin}/>
+            <button onClick={handleSubmit}>
             <img className="border-l-2 border-[#D9D9D9] pl-2" src={paper}/>
+            </button>
             </div>
           </div>
         </div>
@@ -391,16 +611,17 @@ const Messages = () => {
         <div class="flex flex-col items-center w-full border-b-2">
           {/* <div class="font-semibold text-xl py-4">Mern Stack Group</div> */}
           <img
-            src="https://source.unsplash.com/_7LbC5J-jw4/600x600"
+            src={"http://51.21.1.122:8000"+convouser.images_logo}
             class="object-cover rounded-full h-28 w-28 mt-12"
             alt=""
           />
-          <div class=" pt-4 text-xl font-cardo">David Lynch</div>
+          <div class=" pt-4 text-xl font-cardo">{convouser.first_Name} {convouser.last_Name}</div>
           <div class="text-[#797979] text-sm">
           5:18 AM GMT+10 (4.5 h ahead)
           </div>
           <div class="text-[#0A142F] text-xs mb-6">
-          UI Designer - Complex Topics, Simple Designs
+          {/* UI Designer - Complex Topics, Simple Designs */}
+          {convouser.category}
           </div>
           </div>
           <div className="pt-6 pl-6 flex flex-col items-start">

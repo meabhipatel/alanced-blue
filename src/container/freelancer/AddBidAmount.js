@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AddBidAmountAction } from '../../redux/Freelancer/FreelancerAction';
 import { timeAgo } from './TimeFunctions';
+import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 
 
@@ -17,7 +18,8 @@ const AddBidAmount = () => {
 
 const location = useLocation();
 const projectData = location.state && location.state.projectData;
-
+const logindata = useSelector(state => state.login.login_data);
+console.log("project data :",projectData.project.project_owner, logindata.id)
 const accessToken = useSelector(state => state.login.accessToken); 
 const addbid = useSelector(state => state.freelancer.addbid)
 const [addBid, setAddBid] = useState('');
@@ -61,12 +63,49 @@ const isButtonEnabled = () => {
     return addBid.bid_amount > 0 && addBid.bid_type && addBid.description;
   };
 
+  function createConversationName(){
+    const names = [projectData.project.project_owner, logindata.id].sort()
+    return `${names[0]}__${names[1]}`
+  }
+  
+  const { readyState, sendJsonMessage } = useWebSocket(`ws://51.21.1.122:8000/${createConversationName()}`, {
+    onOpen: () => {
+      console.log("Connected !")
+    },
+    onClose : () => {
+      console.log("Disconnected !")
+    },
+    onMessage: (e) => {
+      const data = JSON.parse(e.data);
+      console.log("data :", data)
+    }
+  })
+
+  const connectionStatus = {
+    [ReadyState.CONNECTING]: "Connecting",
+    [ReadyState.OPEN]: "Open",
+    [ReadyState.CLOSING]: "Closing",
+    [ReadyState.CLOSED]: "Closed",
+    [ReadyState.UNINSTANTIATED]: "Uninstantiated"
+  }[readyState];
+
+  console.log("connection status -------------- ",connectionStatus)
+
+  function handleSubmit() {
+    sendJsonMessage({
+      type: "chat_message",
+      message: "you have a bid from freelancer "+logindata.first_Name,
+      name : logindata.id
+    })
+  }
+
   const handleButtonClick = () => {
     if (!isButtonEnabled()) {
       toast.error('Please fill out all required fields.');
     } else {
       // Proceed with the action
       BidAdd();
+      handleSubmit();
       window.scrollTo(0, 0);
     }
   };

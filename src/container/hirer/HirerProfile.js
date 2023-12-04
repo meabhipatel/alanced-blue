@@ -157,6 +157,7 @@ console.log("++++++++++++++",first_Name)
       const handleImageSave = async () => {
     const formData = new FormData();
     formData.append("images_logo", selectedFile);
+    console.log("selected file in hirer :", selectedFile )
     
     axios.put('http://51.21.1.122:8000/account/hirer/profile/update',formData,{
         headers: {
