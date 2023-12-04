@@ -15,7 +15,7 @@ import Footer from '../../../components/Layout/Footer'
 import AddHiringRequestPopup from './AddHiringRequestPopup'
 import StarRating from '../../freelancer/StarRating'
 import { formatDateToDayMonthYear } from '../../freelancer/TimeFunctions'
-
+import experiences from '../../../components/images/experience.png'
 
 const ViewProposalPopup = ({ closeViewProposal }) => {
     
@@ -541,15 +541,17 @@ const [active, setActive] = React.useState(1);
     <div className='my-6 p-4 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-40 text-left'>
     <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Employment history</h1>
     <div class="border-b opacity-50 my-3"></div>
-    {visibleEmp && visibleEmp.map((emp, index) => (<>
+    {visibleEmp.length === 0 ? (<>
+      <img src={experiences} alt="" className='mx-auto mt-5' />
+      <h1 className='font-cardo text-2xl text-center py-3'>No Data Found</h1>
+    </>
+   
+) : (
+    visibleEmp && visibleEmp.map((emp, index) => (<>
     <h1 className="font-cardo text-[18px] text-[#031136] font-normal mr-1">{emp.Company_Designation} | {emp.Freelancer_Company_Name}</h1>
     <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>{formatDate(emp.Company_Joining_date)} - {formatDate(emp.Company_Leaving_date)}</p>
     <div class="border-b opacity-50 my-3"></div>
-    </>))}
-    {/* <h1 className="font-cardo text-[18px] text-[#031136] font-normal mr-1">UI/UX Designer | ABC Technologies</h1>
-    <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>April 2020 - January 2021</p>
-    <div class="border-b opacity-50 my-3"></div> */}
-    {/* <h1 className="font-cardo text-[20px] text-[#031136] font-normal cursor-pointer">Show More</h1> */}
+    </>)))}
     {freelanceremp.length > 3 && (
   startIdx + 3 < freelanceremp.length ? 
     <h1 className="font-cardo text-[20px] text-[#031136] font-normal mx-auto cursor-pointer" onClick={showMoreHandlers}>Show More</h1> :

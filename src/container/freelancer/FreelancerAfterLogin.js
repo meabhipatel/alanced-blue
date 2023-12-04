@@ -418,7 +418,7 @@ const [bidsCount, setBidsCount] = useState({});
             </>
         )
     })}
-    <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>{highlightText(project.rate,searchQuery)} - {highlightText(project.experience_level, searchQuery)} - Est. Budget: ${project.rate == 'Hourly' ? project.min_hourly_rate+"/hr" +" - "+ "$"+project.max_hourly_rate+"/hr" : project.fixed_budget } - Posted {timeAgo(project.project_creation_date)}</p>
+    <p className='font-inter opacity-50 text-[#0A142F] text-[13px] py-3'>{highlightText(project.rate,searchQuery)} - {highlightText(project.experience_level.replace(/_/g, ' '), searchQuery)} - Est. Budget: ${project.rate == 'Hourly' ? project.min_hourly_rate+"/hr" +" - "+ "$"+project.max_hourly_rate+"/hr" : project.fixed_budget } - Posted {timeAgo(project.project_creation_date)}</p>
     <p className='font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3'>
                 Job Description: {highlightText(displayWords.join(' '), searchQuery)}
                 {words.length > 50 && (

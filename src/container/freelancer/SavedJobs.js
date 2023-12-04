@@ -127,11 +127,16 @@ const SavedJobs = () => {
         const jobDeadline = new Date(job.deadline); 
               return(
     <div className='px-4 md:px-8 py-5 border-b border-gray-200 border-opacity-30'>
-         {currentDate > jobDeadline && (
+         {/* {currentDate > jobDeadline && (
                 <p className='font-inter opacity-50 text-[#FFC107] text-[16px] font-normal py-3'>
                     Job is no longer available
                 </p>
-            )}
+            )} */}
+             {job.is_hired ? (
+                <p className='font-inter opacity-50 text-[#FFC107] text-[16px] font-normal py-3'>
+                    Job is no longer available 
+                </p>
+            ):""}
     <div className="flex items-center justify-between">
     <p className="font-inter text-[#0A142F] text-[16px] font-medium"> {job.Project_Name}</p>
     <div className="flex items-center space-x-2">
@@ -144,7 +149,7 @@ const SavedJobs = () => {
     </div>
     </div>
     <p className='font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-3'>
-            {job.Project_Rate} - {job.Project_Experience_level} - Est. Budget: ${job.Project_Rate == 'Hourly' ? job.Project_Min_Hourly_Rate+"/hr" +" - "+ "$"+job.Project_Max_Hourly_Rate+"/hr" : job.Project_Fixed_Budget } - Posted {timeAgo(job.Project_Created)}
+            {job.Project_Rate} - {job.Project_Experience_level.replace(/_/g, ' ')} - Est. Budget: ${job.Project_Rate == 'Hourly' ? job.Project_Min_Hourly_Rate+"/hr" +" - "+ "$"+job.Project_Max_Hourly_Rate+"/hr" : job.Project_Fixed_Budget } - Posted {timeAgo(job.Project_Created)}
         </p>
     <p className='font-inter text-opacity-50 text-[#0A142F] text-[16px] font-normal py-3'>{displayWords.join(' ')} 
                 {words.length > 50 && (

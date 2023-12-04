@@ -105,7 +105,7 @@ const descriptionToShow = showFullDescription ? (findinvite && findinvite.freela
                         <div className=' flex flex-row ml-4'>
                             <div className=' basis-3/12'><i class="fa fa-user-secret" aria-hidden="true"></i></div>
                             <div className=' basis-6/12'>
-                                <p className=' text-[14px] font-normal text-left'>{findinvite && findinvite.freelancer_experience_level ? findinvite.freelancer_experience_level : ""}</p>
+                                <p className=' text-[14px] font-normal text-left'>{findinvite && findinvite.freelancer_experience_level ? findinvite.freelancer_experience_level.replace(/_/g, ' ') : ""}</p>
                                 <p className=' text-[12px] font-normal text-left opacity-50'>Experience level</p>
                             </div>
                         </div>

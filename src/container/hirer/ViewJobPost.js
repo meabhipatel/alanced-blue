@@ -148,7 +148,8 @@ const ViewJobPost = () => {
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
         <p className="font-inter text-[#031136] text-lg font-medium py-4">About the client</p> 
         <p className="font-inter text-[#031136] opacity-50 text-md font-medium py-2 mr-2 inline-block">Payment method not verified</p><i class="bi bi-question-circle-fill text-green-700 inline-block"></i>
-        <p className="font-inter text-[#031136] text-md font-medium">India</p>
+        <p className="font-inter text-[#031136] text-md font-medium py-2">{project.project_owner_name}</p>
+        <p className="font-inter text-[#031136] text-md font-medium">{project.project_owner_address}</p>
         <p className="font-inter text-[#031136] opacity-50 text-md font-medium">{getCurrentTime()}</p>
         <p className="font-inter text-[#031136] text-md font-medium py-2">{viewhirerProjectcount} job posted</p>
         <p className="font-inter text-[#031136] text-sm font-medium opacity-50">Member since {formatDateInput(project.project_owner_created)}</p>

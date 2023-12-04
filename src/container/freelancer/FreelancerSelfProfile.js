@@ -21,7 +21,7 @@ import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import testimonial from '../../components/images/testimonial.png'
 import certificate from '../../components/images/certificate.png'
 import del from '../../components/images/delete.png'
-import experience from '../../components/images/experience.png'
+import experiences from '../../components/images/experience.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetFreelancerSelfProfileAction, UpdateFreelancerProfileAction } from '../../redux/Freelancer/FreelancerAction'
 import StarRating from './StarRating'
@@ -1127,27 +1127,32 @@ const handleImageSave = async () => {
     </div>
     </div>
     <div class="border-b opacity-50 my-3"></div>
-    {visibleEmp.map((emp, index) => (<>
-    <div key={index}>
-    <div className="flex items-center justify-between">
-    <h1 className="font-cardo text-[18px] text-[#031136] font-normal mr-1">{emp.Company_Designation}  |  {emp.Freelancer_Company_Name}</h1>
-    <div className="flex items-center space-x-2">
-        <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={()=>openEditEmployment(emp)}>
-            <img src={edit} alt="edit" />
+    {visibleEmp.length === 0 ? (<>
+      <img src={experiences} alt="" className='mx-auto mt-5' />
+      <h1 className='font-cardo text-2xl text-center py-3'>No Data Found</h1>
+    </>
+   
+) : (
+    visibleEmp.map((emp, index) => (<>
+        <div key={index}>
+        <div className="flex items-center justify-between">
+        <h1 className="font-cardo text-[18px] text-[#031136] font-normal mr-1">{emp.Company_Designation}  |  {emp.Freelancer_Company_Name}</h1>
+        <div className="flex items-center space-x-2">
+            <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={()=>openEditEmployment(emp)}>
+                <img src={edit} alt="edit" />
+            </div>
+            {isEditEmploymentOpen && <EditEmploymentPopup employment={selectedEmp} closeEditEmployment={closeEditEmployment} />}
         </div>
-        {isEditEmploymentOpen && <EditEmploymentPopup employment={selectedEmp} closeEditEmployment={closeEditEmployment} />}
-        {/* <div className="p-1 w-6 h-6 bg-white rounded-full border border-gray-200">
-            <img src={del} alt="delet" />
-        </div> */}
-    </div>
-    </div>
-    <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>
-    {formateDate(emp.Company_Joining_date)} - {formateDate(emp.Company_Leaving_date)}
-</p>
-    <div class="border-b opacity-50 my-3"></div>
-    </div>
-    </>       
-     ))}
+        </div>
+        <p className='font-inter opacity-50 text-[#0A142F] text-[14px] pt-2 text-left'>
+        {formateDate(emp.Company_Joining_date)} - {formateDate(emp.Company_Leaving_date)}
+    </p>
+        <div class="border-b opacity-50 my-3"></div>
+        </div>
+        </>       
+         ))
+)}
+
      {freelanceremployment.length > 3 && (
   startIdx + 3 < freelanceremployment.length ? 
     <h1 className="font-cardo text-[20px] text-[#031136] font-normal mx-auto cursor-pointer" onClick={showMoreHandlers}>Show More</h1> :
