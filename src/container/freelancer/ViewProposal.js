@@ -89,7 +89,7 @@ const ViewProposal = () => {
                         <div className=' flex flex-row ml-4'>
                             <div className=' basis-3/12'><i class="fa fa-user-secret" aria-hidden="true"></i></div>
                             <div className=' basis-6/12'>
-                                <p className=' text-[14px] font-normal text-left'>{findbid.project.Project_experience_level}</p>
+                                <p className=' text-[14px] font-normal text-left'>{findbid.project.Project_experience_level.replace(/_/g, ' ')}</p>
                                 <p className=' text-[12px] font-normal text-left opacity-50'>Experience level</p>
                             </div>
                         </div>
@@ -160,15 +160,20 @@ const ViewProposal = () => {
                         <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>Payment method not verified</p>
                     </div>
                     <div className='mt-5 ml-7'>
+                        <p className=' text-[17px] font-inter font-normal text-left'>Owner Name</p>
+                        <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>{findbid.project.project_owner_Name}</p>
+                        {/* <p className='text-[15px] font-inter font-normal opacity-75  text-left'>kathmandu 04:42 PM</p> */}
+                    </div>
+                    <div className='mt-5 ml-7'>
                         <p className=' text-[17px] font-inter font-normal text-left'>Location</p>
-                        <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>Nepal</p>
-                        <p className='text-[15px] font-inter font-normal opacity-75  text-left'>kathmandu 04:42 PM</p>
+                        <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>{findbid.project.project_owner_location}</p>
+                        {/* <p className='text-[15px] font-inter font-normal opacity-75  text-left'>kathmandu 04:42 PM</p> */}
                     </div>
                     <div className='mt-5 ml-7'>
                         <p className=' text-[17px] font-inter font-normal text-left'>History</p>
                         {/* <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>20 to 50 proposals<span className=' ml-3 text-green-600'><i class="bi bi-question-circle-fill"></i></span></p>
                         <p className='text-[14px] font-inter font-normal opacity-75 mt-2 text-left'>1 job posted</p> */}
-                        <p className='text-[12px] font-inter font-normal opacity-75 mt-2 text-left'>{normaltime}</p>
+                        <p className='text-[12px] font-inter font-normal opacity-75 mt-2 text-left'>Member since {findbid.project.project_owner_date_of_creation}</p>
                     </div>
                 </div>
             </div>
