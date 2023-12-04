@@ -44,13 +44,13 @@ const Messages = () => {
   const [conversation, setConversation] = useState(null);
   useEffect(() => {
   if(conversationName){
-    const names = [conversationName.hirer, conversationName.freelancer.id].sort();
+    const names = [conversationName.hirer, conversationName.freelancer.freelancer_id].sort();
     setConversation(`${names[0]}__${names[1]}`)
     setConvouser(conversationName.freelancer)
     console.log("names -------- ",names,conversation)
   }
 }, [conversationName])
-console.log("names -------- ",conversation)
+console.log("names -------- ",conversationName,"-----",conversation)
 // useEffect(() => {
    function chat_data(chatid) {
       axios.get(`http://51.21.1.122:8000/chat/conversations/${chatid}`)
