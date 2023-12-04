@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import logo from '../images/Alanced.png'
 import { Link, useNavigate } from 'react-router-dom'
 import navback from '../images/Nav_Background.png'
@@ -31,6 +31,8 @@ const navigate = useNavigate();
   const loginMethod = localStorage.getItem('loginMethod')
   const dispatch = useDispatch();
   const [dropdownVisible, setDropdownVisible] = useState(false)
+  const dropdownRef = useRef(null);
+  const notificationsDropdownRef = useRef(null);
   const [Findworkdropdown, setFindworkDropdown] = useState(false)
   const [MyJobsdropdown, setMyJobsDropdown] = useState(false)
   const [Reportsdropdown, setReportsDropdown] = useState(false)
@@ -58,6 +60,23 @@ if(loginType == 'FREELANCER'){
   } else if (loginMethod === 'traditional') {
       displayName = logindata?.first_Name+" "+logindata?.last_Name;
   }
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      // Clicked outside the dropdown, close it
+      setDropdownVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    // Add event listener when the component mounts
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
  
   
     // React.useEffect(() => {
@@ -108,11 +127,11 @@ const fetchClientNotifications = async () => {
   }
 };
 
-// useEffect(() => { // 106 @
-//   fetchClientNotifications(); 
-//   const interval = setInterval(fetchClientNotifications, 60000); 
-//   return () => clearInterval(interval); 
-// }, []);
+useEffect(() => { 
+  fetchClientNotifications(); 
+  const interval = setInterval(fetchClientNotifications, 60000); 
+  return () => clearInterval(interval); 
+}, []);
 
 const markAsReadClient = async (notifId) => {
   try {
@@ -201,11 +220,11 @@ const fetchFreeNotifications = async () => {
     }
   };
   
-//   useEffect(() => {   // 199 @
-//     fetchFreeNotifications(); 
-//     const interval = setInterval(fetchFreeNotifications, 60000);
-//     return () => clearInterval(interval); 
-//   }, []);
+  useEffect(() => {   
+    fetchFreeNotifications(); 
+    const interval = setInterval(fetchFreeNotifications, 60000);
+    return () => clearInterval(interval); 
+  }, []);
   
   const markAsReadFree = async (notifId) => {
     try {
@@ -276,6 +295,27 @@ const handleClientNotificationClick = (notif) => {
     const redirectPath = getNotificationRedirectPath(notif);
     navigate(redirectPath); // Redirect to the appropriate page
   };
+
+  const handlenotifClickOutside = (event) => {
+    if (
+      notificationsDropdownRef.current &&
+      !notificationsDropdownRef.current.contains(event.target)
+    ) {
+      // Clicked outside the notification dropdown, close it
+      setIsNotificationsDropdownVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    // Add event listener when the component mounts
+    document.addEventListener('mousedown', handlenotifClickOutside);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('mousedown', handlenotifClickOutside);
+    };
+  }, []);
+  
   
 
   return (
@@ -319,12 +359,14 @@ const handleClientNotificationClick = (notif) => {
     </div>
   </div> 
   </>:<>
-  {loginType=='FREELANCER' ? <Link to='/freelancer/profile' onClick={() => window.scrollTo(0, 0)}>
+  {loginType=='FREELANCER' ? <Link to='/freelancer/profile' onClick={() => window.scrollTo(0, 0)}
+  onMouseEnter={() => {setFindworkDropdown(false); setReportsDropdown(false); setMyJobsDropdown(false);}}>
   <div class="flex items-center flex-shrink-0 lg:ml-[129px]">
     <img src={logo} alt=""  />
     <span class="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
   </div>
-  </Link>:<Link to='/hirer/profile' onClick={() => window.scrollTo(0, 0)}>
+  </Link>:<Link to='/hirer/profile' onClick={() => window.scrollTo(0, 0)}
+  onMouseEnter={() => {setFindworkDropdown(false); setReportsDropdown(false); setMyJobsDropdown(false);}}>
   <div class="flex items-center flex-shrink-0 lg:ml-[129px]">
     <img src={logo} alt=""  />
     <span class="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
@@ -334,7 +376,7 @@ const handleClientNotificationClick = (notif) => {
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0 my-2.5">
     <div class="text-sm lg:flex-grow lg:ml-[45px] lg:mr-12 mt-1.5">
       {loginType=='FREELANCER' ? <>
-      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setFindworkDropdown(true)}>Find Work <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
+      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => {setFindworkDropdown(true); setReportsDropdown(false); setMyJobsDropdown(false);}}>Find Work <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
       {Findworkdropdown && (
         <div className="absolute md:right-[47.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
@@ -354,10 +396,10 @@ const handleClientNotificationClick = (notif) => {
         </div>
     )}
       </> : <Link to='/hirer/profile' onClick={() => window.scrollTo(0, 0)}>
-      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]" >Find Talent </span>
+      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]"  onMouseEnter={() => {setFindworkDropdown(false); setReportsDropdown(false); setMyJobsDropdown(false);}}>Find Talent </span>
       </Link> }
       {loginType=='FREELANCER' ? <>
-      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setMyJobsDropdown(true)} 
+      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => {setMyJobsDropdown(true); setFindworkDropdown(false); setReportsDropdown(false);}} 
     >My Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
       {MyJobsdropdown && (
         <div className="absolute md:right-[39.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
@@ -371,7 +413,7 @@ const handleClientNotificationClick = (notif) => {
             </div>
         </div>
     )} </> : <>
-    <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setMyJobsDropdown(true)} 
+    <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => {setMyJobsDropdown(true); setFindworkDropdown(false); setReportsDropdown(false);}}  
   > Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
     {MyJobsdropdown && (
       <div className="absolute md:right-[41rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
@@ -392,7 +434,7 @@ const handleClientNotificationClick = (notif) => {
       </div>
   )} </> }
   {loginType=='FREELANCER' ? <>
-      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setReportsDropdown(true)}> Payments <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
+      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => {setReportsDropdown(true); setFindworkDropdown(false); setMyJobsDropdown(false);}}> Payments <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
       {Reportsdropdown && (
         <div className="absolute md:right-[31.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
@@ -405,7 +447,7 @@ const handleClientNotificationClick = (notif) => {
              </div>
         </div>
     )}</>:<>
-    <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => setReportsDropdown(true)}> Payments <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
+    <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => {setReportsDropdown(true); setMyJobsDropdown(false); setFindworkDropdown(false);}}> Payments <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
       {Reportsdropdown && (
         <div className="absolute md:right-[33rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
@@ -419,15 +461,16 @@ const handleClientNotificationClick = (notif) => {
         </div>
     )}
     </>}
-      <Link to='/messages' onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]">Messages</span></Link>
+      <Link to='/messages' onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]" onMouseEnter={() => {setFindworkDropdown(false); setReportsDropdown(false); setMyJobsDropdown(false);}}>Messages</span></Link>
     </div>
     
 <div className='lg:mr-[100px] lg:ml-0 ml-[15rem]'>
    <div className="flex items-center space-x-12">
-      <div className='relative inline-block pt-1'>
+      <div className='relative inline-block pt-1' ref={notificationsDropdownRef}>
       <i 
                     className="bi bi-bell text-2xl cursor-pointer" 
                     onClick={toggleNotificationDropdown}
+                    onMouseEnter={() => {setFindworkDropdown(false); setReportsDropdown(false); setMyJobsDropdown(false);}}
                 ></i>
                 {loginType=='HIRER' && unreadclientCount > 0 && 
                     <span className="absolute top-1.5 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 border-2 border-white"></span>
@@ -505,7 +548,7 @@ const handleClientNotificationClick = (notif) => {
          {/* <i className="bi bi-bell text-2xl"></i>
          <span className="absolute top-1.5 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 border-2 border-white"></span> */}
       </div>
-      <div className='relative inline-block'>
+      <div className='relative inline-block' ref={dropdownRef} onMouseEnter={() => {setFindworkDropdown(false); setReportsDropdown(false); setMyJobsDropdown(false);}}>
       {logindata && logindata.images_logo ? (
         <img 
             src={"http://51.21.1.122:8000" + logindata.images_logo} 

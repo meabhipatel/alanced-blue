@@ -183,7 +183,7 @@ useEffect(() => {
                         <div className=' flex flex-row'>
                                 <div className=' basis-2/12'><img src={rating} alt="" /></div>
                                 <div className=' basis-10/12'>
-                                    <h1 className=' font-cardo font-normal text-lg text-left'>{project.experience_level}</h1>
+                                    <h1 className=' font-cardo font-normal text-lg text-left'>{project.experience_level.replace(/_/g, ' ')}</h1>
                                     <p className=' font-inter font-normal text-base text-left opacity-[50%]'>Experience Level</p>
                                 </div>
                             </div>
