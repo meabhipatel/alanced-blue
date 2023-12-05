@@ -134,6 +134,12 @@ console.log("conversations",conversations)
 
   console.log("connection status -------------- ",connectionStatus)
 
+  function filterconvo(query){
+    for(let i = 0; i < conversations.length; i++){
+      console.log("-----",i)
+    }
+  }
+
   // useEffect(() => {
   //   // Attach scroll event listener
   //   window.addEventListener('scroll', handleScroll);
@@ -256,7 +262,7 @@ console.log("conversations",conversations)
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
               </svg>
             </div>
-            <input type="search" id="default-search" class="block w-full pr-4 p-2 pl-10 text-sm text-gray-900 border border-gray-300 outline-none rounded-lg " placeholder="Search" required/>
+            <input type="search" id="default-search" class="block w-full pr-4 p-2 pl-10 text-sm text-gray-900 border border-gray-300 outline-none rounded-lg " placeholder="Search" onChange={filterconvo((e) => (e.target.value))} required/>
           </div>
         </div>
         <div className="overflow-y-scroll">
