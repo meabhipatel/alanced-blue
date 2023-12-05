@@ -20,7 +20,10 @@ const FreelancerFullDetailAfterLogin = () => {
 
   const location = useLocation();
   const freelancer = location.state && location.state.free;
-  const hirer = useSelector(state => state.login.login_data); // 20 @
+  // const hirer = useSelector(state => state.login.login_data); // 20 @
+  const loginData = useSelector(state => state.login.login_data);
+  const hirer = loginData !== undefined && loginData !== null ? loginData : "";
+
   console.log(freelancer,"freelancer_detail")
 
   const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
@@ -42,11 +45,11 @@ const FreelancerFullDetailAfterLogin = () => {
     setIsFreeHiringOpen(false);
   };
 
-  const conversationName = {
+  const conversationName = hirer !== null && hirer !== undefined ? {
     "hirer": hirer.id,
     "freelancer": freelancer,
-  }
-
+  } : ''
+console.log("conversation name on FreelancerFullDetailAfterLogin : ",conversationName)
 useEffect(() => {
   const queryParameters = [];
 
