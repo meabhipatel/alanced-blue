@@ -24,6 +24,7 @@ const Navbar = () => {
 const navigate = useNavigate();
   const accessToken = localStorage.getItem('accessToken')
   const AccessToken = useSelector(state => state.login.accessToken);
+  const jwtToken = localStorage.getItem('jwtToken')
 //   const loginType = useSelector(state => state.login.type)
   const loginType = useSelector(state => state.login.type) || localStorage.getItem('loginType');
   const logindata = useSelector(state => state.login.login_data)
@@ -101,6 +102,7 @@ if(loginType == 'FREELANCER'){
     localStorage.removeItem('accessToken')
     localStorage.removeItem('loginMethod')
     localStorage.removeItem('loginType')
+    localStorage.removeItem('jwtToken')
 
     dispatch(LogoutAction())
 }

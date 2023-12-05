@@ -111,48 +111,106 @@ const Login = (props) => {
 
     //----- updated code commented Below ,which is to be applied with checkemail-API updation -----
 
-    const checkEmailExists = async (email,type) => {
-        const response = await axios.post('http://51.21.1.122:8000/account/check-email/', { email ,type });
-        return response.data; 
-    };
+    // const checkEmailExists = async (email,type) => {
+    //     const response = await axios.post('http://51.21.1.122:8000/account/check-email/', { email ,type });
+    //     return response.data; 
+    // };
     
-    const logins = useGoogleLogin({
-        onSuccess: async response => {
-            try {
-                const res = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
-                    headers: {
-                        "Authorization": `Bearer ${response.access_token}`
-                    }
-                });
-                const emailCheckResponse = await checkEmailExists(res.data.email);
+    // const logins = useGoogleLogin({
+    //     onSuccess: async response => {
+    //         try {
+    //             const res = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+    //                 headers: {
+    //                     "Authorization": `Bearer ${response.access_token}`
+    //                 }
+    //             });
+    //             const emailCheckResponse = await checkEmailExists(res.data.email);
                 
-                if (emailCheckResponse.exists) {
-                    localStorage.setItem('googleUserName', res.data.name);
-                    localStorage.setItem('isLoggedIn', 'true');
-                    localStorage.setItem('loginMethod', 'google');
-                    localStorage.setItem('loginType', emailCheckResponse.type);
-                    console.log(emailCheckResponse.type,"ckhfff")
-                    // Navigate based on user type
-                    if (emailCheckResponse.type === 'FREELANCER') {
-                        navigate('/freelancer/profile');
-                    } else if (emailCheckResponse.type === 'HIRER') {
-                        navigate('/hirer/profile');
-                    } else {
-                        toast.error("Invalid user type. Please contact support.");
-                    }
+    //             if (emailCheckResponse.exists) {
+    //                 localStorage.setItem('googleUserName', res.data.name);
+    //                 localStorage.setItem('isLoggedIn', 'true');
+    //                 localStorage.setItem('loginMethod', 'google');
+    //                 localStorage.setItem('loginType', emailCheckResponse.type);
+    //                 console.log(emailCheckResponse.type,"ckhfff")
+    //                 // Navigate based on user type
+    //                 if (emailCheckResponse.type === 'FREELANCER') {
+    //                     navigate('/freelancer/profile');
+    //                 } else if (emailCheckResponse.type === 'HIRER') {
+    //                     navigate('/hirer/profile');
+    //                 } else {
+    //                     toast.error("Invalid user type. Please contact support.");
+    //                 }
     
-                } else {
-                    toast.error("You're not a Registered user, Please signup first.");
-                }
+    //             } else {
+    //                 toast.error("You're not a Registered user, Please signup first.");
+    //             }
     
-            } catch (err) {
-                console.log(err);
-                toast.error("Something went wrong. Please try again.");
-            }
-        }
-    });
+    //         } catch (err) {
+    //             console.log(err);
+    //             toast.error("Something went wrong. Please try again.");
+    //         }
+    //     }
+    // });
 
-    
+    const checkEmailExists = async (email, type) => {
+        const response = await axios.post('http://51.21.1.122:8000/account/check-email/', { email, type });
+        return response.data;
+      };
+      
+    //   const handleGoogleLogin = async (response, userType) => {
+        const logins = useGoogleLogin({
+            onSuccess: async response => {
+        try {
+          const googleProfile = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+            headers: {
+              "Authorization": `Bearer ${response.access_token}`
+            }
+          });
+      
+          const emailCheckResponse = await checkEmailExists(googleProfile.data.email);
+      
+          if (emailCheckResponse.exists) {
+            const payload = {
+              email: googleProfile.data.email,
+              type:emailCheckResponse.type
+            };
+      
+            const loginResponse = await axios.post('http://51.21.1.122:8000/account/google-login/', payload);
+      
+            if (loginResponse.data.data && loginResponse.data.data.token.access) {
+              const jwtToken = loginResponse.data.data.token.access;
+      
+              localStorage.setItem('googleUserName', googleProfile.data.name);
+              localStorage.setItem('isLoggedIn', 'true');
+              localStorage.setItem('loginMethod', 'google');
+              localStorage.setItem('loginType', emailCheckResponse.type);
+              localStorage.setItem('jwtToken', jwtToken);
+      
+              // Navigate based on user type
+              if (emailCheckResponse.type === 'FREELANCER') {
+                navigate('/freelancer/profile');
+              } else if (emailCheckResponse.type === 'HIRER') {
+                navigate('/hirer/profile');
+              } else {
+                toast.error("Invalid user type. Please contact support.");
+              }
+      
+            } else {
+              toast.error("Google login failed. Please try again.");
+            }
+      
+          } else {
+            toast.error("You're not a Registered user, Please signup first.");
+          }
+      
+        } catch (err) {
+          console.log(err);
+          toast.error("Something went wrong. Please try again.");
+        }
+      }
+    });
+      
+     
     return (
         <>
       <div className="flex items-center min-h-screen bg-gray-50">

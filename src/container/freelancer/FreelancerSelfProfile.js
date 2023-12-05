@@ -49,7 +49,10 @@ import { formateDate, formatDateToDayMonthYear } from './TimeFunctions'
 
 const FreelancerSelfProfile = () => {
 
-  const accessToken = useSelector(state => state.login.accessToken);  
+  const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
+  const jwtToken = localStorage.getItem('jwtToken');
+  console.log(accessToken,'chkaccesstojken')
+  console.log(jwtToken,'chkjwttoken')
   const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile)
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);

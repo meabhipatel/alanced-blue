@@ -6,7 +6,7 @@ import CityList from '../AllSelectionData/CityList';
 
 const AvailableOffPopup = ({ isAvailable,setIsAvailable,closeAvailableOff }) => {
 
-    const accessToken = useSelector(state => state.login.accessToken);  
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');  
     const dispatch = useDispatch();
     const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile);
 

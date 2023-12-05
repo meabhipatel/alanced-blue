@@ -5,7 +5,7 @@ import { GetFreelancerSelfProfileAction, UpdateFreelancerProfileAction } from '.
 import CategoryList from '../AllSelectionData/CategoryList';
 
 const EditTitlePopup = ({ closeEditTitle }) => {
-  const accessToken = useSelector(state => state.login.accessToken);  
+  const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
 
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState(""); 
