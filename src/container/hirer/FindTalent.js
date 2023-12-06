@@ -536,7 +536,7 @@ const FindTalent = () => {
           </div>
          
         <div className=' flex flex-row'>
-            <div className=' basis-8/12 absolute bottom-4 items-center font-inter text-green-600 text-[14px] cursor-pointer font-bold hover:underline'><Link to='/view-freelancer/full-detail' state={{ free }} onClick={() => window.scroll(0, 0) }><p>View more detail</p></Link></div>
+            <div className=' basis-8/12 absolute bottom-4 items-center font-inter text-green-600 text-[14px] cursor-pointer font-bold hover:underline'><Link to='/view-freelancer/detail' state={{ free }} onClick={() => window.scroll(0, 0) }><p>View more detail</p></Link></div>
             <div className=' basis-4/12 absolute bottom-2 right-6 items-center space-x-2 ml-auto'><Link to='/login'>
             <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
         </Link></div>

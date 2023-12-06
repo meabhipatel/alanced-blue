@@ -69,6 +69,7 @@ import AllInvitedFreelancers from "../container/hirer/AllInvitedFreelancers";
 import ViewInvitationDetail from "../container/hirer/ViewInvitationDetail";
 import AllHirerContracts from "../container/hirer/AllHirerContracts";
 import AllInvitations from "../container/freelancer/AllInvitations";
+import FreelancerFullDetailBeforeLogin from "../container/hirer/FreelancerFullDetailBeforeLogin";
 
 
   const AppRouter = (props) => {
@@ -162,6 +163,7 @@ import AllInvitations from "../container/freelancer/AllInvitations";
           <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
           <Route path="/view-more/project-detail" element={<ViewMoreProjectDetail/>}></Route>
           <Route path="/view-freelancer/full-detail" element={<FreelancerFullDetailAfterLogin/>}></Route>
+          <Route path="/view-freelancer/detail" element={<FreelancerFullDetailBeforeLogin/>}></Route>
           <Route path="/reset-user-password/:uid/:token" element={<ResetPassword />} />
           <Route path="/reset-password" element={<SendPasswordResetEmail/>}/>
 
