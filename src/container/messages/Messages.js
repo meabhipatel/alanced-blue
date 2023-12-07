@@ -36,6 +36,7 @@ const Messages = () => {
   const [name, setName] = useState(logindata.id);
   const [messageHistory, setMessageHistory] = useState([])
   const [conversations, setConversations] = useState([])
+  const [backup, setbackup] = useState([])
   const [convouser, setConvouser] = useState("")
   console.log("--------------",messageHistory)
   const chatid = logindata.id
@@ -58,6 +59,7 @@ console.log("names -------- ",conversationName,"-----",conversation)
               if (response.data.status === 200) {
                 let Data = response.data.data
                 setConversations(Data)
+                setbackup(Data)
                 console.log("conversations",conversations)
                   console.log("--------------------",response.data.data[0].name);
                   if(conversationName != null){
@@ -140,7 +142,7 @@ console.log("conversations",conversations)
       chat_data(chatid)
     }
     console.log("query",query)
-    const filteredConversations = conversations.filter(
+    const filteredConversations = backup.filter(
       (conversation) => conversation.from_user.id != logindata.id ?
         conversation.from_user.first_Name.toLowerCase().includes(query.toLowerCase()) ||
         conversation.from_user.last_Name.toLowerCase().includes(query.toLowerCase()) 
@@ -221,7 +223,16 @@ console.log("conversations",conversations)
   // useEffect(() => {
   //   console.log("convo name after update:", conversation);
   // }, [conversation]);
-  
+  const handleKeyDown = (e) => {
+    // Check if the Enter key is pressed
+    if (e.key === 'Enter') {
+      // Prevent the default behavior (e.g., form submission)
+      e.preventDefault();
+      // Call the submit function
+      handleSubmit();
+    }
+  };
+
   function handleSubmit() {
     // setName("manoj")
     sendJsonMessage({
@@ -615,13 +626,13 @@ console.log("conversations",conversations)
             placeholder="type your message here..."
           /> */}
           <div className="rounded-lg border-2 border-[#E7E8F2] p-1 pb-2">
-            <textarea rows="3" class="block p-2.5 w-full text-sm outline-none resize-none" name="message" value={message} required maxLength={511} onChange={handleChangeMessage} placeholder="Type Message Here ..."></textarea>
+            <textarea rows="3" class="block p-2.5 w-full text-sm outline-none resize-none" name="message" value={message} required maxLength={511} onChange={handleChangeMessage} onKeyDown={handleKeyDown} placeholder="Type Message Here ..."></textarea>
             <div className="flex justify-end gap-2 mr-2">
-            <img src={smiley}/>
+            {/* <img src={smiley}/>
             <img src={attherate}/>
-            <img src={paperpin}/>
+            <img src={paperpin}/> */}
             <button onClick={handleSubmit}>
-            <img className="border-l-2 border-[#D9D9D9] pl-2" src={paper}/>
+            <img className="border-l-2 border-[#D9D9D9] pl-2" src={paper} style={{height : "3vh", widht: "3vw"}}/>
             </button>
             </div>
           </div>
