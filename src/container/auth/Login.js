@@ -153,7 +153,7 @@ const Login = (props) => {
     // });
 
     const checkEmailExists = async (email, type) => {
-        const response = await axios.post('http://51.21.1.122:8000/account/check-email/', { email, type });
+        const response = await axios.post('http://13.233.123.209:8000/account/check-email/', { email, type });
         return response.data;
       };
       
@@ -175,7 +175,7 @@ const Login = (props) => {
               type:emailCheckResponse.type
             };
       
-            const loginResponse = await axios.post('http://51.21.1.122:8000/account/google-login/', payload);
+            const loginResponse = await axios.post('http://13.233.123.209:8000/account/google-login/', payload);
       
             if (loginResponse.data.data && loginResponse.data.data.token.access) {
               const jwtToken = loginResponse.data.data.token.access;

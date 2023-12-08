@@ -48,7 +48,7 @@ const AllHirerContracts = () => {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`http://51.21.1.122:8000/freelance/View-all/hirer-contracts?${queryString}`,{
+      .get(`http://13.233.123.209:8000/freelance/View-all/hirer-contracts?${queryString}`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }

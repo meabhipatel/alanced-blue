@@ -81,7 +81,7 @@ const FreelancerAfterLogin = () => {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`http://51.21.1.122:8000/freelance/view-all/Project/?${queryString}`)
+      .get(`http://13.233.123.209:8000/freelance/view-all/Project/?${queryString}`)
       .then((response) => {
         setViewProject(response.data.results); 
         setTotalPages(Math.ceil(response.data.count / 8));
@@ -154,7 +154,7 @@ const { day, formattedDate, greeting } = getCurrentDateAndGreeting();
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response1 = await axios.get('http://51.21.1.122:8000/freelance/view/freelancer-all-self/bid',{
+        const response1 = await axios.get('http://13.233.123.209:8000/freelance/view/freelancer-all-self/bid',{
           headers: {
             "Authorization":`Bearer ${accessToken}`
           }
@@ -217,13 +217,13 @@ const toggleSaveProject = async (project) => {
         let response;
 
         if (project.isSaved) {
-            response = await axios.delete(`http://51.21.1.122:8000/freelance/saved-projects/${project.id}`, {
+            response = await axios.delete(`http://13.233.123.209:8000/freelance/saved-projects/${project.id}`, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
             });
         } else {
-            response = await axios.post(`http://51.21.1.122:8000/freelance/saved-projects/${project.id}`, {}, {
+            response = await axios.post(`http://13.233.123.209:8000/freelance/saved-projects/${project.id}`, {}, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
@@ -275,7 +275,7 @@ const [bidsCount, setBidsCount] = useState({});
 
             for (const project of viewProject || []) {
                 try {
-                    const response = await axios.get(`http://51.21.1.122:8000/freelance/View/bids/${project.id}`);
+                    const response = await axios.get(`http://13.233.123.209:8000/freelance/View/bids/${project.id}`);
                     if (response.status === 200) {
                         bids[project.id] = response.data.count; 
                     } else {
