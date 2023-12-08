@@ -26,7 +26,7 @@ const ViewJobPost = () => {
   
     useEffect(() => {
       axios
-        .get(`http://51.21.1.122:8000/freelance/view/hirer-self/Project`,{
+        .get(`http://13.233.123.209:8000/freelance/view/hirer-self/Project`,{
           headers: {
               'Authorization': `Bearer ${accessToken}`
           }
@@ -42,7 +42,7 @@ const ViewJobPost = () => {
 
   useEffect(() => {
    axios
-    .get(`http://51.21.1.122:8000/freelance/View/bids/${id}`)
+    .get(`http://13.233.123.209:8000/freelance/View/bids/${id}`)
       .then((response) => {
         setBidCount(response.data.count);
       })
@@ -54,7 +54,7 @@ const ViewJobPost = () => {
 
   useEffect(() => {
     axios
-     .get(`http://51.21.1.122:8000/freelance/View/project-invitations-count/${id}`,{
+     .get(`http://13.233.123.209:8000/freelance/View/project-invitations-count/${id}`,{
       headers: {
       Authorization: `Bearer ${accessToken}`,
   },

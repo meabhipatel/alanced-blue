@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { AddFreelancerEmploymentAction } from '../../../redux/Freelancer/FreelancerAction';
+import CategoryList from '../../freelancer/AllSelectionData/CategoryList';
 
 const AddEmploymentPopup = ({ closeAddEmployment }) => {
 
@@ -62,6 +63,8 @@ const AddEmploymentPopup = ({ closeAddEmployment }) => {
         return `${day}-${month}-${year}`;
     }
 
+    const[cate] = useState(CategoryList)
+    console.log(cate,"category")
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto mt-14">
@@ -78,7 +81,18 @@ const AddEmploymentPopup = ({ closeAddEmployment }) => {
             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Company Name</h1>
             <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Ex: Wiz91' onChange={onChange} name='Freelancer_Company_Name'/>
             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Designation</h1>
-            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Python Developer' onChange={onChange} name='Company_Designation'/>
+            {/* <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Python Developer' onChange={onChange} name='Company_Designation'/> */}
+            <select onChange={onChange} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white' name='Company_Designation'>
+                    {/* <option disabled selected value="">Role</option> */}
+                    <option disabled selected value="">Select a Role</option>
+                    {cate.map((cat, index) => (
+                        <option value={cat}>{cat}</option>
+                    ))}
+                    {/* <option value="">Select an address</option>
+                    <option value="Indore">Indore</option>
+                    <option value="Ujjain">Ujjain</option>
+                    <option value="Bhopal">Bhopal</option> */}
+                </select>
             <div className="flex items-center justify-between">
     <div className="flex-1 mr-2">
         <p className="font-cardo text-[18px] text-[#031136] font-normal text-left opacity-50">From</p>

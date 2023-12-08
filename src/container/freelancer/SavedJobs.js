@@ -38,7 +38,7 @@ const SavedJobs = () => {
 
     const fetchSavedJobs = async () => {
         try {
-            const response = await axios.get(`http://51.21.1.122:8000/freelance/View-all/SavedProjects?page=${currentPage}`, {
+            const response = await axios.get(`http://13.233.123.209:8000/freelance/View-all/SavedProjects?page=${currentPage}`, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
@@ -69,7 +69,7 @@ const SavedJobs = () => {
     const toggleJobSaveStatus = async (jobId) => {
         try {
             const response = await axios.post(
-                `http://51.21.1.122:8000/freelance/saved-projects/${jobId}`,
+                `http://13.233.123.209:8000/freelance/saved-projects/${jobId}`,
                 {},
                 {
                     headers: {

@@ -27,7 +27,7 @@ const EditJobScopePopup = ({closeJobScope,project}) => {
 
     const handleSave = async () => {
         try {
-            const response = await axios.put(`http://51.21.1.122:8000/freelance/update/project/${id}`, {
+            const response = await axios.put(`http://13.233.123.209:8000/freelance/update/project/${id}`, {
                 experience_level: jobexplevel,
                 deadline:jobDeadline
             }, {

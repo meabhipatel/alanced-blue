@@ -36,7 +36,7 @@ const FreelancerProjectsPopup = ({ closeFreeProject, project }) => {
                         </button> */}
                     </div>
                     <div className='mt-8'>
-                        <img src={"http://51.21.1.122:8000"+project.images_logo} alt="" className='w-full h-[300px]'/>
+                        <img src={"http://13.233.123.209:8000"+project.images_logo} alt="" className='w-full h-[300px]'/>
                         <h1 className="font-cardo text-lg text-[#031136] font-normal text-left pt-5">Skills and Deliverables</h1>
                         <div className="text-left mt-5">
                         {JSON.parse(project.skills_used.replace(/'/g, '"')).map((skill, index) => (
