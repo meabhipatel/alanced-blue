@@ -8,6 +8,7 @@ import { formatDate, formatDateInput, getCurrentTime } from './TimeFunctions';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 const ViewHiringDetail = () => {
     const accessToken = useSelector(state => state.login.accessToken);
@@ -15,6 +16,7 @@ const ViewHiringDetail = () => {
     const findhiring = location.state && location.state.hire;
     const hire_id = findhiring && findhiring.hire_id ? findhiring.hire_id :"";
     console.log(hire_id,"chkhireid")
+    console.log("data on ViewHiringDetail : ",findhiring.hire_id, findhiring.freelancer_id)
     const navigate = useNavigate();
     
     const [showFullDescription, setShowFullDescription] = useState(false);
@@ -29,7 +31,7 @@ const ViewHiringDetail = () => {
 
     const handleAcceptProject = async () => {
         try {
-            const response = await axios.put(`http://51.21.1.122:8000/freelance/projects/accept/${hire_id}`, {}, {
+            const response = await axios.put(`http://13.233.123.209:8000/freelance/projects/accept/${hire_id}`, {}, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }
@@ -37,6 +39,7 @@ const ViewHiringDetail = () => {
             if (response.data.status === 200) {
                 toast.success("Hiring Request Accepted Successfully")
                 navigate('/all-invitations')
+                handleAccept()
             } 
 
         } catch (error) {
@@ -46,7 +49,7 @@ const ViewHiringDetail = () => {
 
     const handleRejectProject = async () => {
         try {
-            const response = await axios.put(`http://51.21.1.122:8000/freelance/projects/reject/${hire_id}`, {}, {
+            const response = await axios.put(`http://13.233.123.209:8000/freelance/projects/reject/${hire_id}`, {}, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }
@@ -54,6 +57,7 @@ const ViewHiringDetail = () => {
             if (response.data.status === 200) {
                 toast.success("You have Rejected the Hiring Request")
                 navigate('/all-invitations')
+                handleReject()
             } 
 
         } catch (error) {
@@ -88,7 +92,51 @@ const ViewHiringDetail = () => {
             return `${years} year ago`;
         }
         }
-            
+        
+        function createConversationName(){
+            const names = [findhiring.hire_id, findhiring.freelancer_id].sort()
+            return `${names[0]}__${names[1]}`
+          }
+          
+          const { readyState, sendJsonMessage } = useWebSocket(`ws://13.233.123.209:8000/${createConversationName()}`, {
+            onOpen: () => {
+              console.log("Connected !")
+            },
+            onClose : () => {
+              console.log("Disconnected !")
+            },
+            onMessage: (e) => {
+              const data = JSON.parse(e.data);
+              console.log("data :", data)
+            }
+          })
+      
+          const connectionStatus = {
+            [ReadyState.CONNECTING]: "Connecting",
+            [ReadyState.OPEN]: "Open",
+            [ReadyState.CLOSING]: "Closing",
+            [ReadyState.CLOSED]: "Closed",
+            [ReadyState.UNINSTANTIATED]: "Uninstantiated"
+          }[readyState];
+        
+          console.log("connection status -------------- ",connectionStatus)
+      
+          function handleAccept() {
+            sendJsonMessage({
+              type: "chat_message",
+              message: "invitation accepted by : "+ findhiring.hired_freelancer_name,
+              name : findhiring.freelancer_id
+            })
+          }
+          
+          function handleReject() {
+            sendJsonMessage({
+              type: "chat_message",
+              message: "invitation rejected by : "+ findhiring.hired_freelancer_name,
+              name : findhiring.freelancer_id
+            })
+          }
+          console.log("data on ViewHiringDetail : ",findhiring.hire_id, findhiring.freelancer_id, findhiring)
       return (
         <>
         <Navbar/>

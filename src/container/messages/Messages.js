@@ -40,7 +40,7 @@ const Messages = () => {
   const [convouser, setConvouser] = useState("")
   console.log("--------------",messageHistory)
   const chatid = logindata.id
-  // const { sendJsonMessage } = useWebSocket("ws://51.21.1.122:8000/4__2");
+  // const { sendJsonMessage } = useWebSocket("ws://13.233.123.209:8000/4__2");
   
   const [conversation, setConversation] = useState(null);
   useEffect(() => {
@@ -54,7 +54,7 @@ const Messages = () => {
 console.log("names -------- ",conversationName,"-----",conversation)
 // useEffect(() => {
    function chat_data(chatid) {
-      axios.get(`http://51.21.1.122:8000/chat/conversations/${chatid}`)
+      axios.get(`http://13.233.123.209:8000/chat/conversations/${chatid}`)
           .then(response => {
               if (response.data.status === 200) {
                 let Data = response.data.data
@@ -89,8 +89,8 @@ useEffect(() => {
   chat_data(chatid)
 }, [logindata.id]);
 console.log("conversations",conversations)
-// `ws://51.21.1.122:8000/${conversation}`
-  const { readyState, sendJsonMessage } = useWebSocket(`ws://51.21.1.122:8000/${conversation}`, {
+// `ws://13.233.123.209:8000/${conversation}`
+  const { readyState, sendJsonMessage } = useWebSocket(`ws://13.233.123.209:8000/${conversation}`, {
     onOpen: () => {
       console.log("Connected!");
     },
@@ -175,7 +175,7 @@ console.log("conversations",conversations)
 
    const fetchMessages = async () => {
     const apiRes = await fetch(
-      `http://51.21.1.122:8000/chat/messages/?conversation=${conversation}&page=${page}`,
+      `http://13.233.123.209:8000/chat/messages/?conversation=${conversation}&page=${page}`,
       {
         method: "GET",
         headers: {
@@ -295,7 +295,7 @@ console.log("conversations",conversations)
           <div class="w-1/4 ml-4">
             <div className="relative">
               <img
-                src={convo.from_user.id != logindata.id ? "http://51.21.1.122:8000"+convo.from_user.images_logo : "http://51.21.1.122:8000"+convo.to_user.images_logo}
+                src={convo.from_user.id != logindata.id ? "http://13.233.123.209:8000"+convo.from_user.images_logo : "http://13.233.123.209:8000"+convo.to_user.images_logo}
                 class="object-cover h-12 w-12 rounded-full"
                 alt=""
               />
@@ -645,7 +645,7 @@ console.log("conversations",conversations)
         <div class="flex flex-col items-center w-full border-b-2">
           {/* <div class="font-semibold text-xl py-4">Mern Stack Group</div> */}
           <img
-            src={"http://51.21.1.122:8000"+convouser.images_logo}
+            src={"http://13.233.123.209:8000"+convouser.images_logo}
             class="object-cover rounded-full h-28 w-28 mt-12"
             alt=""
           />
