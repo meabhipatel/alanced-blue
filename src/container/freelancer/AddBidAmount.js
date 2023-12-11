@@ -18,9 +18,11 @@ const AddBidAmount = () => {
 
 const location = useLocation();
 const projectData = location.state && location.state.projectData;
-const logindata = useSelector(state => state.login.login_data);
+// const logindata = useSelector(state => state.login.login_data);
+const logindata = useSelector(state => state.login.login_data) || localStorage.getItem('logindata');
 console.log("project data :",projectData.project.project_owner, logindata.id)
-const accessToken = useSelector(state => state.login.accessToken); 
+// const accessToken = useSelector(state => state.login.accessToken); 
+const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
 const addbid = useSelector(state => state.freelancer.addbid)
 const [addBid, setAddBid] = useState('');
 const navigate = useNavigate();
@@ -68,7 +70,7 @@ const isButtonEnabled = () => {
     return `${names[0]}__${names[1]}`
   }
   
-  const { readyState, sendJsonMessage } = useWebSocket(`ws://51.21.1.122:8000/${createConversationName()}`, {
+  const { readyState, sendJsonMessage } = useWebSocket(`ws://13.233.123.209:8000/${createConversationName()}`, {
     onOpen: () => {
       console.log("Connected !")
     },

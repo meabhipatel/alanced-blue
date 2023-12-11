@@ -10,7 +10,8 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
         event.preventDefault();
       };
 
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const hirer = useSelector(state => state.login.login_data);
     const [ProjectId, setProjectId] = useState("");
     const [Title, setTitle] = useState("");
@@ -30,7 +31,7 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
       return `${names[0]}__${names[1]}`
     }
     
-    const { readyState, sendJsonMessage } = useWebSocket(`ws://51.21.1.122:8000/${createConversationName()}`, {
+    const { readyState, sendJsonMessage } = useWebSocket(`ws://13.233.123.209:8000/${createConversationName()}`, {
       onOpen: () => {
         console.log("Connected !")
       },
@@ -62,7 +63,7 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
     }
       useEffect(() => {
         axios
-          .get(`http://51.21.1.122:8000/freelance/view-all/hirer-self/Project`,{
+          .get(`http://13.233.123.209:8000/freelance/view-all/hirer-self/Project`,{
             headers: {
                 'Authorization': `Bearer ${accessToken}`
             }
@@ -86,7 +87,7 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
         }
 
         try {
-            const response = await axios.post(`http://51.21.1.122:8000/freelance/hire/${id}`, {
+            const response = await axios.post(`http://13.233.123.209:8000/freelance/hire/${id}`, {
                 project:ProjectId,
                 project_title: Title,
                 hiring_budget:HiringBudget,
