@@ -28,11 +28,13 @@ import Bag from '../../components/images/experience.png'
 
 const FreelancerAfterLogin = () => {
 
-  const logindata = useSelector(state => state.login.login_data);  
+//   const logindata = useSelector(state => state.login.login_data);  
+const logindata = useSelector(state => state.login.login_data) || localStorage.getItem('logindata');
   const googleUserName = localStorage.getItem('googleUserName')
   const loginMethod = localStorage.getItem('loginMethod')
   const viewallprojects = useSelector(state => state.freelancer.viewallprojects)
-  const accessToken = useSelector(state => state.login.accessToken);
+//   const accessToken = useSelector(state => state.login.accessToken);
+const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
   const [searchTerm, setSearchTerm] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();

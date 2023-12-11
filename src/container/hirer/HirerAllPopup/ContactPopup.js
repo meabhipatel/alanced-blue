@@ -8,7 +8,8 @@ import CityList from '../../freelancer/AllSelectionData/CityList';
 const HirerContactPopup = ({ handleContactsClose }) => {
 
     const dispatch = useDispatch()
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const hirerselfprofile = useSelector(state => state.hirer.hirerselfprofile)
     var hirerData = useState(null)
     if(hirerselfprofile != null){

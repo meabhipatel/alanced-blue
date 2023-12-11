@@ -5,7 +5,8 @@ import { GetFreelancerSelfProfileAction, UpdateFreelancerProfileAction } from ".
 
 const EditHrRatePopup = ({ closeHrRate }) => {
 
-  const accessToken = useSelector(state => state.login.accessToken);
+  // const accessToken = useSelector(state => state.login.accessToken);
+  const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
   const dispatch = useDispatch();
   const freelancerselfprofile = useSelector(state => state.freelancer.freelancerselfprofile);
   const [userInput, setUserInput] = useState('$0.00');

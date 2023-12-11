@@ -11,7 +11,8 @@ import { useNavigate } from 'react-router-dom'
 
 const AddPortfolioForm = () => {
 
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const [addFreelancerProject, setAddFreelancerProject] = useState('');
     const dispatch = useDispatch();
     const[cate] = useState(CategoryList)

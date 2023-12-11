@@ -5,7 +5,8 @@ import { GetFreelancerSelfProfileAction, UpdateFreelancerProfileAction } from '.
 
 const EditExperienceLevelPopup = ({ closeExperienceLevel }) => {
 
-  const accessToken = useSelector(state => state.login.accessToken);  
+//   const accessToken = useSelector(state => state.login.accessToken);  
+const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
 
   const [experiencelevel, setexperiencelevel] = useState(""); 
   const dispatch = useDispatch();

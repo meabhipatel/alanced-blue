@@ -28,7 +28,8 @@ const ViewMoreProjectDetail = () => {
 const navigate = useNavigate();
 const [BidCount,setBidCount]=useState(0)
 
-  const accessToken = useSelector(state => state.login.accessToken);  
+//   const accessToken = useSelector(state => state.login.accessToken);
+const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');  
 //   const freelancerselfbid = useSelector(state => state.freelancer.freelancerselfbid)
 //   console.log(freelancerselfbid,"/*/*/*/*/*/*/*/*/*/*/*/*/*/*/")
 

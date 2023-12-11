@@ -8,7 +8,8 @@ import SkillsList from '../../freelancer/AllSelectionData/SkillsList';
 
 const EditJobSkillsPopup = ({closeJobSkills,project}) => {
 
-    const accessToken = useSelector(state => state.login.accessToken); 
+    // const accessToken = useSelector(state => state.login.accessToken); 
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
   
     // const [jobskills, setJobSkills] = useState(project.skills_required);
     const [jobskills, setJobSkills] = useState(() => {

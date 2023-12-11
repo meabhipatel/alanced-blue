@@ -11,7 +11,8 @@ const EditFreelancerProjectsPopup = ({closeEditFreeProject,project}) => {
 
     
     const id = project.project_id
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const [title, setTitle] = useState(project.project_title || '');
     const [category, setCategory] = useState(project.category || '');
     const [projectLink, setProjectLink] = useState(project.project_link || '');

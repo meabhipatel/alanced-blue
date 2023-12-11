@@ -14,7 +14,8 @@ const AddJobPost = () => {
     const [addProject, setAddProject] = useState('');
     
 
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const dispatch = useDispatch();
 
     const [skills, setSkills] = useState([]);

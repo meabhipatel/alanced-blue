@@ -19,7 +19,9 @@ import experiences from '../../components/images/experience.png'
 
 const SavedJobs = () => {
 
-    const accessToken = useSelector(state => state.login.accessToken);  
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
+
+    // const accessToken = useSelector(state => state.login.accessToken);  
     // const initialSavedJobs = useSelector(state => state.freelancer.viewallsavedjob);
     // const [savedJobs, setSavedJobs] = useState(initialSavedJobs);
     

@@ -19,7 +19,8 @@ const ViewJobPost = () => {
   const [bidcount,setBidCount] = useState(0);
   const [invitescount,setInvitesCount] = useState(0);
   const id = project.id
-  const accessToken = useSelector(state => state.login.accessToken);
+  // const accessToken = useSelector(state => state.login.accessToken);
+  const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
 
 
   const [viewhirerProjectcount, setViewhirerProjectCount] = useState(0);

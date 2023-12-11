@@ -18,7 +18,8 @@ import experiences from '../../components/images/experience.png'
 const ViewAllJobPost = () => {
     
    const viewhirerselfproject = useSelector(state => state.hirer.viewhirerselfproject)
-   const accessToken = useSelector(state => state.login.accessToken); 
+  //  const accessToken = useSelector(state => state.login.accessToken); 
+  const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
    const dispatch = useDispatch();
    const id = viewhirerselfproject && viewhirerselfproject.id ? viewhirerselfproject.id : '';
    const [currentPage, setCurrentPage] = useState(1);

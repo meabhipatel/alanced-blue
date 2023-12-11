@@ -36,7 +36,8 @@ function ProjectList() {
   const category = searchParams.get('category');
   console.log(category,"category")
   // const viewallprojects = useSelector(state => state.freelancer.viewallprojects)
-  const accessToken = useSelector(state => state.login.accessToken);
+  // const accessToken = useSelector(state => state.login.accessToken);
+  const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
 
   const [categoryFilter, setCategoryFilter] = useState([]);
   const [skillFilter, setSkillFilter] = useState([]);

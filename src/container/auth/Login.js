@@ -179,12 +179,15 @@ const Login = (props) => {
       
             if (loginResponse.data.data && loginResponse.data.data.token.access) {
               const jwtToken = loginResponse.data.data.token.access;
+              const logindata = loginResponse.data.data.login_data;
+              console.log(logindata,'chklogindataafterlogin')
       
               localStorage.setItem('googleUserName', googleProfile.data.name);
               localStorage.setItem('isLoggedIn', 'true');
               localStorage.setItem('loginMethod', 'google');
               localStorage.setItem('loginType', emailCheckResponse.type);
               localStorage.setItem('jwtToken', jwtToken);
+              localStorage.setItem('logindata', logindata);
       
               // Navigate based on user type
               if (emailCheckResponse.type === 'FREELANCER') {

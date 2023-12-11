@@ -14,7 +14,8 @@ const SelfBidProject = () => {
     const findbid = location.state && location.state.project.id;
     console.log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+",findbid )
     console.log(findbid,"find bid")
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     // const [BidData, setBidData ] = useState(null)
     const BidData = useSelector(state => state.freelancer.viewselfproject)
     var description = ''
