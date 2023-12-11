@@ -12,7 +12,7 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
 
     // const accessToken = useSelector(state => state.login.accessToken);
     const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
-    const hirer = useSelector(state => state.login.login_data);
+    const hirer = useSelector(state => state.login.login_data) || JSON.parse(localStorage.getItem('logindata'));
     const [ProjectId, setProjectId] = useState("");
     const [Title, setTitle] = useState("");
     const [HiringBudget, setHiringBudget] = useState("");

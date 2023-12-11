@@ -25,7 +25,7 @@ import axios from 'axios';
 const Messages = () => {
   const audioSrc = {file_example_MP3_5MG}
   const location = useLocation()
-  const logindata = useSelector(state => state.login.login_data)
+  const logindata = useSelector(state => state.login.login_data) || JSON.parse(localStorage.getItem('logindata'));
   const conversationName = location.state && location.state.conversationName
   console.log("conversationName : ",conversationName)
   console.log("logindata :", logindata)

@@ -28,7 +28,7 @@ const navigate = useNavigate();
   const jwtToken = localStorage.getItem('jwtToken')
 //   const loginType = useSelector(state => state.login.type)
   const loginType = useSelector(state => state.login.type) || localStorage.getItem('loginType');
-  const logindata = useSelector(state => state.login.login_data) || localStorage.getItem('logindata');
+  const logindata = useSelector(state => state.login.login_data) || JSON.parse(localStorage.getItem('logindata'));
   console.log(logindata,'chklogindataonnavbar')
   const googleUserName = localStorage.getItem('googleUserName')
   const loginMethod = localStorage.getItem('loginMethod')
@@ -59,7 +59,8 @@ if(loginType == 'FREELANCER'){
   let displayName;
 
   if (loginMethod === 'google') {
-      displayName = googleUserName;
+      // displayName = googleUserName;
+      displayName = logindata.first_Name && logindata.last_Name ?(logindata?.first_Name+" "+logindata?.last_Name ): googleUserName;
   } else if (loginMethod === 'traditional') {
       displayName = logindata?.first_Name+" "+logindata?.last_Name;
   }

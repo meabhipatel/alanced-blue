@@ -19,7 +19,7 @@ const AddBidAmount = () => {
 const location = useLocation();
 const projectData = location.state && location.state.projectData;
 // const logindata = useSelector(state => state.login.login_data);
-const logindata = useSelector(state => state.login.login_data) || localStorage.getItem('logindata');
+const logindata = useSelector(state => state.login.login_data) || JSON.parse(localStorage.getItem('logindata'));
 console.log("project data :",projectData.project.project_owner, logindata.id)
 // const accessToken = useSelector(state => state.login.accessToken); 
 const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
