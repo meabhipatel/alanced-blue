@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { AddFreelancerEmploymentAction } from '../../../redux/Freelancer/FreelancerAction';
 import CategoryList from '../../freelancer/AllSelectionData/CategoryList';
+import DesignationList from '../AllSelectionData/DesignationList';
 
 const AddEmploymentPopup = ({ closeAddEmployment }) => {
 
@@ -64,7 +65,7 @@ const AddEmploymentPopup = ({ closeAddEmployment }) => {
         return `${day}-${month}-${year}`;
     }
 
-    const[cate] = useState(CategoryList)
+    const[cate] = useState(DesignationList)
     console.log(cate,"category")
 
   return (

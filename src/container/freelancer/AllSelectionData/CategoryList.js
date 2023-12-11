@@ -18,7 +18,9 @@ const CategoryList = [
     'Cybersecurity',
     'QA & Testing',
     'Blockchain',
-    'Data Entry'
+    'Data Entry',
+    'Database Administration',
+    'Project Management'
 ];
 
 export default CategoryList;

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { GetFreelancerSelfProfileAction } from '../../../redux/Freelancer/FreelancerAction';
+import DesignationList from '../AllSelectionData/DesignationList';
 
 const EditEmploymentPopup = ({ closeEditEmployment, employment }) => {
 
@@ -67,6 +68,8 @@ const EditEmploymentPopup = ({ closeEditEmployment, employment }) => {
         }
     };
 
+    const[cate] = useState(DesignationList)
+
     return (
         <div className="fixed z-10 inset-0 overflow-y-auto mt-14">
             <div className="fixed inset-0 bg-black opacity-50"></div>
@@ -82,7 +85,13 @@ const EditEmploymentPopup = ({ closeEditEmployment, employment }) => {
                         <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Company Name</h1>
                         <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Ex: Wiz91' onChange={e => setCompanyname(e.target.value)} name='Freelancer_Company_Name' value={companyname}/>
                         <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Designation</h1>
-                        <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Python Developer' onChange={e => setDesignation(e.target.value)} name='Company_Designation' value={designation}/>
+                        {/* <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Python Developer' onChange={e => setDesignation(e.target.value)} name='Company_Designation' value={designation}/> */}
+                        <select onChange={e => setDesignation(e.target.value)} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white' name='Company_Designation' value={designation}>
+                    <option disabled selected value="">Select a Role</option>
+                    {cate.map((cat, index) => (
+                        <option value={cat}>{cat}</option>
+                    ))}
+                </select>
                         <div className="flex items-center justify-between">
                             <div className="flex-1 mr-2">
                                 <p className="font-cardo text-[18px] text-[#031136] font-normal text-left opacity-50">From</p>
