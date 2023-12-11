@@ -19,7 +19,8 @@ const location = useLocation();
 const projectData = location.state && location.state.projectData;
 // const logindata = useSelector(state => state.login.login_data);
 // const accessToken = useSelector(state => state.login.accessToken); 
-const logindata = useSelector(state => state.login.login_data) || localStorage.getItem('logindata');
+const logindata = useSelector(state => state.login.login_data) || JSON.parse(localStorage.getItem('logindata'));
+console.log(logindata,"Login data on send praposal page")
 const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
 const addbid = useSelector(state => state.freelancer.addbid)
 const [addBid, setAddBid] = useState('');

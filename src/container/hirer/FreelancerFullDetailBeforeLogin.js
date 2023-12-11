@@ -21,7 +21,7 @@ const FreelancerFullDetailBeforeLogin = () => {
     const freelancer = location.state && location.state.free;
     // const hirer = useSelector(state => state.login.login_data); // 20 @
     // const loginData = useSelector(state => state.login.login_data);
-    const loginData = useSelector(state => state.login.login_data) || localStorage.getItem('logindata');
+    const loginData = useSelector(state => state.login.login_data) || JSON.parse(localStorage.getItem('logindata'));
     const hirer = loginData !== undefined && loginData !== null ? loginData : "";
   
     console.log(freelancer,"freelancer_detail")

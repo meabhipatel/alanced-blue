@@ -26,7 +26,7 @@ import Bag from '../../components/images/experience.png'
 
 const HirerAfterLogin = () => {
     // const logindata = useSelector(state => state.login.login_data);  
-    const logindata = useSelector(state => state.login.login_data) || localStorage.getItem('logindata');
+    const logindata = useSelector(state => state.login.login_data) || JSON.parse(localStorage.getItem('logindata'));
     const googleUserName = localStorage.getItem('googleUserName')
     const loginMethod = localStorage.getItem('loginMethod')
     const [isFreeHiringOpen, setIsFreeHiringOpen] = useState({});
@@ -195,7 +195,8 @@ const HirerAfterLogin = () => {
     let displayName;
   
     if (loginMethod === 'google') {
-        displayName = googleUserName;
+        // displayName = googleUserName;
+        displayName = logindata.first_Name && logindata.last_Name ?(logindata?.first_Name+" "+logindata?.last_Name ): googleUserName;
     } else if (loginMethod === 'traditional') {
         displayName = logindata?.first_Name +" " +logindata?.last_Name;
     }

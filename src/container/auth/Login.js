@@ -187,7 +187,7 @@ const Login = (props) => {
               localStorage.setItem('loginMethod', 'google');
               localStorage.setItem('loginType', emailCheckResponse.type);
               localStorage.setItem('jwtToken', jwtToken);
-              localStorage.setItem('logindata', logindata);
+              localStorage.setItem('logindata', JSON.stringify(logindata));
       
               // Navigate based on user type
               if (emailCheckResponse.type === 'FREELANCER') {

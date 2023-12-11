@@ -15,7 +15,7 @@ const AddHiringRequestPopup = ({closeHiring,bid}) => {
 
     // const accessToken = useSelector(state => state.login.accessToken);
     const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
-    const hirer = useSelector(state => state.login.login_data);
+    const hirer = useSelector(state => state.login.login_data) || JSON.parse(localStorage.getItem('logindata'));
     const Protitle= bid.project.title
     const [Title, setTitle] = useState(Protitle);
     const [HiringBudget, setHiringBudget] = useState("");
