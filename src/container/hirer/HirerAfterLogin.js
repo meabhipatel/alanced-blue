@@ -25,7 +25,8 @@ import Bag from '../../components/images/experience.png'
 
 
 const HirerAfterLogin = () => {
-    const logindata = useSelector(state => state.login.login_data);  
+    // const logindata = useSelector(state => state.login.login_data);  
+    const logindata = useSelector(state => state.login.login_data) || localStorage.getItem('logindata');
     const googleUserName = localStorage.getItem('googleUserName')
     const loginMethod = localStorage.getItem('loginMethod')
     const [isFreeHiringOpen, setIsFreeHiringOpen] = useState({});

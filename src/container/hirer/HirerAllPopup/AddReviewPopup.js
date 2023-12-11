@@ -6,7 +6,8 @@ import { toast } from 'react-toastify';
 
 const AddReviewPopup = ({closeReview,contract}) => {
 
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const proid =contract.project_id
     const [ProjectId, setProjectId] = useState(proid);
     const [review, setReview] = useState("");

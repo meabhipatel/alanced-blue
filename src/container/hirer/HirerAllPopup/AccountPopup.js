@@ -7,7 +7,8 @@ import { HirerUpdateAction, GetHirerSelfProfileAction } from '../../../redux/Hir
 const HirerAccountPopup = ({ isAvailable,setIsAvailable,handleAccountClose }) => {
 
     const dispatch = useDispatch()
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const hirerselfprofile = useSelector(state => state.hirer.hirerselfprofile)
     
     var hirerData = useState(null)

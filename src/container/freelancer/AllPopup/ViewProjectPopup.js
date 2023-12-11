@@ -30,7 +30,8 @@ function ViewProjectPopup() {
   const projectData = { project };
 //   const dispatch = useDispatch();
 const navigate = useNavigate();
-  const accessToken = useSelector(state => state.login.accessToken);  
+const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
+  // const accessToken = useSelector(state => state.login.accessToken);  
 //   const freelancerselfbid = useSelector(state => state.freelancer.freelancerselfbid)
 //   console.log(freelancerselfbid,"/*/*/*/*/*/*/*/*/*/*/*/*/*/*/")
 const [BidCount,setBidCount]=useState(0)

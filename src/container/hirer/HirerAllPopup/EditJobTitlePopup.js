@@ -8,7 +8,8 @@ import { toast } from 'react-toastify';
 
 const EditJobTitlePopup = ({closeJobTitle,project}) => {
 
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const [jobTitle, setJobTitle] = useState(project.title);
     const dispatch = useDispatch();
     const id = project.id;

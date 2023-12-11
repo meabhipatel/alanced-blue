@@ -18,7 +18,8 @@ import Bag from '../../components/images/experience.png'
 
 const MyProposals = () => {
 
-const accessToken = useSelector(state => state.login.accessToken); 
+// const accessToken = useSelector(state => state.login.accessToken); 
+const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
 const freelancerselfbid = useSelector(state => state.freelancer.freelancerselfbid)
 // const freelancerhiringreq = useSelector(state => state.freelancer.freelancerhiringreq)
 const bidCount = freelancerselfbid?.length || 0;

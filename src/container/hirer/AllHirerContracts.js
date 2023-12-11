@@ -18,7 +18,8 @@ import contractimg from '../../components/images/Frame.png'
 
 const AllHirerContracts = () => {
 
-    const accessToken = useSelector(state => state.login.accessToken); 
+    // const accessToken = useSelector(state => state.login.accessToken); 
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [searchQuery, setSearchQuery] = useState('');

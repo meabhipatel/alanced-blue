@@ -23,11 +23,13 @@ const Navbar = () => {
 
 const navigate = useNavigate();
   const accessToken = localStorage.getItem('accessToken')
-  const AccessToken = useSelector(state => state.login.accessToken);
+  const AccessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
+  // const AccessToken = useSelector(state => state.login.accessToken);
   const jwtToken = localStorage.getItem('jwtToken')
 //   const loginType = useSelector(state => state.login.type)
   const loginType = useSelector(state => state.login.type) || localStorage.getItem('loginType');
-  const logindata = useSelector(state => state.login.login_data)
+  const logindata = useSelector(state => state.login.login_data) || localStorage.getItem('logindata');
+  console.log(logindata,'chklogindataonnavbar')
   const googleUserName = localStorage.getItem('googleUserName')
   const loginMethod = localStorage.getItem('loginMethod')
   const dispatch = useDispatch();
@@ -103,6 +105,7 @@ if(loginType == 'FREELANCER'){
     localStorage.removeItem('loginMethod')
     localStorage.removeItem('loginType')
     localStorage.removeItem('jwtToken')
+    localStorage.removeItem('logindata')
 
     dispatch(LogoutAction())
 }

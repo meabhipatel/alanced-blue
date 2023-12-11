@@ -14,7 +14,8 @@ import { useEffect } from 'react'
 import Bag from '../../components/images/experience.png'
 
 const AllInvitations = () => {
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const [viewallinvites, setViewallinvites] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);

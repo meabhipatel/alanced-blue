@@ -25,7 +25,8 @@ const EditEmploymentPopup = ({ closeEditEmployment, employment }) => {
     const [isCurrentlyWorking, setIsCurrentlyWorking] = useState(!employment.Company_Leaving_date);
 
     const id = employment.emp_id
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const [companyname, setCompanyname] = useState(employment.Freelancer_Company_Name || '');
     const [designation, setDesignation] = useState(employment.Company_Designation || '');
     const [joindate, setJoindate] = useState(

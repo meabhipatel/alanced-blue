@@ -32,7 +32,8 @@ import axios from 'axios'
 
 const HirerSelfProfile = () => {
 
-  const accessToken = useSelector(state => state.login.accessToken);
+  // const accessToken = useSelector(state => state.login.accessToken);
+  const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
   console.log("hirer self profile access token", accessToken)  
   const hirerselfprofile = useSelector(state => state.hirerImage.hirerimageprofile)
   var hirerData = useState(null)

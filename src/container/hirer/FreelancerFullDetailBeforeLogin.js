@@ -20,13 +20,15 @@ const FreelancerFullDetailBeforeLogin = () => {
     const location = useLocation();
     const freelancer = location.state && location.state.free;
     // const hirer = useSelector(state => state.login.login_data); // 20 @
-    const loginData = useSelector(state => state.login.login_data);
+    // const loginData = useSelector(state => state.login.login_data);
+    const loginData = useSelector(state => state.login.login_data) || localStorage.getItem('logindata');
     const hirer = loginData !== undefined && loginData !== null ? loginData : "";
   
     console.log(freelancer,"freelancer_detail")
   
     const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
-    const accessToken = useSelector(state => state.login.accessToken);  
+    // const accessToken = useSelector(state => state.login.accessToken);  
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const [freelancerproject, setfreelancerproject] = useState([]);
     const id = freelancer.id
     const [selectedProjects, setSelectedProjects] = useState(null);

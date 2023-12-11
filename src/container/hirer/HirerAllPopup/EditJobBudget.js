@@ -8,7 +8,8 @@ const EditJobBudget = ({closeJobBudget,project}) => {
 
     const initialRate = project.Project_Rate === "Hourly" ? "Hourly" : "Fixed";
     const [selectedOption, setSelectedOption] = useState(initialRate);
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const [jobrate, setJobRate] = useState(initialRate);
     const [jobfixedbudget, setJobFixedBudget] = useState(project.Project_Fixed_Budget);
     const [jobminhr, setJobMinHr] = useState(project.Project_Min_Hourly_Rate);

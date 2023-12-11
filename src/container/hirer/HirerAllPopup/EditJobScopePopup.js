@@ -19,7 +19,8 @@ const EditJobScopePopup = ({closeJobScope,project}) => {
         return `${day}-${month}-${year}`;
     }
 
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const [jobexplevel, setJobexplevel] = useState(project.experience_level);
     const [jobDeadline, setJobDeadline] = useState(formatToYYYYMMDD(project.deadline));
     const dispatch = useDispatch();

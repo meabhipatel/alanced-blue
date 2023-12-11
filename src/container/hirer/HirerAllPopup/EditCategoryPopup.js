@@ -10,7 +10,8 @@ import { toast } from 'react-toastify';
 
 const EditCategoryPopup = ({closeJobCategory,project}) => {
 
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const [jobCategory, setJobCategory] = useState(project.category);
     const id = project.id;
 

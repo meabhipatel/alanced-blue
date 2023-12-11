@@ -5,7 +5,8 @@ import { GetFreelancerSelfProfileAction, UpdateFreelancerProfileAction } from '.
 
 const EditEducationPopup = ({ closeEditEducation }) => {
 
-  const accessToken = useSelector(state => state.login.accessToken);  
+//   const accessToken = useSelector(state => state.login.accessToken); 
+const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken'); 
 
   const [qualification, setqualification] = useState(""); 
   const dispatch = useDispatch();

@@ -11,7 +11,8 @@ import { toast } from 'react-toastify';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 const ViewHiringDetail = () => {
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const location = useLocation();
     const findhiring = location.state && location.state.hire;
     const hire_id = findhiring && findhiring.hire_id ? findhiring.hire_id :"";

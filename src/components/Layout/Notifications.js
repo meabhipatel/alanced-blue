@@ -14,8 +14,10 @@ const Notifications = () => {
 
   const [clientnotifications, setClientNotifications] = useState([]);
   const [freenotifications, setFreeNotifications] = useState([]);
-  const token = useSelector(state => state.login.accessToken)
-  const loginType = useSelector(state => state.login.type)
+//   const token = useSelector(state => state.login.accessToken)
+const token = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
+//   const loginType = useSelector(state => state.login.type)
+const loginType = useSelector(state => state.login.type) || localStorage.getItem('loginType');
   const navigate = useNavigate();
 
   const fetchClientNotifications = async () => {

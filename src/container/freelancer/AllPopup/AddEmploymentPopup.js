@@ -9,7 +9,8 @@ const AddEmploymentPopup = ({ closeAddEmployment }) => {
     const [AddEmployment, setAddEmployment] = useState('');
     
 
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const addemp = useSelector(state => state.freelancer.addemp);
     const dispatch = useDispatch();
 
