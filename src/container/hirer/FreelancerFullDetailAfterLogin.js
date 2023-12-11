@@ -21,13 +21,18 @@ const FreelancerFullDetailAfterLogin = () => {
   const location = useLocation();
   const freelancer = location.state && location.state.free;
   // const hirer = useSelector(state => state.login.login_data); // 20 @
-  const loginData = useSelector(state => state.login.login_data);
+  // const loginData = useSelector(state => state.login.login_data);
+  const loginData = useSelector(state => state.login.login_data) || localStorage.getItem('logindata');
+
+
+
   const hirer = loginData !== undefined && loginData !== null ? loginData : "";
 
   console.log(freelancer,"freelancer_detail")
 
   const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
-  const accessToken = useSelector(state => state.login.accessToken);  
+  // const accessToken = useSelector(state => state.login.accessToken);  
+  const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
   const [freelancerproject, setfreelancerproject] = useState([]);
   const id = freelancer.id
   const [selectedProjects, setSelectedProjects] = useState(null);
@@ -58,7 +63,7 @@ useEffect(() => {
   const queryString = queryParameters.join('&');
 
   axios
-    .get(`http://51.21.1.122:8000/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`)
+    .get(`http://13.233.123.209:8000/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`)
     .then((response) => {
       setfreelancerproject(response.data.results); 
       setProjectCount(response.data.count);
@@ -82,7 +87,7 @@ const next = () => {
 
 useEffect(() => {
   if(id) { 
-      axios.get(`http://51.21.1.122:8000/freelance/View-all/Review/${id}`)
+      axios.get(`http://13.233.123.209:8000/freelance/View-all/Review/${id}`)
           .then(response => {
               if (response.data.status === 200) {
                   setReviews(response.data.data);
@@ -130,7 +135,7 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 3);
 
   useEffect(() => {
     if(id) { 
-        axios.get(`http://51.21.1.122:8000/freelance/View-all/Freelancer/Employment/${id}`)
+        axios.get(`http://13.233.123.209:8000/freelance/View-all/Freelancer/Employment/${id}`)
             .then(response => {
                 if (response.data.status === 200) {
                     setfreelanceremployment(response.data.data);
@@ -166,7 +171,7 @@ const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 2);
     <div className=' flex flex-row'>
       <div className=' basis-3/12 pl-14'>
       <div className="relative w-24 h-24">
-            <img src={"http://51.21.1.122:8000"+freelancer.images_logo} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
+            <img src={"http://13.233.123.209:8000"+freelancer.images_logo} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
             <div class="absolute bottom-3 right-0.5 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
         </div>
         <div className='text-left pl-2 mt-10'>
@@ -258,7 +263,7 @@ const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 2);
         <div className='w-1/3 px-2 cursor-pointer' key={index} onClick={() => openPortfolio(pro)}>  
             <div className='w-full h-[165px] mt-4 border border-gray-100 overflow-hidden'>
                 <img 
-                    src={"http://51.21.1.122:8000"+pro.images_logo} 
+                    src={"http://13.233.123.209:8000"+pro.images_logo} 
                     alt="" 
                     style={{
                         maxWidth: '100%',

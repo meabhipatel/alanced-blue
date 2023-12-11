@@ -13,7 +13,8 @@ const AddHiringRequestPopup = ({closeHiring,bid}) => {
         event.preventDefault();
       };
 
-    const accessToken = useSelector(state => state.login.accessToken);
+    // const accessToken = useSelector(state => state.login.accessToken);
+    const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const hirer = useSelector(state => state.login.login_data);
     const Protitle= bid.project.title
     const [Title, setTitle] = useState(Protitle);
@@ -28,7 +29,7 @@ const AddHiringRequestPopup = ({closeHiring,bid}) => {
         return `${names[0]}__${names[1]}`
       }
       
-      const { readyState, sendJsonMessage } = useWebSocket(`ws://51.21.1.122:8000/${createConversationName()}`, {
+      const { readyState, sendJsonMessage } = useWebSocket(`ws://13.233.123.209:8000/${createConversationName()}`, {
         onOpen: () => {
           console.log("Connected !")
         },
@@ -67,7 +68,7 @@ const AddHiringRequestPopup = ({closeHiring,bid}) => {
         }
 
         try {
-            const response = await axios.post(`http://51.21.1.122:8000/freelance/hire/${id}`, {
+            const response = await axios.post(`http://13.233.123.209:8000/freelance/hire/${id}`, {
                 project:proid,
                 project_title: Title,
                 hiring_budget:HiringBudget,
