@@ -47,7 +47,7 @@ const Messages = () => {
   if(conversationName){
     const names = [conversationName.hirer, conversationName.freelancer].sort();
     setConversation(`${names[0]}__${names[1]}`)
-    // setConvouser(conversationName.freelancer)
+    setConvouser(conversationName.freelancerDetails)
     console.log("names -------- ",names,conversation)
   }
 }, [conversationName])

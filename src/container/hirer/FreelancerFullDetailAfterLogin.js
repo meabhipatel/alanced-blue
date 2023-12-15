@@ -51,6 +51,7 @@ const FreelancerFullDetailAfterLogin = () => {
   const conversationName = hirer !== null && hirer !== undefined ? {
     "hirer": hirer.id,
     "freelancer": id,
+    "freelancerDetails" : freelancer
   } : ''
 console.log("conversation name on FreelancerFullDetailAfterLogin : ",conversationName)
 useEffect(() => {
