@@ -73,6 +73,7 @@ const Bidnext = () => {
 
 
 const [viewallhiring, setViewAllHiring] = useState([]);
+console.log("viewallhiring on MyProposals :", viewallhiring)
 //   const userCategory = logindata?.category
 
   useEffect(() => {

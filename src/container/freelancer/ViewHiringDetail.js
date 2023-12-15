@@ -14,6 +14,8 @@ const ViewHiringDetail = () => {
     // const accessToken = useSelector(state => state.login.accessToken);
     const accessToken = useSelector(state => state.login.accessToken) || localStorage.getItem('jwtToken');
     const location = useLocation();
+    const logindata = useSelector(state => state.login.login_data) || JSON.parse(localStorage.getItem('logindata'));
+    console.log(logindata.id)
     const findhiring = location.state && location.state.hire;
     const hire_id = findhiring && findhiring.hire_id ? findhiring.hire_id :"";
     console.log(hire_id,"chkhireid")
@@ -126,7 +128,7 @@ const ViewHiringDetail = () => {
             sendJsonMessage({
               type: "chat_message",
               message: "invitation accepted by : "+ findhiring.hired_freelancer_name,
-              name : findhiring.freelancer_id
+              name : logindata.id
             })
           }
           
@@ -134,7 +136,7 @@ const ViewHiringDetail = () => {
             sendJsonMessage({
               type: "chat_message",
               message: "invitation rejected by : "+ findhiring.hired_freelancer_name,
-              name : findhiring.freelancer_id
+              name : logindata.id
             })
           }
           console.log("data on ViewHiringDetail : ",findhiring.hire_id, findhiring.freelancer_id, findhiring)
