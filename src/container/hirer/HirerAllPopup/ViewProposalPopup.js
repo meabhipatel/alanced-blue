@@ -29,6 +29,7 @@ const ViewProposalPopup = ({ closeViewProposal }) => {
       setConversationName({
         "hirer": project.project_owner_id,
         "freelancer": bid.freelancer_id,
+        "freelancerDetails": bid
       })
     }
   }, [project, bid]);
