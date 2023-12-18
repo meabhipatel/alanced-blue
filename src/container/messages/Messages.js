@@ -474,12 +474,12 @@ console.log("conversations",conversations)
           <span className="text-[20px] font-cardo text-[#031136]">{convouser.first_Name} {convouser.last_Name}</span>
           </div>
           <span className="text-[12px] text-[#8A8A8A] float-left ml-5">
-            3:06 PM EDTAlgorithm and Software Developer
+            {/* 3:06 PM EDTAlgorithm and Software Developer */}
             {convouser.category}
             </span>
           </div>
           <div className="flex gap-2 items-center float-right">
-            <img className="h-[19px] w-[19px]" src={phone}/>
+            {/* <img className="h-[19px] w-[19px]" src={phone}/> */}
             <img className="h-[25px] w-[25px]" src={iicon}/>
           </div>
         </div>

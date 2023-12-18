@@ -91,6 +91,7 @@ const ViewAllProposals = () => {
 
 const [viewbids, setViewBids] = useState([]);
 
+console.log("viewbids on ViewAllProposals : ",viewbids)
   useEffect(() => {
     const queryParameters = [];
   
@@ -337,7 +338,8 @@ const handleClick = (event, index) => {
                               <div class="flex items-center space-x-4">
                               <Link to="/messages" state={{
                                   conversationName: {"hirer": project.project_owner_id,
-                                  "freelancer": bid.freelancer_id,},
+                                  "freelancer": bid.freelancer_id,
+                                "freelancerDetails": bid},
                                   // Other data you may want to pass
                                 }} 
                               // to={{
