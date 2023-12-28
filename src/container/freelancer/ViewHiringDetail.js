@@ -34,7 +34,7 @@ const ViewHiringDetail = () => {
 
     const handleAcceptProject = async () => {
         try {
-            const response = await axios.put(`http://13.233.123.209:8000/freelance/projects/accept/${hire_id}`, {}, {
+            const response = await axios.put(`https://www.api.alanced.com/freelance/projects/accept/${hire_id}`, {}, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }
@@ -52,7 +52,7 @@ const ViewHiringDetail = () => {
 
     const handleRejectProject = async () => {
         try {
-            const response = await axios.put(`http://13.233.123.209:8000/freelance/projects/reject/${hire_id}`, {}, {
+            const response = await axios.put(`https://www.api.alanced.com/freelance/projects/reject/${hire_id}`, {}, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }
@@ -97,11 +97,11 @@ const ViewHiringDetail = () => {
         }
         
         function createConversationName(){
-            const names = [findhiring.hire_id, findhiring.freelancer_id].sort()
+            const names = [findhiring.hire_by_id, findhiring.freelancer_id].sort()
             return `${names[0]}__${names[1]}`
           }
           
-          const { readyState, sendJsonMessage } = useWebSocket(`ws://13.233.123.209:8000/${createConversationName()}`, {
+          const { readyState, sendJsonMessage } = useWebSocket(`ws://www.api.alanced.com:8001/${createConversationName()}`, {
             onOpen: () => {
               console.log("Connected !")
             },
