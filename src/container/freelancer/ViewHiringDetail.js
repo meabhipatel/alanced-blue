@@ -97,7 +97,7 @@ const ViewHiringDetail = () => {
         }
         
         function createConversationName(){
-            const names = [findhiring.hire_by_id, findhiring.freelancer_id].sort()
+            const names = [findhiring.hired_by_id, findhiring.freelancer_id].sort()
             return `${names[0]}__${names[1]}`
           }
           
@@ -139,7 +139,7 @@ const ViewHiringDetail = () => {
               name : logindata.id
             })
           }
-          console.log("data on ViewHiringDetail : ",findhiring.hire_id, findhiring.freelancer_id, findhiring)
+          console.log("data on ViewHiringDetail : ",findhiring.hired_by_id, findhiring.freelancer_id, findhiring)
       return (
         <>
         <Navbar/>
