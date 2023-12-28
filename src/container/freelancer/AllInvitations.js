@@ -28,7 +28,7 @@ const AllInvitations = () => {
       const queryString = queryParameters.join('&');
   
       axios
-        .get(`http://13.233.123.209:8000/freelance/View-all/hire-request?${queryString}`,{
+        .get(`https://www.api.alanced.com/freelance/View-all/hire-request?${queryString}`,{
           headers: {
             "Authorization":`Bearer ${accessToken}`
           }
