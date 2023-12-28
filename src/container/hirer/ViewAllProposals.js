@@ -104,7 +104,7 @@ console.log("viewbids on ViewAllProposals : ",viewbids)
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`http://13.233.123.209:8000/freelance/View/bids/${id}?${queryString}`)
+      .get(`https://www.api.alanced.com/freelance/View/bids/${id}?${queryString}`)
       .then((response) => {
         setViewBids(response.data.results); 
         setTotalPages(Math.ceil(response.data.count / 8));
@@ -149,7 +149,7 @@ const [viewinvites, setViewinvites] = useState([]);
   useEffect(() => {
     
     axios
-      .get(`http://13.233.123.209:8000/freelance/View-all/invited-freelancers`,{
+      .get(`https://www.api.alanced.com/freelance/View-all/invited-freelancers`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }
@@ -327,7 +327,7 @@ const handleClick = (event, index) => {
                               <div class="flex">
                             <div class="flex-[10%] p-4">
                             <div className="relative w-24 h-24 mx-auto">
-                                              <img src={"http://13.233.123.209:8000"+bid.freelancer_profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
+                                              <img src={"https://www.api.alanced.com"+bid.freelancer_profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
                                               <div class="absolute bottom-2 right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                                           </div>
                             </div>

@@ -62,7 +62,7 @@ useEffect(() => {
   const queryString = queryParameters.join('&');
 
   axios
-    .get(`http://13.233.123.209:8000/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`)
+    .get(`https://www.api.alanced.com/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`)
     .then((response) => {
       setfreelancerproject(response.data.results); 
       setProjectCount(response.data.count);
@@ -86,7 +86,7 @@ const next = () => {
 
 useEffect(() => {
   if(id) { 
-      axios.get(`http://13.233.123.209:8000/freelance/View-all/Review/${id}`)
+      axios.get(`https://www.api.alanced.com/freelance/View-all/Review/${id}`)
           .then(response => {
               if (response.data.status === 200) {
                   setReviews(response.data.data);
@@ -134,7 +134,7 @@ const visibleReviews = reviews.slice(startIdx, startIdx + 3);
 
   useEffect(() => {
     if(id) { 
-        axios.get(`http://13.233.123.209:8000/freelance/View-all/Freelancer/Employment/${id}`)
+        axios.get(`https://www.api.alanced.com/freelance/View-all/Freelancer/Employment/${id}`)
             .then(response => {
                 if (response.data.status === 200) {
                     setfreelanceremployment(response.data.data);
@@ -170,7 +170,7 @@ const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 2);
     <div className=' flex flex-row'>
       <div className=' basis-3/12 pl-14'>
       <div className="relative w-24 h-24">
-            <img src={"http://13.233.123.209:8000"+freelancer.images_logo} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
+            <img src={"https://www.api.alanced.com"+freelancer.images_logo} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
             <div class="absolute bottom-3 right-0.5 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
         </div>
         <div className='text-left pl-2 mt-10'>
@@ -262,7 +262,7 @@ const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 2);
         <div className='w-1/3 px-2 cursor-pointer' key={index} onClick={() => openPortfolio(pro)}>  
             <div className='w-full h-[165px] mt-4 border border-gray-100 overflow-hidden'>
                 <img 
-                    src={"http://13.233.123.209:8000"+pro.images_logo} 
+                    src={"https://www.api.alanced.com"+pro.images_logo} 
                     alt="" 
                     style={{
                         maxWidth: '100%',

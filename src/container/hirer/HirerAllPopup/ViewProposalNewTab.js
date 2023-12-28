@@ -21,7 +21,7 @@ const ViewProposalNewTab = () => {
     <div className="flex mt-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30">
   <div className="flex-[20%] p-6">
   <div className="relative w-24 h-24">
-                    <img src={"http://13.233.123.209:8000/"+bidData.bid.freelancer_profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
+                    <img src={"https://www.api.alanced.com/"+bidData.bid.freelancer_profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
                     <div class="absolute bottom-3 right-0.5 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                 </div>
   </div>

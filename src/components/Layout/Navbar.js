@@ -117,7 +117,7 @@ const [isNotificationsDropdownVisible, setIsNotificationsDropdownVisible] = useS
 
 const fetchClientNotifications = async () => {
   try {
-      const response = await axios.get('http://13.233.123.209:8000/freelance/view/client-notifications', {
+      const response = await axios.get('https://www.api.alanced.com/freelance/view/client-notifications', {
           headers: {
               'Authorization': `Bearer ${AccessToken}`
           }
@@ -141,7 +141,7 @@ useEffect(() => {
 
 const markAsReadClient = async (notifId) => {
   try {
-      const response = await axios.put(`http://13.233.123.209:8000/freelance/read/client-notification/${notifId}`, {}, {
+      const response = await axios.put(`https://www.api.alanced.com/freelance/read/client-notification/${notifId}`, {}, {
           headers: {
               'Authorization': `Bearer ${AccessToken}`
           }
@@ -192,7 +192,7 @@ const unreadclientCount = clientnotifications.filter(notif => !notif.is_read).le
 
 const deleteClientNotification = async (notifId) => {
   try {
-      const response = await axios.delete(`http://13.233.123.209:8000/freelance/delete/client-notification/${notifId}`, {
+      const response = await axios.delete(`https://www.api.alanced.com/freelance/delete/client-notification/${notifId}`, {
           headers: {
               'Authorization': `Bearer ${AccessToken}`
           }
@@ -210,7 +210,7 @@ const deleteClientNotification = async (notifId) => {
 
 const fetchFreeNotifications = async () => {
     try {
-        const response = await axios.get('http://13.233.123.209:8000/freelance/view/freelancer-notifications', {
+        const response = await axios.get('https://www.api.alanced.com/freelance/view/freelancer-notifications', {
             headers: {
                 'Authorization': `Bearer ${AccessToken}`
             }
@@ -234,7 +234,7 @@ const fetchFreeNotifications = async () => {
   
   const markAsReadFree = async (notifId) => {
     try {
-        const response = await axios.put(`http://13.233.123.209:8000/freelance/read/freelancer-notification/${notifId}`, {}, {
+        const response = await axios.put(`https://www.api.alanced.com/freelance/read/freelancer-notification/${notifId}`, {}, {
             headers: {
                 'Authorization': `Bearer ${AccessToken}`
             }
@@ -252,7 +252,7 @@ const fetchFreeNotifications = async () => {
   
   const deleteFreeNotification = async (notifId) => {
     try {
-        const response = await axios.delete(`http://13.233.123.209:8000/freelance/delete/freelancer-notification/${notifId}`, {
+        const response = await axios.delete(`https://www.api.alanced.com/freelance/delete/freelancer-notification/${notifId}`, {
             headers: {
                 'Authorization': `Bearer ${AccessToken}`
             }
@@ -557,7 +557,7 @@ const handleClientNotificationClick = (notif) => {
       <div className='relative inline-block' ref={dropdownRef} onMouseEnter={() => {setFindworkDropdown(false); setReportsDropdown(false); setMyJobsDropdown(false);}}>
       {logindata && logindata.images_logo ? (
         <img 
-            src={"http://13.233.123.209:8000" + logindata.images_logo} 
+            src={"https://www.api.alanced.com" + logindata.images_logo} 
             alt="Profile" 
             className="h-10 w-10 rounded-full cursor-pointer" 
             onClick={() => setDropdownVisible(!dropdownVisible)}
@@ -575,7 +575,7 @@ const handleClientNotificationClick = (notif) => {
             <div className="py-1">
                       {logindata && logindata.images_logo ? (
         <img 
-            src={"http://13.233.123.209:8000" + logindata.images_logo} 
+            src={"https://www.api.alanced.com" + logindata.images_logo} 
             alt="Profile" 
             className="h-20 w-20 rounded-full cursor-pointer mx-auto my-5 border border-gray-200 p-0.5" 
             onClick={() => setDropdownVisible(!dropdownVisible)}

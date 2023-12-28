@@ -130,7 +130,7 @@ const HirerAfterLogin = () => {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`http://13.233.123.209:8000/account/freelancer/profile/view-all/?${queryString}`)
+      .get(`https://www.api.alanced.com/account/freelancer/profile/view-all/?${queryString}`)
       .then((response) => {
         setViewFreelancer(response.data.results); 
         setTotalPages(Math.ceil(response.data.count / 8));
@@ -545,7 +545,7 @@ const next = () => {
                 
       <div className='px-4 md:w-[26vw] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4' key={index}>
         <div className="flex items-center">
-            <Avatar src={"http://13.233.123.209:8000"+free.images_logo} alt="" variant="rounded" className="mr-4 h-24 w-24" />
+            <Avatar src={"https://www.api.alanced.com"+free.images_logo} alt="" variant="rounded" className="mr-4 h-24 w-24" />
             <div>
             <p className="font-inter text-[#0A142F] text-[18px] font-semibold">{highlightText(free.first_Name + " " + free.last_Name, searchQuery)}</p>
             <p className='font-inter opacity-50 text-[#0A142F] text-[14px]'>{highlightText(free.category, searchQuery)}</p>

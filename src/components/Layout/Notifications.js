@@ -22,7 +22,7 @@ const loginType = useSelector(state => state.login.type) || localStorage.getItem
 
   const fetchClientNotifications = async () => {
     try {
-        const response = await axios.get('http://13.233.123.209:8000/freelance/view/client-notifications', {
+        const response = await axios.get('https://www.api.alanced.com/freelance/view/client-notifications', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -47,7 +47,7 @@ const loginType = useSelector(state => state.login.type) || localStorage.getItem
   
   const markAsReadClient = async (notifId) => {
     try {
-        const response = await axios.put(`http://13.233.123.209:8000/freelance/read/client-notification/${notifId}`, {}, {
+        const response = await axios.put(`https://www.api.alanced.com/freelance/read/client-notification/${notifId}`, {}, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -66,7 +66,7 @@ const loginType = useSelector(state => state.login.type) || localStorage.getItem
   
   const deleteClientNotification = async (notifId) => {
     try {
-        const response = await axios.delete(`http://13.233.123.209:8000/freelance/delete/client-notification/${notifId}`, {
+        const response = await axios.delete(`https://www.api.alanced.com/freelance/delete/client-notification/${notifId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -85,7 +85,7 @@ const loginType = useSelector(state => state.login.type) || localStorage.getItem
 
   const fetchFreeNotifications = async () => {
     try {
-        const response = await axios.get('http://13.233.123.209:8000/freelance/view/freelancer-notifications', {
+        const response = await axios.get('https://www.api.alanced.com/freelance/view/freelancer-notifications', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -110,7 +110,7 @@ const loginType = useSelector(state => state.login.type) || localStorage.getItem
   
   const markAsReadFree = async (notifId) => {
     try {
-        const response = await axios.put(`http://13.233.123.209:8000/freelance/read/freelancer-notification/${notifId}`, {}, {
+        const response = await axios.put(`https://www.api.alanced.com/freelance/read/freelancer-notification/${notifId}`, {}, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -128,7 +128,7 @@ const loginType = useSelector(state => state.login.type) || localStorage.getItem
   
   const deleteFreeNotification = async (notifId) => {
     try {
-        const response = await axios.delete(`http://13.233.123.209:8000/freelance/delete/freelancer-notification/${notifId}`, {
+        const response = await axios.delete(`https://www.api.alanced.com/freelance/delete/freelancer-notification/${notifId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

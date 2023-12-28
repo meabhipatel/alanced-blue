@@ -29,7 +29,7 @@ const [invitesCount, setInvitesCount] = useState(0);
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`http://13.233.123.209:8000/freelance/View-all/invited-freelancers?${queryString}`,{
+      .get(`https://www.api.alanced.com/freelance/View-all/invited-freelancers?${queryString}`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }

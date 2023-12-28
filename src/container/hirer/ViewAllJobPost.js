@@ -51,7 +51,7 @@ const ViewAllJobPost = () => {
         const queryString = queryParameters.join('&');
     
         axios
-          .get(`http://13.233.123.209:8000/freelance/view/hirer-self/Project?${queryString}`,{
+          .get(`https://www.api.alanced.com/freelance/view/hirer-self/Project?${queryString}`,{
             headers: {
                 'Authorization': `Bearer ${accessToken}`
             }
@@ -108,7 +108,7 @@ const [bidsCount, setBidsCount] = useState({});
 
             for (const project of viewhirerProject || []) {
                 try {
-                    const response = await axios.get(`http://13.233.123.209:8000/freelance/View/bids/${project.id}`);
+                    const response = await axios.get(`https://www.api.alanced.com/freelance/View/bids/${project.id}`);
                     if (response.status === 200) {
                         bids[project.id] = response.data.count; 
                     } else {
@@ -135,7 +135,7 @@ const [bidsCount, setBidsCount] = useState({});
 
             for (const project of viewhirerProject || []) {
                 try {
-                    const response = await axios.get(`http://13.233.123.209:8000/freelance/View/project-invitations-count/${project.id}`,{
+                    const response = await axios.get(`https://www.api.alanced.com/freelance/View/project-invitations-count/${project.id}`,{
                       headers: {
                       Authorization: `Bearer ${accessToken}`,
                   },

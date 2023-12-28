@@ -49,7 +49,7 @@ const AllHirerContracts = () => {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`http://13.233.123.209:8000/freelance/View-all/hirer-contracts?${queryString}`,{
+      .get(`https://www.api.alanced.com/freelance/View-all/hirer-contracts?${queryString}`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }

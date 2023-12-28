@@ -24,7 +24,7 @@ const AddReviewPopup = ({closeReview,contract}) => {
         }
 
         try {
-            const response = await axios.post(`http://13.233.123.209:8000/freelance/Add/Review/${id}`, {
+            const response = await axios.post(`https://www.api.alanced.com/freelance/Add/Review/${id}`, {
                 projects:ProjectId,
                 rating:rating,
                 review:review

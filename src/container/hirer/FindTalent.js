@@ -115,7 +115,7 @@ const FindTalent = () => {
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`http://13.233.123.209:8000/account/freelancer/profile/view-all/?${queryString}`)
+      .get(`https://www.api.alanced.com/account/freelancer/profile/view-all/?${queryString}`)
       .then((response) => {
         setViewFreelancer(response.data.results);
         setTotalPages(Math.ceil(response.data.count / 8));
