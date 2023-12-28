@@ -31,7 +31,7 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
       return `${names[0]}__${names[1]}`
     }
     
-    const { readyState, sendJsonMessage } = useWebSocket(`ws://13.233.123.209:8000/${createConversationName()}`, {
+    const { readyState, sendJsonMessage } = useWebSocket(`ws://api.alanced.com:8001/${createConversationName()}`, {
       onOpen: () => {
         console.log("Connected !")
       },
@@ -63,7 +63,7 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
     }
       useEffect(() => {
         axios
-          .get(`http://13.233.123.209:8000/freelance/view-all/hirer-self/Project`,{
+          .get(`https://www.api.alanced.com/freelance/view-all/hirer-self/Project`,{
             headers: {
                 'Authorization': `Bearer ${accessToken}`
             }
@@ -87,7 +87,7 @@ const AddFreeHireRequest = ({closeFreeHiring,free}) => {
         }
 
         try {
-            const response = await axios.post(`http://13.233.123.209:8000/freelance/hire/${id}`, {
+            const response = await axios.post(`https://www.api.alanced.com/freelance/hire/${id}`, {
                 project:ProjectId,
                 project_title: Title,
                 hiring_budget:HiringBudget,

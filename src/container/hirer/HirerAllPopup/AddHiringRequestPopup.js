@@ -29,7 +29,7 @@ const AddHiringRequestPopup = ({closeHiring,bid}) => {
         return `${names[0]}__${names[1]}`
       }
       
-      const { readyState, sendJsonMessage } = useWebSocket(`ws://13.233.123.209:8000/${createConversationName()}`, {
+      const { readyState, sendJsonMessage } = useWebSocket(`ws://api.alanced.com:8001/${createConversationName()}`, {
         onOpen: () => {
           console.log("Connected !")
         },
@@ -68,7 +68,7 @@ const AddHiringRequestPopup = ({closeHiring,bid}) => {
         }
 
         try {
-            const response = await axios.post(`http://13.233.123.209:8000/freelance/hire/${id}`, {
+            const response = await axios.post(`https://www.api.alanced.com/freelance/hire/${id}`, {
                 project:proid,
                 project_title: Title,
                 hiring_budget:HiringBudget,

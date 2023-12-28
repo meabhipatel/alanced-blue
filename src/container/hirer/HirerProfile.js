@@ -160,7 +160,7 @@ console.log("++++++++++++++",first_Name)
     formData.append("images_logo", selectedFile);
     console.log("selected file in hirer :", selectedFile )
     
-    axios.put('http://13.233.123.209:8000/account/hirer/profile/update',formData,{
+    axios.put('https://www.api.alanced.com/account/hirer/profile/update',formData,{
         headers: {
             "Authorization":`Bearer ${accessToken}`
           },first_Name: first_Name
@@ -198,7 +198,7 @@ console.log("++++++++++++++",first_Name)
 
 
       const [showCopyMessage, setShowCopyMessage] = useState(false);
-      const profileLink = "http://13.233.123.209:8000/freelancer/edit-profile"; 
+      const profileLink = "https://www.api.alanced.com/freelancer/edit-profile"; 
   
       const handlePinClick = useCallback(() => {
         navigator.clipboard.writeText(profileLink)
@@ -224,7 +224,7 @@ console.log("++++++++++++++",first_Name)
    <div className='border-b border-gray-200 border-opacity-30 py-8 p-4 mb-4 md:mb-0 relative'>
    <div className="relative w-28 h-28 mx-auto">
     {hirerselfprofile != null ? 
-                    <img  alt="Profile" src={hirerData && hirerData ? "http://13.233.123.209:8000"+hirerData.images_logo : ''} className="rounded-full w-full h-full border border-gray-200" /> : 
+                    <img  alt="Profile" src={hirerData && hirerData ? "https://www.api.alanced.com"+hirerData.images_logo : ''} className="rounded-full w-full h-full border border-gray-200" /> : 
                     <div className='h-full w-full border border-gray-200 rounded-full'><Skeleton className='z-0' height={104} width={104} style={{borderRadius: 100}}/></div>}
                     <div className="absolute top-1 left-2 p-1 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={handleEditClick}>
                         <img src={edit} alt="edit" />

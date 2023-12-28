@@ -182,7 +182,7 @@ const Registration = () => {
                         type: 'HIRER'
                     };
         
-                    const registrationResponse = await axios.post('http://13.233.123.209:8000/account/google-sign-up/', payload);
+                    const registrationResponse = await axios.post('https://www.api.alanced.com/account/google-sign-up/', payload);
                     if (registrationResponse.data && registrationResponse.data.status === 200 && registrationResponse.data.message === "Email already exists") {
                         toast.error("This email already exists");
                     } else {

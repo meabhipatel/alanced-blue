@@ -27,7 +27,7 @@ const ViewJobPost = () => {
   
     useEffect(() => {
       axios
-        .get(`http://13.233.123.209:8000/freelance/view/hirer-self/Project`,{
+        .get(`https://www.api.alanced.com/freelance/view/hirer-self/Project`,{
           headers: {
               'Authorization': `Bearer ${accessToken}`
           }
@@ -43,7 +43,7 @@ const ViewJobPost = () => {
 
   useEffect(() => {
    axios
-    .get(`http://13.233.123.209:8000/freelance/View/bids/${id}`)
+    .get(`https://www.api.alanced.com/freelance/View/bids/${id}`)
       .then((response) => {
         setBidCount(response.data.count);
       })
@@ -55,7 +55,7 @@ const ViewJobPost = () => {
 
   useEffect(() => {
     axios
-     .get(`http://13.233.123.209:8000/freelance/View/project-invitations-count/${id}`,{
+     .get(`https://www.api.alanced.com/freelance/View/project-invitations-count/${id}`,{
       headers: {
       Authorization: `Bearer ${accessToken}`,
   },
