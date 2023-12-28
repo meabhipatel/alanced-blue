@@ -50,7 +50,7 @@ const EditEmploymentPopup = ({ closeEditEmployment, employment }) => {
                 Company_Leaving_date: isCurrentlyWorking ? null : leavedate
             };
 
-            const response = await axios.put(`http://13.233.123.209:8000/freelance/update/Freelancer/Employment/${id}`, updatedData, {
+            const response = await axios.put(`https://www.api.alanced.com/freelance/update/Freelancer/Employment/${id}`, updatedData, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }

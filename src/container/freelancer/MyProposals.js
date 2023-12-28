@@ -46,7 +46,7 @@ const [viewfreebid, setViewFreeBid] = useState([]);
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`http://13.233.123.209:8000/freelance/view/freelancer-self/bid?${queryString}`,{
+      .get(`https://www.api.alanced.com/freelance/view/freelancer-self/bid?${queryString}`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }
@@ -84,7 +84,7 @@ console.log("viewallhiring on MyProposals :", viewallhiring)
     const queryString = queryParameters.join('&');
 
     axios
-      .get(`http://13.233.123.209:8000/freelance/View-all/pending-hire-request?${queryString}`,{
+      .get(`https://www.api.alanced.com/freelance/View-all/pending-hire-request?${queryString}`,{
         headers: {
           "Authorization":`Bearer ${accessToken}`
         }

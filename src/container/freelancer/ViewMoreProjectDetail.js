@@ -40,7 +40,7 @@ const accessToken = useSelector(state => state.login.accessToken) || localStorag
     const fetchData = async () => {
       try {
         // Fetch doc API
-        const response1 = await axios.get('http://13.233.123.209:8000/freelance/view/freelancer-all-self/bid',{
+        const response1 = await axios.get('https://www.api.alanced.com/freelance/view/freelancer-all-self/bid',{
           headers: {
             "Authorization":`Bearer ${accessToken}`
           }
@@ -74,13 +74,13 @@ const accessToken = useSelector(state => state.login.accessToken) || localStorag
         let response;
 
         if (project.isSaved) {
-            response = await axios.delete(`http://13.233.123.209:8000/freelance/saved-projects/${project.id}`, {
+            response = await axios.delete(`https://www.api.alanced.com/freelance/saved-projects/${project.id}`, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
             });
         } else {
-            response = await axios.post(`http://13.233.123.209:8000/freelance/saved-projects/${project.id}`, {}, {
+            response = await axios.post(`https://www.api.alanced.com/freelance/saved-projects/${project.id}`, {}, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
@@ -113,7 +113,7 @@ const handleClick = (event,project) => {
 
 useEffect(() => {
     axios
-     .get(`http://13.233.123.209:8000/freelance/View/bids/${id}`)
+     .get(`https://www.api.alanced.com/freelance/View/bids/${id}`)
        .then((response) => {
          setBidCount(response.data.count);
        })
