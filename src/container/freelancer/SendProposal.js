@@ -69,7 +69,7 @@ const isButtonEnabled = () => {
     return `${names[0]}__${names[1]}`
   }
   
-  const { readyState, sendJsonMessage } = useWebSocket(`ws://api.alanced.com:8001/${createConversationName()}`, {
+  const { readyState, sendJsonMessage } = useWebSocket(`wss://api.alanced.com:8001/${createConversationName()}`, {
     onOpen: () => {
       console.log("Connected !")
     },

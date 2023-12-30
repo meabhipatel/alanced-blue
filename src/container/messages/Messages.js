@@ -90,7 +90,7 @@ useEffect(() => {
 }, [logindata.id]);
 console.log("conversations",conversations)
 // `ws://13.233.123.209:8000/${conversation}`
-  const { readyState, sendJsonMessage } = useWebSocket(`ws://api.alanced.com:8001/${conversation}`, {
+  const { readyState, sendJsonMessage } = useWebSocket(`wss://api.alanced.com:8001/${conversation}`, {
     onOpen: () => {
       console.log("Connected!");
     },
