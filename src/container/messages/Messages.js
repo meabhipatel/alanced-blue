@@ -15,6 +15,7 @@ import vthreedots from '../../components/images/vthreedots.svg'
 import AudioVisualizer from './AudioVisualizer'
 import file_example_MP3_5MG from '../../components/images/file_example_MP3_5MG.mp3'
 import AudioMessages from './AudioMessages'
+import Drawer from '@mui/material/Drawer';
 import { useSelector } from 'react-redux'
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -246,6 +247,13 @@ console.log("conversations",conversations)
     chat_data(chatid)
     console.log("connection status -------------- ",connectionStatus)
   }
+  
+  const [isClicked, setIsClicked] = useState(true)
+
+  const handleClick = () => {
+    setIsClicked(!isClicked)
+  }
+
     return(
         <>
         <Navbar/>
@@ -480,7 +488,7 @@ console.log("conversations",conversations)
           </div>
           <div className="flex gap-2 items-center float-right">
             {/* <img className="h-[19px] w-[19px]" src={phone}/> */}
-            <img className="h-[25px] w-[25px]" src={iicon}/>
+            <img className="h-[25px] w-[25px]" src={iicon} onClick={handleClick}/>
           </div>
         </div>
         <div className="px-5 pr-0">
@@ -552,12 +560,12 @@ console.log("conversations",conversations)
             <div className="flex-row">
             <div
               class="mr-2 py-3 px-4 min:w-fit max:w-[45vw] text-left bg-[#F6FAFD] rounded-md text-[#0A142F]"
-              className={message.from_user.id == logindata.id ? "mr-2 py-3 px-4 w-[45vw] text-left bg-[#F6FAFD] rounded-md text-[#0A142F]" : "mr-2 py-3 px-4 w-[45vw] text-left rounded-md text-[#0A142F]"}
+              className={message.from_user.id == logindata.id ? "mr-2 py-3 px-4 min:w-fit max:w-[45vw] text-left bg-[#F6FAFD] rounded-md text-[#0A142F]" : "mr-2 py-3 px-4 w-[45vw] text-left rounded-md text-[#0A142F]"}
             >
               {/* Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,  */}
-              {message.content}  {message.timestamp}
+              {message.content}
             </div>
-            <span className="text-xs text-[#D7D7D7] float-right mr-3">{Date(message.timestamp)}{formatTimeStamp(message.timestamp)}</span>
+            <span className="text-xs text-[#D7D7D7] float-right mr-3">{Date(message.timestamp).slice(0,16)}{formatTimeStamp(message.timestamp)}</span>
             </div>
             {/* <img
               src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
@@ -640,8 +648,8 @@ console.log("conversations",conversations)
         </div>
       </div>
       
-      <div class="w-2/5 border-l-2">
-        <img className="float-right mt-6 mr-6" src={cross}/>
+      <div className={`w-2/5 border-l-2 ${isClicked ? '' : 'hidden'}`}>
+        <img className="float-right mt-6 mr-6" src={cross} onClick={handleClick}/>
         <div class="flex flex-col items-center w-full border-b-2">
           {/* <div class="font-semibold text-xl py-4">Mern Stack Group</div> */}
           <img
