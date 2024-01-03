@@ -142,13 +142,17 @@ console.log("conversations",conversations)
     if(!query){
       chat_data(chatid)
     }
-    console.log("query",query)
+    var list = query.split(" ")
+    var querys = list[1]
+    console.log("query",query.split(" "),querys)
     const filteredConversations = backup.filter(
       (conversation) => conversation.from_user.id != logindata.id ?
         conversation.from_user.first_Name.toLowerCase().includes(query.toLowerCase()) ||
-        conversation.from_user.last_Name.toLowerCase().includes(query.toLowerCase()) 
+        (!querys ? conversation.from_user.last_Name.toLowerCase().includes(query.toLowerCase()) :
+        conversation.from_user.last_Name.toLowerCase().includes(querys.toLowerCase()))
         : conversation.to_user.first_Name.toLowerCase().includes(query.toLowerCase()) ||
-        conversation.to_user.last_Name.toLowerCase().includes(query.toLowerCase())
+        (!querys ? conversation.to_user.last_Name.toLowerCase().includes(query.toLowerCase()) :
+        conversation.to_user.last_Name.toLowerCase().includes(querys.toLowerCase()))
     );
   
     // Update state with the filtered conversations
@@ -226,11 +230,21 @@ console.log("conversations",conversations)
   // }, [conversation]);
   const handleKeyDown = (e) => {
     // Check if the Enter key is pressed
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.shiftKey && !e.ctrlKey && message.length > 0) {
       // Prevent the default behavior (e.g., form submission)
       e.preventDefault();
       // Call the submit function
       handleSubmit();
+    }
+    if (message.trim() === '' && e.key === 'Enter') {
+      e.preventDefault();
+      // Optionally, you can alert the user, or simply do nothing
+      // alert("Please enter some text before pressing Enter.");
+      return; // Exit the function
+    }
+    if((e.shiftKey || e.ctrlKey) && e.key === 'Enter'){
+      e.preventDefault();
+      setMessage(prev => prev + '\n')
     }
   };
 
@@ -491,7 +505,7 @@ console.log("conversations",conversations)
             <img className="h-[25px] w-[25px]" src={iicon} onClick={handleClick}/>
           </div>
         </div>
-        <div className="px-5 pr-0">
+        <div className="px-2">
         <div id="scrollableDiv" class="flex flex-col-reverse h-[54vh] overflow-y-auto pr-2 mt-5">
         {/* <div class="flex justify-between mb-4">
           <div className="flex justify-start">
@@ -639,7 +653,7 @@ console.log("conversations",conversations)
             {/* <img src={smiley}/>
             <img src={attherate}/>
             <img src={paperpin}/> */}
-            <button onClick={handleSubmit}>
+            <button disabled={message.length === 0 ? true : false} onClick={handleSubmit}>
             <img className="border-l-2 border-[#D9D9D9] pl-2" src={paper} style={{height : "3vh", widht: "3vw"}}/>
             </button>
             </div>
@@ -648,7 +662,8 @@ console.log("conversations",conversations)
         </div>
       </div>
       
-      <div className={`w-2/5 border-l-2 ${isClicked ? '' : 'hidden'}`}>
+      <div className={`w-2/5 border-l-2 overflow-hidden transition-all duration-500 ease-in-out ${isClicked ? '' : 'w-0 pl-8'}`}>
+        <div className={`transition-opacity ease-in-out duration-300 ${isClicked ? 'opacity-100' : 'opacity-0'}`}>
         <img className="float-right mt-6 mr-6" src={cross} onClick={handleClick}/>
         <div class="flex flex-col items-center w-full border-b-2">
           {/* <div class="font-semibold text-xl py-4">Mern Stack Group</div> */}
@@ -684,6 +699,7 @@ console.log("conversations",conversations)
               <img className="h-4 w-4 mr-2" src={notepad}/>
             <span className="text-[#8A8A8A]">Personal Notepad</span>
             </div>
+          </div>
           </div>
         </div>
       {/* </div> */}
