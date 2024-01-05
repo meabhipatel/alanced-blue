@@ -217,6 +217,20 @@ console.log("conversations",conversations)
     return date.toLocaleTimeString();
   }
 
+  const formatDate = (dateString) => {
+    
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    
+    const date = new Date(dateString.slice(0,10));
+    const dayOfWeek = days[date.getDay()];
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    const year = date.getFullYear();
+    
+    return `${dayOfWeek}, ${month} ${day}, ${year}`
+  }
+
   function convoname(name, user){
     setConversation(name)
     setPage(2)
@@ -294,7 +308,7 @@ console.log("conversations",conversations)
     
     <div class="flex flex-row border-t-2 justify-between bg-white">
       
-      <div class="flex flex-col h-[86.9vh] w-2/5 border-r-2 overflow-y-auto">
+      <div class="flex flex-col h-[86.1vh] w-2/5 border-r-2 overflow-y-auto">
         
         <div class="border-b-2 py-3 px-2 flex items-center justify-between">
           <span className="float-left text-lg font-cardo font-semibold">Chats</span>
@@ -310,10 +324,10 @@ console.log("conversations",conversations)
             <input type="search" id="default-search" class="block w-full pr-4 p-2 pl-10 text-sm text-gray-900 border border-gray-300 outline-none rounded-lg " placeholder="Search" onChange={(e) => filterconvo(e.target.value)} required/>
           </div>
         </div>
-        <div className="overflow-y-scroll">
+        <div className="overflow-y-auto">
           {conversations != null ? conversations.map((convo, index) => (
           // <>{convo.from_user.id != logindata.id ?
-        <div key={index} onClick={() => convoname(convo.name, convo.from_user.id != logindata.id ? convo.from_user : convo.to_user)} class="flex flex-row py-4 px-2 justify-center items-center border-b-2">
+        <div key={index} onClick={() => convoname(convo.name, convo.from_user.id != logindata.id ? convo.from_user : convo.to_user)} class="flex flex-row py-4 px-2 justify-center items-center border-b-2 cursor-pointer hover:bg-green-50 active:bg-green-100">
           <div class="w-1/4 ml-4">
             <div className="relative">
               <img
@@ -328,7 +342,7 @@ console.log("conversations",conversations)
             <div class="text-lg text-[#031136] font-cardo w-fit font-semibold">{convo.from_user.id != logindata.id ? <>{convo.from_user.first_Name} {convo.from_user.last_Name}</> : <>{convo.to_user.first_Name} {convo.to_user.last_Name}</>}</div>
             <div className="flex-row">
               <span class="text-[#8A8A8A] text-xs float-left text-left w-full">{convo.from_user.id != logindata.id ? <>{convo.from_user.category}</> : <>{convo.to_user.category}</>}</span>
-              <span class="text-[#8A8A8A] text-[10px] float-left">{convo.content.length == 32 ? convo.content.substring(0, 29) + "..." : convo.content}</span>
+              <span class="text-[#8A8A8A] text-[10px] float-left">{convo.content.length >= 45 ? convo.content.substring(0, 45) + "..." : convo.content}</span>
             </div>
           </div>
         </div> 
@@ -502,11 +516,11 @@ console.log("conversations",conversations)
           </div>
           <div className="flex gap-2 items-center float-right">
             {/* <img className="h-[19px] w-[19px]" src={phone}/> */}
-            <img className="h-[25px] w-[25px]" src={iicon} onClick={handleClick}/>
+            <img className="h-[25px] w-[25px] cursor-pointer" src={iicon} onClick={handleClick}/>
           </div>
         </div>
         <div className="px-2">
-        <div id="scrollableDiv" class="flex flex-col-reverse h-[54vh] overflow-y-auto pr-2 mt-5">
+        <div id="scrollableDiv" class="flex flex-col-reverse h-[56vh] overflow-y-auto pr-2">
         {/* <div class="flex justify-between mb-4">
           <div className="flex justify-start">
             <img
@@ -579,7 +593,7 @@ console.log("conversations",conversations)
               {/* Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,  */}
               {message.content}
             </div>
-            <span className="text-xs text-[#D7D7D7] float-right mr-3">{Date(message.timestamp).slice(0,16)}{formatTimeStamp(message.timestamp)}</span>
+            <span className={`text-xs text-[#D7D7D7] float-right mr-3 ${message.from_user.id == logindata.id ? 'float-right' : 'float-left'}`}>{formatDate(message.timestamp)} {formatTimeStamp(message.timestamp)}</span>
             </div>
             {/* <img
               src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
@@ -641,7 +655,7 @@ console.log("conversations",conversations)
             </div>
           </div> */}
         </div>
-        <div class="py-5">
+        <div class="py-3 pb-1">
           {/* <input
             class="w-full bg-gray-300 py-5 px-3 rounded-xl"
             type="text"
@@ -654,7 +668,7 @@ console.log("conversations",conversations)
             <img src={attherate}/>
             <img src={paperpin}/> */}
             <button disabled={message.length === 0 ? true : false} onClick={handleSubmit}>
-            <img className="border-l-2 border-[#D9D9D9] pl-2" src={paper} style={{height : "3vh", widht: "3vw"}}/>
+            <img className="border-l-2 border-[#D9D9D9] cursor-pointer pl-2" src={paper} style={{height : "3vh", widht: "3vw"}}/>
             </button>
             </div>
           </div>
@@ -662,9 +676,9 @@ console.log("conversations",conversations)
         </div>
       </div>
       
-      <div className={`w-2/5 border-l-2 overflow-hidden transition-all duration-500 ease-in-out ${isClicked ? '' : 'w-0 pl-8'}`}>
+      <div className={`w-2/5 border-l-2 h-[86.1vh] overflow-hidden transition-all duration-500 ease-in-out ${isClicked ? '' : 'w-0 pl-8'}`}>
         <div className={`transition-opacity ease-in-out duration-300 ${isClicked ? 'opacity-100' : 'opacity-0'}`}>
-        <img className="float-right mt-6 mr-6" src={cross} onClick={handleClick}/>
+        <img className="float-right mt-6 mr-6 cursor-pointer" src={cross} onClick={handleClick}/>
         <div class="flex flex-col items-center w-full border-b-2">
           {/* <div class="font-semibold text-xl py-4">Mern Stack Group</div> */}
           <img
