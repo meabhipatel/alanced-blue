@@ -212,6 +212,17 @@ console.log("conversations",conversations)
   //   setName(e.target.value);
   // }
 
+  const [time, setTime] = useState(new Date())
+  console.log("time :",time)
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTime(new Date());
+    }, 1000); // Update time every second
+
+    return () => clearInterval(intervalId); // Cleanup the interval on component unmount
+  }, []);
+
   function formatTimeStamp(timestamp){
     const date = new Date(timestamp);
     return date.toLocaleTimeString();
@@ -349,101 +360,7 @@ console.log("conversations",conversations)
         // : <></>}
         // </>
         )) : <></>}
-        {/* <div class="flex flex-row py-4 px-2 items-center border-b-2">
-          <div class="w-1/4 ml-4">
-            <div className="relative">
-              <img
-                src="https://www.famousbirthdays.com/headshots/russell-crowe-6.jpg"
-                class="object-cover h-12 w-12 rounded-full"
-                alt=""
-              />
-              <span class="bottom-0 left-8 absolute  w-3 h-3 bg-white border-[3px] border-green-400 dark:border-gray-800 rounded-full"></span>
-            </div>
-          </div>
-          <div class="w-full">
-            <div class="text-lg font-semibold text-[#031136] font-cardo w-fit">ByeWind</div>
-            <div className="flex-row">
-              <span class="text-[#8A8A8A] text-xs float-left">UI Designer - Complex</span>
-              <span class="text-[#8A8A8A] text-[10px] float-left">You: do you have any reference card?</span>
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-row py-4 px-2 justify-center items-center border-b-2">
-          <div class="w-1/4 ml-4">
-            <div className="relative">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGpYTzuO0zLW7yadaq4jpOz2SbsX90okb24Z9GtEvK6Z9x2zS5"
-                class="object-cover h-12 w-12 rounded-full"
-                alt=""
-              />
-              <span class="bottom-0 left-8 absolute  w-3 h-3 bg-white border-[3px] border-green-400 dark:border-gray-800 rounded-full"></span>
-            </div>
-          </div>
-          <div class="w-full">
-            <div class="text-lg text-[#031136] font-cardo w-fit font-semibold">Jannes Graf</div>
-            <div className="flex-row">
-              <span class="text-[#8A8A8A] text-xs float-left">UI Designer - Complex</span>
-              <span class="text-[#8A8A8A] text-[10px] float-left">You: do you have any reference card?</span>
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-row py-4 px-2 justify-center items-center border-b-2">
-          <div class="w-1/4 ml-4">
-            <div className="relative">
-              <img
-                src="https://avatars3.githubusercontent.com/u/2763884?s=128"
-                class="object-cover h-12 w-12 rounded-full"
-                alt=""
-              />
-              <span class="bottom-0 left-8 absolute  w-3 h-3 bg-white border-[3px] border-green-400 dark:border-gray-800 rounded-full"></span>
-            </div>
-          </div>
-          <div class="w-full">
-            <div class="text-lg text-[#031136] font-cardo w-fit font-semibold">David Lynch</div>
-            <div className="flex-row">
-              <span class="text-[#8A8A8A] text-xs float-left">UI Designer - Complex</span>
-              <span class="text-[#8A8A8A] text-[10px] float-left">You: do you have any reference card?</span>
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-row py-4 px-2 justify-center items-center border-b-2">
-          <div class="w-1/4 ml-4">
-            <div className="relative">
-              <img
-                src="https://source.unsplash.com/_7LbC5J-jw4/600x600"
-                class="object-cover h-12 w-12 rounded-full"
-                alt=""
-              />
-              <span class="bottom-0 left-8 absolute  w-3 h-3 bg-white border-[3px] border-green-400 dark:border-gray-800 rounded-full"></span>
-            </div>
-          </div>
-          <div class="w-full">
-            <div class="text-lg text-[#031136] font-cardo w-fit font-semibold">Anthony Daugloi</div>
-            <div className="flex-row">
-              <span class="text-[#8A8A8A] text-xs float-left">UI Designer - Complex</span>
-              <span class="text-[#8A8A8A] text-[10px] float-left">You: do you have any reference card?</span>
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-row py-4 px-2 justify-center items-center border-b-2">
-          <div class="w-1/4 ml-4">
-            <div className="relative">
-              <img
-                src="https://source.unsplash.com/_7LbC5J-jw4/600x600"
-                class="object-cover h-12 w-12 rounded-full"
-                alt=""
-              />
-              <span class="bottom-0 left-8 absolute  w-3 h-3 bg-white border-[3px] border-green-400 dark:border-gray-800 rounded-full"></span>
-            </div>
-          </div>
-          <div class="w-full">
-            <div class="text-lg text-[#031136] font-cardo w-fit font-semibold">Anthony Daugloi</div>
-            <div className="flex-row">
-              <span class="text-[#8A8A8A] text-xs float-left">UI Designer - Complex</span>
-              <span class="text-[#8A8A8A] text-[10px] float-left">You: do you have any reference card?</span>
-            </div>
-          </div>
-        </div> */}
+        
         </div>
         {/* <div
           class="flex flex-row py-4 px-2 items-center border-b-2"
@@ -676,7 +593,7 @@ console.log("conversations",conversations)
         </div>
       </div>
       
-      <div className={`w-2/5 border-l-2 h-[86.1vh] overflow-hidden transition-all duration-500 ease-in-out ${isClicked ? '' : 'w-0 pl-8'}`}>
+      <div className={`border-l-2 h-[86.1vh] overflow-hidden transition-all duration-500 ease-in-out ${isClicked ? 'w-2/5' : 'w-0 pl-8'}`}>
         <div className={`transition-opacity ease-in-out duration-300 ${isClicked ? 'opacity-100' : 'opacity-0'}`}>
         <img className="float-right mt-6 mr-6 cursor-pointer" src={cross} onClick={handleClick}/>
         <div class="flex flex-col items-center w-full border-b-2">
@@ -688,7 +605,8 @@ console.log("conversations",conversations)
           />
           <div class=" pt-4 text-xl font-cardo">{convouser.first_Name} {convouser.last_Name}</div>
           <div class="text-[#797979] text-sm">
-          5:18 AM GMT+10 (4.5 h ahead)
+          {/* 5:18 AM GMT+10 (4.5 h ahead) */}
+          {time.toLocaleTimeString()} IST
           </div>
           <div class="text-[#0A142F] text-xs mb-6">
           {/* UI Designer - Complex Topics, Simple Designs */}
