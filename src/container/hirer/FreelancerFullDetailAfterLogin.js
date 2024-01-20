@@ -219,7 +219,7 @@ const visibleEmp = sortedEmployments.slice(startIdx, startIdx + 2);
           </div>
           <div className=' basis-3/12 text-left'>
           <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]  mr-2">
-                <button class="px-11 py-1 bg-white" onClick={openFreeHiring}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p></button>
+                <button class="px-11 py-1 bg-white rounded-[3px]" onClick={openFreeHiring}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p></button>
             </div>
             {isFreeHiringOpen && <AddFreeHireRequest closeFreeHiring={closeFreeHiring} free={freelancer}/>}
           </div>

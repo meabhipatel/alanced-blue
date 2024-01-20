@@ -360,7 +360,7 @@ const handleClientNotificationClick = (notif) => {
     <div className='lg:mr-[100px] mt-2'>
         <Link to='/login'><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-2 font-semibold">Sign In</span></Link>
       <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
-      <Link to='/sign-up'><button class="px-2 py-1 bg-[#E2F9EE]"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px]">Sign Up</p></button></Link>
+      <Link to='/sign-up'><button class="px-2 py-1 bg-[#E2F9EE] rounded-[3px]"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px]">Sign Up</p></button></Link>
 </div>    
     </div>
   </div> 
@@ -384,7 +384,7 @@ const handleClientNotificationClick = (notif) => {
       {loginType=='FREELANCER' ? <>
       <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => {setFindworkDropdown(true); setReportsDropdown(false); setMyJobsDropdown(false);}}>Find Work <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
       {Findworkdropdown && (
-        <div className="absolute md:right-[47.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+        <div className="absolute md:right-[54.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
             <Link to='/projects' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Find Work</span>
@@ -408,7 +408,7 @@ const handleClientNotificationClick = (notif) => {
       <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => {setMyJobsDropdown(true); setFindworkDropdown(false); setReportsDropdown(false);}} 
     >My Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
       {MyJobsdropdown && (
-        <div className="absolute md:right-[39.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+        <div className="absolute md:right-[46.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
             <Link to='/all-invitations' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">All Invitations</span>
@@ -422,7 +422,7 @@ const handleClientNotificationClick = (notif) => {
     <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => {setMyJobsDropdown(true); setFindworkDropdown(false); setReportsDropdown(false);}}  
   > Jobs <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
     {MyJobsdropdown && (
-      <div className="absolute md:right-[41rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+      <div className="absolute md:right-[47rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
           <div className="py-1">
           <Link to='/add/Job-post' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Post A Job</span>
@@ -442,7 +442,7 @@ const handleClientNotificationClick = (notif) => {
   {loginType=='FREELANCER' ? <>
       <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => {setReportsDropdown(true); setFindworkDropdown(false); setMyJobsDropdown(false);}}> Payments <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
       {Reportsdropdown && (
-        <div className="absolute md:right-[31.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+        <div className="absolute md:right-[38.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
             <Link to='/freelancer/my-reports' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Transaction History</span>
@@ -455,7 +455,7 @@ const handleClientNotificationClick = (notif) => {
     )}</>:<>
     <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => {setReportsDropdown(true); setMyJobsDropdown(false); setFindworkDropdown(false);}}> Payments <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>  
       {Reportsdropdown && (
-        <div className="absolute md:right-[33rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+        <div className="absolute md:right-[39.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
             <Link to='/freelancer/my-reports' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-lime-600">Transaction History</span>
