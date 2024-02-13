@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import logo from '../images/Alanced.png'
+import logo from '../images/Alanced.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import navback from '../images/Nav_Background.png'
 import { useDispatch, useSelector } from 'react-redux'
@@ -325,7 +325,7 @@ const handleClientNotificationClick = (notif) => {
   
 
   return (
-<div className='sticky z-50 top-0 bg-cover bg-top' style={{ backgroundImage: `url(${navback})`}} onMouseLeave={(e)=>{setFindworkDropdown(); setMyJobsDropdown(); setReportsDropdown()}}>
+<div className='sticky z-50 top-0 bg-cover bg-white bg-top' style={{ backgroundImage: `url(${navback})`}} onMouseLeave={(e)=>{setFindworkDropdown(); setMyJobsDropdown(); setReportsDropdown()}}>
       <nav class="flex items-center justify-between flex-wrap p-6">
   {/* <Link to='/'>
   <div class="flex items-center flex-shrink-0 lg:ml-[129px]">
@@ -358,9 +358,9 @@ const handleClientNotificationClick = (notif) => {
       </span></Link>
     </div>
     <div className='lg:mr-[100px] mt-2'>
-        <Link to='/login'><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-2 font-semibold">Sign In</span></Link>
-      <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
-      <Link to='/sign-up'><button class="px-2 py-1 bg-[#E2F9EE] rounded-[3px]"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px]">Sign Up</p></button></Link>
+        <Link to='/login'><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-2 font-semibold">Sign In</span></Link>
+      <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]">
+      <Link to='/sign-up'><button class="px-2 py-1 bg-[#e1f9ff] rounded-[3px]"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px]">Sign Up</p></button></Link>
 </div>    
     </div>
   </div> 
@@ -564,7 +564,7 @@ const handleClientNotificationClick = (notif) => {
         />
      ) : (
         <div 
-            className="h-10 w-10 rounded-full cursor-pointer flex items-center justify-center bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white font-bold font-cardo text-xl p-1"
+            className="h-10 w-10 rounded-full cursor-pointer flex items-center justify-center bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white font-bold font-cardo text-xl p-1"
             onClick={() => setDropdownVisible(!dropdownVisible)}
         >
             {displayName && displayName[0].toUpperCase()}
@@ -582,7 +582,7 @@ const handleClientNotificationClick = (notif) => {
         />
      ) : (
         <div 
-            className="h-20 w-20 rounded-full cursor-pointer flex items-center justify-center bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white font-bold font-cardo text-4xl p-1 mx-auto my-5"
+            className="h-20 w-20 rounded-full cursor-pointer flex items-center justify-center bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white font-bold font-cardo text-4xl p-1 mx-auto my-5"
             onClick={() => setDropdownVisible(!dropdownVisible)}
         >
             {displayName && displayName[0].toUpperCase()}
