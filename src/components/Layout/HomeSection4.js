@@ -21,7 +21,7 @@ const HomeSection4 = () => {
     <p className='opacity-50 font-inter text-[13px]'>This the first true value generator on the Internet. It uses alphas dictionary <br /> of over 200 Latin words. This unique collection not only highlights the beauty and depth of the Latin language.</p>
 <div className='mt-8'>
 {!isLoggedIn ? <Link to='/login'>
-<span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Sign In</span></Link> :''}
+<span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold">Sign In</span></Link> :''}
 </div>
     </div>
     <div class="flex-1 p-4">

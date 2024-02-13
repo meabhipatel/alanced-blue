@@ -233,7 +233,7 @@ const Login = (props) => {
                 <div className="w-full">
                 <div class="flex items-center justify-between -mt-[20px]">
                             <p className="inline-block ml-[170px] text-xs">Don't have an account?</p>
-                            <Link to='/sign-up'><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Sign Up</span></Link>
+                            <Link to='/sign-up'><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold">Sign Up</span></Link>
                         </div>
                           
                             <h1 class="mb-4 text-xl text-left mt-10 font-cardo text-gray-700">
@@ -266,13 +266,13 @@ const Login = (props) => {
                                     onClick={togglePasswordVisibility}
                                     className="absolute top-1/2 right-3 transform -translate-y-1/2"
                                 >
-                                    <i className={`fa ${inputType === 'password' ? 'fa-eye-slash' : 'fa-eye'} text-lime-600`}></i>
+                                    <i className={`fa ${inputType === 'password' ? 'fa-eye-slash' : 'fa-eye'} text-blue-600`}></i>
                                 </button>
                             </div>
                         </div>
                             <div class="mb-6 mt-4 text-left flex justify-between items-center">
                                 <label class="flex items-center font-inter">
-                                    <input class="mr-2 leading-tight accent-lime-600" type="checkbox" 
+                                    <input class="mr-2 leading-tight accent-blue-600" type="checkbox" 
                                      onChange={(e) => setRememberMe(e.target.checked)}
                                      />
                                     <span class="text-xs">
@@ -284,7 +284,7 @@ const Login = (props) => {
                                 </span></Link>
                             </div>
                             <button
-                                class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold"
+                                class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#0909E9] to-[#00D4FF]  text-white font-semibold"
                                 href="#"
                                 onClick={LoginButton}
                             >

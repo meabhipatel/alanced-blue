@@ -105,7 +105,7 @@ const Registration = () => {
     const handle_password_alert=()=>{
         if (typeof(addHirer.password)!="undefined"){
           if(validatePassword(addHirer.password)==false){
-            return   <Alert className='mb-2 mt-1 bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold' animate={{mount:{ y:0 }, unmount:{ y: 100},}}>
+            return   <Alert className='mb-2 mt-1 bg-gradient-to-r from-[#0909E9] to-[#00D4FF]  text-white font-semibold' animate={{mount:{ y:0 }, unmount:{ y: 100},}}>
             {/* <Typography className="">
               Ensure that these requirements are met:
             </Typography> */}
@@ -118,7 +118,7 @@ const Registration = () => {
     // const handlealert = ()=>{
     //     if (typeof(addHirer.email)!="undefined"){
     //         if(validateEmail(addHirer.email)==false){
-    //           return   <Alert className='mb-2 mt-1 bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold' animate={{mount:{ y:0 }, unmount:{ y: 100},}}>
+    //           return   <Alert className='mb-2 mt-1 bg-gradient-to-r from-[#0909E9] to-[#00D4FF]  text-white font-semibold' animate={{mount:{ y:0 }, unmount:{ y: 100},}}>
     //           <Typography className="">
     //             Please give valid email address
     //           </Typography>
@@ -160,7 +160,7 @@ const Registration = () => {
     
     // const handleallalert = ()=>{
     //     if (a==true){
-    //     return  <Alert className='mb-2 mt-1 bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold' animate={{mount:{ y:0 }, unmount:{ y: 100},}}>
+    //     return  <Alert className='mb-2 mt-1 bg-gradient-to-r from-[#0909E9] to-[#00D4FF]  text-white font-semibold' animate={{mount:{ y:0 }, unmount:{ y: 100},}}>
     //     <Typography className="">
     //     All fields must be required
     //     </Typography>
@@ -215,7 +215,7 @@ const Registration = () => {
                 <div class="w-full">
                 <div class="flex items-center justify-between -mt-[20px]">
                         <p className="inline-block ml-[170px] text-xs">Already have an account?</p>
-                        <Link to='/login'><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Sign in</span></Link>
+                        <Link to='/login'><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold">Sign in</span></Link>
                     </div>
                       
                         <h1 class="mb-4 text-xl text-left mt-10 font-cardo text-gray-700">
@@ -227,7 +227,7 @@ const Registration = () => {
                                 First Name <span class="text-red-500">*</span>
                             </label>
                             <input type="text"
-                                class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
+                                class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
                                 placeholder="First Name"  name='first_Name' onChange={onChange} required/>
                         </div>
                         <div className=''>
@@ -235,7 +235,7 @@ const Registration = () => {
                                 Last Name <span class="text-red-500">*</span>
                             </label>
                             <input type="text"
-                                class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
+                                class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
                                 placeholder="Last Name"  name='last_Name' onChange={onChange} required/>
                         </div>
                         </div>
@@ -244,7 +244,7 @@ const Registration = () => {
                                 Email Address <span class="text-red-500">*</span>
                             </label>
                             <input type="email"
-                                class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
+                                class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
                                 placeholder="example@gmail.com"  name='email' onChange={onChange} required/>
                         </div>
                         <div>
@@ -254,7 +254,7 @@ const Registration = () => {
                             <div className="relative">
                                 <input
                                     type={inputType}
-                                    class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
+                                    class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
                                     placeholder="•••••••••••"
                                     name='password'
                                     onChange={onChange}
@@ -264,7 +264,7 @@ const Registration = () => {
                                     onClick={togglePasswordVisibility}
                                     className="absolute top-1/2 right-3 transform -translate-y-1/2"
                                 >
-                                    <i className={`fa ${inputType === 'password' ? 'fa-eye-slash' : 'fa-eye'} text-lime-600`}></i>
+                                    <i className={`fa ${inputType === 'password' ? 'fa-eye-slash' : 'fa-eye'} text-blue-600`}></i>
                                 </button>
                             </div>
                         </div>
@@ -272,7 +272,7 @@ const Registration = () => {
                         {/* {handlealert()}
                         {handleallalert()} */}
                         <button
-                            class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold"
+                            class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-lg  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#0909E9] to-[#00D4FF]  text-white font-semibold"
                             href="#" onClick={AddHirer}>
                             {show ? <div><Loader/></div> : "Create your account"}
                         </button>
