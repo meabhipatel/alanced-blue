@@ -363,7 +363,7 @@ function ProjectList() {
         const regex = new RegExp(`(${query})`, 'gi');
         return text.split(regex).map((part, index) => {
           if (index % 2 === 1) {
-            return <span key={index} style={{ backgroundColor: '#a3e635' }}>{part}</span>;
+            return <span key={index} style={{ backgroundColor: '#73cbfa' }}>{part}</span>;
           } else {
             return <span key={index}>{part}</span>;
           }

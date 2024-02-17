@@ -306,7 +306,7 @@ const [bidsCount, setBidsCount] = useState({});
         const regex = new RegExp(`(${query})`, 'gi');
         return text.split(regex).map((part, index) => {
           if (index % 2 === 1) {
-            return <span key={index} style={{ backgroundColor: '#a3e635' }}>{part}</span>;
+            return <span key={index} style={{ backgroundColor: '#73cbfa' }}>{part}</span>;
           } else {
             return <span key={index}>{part}</span>;
           }
@@ -328,30 +328,30 @@ const [bidsCount, setBidsCount] = useState({});
 <div class="flex flex-col md:flex-row mb-5 mx-5">
 <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
   <Link to='/saved-jobs' onClick={() => window.scrollTo(0, 0)}>
-<div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#E2F9EE] rounded-2xl">
+<div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#e2f1f9] rounded-2xl">
     <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Saved Jobs</h1>
-    <div className="flex items-center space-x-2 text-green-600 mr-5">
+    <div className="flex items-center space-x-2 text-blue-600 mr-5">
             <i class="bi bi-heart"></i>
             {/* <i class="bi bi-heart-fill"></i> */}
     </div>
     </div></Link>
     <Link to='/my-proposals' onClick={() => window.scrollTo(0, 0)}>
-    <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#E2F9EE] rounded-2xl">
+    <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#e2f1f9] rounded-2xl">
     <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Proposals</h1>
-    <div className="flex items-center space-x-2 text-green-600 mr-5">
+    <div className="flex items-center space-x-2 text-blue-600 mr-5">
             <i class="bi bi-send-check"></i>
             {/* <i class="bi bi-send-check-fill"></i> */}
     </div>
     </div></Link>
-    <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#E2F9EE] rounded-2xl">
+    <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#e2f1f9] rounded-2xl">
     <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Get Paid</h1>
-    <div className="flex items-center space-x-2 text-green-600 mr-5">
+    <div className="flex items-center space-x-2 text-blue-600 mr-5">
             {/* <img src={downarrow} alt="" /> */}
             <i class="bi bi-coin"></i>
     </div>
     </div>
 <Link to='/projects' onClick={() => window.scrollTo(0, 0)}>
-    <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#E2F9EE] rounded-lg p-4 mx-4 my-3 shadow-sm">
+    <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#e2f1f9] rounded-lg p-4 mx-4 my-3 shadow-sm">
         <div>
         <h1 className='font-cardo text-lg text-[#031136] text-left'>Get Tips To Find Work</h1>
            <p className='font-inter text-sm text-[#0A142F] opacity-50 py-2 text-left'>Learn to optimize search, use Connects, and land your first job.</p>
@@ -362,7 +362,7 @@ const [bidsCount, setBidsCount] = useState({});
         </div>
     </div></Link>
     <Link to='/all-invitations' onClick={() => window.scrollTo(0, 0)}>
-    <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#E2F9EE] rounded-lg p-4 mx-4 relative z-10 shadow-sm">
+    <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#e2f1f9] rounded-lg p-4 mx-4 relative z-10 shadow-sm">
         <div>
         <h1 className='font-cardo text-lg text-[#031136] text-left'>My Jobs</h1>
            <p className='font-inter text-sm text-[#0A142F] opacity-50 py-2 text-left'>View your active contracts, timesheets, and available earnings.</p>
@@ -408,7 +408,7 @@ const [bidsCount, setBidsCount] = useState({});
     <div className="p-1 w-8 h-8 bg-white rounded-full border border-gray-200" onClick={(event) => handleClick(event, index,project)}>
     { 
         localStorage.getItem(`isSaved_${project.id}`) === 'true' 
-        ? <i className="fa fa-heart p-1 text-green-600"></i>
+        ? <i className="fa fa-heart p-1 text-blue-600"></i>
         : <i className="fa fa-heart-o p-1"></i> 
     }
 </div>
@@ -417,7 +417,7 @@ const [bidsCount, setBidsCount] = useState({});
     {AllProposals && AllProposals.map((all, proposal) => {
         return(
             <>
-            {project.id == all.project_id ? <span className='text-green-600 flex justify-center items-center w-fit'><TaskOutlinedIcon className='mr-1 text-green-600'/>Already Applied</span> : ''}
+            {project.id == all.project_id ? <span className='text-blue-600 flex justify-center items-center w-fit'><TaskOutlinedIcon className='mr-1 text-blue-600'/>Already Applied</span> : ''}
             </>
         )
     })}
