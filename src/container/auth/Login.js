@@ -245,7 +245,7 @@ const Login = (props) => {
                                     Email Address <span class="text-red-500">*</span>
                                 </label>
                                 <input type="email"
-                                    class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
+                                    class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
                                     placeholder="example@gmail.com" id="uname" onChange={onChange} name='email' required/>
                             </div>
                             <div>
@@ -255,7 +255,7 @@ const Login = (props) => {
                             <div className="relative">
                                 <input
                                     type={inputType}
-                                    class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"
+                                    class="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
                                     placeholder="•••••••••••"
                                     name='password'
                                     id="upass"
