@@ -50,7 +50,11 @@ const HomeSection1 = () => {
     </div>
     <div class="p-4 text-left">
         <h4 className='font-cardo text-lg md:text-[23px] text-[#0A142F] mt-5'>Simple Solutions for Complex <br />Connections</h4>
-        <p className='font-inter text-sm md:text-[13px] opacity-50 mt-3'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ,including versions of Lorem Ipsum.</p>
+        <p className='font-inter text-sm md:text-[13px] opacity-50 mt-3'>Welcome to our freelancing platform, your gateway to success in the digital realm! Our platform offers a straightforward approach to navigating the intricate web of professional connections, providing freelancers with a reliable and user-friendly interface.
+
+Embrace the essence of simplicity as you curate your portfolio and showcase your diverse skills and expertise. From graphic designing to web development, each project resonates with clarity and purpose, leaving a lasting impression on potential clients.
+
+Join us in navigating the dynamic landscape of freelancing with confidence and ease. Your portfolio is more than just a collection of works—it's a compelling narrative of your professional journey and achievements.</p>
         <div class="flex flex-wrap items-center space-x-3 mt-4">
             <img src={circlecheck} alt="" className='h-5 w-5'/>
             <span className='pr-6 font-inter text-[15px]'>High Analysis</span>
