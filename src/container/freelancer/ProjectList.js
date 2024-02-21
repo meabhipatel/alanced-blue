@@ -376,7 +376,7 @@ function ProjectList() {
       <div className="h-[43vh] bg-no-repeat -mt-[1.3rem] bg-contain" style={{ backgroundImage: `url(${profile_list})` }}>
         <div className='text-left pt-[3rem] ml-[13.5vw] text-2xl font-cardo'>
           <h1>Projects List</h1>
-          <p className='font-inter text-sm text-[#797979] font-normal mt-2'>All the Lorem Ipsum generators on the Internet tend to repeat.</p>
+          <p className='font-inter text-sm text-[#797979] font-normal mt-2'>Explore high-paying freelance opportunities and land your dream job now!</p>
           <div className='lg:w-[44vw] bg-white p-3 lg:h-14 rounded-2xl lg:flex items-center mt-4 shadow-md'>
             <div className='flex flex-row'>
               <img className='w-5 h-5' src={search}></img>
@@ -468,7 +468,7 @@ function ProjectList() {
           value={protype}
           onChange={handleRateFilterChange}
         />
-              <div class="w-11 h-6 bg-white border-2  border-green-300 rounded-full peer dark:bg-white-700 peer-focus:ring-0 peer-focus:ring-green-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-gradient-to-r  after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r from-[#00BF58] to-[#E3FF75]"></div>
+              <div class="w-11 h-6 bg-white border-2  border-blue-300 rounded-full peer dark:bg-white-700 peer-focus:ring-0 peer-focus:ring-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-gradient-to-r  after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r from-[#00BF58] to-[#E3FF75]"></div>
               <span class="ml-3 text-base font-normal font-inter text-[#797979]">{protype}</span>
             </label>
               </div>
@@ -513,7 +513,7 @@ function ProjectList() {
                 type="text"
                 value={priceRange[0]}
                 onChange={(e) => handleInputChange(0, e.target.value)}
-                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-60
+                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-60
                 focus:outline-none'
               /></div>
               <div className='basis-2/12 m-auto mt-4'><i class="bi bi-dash-lg text-[#475569]"></i></div>
@@ -521,7 +521,7 @@ function ProjectList() {
                 type="text"
                 value={priceRange[1]}
                 onChange={(e) => handleInputChange(1, e.target.value)}
-                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-60
+                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-60
                 focus:outline-none'
               /></div>
               </div>
@@ -615,7 +615,7 @@ function ProjectList() {
                 {AllProposals && AllProposals.map((all, proposal) => {
                     return(
                         <>
-                        {project.id == all.project_id ? <span className='text-green-600 flex justify-center items-center w-fit'><TaskOutlinedIcon className='mr-1 text-green-600'/>Already Applied</span> : ''}
+                        {project.id == all.project_id ? <span className='text-blue-600 flex justify-center items-center w-fit'><TaskOutlinedIcon className='mr-1 text-blue-600'/>Already Applied</span> : ''}
                         </>
                     )
                 })}
