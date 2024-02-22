@@ -373,8 +373,8 @@ function ProjectList() {
   return (
     <>
       <Navbar />
-      <div className="h-[43vh] bg-no-repeat -mt-[1.3rem] bg-contain" style={{ backgroundImage: `url(${profile_list})` }}>
-        <div className='text-left pt-[3rem] ml-[13.5vw] text-2xl font-cardo'>
+      <div className="h-[43vh] bg-no-repeat -mt-[1.2rem] bg-cover" style={{ backgroundImage: `url(${profile_list})` }}>
+        <div className='text-left pt-[6rem] ml-[13.5vw] text-2xl font-cardo'>
           <h1>Projects List</h1>
           <p className='font-inter text-sm text-[#797979] font-normal mt-2'>Explore high-paying freelance opportunities and land your dream job now!</p>
           <div className='lg:w-[44vw] bg-white p-3 lg:h-14 rounded-2xl lg:flex items-center mt-4 shadow-md'>
@@ -383,7 +383,7 @@ function ProjectList() {
               <input className='w-96 font-inter text-base ml-3 outline-none' placeholder='Search Job by Category' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
             </div>
             <div className=''>
-              <button className='rounded h-8 w-24 lg:ml-6 font-semibold text-base text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>Search</button>
+              <button className='rounded h-8 w-24 lg:ml-6 font-semibold text-base text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF]'>Search</button>
             </div>
           </div>
         </div>
@@ -413,7 +413,7 @@ function ProjectList() {
         />
                 <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                   
-                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                    <span class="checkmark hidden"><i class="bi bi-check-lg pr-0.5 pt-2"></i></span>
                 </div>
                      <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
                 <span class="font-normal text-[#797979]">{category}</span>
@@ -448,7 +448,7 @@ function ProjectList() {
               />
                       <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                         
-                          <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                          <span class="checkmark hidden"><i class="bi bi-check-lg pr-0.5 pt-2"></i></span>
                       </div>
                            <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
                       <span class="font-normal text-[#797979]">{exp.replace(/_/g, ' ')}</span>
@@ -468,7 +468,7 @@ function ProjectList() {
           value={protype}
           onChange={handleRateFilterChange}
         />
-              <div class="w-11 h-6 bg-white border-2  border-blue-300 rounded-full peer dark:bg-white-700 peer-focus:ring-0 peer-focus:ring-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-gradient-to-r  after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r from-[#00BF58] to-[#E3FF75]"></div>
+              <div class="w-11 h-6 bg-white border-2  border-blue-300 rounded-full peer dark:bg-white-700 peer-focus:ring-0 peer-focus:ring-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-gradient-to-r  after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r from-[#0909E9] to-[#00D4FF]"></div>
               <span class="ml-3 text-base font-normal font-inter text-[#797979]">{protype}</span>
             </label>
               </div>
@@ -487,7 +487,7 @@ function ProjectList() {
                 railStyle={{ background: 'lightgray' }}
                 trackStyle={[
                   {
-                    background: 'linear-gradient(45deg, #00BF58, #E3FF75)',
+                    background: 'linear-gradient(45deg, #0909E9, #00D4FF)',
                     borderColor: '#65a30d',
                   },
                 ]}
@@ -496,14 +496,14 @@ function ProjectList() {
                     backgroundColor: 'white',
                     borderColor: 'transparent', 
                     borderRadius: '50%', // Set border radius for circular shape
-                    borderImage: 'linear-gradient(45deg, #00BF58, #E3FF75)',
+                    borderImage: 'linear-gradient(45deg, #0909E9, #00D4FF)',
                     borderImageSlice: 1,
                   },
                   {
                     backgroundColor: 'white',
                     borderColor: 'transparent',
                     borderRadius: '50%',
-                    borderImage: 'linear-gradient(45deg, #00BF58, #E3FF75)',
+                    borderImage: 'linear-gradient(45deg, #0909E9, #00D4FF)',
                     borderImageSlice: 1,
                   },
                 ]}
@@ -538,7 +538,7 @@ function ProjectList() {
                 onChange={handleSkillFilterChange}
               />
                           <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                              <span className="checkmark hidden"><i className="bi bi-check-lg pr-2 pt-2"></i></span>
+                              <span className="checkmark hidden"><i className="bi bi-check-lg pr-0.5 pt-2"></i></span>
                           </div>
                           <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
                           <span className="font-normal text-[#797979]">{skills}</span>
@@ -575,7 +575,7 @@ function ProjectList() {
               />
                       <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                         
-                          <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                          <span class="checkmark hidden"><i class="bi bi-check-lg pr-0.5 pt-2"></i></span>
                       </div>
                            <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
                       <span class="font-normal text-[#797979]">{location}</span>
@@ -663,11 +663,11 @@ function ProjectList() {
                 <p className='font-inter text-[#797979] mt-1 text-sm text-right'>{project.rate} Rate</p>
                 <div className=''>
                   {/* {accessToken ? (
-                    <Link to='/view-more/project-detail' state={{ project }} onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>View Detail</button></Link>
+                    <Link to='/view-more/project-detail' state={{ project }} onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF] mt-3 text-sm font-bold ml-16'>View Detail</button></Link>
                   ): (
-                  <Link to='/login' onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
+                  <Link to='/login' onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
                 )} */}
-                 <Link to='/view-more/project-detail' state={{ project }} onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>View Detail</button></Link>
+                 <Link to='/view-more/project-detail' state={{ project }} onClick={() => window.scrollTo(0, 0)}><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF] mt-3 text-sm font-bold ml-16'>View Detail</button></Link>
                 {/* {accessToken ? (
                 isAlreadyApplied ? (
                   <button className='rounded h-12 w-36 text-gray-400 bg-slate-200 cursor-not-allowed mt-3 text-sm font-bold ml-16' disabled>
@@ -675,14 +675,14 @@ function ProjectList() {
                   </button>
                 ) : (
                   <Link to='/freelancer/send-proposal' state={{ project }} onClick={() => window.scrollTo(0, 0)}>
-                    <button className='rounded h-12 w-36 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>
+                    <button className='rounded h-12 w-36 text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF] mt-3 text-sm font-bold ml-16'>
                       Send Proposal
                     </button>
                   </Link>
                 )
               ) : (
                 <Link to='/login' onClick={() => window.scrollTo(0, 0)}>
-                  <button className='rounded h-12 w-36 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-3 text-sm font-bold ml-16'>
+                  <button className='rounded h-12 w-36 text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF] mt-3 text-sm font-bold ml-16'>
                     Send Proposal
                   </button>
                 </Link>
@@ -729,7 +729,7 @@ function ProjectList() {
                             variant="outlined"
                             onClick={prev}
                             disabled={currentPage === 1}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
@@ -739,7 +739,7 @@ function ProjectList() {
                             return (
                                 <span
                                     key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
                                     onClick={() => {
                                         window.scrollTo(0, 0);
                                         setCurrentPage(pageNumber);
@@ -756,7 +756,7 @@ function ProjectList() {
                             variant="outlined"
                             onClick={next}
                             disabled={currentPage === totalPages}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
@@ -769,7 +769,7 @@ function ProjectList() {
                             variant="outlined"
                             onClick={prev}
                             disabled={currentPage === 1}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
@@ -779,7 +779,7 @@ function ProjectList() {
                             return (
                                 <span
                                     key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
                                     onClick={() => setCurrentPage(pageNumber)}
                                 >
                                     {pageNumber}
@@ -792,7 +792,7 @@ function ProjectList() {
                             variant="outlined"
                             onClick={next}
                             disabled={currentPage === totalPages}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>

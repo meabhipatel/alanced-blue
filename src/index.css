@@ -19,7 +19,7 @@
 .checkbox-border-gradient {
     display: none;
     border: double 1px transparent;
-    background-image: linear-gradient(white, white), linear-gradient(to right, #00BF58, #E3FF75);
+    background-image: linear-gradient(white, white), linear-gradient(to right, #0909E9, #00D4FF);
     background-origin: border-box;
     background-clip: content-box, border-box;
 }
@@ -30,7 +30,7 @@ input[type="checkbox"]:checked + .checkbox-border-gradient {
 
 input[type="checkbox"]:checked + .checkbox-border-gradient .checkmark {
     display: inline-block;
-    color: #00BF58;
+    color: #0091c2;
 }
 
 input[type="checkbox"]:checked + .checkbox-border-gradient + .normal-checkbox {
