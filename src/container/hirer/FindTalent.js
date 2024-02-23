@@ -252,8 +252,8 @@ const FindTalent = () => {
     return (
       <>
       <Navbar/>
-      <div className="h-[43vh] bg-no-repeat -mt-[1.3rem] bg-cover" style={{ backgroundImage: `url(${mybg})` }}>
-        <div className='text-left pt-[3rem] ml-[13.5vw] text-2xl font-cardo'>
+      <div className="h-[43vh] bg-no-repeat -mt-[1.2rem] bg-cover" style={{ backgroundImage: `url(${mybg})` }}>
+        <div className='text-left pt-[6rem] ml-[13.5vw] text-2xl font-cardo'>
           <h1>Find & Hire Freelancers</h1>
           <p className='font-inter text-sm text-[#797979] font-normal mt-2'>More than 10K expert freelancers are waiting for you</p>
           <div className='lg:w-[44vw] bg-white p-3 lg:h-14 rounded-2xl lg:flex items-center mt-4 shadow-md'>
@@ -262,7 +262,7 @@ const FindTalent = () => {
               <input className='w-96 font-inter text-base ml-3 outline-none' placeholder='Search by Category' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
             </div>
             <div className=''>
-              <button className='rounded h-8 w-24 lg:ml-6 font-semibold text-base text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>Search</button>
+              <button className='rounded h-8 w-24 lg:ml-6 font-semibold text-base text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF]'>Search</button>
             </div>
           </div>
         </div>
@@ -283,7 +283,7 @@ const FindTalent = () => {
         onChange={handleSkillFilterChange}
       />
                   <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                      <span className="checkmark hidden"><i className="bi bi-check-lg pr-2 pt-2"></i></span>
+                      <span className="checkmark hidden"><i className="bi bi-check-lg pr-0.5 pt-2"></i></span>
                   </div>
                   <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
                   <span className="font-normal text-[#797979]">{skill}</span>
@@ -320,7 +320,7 @@ const FindTalent = () => {
                 railStyle={{ background: 'lightgray' }}
                 trackStyle={[
                   {
-                    background: 'linear-gradient(45deg, #00BF58, #E3FF75)',
+                    background: 'linear-gradient(45deg, #0909E9, #00D4FF)',
                     borderColor: '#65a30d',
                   },
                 ]}
@@ -329,14 +329,14 @@ const FindTalent = () => {
                     backgroundColor: 'white',
                     borderColor: 'transparent', 
                     borderRadius: '50%', // Set border radius for circular shape
-                    borderImage: 'linear-gradient(45deg, #00BF58, #E3FF75)',
+                    borderImage: 'linear-gradient(45deg, #0909E9, #00D4FF)',
                     borderImageSlice: 1,
                   },
                   {
                     backgroundColor: 'white',
                     borderColor: 'transparent',
                     borderRadius: '50%',
-                    borderImage: 'linear-gradient(45deg, #00BF58, #E3FF75)',
+                    borderImage: 'linear-gradient(45deg, #0909E9, #00D4FF)',
                     borderImageSlice: 1,
                   },
                 ]}
@@ -346,7 +346,7 @@ const FindTalent = () => {
                 type="text"
                 value={range[0]}
                 onChange={(e) => handleInputChange(0, e.target.value)}
-                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-60
+                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-60
                 focus:outline-none'
               /></div>
               <div className='basis-2/12 m-auto mt-4 text-center'><i class="bi bi-dash-lg text-[#475569]"></i></div>
@@ -354,7 +354,7 @@ const FindTalent = () => {
                 type="text"
                 value={range[1]}
                 onChange={(e) => handleInputChange(1, e.target.value)}
-                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-60
+                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-60
                 focus:outline-none'
               /></div>
               </div>
@@ -373,7 +373,7 @@ const FindTalent = () => {
               onChange={handleCityFilterChange}
             />
             <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-              <span className="checkmark hidden"><i className="bi bi-check-lg pr-2 pt-2"></i></span>
+              <span className="checkmark hidden"><i className="bi bi-check-lg pr-0.5 pt-2"></i></span>
             </div>
             <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
             <span className="font-normal text-[#797979]">{location}</span>
@@ -411,7 +411,7 @@ const FindTalent = () => {
                   onChange={handleLanguageFilterChange}
                     />
                   <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                      <span className="checkmark hidden"><i className="bi bi-check-lg pr-2 pt-2"></i></span>
+                      <span className="checkmark hidden"><i className="bi bi-check-lg pr-0.5 pt-2"></i></span>
                   </div>
                   <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
                   <span className="font-normal text-[#797979]">{language}</span>
@@ -450,7 +450,7 @@ const FindTalent = () => {
       />
               <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                 
-                  <span class="checkmark hidden"><i class="bi bi-check-lg pr-2 pt-2"></i></span>
+                  <span class="checkmark hidden"><i class="bi bi-check-lg pr-0.5 pt-2"></i></span>
               </div>
                    <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
               <span class="font-normal text-[#797979]">{exp}</span>
@@ -468,7 +468,7 @@ const FindTalent = () => {
       <h1  className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Freelancers that Matches your Job</h1>
       </div>
       <div class="w-40  mt-3 relative">
-      <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
       <div class="border-gray-600 border-b-2 rounded-lg"></div>
     </div>   
       </div>
@@ -493,7 +493,7 @@ const FindTalent = () => {
 {free.about && free.about.split(' ').length > 20 && (
     <button
         onClick={() => toggleShowMoreDes(free.id)}
-        className='font-inter text-green-600 text-[14px] cursor-pointer font-bold inline-block mb-2'
+        className='font-inter text-blue-600 text-[14px] cursor-pointer font-bold inline-block mb-2'
     >
         {showMoreDes[free.id] && showMoreDes[free.id].showAllDes ? 'See Less' : 'See More'}
     </button>
@@ -517,7 +517,7 @@ const FindTalent = () => {
                     JSON.parse(free.skills.replace(/'/g, '"')).length > 4 && (
                         <button
                             onClick={() => toggleShowMoreSkills(free.id)}
-                            className='font-inter text-green-600 text-[14px] cursor-pointer font-bold'
+                            className='font-inter text-blue-600 text-[14px] cursor-pointer font-bold'
                         >
                             {showMoreSkills[free.id] && showMoreSkills[free.id].showAll ? ' Less' : ' More'}
                         </button>
@@ -536,9 +536,9 @@ const FindTalent = () => {
           </div>
          
         <div className=' flex flex-row'>
-            <div className=' basis-8/12 absolute bottom-4 items-center font-inter text-green-600 text-[14px] cursor-pointer font-bold hover:underline'><Link to='/view-freelancer/detail' state={{ free }} onClick={() => window.scroll(0, 0) }><p>View more detail</p></Link></div>
+            <div className=' basis-8/12 absolute bottom-4 items-center font-inter text-blue-600 text-[14px] cursor-pointer font-bold hover:underline'><Link to='/view-freelancer/detail' state={{ free }} onClick={() => window.scroll(0, 0) }><p>View more detail</p></Link></div>
             <div className=' basis-4/12 absolute bottom-2 right-6 items-center space-x-2 ml-auto'><Link to='/login'>
-            <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Hire Now</span>
+            <span className="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold">Hire Now</span>
         </Link></div>
         </div>
       </div>
@@ -578,7 +578,7 @@ const FindTalent = () => {
                             variant="outlined"
                             onClick={prev}
                             disabled={currentPage === 1}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
@@ -588,7 +588,7 @@ const FindTalent = () => {
                             return (
                                 <span
                                     key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
                                     onClick={() => {
                                         window.scrollTo(0, 0);
                                         setCurrentPage(pageNumber);
@@ -605,7 +605,7 @@ const FindTalent = () => {
                             variant="outlined"
                             onClick={next}
                             disabled={currentPage === totalPages}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
