@@ -5,17 +5,17 @@ import people from '../../components/images/people.png'
 import files from '../../components/images/files.png'
 import notepad from '../../components/images/notepad.png'
 import cross from '../../components/images/cross.png'
-import phone from '../../components/images/phone.png'
+// import phone from '../../components/images/phone.png'
 import iicon from '../../components/images/iicon.svg'
 import paper from '../../components/images/paper.svg'
-import paperpin from '../../components/images/paperpin.svg'
-import attherate from '../../components/images/attherate.svg'
-import smiley from '../../components/images/smiley.svg'
+// import paperpin from '../../components/images/paperpin.svg'
+// import attherate from '../../components/images/attherate.svg'
+// import smiley from '../../components/images/smiley.svg'
 import vthreedots from '../../components/images/vthreedots.svg'
-import AudioVisualizer from './AudioVisualizer'
-import file_example_MP3_5MG from '../../components/images/file_example_MP3_5MG.mp3'
-import AudioMessages from './AudioMessages'
-import Drawer from '@mui/material/Drawer';
+// import AudioVisualizer from './AudioVisualizer'
+// import file_example_MP3_5MG from '../../components/images/file_example_MP3_5MG.mp3'
+// import AudioMessages from './AudioMessages'
+// import Drawer from '@mui/material/Drawer';
 import { useSelector } from 'react-redux'
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -24,7 +24,7 @@ import { useLocation } from "react-router-dom";
 import axios from 'axios';
 
 const Messages = () => {
-  const audioSrc = {file_example_MP3_5MG}
+  // const audioSrc = {file_example_MP3_5MG}
   const location = useLocation()
   const logindata = useSelector(state => state.login.login_data) || JSON.parse(localStorage.getItem('logindata'));
   const conversationName = location.state && location.state.conversationName
@@ -338,11 +338,11 @@ console.log("conversations",conversations)
         <div className="overflow-y-auto">
           {conversations != null ? conversations.map((convo, index) => (
           // <>{convo.from_user.id != logindata.id ?
-        <div key={index} onClick={() => convoname(convo.name, convo.from_user.id != logindata.id ? convo.from_user : convo.to_user)} class="flex flex-row py-4 px-2 justify-center items-center border-b-2 cursor-pointer hover:bg-green-50 active:bg-green-100">
+        <div key={index} onClick={() => convoname(convo.name, convo.from_user.id != logindata.id ? convo.from_user : convo.to_user)} class="flex flex-row py-4 px-2 justify-center items-center border-b-2 cursor-pointer hover:bg-blue-50 active:bg-blue-100">
           <div class="w-1/4 ml-4">
             <div className="relative">
               <img
-                src={convo.from_user.id != logindata.id ? "https://www.api.alanced.com"+convo.from_user.images_logo : "https://www.api.alanced.com"+convo.to_user.images_logo}
+                src={convo.from_user.id != logindata.id ? convo.from_user.images_logo == "/static/images/blank.png" ? "https://www.api.alanced.com"+"/media/images/blank.png" : "https://www.api.alanced.com"+convo.from_user.images_logo : convo.to_user.images_logo == "/static/images/blank.png" ? "https://www.api.alanced.com"+"/media/images/blank.png" : "https://www.api.alanced.com"+convo.to_user.images_logo}
                 class="object-cover h-12 w-12 rounded-full"
                 alt=""
               />
@@ -599,7 +599,7 @@ console.log("conversations",conversations)
         <div class="flex flex-col items-center w-full border-b-2">
           {/* <div class="font-semibold text-xl py-4">Mern Stack Group</div> */}
           <img
-            src={"https://www.api.alanced.com"+convouser.images_logo}
+            src={convouser.images_logo == "/static/images/blank.png" ? "https://www.api.alanced.com"+"/media/images/blank.png" : "https://www.api.alanced.com"+convouser.images_logo}
             class="object-cover rounded-full h-28 w-28 mt-12"
             alt=""
           />
