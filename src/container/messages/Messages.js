@@ -28,8 +28,8 @@ const Messages = () => {
   const location = useLocation()
   const logindata = useSelector(state => state.login.login_data) || JSON.parse(localStorage.getItem('logindata'));
   const conversationName = location.state && location.state.conversationName
-  console.log("conversationName : ",conversationName)
-  console.log("logindata :", logindata)
+  //console.log("conversationName : ",conversationName)
+  //console.log("logindata :", logindata)
   const [welcomeMessage, setWelcomeMessage] = useState("");
   const [message, setMessage] = useState("");
   const [page, setPage] = useState(2)
@@ -39,7 +39,7 @@ const Messages = () => {
   const [conversations, setConversations] = useState([])
   const [backup, setbackup] = useState([])
   const [convouser, setConvouser] = useState("")
-  console.log("--------------",messageHistory)
+  //console.log("--------------",messageHistory)
   const chatid = logindata.id
   // const { sendJsonMessage } = useWebSocket("ws://13.233.123.209:8000/4__2");
   
@@ -49,10 +49,10 @@ const Messages = () => {
     const names = [conversationName.hirer, conversationName.freelancer].sort();
     setConversation(`${names[0]}__${names[1]}`)
     setConvouser(conversationName.freelancerDetails)
-    console.log("names -------- ",names,conversation)
+    //console.log("names -------- ",names,conversation)
   }
 }, [conversationName])
-console.log("names -------- ",conversationName,"-----",conversation)
+//console.log("names -------- ",conversationName,"-----",conversation)
 // useEffect(() => {
    function chat_data(chatid) {
       axios.get(`https://www.api.alanced.com/chat/conversations/${chatid}`)
@@ -61,14 +61,14 @@ console.log("names -------- ",conversationName,"-----",conversation)
                 let Data = response.data.data
                 setConversations(Data)
                 setbackup(Data)
-                console.log("conversations",conversations)
-                  console.log("--------------------",response.data.data[0].name);
+                //console.log("conversations",conversations)
+                  //console.log("--------------------",response.data.data[0].name);
                   if(conversationName != null){
                   for(let i = 0; i < response.data.data.length; i++){
-                    console.log("================ >",response.data.data[i].name)
+                    //console.log("================ >",response.data.data[i].name)
                     if(conversationName.freelancer == response.data.data[i].from_user.id || conversationName.freelancer == response.data.data[i].to_user.id){
                       setConvouser(response.data.data[i].from_user.id != logindata.id ? response.data.data[i].from_user : response.data.data[i].to_user)
-                      console.log(conversationName.freelancer,"------",response.data.data[i].from_user.id,"-----",response.data.data[i].to_user.id)
+                      //console.log(conversationName.freelancer,"------",response.data.data[i].from_user.id,"-----",response.data.data[i].to_user.id)
                     }
                   }}
                   if(conversationName == null){
@@ -78,29 +78,29 @@ console.log("names -------- ",conversationName,"-----",conversation)
                   setConversation(Data[0].name)
                 }
               } else {
-                  console.log(response.data.message || 'Error fetching project');
+                  //console.log(response.data.message || 'Error fetching project');
               }
           })
           .catch(err => {
-              console.log(err.message);
+              //console.log(err.message);
           });
         }
 // }, [logindata.id]);
 useEffect(() => {
   chat_data(chatid)
 }, [logindata.id]);
-console.log("conversations",conversations)
+//console.log("conversations",conversations)
 // `ws://13.233.123.209:8000/${conversation}`
   const { readyState, sendJsonMessage } = useWebSocket(`wss://api.alanced.com:8001/${conversation}`, {
     onOpen: () => {
-      console.log("Connected!");
+      //console.log("Connected!");
     },
     onClose: () => {
-      console.log("Disconnected!");
+      //console.log("Disconnected!");
     },
     onMessage: (e) => {
       const data = JSON.parse(e.data);
-      console.log("data :",data)
+      //console.log("data :",data)
       switch (data.type) {
         case "welcome_message":
           setWelcomeMessage(data.message);
@@ -108,13 +108,13 @@ console.log("conversations",conversations)
         case "chat_message_echo":
           // setMessageHistory((prev) => [...prev, data.message]);
           setMessageHistory((prev) => [data.message, ...prev]);
-          console.log("message from chat_message_echo : ",messageHistory,"-------", data.message)
+          //console.log("message from chat_message_echo : ",messageHistory,"-------", data.message)
           break;
         case "last_50_messages":
           if (data != undefined){
           setMessageHistory(data.messages.slice())
           setHasMoreMessages(data.has_more)
-          console.log("message from last_50_messages : ",messageHistory,"-------", data.messages)
+          //console.log("message from last_50_messages : ",messageHistory,"-------", data.messages)
           }
           
           break;
@@ -135,7 +135,7 @@ console.log("conversations",conversations)
     [ReadyState.UNINSTANTIATED]: "Uninstantiated"
   }[readyState];
 
-  console.log("connection status -------------- ",connectionStatus)
+  //console.log("connection status -------------- ",connectionStatus)
 
   function filterconvo(query){
     
@@ -144,7 +144,7 @@ console.log("conversations",conversations)
     }
     var list = query.split(" ")
     var querys = list[1]
-    console.log("query",query.split(" "),querys)
+    //console.log("query",query.split(" "),querys)
     const filteredConversations = backup.filter(
       (conversation) => conversation.from_user.id != logindata.id ?
         conversation.from_user.first_Name.toLowerCase().includes(query.toLowerCase()) ||
@@ -194,26 +194,26 @@ console.log("conversations",conversations)
       setPage(page + 1);
       if(data.results.length > 0){
       // for (let i = 0; i < data.results.length; i++){
-      //   console.log("iiiiiiiii",data.results[i])
+      //   //console.log("iiiiiiiii",data.results[i])
         setMessageHistory((prev) => [...prev, ...data.results])
       // }
     }else{
       setHasMoreMessages(false);
     }
-      console.log(" Message fetched ------ >", data.results)
+      //console.log(" Message fetched ------ >", data.results)
     }
   }
 
   function handleChangeMessage(e){
     setMessage(e.target.value)
   }
-  console.log("message -------- ",message)
+  //console.log("message -------- ",message)
   // function handleChangeName(e){
   //   setName(e.target.value);
   // }
 
   const [time, setTime] = useState(new Date())
-  console.log("time :",time)
+  //console.log("time :",time)
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -246,12 +246,12 @@ console.log("conversations",conversations)
     setConversation(name)
     setPage(2)
     setConvouser(user)
-    console.log("convo name : ", name)
-    console.log("convo user : ",convouser)
+    //console.log("convo name : ", name)
+    //console.log("convo user : ",convouser)
   }
-  console.log("convo user : ",convouser)
+  //console.log("convo user : ",convouser)
   // useEffect(() => {
-  //   console.log("convo name after update:", conversation);
+  //   //console.log("convo name after update:", conversation);
   // }, [conversation]);
   const handleKeyDown = (e) => {
     // Check if the Enter key is pressed
@@ -284,7 +284,7 @@ console.log("conversations",conversations)
     setMessage("");
     fetchMessages()
     chat_data(chatid)
-    console.log("connection status -------------- ",connectionStatus)
+    //console.log("connection status -------------- ",connectionStatus)
   }
   
   const [isClicked, setIsClicked] = useState(true)
