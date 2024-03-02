@@ -16,13 +16,13 @@ const ViewProposalNewTab = () => {
   return (
    <>
    <Navbar/>
-   <Link to='/View-all/proposals'><div className='text-left ml-[12%] mt-[5%]'><i class="bi bi-chevron-left font-bold text-green-600 text-lg inline-block mr-2"></i><p className="text-green-600 text-[16px] font-inter inline-block font-semibold cursor-pointer hover:underline">View all proposals</p></div></Link>
+   <Link to='/View-all/proposals'><div className='text-left ml-[12%] mt-[5%]'><i class="bi bi-chevron-left font-bold text-blue-600 text-lg inline-block mr-2"></i><p className="text-blue-600 text-[16px] font-inter inline-block font-semibold cursor-pointer hover:underline">View all proposals</p></div></Link>
    <div className=' container-sm px-40'>
     <div className="flex mt-8 bg-[#FFFFFF] border border-gray-200 border-opacity-30">
   <div className="flex-[20%] p-6">
   <div className="relative w-24 h-24">
                     <img src={"https://www.api.alanced.com/"+bidData.bid.freelancer_profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
-                    <div class="absolute bottom-3 right-0.5 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                    <div class="absolute bottom-3 right-0.5 w-4 h-4 bg-blue-500 rounded-full border-2 border-white"></div>
                 </div>
   </div>
   <div className="flex-[30%] py-6">
@@ -35,11 +35,11 @@ const ViewProposalNewTab = () => {
                 <img src={locations} alt="Location" className="h-[13px] mr-1" />
                 <p className="text-[#797979] text-[14px] font-inter">{bidData.bid.freelancer_address}</p>
             </div>
-            <p className="text-green-600 text-[16px] font-inter py-3 font-semibold cursor-pointer hover:underline text-left">View Profile</p>
+            <p className="text-blue-600 text-[16px] font-inter py-3 font-semibold cursor-pointer hover:underline text-left">View Profile</p>
   </div>
   <div className="flex-[50%] p-6 text-right">
-  <Link to=''><span class="inline-block text-sm px-10 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold">Message</span></Link>
-            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
+  <Link to=''><span class="inline-block text-sm px-10 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-4 font-semibold">Message</span></Link>
+            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF] mt-3 mr-2">
                 <Link to=''><button class="px-11 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p></button></Link>
             </div>
   </div>
@@ -67,7 +67,7 @@ const ViewProposalNewTab = () => {
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
         <h1 className="font-cardo text-xl text-[#031136] font-normal">View Profile</h1>
     <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2 pb-6">{bidData.bid.freelancer_category}</p>
-    <Link to=''><span class="text-sm px-16 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">All Work</span></Link>
+    <Link to=''><span class="text-sm px-16 py-[10px] lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold">All Work</span></Link>
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
         <h1 className="font-cardo text-xl text-[#031136] font-normal">Hours Per Week</h1>
@@ -108,7 +108,7 @@ const ViewProposalNewTab = () => {
                     }}
                 />
             </div>
-            <p className='font-inter text-green-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-green-700 underline font-semibold'>Project Title</p>
+            <p className='font-inter text-blue-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-blue-700 underline font-semibold'>Project Title</p>
         </div>
 </div>
         </div>
@@ -122,7 +122,7 @@ const ViewProposalNewTab = () => {
       return skillsArray.map((skill, index) => (
         <div
           key={index}
-          className="mr-3 my-2 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
+          className="mr-3 my-2 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-blue-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
         >
           <p className="text-center">{skill}</p>
         </div>

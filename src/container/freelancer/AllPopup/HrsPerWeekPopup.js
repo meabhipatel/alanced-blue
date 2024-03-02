@@ -50,8 +50,8 @@ const HrsPerWeekPopup = ({ closeHrsperWeek }) => {
             </label>
             <p className="font-inter text-[14px] text-[#031136] font-normal text-left opacity-50 py-3">This means you'll start with a contract and may later explore a full-time option</p>
             <div className="mt-8 flex justify-end">
-            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" >Save</span></Link>
-            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={closeHrsperWeek}>
+            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-3 font-semibold" >Save</span></Link>
+            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]" onClick={closeHrsperWeek}>
                 <Link to=''><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
             </div>     
             </div>

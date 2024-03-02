@@ -35,13 +35,13 @@ const SearchJobs = () => {
     <div className='my-3 flex flex-wrap'>
     <Link to='/saved-jobs' className="flex-grow md:flex-none p-1">
                 <span 
-                    className={`${commonStyle} px-3 my-3 md:px-8 font-inter font-normal text-sm text-[#797979] opacity-[50%] ${selectedButton === 'Saved Jobs' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
+                    className={`${commonStyle} px-3 my-3 md:px-8 font-inter font-normal text-sm text-[#797979] opacity-[50%] ${selectedButton === 'Saved Jobs' ? "bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('Saved Jobs')}>
                     Saved Jobs
                 </span>
             </Link>  
             <Link to='/search-jobs'className="flex-grow md:flex-none p-1">
-                <span className={`${commonStyle} px-3 md:px-8 text-base font-inter font-bold ${selectedButton === 'Search' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
+                <span className={`${commonStyle} px-3 md:px-8 text-base font-inter font-bold ${selectedButton === 'Search' ? "bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('Search')}>
                     Search
                 </span>
@@ -143,7 +143,7 @@ const SearchJobs = () => {
                 className='ml-2.5'
                 trackStyle={[
                   {
-                    background: 'linear-gradient(45deg, #00BF58, #E3FF75)',
+                    background: 'linear-gradient(45deg, #0909E9, #00D4FF)',
                     borderColor: '#65a30d',
                   },
                 ]}
@@ -152,14 +152,14 @@ const SearchJobs = () => {
                     backgroundColor: 'white',
                     borderColor: 'transparent', 
                     borderRadius: '50%', 
-                    borderImage: 'linear-gradient(45deg, #00BF58, #E3FF75)',
+                    borderImage: 'linear-gradient(45deg, #0909E9, #00D4FF)',
                     borderImageSlice: 1,
                   },
                   {
                     backgroundColor: 'white',
                     borderColor: 'transparent',
                     borderRadius: '50%',
-                    borderImage: 'linear-gradient(45deg, #00BF58, #E3FF75)',
+                    borderImage: 'linear-gradient(45deg, #0909E9, #00D4FF)',
                     borderImageSlice: 1,
                   },
                 ]}
@@ -169,7 +169,7 @@ const SearchJobs = () => {
                 type="text"
                 value={"$"+range[0]}
                 onChange={(e) => handleInputChange(0, e.target.value)}
-                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-28 focus:border-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-60
+                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-28 focus:border-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-60
                 focus:outline-none'
               /></div>
               <div className='basis-2/12 m-auto mt-4 px-5'><i class="bi bi-dash-lg text-[#475569]"></i></div>
@@ -177,7 +177,7 @@ const SearchJobs = () => {
                 type="text"
                 value={"$"+range[1]}
                 onChange={(e) => handleInputChange(1, e.target.value)}
-                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-28 focus:border-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-60
+                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-28 focus:border-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-60
                 focus:outline-none'
               /></div>
               </div>

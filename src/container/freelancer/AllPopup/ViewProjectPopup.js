@@ -152,9 +152,9 @@ useEffect(() => {
         
         <div className=' container-sm px-40'>
         {clickable ?  
-        <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><LightbulbOutlinedIcon/><span className='ml-4'>You have already submitted a proposal for this project.</span><br/><span className='text-green-700 font-bold ml-10'><Link to="/view/SelfBidProject" state={{ project }}>View Proposal</Link></span></div>:  '' }
+        <div className='h-16 mt-4 bg-blue-100 pl-5 rounded-md pt-2 text-left'><LightbulbOutlinedIcon/><span className='ml-4'>You have already submitted a proposal for this project.</span><br/><span className='text-blue-700 font-bold ml-10'><Link to="/view/SelfBidProject" state={{ project }}>View Proposal</Link></span></div>:  '' }
         {project.is_hired && !clickable ? 
-        <div className='h-16 mt-4 bg-green-100 pl-5 rounded-md pt-2 text-left'><DoDisturbAltOutlinedIcon/><span className='ml-4'>This project is closed ,you can't add proposal now</span></div>:  '' }
+        <div className='h-16 mt-4 bg-blue-100 pl-5 rounded-md pt-2 text-left'><DoDisturbAltOutlinedIcon/><span className='ml-4'>This project is closed ,you can't add proposal now</span></div>:  '' }
             <div className=' flex flex-row my-6'>
                 <div className=' basis-8/12 text-left'>
                     <h1 className='text-xl font-normal font-cardo'>{project.title}</h1>
@@ -229,12 +229,12 @@ useEffect(() => {
                 </div>
                 <div className=' basis-4/12'>
                 <div className='mt-6 ml-[16%]'>
-                <Link to="/freelancer/add-bid" style={{pointerEvents: clickable|| project.is_hired ? 'none' : ''}} state={{ projectData }} onClick={() => window.scrollTo(0, 0)}><span class={clickable || project.is_hired? 'px-12 py-[15px] lg:mt-0 bg-slate-200 border rounded border-none text-white font-inter text-base font-normal':'px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal'}>Apply Now</span></Link>
+                <Link to="/freelancer/add-bid" style={{pointerEvents: clickable|| project.is_hired ? 'none' : ''}} state={{ projectData }} onClick={() => window.scrollTo(0, 0)}><span class={clickable || project.is_hired? 'px-12 py-[15px] lg:mt-0 bg-slate-200 border rounded border-none text-white font-inter text-base font-normal':'px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-inter text-base font-normal'}>Apply Now</span></Link>
                 </div>
-                {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-8 ml-[30%]">
+                {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF] mt-8 ml-[30%]">
                 <button class="rounded-sm px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-inter font-bold text-base py-[4px] px-8" onClick={(event) => handleClick(event,project)}>{ 
         localStorage.getItem(`isSaved_${project.id}`) === 'true' 
-        ? <><i className="fa fa-heart p-1 text-green-600"></i> Unsave Job</>
+        ? <><i className="fa fa-heart p-1 text-blue-600"></i> Unsave Job</>
         : <><i className="fa fa-heart-o p-1"></i> Save Job</> 
     }</p></button>
                 </div>  */}

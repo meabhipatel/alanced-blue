@@ -481,7 +481,7 @@ const [bidsCount, setBidsCount] = useState({});
                             variant="outlined"
                             onClick={prev}
                             disabled={currentPage === 1}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
@@ -491,7 +491,7 @@ const [bidsCount, setBidsCount] = useState({});
                             return (
                                 <span
                                     key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
                                     onClick={() => setCurrentPage(pageNumber)}
                                 >
                                     {pageNumber}
@@ -504,7 +504,7 @@ const [bidsCount, setBidsCount] = useState({});
                             variant="outlined"
                             onClick={next}
                             disabled={currentPage === totalPages}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
@@ -517,7 +517,7 @@ const [bidsCount, setBidsCount] = useState({});
                             variant="outlined"
                             onClick={prev}
                             disabled={currentPage === 1}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
@@ -527,7 +527,7 @@ const [bidsCount, setBidsCount] = useState({});
                             return (
                                 <span
                                     key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
                                     onClick={() => {
                                         window.scrollTo(0, 0);
                                         setCurrentPage(pageNumber);
@@ -544,7 +544,7 @@ const [bidsCount, setBidsCount] = useState({});
                             variant="outlined"
                             onClick={next}
                             disabled={currentPage === totalPages}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>

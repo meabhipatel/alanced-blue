@@ -116,9 +116,9 @@ useEffect(() => {
                 <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Language</h1>
                 <div className="border rounded-md p-2 flex items-center flex-wrap my-3">
     {Array.isArray(Language) && Language.map((language, index) => (
-        <div key={index} className="bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border-none text-white font-semibold rounded px-2 py-1.5 mr-3 my-2 flex items-center">
+        <div key={index} className="bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border-none text-white font-semibold rounded px-2 py-1.5 mr-3 my-2 flex items-center">
             <span>{language}</span>
-            <button onClick={() => removeLanguage(index)} className="ml-2 mt-1 pb-0.5 text-sm bg-white text-green-500 rounded-full w-4 h-4 flex justify-center items-center">
+            <button onClick={() => removeLanguage(index)} className="ml-2 mt-1 pb-0.5 text-sm bg-white text-blue-500 rounded-full w-4 h-4 flex justify-center items-center">
                 &times;
             </button>
         </div>
@@ -161,8 +161,8 @@ useEffect(() => {
                 {error && <p className="text-red-500 mt-2">{error}</p>}
             </div>
             <div className="mt-8 flex justify-end">
-                <Link to="" onClick={handleSave}><span className="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" >Save</span></Link>
-                <div className="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={closeEditLanguage}>
+                <Link to="" onClick={handleSave}><span className="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-3 font-semibold" >Save</span></Link>
+                <div className="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]" onClick={closeEditLanguage}>
                     <Link to=''><button className="px-2 py-1 bg-white"><p className="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
                 </div>
             </div>

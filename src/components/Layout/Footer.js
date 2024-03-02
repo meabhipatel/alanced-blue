@@ -120,7 +120,7 @@ const onChange = e =>{
     <div class="p-4">
     <div className='bg-[#F4F5F9] lg:h-[220px] lg:w-[350px] -mt-6 lg:-ml-[100px]'>
         <h5 class="text-xl font-bold font-cardo pt-[22px] text-start ml-[23px]">Subscribe</h5>
-        <input type="email" className='mt-3 lg:-ml-[60px] p-2 text-sm focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='Email Address' name='email' onChange={onChange} value={addUserSub.email}/>
+        <input type="email" className='mt-3 lg:-ml-[60px] p-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='Email Address' name='email' onChange={onChange} value={addUserSub.email}/>
         <button class="inline-block text-sm px-4 py-[12px] lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold" onClick={AddUserSubscribe}><img src={arrow} alt=""/></button>
         <p className='text-[14px] pt-3 text-left pl-6 opacity-50'>Hello, we are Lift Media. Our goal is to translate <br />the positive effects from revolutionizing how <br /> companies engage with their clients & their <br /> team.</p>
         </div>

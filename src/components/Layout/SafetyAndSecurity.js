@@ -14,12 +14,12 @@ const SafetyAndSecurity = () => {
     <>
     <Navbar/>
     <div className='mt-6 mx-[9%]'>
-      <h1 className="font-cardo text-4xl text-green-600 text-left font-semibold p-3">Safety and security</h1>
+      <h1 className="font-cardo text-4xl text-blue-600 text-left font-semibold p-3">Safety and security</h1>
       <h1 className="font-inter text-md text-[#031136] text-left font-normal opacity-40 py-6 px-3">
       At Alanced, we prioritize your safety, trust, and the security of your data above all else. We understand that in the world of freelancing, you're not just working with us – you're entrusting us with your projects, your professional reputation, and your personal data. Here's how we're committed to keeping that trust.
       </h1>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-4 px-3 mt-5 cursor-pointer items-center">
-    <h4 className="font-cardo text-2xl text-green-600 font-bold text-left col-span-1 md:col-span-2 lg:col-span-1">Trusted by</h4>
+    <h4 className="font-cardo text-2xl text-blue-600 font-bold text-left col-span-1 md:col-span-2 lg:col-span-1">Trusted by</h4>
     <div class="p-4 col-span-1">
         <img src={coinbase} alt="" />
     </div>

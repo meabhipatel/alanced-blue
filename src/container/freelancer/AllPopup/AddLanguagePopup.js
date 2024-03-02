@@ -25,7 +25,7 @@ const AddLanguagePopup = ({ closeAddLanguage }) => {
                 <select 
                     value={selectedLanguage} 
                     onChange={(e) => setSelectedLanguage(e.target.value)}
-                    className="border py-2 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 flex-1 bg-white opacity-50"
+                    className="border py-2 px-2 rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600 flex-1 bg-white opacity-50"
                 >
                     <option value="" disabled>Select Language</option>
                     {languages.map(language => (
@@ -36,7 +36,7 @@ const AddLanguagePopup = ({ closeAddLanguage }) => {
 
             <div className="flex flex-col flex-1">
                 <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left mb-2">Proficiency</h1>
-                <select className="border py-2 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 flex-1 bg-white opacity-50">
+                <select className="border py-2 px-2 rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600 flex-1 bg-white opacity-50">
                     <option value="" disabled selected>Language Proficiency</option>
                     <option value="">Basic</option>
                     <option value="">Conversational</option>
@@ -48,8 +48,8 @@ const AddLanguagePopup = ({ closeAddLanguage }) => {
             </div>
 
             <div className="mt-8 flex justify-end">
-            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" >Add</span></Link>
-            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={closeAddLanguage}>
+            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-3 font-semibold" >Add</span></Link>
+            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]" onClick={closeAddLanguage}>
                 <Link to=''><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
             </div>     
             </div>

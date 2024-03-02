@@ -19,27 +19,27 @@ const AddCertificatesPopup = ({ closeAddCertificates }) => {
     </div>
     <div className='mt-10'>
             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Name</h1>
-            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'/>
+            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600'/>
             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Issuing Organization</h1>
-            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'/>
+            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600'/>
             <div className="flex justify-between space-x-6">
     <div className="flex-1">
         <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Issued Date</h1>
-        <input type="date" max={today} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'/>
+        <input type="date" max={today} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600'/>
     </div>
     <div className="flex-1">
         <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Expiration Date</h1>
-        <input type="date" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'/>
+        <input type="date" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600'/>
     </div>
 </div>
 
             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Credential ID</h1>
-            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'/>
+            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600'/>
             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Credential URL</h1>
-            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'/>
+            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600'/>
             <div className="mt-8 flex justify-end">
-            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" >Add</span></Link>
-            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={closeAddCertificates}>
+            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-3 font-semibold" >Add</span></Link>
+            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]" onClick={closeAddCertificates}>
                 <Link to=''><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
             </div>     
             </div>

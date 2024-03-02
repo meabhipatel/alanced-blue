@@ -52,16 +52,16 @@ const HirerAccountPopup = ({ isAvailable,setIsAvailable,handleAccountClose }) =>
                     <div className='flex gap-5 w-full'>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>First Name</span>
-                    <input type="text" name='first_Name' defaultValue={hirerData.first_Name} onChange={e => {setfirst_Name(e.target.value)}} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input type="text" name='first_Name' defaultValue={hirerData.first_Name} onChange={e => {setfirst_Name(e.target.value)}} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder=''/>
                     </div>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Last Name</span>
-                    <input type="text" name='last_Name' defaultValue={hirerData.last_Name} onChange={e => {setlast_Name(e.target.value)}} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input type="text" name='last_Name' defaultValue={hirerData.last_Name} onChange={e => {setlast_Name(e.target.value)}} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder=''/>
                     </div>
                     </div>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Email</span>
-                    <input type="text" name='email' defaultValue={hirerData.email} onChange={e => {setemail(e.target.value)}} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder=''/>
+                    <input type="text" name='email' defaultValue={hirerData.email} onChange={e => {setemail(e.target.value)}} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder=''/>
                     </div>
                     <div className="flex justify-start items-center space-x-4 gap-6 mt-3 mr-auto"> 
             <label className="flex items-center">
@@ -78,8 +78,8 @@ const HirerAccountPopup = ({ isAvailable,setIsAvailable,handleAccountClose }) =>
                         </div>
                         
                             <div className="mt-8 flex justify-end">
-                            <Link to='/hirer/profile-edit' onClick={handleSave}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold">Save</span></Link>
-                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
+                            <Link to='/hirer/profile-edit' onClick={handleSave}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-3 font-semibold">Save</span></Link>
+                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]">
                                 <Link to=''><button class="px-2 py-1 bg-white rounded-sm" onClick={handleAccountClose}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
                             </div>     
                             </div>

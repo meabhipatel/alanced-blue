@@ -45,7 +45,7 @@ const MyJobs = () => {
     </div>
     <div className="flex items-center">
     <Link to=''>
-            <span className='inline-block text-sm py-[6px] px-4 mt-4 lg:mt-0 border rounded font-inter font-semibold bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none mr-2'>
+            <span className='inline-block text-sm py-[6px] px-4 mt-4 lg:mt-0 border rounded font-inter font-semibold bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white border-none mr-2'>
             See Timesheet
             </span>
         </Link>
@@ -163,10 +163,10 @@ const MyJobs = () => {
 </div>
 </div>
 {/* <div className='px-4 md:px-8 py-6 border-b border-gray-200 border-opacity-30'>
-<Link to='/freelancer/all-contracts'><span class="text-sm py-[8px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold lg:px-[402px] px-6">View All Contracts</span></Link>
+<Link to='/freelancer/all-contracts'><span class="text-sm py-[8px] lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold lg:px-[402px] px-6">View All Contracts</span></Link>
 </div> */}
 <Link to='/freelancer/all-contracts' onClick={() => window.scroll(0, 0)}>
-<div className=' bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg mt-5 ml-5 mr-5'><p className='py-2 text-center text-sm text-white font-semibold'>View All Contracts</p></div></Link>
+<div className=' bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg mt-5 ml-5 mr-5'><p className='py-2 text-center text-sm text-white font-semibold'>View All Contracts</p></div></Link>
 </div>
     </div>
     <HomeSection4/>

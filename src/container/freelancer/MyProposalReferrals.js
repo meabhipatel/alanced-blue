@@ -19,19 +19,19 @@ const MyProposalReferrals = () => {
     <div className='my-3 flex flex-wrap'>
     <Link to='/my-proposals' className="flex-grow md:flex-none p-1">
                 <span 
-                    className={`${commonStyle} px-3 my-3 md:px-8 ${selectedButton === 'Active' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white font-inter text-sm font-normal border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
+                    className={`${commonStyle} px-3 my-3 md:px-8 ${selectedButton === 'Active' ? "bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white font-inter text-sm font-normal border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('Active')}>
                     Active
                 </span>
             </Link>  
             <Link to='/freelancer/view-referals'className="flex-grow md:flex-none p-1">
-                <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'Referrals' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white font-inter text-sm font-normal border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
+                <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'Referrals' ? "bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white font-inter text-sm font-normal border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('Referrals')}>
                     Referrals
                 </span>
             </Link>
             {/* <Link to='/freelancer/view-archived'className="flex-grow md:flex-none p-1">
-                <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'Archieved' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white font-inter text-sm font-normal border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
+                <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'Archieved' ? "bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white font-inter text-sm font-normal border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('Archieved')}>
                     Archieved
                 </span>

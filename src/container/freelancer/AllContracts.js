@@ -97,7 +97,7 @@ function highlightText(text, query) {
                     <img src={search} alt="Search Icon" className="h-5 w-5" />
                     <input className='w-full  h-7 font-normal lg:text-sm border-0 outline-none font-inter text-sm' placeholder='Search contracts' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
                 </div>
-                <button className='rounded h-8 w-8 p-2 text-xs lg:text-sm font-semibold text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>
+                <button className='rounded h-8 w-8 p-2 text-xs lg:text-sm font-semibold text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF]'>
                     <img src={searchbtn} alt="Search Icon" />
                 </button>
             </section>
@@ -114,7 +114,7 @@ function highlightText(text, query) {
             </div>
             <div className=' basis-3/12'></div>
             <div className='basis-1/12'>
-            <div className={isJobOpen(contract.project_deadline) ? 'text-green-600 mt-1 font-semibold' : 'text-yellow-600 mt-1 font-semibold'}>
+            <div className={isJobOpen(contract.project_deadline) ? 'text-blue-600 mt-1 font-semibold' : 'text-yellow-600 mt-1 font-semibold'}>
                 {isJobOpen(contract.project_deadline) ? 'Active' : 'Completed'}
             </div>
             </div>
@@ -125,11 +125,11 @@ function highlightText(text, query) {
             </div>
             <div className=' basis-5/12'>
             <p className='font-inter text-[14px] text-[#031136] font-normal text-left'>
-        Received: <span className='text-[#03C058]'>{formatDateInput(contract.Received_time)}</span></p>
+        Received: <span className='text-[#0365c0]'>{formatDateInput(contract.Received_time)}</span></p>
             </div>
             <div className=' basis-2/12'>
             <p className='font-inter text-[14px] text-[#031136] font-normal text-left'>
-        Deadline: <span className='text-[#03C058]'>{formatDateInput(contract.project_deadline)}</span></p>
+        Deadline: <span className='text-[#0365c0]'>{formatDateInput(contract.project_deadline)}</span></p>
             </div>
         </div>
         </div>
@@ -162,7 +162,7 @@ function highlightText(text, query) {
                                     variant="outlined"
                                     onClick={prev}
                                     disabled={currentPage === 1}
-                                    style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                                    style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                                 >
                                     <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                                 </IconButton>
@@ -172,7 +172,7 @@ function highlightText(text, query) {
                                     return (
                                         <span
                                             key={pageNumber}
-                                            className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                            className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
                                             onClick={() => {
                                                 window.scrollTo(0, 0);
                                                 setCurrentPage(pageNumber);
@@ -189,7 +189,7 @@ function highlightText(text, query) {
                                     variant="outlined"
                                     onClick={next}
                                     disabled={currentPage === totalPages}
-                                    style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                                    style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                                 >
                                     <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                                 </IconButton>

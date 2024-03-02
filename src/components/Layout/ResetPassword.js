@@ -89,7 +89,7 @@ const onChange = e =>{
         <span className="font-semibold text-[15px] tracking-widest ml-2 font-poppins text-[#031136] md:text-[16px]">ALANCED</span>
     </div> 
 </Link>
-   <div class="bg-white shadow-lg p-10 pt-7 lg:w-[550px] lg:h-[340px] h-[460px] w-[350px] max-w-2xl border border-lime-300">
+   <div class="bg-white shadow-lg p-10 pt-7 lg:w-[550px] lg:h-[340px] h-[460px] w-[350px] max-w-2xl border border-blue-300">
    <h3 className='text-center font-cardo mb-8 text-xl'>Reset Your Password</h3>
    <div className='text-left'>
    <label class="text-sm font-cardo">
@@ -99,17 +99,17 @@ const onChange = e =>{
   <div class="relative">
       <input 
         type={showPassword1 ? "text" : "password"} 
-        className='border mt-2 mb-5 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' 
+        className='border mt-2 mb-5 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' 
         placeholder='•••••••••••' 
         name='password' 
         onChange={onChange} 
         value={resetuserpass.password}
       />
       <span onClick={togglePasswordVisibility1} class="absolute inset-y-0 mb-2.5 right-0 pr-3 flex items-center cursor-pointer">
-        <i className={`fa ${showPassword1 ? 'fa-eye' : 'fa-eye-slash'} text-lime-600`}></i>
+        <i className={`fa ${showPassword1 ? 'fa-eye' : 'fa-eye-slash'} text-blue-600`}></i>
       </span>
     </div>
-   {/* <input type="password" className='border mt-2 mb-5 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='•••••••••••' name='password' onChange={onChange} value={resetuserpass.password}/> */}
+   {/* <input type="password" className='border mt-2 mb-5 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='•••••••••••' name='password' onChange={onChange} value={resetuserpass.password}/> */}
    <div className='text-left'>
    <label class="text-sm font-cardo">
      Confirm New Password <span class="text-red-500">*</span>
@@ -118,19 +118,19 @@ const onChange = e =>{
   <div class="relative">
       <input 
         type={showPassword2 ? "text" : "password"} 
-        className='border mt-2 mb-5 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' 
+        className='border mt-2 mb-5 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' 
         placeholder='•••••••••••' 
         name='password2' 
         onChange={onChange} 
         value={resetuserpass.password2}
       />
       <span onClick={togglePasswordVisibility2} class="absolute inset-y-0 mb-1 right-0 pr-3 flex items-center cursor-pointer">
-      <i className={`fa ${showPassword2 ? 'fa-eye' : 'fa-eye-slash'} text-lime-600`}></i>
+      <i className={`fa ${showPassword2 ? 'fa-eye' : 'fa-eye-slash'} text-blue-600`}></i>
       </span>
     </div>
-   {/* <input type="password" className='border mt-2 mb-5 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='•••••••••••' name='password2' onChange={onChange} value={resetuserpass.password2}/> */}
+   {/* <input type="password" className='border mt-2 mb-5 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='•••••••••••' name='password2' onChange={onChange} value={resetuserpass.password2}/> */}
    <button onClick={ResetUserPassword}
-    class="block w-full px-4 py-2 mt-2 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-md  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold">Reset Password</button>
+    class="block w-full px-4 py-2 mt-2 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-md  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#0909E9] to-[#00D4FF]  text-white font-semibold">Reset Password</button>
    </div>
 </div>
   )

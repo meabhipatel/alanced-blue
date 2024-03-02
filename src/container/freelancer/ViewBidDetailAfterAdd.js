@@ -57,7 +57,7 @@ const ViewBidDetailAfterAdd = () => {
         <Navbar/>
         <div className=' container-sm px-36'>
         <div className=' w-full mt-10 bg-[#d9f3e6] h-[60px] rounded-xl'>
-            <h1 className=' text-left font-inter text-base p-5 mr-8'><span><i class="bi bi-check-circle mr-[25px] text-green-600"></i></span>Your Proposal was submitted</h1>
+            <h1 className=' text-left font-inter text-base p-5 mr-8'><span><i class="bi bi-check-circle mr-[25px] text-blue-600"></i></span>Your Proposal was submitted</h1>
         </div>
             <h1 className='font-inter text-2xl text-left mt-10'>Proposal Details</h1>
             <div className=' flex flex-row'>
@@ -68,7 +68,7 @@ const ViewBidDetailAfterAdd = () => {
                     <div className=' basis-8/12'>
                     <h1 className=' text-xl font-inter font-medium text-left'>{projectdata.project.title}</h1>
                     <div className=' flex flex-row'>
-                    <div className=' basis-4/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-green-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  w-[90%] bg-opacity-[60%]">{projectdata.project.category}</div></div>
+                    <div className=' basis-4/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-blue-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  w-[90%] bg-opacity-[60%]">{projectdata.project.category}</div></div>
                     <div className=' basis-4/12 mt-5 ml-2'><p className=' text-sm font-medium font-inter text-left opacity-[50%]'>Posted {timeAgo(projectdata.project.project_creation_date)}</p></div>
                     </div>
                     {/* <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>
@@ -79,15 +79,15 @@ const ViewBidDetailAfterAdd = () => {
                     </p>
                 {projectdata.project.description.length > 200 && (
                     <p
-                    className='mt-3 text-base font-semibold text-green-600 text-left cursor-pointer'
+                    className='mt-3 text-base font-semibold text-blue-600 text-left cursor-pointer'
                     onClick={toggleDescription}
                     >
                     {showFullDescription ? 'less' : 'more'}
                     </p>
                 )}
                     {/* <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>{projectData.project.description}</p>
-                    <p className=' mt-3 text-base font-semibold text-green-600 text-left'>more</p> */}
-                    {/* <p className='mb-5 mt-5 text-base font-semibold text-green-600 text-left'>View job posting</p> */}
+                    <p className=' mt-3 text-base font-semibold text-blue-600 text-left'>more</p> */}
+                    {/* <p className='mb-5 mt-5 text-base font-semibold text-blue-600 text-left'>View job posting</p> */}
                     </div>
                     <div className=' basis-1/12'></div>
                     <div className=' basis-3/12 border-l border-[#E7E8F2]'>
@@ -118,14 +118,14 @@ const ViewBidDetailAfterAdd = () => {
                 <h1 className='text-base font-medium font-inter text-left mt-5'>Skills & Experties</h1>
                 <div className="text-left mt-5">
                 {JSON.parse(projectdata.project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
-                    <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%] mt-4">
+                    <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-28 text-blue-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%] mt-4">
                     <p className=" text-center">{skill}</p>
                 </div>
                 ))}
-                {/* <div className="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-24 text-green-800 px-3 py-[3px] font-semibold text-sm dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
+                {/* <div className="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-24 text-blue-800 px-3 py-[3px] font-semibold text-sm dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
                     <p className="text-center">React</p>
                 </div>
-                <div className="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-24 ml-3 text-green-800 px-3 py-[3px] font-semibold text-sm dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
+                <div className="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  w-24 ml-3 text-blue-800 px-3 py-[3px] font-semibold text-sm dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
                     <p className="text-center">Django</p>
                 </div> */}
                 </div>
@@ -145,8 +145,8 @@ const ViewBidDetailAfterAdd = () => {
                 <p className='text-[15px] font-medium font-inter text-left opacity-70'>The estimated payment, after service fees.</p>
                 <p className='text-base font-medium font-inter text-left mt-5 opacity-70'>$ {addedbid.bid_amount-(addedbid.bid_amount/10)}</p>
                 {/* <div className=' flex flex-row mt-5  mb-5'>
-            <div className=' basis-3/12' ><button className='h-10 w-40 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-base font-semibold rounded'>Change Terms</button></div>
-            <div class="p-0.5 mt-5 rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] ml-5">
+            <div className=' basis-3/12' ><button className='h-10 w-40 text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF] mt-5 text-base font-semibold rounded'>Change Terms</button></div>
+            <div class="p-0.5 mt-5 rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF] ml-5">
             <button class="px-2 py-1 bg-[#f8faf9] rounded"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-bold text-sm py-[4px] px-[8px]">Withdraw Proposal</p></button>
             </div>
             </div> */}
@@ -175,7 +175,7 @@ const ViewBidDetailAfterAdd = () => {
                     </div>
                     <div className='mt-5 ml-7'>
                         <p className=' text-[17px] font-inter font-normal text-left'>History</p>
-                        {/* <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>20 to 50 proposals<span className=' ml-3 text-green-600'><i class="bi bi-question-circle-fill"></i></span></p>
+                        {/* <p className='text-[15px] font-inter font-normal opacity-75 mt-2 text-left'>20 to 50 proposals<span className=' ml-3 text-blue-600'><i class="bi bi-question-circle-fill"></i></span></p>
                         <p className='text-[14px] font-inter font-normal opacity-75 mt-2 text-left'>1 job posted</p> */}
                         <p className='text-[12px] font-inter font-normal opacity-75 mt-2 text-left'>Member since {projectdata.project.project_owner_date_of_creation}</p>
                     </div>

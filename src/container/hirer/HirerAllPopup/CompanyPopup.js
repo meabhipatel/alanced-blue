@@ -58,23 +58,23 @@ const HirerCompanyPopup = ({ handleDetailsClose }) => {
                     <div className='flex gap-5 w-full'>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Company Name</span>
-                    <input type="text" defaultValue={hirerData.Company_Name} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' onChange={e => {setCompany_Name(e.target.value)}} placeholder=''/>
+                    <input type="text" defaultValue={hirerData.Company_Name} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' onChange={e => {setCompany_Name(e.target.value)}} placeholder=''/>
                     </div>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Establish</span>
-                    <input type="date" defaultValue={hirerData.Company_Establish} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' onChange={e => {setCompany_Establish(formatToYYYYMMDD(e.target.value))}} placeholder=''/>
+                    <input type="date" defaultValue={hirerData.Company_Establish} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' onChange={e => {setCompany_Establish(formatToYYYYMMDD(e.target.value))}} placeholder=''/>
                     </div>
                     </div>
                     <div className='flex flex-col w-full'>
                     <span className='text-left'>Website</span>
-                    <input type="text" defaultValue={hirerData.social_media} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' onChange={e => {setsocial_media(e.target.value)}} placeholder=''/>
+                    <input type="text" defaultValue={hirerData.social_media} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' onChange={e => {setsocial_media(e.target.value)}} placeholder=''/>
                     </div>
                     
                         </div>
                         
                             <div className="mt-8 flex justify-end">
-                            <Link to='' onClick={handleSave}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold">Save</span></Link>
-                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
+                            <Link to='' onClick={handleSave}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-3 font-semibold">Save</span></Link>
+                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]">
                                 <Link to=''><button class="px-2 py-1 bg-white rounded-sm" onClick={handleDetailsClose}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
                             </div>     
                             </div>

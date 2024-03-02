@@ -54,7 +54,7 @@ const AudioMessages = () => {
     <div className='w-fit rounded-full h-14 pl-6 pr-6 flex bg-[#F6FAFD]'>
       
       <div id="waveform" className='w-72 -mt-[18px] mr-12'></div>
-      <button onClick={togglePlay}><div className='h-7 w-7 rounded-full text-white flex justify-center items-center bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>{play ? <i class="bi bi-play-fill text-xl ml-[2px] mb-[1px]"></i> : <i class="bi bi-pause-fill text-xl ml-[2px] mb-[1px]"></i>}</div></button>
+      <button onClick={togglePlay}><div className='h-7 w-7 rounded-full text-white flex justify-center items-center bg-gradient-to-r from-[#0909E9] to-[#00D4FF]'>{play ? <i class="bi bi-play-fill text-xl ml-[2px] mb-[1px]"></i> : <i class="bi bi-pause-fill text-xl ml-[2px] mb-[1px]"></i>}</div></button>
       {/* You can add any other content or controls here */}
     </div>
   );

@@ -74,16 +74,16 @@ const onChange = e =>{
         <span className="font-semibold text-[15px] tracking-widest ml-2 font-poppins text-[#031136] md:text-[16px]">ALANCED</span>
     </div> 
 </Link>
-   <div class="bg-white shadow-lg p-10 pt-8 lg:w-[550px] lg:h-[340px] h-[460px] w-[350px] max-w-2xl flex flex-col items-center border border-lime-300">
+   <div class="bg-white shadow-lg p-10 pt-8 lg:w-[550px] lg:h-[340px] h-[460px] w-[350px] max-w-2xl flex flex-col items-center border border-blue-300">
    <h3 className='text-center font-cardo text-xl'>Reset Password</h3>
    <div class="w-32 mb-6 mt-1 relative">
-      <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
       <div class="border-gray-600 border-b-2 rounded-lg"></div>
     </div>
    <p className="text-md pt-2.5 font-cardo text-left">Enter your email address and we will send you a link to reset your password.</p>
-   <input type="email" className='border my-5 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Email Address' name='email' onChange={onChange} value={forgetuserpass.email}/>
+   <input type="email" className='border my-5 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='Email Address' name='email' onChange={onChange} value={forgetuserpass.email}/>
    <button onClick={ForgotPassword} 
-    class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-md  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#00BF58] to-[#E3FF75]  text-white font-semibold">{show ? <div><Loader/></div> : "Send Password Reset Email"}
+    class="block w-full px-4 py-2 mt-4 text-sm leading-5 text-center transition-colors duration-150 border border-none rounded-md  focus:outline-none focus:shadow-outline-blue bg-gradient-to-r from-[#0909E9] to-[#00D4FF]  text-white font-semibold">{show ? <div><Loader/></div> : "Send Password Reset Email"}
 </button>
    </div>
 </div>

@@ -148,18 +148,18 @@ const ViewHiringDetail = () => {
                 <div className=' my-8  border border-[#E7E8F2] py-8 px-8 rounded-lg'>
             {/* <h1 className=' text-2xl font-cardo font-semibold text-left'>Job Details</h1>
             <div className='mt-4 text-left'>
-        <span class="inline-block text-sm px-8 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold cursor-pointer" onClick={handleAcceptProject}>Accept</span>
-      <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
+        <span class="inline-block text-sm px-8 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-4 font-semibold cursor-pointer" onClick={handleAcceptProject}>Accept</span>
+      <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]">
       <button class="px-8 py-1 bg-[#E2F9EE]"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px] cursor-pointer" onClick={handleRejectProject}>Reject</p></button>
 </div> 
 </div>    */}
 <div className='flex justify-between items-center'>
   <h1 className='text-2xl font-cardo font-semibold text-left'>Job Details</h1>
   <div className='mt-4 text-right'>
-    <span className="inline-block text-sm px-8 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold cursor-pointer" onClick={handleAcceptProject}>
+    <span className="inline-block text-sm px-8 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-4 font-semibold cursor-pointer" onClick={handleAcceptProject}>
       Accept
     </span>
-    <div className="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
+    <div className="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]">
       <button className="px-8 py-1 bg-white">
         <p className="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px] cursor-pointer" onClick={handleRejectProject}>
           Reject
@@ -173,7 +173,7 @@ const ViewHiringDetail = () => {
                     <div className=' basis-8/12'>
                     <h1 className=' text-xl font-inter font-medium text-left'>{findhiring && findhiring.project_title ? findhiring.project_title : ""}</h1>
                     <div className=' flex flex-row'>
-                    <div className=' basis-4/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-green-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  w-[90%] bg-opacity-[60%]">{findhiring && findhiring.project_category? findhiring.project_category:""}</div></div>
+                    <div className=' basis-4/12 mt-5'><div  class="focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1]  rounded-xl text-sm font-semibold text-blue-800 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]  w-[90%] bg-opacity-[60%]">{findhiring && findhiring.project_category? findhiring.project_category:""}</div></div>
                     <div className=' basis-4/12 mt-5 ml-2'><p className=' text-sm font-medium font-inter text-left opacity-[50%]'>Received {timeAgo(findhiring && findhiring.Received_time ? findhiring.Received_time:"")}</p></div>
                     </div>
                     <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>
@@ -181,7 +181,7 @@ const ViewHiringDetail = () => {
                     </p>
                     {findhiring && findhiring.project_description ? (findhiring.project_description.length > 200 && (
                         <p
-                        className='mt-3 text-base font-semibold text-green-600 text-left cursor-pointer'
+                        className='mt-3 text-base font-semibold text-blue-600 text-left cursor-pointer'
                         onClick={toggleDescription}
                         >
                         {showFullDescription ? 'less' : 'more'}
@@ -216,7 +216,7 @@ const ViewHiringDetail = () => {
                 <h1 className='text-base font-medium font-inter text-left mt-5'>Skills & Experties</h1>
                 <div className="text-left mt-3">
                 {JSON.parse(findhiring && findhiring.project_skills.replace(/'/g,'"')).map((skill,index)=>(
-                    <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  text-green-800 px-5 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%] mt-4">
+                    <div className="mr-3 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  text-blue-800 px-5 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%] mt-4">
                     <p className=" text-center">{skill}</p>
                 </div>
                 ))}
@@ -256,8 +256,8 @@ const ViewHiringDetail = () => {
                 <div>
                 {/* <hr className='mt-5' /> */}
                 {/* <div className='mt-4 text-left'>
-        <span class="inline-block text-sm px-8 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold cursor-pointer" onClick={handleAcceptProject}>Accept</span>
-      <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
+        <span class="inline-block text-sm px-8 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-4 font-semibold cursor-pointer" onClick={handleAcceptProject}>Accept</span>
+      <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]">
       <button class="px-8 py-1 bg-[#E2F9EE]"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px] cursor-pointer" onClick={handleRejectProject}>Reject</p></button>
 </div> 
 </div>    */}

@@ -533,7 +533,7 @@ const handleImageSave = async () => {
         left: '0',
         width: '100%',
         height: '2px',
-        background: 'linear-gradient(90deg, #00BF58, #E3FF75)'
+        background: 'linear-gradient(90deg, #0909E9, #00D4FF)'
     };
 
     React.useEffect(() => {
@@ -690,13 +690,13 @@ const handleImageSave = async () => {
                 
                 <div className='my-3 flex flex-wrap'>
                     <Link to=''  className="flex-grow md:flex-none p-1">
-                        <span className={`${commonStyle} px-3 md:px-6 ${selectedButtons === 'Github' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-1`}
+                        <span className={`${commonStyle} px-3 md:px-6 ${selectedButtons === 'Github' ? "bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-1`}
                             onClick={() => setSelectedButtons('Github')}>
                             Github
                         </span>
                     </Link>
                     <Link to='' className="flex-grow md:flex-none p-1">
-                        <span className={`${commonStyle} px-3 md:px-6 ${selectedButtons === 'StackOverflow' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
+                        <span className={`${commonStyle} px-3 md:px-6 ${selectedButtons === 'StackOverflow' ? "bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                             onClick={() => setSelectedButtons('StackOverflow')}>
                             StackOverflow
                         </span>
@@ -757,8 +757,8 @@ const handleImageSave = async () => {
                         <p className="font-cardo text-[17px] text-[#031136] font-normal pt-2 text-left">Must Be An Actual Photo Of You.</p>
                         <p className='text-[#0A142F] font-inter opacity-50 text-[14px] text-left'>Logos, clip-art, group photos, and digitally-altered images are not allowed.</p>
                             <div className="mt-8 flex justify-end">
-                            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" onClick={handleImageClick} onChange={handleFileChange}>Change Image</span></Link>
-                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={handleImageSave}>
+                            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-3 font-semibold" onClick={handleImageClick} onChange={handleFileChange}>Change Image</span></Link>
+                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]" onClick={handleImageSave}>
                                 <Link to=''><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Save Photo</p></button></Link>
                             </div>     
                             </div>
@@ -797,13 +797,13 @@ const handleImageSave = async () => {
             </div>
             <div className="flex items-center mt-3">
                 {/* <img src={jobsuccess} alt="" className="h-[22px] mr-2" /> */}
-                <i class="bi bi-patch-check text-green-600 mr-2"></i>
+                <i class="bi bi-patch-check text-blue-600 mr-2"></i>
                 <p className="font-inter text-[#797979] text-[13px]">{calculateJobSuccess(reviews)}% Job Success</p>
             </div>
         </div>
         <div class="w-full md:w-1/4 px-auto pt-8">
-            {/* <Link to=''><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-2 font-semibold">See Public View</span></Link> */}
-            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
+            {/* <Link to=''><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-2 font-semibold">See Public View</span></Link> */}
+            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF] mt-3 mr-2">
                 <button class="px-2 py-1 bg-white" onClick={scrollToWorkHistory}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">See Public Reviews</p></button>
             </div>
         </div>
@@ -815,7 +815,7 @@ const handleImageSave = async () => {
     JSON.parse(freelancerselfprofile[0].skills.replace(/'/g, '"')).map((skill, index) => (
         <Link key={index} to='' className="flex-grow md:flex-none p-1">
                 <span 
-                    className={`${commonStyle} px-3 my-3 md:px-8 ${selectedButton === skill ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
+                    className={`${commonStyle} px-3 my-3 md:px-8 ${selectedButton === skill ? "bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton(skill)}>
                     {skill}
                 </span>
@@ -823,7 +823,7 @@ const handleImageSave = async () => {
     )) 
 : null}
             <Link to=''className="flex-grow md:flex-none p-1">
-                <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'All Work' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
+                <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'All Work' ? "bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('All Work')}>
                     All Work
                 </span>
@@ -996,7 +996,7 @@ const handleImageSave = async () => {
                     }}
                 />
             </div>
-            <p className='font-inter text-green-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-green-700 underline font-semibold'>{pro.project_title}</p>
+            <p className='font-inter text-blue-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-blue-700 underline font-semibold'>{pro.project_title}</p>
         </div>
     ))}
     {isEditFreeProjectOpen && <EditFreelancerProjectsPopup project={selectedProject} closeEditFreeProject={closeEditFreeProject} />}
@@ -1009,7 +1009,7 @@ const handleImageSave = async () => {
       variant="outlined"
       onClick={prev}
       disabled={active === 1}
-      style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+      style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
     >
       <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
     </IconButton>
@@ -1019,7 +1019,7 @@ const handleImageSave = async () => {
       return (
         <span
           key={pageNumber}
-          className={`px-0 py-1 ${active === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+          className={`px-0 py-1 ${active === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
           onClick={() => setActive(pageNumber)}
         >
           {pageNumber}
@@ -1032,7 +1032,7 @@ const handleImageSave = async () => {
       variant="outlined"
       onClick={next}
       disabled={active === Math.ceil(freelancerproject.length / 6)}
-      style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+      style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
     >
       <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
     </IconButton>
@@ -1045,7 +1045,7 @@ const handleImageSave = async () => {
                             variant="outlined"
                             onClick={prev}
                             disabled={currentPage === 1}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
@@ -1055,7 +1055,7 @@ const handleImageSave = async () => {
                             return (
                                 <span
                                     key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
                                     onClick={() => {
                                         window.scrollTo(0, 0);
                                         setCurrentPage(pageNumber);
@@ -1072,7 +1072,7 @@ const handleImageSave = async () => {
                             variant="outlined"
                             onClick={next}
                             disabled={currentPage === totalPages}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>

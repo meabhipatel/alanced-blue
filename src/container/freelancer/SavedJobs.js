@@ -146,7 +146,7 @@ const SavedJobs = () => {
             <img src={thumbdown} alt="" className='mt-1' />
         </div> */}
         <div className="p-1 w-8 h-8 bg-white rounded-full border border-gray-200 cursor-pointer" onClick={() => toggleJobSaveStatus(job.Project_id)}>
-        <i class="fa fa-heart p-1 text-green-600" aria-hidden="true"></i>
+        <i class="fa fa-heart p-1 text-blue-600" aria-hidden="true"></i>
         </div>
     </div>
     </div>
@@ -183,7 +183,7 @@ const SavedJobs = () => {
                             variant="outlined"
                             onClick={prev}
                             disabled={currentPage === 1}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
@@ -193,7 +193,7 @@ const SavedJobs = () => {
                             return (
                                 <span
                                     key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
                                     // onClick={() => setCurrentPage(pageNumber)}
                                     onClick={() => {
                                         window.scrollTo(0, 0);
@@ -211,7 +211,7 @@ const SavedJobs = () => {
                             variant="outlined"
                             onClick={next}
                             disabled={currentPage === totalPages}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>

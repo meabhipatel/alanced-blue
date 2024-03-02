@@ -19,49 +19,49 @@ const TestimonialPopup = ({ closeTestimonial }) => {
                     <div class="flex-none w-2/6 bg-[#E4EBE4] py-3 rounded-md px-6">
                     <img src={testimonial} alt="" className='mx-auto mt-5'/>
                     <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left py-8">Strengthen your profile with client testimonials</h1>
-                    <p className="font-cardo text-[16px] text-[#031136] font-normal text-left py-1"><i class="bi bi-check-circle mr-1 text-green-500"></i> Highlight external client achievements.</p>
-                           <p className="font-cardo text-[16px] text-[#031136] font-normal text-left py-1"><i class="bi bi-check-circle mr-1 text-green-500"></i> Clients receive testimonial instructions.</p>
-                           <p className="font-cardo text-[16px] text-[#031136] font-normal text-left py-1"><i class="bi bi-check-circle mr-1 text-green-500"></i> Verified testimonials appear on your Alanced profile.</p>
-                           <p className="font-cardo text-[16px] text-[#031136] font-normal text-left py-1"><i class="bi bi-check-circle mr-1 text-green-500"></i> Showcase expertise with real-world feedback.</p>
-                           <p className="font-cardo text-[16px] text-[#031136] font-normal text-left py-1"><i class="bi bi-check-circle mr-1 text-green-500"></i> Build trust with potential clients faster.</p>
+                    <p className="font-cardo text-[16px] text-[#031136] font-normal text-left py-1"><i class="bi bi-check-circle mr-1 text-blue-500"></i> Highlight external client achievements.</p>
+                           <p className="font-cardo text-[16px] text-[#031136] font-normal text-left py-1"><i class="bi bi-check-circle mr-1 text-blue-500"></i> Clients receive testimonial instructions.</p>
+                           <p className="font-cardo text-[16px] text-[#031136] font-normal text-left py-1"><i class="bi bi-check-circle mr-1 text-blue-500"></i> Verified testimonials appear on your Alanced profile.</p>
+                           <p className="font-cardo text-[16px] text-[#031136] font-normal text-left py-1"><i class="bi bi-check-circle mr-1 text-blue-500"></i> Showcase expertise with real-world feedback.</p>
+                           <p className="font-cardo text-[16px] text-[#031136] font-normal text-left py-1"><i class="bi bi-check-circle mr-1 text-blue-500"></i> Build trust with potential clients faster.</p>
                     </div>
                     <div class="flex-grow p-4 w-4/6">
                     <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Add your client’s contact details</h1>
                     <div className="flex justify-between space-x-6 mt-4"> 
            <div className="flex-1">
            <h1 className="font-cardo text-[18px] text-[#031136] font-normal text-left">First Name</h1>
-         <input type="text" className='border mt-1 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='First Name'/>
+         <input type="text" className='border mt-1 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='First Name'/>
     </div>
     <div className="flex-1">
     <h1 className="font-cardo text-[18px] text-[#031136] font-normal text-left">Last Name</h1>
-        <input type="text" className='border mt-1 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Last Name'/>
+        <input type="text" className='border mt-1 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='Last Name'/>
     </div>
 </div>
 <div className="flex justify-between space-x-6"> 
            <div className="flex-1">
            <h1 className="font-cardo text-[18px] text-[#031136] font-normal text-left">Business Email Address</h1>
-         <input type="text" className='border mt-1 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='example@gmail.com'/>
+         <input type="text" className='border mt-1 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='example@gmail.com'/>
     </div>
     <div className="flex-1">
     <h1 className="font-cardo text-[18px] text-[#031136] font-normal text-left">Client's LinkedIn Profile</h1>
-        <input type="text" className='border mt-1 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='https://www.linkedin.com/in/your-name-here/
+        <input type="text" className='border mt-1 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='https://www.linkedin.com/in/your-name-here/
 '/>
     </div>
 </div>
 <div className="flex justify-between space-x-6"> 
            <div className="flex-1">
            <h1 className="font-cardo text-[18px] text-[#031136] font-normal text-left">Client's Title</h1>
-         <input type="text" className='border mt-1 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Ex: Director of Development'/>
+         <input type="text" className='border mt-1 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='Ex: Director of Development'/>
     </div>
     <div className="flex-1">
     <h1 className="font-cardo text-[18px] text-[#031136] font-normal text-left">Project Type</h1>
-        <input type="text" className='border mt-1 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Ex: Web Development'/>
+        <input type="text" className='border mt-1 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='Ex: Web Development'/>
     </div>
 </div>
 <h1 className="font-cardo text-[18px] text-[#031136] font-normal text-left">Message to Client</h1>
-<textarea name="" id="" cols="30" rows="3" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder="Hi, I enjoyed our recent collaboration! Could you provide a short testimonial about my work for my Alanced profile? It'd greatly support my freelancing journey. Thanks!"></textarea>
+<textarea name="" id="" cols="30" rows="3" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder="Hi, I enjoyed our recent collaboration! Could you provide a short testimonial about my work for my Alanced profile? It'd greatly support my freelancing journey. Thanks!"></textarea>
                             <div className="mt-5 flex justify-end">
-                            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold" >Request Testimonial</span></Link>
+                            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold" >Request Testimonial</span></Link>
                             </div>
                     </div>
                     </div>

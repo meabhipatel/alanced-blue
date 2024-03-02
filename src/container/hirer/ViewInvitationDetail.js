@@ -50,7 +50,7 @@ const descriptionToShow = showFullDescription ? (findinvite && findinvite.freela
   </div>
     <p className="text-xl font-medium font-cardo text-left mt-4">
       Invite Status : <span className="opacity-70 inline-block">{findinvite && findinvite.freelancer_accepted ? (
-                  <h1 className='font-cardo text-[18px] text-green-600'>Accepted</h1>
+                  <h1 className='font-cardo text-[18px] text-blue-600'>Accepted</h1>
                 ) : findinvite && findinvite.freelancer_rejected ? (
                   <h1 className='font-cardo text-[18px] text-red-600'>Rejected</h1>
                 ) : (
@@ -64,14 +64,14 @@ const descriptionToShow = showFullDescription ? (findinvite && findinvite.freela
                     <div className=' basis-8/12'>
                     <h1 className=' text-xl font-cardo font-medium text-left'>{findinvite && findinvite.freelancer_name ? findinvite.freelancer_name : ""}</h1>
                     <div className=' flex flex-row text-left'>
-                    <div className=' basis-4/12 mt-2'><div  class="text-sm font-semibold text-green-800">{findinvite && findinvite.freelancer_category? findinvite.freelancer_category:""}</div></div>
+                    <div className=' basis-4/12 mt-2'><div  class="text-sm font-semibold text-blue-800">{findinvite && findinvite.freelancer_category? findinvite.freelancer_category:""}</div></div>
                     </div>
                     <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>
                      {descriptionToShow}  
                     </p>
                     {findinvite && findinvite.freelancer_description ? (findinvite.freelancer_description.length > 400 && (
                         <p
-                        className='mt-3 text-base font-semibold text-green-600 text-left cursor-pointer'
+                        className='mt-3 text-base font-semibold text-blue-600 text-left cursor-pointer'
                         onClick={toggleDescription}
                         >
                         {showFullDescription ? 'less' : 'more'}
@@ -86,7 +86,7 @@ const descriptionToShow = showFullDescription ? (findinvite && findinvite.freela
       return skillsArray.map((skill, index) => (
         <div
           key={index}
-          className="mr-3 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-green-800 px-3 py-[3px] my-1 text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
+          className="mr-3 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-blue-800 px-3 py-[3px] my-1 text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
         >
           <p className="text-center">{skill}</p>
         </div>
@@ -126,7 +126,7 @@ const descriptionToShow = showFullDescription ? (findinvite && findinvite.freela
                                   const languageArray = JSON.parse(findinvite.freelancer_language.replace(/'/g, '"'));
                                   return languageArray.map((language, index) => (
                                     <div
-                                      key={index} className="mt-2 text-green-800 text-sm font-semibold text-left">
+                                      key={index} className="mt-2 text-blue-800 text-sm font-semibold text-left">
                                       <p>{language}</p>
                                     </div>
                                   ));
@@ -145,7 +145,7 @@ const descriptionToShow = showFullDescription ? (findinvite && findinvite.freela
             <h1 className=' text-2xl font-cardo font-semibold text-left'>Project Details</h1>
                     <h1 className=' text-xl font-cardo font-medium text-left mt-5'>{findinvite && findinvite.project_title ? findinvite.project_title : ""}</h1>
                     <div className=' flex flex-row text-left'>
-                    <div className=' basis-4/12 mt-2'><div  class="text-sm font-semibold text-green-800">{findinvite && findinvite.project_category? findinvite.project_category:""}</div></div>
+                    <div className=' basis-4/12 mt-2'><div  class="text-sm font-semibold text-blue-800">{findinvite && findinvite.project_category? findinvite.project_category:""}</div></div>
                     </div>
                     <p className='font-inter text-[15px] font-medium mt-3 text-left opacity-[70%]'>
                     {findinvite && findinvite.project_description? findinvite.project_description:""}
