@@ -314,7 +314,7 @@ useEffect(() => {
                 {step === 1 && (
     <div className="flex justify-between items-center">
         <div className="flex-1 mr-4 my-5">
-            <h1 className="text-4xl text-green-600 font-cardo font-semibold">Your Job Post Title</h1>
+            <h1 className="text-4xl text-blue-600 font-cardo font-semibold">Your Job Post Title</h1>
             <p className="text-lg opacity-50 font-cardo font-medium py-4">Make it Shine, Attract the Right Candidates, <br />Land the Best Talent</p>
         </div>
         <div className="flex-1">
@@ -324,7 +324,7 @@ useEffect(() => {
         onChange={onChange}
         name="title"
         value={addProject.title || ''}
-        className='border my-2 py-2 px-3 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' 
+        className='border my-2 py-2 px-3 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' 
         placeholder="Add Job title" 
     />
     <label className="block text-xl mt-3 font-cardo" htmlFor="jobCategory">Job Category</label>
@@ -337,7 +337,7 @@ useEffect(() => {
         setSearchTerm(e.target.value);
         setIsOpen(true);
     }} 
-    className='border my-2 py-2 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'
+    className='border my-2 py-2 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600'
     placeholder="Select Category" 
 />
 
@@ -372,27 +372,27 @@ useEffect(() => {
                 {step === 2 && (
                     <div className="flex justify-between items-center">
                     <div className="flex-1 mr-4 my-5">
-                        <h1 className="text-4xl text-green-600 font-cardo font-semibold">Your Job Description</h1>
+                        <h1 className="text-4xl text-blue-600 font-cardo font-semibold">Your Job Description</h1>
                         <p className="text-lg opacity-50 font-cardo font-medium py-4">Post Your Job Description To Find Top Talent</p>
                     </div>
                     <div className="flex-1">
                     <label className="block text-xl mt-3 font-cardo" htmlFor="jobCategory">Job Description</label>
-                    <textarea name="description" id="" cols="30" rows="5" className='border py-2 px-3 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Write Your Job Description Here' onChange={onChange} value={addProject.description || ''}></textarea> 
+                    <textarea name="description" id="" cols="30" rows="5" className='border py-2 px-3 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='Write Your Job Description Here' onChange={onChange} value={addProject.description || ''}></textarea> 
             </div>
                 </div>
                 )}
                 {step === 3 && (
                     <div className="flex justify-between items-center">
                     <div className="flex-1 mr-4 my-5">
-                        <h1 className="text-4xl text-green-600 font-cardo font-semibold">Your Job Skills</h1>
+                        <h1 className="text-4xl text-blue-600 font-cardo font-semibold">Your Job Skills</h1>
                         <p className="text-lg opacity-50 font-cardo font-medium py-4">What are the main skills required for your work?</p>
                     </div>
                     <div className="flex-1">
                     <div className="border rounded-md p-2 flex items-center flex-wrap my-3">
     {Array.isArray(skills) && skills.map((skill, index) => (
-        <div key={index} className="bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border-none text-white font-semibold rounded px-2 py-1.5 mr-3 my-2 flex items-center">
+        <div key={index} className="bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border-none text-white font-semibold rounded px-2 py-1.5 mr-3 my-2 flex items-center">
             <span>{skill}</span>
-            <button onClick={() => removeSkill(index)} className="ml-2 mt-1 pb-0.5 text-sm bg-white text-green-500 rounded-full w-4 h-4 flex justify-center items-center">
+            <button onClick={() => removeSkill(index)} className="ml-2 mt-1 pb-0.5 text-sm bg-white text-blue-500 rounded-full w-4 h-4 flex justify-center items-center">
                 &times;
             </button>
         </div>
@@ -439,25 +439,25 @@ useEffect(() => {
                 {step === 4 && (
                 <div className="flex justify-between items-center">
     <div className="flex-1 mr-4 my-5">
-        <h1 className="text-4xl text-green-600 font-cardo font-semibold">Tell us about your budget</h1>
+        <h1 className="text-4xl text-blue-600 font-cardo font-semibold">Tell us about your budget</h1>
         <p className="text-lg opacity-50 font-cardo font-medium py-4">This will help us match you to talent within your range.</p>
     </div>
     <div className="flex-1">
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full mb-4">
             <div 
-                className={`flex sm:block items-center w-full sm:flex-1 p-4 border ${selectedOption === 'hourly' ? 'border-green-600' : ''} hover:border-green-600 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
+                className={`flex sm:block items-center w-full sm:flex-1 p-4 border ${selectedOption === 'hourly' ? 'border-blue-600' : ''} hover:border-blue-600 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
                 // onClick={() => setSelectedOption('hourly')}
                 onClick={() => selectOptionHandler('hourly')}
             >
-                <i className="bi bi-alarm text-3xl sm:-mt-3 mr-4 sm:mr-0 text-green-600"></i>
+                <i className="bi bi-alarm text-3xl sm:-mt-3 mr-4 sm:mr-0 text-blue-600"></i>
                 <h5 className='text-left font-cardo text-2xl lg:pt-3'>Hourly Rate</h5>
             </div>
             <div 
-                className={`flex sm:block items-center w-full sm:flex-1 p-4 border ${selectedOption === 'fixed' ? 'border-green-600' : ''} hover:border-green-600 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
+                className={`flex sm:block items-center w-full sm:flex-1 p-4 border ${selectedOption === 'fixed' ? 'border-blue-600' : ''} hover:border-blue-600 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
                 // onClick={() => setSelectedOption('fixed')}
                 onClick={() => selectOptionHandler('fixed')}
             >
-                <i className="bi bi-tag-fill sm:-mt-3 mr-4 sm:mr-0 text-3xl text-green-600"></i>
+                <i className="bi bi-tag-fill sm:-mt-3 mr-4 sm:mr-0 text-3xl text-blue-600"></i>
                 <h5 className='text-left font-cardo text-2xl lg:pt-3'>Fixed Budget</h5>
             </div>
         </div>
@@ -469,14 +469,14 @@ useEffect(() => {
                         <div className="flex flex-col">
                             <label className="block text-xl mt-3 font-cardo" htmlFor="fromInput">From</label>
                             <div className="flex items-center">
-                                <input id="fromInput" type="number" placeholder="" className="flex-1 w-36 mr-1 p-2 border my-1 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"  onChange={onChange} name="min_hourly_rate" value={addProject.min_hourly_rate || ''}/>
+                                <input id="fromInput" type="number" placeholder="" className="flex-1 w-36 mr-1 p-2 border my-1 rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"  onChange={onChange} name="min_hourly_rate" value={addProject.min_hourly_rate || ''}/>
                                 <span>/hr</span>
                             </div>
                         </div>
                         <div className="flex flex-col">
                             <label className="block text-xl mt-3 font-cardo" htmlFor="toInput">To</label>
                             <div className="flex items-center">
-                                <input id="toInput" type="number" placeholder="" className="flex-1 w-36 mr-1 p-2 border my-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600"  onChange={onChange} name="max_hourly_rate" value={addProject.max_hourly_rate || ''}/>
+                                <input id="toInput" type="number" placeholder="" className="flex-1 w-36 mr-1 p-2 border my-2 rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"  onChange={onChange} name="max_hourly_rate" value={addProject.max_hourly_rate || ''}/>
                                 <span>/hr</span>
                             </div>
                         </div>
@@ -488,7 +488,7 @@ useEffect(() => {
             {selectedOption === 'fixed' && (
                 <div>
                     <label className="block text-xl mt-3 font-cardo" htmlFor="maxBudgetInput">Maximum Budget</label> 
-                    <input id="maxBudgetInput" type="number" className='border my-2 p-2 rounded-md w-52 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='' onChange={onChange} name="fixed_budget" value={addProject.fixed_budget || ''}/>
+                    <input id="maxBudgetInput" type="number" className='border my-2 p-2 rounded-md w-52 focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='' onChange={onChange} name="fixed_budget" value={addProject.fixed_budget || ''}/>
                     <p className="text-lg opacity-50 font-cardo font-medium py-2">Set your Project Budget</p>
                 </div>
             )}
@@ -500,14 +500,14 @@ useEffect(() => {
                 {step === 5 && (
                     <div className="flex justify-between items-center">
                     <div className="flex-1 mr-4 my-5">
-                        <h1 className="text-4xl text-green-600 font-cardo font-semibold">Your Deadline And Experience Level</h1>
+                        <h1 className="text-4xl text-blue-600 font-cardo font-semibold">Your Deadline And Experience Level</h1>
                         <p className="text-lg opacity-50 font-cardo font-medium py-4">Post Your Job Deadline And Experience Level</p>
                     </div>
                     <div className="flex-1">
                     <label className="block text-xl mt-3 font-cardo" htmlFor="jobCategory">Deadline</label>
-                    <input id="" name="deadline" type="date" className='border my-2 p-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' onChange={onChange} value={formatToYYYYMMDD(addProject.deadline || '')}/>
+                    <input id="" name="deadline" type="date" className='border my-2 p-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' onChange={onChange} value={formatToYYYYMMDD(addProject.deadline || '')}/>
                     <label className="block text-xl mt-3 font-cardo" htmlFor="jobCategory">Experience Level</label>
-                    <select className="border mt-2 mb-6 py-2 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white opacity-50" onChange={onChange} name="experience_level" value={addProject.experience_level || ''}>
+                    <select className="border mt-2 mb-6 py-2 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600 bg-white opacity-50" onChange={onChange} name="experience_level" value={addProject.experience_level || ''}>
                     <option value="" selected disabled>Select Experience Level</option>
                     <option value="Entry_Level">Entry Level</option>
                     <option value="Intermediate">Intermediate</option>
@@ -520,7 +520,7 @@ useEffect(() => {
                 
 <div className="flex justify-between mt-8">
     {step > 1 ? (
-        <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mr-2">
+        <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF] mr-2">
             <Link to='' onClick={() => {
                 window.scrollTo(0, 0);
                 prevStep();
@@ -547,7 +547,7 @@ useEffect(() => {
         window.scrollTo(0, 0);
         nextStep();
     }}>
-        <span class={`text-sm px-6 py-[10px] ${isValid ? 'bg-gradient-to-r from-[#00BF58] to-[#E3FF75]' : 'bg-gray-400 cursor-not-allowed'} border rounded border-none text-white font-semibold`} >Next: {stepsLabels[step]}</span>
+        <span class={`text-sm px-6 py-[10px] ${isValid ? 'bg-gradient-to-r from-[#0909E9] to-[#00D4FF]' : 'bg-gray-400 cursor-not-allowed'} border rounded border-none text-white font-semibold`} >Next: {stepsLabels[step]}</span>
     </Link>
 ) : (
     <Link to={isValid ? '/View-all/Job-post' : '#'} onClick={(e) => {
@@ -558,7 +558,7 @@ useEffect(() => {
         AddProjects();
         window.scrollTo(0, 0);
     }}>
-        <span class={`text-sm px-6 py-[10px] ${isValid ? 'bg-gradient-to-r from-[#00BF58] to-[#E3FF75]' : 'bg-gray-400 cursor-not-allowed'} border rounded border-none text-white font-semibold`}>Post A Job</span>
+        <span class={`text-sm px-6 py-[10px] ${isValid ? 'bg-gradient-to-r from-[#0909E9] to-[#00D4FF]' : 'bg-gray-400 cursor-not-allowed'} border rounded border-none text-white font-semibold`}>Post A Job</span>
     </Link>
     
     )}

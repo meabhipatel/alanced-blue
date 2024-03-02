@@ -346,7 +346,7 @@ useEffect(() => {
                 class="object-cover h-12 w-12 rounded-full"
                 alt=""
               />
-              <span class="bottom-0 left-8 absolute  w-3 h-3 bg-white border-[3px] border-green-400 dark:border-gray-800 rounded-full"></span>
+              <span class="bottom-0 left-8 absolute  w-3 h-3 bg-white border-[3px] border-blue-400 dark:border-gray-800 rounded-full"></span>
             </div>
           </div>
           <div class="w-full">

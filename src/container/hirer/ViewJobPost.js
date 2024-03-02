@@ -78,9 +78,9 @@ const ViewJobPost = () => {
     <div class="flex flex-col md:flex-row">
     <div class="w-full md:w-[70%] bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
-        <p className="font-inter text-green-700 text-[16px] font-medium">{project.category}</p>
+        <p className="font-inter text-blue-700 text-[16px] font-medium">{project.category}</p>
         <p className="font-inter text-[#031136] opacity-50 text-sm font-medium py-1">posted {timeAgo(project.Project_created_at)}</p>
-        <p className="font-inter text-[#031136] text-sm font-normal py-3"><i class="bi bi-geo-alt-fill text-green-700"></i> Worldwide</p>
+        <p className="font-inter text-[#031136] text-sm font-normal py-3"><i class="bi bi-geo-alt-fill text-blue-700"></i> Worldwide</p>
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
         <p className="font-inter text-[#031136] text-md font-medium opacity-50">{project.description}</p>  
@@ -125,7 +125,7 @@ const ViewJobPost = () => {
         <p className="font-inter text-[#031136] text-lg font-medium">Skills and Expertise</p> 
         <div className="text-left mt-5">
         {JSON.parse(project.skills_required.replace(/'/g,'"')).map((skill,index)=>(
-                <div className="mr-3 my-2 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full text-green-800 px-4 py-1 text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
+                <div className="mr-3 my-2 focus:outline-none  bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full text-blue-800 px-4 py-1 text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]">
                 <p className=" text-center">{skill}</p>
             </div>
             ))}
@@ -141,14 +141,14 @@ const ViewJobPost = () => {
         <div class="w-full md:w-[30%] bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
         <Link to='/edit/Job-post' state={{project}} onClick={() => window.scrollTo(0, 0)}>
-        <p className="font-inter text-green-700 text-md font-normal py-1"><i class="bi bi-pencil mr-1"></i> Edit Job Post</p>
+        <p className="font-inter text-blue-700 text-md font-normal py-1"><i class="bi bi-pencil mr-1"></i> Edit Job Post</p>
         </Link>
-        <Link to='/View/Job-post' state={{project}} onClick={() => window.scrollTo(0, 0)}><p className="font-inter text-green-700 text-md font-normal py-1"><i class="bi bi-eye mr-1"></i> View Job Post</p></Link>
-        {/* <p className="font-inter text-green-700 text-md font-normal py-1"><i class="bi bi-trash mr-1"></i> Delete Job Post</p> */}
+        <Link to='/View/Job-post' state={{project}} onClick={() => window.scrollTo(0, 0)}><p className="font-inter text-blue-700 text-md font-normal py-1"><i class="bi bi-eye mr-1"></i> View Job Post</p></Link>
+        {/* <p className="font-inter text-blue-700 text-md font-normal py-1"><i class="bi bi-trash mr-1"></i> Delete Job Post</p> */}
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-4 px-8'>
         <p className="font-inter text-[#031136] text-lg font-medium py-4">About the client</p> 
-        <p className="font-inter text-[#031136] opacity-50 text-md font-medium py-2 mr-2 inline-block">Payment method not verified</p><i class="bi bi-question-circle-fill text-green-700 inline-block"></i>
+        <p className="font-inter text-[#031136] opacity-50 text-md font-medium py-2 mr-2 inline-block">Payment method not verified</p><i class="bi bi-question-circle-fill text-blue-700 inline-block"></i>
         <p className="font-inter text-[#031136] text-md font-medium py-2">{project.project_owner_name}</p>
         <p className="font-inter text-[#031136] text-md font-medium">{project.project_owner_address}</p>
         <p className="font-inter text-[#031136] opacity-50 text-md font-medium">{getCurrentTime()}</p>

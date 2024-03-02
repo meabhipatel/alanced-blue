@@ -215,7 +215,7 @@ useEffect(() => {
             <input type="file" ref={fileInputRef} style={{ display: 'none' }} onChange={handleImageUpload} />
                     <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Title</h1>
                     <input type="text" value={title}
-                onChange={(e) => setTitle(e.target.value)} className='border mb-3 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 opacity-50' placeholder=''/>
+                onChange={(e) => setTitle(e.target.value)} className='border mb-3 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600 opacity-50' placeholder=''/>
                     <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Category</h1>
                     <div ref={wrapperRef}>
     <input 
@@ -227,7 +227,7 @@ useEffect(() => {
             setCategory(e.target.value);
             setIsOpen(true);
         }} 
-        className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'
+        className='border my-2 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600'
         placeholder="Select Category" 
     />
     {isOpen && (
@@ -255,13 +255,13 @@ useEffect(() => {
                 
                 <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Project Link</h1>
                     <input type="text" value={projectLink}
-                onChange={(e) => setProjectLink(e.target.value)} className='border mb-3 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 opacity-50' placeholder=''/>
+                onChange={(e) => setProjectLink(e.target.value)} className='border mb-3 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600 opacity-50' placeholder=''/>
                     <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Skills</h1>
                     <div className="border rounded-md p-2 flex items-center flex-wrap my-3">
                 {Array.isArray(skills) && skills.map((skill, index) => (
-                    <div key={index} className="bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border-none text-white font-semibold rounded px-2 py-1.5 mr-3 my-2 flex items-center">
+                    <div key={index} className="bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border-none text-white font-semibold rounded px-2 py-1.5 mr-3 my-2 flex items-center">
                         <span>{skill}</span>
-                        <button onClick={() => removeSkill(index)} className="ml-2 mt-1 pb-0.5 text-sm bg-white text-green-500 rounded-full w-4 h-4 flex justify-center items-center">
+                        <button onClick={() => removeSkill(index)} className="ml-2 mt-1 pb-0.5 text-sm bg-white text-blue-500 rounded-full w-4 h-4 flex justify-center items-center">
                             &times;
                         </button>
                     </div>
@@ -303,11 +303,11 @@ useEffect(() => {
 </div>
 {error && <p className="text-red-500 mt-2">{error}</p>}
                 <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Description</h1>
-                    <textarea name="" id="" cols="30" rows="5" className='border mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 opacity-50' value={description}
+                    <textarea name="" id="" cols="30" rows="5" className='border mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600 opacity-50' value={description}
                 onChange={(e) => setDescription(e.target.value)}></textarea>
                             <div className="mt-4 flex justify-end">
-                            <Link to='' onClick={handleSave}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" >Save</span></Link>
-                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={closeEditFreeProject}>
+                            <Link to='' onClick={handleSave}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-3 font-semibold" >Save</span></Link>
+                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]" onClick={closeEditFreeProject}>
                                 <Link to=''><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
                             </div>     
                             </div>

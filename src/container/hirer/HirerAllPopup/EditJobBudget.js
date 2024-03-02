@@ -66,17 +66,17 @@ const EditJobBudget = ({closeJobBudget,project}) => {
                     <div className="flex-1">
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full mb-8">
             <div 
-                className={`flex sm:block items-center w-full sm:flex-1 p-4 border ${selectedOption === 'Hourly' ? 'border-green-600' : ''} hover:border-green-600 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
+                className={`flex sm:block items-center w-full sm:flex-1 p-4 border ${selectedOption === 'Hourly' ? 'border-blue-600' : ''} hover:border-blue-600 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
                 onClick={() => selectOptionHandler('Hourly')}
             >
-                <i className="bi bi-alarm text-3xl sm:-mt-3 mr-4 sm:mr-0 text-green-600"></i>
+                <i className="bi bi-alarm text-3xl sm:-mt-3 mr-4 sm:mr-0 text-blue-600"></i>
                 <h5 className='text-left font-cardo text-2xl lg:pt-3'>Hourly Rate</h5>
             </div>
             <div 
-                className={`flex sm:block items-center w-full sm:flex-1 p-4 border ${selectedOption === 'Fixed' ? 'border-green-600' : ''} hover:border-green-600 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
+                className={`flex sm:block items-center w-full sm:flex-1 p-4 border ${selectedOption === 'Fixed' ? 'border-blue-600' : ''} hover:border-blue-600 hover:shadow-md transition duration-300 cursor-pointer h-[120px] sm:h-auto`}
                 onClick={() => selectOptionHandler('Fixed')}
             >
-                <i className="bi bi-tag-fill sm:-mt-3 mr-4 sm:mr-0 text-3xl text-green-600"></i>
+                <i className="bi bi-tag-fill sm:-mt-3 mr-4 sm:mr-0 text-3xl text-blue-600"></i>
                 <h5 className='text-left font-cardo text-2xl lg:pt-3'>Fixed Budget</h5>
             </div>
         </div>
@@ -88,14 +88,14 @@ const EditJobBudget = ({closeJobBudget,project}) => {
                         <div className="flex flex-col">
                             <label className="block text-xl mt-3 font-cardo" htmlFor="fromInput">From</label>
                             <div className="flex items-center">
-                                <input id="fromInput" type="number" placeholder="" className="flex-1 w-full mr-1 p-2 border my-1 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600" value={jobminhr} onChange={e => setJobMinHr(e.target.value)} />
+                                <input id="fromInput" type="number" placeholder="" className="flex-1 w-full mr-1 p-2 border my-1 rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600" value={jobminhr} onChange={e => setJobMinHr(e.target.value)} />
                                 <span>/hr</span>
                             </div>
                         </div>
                         <div className="flex flex-col">
                             <label className="block text-xl mt-3 font-cardo" htmlFor="toInput">To</label>
                             <div className="flex items-center">
-                                <input id="toInput" type="number" placeholder="" className="flex-1 w-full mr-1 p-2 border my-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600" value={jobmaxhr} onChange={e => setJobMaxHr(e.target.value)}/>
+                                <input id="toInput" type="number" placeholder="" className="flex-1 w-full mr-1 p-2 border my-2 rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600" value={jobmaxhr} onChange={e => setJobMaxHr(e.target.value)}/>
                                 <span>/hr</span>
                             </div>
                         </div>
@@ -107,15 +107,15 @@ const EditJobBudget = ({closeJobBudget,project}) => {
             {selectedOption === 'Fixed' && (
                 <div>
                     <label className="block text-xl mt-3 font-cardo" htmlFor="maxBudgetInput">Maximum Budget</label> 
-                    <input id="maxBudgetInput" type="number" className='border my-2 p-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='' value={jobfixedbudget} onChange={e => setJobFixedBudget(e.target.value)}/>
+                    <input id="maxBudgetInput" type="number" className='border my-2 p-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='' value={jobfixedbudget} onChange={e => setJobFixedBudget(e.target.value)}/>
                     <p className="text-lg opacity-50 font-cardo font-medium py-4">Set your Project Budget</p>
                 </div>
             )}
         </div>
     </div>
                             <div className="flex justify-end">
-                            <Link to='' onClick={handleSave} state={{project}}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" >Save</span></Link>
-                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={closeJobBudget}>
+                            <Link to='' onClick={handleSave} state={{project}}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-3 font-semibold" >Save</span></Link>
+                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]" onClick={closeJobBudget}>
                                 <Link to='' state={{project}}><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
                             </div>     
                             </div>

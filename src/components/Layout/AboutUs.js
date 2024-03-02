@@ -17,7 +17,7 @@ const AboutUs = () => {
     </h1>
     <h1 className="font-inter text-lg  text-[#031136] text-left font-semibold">Our Story</h1>
     <div class="w-20 mt-1 relative">
-      <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
       <div class="border-gray-600 border-b-2 rounded-lg"></div>
     </div>
     <h1 className="font-inter text-md text-[#031136] text-left font-normal opacity-40 py-8">
@@ -25,7 +25,7 @@ const AboutUs = () => {
     </h1>
     <h1 className="font-inter text-lg  text-[#031136] text-left font-semibold">Why Choose Alanced?</h1>
     <div class="w-48 mb-6 mt-1 relative">
-      <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
       <div class="border-gray-600 border-b-2 rounded-lg"></div>
     </div>
     <h1 className="font-inter text-md  text-[#031136] text-left font-semibold py-2"><span className='opacity-50'>1.</span> Diverse Opportunities: <span className='font-normal opacity-40'>From graphic design and web development to content creation and digital marketing, our platform showcases a myriad of projects suitable for every skill set.</span></h1>
@@ -34,16 +34,16 @@ const AboutUs = () => {
     <h1 className="font-inter text-md  text-[#031136] text-left font-semibold py-2"><span className='opacity-50'>4.</span> Fair & Balanced: <span className='font-normal opacity-40'>We believe in fair compensation for every freelancer. Our platform promotes equitable pay, ensuring that talents are appropriately rewarded for their efforts.</span></h1>
     <h1 className="font-inter text-lg  text-[#031136] text-left font-semibold pt-8">Our Mission</h1>
     <div class="w-28 mt-1 relative">
-      <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
       <div class="border-gray-600 border-b-2 rounded-lg"></div>
     </div>
     <h1 className="font-inter text-md text-[#031136] text-left font-normal opacity-40 py-8">
     To empower freelancers worldwide by providing them with a platform that not only helps them showcase their skills but also finds them the perfect match for their expertise. Alanced is more than a freelancing website; it's a movement. A movement to balance the scales of work, opportunity, and life.
     </h1>
-    <h1 className="font-inter text-xl  text-green-600 text-left font-semibold">Join Us Now And Start Your Journey</h1>
+    <h1 className="font-inter text-xl  text-blue-600 text-left font-semibold">Join Us Now And Start Your Journey</h1>
     <div className='mt-8'>
-        <Link to='/projects' onClick={() => window.scrollTo(0, 0)}><span class="inline-block text-sm px-8 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold">Find Work</span></Link>
-      <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]">
+        <Link to='/projects' onClick={() => window.scrollTo(0, 0)}><span class="inline-block text-sm px-8 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-4 font-semibold">Find Work</span></Link>
+      <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]">
       <Link to='/view-all/freelancer' onClick={() => window.scrollTo(0, 0)}><button class="px-8 py-1 bg-[#E2F9EE]"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px]">Find Talent</p></button></Link>
 </div>    
     </div>

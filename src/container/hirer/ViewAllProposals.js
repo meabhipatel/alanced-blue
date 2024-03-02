@@ -239,7 +239,7 @@ const handleClick = (event, index) => {
       left: '0',
       width: '100%',
       height: '2px',
-      background: 'linear-gradient(90deg, #00BF58, #E3FF75)'
+      background: 'linear-gradient(90deg, #0909E9, #00D4FF)'
     };
 
     
@@ -285,13 +285,13 @@ const handleClick = (event, index) => {
             <img src={search} alt="Search Icon" className="h-3 w-3" />
             <input className='w-28 lg:w-40 xl:w-[30rem] h-7 text-xs lg:text-sm outline-none' placeholder='Search' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
         </div>
-        <button className='rounded h-7 w-7 p-2 text-xs lg:text-sm font-semibold text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>
+        <button className='rounded h-7 w-7 p-2 text-xs lg:text-sm font-semibold text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF]'>
             <img src={searchbtn} alt="Search Icon" />
         </button>
     </section>
     <select id="countries" onChange={(e) => {
         setSortCriterion(e.target.value);
-    }} class="bg-gray-50 border border-gray-300 text-[#797979] text-sm font-inter font-normal rounded-lg focus:ring-green-500 focus:border-green-500 block w-[22%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 mr-12">
+    }} class="bg-gray-50 border border-gray-300 text-[#797979] text-sm font-inter font-normal rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[22%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-12">
         <option selected disabled value="bestMatch">Best Match</option>
         <option value="newest">Newest Applicants</option>
         <option value="oldest">Oldest Applicants</option>
@@ -328,7 +328,7 @@ const handleClick = (event, index) => {
                             <div class="flex-[10%] p-4">
                             <div className="relative w-24 h-24 mx-auto">
                                               <img src={"https://www.api.alanced.com"+bid.freelancer_profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
-                                              <div class="absolute bottom-2 right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                                              <div class="absolute bottom-2 right-1 w-4 h-4 bg-blue-500 rounded-full border-2 border-white"></div>
                                           </div>
                             </div>
                             <div class="flex-[90%] p-4">
@@ -351,23 +351,23 @@ const handleClick = (event, index) => {
                               //   },
                               // }}
                               >
-                                      <span class="inline-block text-sm px-10 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Message</span></Link>
+                                      <span class="inline-block text-sm px-10 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold">Message</span></Link>
                           
-                        {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={isInvited ? null : handleBtnClick}>
+                        {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]" onClick={isInvited ? null : handleBtnClick}>
     <button class={`px-10 py-1 bg-white ${isInvited ? 'cursor-not-allowed' : ''}`} disabled={isInvited}>
         <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">
             {isInvited ? 'Hired' : 'Hire'}
         </p>
     </button>
 </div> */}
-{/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={isInvited ? null : (event) => handleBtnClick(event, bid.freelancer_id)}>
+{/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]" onClick={isInvited ? null : (event) => handleBtnClick(event, bid.freelancer_id)}>
   <button class={`px-10 py-1 bg-white ${isInvited ? 'cursor-not-allowed' : ''}`} disabled={isInvited}>
     <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">
       {isInvited ? 'Hired' : 'Hire'}
     </p>
   </button>
 </div> */}
-<div class={` ${isInvited ? 'p-0.5 inline-block rounded bg-gradient-to-b from-[gray] to-[lightgray]' : 'p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]'}`} onClick={isInvited ? null : (event) => handleBtnClick(event, bid.freelancer_id)}>
+<div class={` ${isInvited ? 'p-0.5 inline-block rounded bg-gradient-to-b from-[gray] to-[lightgray]' : 'p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]'}`} onClick={isInvited ? null : (event) => handleBtnClick(event, bid.freelancer_id)}>
   <button class={`px-10 py-1 bg-white ${isInvited ? 'cursor-not-allowed' : ''}`} disabled={isInvited}>
     <p class={`${isInvited ? 'bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]' : 'bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]'}`}>
       {isInvited ? 'Hired' : 'Hire'}
@@ -376,7 +376,7 @@ const handleClick = (event, index) => {
 </div>
 
                           
-                                  {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={handleBtnClick}>
+                                  {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]" onClick={handleBtnClick}>
                                           <button class="px-10 py-1 bg-white">
                                               <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p>
                                           </button>        
@@ -414,7 +414,7 @@ const handleClick = (event, index) => {
       return skillsArray.map((skill, index) => (
         <div
           key={index}
-          className="mr-3 my-2 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-green-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
+          className="mr-3 my-2 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-blue-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
         >
           <p className="text-center">{highlightText(skill,searchQuery)}</p>
         </div>
@@ -443,7 +443,7 @@ const handleClick = (event, index) => {
                             variant="outlined"
                             onClick={prev}
                             disabled={currentPage === 1}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
@@ -453,7 +453,7 @@ const handleClick = (event, index) => {
                             return (
                                 <span
                                     key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
                                     onClick={() => {
                                         window.scrollTo(0, 0);
                                         setCurrentPage(pageNumber);
@@ -470,7 +470,7 @@ const handleClick = (event, index) => {
                             variant="outlined"
                             onClick={next}
                             disabled={currentPage === totalPages}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>

@@ -83,10 +83,10 @@ const EditEmploymentPopup = ({ closeEditEmployment, employment }) => {
                     </div>
                     <div className='mt-10'>
                         <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Company Name</h1>
-                        <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Ex: Wiz91' onChange={e => setCompanyname(e.target.value)} name='Freelancer_Company_Name' value={companyname}/>
+                        <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='Ex: Wiz91' onChange={e => setCompanyname(e.target.value)} name='Freelancer_Company_Name' value={companyname}/>
                         <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Designation</h1>
-                        {/* <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' placeholder='Python Developer' onChange={e => setDesignation(e.target.value)} name='Company_Designation' value={designation}/> */}
-                        <select onChange={e => setDesignation(e.target.value)} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white' name='Company_Designation' value={designation}>
+                        {/* <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='Python Developer' onChange={e => setDesignation(e.target.value)} name='Company_Designation' value={designation}/> */}
+                        <select onChange={e => setDesignation(e.target.value)} className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600 bg-white' name='Company_Designation' value={designation}>
                     <option disabled selected value="">Select a Role</option>
                     {cate.map((cat, index) => (
                         <option value={cat}>{cat}</option>
@@ -97,7 +97,7 @@ const EditEmploymentPopup = ({ closeEditEmployment, employment }) => {
                                 <p className="font-cardo text-[18px] text-[#031136] font-normal text-left opacity-50">From</p>
                                 <input 
                                     type="date" 
-                                    className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' 
+                                    className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' 
                                     placeholder='Start Date'
                                     name='Company_Joining_date'
                                     value={formatToYYYYMMDD(joindate)}
@@ -108,7 +108,7 @@ const EditEmploymentPopup = ({ closeEditEmployment, employment }) => {
                                 <p className="font-cardo text-[18px] text-[#031136] font-normal text-left opacity-50">To</p>
                                 <input 
                                     type="date" 
-                                    className={`border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 ${isCurrentlyWorking ? 'bg-gray-100 cursor-not-allowed' : ''}`} 
+                                    className={`border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600 ${isCurrentlyWorking ? 'bg-gray-100 cursor-not-allowed' : ''}`} 
                                     placeholder='End Date'
                                     name='Company_Leaving_date'
                                     disabled={isCurrentlyWorking}
@@ -132,8 +132,8 @@ const EditEmploymentPopup = ({ closeEditEmployment, employment }) => {
                             <span className="font-normal opacity-50">I Currently Work Here</span>
                         </label>
                         <div className="mt-8 flex justify-end">
-                            <Link to='' onClick={handleSave}><span className="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" >Save</span></Link>
-                            <div className="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={closeEditEmployment}>
+                            <Link to='' onClick={handleSave}><span className="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-3 font-semibold" >Save</span></Link>
+                            <div className="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]" onClick={closeEditEmployment}>
                                 <Link to=''><button className="px-2 py-1 bg-white"><p className="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
                             </div>
                         </div>

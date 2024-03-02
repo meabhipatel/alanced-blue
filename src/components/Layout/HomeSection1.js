@@ -62,7 +62,7 @@ Join us in navigating the dynamic landscape of freelancing with confidence and e
             <span className='font-inter text-[15px]'>Certified Institute</span>
         </div>
         {/* <div className='mt-7'>
-            <Link to=''><span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Read More</span></Link>
+            <Link to=''><span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold">Read More</span></Link>
         </div> */}
     </div>
 </div>

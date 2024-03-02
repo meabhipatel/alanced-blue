@@ -168,7 +168,7 @@ const FreelancerFullDetailBeforeLogin = () => {
         <div className=' basis-3/12 pl-14'>
         <div className="relative w-24 h-24">
               <img src={"https://www.api.alanced.com"+freelancer.images_logo} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
-              <div class="absolute bottom-3 right-0.5 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+              <div class="absolute bottom-3 right-0.5 w-4 h-4 bg-blue-500 rounded-full border-2 border-white"></div>
           </div>
           <div className='text-left pl-2 mt-10'>
             <h1 className=' font-cardo text-[20px] fond-semibold'>Experience level</h1>
@@ -212,11 +212,11 @@ const FreelancerFullDetailBeforeLogin = () => {
             </div>
             <div className=' basis-3/12 text-right'>
             <Link to="/login" >
-            <span class="inline-block text-sm px-10 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold">Message</span></Link>
+            <span class="inline-block text-sm px-10 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-4 font-semibold">Message</span></Link>
             </div>
             <Link to='/login'>
             <div className=' basis-3/12 text-left'>
-            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]  mr-2">
+            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]  mr-2">
                   <button class="px-11 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p></button>
               </div>
             </div>
@@ -225,7 +225,7 @@ const FreelancerFullDetailBeforeLogin = () => {
           <div className='mt-[8%]'>
           <p className='font-cardo text-[22px] fond-semibold text-left'>About Freelancer</p>
           <div class="w-28  mt-2 ml-1 relative">
-          <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
           <div class="border-gray-600 border-b-2 rounded-lg"></div>
         </div>
         <p className="text-[#031136] opacity-50 text-[14px] font-inter py-5 text-left pr-8">{freelancer.about ? freelancer.about:'NA'}</p>
@@ -233,7 +233,7 @@ const FreelancerFullDetailBeforeLogin = () => {
           <div className=' mt-6'>
           <p className='font-cardo text-[22px] fond-semibold text-left'>Skills</p>
           <div class="w-8 mt-2 ml-1 relative">
-          <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
           <div class="border-gray-600 border-b-2 rounded-lg"></div>
         </div>
         <div className="text-left mt-5">
@@ -241,7 +241,7 @@ const FreelancerFullDetailBeforeLogin = () => {
           ? JSON.parse(freelancer.skills.replace(/'/g, '"')).map((skill, index) => (
               <div
                 key={index} // Add a key prop for each skill for React to identify them uniquely.
-                className="mr-3 focus:outline-none mb-3 bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full text-green-800 px-8 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
+                className="mr-3 focus:outline-none mb-3 bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full text-blue-800 px-8 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
               >
                 <p className="text-center">{skill}</p>
               </div>
@@ -252,7 +252,7 @@ const FreelancerFullDetailBeforeLogin = () => {
           <div className='mt-8'>
           <p className='font-cardo text-[22px] fond-semibold text-left'>Portfolio ({freelancerproject ? freelancerproject.length : 0})</p>
           <div class="w-20  mt-2 ml-1 relative">
-          <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
           <div class="border-gray-600 border-b-2 rounded-lg"></div>
         </div>
         <div className="flex flex-wrap -mx-2">  
@@ -271,7 +271,7 @@ const FreelancerFullDetailBeforeLogin = () => {
                       }}
                   />
               </div>
-              <p className='font-inter text-green-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-green-700 underline font-semibold text-left'>{pro.project_title}</p>
+              <p className='font-inter text-blue-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-blue-700 underline font-semibold text-left'>{pro.project_title}</p>
           </div>
       ))}
       {isPortfolioOpen && <FreelancerPortfolio project={selectedProjects} closePortfolio={closePortfolio} />}
@@ -284,7 +284,7 @@ const FreelancerFullDetailBeforeLogin = () => {
                               variant="outlined"
                               onClick={prev}
                               disabled={currentPage === 1}
-                              style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                              style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                           >
                               <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                           </IconButton>
@@ -294,7 +294,7 @@ const FreelancerFullDetailBeforeLogin = () => {
                               return (
                                   <span
                                       key={pageNumber}
-                                      className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                      className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
                                       onClick={() => {
                                           window.scrollTo(0, 0);
                                           setCurrentPage(pageNumber);
@@ -311,7 +311,7 @@ const FreelancerFullDetailBeforeLogin = () => {
                               variant="outlined"
                               onClick={next}
                               disabled={currentPage === totalPages}
-                              style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                              style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                           >
                               <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                           </IconButton>
@@ -321,7 +321,7 @@ const FreelancerFullDetailBeforeLogin = () => {
   <div className=' mt-6'>
           <p className='font-cardo text-[22px] fond-semibold text-left'>Reviews ({reviews && reviews ? reviews.length : 0})</p>
           <div class="w-24 mt-2 ml-1 relative">
-          <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
           <div class="border-gray-600 border-b-2 rounded-lg"></div>
         </div>
       {visibleReviews.map((review, index) => (<>
@@ -361,7 +361,7 @@ const FreelancerFullDetailBeforeLogin = () => {
       <div className=' mt-12 text-left border border-gray-100 p-4'>
           <p className='font-cardo text-[22px] fond-semibold text-left'>Employment History</p>
           <div class="w-48 mt-2 ml-1 relative">
-          <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
           <div class="border-gray-600 border-b-2 rounded-lg"></div>
         </div>
       <div class="border-b opacity-50 my-8"></div>

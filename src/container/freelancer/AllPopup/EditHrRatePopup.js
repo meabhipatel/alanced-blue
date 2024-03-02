@@ -112,7 +112,7 @@ const EditHrRatePopup = ({ closeHrRate }) => {
                 <div className="flex items-center space-x-2">
                 <input
             type="text"
-            className='border py-1.5 px-2 rounded-md w-56 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 text-right'
+            className='border py-1.5 px-2 rounded-md w-56 focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600 text-right'
             value={userInput}
             onChange={(e) => {
                 const value = e.target.value.replace(/[^0-9.]/g, ''); 
@@ -139,7 +139,7 @@ const EditHrRatePopup = ({ closeHrRate }) => {
                 <div className="flex items-center space-x-2">
                   <input
                     type="text"
-                    className="py-1.5 px-2 rounded-md w-56 border-none text-right bg-green-50"
+                    className="py-1.5 px-2 rounded-md w-56 border-none text-right bg-blue-50"
                     value={`-$${serviceFee.toFixed(2)}`}
                     disabled
                   />
@@ -161,7 +161,7 @@ const EditHrRatePopup = ({ closeHrRate }) => {
                 <div className="flex items-center space-x-2">
                   <input
                     type="text"
-                    className="border py-1.5 px-2 rounded-md w-56 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 text-right"
+                    className="border py-1.5 px-2 rounded-md w-56 focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600 text-right"
                     value={`$${totalAfterFee.toFixed(2)}`}
                     disabled
                   />
@@ -171,12 +171,12 @@ const EditHrRatePopup = ({ closeHrRate }) => {
             </div>
             <div className="mt-8 flex justify-end">
               <Link to="" onClick={handleSave}>
-                <span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold">
+                <span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-3 font-semibold">
                   Save
                 </span>
               </Link>
               <div
-                class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]"
+                class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]"
                 onClick={closeHrRate}
               >
                 <Link to="">

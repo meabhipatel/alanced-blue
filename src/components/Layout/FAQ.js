@@ -40,12 +40,12 @@ const FAQ = () => {
     <div ref={contentRef} className="flex-1 py-4 px-3" style={{ overflowY: 'hidden' }}>
     <h1 className="font-cardo text-[26px] text-[#031136] text-center font-normal">Frequently Asked Question</h1>
     <div class="w-52 mt-1 relative mx-auto">
-      <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
       <div class="border-gray-600 border-b-2 rounded-lg"></div>
     </div>
     <div className='border border-gray-200 border-opacity-30 mt-8 mx-6 p-3'>
             <div className="flex justify-between items-center">
-                <h1 className="font-inter text-md text-[#031136] text-left font-semibold"><i className="bi bi-question-circle-fill text-green-700 inline-block mr-1"></i> What is Alanced?</h1>
+                <h1 className="font-inter text-md text-[#031136] text-left font-semibold"><i className="bi bi-question-circle-fill text-blue-700 inline-block mr-1"></i> What is Alanced?</h1>
                 <div 
                     className="pb-1 pl-0.4 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer flex-shrink-0"
                     onClick={() => setIsOpen1(!isOpen1)}
@@ -61,7 +61,7 @@ const FAQ = () => {
         </div>
         <div className='border border-gray-200 border-opacity-30 mt-1 mx-6 p-3'>
             <div className="flex justify-between items-center">
-                <h1 className="font-inter text-md text-[#031136] text-left font-semibold"><i className="bi bi-question-circle-fill text-green-700 inline-block mr-1"></i>  How do I sign up?</h1>
+                <h1 className="font-inter text-md text-[#031136] text-left font-semibold"><i className="bi bi-question-circle-fill text-blue-700 inline-block mr-1"></i>  How do I sign up?</h1>
                 <div 
                     className="pb-1 pl-0.4 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer flex-shrink-0"
                     onClick={() => setIsOpen2(!isOpen2)}
@@ -77,7 +77,7 @@ const FAQ = () => {
         </div>
         <div className='border border-gray-200 border-opacity-30 mt-1 mx-6 p-3'>
             <div className="flex justify-between items-center">
-                <h1 className="font-inter text-md text-[#031136] text-left font-semibold"><i className="bi bi-question-circle-fill text-green-700 inline-block mr-1"></i> How much does it cost to use Alanced?</h1>
+                <h1 className="font-inter text-md text-[#031136] text-left font-semibold"><i className="bi bi-question-circle-fill text-blue-700 inline-block mr-1"></i> How much does it cost to use Alanced?</h1>
                 <div 
                     className="pb-1 pl-0.4 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer flex-shrink-0"
                     onClick={() => setIsOpen3(!isOpen3)}
@@ -93,7 +93,7 @@ const FAQ = () => {
         </div>
         <div className='border border-gray-200 border-opacity-30 mt-1 mx-6 p-3'>
             <div className="flex justify-between items-center">
-                <h1 className="font-inter text-md text-[#031136] text-left font-semibold"><i className="bi bi-question-circle-fill text-green-700 inline-block mr-1"></i> How do I get paid?</h1>
+                <h1 className="font-inter text-md text-[#031136] text-left font-semibold"><i className="bi bi-question-circle-fill text-blue-700 inline-block mr-1"></i> How do I get paid?</h1>
                 <div 
                     className="pb-1 pl-0.4 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer flex-shrink-0"
                     onClick={() => setIsOpen4(!isOpen4)}
@@ -109,7 +109,7 @@ const FAQ = () => {
         </div>
         <div className='border border-gray-200 border-opacity-30 mt-1 mx-6 p-3'>
             <div className="flex justify-between items-center">
-                <h1 className="font-inter text-md text-[#031136] text-left font-semibold"><i className="bi bi-question-circle-fill text-green-700 inline-block mr-1"></i> What kind of jobs can I find or post on Alanced?</h1>
+                <h1 className="font-inter text-md text-[#031136] text-left font-semibold"><i className="bi bi-question-circle-fill text-blue-700 inline-block mr-1"></i> What kind of jobs can I find or post on Alanced?</h1>
                 <div 
                     className="pb-1 pl-0.4 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer flex-shrink-0"
                     onClick={() => setIsOpen5(!isOpen5)}
@@ -125,7 +125,7 @@ const FAQ = () => {
         </div>
         <div className='border border-gray-200 border-opacity-30 mt-1 mx-6 p-3'>
             <div className="flex justify-between items-center">
-                <h1 className="font-inter text-md text-[#031136] text-left font-semibold"><i className="bi bi-question-circle-fill text-green-700 inline-block mr-1"></i> Is my personal information safe with Alanced?</h1>
+                <h1 className="font-inter text-md text-[#031136] text-left font-semibold"><i className="bi bi-question-circle-fill text-blue-700 inline-block mr-1"></i> Is my personal information safe with Alanced?</h1>
                 <div 
                     className="pb-1 pl-0.4 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer flex-shrink-0"
                     onClick={() => setIsOpen6(!isOpen6)}
@@ -141,7 +141,7 @@ const FAQ = () => {
         </div>
         <div className='border border-gray-200 border-opacity-30 mt-1 mx-6 p-3'>
             <div className="flex justify-between items-center">
-                <h1 className="font-inter text-md text-[#031136] text-left font-semibold"><i className="bi bi-question-circle-fill text-green-700 inline-block mr-1"></i> Can I work or hire from anywhere in the world?</h1>
+                <h1 className="font-inter text-md text-[#031136] text-left font-semibold"><i className="bi bi-question-circle-fill text-blue-700 inline-block mr-1"></i> Can I work or hire from anywhere in the world?</h1>
                 <div 
                     className="pb-1 pl-0.4 w-6 h-6 bg-white rounded-full border border-gray-200 cursor-pointer flex-shrink-0"
                     onClick={() => setIsOpen7(!isOpen7)}

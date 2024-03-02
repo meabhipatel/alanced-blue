@@ -92,9 +92,9 @@ const ViewProjectNewTab = () => {
                 </div>
                 <div className=' basis-4/12'>
                 <div className='mt-6 ml-32'>
-                <Link to=''><span class="px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-inter text-base font-normal">Apply Now</span></Link>
+                <Link to=''><span class="px-12 py-[15px] lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-inter text-base font-normal">Apply Now</span></Link>
                 </div>
-                <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-8 ml-32">
+                <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF] mt-8 ml-32">
                 <Link to=''><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-inter font-bold text-base py-[4px] px-8"><i class="bi bi-suit-heart"></i>  Save Job</p></button></Link>
                 </div> 
                 <div className='mt-8 text-sm font-inter font-normal text-[#0A142F] ml-28'><i class="bi bi-flag-fill"></i><span className=' opacity-[50%] ml-2'>Flag as inappropriate</span></div>

@@ -117,7 +117,7 @@ const EditJobPost = () => {
             return skillsArray.map((skill, index) => (
                 <div
                 key={index}
-                className="mr-3 my-2 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  text-green-800 px-4 py-1 text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
+                className="mr-3 my-2 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full  text-blue-800 px-4 py-1 text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
                 >
                 <p className="text-center">{skill}</p>
                 </div>
@@ -160,7 +160,7 @@ const EditJobPost = () => {
 </div>
 <div className='flex justify-end m-5'>
 <Link to='/View/Job-post' state={{project}} onClick={() => window.scrollTo(0, 0)}>
-<span class="text-sm px-6 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">Save Job Post</span>
+<span class="text-sm px-6 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold">Save Job Post</span>
 </Link>
 </div>
 

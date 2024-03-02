@@ -63,7 +63,7 @@ const AddReviewPopup = ({closeReview,contract}) => {
                     <div className='mt-8'>
                             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Rating <span class="text-red-500">*</span></h1>
                             <select
-                            className="w-full border my-2 py-1.5 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white"
+                            className="w-full border my-2 py-1.5 px-2 rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600 bg-white"
                             name="rating" value={rating} onChange={e => setRating(e.target.value)} required>
                             <option disabled selected value="">Choose Rating</option>
                             <option value="1.0">1.0</option>
@@ -77,10 +77,10 @@ const AddReviewPopup = ({closeReview,contract}) => {
                             <option value="5.0">5.0</option>
                             </select>
                             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left pt-5">Review <span class="text-red-500">*</span></h1>
-                          <textarea id="" cols="30" rows="5" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' name="review" value={review} onChange={e => setReview(e.target.value)} required></textarea> 
+                          <textarea id="" cols="30" rows="5" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' name="review" value={review} onChange={e => setReview(e.target.value)} required></textarea> 
                             <div className="mt-8 flex justify-end">
-                            <button onClick={handleSave}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" >Submit</span></button>
-                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={closeReview}>
+                            <button onClick={handleSave}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-3 font-semibold" >Submit</span></button>
+                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]" onClick={closeReview}>
                                 <button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button>
                             </div>     
                             </div>

@@ -22,7 +22,7 @@ const AddBidPopup = ({ isOpen, onClose }) => {
         <div className=' basis-8/12'>
             <h1 className=' text-3xl font-cardo font-semibold text-left'>Shopping Website</h1>
             <div className=' flex flex-row'>
-                <div className=' basis-3/12 mt-5'><button type="button" class="focus:outline-none  bg-[#dffdee] hover:bg-[#dffdee]  rounded-xl text-sm font-semibold text-green-900 px-3 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]">Open</button></div>
+                <div className=' basis-3/12 mt-5'><button type="button" class="focus:outline-none  bg-[#dffdee] hover:bg-[#dffdee]  rounded-xl text-sm font-semibold text-blue-900 px-3 py-[3px] dark:bg-[#dffdee] dark:hover:bg-[#dffdee]">Open</button></div>
                 <div className=' basis-5/12 mt-5'><p className=' text-base font-normal font-inter'>Posted 22 hours ago</p></div>
                 <div className=' basis-4/12 mt-5'><p className=' text-base font-normal font-inter'>Ends in 6 days</p></div>
             </div>
@@ -54,7 +54,7 @@ const AddBidPopup = ({ isOpen, onClose }) => {
         <input type="text" id="website-admin" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Description"/>
         </div>
         <div className=''>
-        <button className='rounded h-10 w-80 text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75] mt-5 text-sm font-bold' onClick={onClose}>Send Proposal</button>
+        <button className='rounded h-10 w-80 text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF] mt-5 text-sm font-bold' onClick={onClose}>Send Proposal</button>
         </div>
         </div>
         <div className=' basis-6/12'>

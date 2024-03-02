@@ -189,7 +189,7 @@ console.log("++++++++++++++",first_Name)
         left: '0',
         width: '100%',
         height: '2px',
-        background: 'linear-gradient(90deg, #00BF58, #E3FF75)'
+        background: 'linear-gradient(90deg, #0909E9, #00D4FF)'
     };
 
     React.useEffect(() => {
@@ -292,8 +292,8 @@ console.log("++++++++++++++",first_Name)
                         <p className="font-cardo text-[17px] text-[#031136] font-normal pt-2 text-left">Must Be An Actual Photo Of You.</p>
                         <p className='text-[#0A142F] font-inter opacity-50 text-[14px] text-left'>Logos, clip-art, group photos, and digitally-altered images are not allowed.</p>
                             <div className="mt-8 flex justify-end">
-                            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" onClick={handleImageClick} onChange={handleFileChange}>Change Image</span></Link>
-                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={handleImageSave}>
+                            <Link to=''><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-3 font-semibold" onClick={handleImageClick} onChange={handleFileChange}>Change Image</span></Link>
+                            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]" onClick={handleImageSave}>
                                 <Link to=''><button class="px-2 py-1 bg-white rounded-sm"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Save Photo</p></button></Link>
                             </div>     
                             </div>
@@ -340,7 +340,7 @@ console.log("++++++++++++++",first_Name)
    
    <div className='border-b flex border-gray-200 border-opacity-30 text-left py-6 px-4 md:px-8' id='workHistory'>
     <div className='flex flex-col w-fit'>
-    <span className='text-xl text-[#00BF58] font-bold'>Account</span>
+    <span className='text-xl text-[#0909E9] font-bold'>Account</span>
     {hirerselfprofile != null ? 
     <div className='flex flex-col mt-5 ml-4'>
     <span className='text-2xl font-semibold'>{hirerData.first_Name + ' ' + hirerData.last_Name}</span>
@@ -368,7 +368,7 @@ console.log("++++++++++++++",first_Name)
             {isAccount && <HirerAccountPopup isAvailable={isAvailable} setIsAvailable={setIsAvailable} handleAccountClose={handleAccountClose}/>}
    <div className='border-b flex border-gray-200 border-opacity-30 text-left py-6 px-4 md:px-8' id='workHistory'>
     <div className='flex flex-col'>
-    <span className='text-xl text-[#00BF58] font-bold'>Company Details</span>
+    <span className='text-xl text-[#0909E9] font-bold'>Company Details</span>
     {hirerselfprofile != null ? 
     <div className='flex flex-col mt-5 ml-4'>
     <span className='text-lg font-semibold'>{hirerData.first_Name + ' ' + hirerData.last_Name}</span>
@@ -398,7 +398,7 @@ console.log("++++++++++++++",first_Name)
             { isDetails && <HirerCompanyPopup handleDetailsClose={handleDetailsClose}/>}
    <div className='border-b flex border-gray-200 border-opacity-30 text-left py-6 px-4 md:px-8' id='workHistory'>
     <div className='flex flex-col'>
-    <span className='text-xl text-[#00BF58] font-bold'>Company Contacts</span>
+    <span className='text-xl text-[#0909E9] font-bold'>Company Contacts</span>
     {hirerselfprofile != null ? 
     <div className='flex flex-col mt-5 ml-4'>
     <span className='text-md text-gray-500'>Owner</span>

@@ -136,19 +136,19 @@ const next = () => {
     <div className='my-3 flex flex-wrap'>
     <Link to='/my-proposals' className="flex-grow md:flex-none p-1">
                 <span 
-                    className={`${commonStyle} px-3 my-3 md:px-8 ${selectedButton === 'Active' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white  font-inter text-sm font-normal border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
+                    className={`${commonStyle} px-3 my-3 md:px-8 ${selectedButton === 'Active' ? "bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white  font-inter text-sm font-normal border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('Active')}>
                     Active
                 </span>
             </Link>  
             <Link to='/freelancer/view-referals'className="flex-grow md:flex-none p-1">
-                <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'Referrals' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
+                <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'Referrals' ? "bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('Referrals')}>
                     Referrals
                 </span>
             </Link>
             {/* <Link to='/freelancer/view-archived'className="flex-grow md:flex-none p-1">
-                <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'Archieved' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
+                <span className={`${commonStyle} px-3 md:px-8 ${selectedButton === 'Archieved' ? "bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('Archieved')}>
                     Archieved
                 </span>
@@ -185,7 +185,7 @@ const next = () => {
         </div>
 
         <div className='flex-grow ml-[100px]'>
-            <Link to="/View/freelancer/proposal" state={{ bid }} onClick={() => window.scrollTo(0, 0)}><h1 className='font-cardo text-[18px] text-green-600 hover:underline'>{bid.project.title}</h1></Link>
+            <Link to="/View/freelancer/proposal" state={{ bid }} onClick={() => window.scrollTo(0, 0)}><h1 className='font-cardo text-[18px] text-blue-600 hover:underline'>{bid.project.title}</h1></Link>
         </div>
 
         <div className='flex flex-col w-1/4 items-end pr-4'>
@@ -219,7 +219,7 @@ const next = () => {
                             variant="outlined"
                             onClick={Bidprev}
                             disabled={currentBidPage === 1}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
@@ -229,7 +229,7 @@ const next = () => {
                             return (
                                 <span
                                     key={pageNumber}
-                                    className={`px-0 py-1 ${currentBidPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    className={`px-0 py-1 ${currentBidPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
                                     onClick={() => {
                                         window.scrollTo(0, 0);
                                         setCurrentBidPage(pageNumber);
@@ -246,7 +246,7 @@ const next = () => {
                             variant="outlined"
                             onClick={Bidnext}
                             disabled={currentBidPage === totalBidPages}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
@@ -280,7 +280,7 @@ const next = () => {
     </div>
 
     <div className='flex-grow ml-[100px]'>
-    <Link to="/view/hiring-detail" state={{ hire }} onClick={() => window.scrollTo(0, 0)}><h1 className='font-cardo text-[18px] text-green-600 hover:underline'>{hire.project_title}</h1></Link>
+    <Link to="/view/hiring-detail" state={{ hire }} onClick={() => window.scrollTo(0, 0)}><h1 className='font-cardo text-[18px] text-blue-600 hover:underline'>{hire.project_title}</h1></Link>
     </div>
 
     <div className='flex flex-col w-1/4 items-end pr-4'>
@@ -314,7 +314,7 @@ const next = () => {
                               variant="outlined"
                               onClick={prev}
                               disabled={currentPage === 1}
-                              style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                              style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                           >
                               <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                           </IconButton>
@@ -324,7 +324,7 @@ const next = () => {
                               return (
                                   <span
                                       key={pageNumber}
-                                      className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                      className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
                                       onClick={() => {
                                           window.scrollTo(0, 0);
                                           setCurrentPage(pageNumber);
@@ -341,7 +341,7 @@ const next = () => {
                               variant="outlined"
                               onClick={next}
                               disabled={currentPage === totalPages}
-                              style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                              style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                           >
                               <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                           </IconButton>

@@ -166,13 +166,13 @@ const [bidsCount, setBidsCount] = useState({});
     <div className='mt-3 flex flex-wrap'>
     <Link to='/View-all/Job-post' className="flex-grow md:flex-none p-1">
                 <span 
-                    className={`${commonStyle} px-3 my-3 md:px-8 text-base font-inter font-bold ${selectedButton === 'All Job Posts' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
+                    className={`${commonStyle} px-3 my-3 md:px-8 text-base font-inter font-bold ${selectedButton === 'All Job Posts' ? "bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-50"} mr-3`}
                     onClick={() => setSelectedButton('All Job Posts')}>
                     All Job Posts
                 </span>
             </Link>  
             <Link to='/view-all/hirer-contracts'className="flex-grow md:flex-none p-1">
-                <span className={`${commonStyle} px-3 md:px-8 font-inter font-normal text-sm text-[#797979] opacity-[50%] ${selectedButton === 'All Contracts' ? "bg-gradient-to-r from-[#00BF58] to-[#E3FF75] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-[50%]"} mr-3`}
+                <span className={`${commonStyle} px-3 md:px-8 font-inter font-normal text-sm text-[#797979] opacity-[50%] ${selectedButton === 'All Contracts' ? "bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white border-none" : "border border-gray-300 text-[#0A142F] opacity-[50%]"} mr-3`}
                     onClick={() => setSelectedButton('All Contracts')}>
                     All Contracts
                 </span>
@@ -192,7 +192,7 @@ const [bidsCount, setBidsCount] = useState({});
         <img src={search} alt="Search Icon" className="h-3 w-3" />
         <input className='w-28 lg:w-40 xl:w-[30rem] h-7 text-xs lg:text-sm outline-none' placeholder='Search Job Postings' />
     </div> */}
-    <button className='rounded h-7 w-7 p-2 text-xs lg:text-sm font-semibold text-white bg-gradient-to-r from-[#00BF58] to-[#E3FF75]'>
+    <button className='rounded h-7 w-7 p-2 text-xs lg:text-sm font-semibold text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF]'>
         <img src={searchbtn} alt="Search Icon" />
     </button>
 </section>
@@ -204,10 +204,10 @@ const [bidsCount, setBidsCount] = useState({});
                     <div class="flex">
                       <div class="flex-[40%]">
                         <Link to='/View/Job-post' state={{ project }} onClick={() => window.scrollTo(0, 0)}>
-                          <p className="font-inter text-[#0A142F] text-[16px] font-medium hover:underline hover:text-green-600">{highlightText(project.title, searchQuery)}</p>
+                          <p className="font-inter text-[#0A142F] text-[16px] font-medium hover:underline hover:text-blue-600">{highlightText(project.title, searchQuery)}</p>
                         </Link>
                         <p className='font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-1'>{highlightText(project.Project_Rate, searchQuery)} Rate - {highlightText(project.experience_level.replace(/_/g, ' '), searchQuery)} - Posted {timeAgo(project.Project_created_at)}</p>
-                        <span className={`px-4 py-1 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 font-semibold ${project.is_hired ? 'bg-yellow-100 text-yellow-700 border border-yellow-700' : 'bg-[#E4EBE4] text-green-800 border border-green-800'}`}>
+                        <span className={`px-4 py-1 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 font-semibold ${project.is_hired ? 'bg-yellow-100 text-yellow-700 border border-yellow-700' : 'bg-[#E4EBE4] text-blue-800 border border-blue-800'}`}>
                           {project.is_hired ? 'Closed' : 'Open'}
                         </span>
                       </div>
@@ -226,7 +226,7 @@ const [bidsCount, setBidsCount] = useState({});
                         </div>
                       </div>
                       <div class="flex-[20%] text-center">
-                        <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
+                        <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF] mt-3 mr-2">
                           <Link to='/View-all/proposals' state={{ project, isOpen: project.is_hired }} onClick={() => window.scrollTo(0, 0)}>
                             <button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">View Proposals</p></button>
                           </Link>
@@ -271,7 +271,7 @@ const [bidsCount, setBidsCount] = useState({});
                             variant="outlined"
                             onClick={prev}
                             disabled={currentPage === 1}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
@@ -281,7 +281,7 @@ const [bidsCount, setBidsCount] = useState({});
                             return (
                                 <span
                                     key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
                                     onClick={() => {
                                         window.scrollTo(0, 0);
                                         setCurrentPage(pageNumber);
@@ -298,7 +298,7 @@ const [bidsCount, setBidsCount] = useState({});
                             variant="outlined"
                             onClick={next}
                             disabled={currentPage === totalPages}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>

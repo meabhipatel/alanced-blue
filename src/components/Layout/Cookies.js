@@ -17,7 +17,7 @@ const Cookies = () => {
     </div>
     </div>
     <div class="w-56 mb-6 mt-1 relative">
-      <div class="absolute inset-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] rounded-lg"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
       <div class="border-gray-600 border-b-2 rounded-lg"></div>
     </div>
     <h1 className="font-inter text-md text-[#031136] text-left font-normal opacity-40 py-4">

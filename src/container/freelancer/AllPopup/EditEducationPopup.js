@@ -38,16 +38,16 @@ const accessToken = useSelector(state => state.login.accessToken) || localStorag
     </div>
     <div className='mt-10'>
             {/* <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Edit Qualification</h1> */}
-            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' value={qualification} onChange={e => setqualification(e.target.value)}/>
+            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' value={qualification} onChange={e => setqualification(e.target.value)}/>
             {/* <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left"></h1>
             <div className="flex justify-between items-center mt-2 mb-6">
-        <select className="border py-2 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 mr-5 flex-1 bg-white opacity-50" defaultValue={startdate}>
+        <select className="border py-2 px-2 rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600 mr-5 flex-1 bg-white opacity-50" defaultValue={startdate}>
             <option value="" disabled selected>{startdate}</option>
             {Array.from({ length: new Date().getFullYear() - 1980 + 1 }, (_, idx) => 1980 + idx).map(year => (
                 <option key={year} value={year}>{year}</option>
             ))}
         </select>
-        <select className="border py-2 px-2 rounded-md focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 flex-1 bg-white opacity-50" defaultValue={enddate}>
+        <select className="border py-2 px-2 rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600 flex-1 bg-white opacity-50" defaultValue={enddate}>
             <option value="" disabled selected>{enddate}</option>
             {Array.from({ length: new Date().getFullYear() - 1980 + 1 + 4 }, (_, idx) => 1980 + idx).map(year => (
                 <option key={year} value={year}>{year}</option>
@@ -56,19 +56,19 @@ const accessToken = useSelector(state => state.login.accessToken) || localStorag
             </div>
             
             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Degree</h1>
-            <select className="border mt-2 mb-6 py-2 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600 bg-white opacity-50" defaultValue={qualification}>
+            <select className="border mt-2 mb-6 py-2 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600 bg-white opacity-50" defaultValue={qualification}>
             <option value="" disabled selected>{qualification}</option>
             {degrees.map(degree => (
                 <option key={degree} value={degree}>{degree}</option>
             ))}
         </select>
             <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Area of Study (Optional) </h1>
-            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600' defaultValue={stream}/> */}
+            <input type="text" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' defaultValue={stream}/> */}
             {/* <h1 className="font-cardo text-[20px] text-[#031136] font-normal text-left">Description (Optional)</h1>
-            <textarea name="" id="" cols="30" rows="5" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-600'></textarea> */}
+            <textarea name="" id="" cols="30" rows="5" className='border mt-2 mb-6 py-1.5 px-2 rounded-md w-full focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600'></textarea> */}
             <div className="mt-8 flex justify-end">
-            <Link to='' onClick={handleSave}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-3 font-semibold" >Save</span></Link>
-            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75]" onClick={closeEditEducation}>
+            <Link to='' onClick={handleSave}><span class="inline-block text-sm px-4 py-[10px] bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-3 font-semibold" >Save</span></Link>
+            <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]" onClick={closeEditEducation}>
                 <Link to=''><button class="px-2 py-1 bg-white"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Cancel</p></button></Link>
             </div>     
             </div>

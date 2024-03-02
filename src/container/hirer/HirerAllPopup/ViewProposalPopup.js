@@ -256,7 +256,7 @@ const [active, setActive] = React.useState(1);
   <div className="flex-[20%] p-6">
   <div className="relative w-24 h-24">
                     <img src={"https://www.api.alanced.com"+bid.freelancer_profilepic} alt="Profile" className="rounded-full w-full h-full border border-gray-200" />
-                    <div class="absolute bottom-3 right-0.5 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                    <div class="absolute bottom-3 right-0.5 w-4 h-4 bg-blue-500 rounded-full border-2 border-white"></div>
                 </div>
   </div>
   <div className="flex-[30%] py-6">
@@ -269,16 +269,16 @@ const [active, setActive] = React.useState(1);
                 <img src={locations} alt="Location" className="h-[13px] mr-1" />
                 <p className="text-[#797979] text-[14px] font-inter">{bid.freelancer_address ? bid.freelancer_address:'NA'}</p>
             </div>
-            {/* <p className="text-green-600 text-[16px] font-inter py-3 font-semibold cursor-pointer hover:underline">View Profile</p> */}
+            {/* <p className="text-blue-600 text-[16px] font-inter py-3 font-semibold cursor-pointer hover:underline">View Profile</p> */}
   </div>
   <div className="flex-[50%] p-6 text-right">
   <Link to="/messages" state={{conversationName}} >
-  <span class="inline-block text-sm px-10 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white mr-4 font-semibold">Message</span></Link>
-            {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
+  <span class="inline-block text-sm px-10 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-4 font-semibold">Message</span></Link>
+            {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF] mt-3 mr-2">
                 <button class="px-11 py-1 bg-white" onClick={openHiring}><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">Hire</p></button>
             </div> */}
            
-  {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2">
+  {/* <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF] mt-3 mr-2">
   <button
     class={`px-11 py-1 bg-white ${isInvited ? 'cursor-not-allowed' : ''}`}
     onClick={isInvited ? null : openHiring}
@@ -289,7 +289,7 @@ const [active, setActive] = React.useState(1);
     </p>
   </button>
 </div> */}
-<div class={` ${isInvited ? 'p-0.5 inline-block rounded bg-gradient-to-b from-[gray] to-[lightgray] mt-3 mr-2' : 'p-0.5 inline-block rounded bg-gradient-to-b from-[#00BF58] to-[#E3FF75] mt-3 mr-2'}`}>
+<div class={` ${isInvited ? 'p-0.5 inline-block rounded bg-gradient-to-b from-[gray] to-[lightgray] mt-3 mr-2' : 'p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF] mt-3 mr-2'}`}>
   <button class={`px-11 py-1 bg-white ${isInvited ? 'cursor-not-allowed' : ''}`} disabled={isInvited} onClick={isInvited ? null : openHiring}>
     <p class={`${isInvited ? 'bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]' : 'bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]'}`}>
       {isInvited ? 'Hired' : 'Hire'}
@@ -327,7 +327,7 @@ const [active, setActive] = React.useState(1);
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
         <h1 className="font-cardo text-xl text-[#031136] font-normal">View Profile</h1>
     <p className="text-[#031136] opacity-50 text-[14px] font-inter py-2 pb-6">{bid.freelancer_category.replace(/_/g, ' ')}</p>
-    {/* <span class="text-sm px-16 py-[10px] lg:mt-0 bg-gradient-to-r from-[#00BF58] to-[#E3FF75] border rounded border-none text-white font-semibold">All Work</span> */}
+    {/* <span class="text-sm px-16 py-[10px] lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold">All Work</span> */}
         </div>
         <div className='border-b border-gray-200 border-opacity-30 py-6 px-8'>
     <h1 className="font-cardo text-xl text-[#031136] font-normal">Languages</h1>
@@ -409,7 +409,7 @@ const [active, setActive] = React.useState(1);
                     }}
                 />
             </div>
-            <p className='font-inter text-green-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-green-700 underline font-semibold'>{pro.project_title}</p>
+            <p className='font-inter text-blue-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-blue-700 underline font-semibold'>{pro.project_title}</p>
         </div>
     ))}
     {isPortfolioOpen && <Portfolio project={selectedProjects} closePortfolio={closePortfolio} />}
@@ -422,7 +422,7 @@ const [active, setActive] = React.useState(1);
       variant="outlined"
       onClick={prev}
       disabled={active === 1}
-      style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+      style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
     >
       <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
     </IconButton>
@@ -432,7 +432,7 @@ const [active, setActive] = React.useState(1);
       return (
         <span
           key={pageNumber}
-          className={`px-0 py-1 ${active === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+          className={`px-0 py-1 ${active === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
           onClick={() => setActive(pageNumber)}
         >
           {pageNumber}
@@ -445,7 +445,7 @@ const [active, setActive] = React.useState(1);
       variant="outlined"
       onClick={next}
       disabled={active === Math.ceil(freelancerproject.length / 6)}
-      style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+      style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
     >
       <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
     </IconButton>
@@ -458,7 +458,7 @@ const [active, setActive] = React.useState(1);
                             variant="outlined"
                             onClick={prev}
                             disabled={currentPage === 1}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
@@ -468,7 +468,7 @@ const [active, setActive] = React.useState(1);
                             return (
                                 <span
                                     key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00BF58] to-[#E3FF75] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
                                     onClick={() => {
                                         window.scrollTo(0, 0);
                                         setCurrentPage(pageNumber);
@@ -485,7 +485,7 @@ const [active, setActive] = React.useState(1);
                             variant="outlined"
                             onClick={next}
                             disabled={currentPage === totalPages}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #00BF58, #E3FF75)', border: 'none' }}
+                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
                         >
                             <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                         </IconButton>
@@ -510,7 +510,7 @@ const [active, setActive] = React.useState(1);
                     }}
                 />
             </div>
-            <p className='font-inter text-green-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-green-700 underline font-semibold'>Project Title</p>
+            <p className='font-inter text-blue-600 text-[13px] pt-2 overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-blue-700 underline font-semibold'>Project Title</p>
         </div>
         {isPortfolioOpen && <Portfolio closePortfolio={closePortfolio} project={project}/>}
 </div>
@@ -525,7 +525,7 @@ const [active, setActive] = React.useState(1);
       return skillsArray.map((skill, index) => (
         <div
           key={index}
-          className="mr-3 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-green-800 px-3 py-[3px] my-1 text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
+          className="mr-3 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-blue-800 px-3 py-[3px] my-1 text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
         >
           <p className="text-center">{skill}</p>
         </div>
