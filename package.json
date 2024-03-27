@@ -18,6 +18,7 @@
     "bootstrap-icons": "^1.10.5",
     "date-fns": "^2.30.0",
     "font-awesome": "^4.7.0",
+    "generate-robotstxt": "^8.0.3",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.1",
     "jwt-decode": "^3.1.2",
@@ -38,6 +39,7 @@
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2",
+    "sitemap": "^7.1.1",
     "wavesurfer-react": "^2.2.3",
     "wavesurfer.js": "^7.3.1",
     "web-vitals": "^2.1.4"
@@ -46,7 +48,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "generateSitemap": "Alanced-Frontend/generateSitemap.mjs",
+    "robotsgenerator": "Alanced-Frontend/robotsgenerator.mjs"
   },
   "eslintConfig": {
     "extends": [

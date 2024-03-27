@@ -344,9 +344,9 @@ const handleClientNotificationClick = (notif) => {
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0">
     <div class="text-sm lg:flex-grow lg:ml-[45px]">
       <Link to='/view-all/freelancer' onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
-        Find Talent
+        Search Freelancer
       </span></Link>
-      <Link to='/projects' onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Find Work</span></Link>
+      <Link to='/projects' onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Search Job</span></Link>
       <Link to='/why-alanced' onClick={() => window.scrollTo(0, 0)}>
       <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
         Why Alanced
@@ -382,12 +382,12 @@ const handleClientNotificationClick = (notif) => {
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0 my-2.5">
     <div class="text-sm lg:flex-grow lg:ml-[45px] lg:mr-12 mt-1.5">
       {loginType=='FREELANCER' ? <>
-      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => {setFindworkDropdown(true); setReportsDropdown(false); setMyJobsDropdown(false);}}>Find Work <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
+      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => {setFindworkDropdown(true); setReportsDropdown(false); setMyJobsDropdown(false);}}>Search Job <i class="bi bi-chevron-down text-[#031136] text-xs"></i></span>
       {Findworkdropdown && (
         <div className="absolute md:right-[54.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
             <Link to='/projects' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Find Work</span>
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Search Job</span>
                       </Link>
                       <Link to='/saved-jobs' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                         <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Saved Jobs</span>
@@ -402,7 +402,7 @@ const handleClientNotificationClick = (notif) => {
         </div>
     )}
       </> : <Link to='/hirer/profile' onClick={() => window.scrollTo(0, 0)}>
-      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]"  onMouseEnter={() => {setFindworkDropdown(false); setReportsDropdown(false); setMyJobsDropdown(false);}}>Find Talent </span>
+      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]"  onMouseEnter={() => {setFindworkDropdown(false); setReportsDropdown(false); setMyJobsDropdown(false);}}>Search Freelancer </span>
       </Link> }
       {loginType=='FREELANCER' ? <>
       <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => {setMyJobsDropdown(true); setFindworkDropdown(false); setReportsDropdown(false);}} 
