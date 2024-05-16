@@ -150,7 +150,10 @@ const onChange = e =>{
       <div class="flex-1 p-2 font-bold font-larsseit text-[14px] hover:text-blue-600 hover:underline">Cookies</div>
       </Link>
     </div> */}
-      <p className=' font-cardo font-bold text-sm'>©Copyright 2023 Wiz91 All Rights Reserved</p>
+      <p className=' font-cardo font-bold text-sm'>Copyrights © 2024 Alanced Proudly Created by <a href="https://wiz91.com/" 
+target="_blank"
+    > Wiz91 Technologies </a></p>
+      
       </div>
       <div className="flex-1 flex justify-end p-4 pr-0 pt-1">
       <div class="flex sm:justify-center xl:justify-start md:justify-end">
