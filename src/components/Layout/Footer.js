@@ -54,23 +54,11 @@ const onChange = e =>{
   <div className="container mx-auto px-4">
     <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:px-20">
     <div class="p-4 text-left">
-    <h5 class="text-xl font-bold font-cardo mb-6">Company Info</h5>
-        {/* <ul class="list-none footer-links text-gray-500">
-          <Link to='/why-alanced' onClick={() => window.scrollTo(0, 0)}>
-          <li class="mb-2 hover:text-blue-600 hover:underline">Alanced Foundation</li>
-          </Link>
-          <Link to='/enterprises' onClick={() => window.scrollTo(0, 0)}>
-          <li class="mb-2 hover:text-blue-600 hover:underline">Enterprise </li>
-          </Link>
-          <Link to='/FAQ' onClick={() => window.scrollTo(0, 0)}>
-          <li class="mb-2 hover:text-blue-600 hover:underline">FAQ</li>
-          </Link>
-        </ul> */}
+    <h5 class="text-xl font-bold mb-6">Company Info</h5>
         <ul class="list-none footer-links text-gray-500">
         <Link to='/about-us' onClick={() => window.scrollTo(0, 0)}>
         <li class="mb-2 hover:text-blue-600 hover:underline">About us</li>
         </Link>
-          {/* <li class="mb-2 hover:text-blue-600 hover:underline">Blog</li> */}
           <Link to='/contact-us' onClick={() => window.scrollTo(0, 0)}>
           <li class="mb-2 hover:text-blue-600 hover:underline">Contact us</li>
           </Link>
@@ -78,20 +66,8 @@ const onChange = e =>{
         </ul>
     </div>
     <div class="p-4 text-left">
-    <h5 class="text-xl font-bold mb-6 font-cardo">About</h5>
-        {/* <ul class="list-none footer-links text-gray-500">
-        <Link to='/about-us' onClick={() => window.scrollTo(0, 0)}>
-        <li class="mb-2 hover:text-blue-600 hover:underline">About us</li>
-        </Link>
-          <Link to='/contact-us' onClick={() => window.scrollTo(0, 0)}>
-          <li class="mb-2 hover:text-blue-600 hover:underline">Contact us</li>
-          </Link>
-          <Link to='/safety-security' onClick={() => window.scroll(0,0)}><li class="mb-2 hover:text-blue-600 hover:underline">Safety & Security</li></Link>
-        </ul> */}
+    <h5 class="text-xl font-bold mb-6">About</h5>
         <ul class="list-none footer-links text-gray-500">
-          {/* <Link to='/why-alanced' onClick={() => window.scrollTo(0, 0)}>
-          <li class="mb-2 hover:text-blue-600 hover:underline">Alanced Foundation</li>
-          </Link> */}
           <Link to='/enterprises' onClick={() => window.scrollTo(0, 0)}>
           <li class="mb-2 hover:text-blue-600 hover:underline">Enterprise </li>
           </Link>
@@ -104,7 +80,7 @@ const onChange = e =>{
         </ul>
     </div>
     <div class="p-4 text-left">
-    <h5 class="text-xl font-bold mb-6 font-cardo">Policies</h5>
+    <h5 class="text-xl font-bold mb-6">Policies</h5>
         <ul class="list-none footer-links text-gray-500">
         <Link to='/terms' onClick={() => window.scrollTo(0, 0)}>
           <li class="mb-2 hover:text-blue-600 hover:underline">Terms</li>
@@ -119,7 +95,7 @@ const onChange = e =>{
     </div>
     <div class="p-4">
     <div className='bg-[#F4F5F9] lg:h-[220px] lg:w-[350px] -mt-6 lg:-ml-[100px]'>
-        <h5 class="text-xl font-bold font-cardo pt-[22px] text-start ml-[23px]">Subscribe</h5>
+        <h5 class="text-xl font-bold pt-[22px] text-start ml-[23px]">Subscribe</h5>
         <input type="email" className='mt-3 lg:-ml-[60px] p-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' placeholder='Email Address' name='email' onChange={onChange} value={addUserSub.email}/>
         <button class="inline-block text-sm px-4 py-[12px] lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold" onClick={AddUserSubscribe}><img src={arrow} alt=""/></button>
         <p className='text-[14px] pt-3 text-left pl-6 opacity-50'>Hello, we are Lift Media. Our goal is to translate <br />the positive effects from revolutionizing how <br /> companies engage with their clients & their <br /> team.</p>
@@ -134,7 +110,7 @@ const onChange = e =>{
       <Link to='/' onClick={() => window.scrollTo(0, 0)}>
       <div class="md:w-1/6 flex items-center flex-shrink-0">
         <img src={logo} alt="" />
-        <span class="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
+        <span class="font-semibold text-[23px] tracking-widest ml-2 text-[#031136]">ALANCED</span>
       </div>
       </Link>
       </div>
@@ -150,7 +126,7 @@ const onChange = e =>{
       <div class="flex-1 p-2 font-bold font-larsseit text-[14px] hover:text-blue-600 hover:underline">Cookies</div>
       </Link>
     </div> */}
-      <p className=' font-cardo font-bold text-sm'>Copyrights © 2024 Alanced Proudly Created by <a href="https://wiz91.com/" 
+      <p className='font-bold text-sm'>Copyrights © 2024 Alanced Proudly Created by <a href="https://wiz91.com/" 
 target="_blank"
     > Wiz91 Technologies </a></p>
       
