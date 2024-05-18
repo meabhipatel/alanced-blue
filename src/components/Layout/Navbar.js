@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import logo from "../images/Alanced.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import navback from "../images/Nav_Background.png";
 import { useDispatch, useSelector } from "react-redux";
 import { LogoutAction } from "../../redux/Auth/AuthAction";
@@ -16,9 +16,11 @@ import alancedlogo from "../images/Alanced-footer.png";
 import { GetFreelancerSelfProfileAction } from "../../redux/Freelancer/FreelancerAction";
 import { GetViewAllProjectsListAction } from "../../redux/Freelancer/FreelancerAction";
 import { timeAgo } from "../../container/freelancer/TimeFunctions";
+import { dontNeedMTScreens } from "../../routes/DynamicMarginTop";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const accessToken = localStorage.getItem("accessToken");
   const AccessToken =
     useSelector((state) => state.login.accessToken) ||
@@ -32,7 +34,6 @@ const Navbar = () => {
   const logindata =
     useSelector((state) => state.login.login_data) ||
     JSON.parse(localStorage.getItem("logindata"));
-  console.log(logindata, "chklogindataonnavbar");
   const googleUserName = localStorage.getItem("googleUserName");
   const loginMethod = localStorage.getItem("loginMethod");
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ const Navbar = () => {
   const [Reportsdropdown, setReportsDropdown] = useState(false);
   const hirerImage = useSelector((state) => state.hirerImage.hirerimageprofile);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isTransparent, setIsTransparent] = useState(false);
   const freelanceImage = useSelector(
     (state) => state.freelancerImage.freelancerimageprofile
   );
@@ -323,9 +325,21 @@ const Navbar = () => {
   return (
     <div
       className={`fixed z-50 w-full top-0 bg-cover ${
-        isScrolled ? " bg-white" : "bg-transparent"
+        !dontNeedMTScreens.includes(location.pathname)
+          ? "bg-white"
+          : isScrolled
+          ? " bg-white"
+          : "bg-transparent"
       } bg-top`}
-      style={{ backgroundImage: `url(${isScrolled ? navback : ""})` }}
+      style={{
+        backgroundImage: `url(${
+          !dontNeedMTScreens.includes(location.pathname)
+            ? navback
+            : isScrolled
+            ? navback
+            : ""
+        })`,
+      }}
       onMouseLeave={(e) => {
         setFindworkDropdown();
         setMyJobsDropdown();
