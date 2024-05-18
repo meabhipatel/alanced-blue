@@ -56,6 +56,7 @@ import ViewInvitationDetail from "../container/hirer/ViewInvitationDetail";
 import AllHirerContracts from "../container/hirer/AllHirerContracts";
 import AllInvitations from "../container/freelancer/AllInvitations";
 import FreelancerFullDetailBeforeLogin from "../container/hirer/FreelancerFullDetailBeforeLogin";
+import Navbar from "../components/Layout/Navbar";
 
 const AppRouter = () => {
   const loginType =
@@ -74,6 +75,7 @@ const AppRouter = () => {
 
   return (
     <>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
