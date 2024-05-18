@@ -341,7 +341,7 @@ const next = () => {
         onChange={handleSkillFilterChange}
       />
                   <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                      <span className="checkmark hidden"><i className="bi bi-check-lg pr-2 pt-2"></i></span>
+                      <span className="checkmark hidden"><i className="bi bi-check-lg pr-0.5 pt-2"></i></span>
                   </div>
                   <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
                   <span className="font-normal text-[#797979]">{skill}</span>
