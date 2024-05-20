@@ -18,6 +18,7 @@
     "font-awesome": "^4.7.0",
     "generate-robotstxt": "^8.0.3",
     "jwt-decode": "^3.1.2",
+    "prettier": "^3.2.5",
     "rc-slider": "^10.2.1",
     "react": "^18.2.0",
     "react-audio-player": "^0.17.0",

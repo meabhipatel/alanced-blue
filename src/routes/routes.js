@@ -60,9 +60,7 @@ import Navbar from "../components/Layout/Navbar";
 import DynamicMarginTop from "./DynamicMarginTop";
 
 const AppRouter = () => {
-  const loginType =
-    useSelector((state) => state.login.type) ||
-    localStorage.getItem("loginType");
+  const loginType = useSelector((state) => state.login.type) || localStorage.getItem("loginType");
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -81,10 +79,7 @@ const AppRouter = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route
-          path="/freelancer/registration"
-          element={<FreelancerRegistration />}
-        />
+        <Route path="/freelancer/registration" element={<FreelancerRegistration />} />
         <Route path="/hirer/registration" element={<HirerRegistration />} />
         <Route path="/sign-up" element={<Choose />} />
         <Route path="/projects" element={<ProjectList />} />
@@ -98,89 +93,35 @@ const AppRouter = () => {
         <Route path="/terms" element={<TermsConditions />} />
         <Route path="/cookies" element={<Cookies />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route
-          path="/view-more/project-detail"
-          element={<ViewMoreProjectDetail />}
-        ></Route>
-        <Route
-          path="/view-freelancer/full-detail"
-          element={<FreelancerFullDetailAfterLogin />}
-        ></Route>
-        <Route
-          path="/view-freelancer/detail"
-          element={<FreelancerFullDetailBeforeLogin />}
-        ></Route>
-        <Route
-          path="/reset-user-password/:uid/:token"
-          element={<ResetPassword />}
-        />
+        <Route path="/view-more/project-detail" element={<ViewMoreProjectDetail />}></Route>
+        <Route path="/view-freelancer/full-detail" element={<FreelancerFullDetailAfterLogin />}></Route>
+        <Route path="/view-freelancer/detail" element={<FreelancerFullDetailBeforeLogin />}></Route>
+        <Route path="/reset-user-password/:uid/:token" element={<ResetPassword />} />
         <Route path="/reset-password" element={<SendPasswordResetEmail />} />
 
         {loginType == "FREELANCER" && (
           <>
-            <Route
-              path="/freelancer/edit-profile"
-              element={<FreelancerSelfProfile />}
-            />
-            <Route
-              path="/freelancer/profile"
-              element={<FreelancerAfterLogin />}
-            />
-            <Route
-              path="/freelancer/view-project/detail"
-              element={<ViewProjectNewTab />}
-            />
-            <Route
-              path="/freelancer/view-referals"
-              element={<MyProposalReferrals />}
-            />
+            <Route path="/freelancer/edit-profile" element={<FreelancerSelfProfile />} />
+            <Route path="/freelancer/profile" element={<FreelancerAfterLogin />} />
+            <Route path="/freelancer/view-project/detail" element={<ViewProjectNewTab />} />
+            <Route path="/freelancer/view-referals" element={<MyProposalReferrals />} />
             <Route path="/saved-jobs" element={<SavedJobs />} />
             <Route path="/my-proposals" element={<MyProposals />} />
             <Route path="/my-jobs" element={<MyJobs />} />
             <Route path="/messages" element={<Messages />} />
-            <Route
-              path="/freelancer/all-contracts"
-              element={<AllContracts />}
-            />
+            <Route path="/freelancer/all-contracts" element={<AllContracts />} />
             <Route path="/freelancer/my-reports" element={<MyReports />} />
-            <Route
-              path="/freelancer/add/portfolio"
-              element={<AddPortfolio />}
-            />
+            <Route path="/freelancer/add/portfolio" element={<AddPortfolio />} />
             <Route path="/freelancer/add-bid" element={<AddBidAmount />} />
-            <Route
-              path="/freelancer/send-proposal"
-              element={<SendProposal />}
-            />
-            <Route
-              path="/View/freelancer/proposal"
-              element={<ViewProposal />}
-            />
-            <Route
-              path="/View/bid-details"
-              element={<ViewBidDetailAfterAdd />}
-            />
-            <Route
-              path="/view-project/full-detail"
-              element={<ViewProjectPopup />}
-            />
-            <Route
-              path="/send-proposal/detail"
-              element={<ViewSendPraposalAfterAdd />}
-            ></Route>
-            <Route
-              path="/view/SelfBidProject"
-              element={<SelfBidProject />}
-            ></Route>
+            <Route path="/freelancer/send-proposal" element={<SendProposal />} />
+            <Route path="/View/freelancer/proposal" element={<ViewProposal />} />
+            <Route path="/View/bid-details" element={<ViewBidDetailAfterAdd />} />
+            <Route path="/view-project/full-detail" element={<ViewProjectPopup />} />
+            <Route path="/send-proposal/detail" element={<ViewSendPraposalAfterAdd />}></Route>
+            <Route path="/view/SelfBidProject" element={<SelfBidProject />}></Route>
             <Route path="/notifications" element={<Notifications />} />
-            <Route
-              path="/freelancer/add-portfolio"
-              element={<AddPortfolioForm />}
-            ></Route>
-            <Route
-              path="/view/hiring-detail"
-              element={<ViewHiringDetail />}
-            ></Route>
+            <Route path="/freelancer/add-portfolio" element={<AddPortfolioForm />}></Route>
+            <Route path="/view/hiring-detail" element={<ViewHiringDetail />}></Route>
             <Route path="/all-invitations" element={<AllInvitations />}></Route>
           </>
         )}
@@ -194,25 +135,13 @@ const AppRouter = () => {
             <Route path="/View/Job-post" element={<ViewJobPost />} />
             <Route path="/edit/Job-post" element={<EditJobPost />} />
             <Route path="/add/Job-post" element={<AddJobPost />} />
-            <Route
-              path="/hirer/profile-edit"
-              element={<HirerSelfProfile />}
-            ></Route>
+            <Route path="/hirer/profile-edit" element={<HirerSelfProfile />}></Route>
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/freelancer/my-reports" element={<MyReports />} />
-            <Route
-              path="/view-all/invited-freelancers"
-              element={<AllInvitedFreelancers />}
-            />
-            <Route
-              path="/view/invitation-Detail"
-              element={<ViewInvitationDetail />}
-            />
-            <Route
-              path="/view-all/hirer-contracts"
-              element={<AllHirerContracts />}
-            />
+            <Route path="/view-all/invited-freelancers" element={<AllInvitedFreelancers />} />
+            <Route path="/view/invitation-Detail" element={<ViewInvitationDetail />} />
+            <Route path="/view-all/hirer-contracts" element={<AllHirerContracts />} />
           </>
         )}
 
