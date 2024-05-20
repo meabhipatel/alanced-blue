@@ -32,9 +32,7 @@ const ViewAllProposals = () => {
   const id = project.id;
 
   // const accessToken = useSelector(state => state.login.accessToken);
-  const accessToken =
-    useSelector((state) => state.login.accessToken) ||
-    localStorage.getItem("jwtToken");
+  const accessToken = useSelector((state) => state.login.accessToken) || localStorage.getItem("jwtToken");
 
   const convertToDateObject = (dateString) => {
     const [date, time, period] = dateString.split(" ");
@@ -59,16 +57,10 @@ const ViewAllProposals = () => {
     let sortedBids = [...bids];
     switch (sortCriterion) {
       case "newest":
-        sortedBids.sort(
-          (a, b) =>
-            convertToDateObject(b.bid_time) - convertToDateObject(a.bid_time)
-        );
+        sortedBids.sort((a, b) => convertToDateObject(b.bid_time) - convertToDateObject(a.bid_time));
         break;
       case "oldest":
-        sortedBids.sort(
-          (a, b) =>
-            convertToDateObject(a.bid_time) - convertToDateObject(b.bid_time)
-        );
+        sortedBids.sort((a, b) => convertToDateObject(a.bid_time) - convertToDateObject(b.bid_time));
         break;
       case "highestRate":
         sortedBids.sort((a, b) => b.bid_amount - a.bid_amount);
@@ -106,9 +98,7 @@ const ViewAllProposals = () => {
     const queryString = queryParameters.join("&");
 
     axios
-      .get(
-        `https://www.api.alanced.com/freelance/View/bids/${id}?${queryString}`
-      )
+      .get(`https://www.api.alanced.com/freelance/View/bids/${id}?${queryString}`)
       .then((response) => {
         setViewBids(response.data.results);
         setTotalPages(Math.ceil(response.data.count / 8));
@@ -134,12 +124,7 @@ const ViewAllProposals = () => {
   }
   // }, [free, project]);
 
-  console.log(
-    "conversation name on ViewAllProposal : ",
-    conversationname(3),
-    "-----",
-    conversationName
-  );
+  console.log("conversation name on ViewAllProposal : ", conversationname(3), "-----", conversationName);
 
   const prev = () => {
     window.scrollTo(0, 0);
@@ -155,14 +140,11 @@ const ViewAllProposals = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://www.api.alanced.com/freelance/View-all/invited-freelancers`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
+      .get(`https://www.api.alanced.com/freelance/View-all/invited-freelancers`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
       .then((response) => {
         setViewinvites(response.data.results);
       })
@@ -253,9 +235,7 @@ const ViewAllProposals = () => {
   return (
     <>
       <div className="mt-2 mx-[9%]">
-        <h1 className="font-cardo text-[26px] text-[#031136] text-left font-normal p-3">
-          {project.title}
-        </h1>
+        <h1 className="font-cardo text-[26px] text-[#031136] text-left font-normal p-3">{project.title}</h1>
         <div className="my-2 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left">
           <div className="p-4 px-6">
             <p
@@ -263,9 +243,7 @@ const ViewAllProposals = () => {
               onClick={() => setSelected("All Proposals")}
             >
               All Proposals
-              {selected === "All Proposals" && (
-                <span style={underlineStyle}></span>
-              )}
+              {selected === "All Proposals" && <span style={underlineStyle}></span>}
             </p>
 
             {/* <p 
@@ -291,11 +269,7 @@ const ViewAllProposals = () => {
                   <div className="flex justify-between items-center">
                     <section className="flex items-center p-2 bg-white rounded-lg m-5 border w-[49%]">
                       <div className="flex items-center mr-1 space-x-1">
-                        <img
-                          src={search}
-                          alt="Search Icon"
-                          className="h-3 w-3"
-                        />
+                        <img src={search} alt="Search Icon" className="h-3 w-3" />
                         <input
                           className="w-28 lg:w-40 xl:w-[30rem] h-7 text-xs lg:text-sm outline-none"
                           placeholder="Search"
@@ -328,9 +302,7 @@ const ViewAllProposals = () => {
               {(viewbids != null && viewbids.length === 0) || !viewbids ? (
                 <div className="my-8">
                   <img src={experience} alt="" className="mx-auto mt-2" />
-                  <div className="px-4 md:px-8 py-5 text-center text-2xl opacity-50">
-                    No proposals found for this project
-                  </div>
+                  <div className="px-4 md:px-8 py-5 text-center text-2xl opacity-50">No proposals found for this project</div>
                 </div>
               ) : (
                 <>
@@ -339,35 +311,22 @@ const ViewAllProposals = () => {
                       {sortedBids &&
                         sortedBids.map((bid, index) => {
                           const words = bid.description.split(" ");
-                          const displayWords =
-                            expandedProjects[index] || words.length <= 50
-                              ? words
-                              : words.slice(0, 50);
+                          const displayWords = expandedProjects[index] || words.length <= 50 ? words : words.slice(0, 50);
 
                           const isInvited =
                             viewinvites &&
                             viewinvites.some(
-                              (invitation) =>
-                                bid.freelancer_id ===
-                                  invitation.freelancer_id &&
-                                bid.project_id === invitation.project_id
+                              (invitation) => bid.freelancer_id === invitation.freelancer_id && bid.project_id === invitation.project_id
                             );
                           return (
                             <>
-                              <Link
-                                to="/View/proposal"
-                                state={{ project, bid }}
-                                onClick={() => window.scrollTo(0, 0)}
-                              >
+                              <Link to="/View/proposal" state={{ project, bid }}>
                                 <div className="px-4 md:px-8 py-2 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30">
                                   <div class="flex">
                                     <div class="flex-[10%] p-4">
                                       <div className="relative w-24 h-24 mx-auto">
                                         <img
-                                          src={
-                                            "https://www.api.alanced.com" +
-                                            bid.freelancer_profilepic
-                                          }
+                                          src={"https://www.api.alanced.com" + bid.freelancer_profilepic}
                                           alt="Profile"
                                           className="rounded-full w-full h-full border border-gray-200"
                                         />
@@ -377,10 +336,7 @@ const ViewAllProposals = () => {
                                     <div class="flex-[90%] p-4">
                                       <div class="flex items-center justify-between">
                                         <p className="font-cardo text-[#0A142F] text-2xl font-medium">
-                                          {highlightText(
-                                            bid.freelancer_name,
-                                            searchQuery
-                                          )}
+                                          {highlightText(bid.freelancer_name, searchQuery)}
                                         </p>
 
                                         <div class="flex items-center space-x-4">
@@ -428,24 +384,9 @@ const ViewAllProposals = () => {
                                                 ? "p-0.5 inline-block rounded bg-gradient-to-b from-[gray] to-[lightgray]"
                                                 : "p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]"
                                             }`}
-                                            onClick={
-                                              isInvited
-                                                ? null
-                                                : (event) =>
-                                                    handleBtnClick(
-                                                      event,
-                                                      bid.freelancer_id
-                                                    )
-                                            }
+                                            onClick={isInvited ? null : (event) => handleBtnClick(event, bid.freelancer_id)}
                                           >
-                                            <button
-                                              class={`px-10 py-1 bg-white ${
-                                                isInvited
-                                                  ? "cursor-not-allowed"
-                                                  : ""
-                                              }`}
-                                              disabled={isInvited}
-                                            >
+                                            <button class={`px-10 py-1 bg-white ${isInvited ? "cursor-not-allowed" : ""}`} disabled={isInvited}>
                                               <p
                                                 class={`${
                                                   isInvited
@@ -464,69 +405,37 @@ const ViewAllProposals = () => {
                                           </button>        
                                   </div> */}
                                           {isHiringOpen[bid.freelancer_id] && (
-                                            <AddHiringRequestPopup
-                                              closeHiring={() =>
-                                                closeHiring(bid.freelancer_id)
-                                              }
-                                              bid={bid}
-                                            />
+                                            <AddHiringRequestPopup closeHiring={() => closeHiring(bid.freelancer_id)} bid={bid} />
                                           )}
                                           {/* {isHiringOpen && <AddHiringRequestPopup closeHiring={closeHiring} bid={bid}/>} */}
                                         </div>
                                       </div>
                                       <h1 className="font-cardo opacity-50 text-lg text-[#031136]">
-                                        {highlightText(
-                                          bid.freelancer_category.replace(
-                                            /_/g,
-                                            " "
-                                          ),
-                                          searchQuery
-                                        )}
+                                        {highlightText(bid.freelancer_category.replace(/_/g, " "), searchQuery)}
                                       </h1>
                                       <div style={{ display: "flex" }}>
                                         <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">
-                                          $
-                                          {highlightText(
-                                            bid.bid_amount,
-                                            searchQuery
-                                          )}{" "}
-                                          <span className="opacity-50 font-medium">
-                                            {bid.bid_type == "Fixed"
-                                              ? ""
-                                              : "/hr"}
-                                          </span>
+                                          ${highlightText(bid.bid_amount, searchQuery)}{" "}
+                                          <span className="opacity-50 font-medium">{bid.bid_type == "Fixed" ? "" : "/hr"}</span>
                                         </h1>
                                         <h1 className="font-cardo text-lg text-[#031136] font-semibold py-3 flex-1">
-                                          {highlightText(
-                                            bid.bid_type,
-                                            searchQuery
-                                          )}
+                                          {highlightText(bid.bid_type, searchQuery)}
                                         </h1>
                                         <h1 className="font-cardo text-lg text-[#031136] py-3 flex-1">
-                                          {highlightText(
-                                            bid.freelancer_address,
-                                            searchQuery
-                                          )}
+                                          {highlightText(bid.freelancer_address, searchQuery)}
                                         </h1>
                                         <h1 className="font-cardo text-lg text-[#031136] py-3 flex-1"></h1>
                                       </div>
                                       <p className="font-inter text-[#0A142F] text-[14px]">
                                         Cover Letter -{" "}
                                         <span className="opacity-50">
-                                          {highlightText(
-                                            displayWords.join(" "),
-                                            searchQuery
-                                          )}
+                                          {highlightText(displayWords.join(" "), searchQuery)}
                                           {words.length > 50 && (
                                             <span
                                               className="font-cardo text-[#031136] text-[18px] font-semibold cursor-pointer pl-2"
-                                              onClick={(event) =>
-                                                handleClick(event, index)
-                                              }
+                                              onClick={(event) => handleClick(event, index)}
                                             >
-                                              {expandedProjects[index]
-                                                ? "Less"
-                                                : "More"}
+                                              {expandedProjects[index] ? "Less" : "More"}
                                             </span>
                                           )}
                                         </span>
@@ -535,32 +444,17 @@ const ViewAllProposals = () => {
                                         {bid.freelancer_skills &&
                                           (() => {
                                             try {
-                                              const skillsArray = JSON.parse(
-                                                bid.freelancer_skills.replace(
-                                                  /'/g,
-                                                  '"'
-                                                )
-                                              );
-                                              return skillsArray.map(
-                                                (skill, index) => (
-                                                  <div
-                                                    key={index}
-                                                    className="mr-3 my-2 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-blue-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
-                                                  >
-                                                    <p className="text-center">
-                                                      {highlightText(
-                                                        skill,
-                                                        searchQuery
-                                                      )}
-                                                    </p>
-                                                  </div>
-                                                )
-                                              );
+                                              const skillsArray = JSON.parse(bid.freelancer_skills.replace(/'/g, '"'));
+                                              return skillsArray.map((skill, index) => (
+                                                <div
+                                                  key={index}
+                                                  className="mr-3 my-2 focus:outline-none bg-[#b4d3c3] hover:bg-[#c1e2d1] inline-block rounded-full w-28 text-blue-800 px-3 py-[3px] text-sm font-semibold dark:bg-[#b4d3c3] dark:hover:bg-[#dffdee] bg-opacity-[60%]"
+                                                >
+                                                  <p className="text-center">{highlightText(skill, searchQuery)}</p>
+                                                </div>
+                                              ));
                                             } catch (error) {
-                                              console.error(
-                                                "Error parsing JSON:",
-                                                error
-                                              );
+                                              console.error("Error parsing JSON:", error);
                                               return null;
                                             }
                                           })()}
@@ -582,15 +476,11 @@ const ViewAllProposals = () => {
                             onClick={prev}
                             disabled={currentPage === 1}
                             style={{
-                              backgroundImage:
-                                "linear-gradient(45deg, #0909E9, #00D4FF)",
+                              backgroundImage: "linear-gradient(45deg, #0909E9, #00D4FF)",
                               border: "none",
                             }}
                           >
-                            <ArrowLeftIcon
-                              strokeWidth={2}
-                              className="h-4 w-4 text-white"
-                            />
+                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                           </IconButton>
 
                           {[...Array(totalPages)].map((_, index) => {
@@ -619,15 +509,11 @@ const ViewAllProposals = () => {
                             onClick={next}
                             disabled={currentPage === totalPages}
                             style={{
-                              backgroundImage:
-                                "linear-gradient(45deg, #0909E9, #00D4FF)",
+                              backgroundImage: "linear-gradient(45deg, #0909E9, #00D4FF)",
                               border: "none",
                             }}
                           >
-                            <ArrowRightIcon
-                              strokeWidth={2}
-                              className="h-4 w-4 text-white"
-                            />
+                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                           </IconButton>
                         </div>
                       )}
@@ -647,16 +533,8 @@ const ViewAllProposals = () => {
                                 marginTop: 30,
                               }}
                             />
-                            <Skeleton
-                              height={20}
-                              width={100}
-                              style={{ marginLeft: 20, marginTop: 30 }}
-                            />
-                            <Skeleton
-                              height={20}
-                              width={150}
-                              style={{ marginLeft: 20 }}
-                            />
+                            <Skeleton height={20} width={100} style={{ marginLeft: 20, marginTop: 30 }} />
+                            <Skeleton height={20} width={150} style={{ marginLeft: 20 }} />
                             <Skeleton
                               height={40}
                               width={150}
@@ -676,11 +554,7 @@ const ViewAllProposals = () => {
                                 marginRight: 210,
                               }}
                             />
-                            <Skeleton
-                              height={100}
-                              width={1000}
-                              style={{ marginLeft: 150 }}
-                            />
+                            <Skeleton height={100} width={1000} style={{ marginLeft: 150 }} />
                             <Skeleton
                               height={30}
                               width={100}
@@ -713,9 +587,7 @@ const ViewAllProposals = () => {
           ) : (
             <div className="my-8">
               <img src={experience} alt="" className="mx-auto mt-2" />
-              <div className="px-4 md:px-8 py-5 text-center text-2xl opacity-50">
-                This job is closed and is no longer accepting proposals.
-              </div>
+              <div className="px-4 md:px-8 py-5 text-center text-2xl opacity-50">This job is closed and is no longer accepting proposals.</div>
             </div>
           )}
         </div>

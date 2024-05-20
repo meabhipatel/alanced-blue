@@ -58,6 +58,7 @@ import AllInvitations from "../container/freelancer/AllInvitations";
 import FreelancerFullDetailBeforeLogin from "../container/hirer/FreelancerFullDetailBeforeLogin";
 import Navbar from "../components/Layout/Navbar";
 import DynamicMarginTop from "./DynamicMarginTop";
+import ScrollToTop from "../components/molecules/ScrollToTop";
 
 const AppRouter = () => {
   const loginType = useSelector((state) => state.login.type) || localStorage.getItem("loginType");
@@ -76,6 +77,7 @@ const AppRouter = () => {
     <>
       <Navbar />
       <DynamicMarginTop />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

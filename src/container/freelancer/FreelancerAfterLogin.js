@@ -28,18 +28,12 @@ import Bag from "../../components/images/experience.png";
 
 const FreelancerAfterLogin = () => {
   //   const logindata = useSelector(state => state.login.login_data);
-  const logindata =
-    useSelector((state) => state.login.login_data) ||
-    JSON.parse(localStorage.getItem("logindata"));
+  const logindata = useSelector((state) => state.login.login_data) || JSON.parse(localStorage.getItem("logindata"));
   const googleUserName = localStorage.getItem("googleUserName");
   const loginMethod = localStorage.getItem("loginMethod");
-  const viewallprojects = useSelector(
-    (state) => state.freelancer.viewallprojects
-  );
+  const viewallprojects = useSelector((state) => state.freelancer.viewallprojects);
   //   const accessToken = useSelector(state => state.login.accessToken);
-  const accessToken =
-    useSelector((state) => state.login.accessToken) ||
-    localStorage.getItem("jwtToken");
+  const accessToken = useSelector((state) => state.login.accessToken) || localStorage.getItem("jwtToken");
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -55,33 +49,22 @@ const FreelancerAfterLogin = () => {
 
   if (loginMethod === "google") {
     //   displayName = googleUserName;
-    displayName =
-      logindata.first_Name && logindata.last_Name
-        ? logindata?.first_Name + " " + logindata?.last_Name
-        : googleUserName;
+    displayName = logindata.first_Name && logindata.last_Name ? logindata?.first_Name + " " + logindata?.last_Name : googleUserName;
   } else if (loginMethod === "traditional") {
     displayName = logindata?.first_Name + " " + logindata?.last_Name;
   }
 
-  const filteredProjects = viewallprojects
-    ? viewallprojects.filter(
-        (project) => project.category === logindata?.category
-      )
-    : [];
+  const filteredProjects = viewallprojects ? viewallprojects.filter((project) => project.category === logindata?.category) : [];
 
   const searchFilteredProjects = filteredProjects.filter((project) => {
     const skills = JSON.parse(project.skills_required.replace(/'/g, '"'));
     return (
-      skills.some((skill) =>
-        skill.toLowerCase().includes(searchTerm.toLowerCase())
-      ) || project.category.toLowerCase().includes(searchTerm.toLowerCase())
+      skills.some((skill) => skill.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      project.category.toLowerCase().includes(searchTerm.toLowerCase())
     );
   });
 
-  const projectsToDisplay =
-    searchFilteredProjects.length > 0
-      ? searchFilteredProjects
-      : viewallprojects;
+  const projectsToDisplay = searchFilteredProjects.length > 0 ? searchFilteredProjects : viewallprojects;
   const [expandedProjects, setExpandedProjects] = useState([]);
 
   const [viewProject, setViewProject] = useState([]);
@@ -99,9 +82,7 @@ const FreelancerAfterLogin = () => {
     const queryString = queryParameters.join("&");
 
     axios
-      .get(
-        `https://www.api.alanced.com/freelance/view-all/Project/?${queryString}`
-      )
+      .get(`https://www.api.alanced.com/freelance/view-all/Project/?${queryString}`)
       .then((response) => {
         setViewProject(response.data.results);
         setTotalPages(Math.ceil(response.data.count / 8));
@@ -133,29 +114,8 @@ const FreelancerAfterLogin = () => {
   function getCurrentDateAndGreeting() {
     const current = new Date();
     const hours = current.getHours();
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    const days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
     let greeting;
     if (hours < 12) {
@@ -181,9 +141,7 @@ const FreelancerAfterLogin = () => {
       }
     }
 
-    const formattedDate = `${
-      months[current.getMonth()]
-    } ${dateOfMonth}${getOrdinalSuffix(dateOfMonth)}`;
+    const formattedDate = `${months[current.getMonth()]} ${dateOfMonth}${getOrdinalSuffix(dateOfMonth)}`;
     return {
       day: days[current.getDay()],
       formattedDate,
@@ -198,14 +156,11 @@ const FreelancerAfterLogin = () => {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response1 = await axios.get(
-          "https://www.api.alanced.com/freelance/view/freelancer-all-self/bid",
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        );
+        const response1 = await axios.get("https://www.api.alanced.com/freelance/view/freelancer-all-self/bid", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
         setAllProposals(response1.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -262,14 +217,11 @@ const FreelancerAfterLogin = () => {
       let response;
 
       if (project.isSaved) {
-        response = await axios.delete(
-          `https://www.api.alanced.com/freelance/saved-projects/${project.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        );
+        response = await axios.delete(`https://www.api.alanced.com/freelance/saved-projects/${project.id}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
       } else {
         response = await axios.post(
           `https://www.api.alanced.com/freelance/saved-projects/${project.id}`,
@@ -284,10 +236,7 @@ const FreelancerAfterLogin = () => {
 
       const updatedJob = response.data;
 
-      localStorage.setItem(
-        `isSaved_${project.id}`,
-        JSON.stringify(updatedJob.isSaved)
-      );
+      localStorage.setItem(`isSaved_${project.id}`, JSON.stringify(updatedJob.isSaved));
 
       if (updatedJob.isSaved) {
         toast.success("Job saved successfully!");
@@ -325,9 +274,7 @@ const FreelancerAfterLogin = () => {
 
       for (const project of viewProject || []) {
         try {
-          const response = await axios.get(
-            `https://www.api.alanced.com/freelance/View/bids/${project.id}`
-          );
+          const response = await axios.get(`https://www.api.alanced.com/freelance/View/bids/${project.id}`);
           if (response.status === 200) {
             bids[project.id] = response.data.count;
           } else {
@@ -381,22 +328,18 @@ const FreelancerAfterLogin = () => {
         </div>
         <div class="flex flex-col md:flex-row mb-5 mx-5">
           <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
-            <Link to="/saved-jobs" onClick={() => window.scrollTo(0, 0)}>
+            <Link to="/saved-jobs">
               <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#e2f1f9] rounded-2xl">
-                <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">
-                  Saved Jobs
-                </h1>
+                <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Saved Jobs</h1>
                 <div className="flex items-center space-x-2 text-blue-600 mr-5">
                   <i class="bi bi-heart"></i>
                   {/* <i class="bi bi-heart-fill"></i> */}
                 </div>
               </div>
             </Link>
-            <Link to="/my-proposals" onClick={() => window.scrollTo(0, 0)}>
+            <Link to="/my-proposals">
               <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#e2f1f9] rounded-2xl">
-                <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">
-                  Proposals
-                </h1>
+                <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Proposals</h1>
                 <div className="flex items-center space-x-2 text-blue-600 mr-5">
                   <i class="bi bi-send-check"></i>
                   {/* <i class="bi bi-send-check-fill"></i> */}
@@ -404,23 +347,18 @@ const FreelancerAfterLogin = () => {
               </div>
             </Link>
             <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#e2f1f9] rounded-2xl">
-              <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">
-                Get Paid
-              </h1>
+              <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Get Paid</h1>
               <div className="flex items-center space-x-2 text-blue-600 mr-5">
                 {/* <img src={downarrow} alt="" /> */}
                 <i class="bi bi-coin"></i>
               </div>
             </div>
-            <Link to="/projects" onClick={() => window.scrollTo(0, 0)}>
+            <Link to="/projects">
               <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#e2f1f9] rounded-lg p-4 mx-4 my-3 shadow-sm">
                 <div>
-                  <h1 className="font-cardo text-lg text-[#031136] text-left">
-                    Get Tips To Find Work
-                  </h1>
+                  <h1 className="font-cardo text-lg text-[#031136] text-left">Get Tips To Find Work</h1>
                   <p className="font-inter text-sm text-[#0A142F] opacity-50 py-2 text-left">
-                    Learn to optimize search, use Connects, and land your first
-                    job.
+                    Learn to optimize search, use Connects, and land your first job.
                   </p>
                 </div>
                 <div className="text-center">
@@ -429,15 +367,12 @@ const FreelancerAfterLogin = () => {
                 </div>
               </div>
             </Link>
-            <Link to="/all-invitations" onClick={() => window.scrollTo(0, 0)}>
+            <Link to="/all-invitations">
               <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#e2f1f9] rounded-lg p-4 mx-4 relative z-10 shadow-sm">
                 <div>
-                  <h1 className="font-cardo text-lg text-[#031136] text-left">
-                    My Jobs
-                  </h1>
+                  <h1 className="font-cardo text-lg text-[#031136] text-left">My Jobs</h1>
                   <p className="font-inter text-sm text-[#0A142F] opacity-50 py-2 text-left">
-                    View your active contracts, timesheets, and available
-                    earnings.
+                    View your active contracts, timesheets, and available earnings.
                   </p>
                 </div>
                 <div className="text-center">
@@ -453,17 +388,11 @@ const FreelancerAfterLogin = () => {
               {/* <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1> */}
               <div className="flex justify-between items-center">
                 <div className="flex items-center">
-                  <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">
-                    Jobs You Might Like
-                  </h1>
+                  <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1>
                 </div>
                 <div className="flex items-center">
                   <div className="flex items-center mr-1 space-x-1 border p-1 w-[200px] rounded-md">
-                    <img
-                      src={search}
-                      alt="Search Icon"
-                      className="h-4 w-4 mr-1 ml-1"
-                    />
+                    <img src={search} alt="Search Icon" className="h-4 w-4 mr-1 ml-1" />
                     <input
                       className="w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none"
                       placeholder="Search Jobs by skills"
@@ -476,8 +405,7 @@ const FreelancerAfterLogin = () => {
             </div>
             <div className="px-4 md:px-8 py-2">
               <p className="font-inter opacity-50 text-[#0A142F] text-[13px]">
-                Browse jobs that match your experience to a client's hiring
-                preferences.
+                Browse jobs that match your experience to a client's hiring preferences.
                 <br /> Ordered by most relevant.
               </p>
             </div>
@@ -487,32 +415,19 @@ const FreelancerAfterLogin = () => {
                   {viewProject &&
                     viewProject.map((project, index) => {
                       const words = project.description.split(" ");
-                      const displayWords =
-                        expandedProjects[index] || words.length <= 50
-                          ? words
-                          : words.slice(0, 50);
+                      const displayWords = expandedProjects[index] || words.length <= 50 ? words : words.slice(0, 50);
                       return (
                         <>
-                          <Link
-                            to="/view-project/full-detail"
-                            state={{ project }}
-                            onClick={() => window.scrollTo(0, 0)}
-                          >
+                          <Link to="/view-project/full-detail" state={{ project }}>
                             <div className="px-4 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer">
                               <div className="flex items-center justify-between">
-                                <p className="font-inter text-[#0A142F] text-[18px] font-semibold">
-                                  {highlightText(project.title, searchQuery)}
-                                </p>
+                                <p className="font-inter text-[#0A142F] text-[18px] font-semibold">{highlightText(project.title, searchQuery)}</p>
                                 <div className="flex items-center space-x-2">
                                   <div
                                     className="p-1 w-8 h-8 bg-white rounded-full border border-gray-200"
-                                    onClick={(event) =>
-                                      handleClick(event, index, project)
-                                    }
+                                    onClick={(event) => handleClick(event, index, project)}
                                   >
-                                    {localStorage.getItem(
-                                      `isSaved_${project.id}`
-                                    ) === "true" ? (
+                                    {localStorage.getItem(`isSaved_${project.id}`) === "true" ? (
                                       <i className="fa fa-heart p-1 text-blue-600"></i>
                                     ) : (
                                       <i className="fa fa-heart-o p-1"></i>
@@ -536,43 +451,25 @@ const FreelancerAfterLogin = () => {
                                   );
                                 })}
                               <p className="font-inter opacity-50 text-[#0A142F] text-[13px] py-3">
-                                {highlightText(project.rate, searchQuery)} -{" "}
-                                {highlightText(
-                                  project.experience_level.replace(/_/g, " "),
-                                  searchQuery
-                                )}{" "}
+                                {highlightText(project.rate, searchQuery)} - {highlightText(project.experience_level.replace(/_/g, " "), searchQuery)}{" "}
                                 - Est. Budget: $
                                 {project.rate == "Hourly"
-                                  ? project.min_hourly_rate +
-                                    "/hr" +
-                                    " - " +
-                                    "$" +
-                                    project.max_hourly_rate +
-                                    "/hr"
+                                  ? project.min_hourly_rate + "/hr" + " - " + "$" + project.max_hourly_rate + "/hr"
                                   : project.fixed_budget}{" "}
-                                - Posted{" "}
-                                {timeAgo(project.project_creation_date)}
+                                - Posted {timeAgo(project.project_creation_date)}
                               </p>
                               <p className="font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3">
-                                Job Description:{" "}
-                                {highlightText(
-                                  displayWords.join(" "),
-                                  searchQuery
-                                )}
+                                Job Description: {highlightText(displayWords.join(" "), searchQuery)}
                                 {words.length > 50 && (
                                   <span
                                     className="font-cardo text-[#031136] text-[18px] font-semibold cursor-pointer pl-2"
-                                    onClick={(event) =>
-                                      handleClick(event, index)
-                                    }
+                                    onClick={(event) => handleClick(event, index)}
                                   >
                                     {expandedProjects[index] ? "Less" : "More"}
                                   </span>
                                 )}
                               </p>
-                              {JSON.parse(
-                                project.skills_required.replace(/'/g, '"')
-                              ).map((skill, index) => (
+                              {JSON.parse(project.skills_required.replace(/'/g, '"')).map((skill, index) => (
                                 <Link to="">
                                   <span className="border px-4 py-1 border-gray-300 opacity-50 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2">
                                     {highlightText(skill, searchQuery)}
@@ -580,36 +477,14 @@ const FreelancerAfterLogin = () => {
                                 </Link>
                               ))}
                               <p className="font-inter text-[#0A142F] text-[14px] py-1 mr-1">
-                                Proposals :{" "}
-                                <span className="opacity-50">
-                                  {bidsCount[project.id]
-                                    ? bidsCount[project.id]
-                                    : 0}
-                                </span>
+                                Proposals : <span className="opacity-50">{bidsCount[project.id] ? bidsCount[project.id] : 0}</span>
                               </p>
-                              <img
-                                src={verify}
-                                alt=""
-                                className="inline-block h-3 w-3 mr-1"
-                              />
+                              <img src={verify} alt="" className="inline-block h-3 w-3 mr-1" />
+                              <p className="font-inter text-[#0A142F] text-[14px] opacity-50 inline-block">Payment verified</p>
+                              <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>
+                              <img src={location} alt="" className="inline-block h-3 w-3 mr-1" />
                               <p className="font-inter text-[#0A142F] text-[14px] opacity-50 inline-block">
-                                Payment verified
-                              </p>
-                              <div className="text-[16px] text-[#FFC107] inline-block mx-3">
-                                ★★★★★
-                              </div>
-                              <img
-                                src={location}
-                                alt=""
-                                className="inline-block h-3 w-3 mr-1"
-                              />
-                              <p className="font-inter text-[#0A142F] text-[14px] opacity-50 inline-block">
-                                {highlightText(
-                                  project.project_owner_location
-                                    ? project.project_owner_location
-                                    : "NA",
-                                  searchQuery
-                                )}
+                                {highlightText(project.project_owner_location ? project.project_owner_location : "NA", searchQuery)}
                               </p>
                             </div>
                           </Link>
@@ -620,12 +495,8 @@ const FreelancerAfterLogin = () => {
               ) : (
                 <div className=" mx-auto">
                   <img src={Bag} alt="" className="h-[10%] ml-[42%] mt-[20%]" />
-                  <p className=" mt-5 font-cardo text-xl opacity-70 text-center">
-                    There are no results that match your search.
-                  </p>
-                  <p className=" mt-3 font-cardo text-sm opacity-60 text-center">
-                    Please try adjusting your search keywords or filters.
-                  </p>
+                  <p className=" mt-5 font-cardo text-xl opacity-70 text-center">There are no results that match your search.</p>
+                  <p className=" mt-3 font-cardo text-sm opacity-60 text-center">Please try adjusting your search keywords or filters.</p>
                 </div>
               )
             ) : (
@@ -633,46 +504,15 @@ const FreelancerAfterLogin = () => {
                 {[...Array(8)].map((_) => {
                   return (
                     <div className="mb-5">
-                      <Skeleton
-                        height={30}
-                        width={200}
-                        style={{ marginLeft: 20, marginTop: 20 }}
-                      />
-                      <Skeleton
-                        height={30}
-                        width={300}
-                        style={{ marginLeft: 20, marginTop: 10 }}
-                      />
-                      <Skeleton
-                        height={110}
-                        width={700}
-                        style={{ marginLeft: 20, marginTop: 10 }}
-                      />
-                      <Skeleton
-                        height={30}
-                        width={100}
-                        inline={true}
-                        style={{ marginTop: 5, marginLeft: 70, float: "left" }}
-                      />
-                      <Skeleton
-                        height={30}
-                        width={100}
-                        inline={true}
-                        count={2}
-                        style={{ marginTop: 5, marginLeft: 5, float: "left" }}
-                      />
+                      <Skeleton height={30} width={200} style={{ marginLeft: 20, marginTop: 20 }} />
+                      <Skeleton height={30} width={300} style={{ marginLeft: 20, marginTop: 10 }} />
+                      <Skeleton height={110} width={700} style={{ marginLeft: 20, marginTop: 10 }} />
+                      <Skeleton height={30} width={100} inline={true} style={{ marginTop: 5, marginLeft: 70, float: "left" }} />
+                      <Skeleton height={30} width={100} inline={true} count={2} style={{ marginTop: 5, marginLeft: 5, float: "left" }} />
                       <br />
                       <br />
-                      <Skeleton
-                        height={20}
-                        width={200}
-                        style={{ marginLeft: 20 }}
-                      />
-                      <Skeleton
-                        height={20}
-                        width={250}
-                        style={{ marginLeft: 20, marginTop: 10 }}
-                      />
+                      <Skeleton height={20} width={200} style={{ marginLeft: 20 }} />
+                      <Skeleton height={20} width={250} style={{ marginLeft: 20, marginTop: 10 }} />
                     </div>
                   );
                 })}
@@ -723,15 +563,11 @@ const FreelancerAfterLogin = () => {
                     onClick={prev}
                     disabled={currentPage === 1}
                     style={{
-                      backgroundImage:
-                        "linear-gradient(45deg, #0909E9, #00D4FF)",
+                      backgroundImage: "linear-gradient(45deg, #0909E9, #00D4FF)",
                       border: "none",
                     }}
                   >
-                    <ArrowLeftIcon
-                      strokeWidth={2}
-                      className="h-4 w-4 text-white"
-                    />
+                    <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                   </IconButton>
 
                   {[...Array(totalPages)].map((_, index) => {
@@ -760,15 +596,11 @@ const FreelancerAfterLogin = () => {
                     onClick={next}
                     disabled={currentPage === totalPages}
                     style={{
-                      backgroundImage:
-                        "linear-gradient(45deg, #0909E9, #00D4FF)",
+                      backgroundImage: "linear-gradient(45deg, #0909E9, #00D4FF)",
                       border: "none",
                     }}
                   >
-                    <ArrowRightIcon
-                      strokeWidth={2}
-                      className="h-4 w-4 text-white"
-                    />
+                    <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                   </IconButton>
                 </div>
               )}

@@ -13,9 +13,7 @@ import Bag from "../../components/images/experience.png";
 
 const AllInvitedFreelancers = () => {
   // const accessToken = useSelector(state => state.login.accessToken);
-  const accessToken =
-    useSelector((state) => state.login.accessToken) ||
-    localStorage.getItem("jwtToken");
+  const accessToken = useSelector((state) => state.login.accessToken) || localStorage.getItem("jwtToken");
   const [viewinvites, setViewinvites] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -29,14 +27,11 @@ const AllInvitedFreelancers = () => {
     const queryString = queryParameters.join("&");
 
     axios
-      .get(
-        `https://www.api.alanced.com/freelance/View-all/invited-freelancers?${queryString}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
+      .get(`https://www.api.alanced.com/freelance/View-all/invited-freelancers?${queryString}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
       .then((response) => {
         setViewinvites(response.data.results);
         setInvitesCount(response.data.count);
@@ -60,13 +55,9 @@ const AllInvitedFreelancers = () => {
   return (
     <>
       <div className="mt-2 mx-[10rem]">
-        <h1 className="font-cardo text-[21px] text-[#031136] font-normal pt-4 text-left">
-          All Invited Freelancers
-        </h1>
+        <h1 className="font-cardo text-[21px] text-[#031136] font-normal pt-4 text-left">All Invited Freelancers</h1>
         <div className="my-4 bg-[#FFFFFF] border border-[#E7E8F2]  text-left">
-          <h1 className="font-inter text-[16px] font-bold text-[#031136] p-3">
-            All Invitations ({invitesCount ? invitesCount : 0})
-          </h1>
+          <h1 className="font-inter text-[16px] font-bold text-[#031136] p-3">All Invitations ({invitesCount ? invitesCount : 0})</h1>
           {viewinvites && viewinvites.length > 0 ? (
             viewinvites && (
               <>
@@ -80,50 +71,29 @@ const AllInvitedFreelancers = () => {
                     year: "numeric",
                   };
 
-                  const formattedDate = inviteTime.toLocaleDateString(
-                    undefined,
-                    dateFormatOptions
-                  );
+                  const formattedDate = inviteTime.toLocaleDateString(undefined, dateFormatOptions);
                   return (
                     <>
                       <div className="px-4 md:px-8 py-4 border-b border-gray-200 border-opacity-30 flex items-center">
                         <div className="w-full md:w-2/4 p-2">
-                          <h1 className="font-cardo text-[18px] text-[#031136]">
-                            Sent {formattedDate}
-                          </h1>
-                          <p className="font-inter text-[14px] text-[#031136] opacity-50">
-                            {timeAgo(inv.hired_at)}
-                          </p>
+                          <h1 className="font-cardo text-[18px] text-[#031136]">Sent {formattedDate}</h1>
+                          <p className="font-inter text-[14px] text-[#031136] opacity-50">{timeAgo(inv.hired_at)}</p>
                         </div>
                         <div className="w-full md:w-2/4 p-2">
-                          <Link
-                            to="/view/invitation-Detail"
-                            state={{ inv }}
-                            onClick={() => window.scrollTo(0, 0)}
-                          >
-                            <h1 className="font-cardo text-[18px] text-blue-600 hover:underline">
-                              {inv.project_title}
-                            </h1>
+                          <Link to="/view/invitation-Detail" state={{ inv }}>
+                            <h1 className="font-cardo text-[18px] text-blue-600 hover:underline">{inv.project_title}</h1>
                           </Link>
                         </div>
                         <div className="w-full md:w-2/4 p-2">
-                          <p className="font-inter text-[16px] text-[#031136] opacity-50">
-                            {inv.freelancer_name}
-                          </p>
+                          <p className="font-inter text-[16px] text-[#031136] opacity-50">{inv.freelancer_name}</p>
                         </div>
                         <div className="w-full md:w-1/4 p-2">
                           {inv.freelancer_accepted ? (
-                            <h1 className="font-cardo text-[18px] text-blue-600">
-                              Accepted
-                            </h1>
+                            <h1 className="font-cardo text-[18px] text-blue-600">Accepted</h1>
                           ) : inv.freelancer_rejected ? (
-                            <h1 className="font-cardo text-[18px] text-red-600">
-                              Rejected
-                            </h1>
+                            <h1 className="font-cardo text-[18px] text-red-600">Rejected</h1>
                           ) : (
-                            <h1 className="font-cardo text-[18px] text-yellow-600">
-                              Pending
-                            </h1>
+                            <h1 className="font-cardo text-[18px] text-yellow-600">Pending</h1>
                           )}
                         </div>
                       </div>
@@ -139,18 +109,10 @@ const AllInvitedFreelancers = () => {
                   <div className="flex mt-4">
                     <div className="ml-10 mr-60">
                       <Skeleton height={20} width={200} />
-                      <Skeleton
-                        height={20}
-                        width={100}
-                        style={{ marginTop: 10 }}
-                      />
+                      <Skeleton height={20} width={100} style={{ marginTop: 10 }} />
                     </div>
                     <Skeleton height={20} width={300} />
-                    <Skeleton
-                      height={20}
-                      width={200}
-                      style={{ marginLeft: 180 }}
-                    />
+                    <Skeleton height={20} width={200} style={{ marginLeft: 180 }} />
                   </div>
                 );
               })}
@@ -158,9 +120,7 @@ const AllInvitedFreelancers = () => {
           ) : (
             <div className=" mx-auto">
               <img src={Bag} alt="" className="h-[10%] ml-[48%] mt-[6%]" />
-              <p className=" mt-5 font-cardo text-xl opacity-70 ml-[44%] mb-5">
-                {viewinvites !== null ? "No Invitations Found" : "Loading..."}
-              </p>
+              <p className=" mt-5 font-cardo text-xl opacity-70 ml-[44%] mb-5">{viewinvites !== null ? "No Invitations Found" : "Loading..."}</p>
             </div>
           )}
           {totalPages > 1 && (
@@ -208,10 +168,7 @@ const AllInvitedFreelancers = () => {
                   border: "none",
                 }}
               >
-                <ArrowRightIcon
-                  strokeWidth={2}
-                  className="h-4 w-4 text-white"
-                />
+                <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
               </IconButton>
             </div>
           )}

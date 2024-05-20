@@ -16,18 +16,11 @@ import { timeAgo } from "../freelancer/TimeFunctions";
 import experiences from "../../components/images/experience.png";
 
 const ViewAllJobPost = () => {
-  const viewhirerselfproject = useSelector(
-    (state) => state.hirer.viewhirerselfproject
-  );
+  const viewhirerselfproject = useSelector((state) => state.hirer.viewhirerselfproject);
   //  const accessToken = useSelector(state => state.login.accessToken);
-  const accessToken =
-    useSelector((state) => state.login.accessToken) ||
-    localStorage.getItem("jwtToken");
+  const accessToken = useSelector((state) => state.login.accessToken) || localStorage.getItem("jwtToken");
   const dispatch = useDispatch();
-  const id =
-    viewhirerselfproject && viewhirerselfproject.id
-      ? viewhirerselfproject.id
-      : "";
+  const id = viewhirerselfproject && viewhirerselfproject.id ? viewhirerselfproject.id : "";
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
@@ -37,8 +30,7 @@ const ViewAllJobPost = () => {
   // }, [])
 
   const [selectedButton, setSelectedButton] = useState("All Job Posts");
-  const commonStyle =
-    "inline-block text-sm py-[10px] mt-4 lg:mt-0 border rounded font-semibold";
+  const commonStyle = "inline-block text-sm py-[10px] mt-4 lg:mt-0 border rounded font-semibold";
 
   const [viewhirerProject, setViewhirerProject] = useState([]);
   //   const userCategory = logindata?.category
@@ -55,14 +47,11 @@ const ViewAllJobPost = () => {
     const queryString = queryParameters.join("&");
 
     axios
-      .get(
-        `https://www.api.alanced.com/freelance/view/hirer-self/Project?${queryString}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
+      .get(`https://www.api.alanced.com/freelance/view/hirer-self/Project?${queryString}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
       .then((response) => {
         setViewhirerProject(response.data.results);
         setTotalPages(Math.ceil(response.data.count / 8));
@@ -115,9 +104,7 @@ const ViewAllJobPost = () => {
 
       for (const project of viewhirerProject || []) {
         try {
-          const response = await axios.get(
-            `https://www.api.alanced.com/freelance/View/bids/${project.id}`
-          );
+          const response = await axios.get(`https://www.api.alanced.com/freelance/View/bids/${project.id}`);
           if (response.status === 200) {
             bids[project.id] = response.data.count;
           } else {
@@ -144,14 +131,11 @@ const ViewAllJobPost = () => {
 
       for (const project of viewhirerProject || []) {
         try {
-          const response = await axios.get(
-            `https://www.api.alanced.com/freelance/View/project-invitations-count/${project.id}`,
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-              },
-            }
-          );
+          const response = await axios.get(`https://www.api.alanced.com/freelance/View/project-invitations-count/${project.id}`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
           if (response.status === 200) {
             invites[project.id] = response.data.data;
           } else {
@@ -186,10 +170,7 @@ const ViewAllJobPost = () => {
               All Job Posts
             </span>
           </Link>
-          <Link
-            to="/view-all/hirer-contracts"
-            className="flex-grow md:flex-none p-1"
-          >
+          <Link to="/view-all/hirer-contracts" className="flex-grow md:flex-none p-1">
             <span
               className={`${commonStyle} px-3 md:px-8 font-inter font-normal text-sm text-[#797979] opacity-[50%] ${
                 selectedButton === "All Contracts"
@@ -226,29 +207,17 @@ const ViewAllJobPost = () => {
               <div>
                 {viewhirerProject &&
                   viewhirerProject.map((project, index) => (
-                    <div
-                      className="px-4 md:px-8 py-5 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30"
-                      key={index}
-                    >
+                    <div className="px-4 md:px-8 py-5 border-b border-gray-200 hover:bg-[#F6FAFD] border-opacity-30" key={index}>
                       <div class="flex">
                         <div class="flex-[40%]">
-                          <Link
-                            to="/View/Job-post"
-                            state={{ project }}
-                            onClick={() => window.scrollTo(0, 0)}
-                          >
+                          <Link to="/View/Job-post" state={{ project }}>
                             <p className="font-inter text-[#0A142F] text-[16px] font-medium hover:underline hover:text-blue-600">
                               {highlightText(project.title, searchQuery)}
                             </p>
                           </Link>
                           <p className="font-inter opacity-50 text-[#0A142F] text-[14px] font-normal py-1">
-                            {highlightText(project.Project_Rate, searchQuery)}{" "}
-                            Rate -{" "}
-                            {highlightText(
-                              project.experience_level.replace(/_/g, " "),
-                              searchQuery
-                            )}{" "}
-                            - Posted {timeAgo(project.Project_created_at)}
+                            {highlightText(project.Project_Rate, searchQuery)} Rate -{" "}
+                            {highlightText(project.experience_level.replace(/_/g, " "), searchQuery)} - Posted {timeAgo(project.Project_created_at)}
                           </p>
                           <span
                             className={`px-4 py-1 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 font-semibold ${
@@ -262,43 +231,25 @@ const ViewAllJobPost = () => {
                         </div>
                         <div class="flex-[40%] flex">
                           <div class="flex-1 p-2">
-                            <p className="font-inter text-[#0A142F] text-[16px] font-medium">
-                              {bidsCount[project.id]
-                                ? bidsCount[project.id]
-                                : 0}
-                            </p>
-                            <p className="font-inter text-[#0A142F] opacity-50 text-[16px] font-medium">
-                              Proposals
-                            </p>
+                            <p className="font-inter text-[#0A142F] text-[16px] font-medium">{bidsCount[project.id] ? bidsCount[project.id] : 0}</p>
+                            <p className="font-inter text-[#0A142F] opacity-50 text-[16px] font-medium">Proposals</p>
                           </div>
                           <div class="flex-1 p-2">
                             <p className="font-inter text-[#0A142F] text-[16px] font-medium">
-                              {invitesCount[project.id]
-                                ? invitesCount[project.id]
-                                : 0}
+                              {invitesCount[project.id] ? invitesCount[project.id] : 0}
                             </p>
-                            <p className="font-inter text-[#0A142F] opacity-50 text-[16px] font-medium">
-                              Messaged
-                            </p>
+                            <p className="font-inter text-[#0A142F] opacity-50 text-[16px] font-medium">Messaged</p>
                           </div>
                           <div class="flex-1 p-2">
                             <p className="font-inter text-[#0A142F] text-[16px] font-medium">
-                              {invitesCount[project.id]
-                                ? invitesCount[project.id]
-                                : 0}
+                              {invitesCount[project.id] ? invitesCount[project.id] : 0}
                             </p>
-                            <p className="font-inter text-[#0A142F] opacity-50 text-[16px] font-medium">
-                              Invitations
-                            </p>
+                            <p className="font-inter text-[#0A142F] opacity-50 text-[16px] font-medium">Invitations</p>
                           </div>
                         </div>
                         <div class="flex-[20%] text-center">
                           <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF] mt-3 mr-2">
-                            <Link
-                              to="/View-all/proposals"
-                              state={{ project, isOpen: project.is_hired }}
-                              onClick={() => window.scrollTo(0, 0)}
-                            >
+                            <Link to="/View-all/proposals" state={{ project, isOpen: project.is_hired }}>
                               <button class="px-2 py-1 bg-white">
                                 <p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[8px]">
                                   View Proposals
@@ -314,9 +265,7 @@ const ViewAllJobPost = () => {
             ) : (
               <div className="mt-16 mb-8">
                 <img src={experiences} alt="" className="mx-auto mt-2" />
-                <div className="px-4 md:px-8 py-5 text-center text-2xl opacity-50">
-                  Jobs Not Found
-                </div>
+                <div className="px-4 md:px-8 py-5 text-center text-2xl opacity-50">Jobs Not Found</div>
               </div>
             )
           ) : (
@@ -326,37 +275,14 @@ const ViewAllJobPost = () => {
                   <div className="flex mt-5">
                     <div className="pl-6">
                       <Skeleton height={20} width={120} />
-                      <Skeleton
-                        height={20}
-                        width={250}
-                        style={{ marginTop: 10 }}
-                      />
-                      <Skeleton
-                        height={30}
-                        width={60}
-                        style={{ marginTop: 10 }}
-                      />
+                      <Skeleton height={20} width={250} style={{ marginTop: 10 }} />
+                      <Skeleton height={30} width={60} style={{ marginTop: 10 }} />
                     </div>
                     <div className="ml-48">
-                      <Skeleton
-                        height={45}
-                        inline="true"
-                        count={2}
-                        width={100}
-                        style={{ marginLeft: 60 }}
-                      />
-                      <Skeleton
-                        height={45}
-                        inline="true"
-                        width={60}
-                        style={{ marginLeft: 60 }}
-                      />
+                      <Skeleton height={45} inline="true" count={2} width={100} style={{ marginLeft: 60 }} />
+                      <Skeleton height={45} inline="true" width={60} style={{ marginLeft: 60 }} />
                     </div>
-                    <Skeleton
-                      height={40}
-                      width={150}
-                      style={{ marginLeft: 140 }}
-                    />
+                    <Skeleton height={40} width={150} style={{ marginLeft: 140 }} />
                   </div>
                 );
               })}
@@ -407,10 +333,7 @@ const ViewAllJobPost = () => {
                   border: "none",
                 }}
               >
-                <ArrowRightIcon
-                  strokeWidth={2}
-                  className="h-4 w-4 text-white"
-                />
+                <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
               </IconButton>
             </div>
           )}
