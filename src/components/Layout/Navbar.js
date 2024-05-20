@@ -296,7 +296,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`fixed z-50 w-full top-0 bg-cover ${
+      className={`fixed z-50 w-full max-w-[1536px] top-0 bg-cover ${
         !dontNeedMTScreens.includes(location.pathname) ? "bg-white" : isScrolled ? " bg-white" : "bg-transparent"
       } bg-top`}
       style={{
