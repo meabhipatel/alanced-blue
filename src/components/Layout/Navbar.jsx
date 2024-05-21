@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { LogoutAction } from "../../redux/Auth/AuthAction";
 import search from "../images/SearchOutlined.png";
 import searchbtn from "../images/searchbtn.png";
-import "bootstrap-icons/font/bootstrap-icons.css";
 import profilepic from "../../components/images/profilepic.png";
 import { GetHirerSelfProfileAction } from "../../redux/Hirer/HirerAction";
 import { GetViewAllFreelancersAction } from "../../redux/Hirer/HirerAction";
@@ -19,6 +18,7 @@ import { timeAgo } from "../../container/freelancer/TimeFunctions";
 import { dontNeedMTScreens } from "../../routes/DynamicMarginTop";
 import { FiMenu } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
+import { FaBell } from "react-icons/fa6";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -308,9 +308,9 @@ const Navbar = () => {
         setReportsDropdown();
       }}
     >
-      <nav className="flex items-center justify-between flex-wrap lg:p-6">
+      <nav className="flex items-center justify-between p-5 lg:px-12 lg:p-6">
         {!isLoggedIn ? (
-          <div className="w-full relative flex justify-between items-center p-5 lg:p-0">
+          <div className="w-full relative flex justify-between items-center  lg:p-0">
             <Link to="/">
               <div className="flex items-center flex-shrink-0">
                 <img src={logo} alt="" />
@@ -411,352 +411,535 @@ const Navbar = () => {
               </div>
             </Link>
 
-            <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0 my-2.5">
-              <div className="text-sm lg:flex-grow lg:ml-[45px] lg:mr-12 mt-1.5">
-                {loginType == "FREELANCER" ? (
-                  <>
-                    <span
-                      className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
-                      onMouseEnter={() => {
-                        setFindworkDropdown(true);
-                        setReportsDropdown(false);
-                        setMyJobsDropdown(false);
-                      }}
-                    >
-                      Search Job <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
-                    </span>
-                    {Findworkdropdown && (
-                      <div className="absolute md:right-[54.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
-                        <div className="py-1">
-                          <Link to="/projects" className="flex items-center px-4 py-2">
-                            <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Search Job</span>
-                          </Link>
-                          <Link to="/saved-jobs" className="flex items-center px-4 py-2">
-                            <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Saved Jobs</span>
-                          </Link>
-                          <Link to="/my-proposals" className="flex items-center px-4 py-2">
-                            <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Proposals</span>
-                          </Link>
-                          <Link to="/freelancer/edit-profile" className="flex items-center px-4 py-2">
-                            <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Profile</span>
-                          </Link>
-                        </div>
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <Link to="/hirer/profile">
-                    <span
-                      className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]"
-                      onMouseEnter={() => {
-                        setFindworkDropdown(false);
-                        setReportsDropdown(false);
-                        setMyJobsDropdown(false);
-                      }}
-                    >
-                      Search Freelancer{" "}
-                    </span>
-                  </Link>
-                )}
-                {loginType == "FREELANCER" ? (
-                  <>
-                    <span
-                      className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
-                      onMouseEnter={() => {
-                        setMyJobsDropdown(true);
-                        setFindworkDropdown(false);
-                        setReportsDropdown(false);
-                      }}
-                    >
-                      My Jobs <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
-                    </span>
-                    {MyJobsdropdown && (
-                      <div className="absolute md:right-[46.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
-                        <div className="py-1">
-                          <Link to="/all-invitations" className="flex items-center px-4 py-2">
-                            <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Invitations</span>
-                          </Link>
-                          <Link to="/freelancer/all-contracts" className="flex items-center px-4 py-2">
-                            <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Contracts</span>
-                          </Link>
-                        </div>
-                      </div>
-                    )}{" "}
-                  </>
-                ) : (
-                  <>
-                    <span
-                      className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
-                      onMouseEnter={() => {
-                        setMyJobsDropdown(true);
-                        setFindworkDropdown(false);
-                        setReportsDropdown(false);
-                      }}
-                    >
-                      {" "}
-                      Jobs <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
-                    </span>
-                    {MyJobsdropdown && (
-                      <div className="absolute md:right-[47rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
-                        <div className="py-1">
-                          <Link to="/add/Job-post" className="flex items-center px-4 py-2">
-                            <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Post A Job</span>
-                          </Link>
-                          <Link to="/View-all/Job-post" className="flex items-center px-4 py-2">
-                            <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Jobs</span>
-                          </Link>
-                          <Link to="/view-all/invited-freelancers" className="flex items-center px-4 py-2">
-                            <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Invited Freelancers</span>
-                          </Link>
-                          <Link to="/view-all/hirer-contracts" className="flex items-center px-4 py-2">
-                            <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Contracts</span>
-                          </Link>
-                        </div>
-                      </div>
-                    )}{" "}
-                  </>
-                )}
-                {loginType == "FREELANCER" ? (
-                  <>
-                    <span
-                      className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
-                      onMouseEnter={() => {
-                        setReportsDropdown(true);
-                        setFindworkDropdown(false);
-                        setMyJobsDropdown(false);
-                      }}
-                    >
-                      {" "}
-                      Payments <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
-                    </span>
-                    {Reportsdropdown && (
-                      <div className="absolute md:right-[38.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
-                        <div className="py-1">
-                          <Link to="/freelancer/my-reports" className="flex items-center px-4 py-2">
-                            <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Transaction History</span>
-                          </Link>
-                        </div>
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <span
-                      className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
-                      onMouseEnter={() => {
-                        setReportsDropdown(true);
-                        setMyJobsDropdown(false);
-                        setFindworkDropdown(false);
-                      }}
-                    >
-                      {" "}
-                      Payments <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
-                    </span>
-                    {Reportsdropdown && (
-                      <div className="absolute md:right-[39.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
-                        <div className="py-1">
-                          <Link to="/freelancer/my-reports" className="flex items-center px-4 py-2">
-                            <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Transaction History</span>
-                          </Link>
-                        </div>
-                      </div>
-                    )}
-                  </>
-                )}
-
-                {/** ######################### */}
-
-                <Link to="/messages">
+            {/* ----> Navigations  */}
+            <div className="hidden lg:flex text-sm">
+              {loginType == "FREELANCER" ? (
+                <>
                   <span
-                    className="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]"
+                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
+                    onMouseEnter={() => {
+                      setFindworkDropdown(true);
+                      setReportsDropdown(false);
+                      setMyJobsDropdown(false);
+                    }}
+                  >
+                    Search Job <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
+                  </span>
+                  {Findworkdropdown && (
+                    <div className="absolute md:right-[54.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+                      <div className="py-1">
+                        <Link to="/projects" className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Search Job</span>
+                        </Link>
+                        <Link to="/saved-jobs" className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Saved Jobs</span>
+                        </Link>
+                        <Link to="/my-proposals" className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Proposals</span>
+                        </Link>
+                        <Link to="/freelancer/edit-profile" className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Profile</span>
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <Link to="/hirer/profile">
+                  <span
+                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]"
                     onMouseEnter={() => {
                       setFindworkDropdown(false);
                       setReportsDropdown(false);
                       setMyJobsDropdown(false);
                     }}
                   >
-                    Messages
+                    Search Freelancer{" "}
                   </span>
                 </Link>
-              </div>
-
-              <div className="lg:mr-[100px] lg:ml-0 ml-[15rem]">
-                <div className="flex items-center space-x-12">
-                  <div className="relative inline-block pt-1" ref={notificationsDropdownRef}>
-                    <i
-                      className="bi bi-bell text-2xl cursor-pointer"
-                      onClick={toggleNotificationDropdown}
-                      onMouseEnter={() => {
-                        setFindworkDropdown(false);
-                        setReportsDropdown(false);
-                        setMyJobsDropdown(false);
-                      }}
-                    ></i>
-                    {loginType == "HIRER" && unreadclientCount > 0 && (
-                      <span className="absolute top-1.5 right-0 block h-2.5 w-2.5 rounded-full bg-blue-500 border-2 border-white"></span>
-                    )}
-                    {loginType == "FREELANCER" && unreadfreeCount > 0 && (
-                      <span className="absolute top-1.5 right-0 block h-2.5 w-2.5 rounded-full bg-blue-500 border-2 border-white"></span>
-                    )}
-
-                    {loginType == "HIRER" && isNotificationsDropdownVisible && (
-                      <div className="drop absolute right-[-18px] mt-5 w-80 bg-white rounded-md shadow-lg text-left">
-                        {clientnotifications.length > 0 ? (
-                          <>
-                            {clientnotifications.slice(0, 3).map((notif) => (
-                              <div
-                                key={notif.id}
-                                to={getNotificationRedirectPath(notif)}
-                                className={`border-b cursor-pointer p-3 px-5 hover:bg-[#F6FAFD] ${
-                                  !notif.is_read ? "bg-[#f4f8fc]" : "bg-white"
-                                } relative group`}
-                                onClick={() => handleClientNotificationClick(notif)}
-                              >
-                                <div className="flex items-center justify-between mt-1">
-                                  <div className="flex items-center">
-                                    <img src={alancedlogo} alt="" className="h-[18px] w-[18px] mr-2" />
-                                    <h4 className="font-bold text-md">{notif.title}</h4>
-                                  </div>
-                                  <p className="opacity-50 text-xs">{timeAgo(notif.timestamp)}</p>
-                                </div>
-                                <p className="opacity-50 text-sm pt-1">{notif.message}</p>
-                                <i
-                                  className="bi bi-x absolute top-1 right-1 text-[#031136] opacity-0 group-hover:opacity-100"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    deleteClientNotification(notif.id);
-                                  }}
-                                ></i>
-                              </div>
-                            ))}
-                            {clientnotifications.length > 3 && (
-                              <Link to="/notifications" className="block text-left text-md font-semibold p-3">
-                                Show More Notifications
-                              </Link>
-                            )}
-                          </>
-                        ) : (
-                          <div className="p-4">
-                            <h4 className="font-bold text-md">No New Notifications</h4>
-                          </div>
-                        )}
+              )}
+              {loginType == "FREELANCER" ? (
+                <>
+                  <span
+                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
+                    onMouseEnter={() => {
+                      setMyJobsDropdown(true);
+                      setFindworkDropdown(false);
+                      setReportsDropdown(false);
+                    }}
+                  >
+                    My Jobs <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
+                  </span>
+                  {MyJobsdropdown && (
+                    <div className="absolute md:right-[46.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+                      <div className="py-1">
+                        <Link to="/all-invitations" className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Invitations</span>
+                        </Link>
+                        <Link to="/freelancer/all-contracts" className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Contracts</span>
+                        </Link>
                       </div>
-                    )}
-
-                    {loginType == "FREELANCER" && isNotificationsDropdownVisible && (
-                      <div className="drop absolute right-[-18px] mt-5 w-80 bg-white rounded-md shadow-lg text-left">
-                        {freenotifications.length > 0 ? (
-                          <>
-                            {freenotifications.slice(0, 3).map((notif) => (
-                              <div
-                                key={notif.id}
-                                className={`border-b cursor-pointer p-3 px-5 hover:bg-[#F6FAFD] ${
-                                  !notif.is_read ? "bg-[#f4f8fc]" : "bg-white"
-                                } relative group`}
-                                onClick={() => handleFreeNotificationClick(notif)}
-                              >
-                                <div className="flex items-center justify-between mt-1">
-                                  <div className="flex items-center">
-                                    <img src={alancedlogo} alt="" className="h-[18px] w-[18px] mr-2" />
-                                    <h4 className="font-bold text-md">{notif.title}</h4>
-                                  </div>
-                                  <p className="opacity-50 text-xs">{timeAgo(notif.timestamp)}</p>
-                                </div>
-                                <p className="opacity-50 text-sm pt-1">{notif.message}</p>
-                                <i
-                                  className="bi bi-x absolute top-1 right-1 text-[#031136] opacity-0 group-hover:opacity-100"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    deleteFreeNotification(notif.id);
-                                  }}
-                                ></i>
-                              </div>
-                            ))}
-                            {freenotifications.length > 3 && (
-                              <Link to="/notifications" className="block text-left text-md font-semibold p-3">
-                                Show More Notifications
-                              </Link>
-                            )}
-                          </>
-                        ) : (
-                          <div className="p-4">
-                            <h4 className="font-bold text-md">No New Notifications</h4>
-                          </div>
-                        )}
+                    </div>
+                  )}{" "}
+                </>
+              ) : (
+                <>
+                  <span
+                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
+                    onMouseEnter={() => {
+                      setMyJobsDropdown(true);
+                      setFindworkDropdown(false);
+                      setReportsDropdown(false);
+                    }}
+                  >
+                    {" "}
+                    Jobs <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
+                  </span>
+                  {MyJobsdropdown && (
+                    <div className="absolute md:right-[47rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+                      <div className="py-1">
+                        <Link to="/add/Job-post" className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Post A Job</span>
+                        </Link>
+                        <Link to="/View-all/Job-post" className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Jobs</span>
+                        </Link>
+                        <Link to="/view-all/invited-freelancers" className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Invited Freelancers</span>
+                        </Link>
+                        <Link to="/view-all/hirer-contracts" className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Contracts</span>
+                        </Link>
                       </div>
-                    )}
-                  </div>
-                  <div
-                    className="relative inline-block"
-                    ref={dropdownRef}
+                    </div>
+                  )}{" "}
+                </>
+              )}
+              {loginType == "FREELANCER" ? (
+                <>
+                  <span
+                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
+                    onMouseEnter={() => {
+                      setReportsDropdown(true);
+                      setFindworkDropdown(false);
+                      setMyJobsDropdown(false);
+                    }}
+                  >
+                    {" "}
+                    Payments <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
+                  </span>
+                  {Reportsdropdown && (
+                    <div className="absolute md:right-[38.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+                      <div className="py-1">
+                        <Link to="/freelancer/my-reports" className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Transaction History</span>
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  <span
+                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
+                    onMouseEnter={() => {
+                      setReportsDropdown(true);
+                      setMyJobsDropdown(false);
+                      setFindworkDropdown(false);
+                    }}
+                  >
+                    {" "}
+                    Payments <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
+                  </span>
+                  {Reportsdropdown && (
+                    <div className="absolute md:right-[39.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+                      <div className="py-1">
+                        <Link to="/freelancer/my-reports" className="flex items-center px-4 py-2">
+                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Transaction History</span>
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+
+              {/** ######################### */}
+
+              <Link to="/messages">
+                <span
+                  className="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]"
+                  onMouseEnter={() => {
+                    setFindworkDropdown(false);
+                    setReportsDropdown(false);
+                    setMyJobsDropdown(false);
+                  }}
+                >
+                  Messages
+                </span>
+              </Link>
+            </div>
+
+            <div className="flex items-center gap-3 ">
+              {/* ----> Notification and Profile icons  */}
+              <div className="flex items-center space-x-4 md:space-x-10">
+                {/* ----> Notification icon  */}
+                <div className="relative inline-block pt-1" ref={notificationsDropdownRef}>
+                  <FaBell
+                    className="bi bi-bel text-2xl cursor-pointer"
+                    onClick={toggleNotificationDropdown}
                     onMouseEnter={() => {
                       setFindworkDropdown(false);
                       setReportsDropdown(false);
                       setMyJobsDropdown(false);
                     }}
-                  >
-                    {logindata && logindata.images_logo ? (
-                      <img
-                        src={"https://www.api.alanced.com" + logindata.images_logo}
-                        alt="Profile"
-                        className="h-10 w-10 rounded-full cursor-pointer"
-                        onClick={() => setDropdownVisible(!dropdownVisible)}
-                      />
-                    ) : (
-                      <div
-                        className="h-10 w-10 rounded-full cursor-pointer flex items-center justify-center bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white font-bold font-cardo text-xl p-1"
-                        onClick={() => setDropdownVisible(!dropdownVisible)}
-                      >
-                        {displayName && displayName[0].toUpperCase()}
-                      </div>
-                    )}
-                    {dropdownVisible && (
-                      <div className="drop absolute right-[-10px] mt-5 w-[14rem] rounded-md shadow-lg bg-white">
-                        <div className="py-1">
-                          {logindata && logindata.images_logo ? (
-                            <img
-                              src={"https://www.api.alanced.com" + logindata.images_logo}
-                              alt="Profile"
-                              className="h-20 w-20 rounded-full cursor-pointer mx-auto my-5 border border-gray-200 p-0.5"
-                              onClick={() => setDropdownVisible(!dropdownVisible)}
-                            />
-                          ) : (
+                  ></FaBell>
+                  {loginType == "HIRER" && unreadclientCount > 0 && (
+                    <span className="absolute top-1.5 right-0 block h-2.5 w-2.5 rounded-full bg-blue-500 border-2 border-white"></span>
+                  )}
+                  {loginType == "FREELANCER" && unreadfreeCount > 0 && (
+                    <span className="absolute top-1.5 right-0 block h-2.5 w-2.5 rounded-full bg-blue-500 border-2 border-white"></span>
+                  )}
+
+                  {loginType == "HIRER" && isNotificationsDropdownVisible && (
+                    <div className="drop absolute right-[-18px] mt-5 w-80 bg-white rounded-md shadow-lg text-left">
+                      {clientnotifications.length > 0 ? (
+                        <>
+                          {clientnotifications.slice(0, 3).map((notif) => (
                             <div
-                              className="h-20 w-20 rounded-full cursor-pointer flex items-center justify-center bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white font-bold font-cardo text-4xl p-1 mx-auto my-5"
-                              onClick={() => setDropdownVisible(!dropdownVisible)}
+                              key={notif.id}
+                              to={getNotificationRedirectPath(notif)}
+                              className={`border-b cursor-pointer p-3 px-5 hover:bg-[#F6FAFD] ${
+                                !notif.is_read ? "bg-[#f4f8fc]" : "bg-white"
+                              } relative group`}
+                              onClick={() => handleClientNotificationClick(notif)}
                             >
-                              {displayName && displayName[0].toUpperCase()}
+                              <div className="flex items-center justify-between mt-1">
+                                <div className="flex items-center">
+                                  <img src={alancedlogo} alt="" className="h-[18px] w-[18px] mr-2" />
+                                  <h4 className="font-bold text-md">{notif.title}</h4>
+                                </div>
+                                <p className="opacity-50 text-xs">{timeAgo(notif.timestamp)}</p>
+                              </div>
+                              <p className="opacity-50 text-sm pt-1">{notif.message}</p>
+                              <i
+                                className="bi bi-x absolute top-1 right-1 text-[#031136] opacity-0 group-hover:opacity-100"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  deleteClientNotification(notif.id);
+                                }}
+                              ></i>
                             </div>
-                          )}
-                          <h1 className="font-cardo text-[19px] text-[#031136]  text-center px-2">{displayName}</h1>
-                          <h1 className="font-cardo text-lg text-gray-500  text-center  mb-3">
-                            {loginType == "FREELANCER" ? loginType.toLowerCase() : "client"}
-                          </h1>
-                          {loginType == "FREELANCER" ? (
-                            <Link to="/freelancer/edit-profile" className="flex items-center px-4 py-2 hover:bg-gray-100">
-                              <i className="bi bi-person-circle mr-3"></i>
-                              <span className="font-cardo text-[16px] text-[#031136]">Profile</span>
-                            </Link>
-                          ) : (
-                            <Link to="/hirer/profile-edit" className="flex items-center px-4 py-2 hover:bg-gray-100">
-                              <i className="bi bi-person-circle mr-3"></i>
-                              <span className="font-cardo text-[16px] text-[#031136]">Profile</span>
+                          ))}
+                          {clientnotifications.length > 3 && (
+                            <Link to="/notifications" className="block text-left text-md font-semibold p-3">
+                              Show More Notifications
                             </Link>
                           )}
-                          <Link
-                            to="/"
-                            className="flex items-center px-4 py-2 hover:bg-gray-100"
-                            onClick={() => {
-                              window.scrollTo(0, 0);
-                              handleLogout();
-                            }}
-                          >
-                            <i className="bi bi-box-arrow-right mr-3"></i>
-                            <span className="font-cardo text-[16px] text-[#031136]">Logout</span>
-                          </Link>
+                        </>
+                      ) : (
+                        <div className="p-4">
+                          <h4 className="font-bold text-md">No New Notifications</h4>
                         </div>
+                      )}
+                    </div>
+                  )}
+
+                  {loginType == "FREELANCER" && isNotificationsDropdownVisible && (
+                    <div className="drop absolute right-[-18px] mt-5 w-80 bg-white rounded-md shadow-lg text-left">
+                      {freenotifications.length > 0 ? (
+                        <>
+                          {freenotifications.slice(0, 3).map((notif) => (
+                            <div
+                              key={notif.id}
+                              className={`border-b cursor-pointer p-3 px-5 hover:bg-[#F6FAFD] ${
+                                !notif.is_read ? "bg-[#f4f8fc]" : "bg-white"
+                              } relative group`}
+                              onClick={() => handleFreeNotificationClick(notif)}
+                            >
+                              <div className="flex items-center justify-between mt-1">
+                                <div className="flex items-center">
+                                  <img src={alancedlogo} alt="" className="h-[18px] w-[18px] mr-2" />
+                                  <h4 className="font-bold text-md">{notif.title}</h4>
+                                </div>
+                                <p className="opacity-50 text-xs">{timeAgo(notif.timestamp)}</p>
+                              </div>
+                              <p className="opacity-50 text-sm pt-1">{notif.message}</p>
+                              <i
+                                className="bi bi-x absolute top-1 right-1 text-[#031136] opacity-0 group-hover:opacity-100"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  deleteFreeNotification(notif.id);
+                                }}
+                              ></i>
+                            </div>
+                          ))}
+                          {freenotifications.length > 3 && (
+                            <Link to="/notifications" className="block text-left text-md font-semibold p-3">
+                              Show More Notifications
+                            </Link>
+                          )}
+                        </>
+                      ) : (
+                        <div className="p-4">
+                          <h4 className="font-bold text-md">No New Notifications</h4>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+                {/* ----> Profile icon  */}
+                <div
+                  className="relative inline-block"
+                  ref={dropdownRef}
+                  onMouseEnter={() => {
+                    setFindworkDropdown(false);
+                    setReportsDropdown(false);
+                    setMyJobsDropdown(false);
+                  }}
+                >
+                  {logindata && logindata.images_logo ? (
+                    <img
+                      src={"https://www.api.alanced.com" + logindata.images_logo}
+                      alt="Profile"
+                      className="h-8 w-8 border border-gray-400 rounded-full cursor-pointer"
+                      onClick={() => setDropdownVisible(!dropdownVisible)}
+                    />
+                  ) : (
+                    <div
+                      className="h-10 w-10 rounded-full cursor-pointer flex items-center justify-center bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white font-bold font-cardo text-xl p-1"
+                      onClick={() => setDropdownVisible(!dropdownVisible)}
+                    >
+                      {displayName && displayName[0].toUpperCase()}
+                    </div>
+                  )}
+                  {dropdownVisible && (
+                    <div className="drop absolute right-[-10px] mt-5 w-[14rem] rounded-md shadow-lg bg-white">
+                      <div className="py-1">
+                        {logindata && logindata.images_logo ? (
+                          <img
+                            src={"https://www.api.alanced.com" + logindata.images_logo}
+                            alt="Profile"
+                            className="h-20 w-20 rounded-full cursor-pointer mx-auto my-5 border border-gray-200 p-0.5"
+                            onClick={() => setDropdownVisible(!dropdownVisible)}
+                          />
+                        ) : (
+                          <div
+                            className="h-20 w-20 rounded-full cursor-pointer flex items-center justify-center bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-white font-bold font-cardo text-4xl p-1 mx-auto my-5"
+                            onClick={() => setDropdownVisible(!dropdownVisible)}
+                          >
+                            {displayName && displayName[0].toUpperCase()}
+                          </div>
+                        )}
+                        <h1 className="font-cardo text-[19px] text-[#031136]  text-center px-2">{displayName}</h1>
+                        <h1 className="font-cardo text-lg text-gray-500  text-center  mb-3">
+                          {loginType == "FREELANCER" ? loginType.toLowerCase() : "client"}
+                        </h1>
+                        {loginType == "FREELANCER" ? (
+                          <Link to="/freelancer/edit-profile" className="flex items-center px-4 py-2 hover:bg-gray-100">
+                            <i className="bi bi-person-circle mr-3"></i>
+                            <span className="font-cardo text-[16px] text-[#031136]">Profile</span>
+                          </Link>
+                        ) : (
+                          <Link to="/hirer/profile-edit" className="flex items-center px-4 py-2 hover:bg-gray-100">
+                            <i className="bi bi-person-circle mr-3"></i>
+                            <span className="font-cardo text-[16px] text-[#031136]">Profile</span>
+                          </Link>
+                        )}
+                        <Link
+                          to="/"
+                          className="flex items-center px-4 py-2 hover:bg-gray-100"
+                          onClick={() => {
+                            window.scrollTo(0, 0);
+                            handleLogout();
+                          }}
+                        >
+                          <i className="bi bi-box-arrow-right mr-3"></i>
+                          <span className="font-cardo text-[16px] text-[#031136]">Logout</span>
+                        </Link>
                       </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* ---> mobile menu button for authenticated routes */}
+              <div className="lg:hidden flex justify-center items-center">
+                <button onClick={() => setIsMobileMenuOpen((prev) => !prev)} className="">
+                  {isMobileMenuOpen ? <MdClose className="w-8 h-8" /> : <FiMenu className="w-8 h-8" />}
+                </button>
+
+                <div
+                  className={`absolute top-16 ${
+                    isMobileMenuOpen ? "right-0" : "-right-[100rem]"
+                  } duration-300 w-full h-screen bg-white flex flex-col items-start px-5`}
+                >
+                  <div className="flex flex-col text-sm">
+                    {loginType == "FREELANCER" ? (
+                      <>
+                        <span
+                          className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
+                          onMouseEnter={() => {
+                            setFindworkDropdown(true);
+                            setReportsDropdown(false);
+                            setMyJobsDropdown(false);
+                          }}
+                        >
+                          Search Job <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
+                        </span>
+                        {Findworkdropdown && (
+                          <div className="absolute md:right-[54.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+                            <div className="py-1">
+                              <Link to="/projects" className="flex items-center px-4 py-2">
+                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Search Job</span>
+                              </Link>
+                              <Link to="/saved-jobs" className="flex items-center px-4 py-2">
+                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Saved Jobs</span>
+                              </Link>
+                              <Link to="/my-proposals" className="flex items-center px-4 py-2">
+                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Proposals</span>
+                              </Link>
+                              <Link to="/freelancer/edit-profile" className="flex items-center px-4 py-2">
+                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Profile</span>
+                              </Link>
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <Link to="/hirer/profile">
+                        <span
+                          className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]"
+                          onMouseEnter={() => {
+                            setFindworkDropdown(false);
+                            setReportsDropdown(false);
+                            setMyJobsDropdown(false);
+                          }}
+                        >
+                          Search Freelancer{" "}
+                        </span>
+                      </Link>
                     )}
+                    {loginType == "FREELANCER" ? (
+                      <>
+                        <span
+                          className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
+                          onMouseEnter={() => {
+                            setMyJobsDropdown(true);
+                            setFindworkDropdown(false);
+                            setReportsDropdown(false);
+                          }}
+                        >
+                          My Jobs <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
+                        </span>
+                        {MyJobsdropdown && (
+                          <div className="absolute md:right-[46.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+                            <div className="py-1">
+                              <Link to="/all-invitations" className="flex items-center px-4 py-2">
+                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Invitations</span>
+                              </Link>
+                              <Link to="/freelancer/all-contracts" className="flex items-center px-4 py-2">
+                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Contracts</span>
+                              </Link>
+                            </div>
+                          </div>
+                        )}{" "}
+                      </>
+                    ) : (
+                      <>
+                        <span
+                          className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
+                          onMouseEnter={() => {
+                            setMyJobsDropdown(true);
+                            setFindworkDropdown(false);
+                            setReportsDropdown(false);
+                          }}
+                        >
+                          {" "}
+                          Jobs <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
+                        </span>
+                        {MyJobsdropdown && (
+                          <div className="absolute md:right-[47rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+                            <div className="py-1">
+                              <Link to="/add/Job-post" className="flex items-center px-4 py-2">
+                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Post A Job</span>
+                              </Link>
+                              <Link to="/View-all/Job-post" className="flex items-center px-4 py-2">
+                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Jobs</span>
+                              </Link>
+                              <Link to="/view-all/invited-freelancers" className="flex items-center px-4 py-2">
+                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Invited Freelancers</span>
+                              </Link>
+                              <Link to="/view-all/hirer-contracts" className="flex items-center px-4 py-2">
+                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Contracts</span>
+                              </Link>
+                            </div>
+                          </div>
+                        )}{" "}
+                      </>
+                    )}
+                    {loginType == "FREELANCER" ? (
+                      <>
+                        <span
+                          className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
+                          onMouseEnter={() => {
+                            setReportsDropdown(true);
+                            setFindworkDropdown(false);
+                            setMyJobsDropdown(false);
+                          }}
+                        >
+                          {" "}
+                          Payments <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
+                        </span>
+                        {Reportsdropdown && (
+                          <div className="absolute md:right-[38.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+                            <div className="py-1">
+                              <Link to="/freelancer/my-reports" className="flex items-center px-4 py-2">
+                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Transaction History</span>
+                              </Link>
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <span
+                          className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
+                          onMouseEnter={() => {
+                            setReportsDropdown(true);
+                            setMyJobsDropdown(false);
+                            setFindworkDropdown(false);
+                          }}
+                        >
+                          {" "}
+                          Payments <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
+                        </span>
+                        {Reportsdropdown && (
+                          <div className="absolute md:right-[39.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+                            <div className="py-1">
+                              <Link to="/freelancer/my-reports" className="flex items-center px-4 py-2">
+                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Transaction History</span>
+                              </Link>
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    )}
+
+                    {/** ######################### */}
+
+                    <Link to="/messages">
+                      <span
+                        className="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]"
+                        onMouseEnter={() => {
+                          setFindworkDropdown(false);
+                          setReportsDropdown(false);
+                          setMyJobsDropdown(false);
+                        }}
+                      >
+                        Messages
+                      </span>
+                    </Link>
                   </div>
                 </div>
               </div>
