@@ -421,7 +421,7 @@ const Navbar = () => {
               {loginType == "FREELANCER" ? (
                 <>
                   <span
-                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
+                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12  text-[16px] text-[#031136] cursor-pointer"
                     onMouseEnter={() => {
                       setFindworkDropdown(true);
                       setReportsDropdown(false);
@@ -434,16 +434,16 @@ const Navbar = () => {
                     <div className="absolute md:right-[54.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
                       <div className="py-1">
                         <Link to="/projects" className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Search Job</span>
+                          <span className=" text-[16px] text-[#031136] hover:text-blue-600">Search Job</span>
                         </Link>
                         <Link to="/saved-jobs" className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Saved Jobs</span>
+                          <span className=" text-[16px] text-[#031136] hover:text-blue-600">Saved Jobs</span>
                         </Link>
                         <Link to="/my-proposals" className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Proposals</span>
+                          <span className=" text-[16px] text-[#031136] hover:text-blue-600">Proposals</span>
                         </Link>
                         <Link to="/freelancer/edit-profile" className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Profile</span>
+                          <span className=" text-[16px] text-[#031136] hover:text-blue-600">Profile</span>
                         </Link>
                       </div>
                     </div>
@@ -452,7 +452,7 @@ const Navbar = () => {
               ) : (
                 <Link to="/hirer/profile">
                   <span
-                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]"
+                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12  text-[16px] text-[#031136]"
                     onClick={() => {
                       setFindworkDropdown(false);
                       setReportsDropdown(false);
@@ -466,7 +466,7 @@ const Navbar = () => {
               {loginType == "FREELANCER" ? (
                 <>
                   <span
-                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
+                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12  text-[16px] text-[#031136] cursor-pointer"
                     onMouseEnter={() => {
                       setMyJobsDropdown(true);
                       setFindworkDropdown(false);
@@ -479,10 +479,10 @@ const Navbar = () => {
                     <div className="absolute md:right-[46.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
                       <div className="py-1">
                         <Link to="/all-invitations" className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Invitations</span>
+                          <span className=" text-[16px] text-[#031136] hover:text-blue-600">All Invitations</span>
                         </Link>
                         <Link to="/freelancer/all-contracts" className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Contracts</span>
+                          <span className=" text-[16px] text-[#031136] hover:text-blue-600">All Contracts</span>
                         </Link>
                       </div>
                     </div>
@@ -491,7 +491,7 @@ const Navbar = () => {
               ) : (
                 <>
                   <span
-                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
+                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12  text-[16px] text-[#031136] cursor-pointer"
                     onMouseEnter={() => {
                       setMyJobsDropdown(true);
                       setFindworkDropdown(false);
@@ -505,16 +505,16 @@ const Navbar = () => {
                     <div className="absolute md:right-[47rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
                       <div className="py-1">
                         <Link to="/add/Job-post" className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Post A Job</span>
+                          <span className=" text-[16px] text-[#031136] hover:text-blue-600">Post A Job</span>
                         </Link>
                         <Link to="/View-all/Job-post" className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Jobs</span>
+                          <span className=" text-[16px] text-[#031136] hover:text-blue-600">All Jobs</span>
                         </Link>
                         <Link to="/view-all/invited-freelancers" className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Invited Freelancers</span>
+                          <span className=" text-[16px] text-[#031136] hover:text-blue-600">Invited Freelancers</span>
                         </Link>
                         <Link to="/view-all/hirer-contracts" className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Contracts</span>
+                          <span className=" text-[16px] text-[#031136] hover:text-blue-600">All Contracts</span>
                         </Link>
                       </div>
                     </div>
@@ -524,7 +524,7 @@ const Navbar = () => {
               {loginType == "FREELANCER" ? (
                 <>
                   <span
-                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
+                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12  text-[16px] text-[#031136] cursor-pointer"
                     onMouseEnter={() => {
                       setReportsDropdown(true);
                       setFindworkDropdown(false);
@@ -538,7 +538,7 @@ const Navbar = () => {
                     <div className="absolute md:right-[38.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
                       <div className="py-1">
                         <Link to="/freelancer/my-reports" className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Transaction History</span>
+                          <span className=" text-[16px] text-[#031136] hover:text-blue-600">Transaction History</span>
                         </Link>
                       </div>
                     </div>
@@ -547,7 +547,7 @@ const Navbar = () => {
               ) : (
                 <>
                   <span
-                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
+                    className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12  text-[16px] text-[#031136] cursor-pointer"
                     onMouseEnter={() => {
                       setReportsDropdown(true);
                       setMyJobsDropdown(false);
@@ -561,7 +561,7 @@ const Navbar = () => {
                     <div className="absolute md:right-[39.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
                       <div className="py-1">
                         <Link to="/freelancer/my-reports" className="flex items-center px-4 py-2">
-                          <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Transaction History</span>
+                          <span className=" text-[16px] text-[#031136] hover:text-blue-600">Transaction History</span>
                         </Link>
                       </div>
                     </div>
@@ -573,7 +573,7 @@ const Navbar = () => {
 
               <Link to="/messages">
                 <span
-                  className="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]"
+                  className="block mt-4 lg:inline-block lg:mt-0  text-[16px] text-[#031136]"
                   onMouseEnter={() => {
                     setFindworkDropdown(false);
                     setReportsDropdown(false);
@@ -868,16 +868,16 @@ const Navbar = () => {
                           <div className="">
                             <div className="py-1">
                               <Link to="/add/Job-post" className="flex items-center px-4 py-2">
-                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Post A Job</span>
+                                <span className=" text-[16px] text-[#031136] hover:text-blue-600">Post A Job</span>
                               </Link>
                               <Link to="/View-all/Job-post" className="flex items-center px-4 py-2">
-                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Jobs</span>
+                                <span className=" text-[16px] text-[#031136] hover:text-blue-600">All Jobs</span>
                               </Link>
                               <Link to="/view-all/invited-freelancers" className="flex items-center px-4 py-2">
-                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Invited Freelancers</span>
+                                <span className=" text-[16px] text-[#031136] hover:text-blue-600">Invited Freelancers</span>
                               </Link>
                               <Link to="/view-all/hirer-contracts" className="flex items-center px-4 py-2">
-                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Contracts</span>
+                                <span className=" text-[16px] text-[#031136] hover:text-blue-600">All Contracts</span>
                               </Link>
                             </div>
                           </div>
