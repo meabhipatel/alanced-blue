@@ -397,35 +397,19 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            {loginType == "FREELANCER" ? (
-              <Link
-                to="/freelancer/profile"
-                onMouseEnter={() => {
-                  setFindworkDropdown(false);
-                  setReportsDropdown(false);
-                  setMyJobsDropdown(false);
-                }}
-              >
-                <div className="flex items-center flex-shrink-0 lg:ml-[129px]">
-                  <img src={logo} alt="" />
-                  <span className="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
-                </div>
-              </Link>
-            ) : (
-              <Link
-                to="/hirer/profile"
-                onMouseEnter={() => {
-                  setFindworkDropdown(false);
-                  setReportsDropdown(false);
-                  setMyJobsDropdown(false);
-                }}
-              >
-                <div className="flex items-center flex-shrink-0 lg:ml-[129px]">
-                  <img src={logo} alt="" />
-                  <span className="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
-                </div>
-              </Link>
-            )}
+            <Link
+              to={loginType == "FREELANCER" ? "/freelancer/profile" : "/hirer/profile"}
+              onMouseEnter={() => {
+                setFindworkDropdown(false);
+                setReportsDropdown(false);
+                setMyJobsDropdown(false);
+              }}
+            >
+              <div className="flex items-center flex-shrink-0 ">
+                <img src={logo} alt="" />
+                <span className="font-semibold text-[23px] tracking-widest ml-2 font-poppins text-[#031136]">ALANCED</span>
+              </div>
+            </Link>
 
             <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0 my-2.5">
               <div className="text-sm lg:flex-grow lg:ml-[45px] lg:mr-12 mt-1.5">
@@ -579,6 +563,9 @@ const Navbar = () => {
                     )}
                   </>
                 )}
+
+                {/** ######################### */}
+
                 <Link to="/messages">
                   <span
                     className="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]"
