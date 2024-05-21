@@ -19,6 +19,7 @@ import { dontNeedMTScreens } from "../../routes/DynamicMarginTop";
 import { FiMenu } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
 import { FaBell } from "react-icons/fa6";
+import { FaChevronDown } from "react-icons/fa6";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -308,9 +309,9 @@ const Navbar = () => {
         setReportsDropdown();
       }}
     >
-      <nav className="flex items-center justify-between p-5 lg:px-12 lg:p-6">
+      <nav className="flex items-center justify-between  lg:px-12 lg:p-6">
         {!isLoggedIn ? (
-          <div className="w-full relative flex justify-between items-center  lg:p-0">
+          <div className="w-full relative flex justify-between items-center p-5 lg:p-0">
             <Link to="/">
               <div className="flex items-center flex-shrink-0">
                 <img src={logo} alt="" />
@@ -320,16 +321,16 @@ const Navbar = () => {
             <div className="w-full hidden lg:flex flex-grow lg:items-center lg:w-auto mt-0">
               <div className="text-sm lg:flex-grow lg:ml-[45px]">
                 <Link to="/view-all/freelancer">
-                  <span className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Search Freelancer</span>
+                  <span className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 text-[16px] text-[#031136]">Search Freelancer</span>
                 </Link>
                 <Link to="/projects">
-                  <span className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Search Job</span>
+                  <span className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 text-[16px] text-[#031136]">Search Job</span>
                 </Link>
                 <Link to="/why-alanced">
-                  <span className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Why Alanced</span>
+                  <span className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 text-[16px] text-[#031136]">Why Alanced</span>
                 </Link>
                 <Link to="/enterprises" onClick={() => window.scroll(0, 0)}>
-                  <span className="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]">Enterprise</span>
+                  <span className="block mt-4 lg:inline-block lg:mt-0 text-[16px] text-[#031136]">Enterprise</span>
                 </Link>
               </div>
 
@@ -362,19 +363,23 @@ const Navbar = () => {
                   isMobileMenuOpen ? "right-0" : "-right-[100rem]"
                 } duration-300 w-full h-screen bg-white flex flex-col items-start px-5`}
               >
-                <div className="text-sm flex flex-col items-start">
+                <div className="w-full flex flex-col items-start gap-5 pt-5 text-sm">
                   <Link to="/view-all/freelancer">
-                    <span className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Search Freelancer</span>
+                    <span className=" text-[16px] text-[#031136]">Search Freelancer</span>
                   </Link>
+                  <div className="border-t border-gray-300 w-full" />
                   <Link to="/projects">
-                    <span className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Search Job</span>
+                    <span className=" text-[16px] text-[#031136]">Search Job</span>
                   </Link>
+                  <div className="border-t border-gray-300 w-full" />
                   <Link to="/why-alanced">
-                    <span className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Why Alanced</span>
+                    <span className=" text-[16px] text-[#031136]">Why Alanced</span>
                   </Link>
+                  <div className="border-t border-gray-300 w-full" />
                   <Link to="/enterprises" onClick={() => window.scroll(0, 0)}>
-                    <span className="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]">Enterprise</span>
+                    <span className="text-[16px] text-[#031136]">Enterprise</span>
                   </Link>
+                  <div className="border-t border-gray-300 w-full" />
                 </div>
                 <div className="flex flex-col items-center gap-5">
                   <Link to="/login">
@@ -396,7 +401,7 @@ const Navbar = () => {
             </div>
           </div>
         ) : (
-          <>
+          <div className="w-full relative flex justify-between items-center p-5 lg:p-0">
             <Link
               to={loginType == "FREELANCER" ? "/freelancer/profile" : "/hirer/profile"}
               onMouseEnter={() => {
@@ -412,7 +417,7 @@ const Navbar = () => {
             </Link>
 
             {/* ----> Navigations  */}
-            <div className="hidden lg:flex text-sm">
+            <div className="hidden lg:flex p-5 text-sm">
               {loginType == "FREELANCER" ? (
                 <>
                   <span
@@ -448,7 +453,7 @@ const Navbar = () => {
                 <Link to="/hirer/profile">
                   <span
                     className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]"
-                    onMouseEnter={() => {
+                    onClick={() => {
                       setFindworkDropdown(false);
                       setReportsDropdown(false);
                       setMyJobsDropdown(false);
@@ -764,7 +769,7 @@ const Navbar = () => {
               </div>
 
               {/* ---> mobile menu button for authenticated routes */}
-              <div className="lg:hidden flex justify-center items-center">
+              <div className="lg:hidden flex items-center">
                 <button onClick={() => setIsMobileMenuOpen((prev) => !prev)} className="">
                   {isMobileMenuOpen ? <MdClose className="w-8 h-8" /> : <FiMenu className="w-8 h-8" />}
                 </button>
@@ -774,33 +779,33 @@ const Navbar = () => {
                     isMobileMenuOpen ? "right-0" : "-right-[100rem]"
                   } duration-300 w-full h-screen bg-white flex flex-col items-start px-5`}
                 >
-                  <div className="flex flex-col text-sm">
+                  <div className="w-full flex flex-col items-start gap-5 text-sm pt-3">
                     {loginType == "FREELANCER" ? (
                       <>
-                        <span
-                          className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
-                          onMouseEnter={() => {
-                            setFindworkDropdown(true);
+                        <div
+                          className="w-full flex justify-between items-center text-[16px] text-[#031136] cursor-pointer pr-5"
+                          onClick={() => {
+                            setFindworkDropdown((prev) => !prev);
                             setReportsDropdown(false);
                             setMyJobsDropdown(false);
                           }}
                         >
-                          Search Job <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
-                        </span>
+                          Search Job <FaChevronDown className="text-[#031136] text-xs " />
+                        </div>
                         {Findworkdropdown && (
-                          <div className="absolute md:right-[54.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+                          <div className="">
                             <div className="py-1">
                               <Link to="/projects" className="flex items-center px-4 py-2">
-                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Search Job</span>
+                                <span className="text-[16px] text-[#031136] hover:text-blue-600">Search Job</span>
                               </Link>
                               <Link to="/saved-jobs" className="flex items-center px-4 py-2">
-                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Saved Jobs</span>
+                                <span className="text-[16px] text-[#031136] hover:text-blue-600">Saved Jobs</span>
                               </Link>
                               <Link to="/my-proposals" className="flex items-center px-4 py-2">
-                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Proposals</span>
+                                <span className="text-[16px] text-[#031136] hover:text-blue-600">Proposals</span>
                               </Link>
                               <Link to="/freelancer/edit-profile" className="flex items-center px-4 py-2">
-                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Profile</span>
+                                <span className="text-[16px] text-[#031136] hover:text-blue-600">Profile</span>
                               </Link>
                             </div>
                           </div>
@@ -809,37 +814,39 @@ const Navbar = () => {
                     ) : (
                       <Link to="/hirer/profile">
                         <span
-                          className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]"
-                          onMouseEnter={() => {
+                          className="text-[16px] text-[#031136]"
+                          onClick={() => {
                             setFindworkDropdown(false);
                             setReportsDropdown(false);
                             setMyJobsDropdown(false);
                           }}
                         >
-                          Search Freelancer{" "}
+                          Search Freelancer
                         </span>
                       </Link>
                     )}
+                    <div className="border-t border-gray-300 w-full" />
+
                     {loginType == "FREELANCER" ? (
                       <>
-                        <span
-                          className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
-                          onMouseEnter={() => {
-                            setMyJobsDropdown(true);
+                        <div
+                          className="w-full flex justify-between items-center text-[16px] text-[#031136] cursor-pointer pr-5"
+                          onClick={() => {
+                            setMyJobsDropdown((prev) => !prev);
                             setFindworkDropdown(false);
                             setReportsDropdown(false);
                           }}
                         >
-                          My Jobs <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
-                        </span>
+                          My Jobs <FaChevronDown className="text-[#031136] text-xs mt-1" />
+                        </div>
                         {MyJobsdropdown && (
-                          <div className="absolute md:right-[46.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+                          <div className="">
                             <div className="py-1">
                               <Link to="/all-invitations" className="flex items-center px-4 py-2">
-                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Invitations</span>
+                                <span className="text-[16px] text-[#031136] hover:text-blue-600">All Invitations</span>
                               </Link>
                               <Link to="/freelancer/all-contracts" className="flex items-center px-4 py-2">
-                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">All Contracts</span>
+                                <span className="text-[16px] text-[#031136] hover:text-blue-600">All Contracts</span>
                               </Link>
                             </div>
                           </div>
@@ -847,19 +854,18 @@ const Navbar = () => {
                       </>
                     ) : (
                       <>
-                        <span
-                          className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
-                          onMouseEnter={() => {
-                            setMyJobsDropdown(true);
+                        <div
+                          className="w-full flex justify-between items-center gap-2 text-[16px] text-[#031136] cursor-pointer pr-5"
+                          onClick={() => {
+                            setMyJobsDropdown((prev) => !prev);
                             setFindworkDropdown(false);
                             setReportsDropdown(false);
                           }}
                         >
-                          {" "}
-                          Jobs <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
-                        </span>
+                          Jobs <FaChevronDown className="text-[#031136] text-xs mt-1" />
+                        </div>
                         {MyJobsdropdown && (
-                          <div className="absolute md:right-[47rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+                          <div className="">
                             <div className="py-1">
                               <Link to="/add/Job-post" className="flex items-center px-4 py-2">
                                 <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Post A Job</span>
@@ -878,24 +884,25 @@ const Navbar = () => {
                         )}{" "}
                       </>
                     )}
+                    <div className="border-t border-gray-300 w-full" />
+
                     {loginType == "FREELANCER" ? (
                       <>
-                        <span
-                          className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
-                          onMouseEnter={() => {
-                            setReportsDropdown(true);
+                        <div
+                          className="w-full flex justify-between items-center gap-2 text-[16px] text-[#031136] cursor-pointer pr-5"
+                          onClick={() => {
+                            setReportsDropdown((prev) => !prev);
                             setFindworkDropdown(false);
                             setMyJobsDropdown(false);
                           }}
                         >
-                          {" "}
-                          Payments <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
-                        </span>
+                          Payments <FaChevronDown className="text-[#031136] text-xs mt-1" />
+                        </div>
                         {Reportsdropdown && (
-                          <div className="absolute md:right-[38.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+                          <div className="">
                             <div className="py-1">
                               <Link to="/freelancer/my-reports" className="flex items-center px-4 py-2">
-                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Transaction History</span>
+                                <span className=" text-[16px] text-[#031136] hover:text-blue-600">Transaction History</span>
                               </Link>
                             </div>
                           </div>
@@ -903,35 +910,35 @@ const Navbar = () => {
                       </>
                     ) : (
                       <>
-                        <span
-                          className="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer"
-                          onMouseEnter={() => {
-                            setReportsDropdown(true);
+                        <div
+                          className="w-full flex justify-between items-center text-[16px] text-[#031136] cursor-pointer pr-5"
+                          onClick={() => {
+                            setReportsDropdown((prev) => !prev);
                             setMyJobsDropdown(false);
                             setFindworkDropdown(false);
                           }}
                         >
-                          {" "}
-                          Payments <i className="bi bi-chevron-down text-[#031136] text-xs"></i>
-                        </span>
+                          Payments <FaChevronDown className="text-[#031136] text-xs" />
+                        </div>
                         {Reportsdropdown && (
-                          <div className="absolute md:right-[39.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
+                          <div className="">
                             <div className="py-1">
                               <Link to="/freelancer/my-reports" className="flex items-center px-4 py-2">
-                                <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Transaction History</span>
+                                <span className="text-[16px] text-[#031136] hover:text-blue-600">Transaction History</span>
                               </Link>
                             </div>
                           </div>
                         )}
                       </>
                     )}
+                    <div className="border-t border-gray-300 w-full" />
 
                     {/** ######################### */}
 
                     <Link to="/messages">
                       <span
-                        className="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]"
-                        onMouseEnter={() => {
+                        className="text-[16px] text-[#031136]"
+                        onClick={() => {
                           setFindworkDropdown(false);
                           setReportsDropdown(false);
                           setMyJobsDropdown(false);
@@ -940,11 +947,12 @@ const Navbar = () => {
                         Messages
                       </span>
                     </Link>
+                    <div className="border-t border-gray-300 w-full" />
                   </div>
                 </div>
               </div>
             </div>
-          </>
+          </div>
         )}
       </nav>
     </div>
