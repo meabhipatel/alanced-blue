@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
+import { Route, Routes, Navigate, useNavigate, useLocation } from "react-router-dom";
 import React from "react";
 import Login from "../container/auth/Login";
 import { useSelector } from "react-redux";
@@ -61,8 +61,9 @@ import DynamicMarginTop from "./DynamicMarginTop";
 import ScrollToTop from "../components/molecules/ScrollToTop";
 
 const AppRouter = () => {
-  const loginType = useSelector((state) => state.login.type) || localStorage.getItem("loginType");
   const navigate = useNavigate();
+  const location = useLocation();
+  const loginType = useSelector((state) => state.login.type) || localStorage.getItem("loginType");
 
   React.useEffect(() => {
     if (loginType == "HIRER") {
@@ -73,9 +74,13 @@ const AppRouter = () => {
     }
   }, [loginType]);
 
+  const navbarNotAvailable = ["/login", "/sign-up"];
+
   return (
     <>
-      <Navbar />
+      {/* ---> Navbar  */}
+      {!navbarNotAvailable.includes(location.pathname) && <Navbar />}
+
       <DynamicMarginTop />
       <ScrollToTop />
       <Routes>
