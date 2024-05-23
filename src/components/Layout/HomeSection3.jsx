@@ -6,7 +6,6 @@ import boxarrow from "../images/boxarrow.png";
 import womanwithtab from "../images/womanwithtab.png";
 import uparrow from "../images/uparrow.png";
 import downarrow from "../images/downarrow.png";
-import cupbook from "../images/cupbook.png";
 import { Link } from "react-router-dom";
 
 const HomeSection3 = () => {
