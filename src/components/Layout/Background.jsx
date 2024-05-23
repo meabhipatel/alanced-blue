@@ -1,12 +1,13 @@
 import React from "react";
 import heroBackground from "../../assets/hero_background.svg";
 import { Link } from "react-router-dom";
+import heroImage from "../../assets/hero1.png";
 
 const Background = () => {
   return (
     <>
-      <div className="h-[110vh] bg-cover" style={{ backgroundImage: `url(${heroBackground})` }}>
-        <div className="text-left pt-40 ml-[11.5vw] ">
+      <div className="h-[110vh] bg-cover flex justify-center px-5" style={{ backgroundImage: `url(${heroBackground})` }}>
+        <div className="text-left pt-28 sm:pt-40 ">
           <h1 className="text-[#797979] text-lg font-semibold tracking-wider">
             <span className="text-[#031136] indent-4">Popular:</span> Design Art Business Video Editing
           </h1>
@@ -21,6 +22,9 @@ const Background = () => {
               Get Started
             </span>
           </Link>
+        </div>
+        <div className="w-[50%] h-[42rem] pt-16 hidden lg:block">
+          <img src={heroImage} alt="hero-image" className="w-full h-full object-contain" />
         </div>
       </div>
     </>
