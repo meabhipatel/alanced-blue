@@ -271,7 +271,8 @@ const FindTalent = () => {
       {/* ---> page Body  */}
       <div className=" mt-1 px-2  xl:px-20">
         <div class="flex flex-col md:flex-row mb-5 mx-5">
-          <div class="w-full hidden lg:block md:w-[25%] pt-3 bg-[#FFFFFF] py-8 text-left">
+          {/* ---> side categoy bar */}
+          <div class="w-full hidden lg:block md:w-[25%] pt-3 bg-[#FFFFFF] py-8 text-left sticky top-20 h-[90vh] overflow-y-auto">
             <div class="skills">
               <div>
                 <h1 className="bg-white text-xl text-left font-normal">Skills</h1>
@@ -290,9 +291,6 @@ const FindTalent = () => {
                       <span className="font-normal text-[#797979]">{skill}</span>
                     </label>
                   </div>
-                  {/* <div className='basis-4/12  text-base font-normal text-[#797979] text-left'>
-              (21)
-          </div> */}
                 </div>
               ))}
               {showAllSkills ? (
@@ -309,57 +307,7 @@ const FindTalent = () => {
                 </div>
               )}
             </div>
-            {/* <div><h1 className='bg-white text-xl text-left font-normal mt-10'>Freelancer Rate</h1></div>
-  <div className="pt-4 w-[75%]">
-              <Slider
-                min={1}
-                max={1000}
-                step={1}
-                range
-                value={range}
-                onChange={handleSliderChange}
-                railStyle={{ background: 'lightgray' }}
-                trackStyle={[
-                  {
-                    background: 'linear-gradient(45deg, #0909E9, #00D4FF)',
-                    borderColor: '#65a30d',
-                  },
-                ]}
-                handleStyle={[
-                  {
-                    backgroundColor: 'white',
-                    borderColor: 'transparent', 
-                    borderRadius: '50%', // Set border radius for circular shape
-                    borderImage: 'linear-gradient(45deg, #0909E9, #00D4FF)',
-                    borderImageSlice: 1,
-                  },
-                  {
-                    backgroundColor: 'white',
-                    borderColor: 'transparent',
-                    borderRadius: '50%',
-                    borderImage: 'linear-gradient(45deg, #0909E9, #00D4FF)',
-                    borderImageSlice: 1,
-                  },
-                ]}
-                />
-              <div className='flex flex-row mt-4'>
-                <div className='basis-5/12'><input
-                type="text"
-                value={range[0]}
-                onChange={(e) => handleInputChange(0, e.target.value)}
-                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12  text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-60
-                focus:outline-none'
-              /></div>
-              <div className='basis-2/12 m-auto mt-4 text-center'><i class="bi bi-dash-lg text-[#475569]"></i></div>
-                <div className='basis-5/12'><input
-                type="text"
-                value={range[1]}
-                onChange={(e) => handleInputChange(1, e.target.value)}
-                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12  text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-60
-                focus:outline-none'
-              /></div>
-              </div>
-            </div> */}
+
             <div class="location">
               <div>
                 <h1 className="bg-white text-xl text-left font-normal mt-10">Citys</h1>
@@ -379,9 +327,6 @@ const FindTalent = () => {
                       <span className="font-normal text-[#797979]">{location}</span>
                     </label>
                   </div>
-                  {/* <div className='basis-4/12  text-base font-normal text-[#797979] text-left'>
-          (5)
-        </div> */}
                 </div>
               ))}
               {showAllCity ? (
@@ -416,9 +361,6 @@ const FindTalent = () => {
                       <span className="font-normal text-[#797979]">{language}</span>
                     </label>
                   </div>
-                  {/* <div className='basis-4/12  text-base font-normal text-[#797979] text-left'>
-              (22)
-          </div> */}
                 </div>
               ))}
               {showAllLanguage ? (
@@ -453,12 +395,12 @@ const FindTalent = () => {
                       <span class="font-normal text-[#797979]">{exp}</span>
                     </label>
                   </div>
-                  {/* <div className='basis-4/12  text-base font-normal text-[#797979] text-left'>(23)</div> */}
                 </div>
               ))}
             </div>
           </div>
 
+          {/* ---> card container  */}
           <div class="w-full lg:w-[70%]  bg-[#FFFFFF] pt-3 pb-8 text-left">
             <div className="px-4 md:px-8 pt-4  ">
               <div className="flex items-center">
@@ -520,7 +462,6 @@ const FindTalent = () => {
                             )}
 
                             <div className="mb-12">
-                              {/* <p className=' text-[#0A142F] text-[14px] py-1 mr-1'>completed projects : <span className='opacity-50'>More than 50</span></p> */}
                               <img src={verify} alt="" className="inline-block h-3 w-3 mr-1" />
                               <p className=" text-[#0A142F] text-[14px] opacity-50 inline-block">Account verified</p>
                               <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>
