@@ -284,7 +284,7 @@ const Navbar = () => {
   /** ---> Tracking page is scrolled or not  */
   useEffect(() => {
     const handleScroll = () => {
-      window.scrollY > 100 ? setIsScrolled(true) : setIsScrolled(false);
+      window.scrollY > 50 ? setIsScrolled(true) : setIsScrolled(false);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
