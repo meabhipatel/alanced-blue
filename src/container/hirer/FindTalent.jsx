@@ -269,9 +269,9 @@ const FindTalent = () => {
       </div>
 
       {/* ---> page Body  */}
-      <div className=" mt-1 mx-[9%]">
+      <div className=" mt-1 px-2  xl:px-20">
         <div class="flex flex-col md:flex-row mb-5 mx-5">
-          <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
+          <div class="w-full hidden lg:block md:w-[25%] pt-3 bg-[#FFFFFF] py-8 text-left">
             <div class="skills">
               <div>
                 <h1 className="bg-white text-xl text-left font-normal">Skills</h1>
@@ -459,24 +459,25 @@ const FindTalent = () => {
             </div>
           </div>
 
-          <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
-            <div className="px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30">
+          <div class="w-full lg:w-[70%]  bg-[#FFFFFF] pt-3 pb-8 text-left">
+            <div className="px-4 md:px-8 pt-4  ">
               <div className="flex items-center">
-                <h1 className="bg-white text-[21px] text-[#031136] font-normal mr-1">Freelancers that Matches your Job</h1>
+                <h1 className="text-[21px] text-[#031136] font-semibold mr-1">Freelancers that Matches your Job</h1>
               </div>
               <div class="w-40  mt-3 relative">
                 <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
                 <div class="border-gray-600 border-b-2 rounded-lg"></div>
               </div>
             </div>
+
             {viewFreelancer != null ? (
               viewFreelancer.length > 0 ? (
-                <div className="grid md:grid-cols-2 grid-cols-1 w-full pl-3.5">
+                <div className="w-full grid md:grid-cols-2 grid-cols-1 gap-x-5 lg:pl-3.5">
                   {viewFreelancer &&
                     viewFreelancer.map((free, index) => {
                       return (
                         <>
-                          <div className="px-4 md:w-[26vw] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4">
+                          <div className="px-4 w-full relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] cursor-pointer shadow-lg rounded-lg mt-4">
                             <div className="flex items-center">
                               <Avatar src={"https://www.api.alanced.com" + free.images_logo} alt="" variant="rounded" className="mr-4 h-24 w-24" />
                               <div>
@@ -566,7 +567,7 @@ const FindTalent = () => {
               <div className="grid grid-cols-2 w-[70%] md:w-full pl-3.5">
                 {[...Array(6)].map((_) => {
                   return (
-                    <div className="px-4 w-[26vw] h-[467px] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4">
+                    <div className="px-4 w-[26vw] h-[467px] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t  border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4">
                       <Skeleton height={90} width={90} inline={true} style={{ borderRadius: "10%", float: "left" }} />
                       <Skeleton height={20} width={200} style={{ marginLeft: 10, marginTop: 20 }} />
                       <Skeleton height={20} width={200} style={{ marginLeft: 10, marginTop: 10 }} />
