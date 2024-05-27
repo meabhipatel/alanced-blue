@@ -28,12 +28,14 @@ import ProjectRate from "./AllSelectionData/ProjectRate";
 import CityList from "./AllSelectionData/CityList";
 import SkillsList from "./AllSelectionData/SkillsList";
 import Bag from "../../components/images/experience.png";
+import mybg from "../../assets/half_background.png";
+import hero2Image from "../../assets/hero2.png";
+import { IoMdSearch } from "react-icons/io";
 
 function ProjectList() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const category = searchParams.get("category");
-  console.log(category, "category");
   // const viewallprojects = useSelector(state => state.freelancer.viewallprojects)
   // const accessToken = useSelector(state => state.login.accessToken);
   const accessToken = useSelector((state) => state.login.accessToken) || localStorage.getItem("jwtToken");
@@ -118,7 +120,6 @@ function ProjectList() {
   };
 
   const [viewProject, setViewProject] = useState([]);
-  console.log(viewProject, "project, project");
 
   useEffect(() => {
     const queryParameters = [];
@@ -256,7 +257,6 @@ function ProjectList() {
 
     fetchData();
   }, []);
-  console.log("/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/", AllProposals);
 
   //(=//=//=//=//=//=//=//=//=)filter API integrtion(//=//=//=//=//=//=//=//=//=)
 
@@ -368,50 +368,44 @@ function ProjectList() {
 
   return (
     <>
-      <Navbar />
-      <div className="h-[43vh] bg-no-repeat -mt-[1.2rem] bg-cover" style={{ backgroundImage: `url(${profile_list})` }}>
-        <div className="text-left pt-[6rem] ml-[13.5vw] text-2xl font-cardo">
-          <h1>Projects List</h1>
-          <p className="font-inter text-sm text-[#797979] font-normal mt-2">
-            Explore high-paying freelance opportunities and land your dream job now!
-          </p>
-          <div className="lg:w-[44vw] bg-white p-3 lg:h-14 rounded-2xl lg:flex items-center mt-4 shadow-md">
-            <div className="flex flex-row">
-              <img className="w-5 h-5" src={search}></img>
-              <input
-                className="w-96 font-inter text-base ml-3 outline-none"
-                placeholder="Search Job by Category"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              ></input>
+      {/* ---> page Header  */}
+      <div className="h-[50vh] bg-no-repeat bg-cover flex justify-center items-end pb-6" style={{ backgroundImage: `url(${mybg})` }}>
+        <div className="w-[95%] sm:w-[80%] flex p-5 rounded-md text-2xl bg-white">
+          <div className="w-full flex flex-col items-start pt-5 text-start">
+            <h1>Projects List</h1>
+            <p className=" text-sm text-[#797979] font-normal mt-2">Explore high-paying freelance opportunities and land your dream job now!</p>
+            <div className="w-full bg-gray-50 p-3 h-14 rounded-md flex items-center mt-4 shadow-md">
+              <div className="w-full flex flex-row">
+                <IoMdSearch className="w-6 h-6 text-[#797979]" />
+                <input
+                  className="w-full px-3 text-base bg-transparent outline-none"
+                  placeholder="Search by Category"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                ></input>
+              </div>
+
+              <button className="rounded h-8 w-24 font-semibold text-base text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF]">Search</button>
             </div>
-            <div className="">
-              <button className="rounded h-8 w-24 lg:ml-6 font-semibold text-base text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF]">
-                Search
-              </button>
-            </div>
+          </div>
+          <div className="w-full relative hidden lg:block  ">
+            <img src={hero2Image} alt="hero-image-2" className="absolute -bottom-12" />
           </div>
         </div>
       </div>
-      <div className=" container-sm px-36">
-        {/* <div className='flex flex-row'>
-          <div className=' basis-6/12 text-left'>5,512 services available</div>
-          <div className=' basis-6/12'>
-            <div className=' flex flex-row justify-end'>
-              <div className='mr-5 font-normal font-inter'>Sort by:</div>
-              <div className='font-normal font-inter'>Best selling</div>
-            </div>
-          </div>
-        </div> */}
-        <div className="flex flex-row">
-          <div className=" basis-3/12 mt-6">
+
+      {/* ---> page Body  */}
+      <div className="mt-1 xl:px-20 mb-2">
+        <div className="flex flex-row px-5">
+          {/* ---> side categoy bar */}
+          <div className="w-full hidden lg:block md:w-[25%] pt-3 bg-[#FFFFFF] py-8 text-left sticky top-24 h-[90vh] overflow-y-auto">
             <div>
-              <h1 className="font-cardo text-xl text-left font-normal">Category</h1>
+              <h1 className=" text-xl text-left font-normal">Category</h1>
             </div>
             {visibleCategories.map((category, index) => (
               <div key={category} className="flex flex-row mt-4">
                 <div className="basis-10/12">
-                  <label class="flex items-center font-inter relative cursor-pointer">
+                  <label class="flex items-center  relative cursor-pointer">
                     <input className="hidden" type="checkbox" value={category} onChange={handleCategoryFilterChange} />
                     <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                       <span class="checkmark hidden">
@@ -422,29 +416,28 @@ function ProjectList() {
                     <span class="font-normal text-[#797979]">{category}</span>
                   </label>
                 </div>
-                {/* <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(1,945)</div> */}
               </div>
             ))}
             {showAll ? (
               <div>
-                <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowLess}>
+                <h1 className=" text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowLess}>
                   Show Less
                 </h1>
               </div>
             ) : (
               <div>
-                <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowMore}>
+                <h1 className=" text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowMore}>
                   +{cate.length - initialCategoryCount} More
                 </h1>
               </div>
             )}
             <div>
-              <h1 className="font-cardo text-xl text-left font-normal mt-10">Experience Level</h1>
+              <h1 className=" text-xl text-left font-normal mt-10">Experience Level</h1>
             </div>
             {expe.map((exp, index) => (
               <div key={exp} className="flex flex-row mt-4">
                 <div className="basis-8/12">
-                  <label class="flex items-center font-inter relative cursor-pointer">
+                  <label class="flex items-center  relative cursor-pointer">
                     <input className="hidden" type="checkbox" value={exp} onChange={handleExpFilterChange} />
                     <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                       <span class="checkmark hidden">
@@ -455,11 +448,11 @@ function ProjectList() {
                     <span class="font-normal text-[#797979]">{exp.replace(/_/g, " ")}</span>
                   </label>
                 </div>
-                {/* <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div> */}
+                {/* <div className='basis-4/12  text-base font-normal text-[#797979] text-left'>({count})</div> */}
               </div>
             ))}
             <div>
-              <h1 className="font-cardo text-xl text-left font-normal mt-10">Project Type</h1>
+              <h1 className=" text-xl text-left font-normal mt-10">Project Type</h1>
             </div>
             {type.map((protype, index) => (
               <div className="flex flex-row mt-4">
@@ -467,13 +460,13 @@ function ProjectList() {
                   <label class="relative inline-flex items-center mr-5 cursor-pointer">
                     <input class="sr-only peer" type="checkbox" value={protype} onChange={handleRateFilterChange} />
                     <div class="w-11 h-6 bg-white border-2  border-blue-300 rounded-full peer dark:bg-white-700 peer-focus:ring-0 peer-focus:ring-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-gradient-to-r  after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r from-[#0909E9] to-[#00D4FF]"></div>
-                    <span class="ml-3 text-base font-normal font-inter text-[#797979]">{protype}</span>
+                    <span class="ml-3 text-base font-normal  text-[#797979]">{protype}</span>
                   </label>
                 </div>
-                {/* <div className=' basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div> */}
+                {/* <div className=' basis-4/12  text-base font-normal text-[#797979] text-left'>({count})</div> */}
               </div>
             ))}
-            {/* <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Project Rate</h1></div> */}
+            {/* <div><h1 className=' text-xl text-left font-normal mt-10'>Project Rate</h1></div> */}
             {/* <div className="pt-4 w-[85%]">
               <Slider
                 min={1}
@@ -511,7 +504,7 @@ function ProjectList() {
                 type="text"
                 value={priceRange[0]}
                 onChange={(e) => handleInputChange(0, e.target.value)}
-                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-60
+                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12  text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-60
                 focus:outline-none'
               /></div>
               <div className='basis-2/12 m-auto mt-4'><i class="bi bi-dash-lg text-[#475569]"></i></div>
@@ -519,18 +512,18 @@ function ProjectList() {
                 type="text"
                 value={priceRange[1]}
                 onChange={(e) => handleInputChange(1, e.target.value)}
-                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-60
+                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12  text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-60
                 focus:outline-none'
               /></div>
               </div>
             </div> */}
             <div>
-              <h1 className="font-cardo text-xl text-left font-normal mt-10">Skills</h1>
+              <h1 className=" text-xl text-left font-normal mt-10">Skills</h1>
             </div>
             {visibleSkills.map((skills, index) => (
               <div key={skills} className="flex flex-row mt-4">
                 <div className="basis-8/12">
-                  <label className="flex items-center font-inter relative cursor-pointer">
+                  <label className="flex items-center  relative cursor-pointer">
                     <input className="hidden" type="checkbox" value={skills} onChange={handleSkillFilterChange} />
                     <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                       <span className="checkmark hidden">
@@ -541,31 +534,31 @@ function ProjectList() {
                     <span className="font-normal text-[#797979]">{skills}</span>
                   </label>
                 </div>
-                {/* <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
+                {/* <div className='basis-4/12  text-base font-normal text-[#797979] text-left'>
                       ({count})
                   </div> */}
               </div>
             ))}
             {showAllSkills ? (
               <div>
-                <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowLessSkills}>
+                <h1 className=" text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowLessSkills}>
                   Show Less
                 </h1>
               </div>
             ) : (
               <div>
-                <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowMoreSkills}>
+                <h1 className=" text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowMoreSkills}>
                   +{req_skill.length - initialSkillCount} More
                 </h1>
               </div>
             )}
             <div>
-              <h1 className="font-cardo text-xl text-left font-normal mt-10">Citys</h1>
+              <h1 className=" text-xl text-left font-normal mt-10">Citys</h1>
             </div>
             {visibleCities.map((location, index) => (
               <div className="flex flex-row mt-4">
                 <div className="basis-8/12">
-                  <label class="flex items-center font-inter relative cursor-pointer">
+                  <label class="flex items-center  relative cursor-pointer">
                     <input className="hidden" type="checkbox" value={location} onChange={handleCityFilterChange} />
                     <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                       <span class="checkmark hidden">
@@ -576,37 +569,38 @@ function ProjectList() {
                     <span class="font-normal text-[#797979]">{location}</span>
                   </label>
                 </div>
-                {/* <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>({count})</div> */}
+                {/* <div className='basis-4/12  text-base font-normal text-[#797979] text-left'>({count})</div> */}
               </div>
             ))}
             {showAllCity ? (
               <div>
-                <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowLessCity}>
+                <h1 className=" text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowLessCity}>
                   Show Less
                 </h1>
               </div>
             ) : (
               <div>
-                <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowMoreCity}>
+                <h1 className=" text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowMoreCity}>
                   +{city.length - initialCityCount} More
                 </h1>
               </div>
             )}
           </div>
+
+          {/* ---> card container  */}
           {viewProject != null ? (
             viewProject.length > 0 ? (
-              <div className=" basis-9/12 mt-10">
+              <div className="w-full lg:w-[80%] flex flex-col gap-y-3 mt-10 md:ml-2 mb-5">
                 {viewProject && (
                   <>
                     {viewProject.map((project, index) => {
                       const words = project.description.split(" ");
                       const displayWords = expandedProjects[index] || words.length <= 30 ? words : words.slice(0, 30);
-                      // const isAlreadyApplied = Array.isArray(AllProposals) && AllProposals.some(all => project.id === all.project_id);
+
                       return (
-                        <div className="flex flex-row">
-                          <div className="basis-1/12 mr-3">{/* <Avatar src={profilepic} alt="avatar" variant="rounded" /> */}</div>
-                          <div className=" basis-9/12 text-left mb-7">
-                            <h1 className="font-cardo text-lg">{highlightText(project.title, searchQuery)}</h1>
+                        <div className="w-full flex flex-col md:flex-row justify-between md:px-12 p-2 rounded-md bg-gray-50 hover:bg-gray-100 duration-300">
+                          <div className="basis-9/12 text-left ">
+                            <h1 className=" text-lg">{highlightText(project.title, searchQuery)}</h1>
                             {AllProposals &&
                               AllProposals.map((all, proposal) => {
                                 return (
@@ -628,7 +622,7 @@ function ProjectList() {
                                   <div className=" basis-2/12">
                                     <i class="bi bi-geo-alt"></i>
                                   </div>
-                                  <div className=" basis-10/12 font-inter text-[#797979]">
+                                  <div className=" basis-10/12  text-[#797979]">
                                     {highlightText(project.project_owner_location ? project.project_owner_location : "NA", searchQuery)}
                                   </div>
                                 </div>
@@ -638,7 +632,7 @@ function ProjectList() {
                                   <div className=" basis-2/12">
                                     <i class="fa fa-calendar" aria-hidden="true"></i>
                                   </div>
-                                  <div className=" basis-10/12 font-inter text-[#797979]">{timeAgo(project.project_creation_date)}</div>
+                                  <div className=" basis-10/12  text-[#797979]">{timeAgo(project.project_creation_date)}</div>
                                 </div>
                               </div>
                               <div className=" basis-4/12">
@@ -646,18 +640,16 @@ function ProjectList() {
                                   <div className=" basis-2/12">
                                     <i class="bi bi-file-text"></i>
                                   </div>
-                                  <div className=" basis-10/12 font-inter text-[#797979]">
-                                    {bidsCount[project.id] ? bidsCount[project.id] : 0} Received
-                                  </div>
+                                  <div className=" basis-10/12  text-[#797979]">{bidsCount[project.id] ? bidsCount[project.id] : 0} Received</div>
                                 </div>
                               </div>
                             </div>
-                            {/* <p className='font-inter text-base font-normal text-[#797979] mt-3'>{project.description}</p> */}
-                            <p className="font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3">
+                            {/* <p className=' text-base font-normal text-[#797979] mt-3'>{project.description}</p> */}
+                            <p className=" text-opacity-50 text-[#0A142F] text-[14px] py-3">
                               Job Description: {highlightText(displayWords.join(" "), searchQuery)}
                               {words.length > 30 && (
                                 <span
-                                  className="font-cardo text-[#031136] text-[18px] font-semibold cursor-pointer pl-2"
+                                  className=" text-[#031136] text-[18px] font-semibold cursor-pointer pl-2"
                                   onClick={(event) => handleClick(event, index)}
                                 >
                                   {expandedProjects[index] ? "Less" : "More"}
@@ -668,50 +660,26 @@ function ProjectList() {
                               // <div key={index} className='mt-3 bg-white shadow-lg text-center rounded-xl inline-block mr-3 py-1 px-2  border'>{skill}</div>
                               <span
                                 key={index}
-                                className="border px-4 py-1 border-gray-300 opacity-60 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2"
+                                className="border px-4 py-1 border-gray-300 opacity-60 rounded  text-[#0A142F] text-[13px] inline-block mr-2 my-2"
                               >
                                 {highlightText(skill, searchQuery)}
                               </span>
                             ))}
                           </div>
-                          <div className="basis-2/12 pt-10">
-                            <h1 className="font-cardo text-xl font-extrabold text-right">
+                          <div className="h-full flex flex-row md:flex-col items-center md:items-end justify-center gap-5 md:gap-2">
+                            <h1 className=" text-xl font-extrabold text-right">
                               $
                               {project.rate == "Hourly"
                                 ? project.min_hourly_rate + "/hr" + " - " + "$" + project.max_hourly_rate + "/hr"
                                 : project.fixed_budget}
                             </h1>
-                            <p className="font-inter text-[#797979] mt-1 text-sm text-right">{project.rate} Rate</p>
+                            <p className=" text-[#797979] mt-1 text-sm text-right">{project.rate} Rate</p>
                             <div className="">
-                              {/* {accessToken ? (
-                    <Link to='/view-more/project-detail' state={{ project }} ><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF] mt-3 text-sm font-bold ml-16'>View Detail</button></Link>
-                  ): (
-                  <Link to='/login' ><button className='rounded h-12 w-36  text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF] mt-3 text-sm font-bold ml-16'>Send Proposal</button></Link>
-                )} */}
                               <Link to="/view-more/project-detail" state={{ project }}>
-                                <button className="rounded h-12 w-36  text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF] mt-3 text-sm font-bold ml-16">
+                                <button className="rounded h-12 w-36  text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF] text-sm font-bold ">
                                   View Detail
                                 </button>
                               </Link>
-                              {/* {accessToken ? (
-                isAlreadyApplied ? (
-                  <button className='rounded h-12 w-36 text-gray-400 bg-slate-200 cursor-not-allowed mt-3 text-sm font-bold ml-16' disabled>
-                    Already Applied
-                  </button>
-                ) : (
-                  <Link to='/freelancer/send-proposal' state={{ project }} >
-                    <button className='rounded h-12 w-36 text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF] mt-3 text-sm font-bold ml-16'>
-                      Send Proposal
-                    </button>
-                  </Link>
-                )
-              ) : (
-                <Link to='/login' >
-                  <button className='rounded h-12 w-36 text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF] mt-3 text-sm font-bold ml-16'>
-                    Send Proposal
-                  </button>
-                </Link>
-              )} */}
                             </div>
                           </div>
                         </div>
@@ -721,11 +689,10 @@ function ProjectList() {
                 )}
               </div>
             ) : (
-              // <p>Project Not Found</p>
               <div className=" mx-auto">
                 <img src={Bag} alt="" className="h-[10%] ml-[30%] mt-[20%]" />
-                <p className=" mt-5 font-cardo text-xl opacity-70">There are no results that match your search.</p>
-                <p className=" mt-3 font-cardo text-sm opacity-60">Please try adjusting your search keywords or filters.</p>
+                <p className=" mt-5  text-xl opacity-70">There are no results that match your search.</p>
+                <p className=" mt-3  text-sm opacity-60">Please try adjusting your search keywords or filters.</p>
               </div>
             )
           ) : (
@@ -753,6 +720,7 @@ function ProjectList() {
             </div>
           )}
         </div>
+
         {totalPages > 1 && (
           <div className="flex justify-end items-center gap-6 m-4">
             <IconButton
@@ -770,7 +738,7 @@ function ProjectList() {
               return (
                 <span
                   key={pageNumber}
-                  className={`px-0 py-1 ${currentPage === pageNumber ? "bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer" : "text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer"}`}
+                  className={`px-0 py-1 ${currentPage === pageNumber ? "bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold  text-[14px] cursor-pointer" : "text-[#0A142F] font-bold  text-[14px] cursor-pointer"}`}
                   onClick={() => {
                     window.scrollTo(0, 0);
                     setCurrentPage(pageNumber);
@@ -792,42 +760,6 @@ function ProjectList() {
             </IconButton>
           </div>
         )}
-        {/* {viewallprojects?.length > 5 && (
-                    <div className="flex justify-end items-center gap-6 m-4">
-                        <IconButton
-                            size="sm"
-                            variant="outlined"
-                            onClick={prev}
-                            disabled={currentPage === 1}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
-                        >
-                            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
-                        </IconButton>
-                        
-                        {[...Array(totalPages)].map((_, index) => {
-                            const pageNumber = index + 1;
-                            return (
-                                <span
-                                    key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
-                                    onClick={() => setCurrentPage(pageNumber)}
-                                >
-                                    {pageNumber}
-                                </span>
-                            );
-                        })}
-
-                        <IconButton
-                            size="sm"
-                            variant="outlined"
-                            onClick={next}
-                            disabled={currentPage === totalPages}
-                            style={{ backgroundImage: 'linear-gradient(45deg, #0909E9, #00D4FF)', border: 'none' }}
-                        >
-                            <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
-                        </IconButton>
-                    </div>
-                )} */}
       </div>
       <HomeSection4 />
       <Footer />
