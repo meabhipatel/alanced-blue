@@ -11,8 +11,8 @@ const HomeSection4 = () => {
   return (
     <div>
       <div className="bg-[#F6FAFD]">
-        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 px-4 lg:px-[145px]">
-          <div class="flex-1 p-4 text-left">
+        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 px-4 lg:px-[145px]">
+          <div className="flex-1 p-4 text-left">
             <h1 className="text-[26px] font-semibold pt-20 inline-block text-[#0A142F]">
               Get Book Copy Today!
               <div className="border-b-2 border-[#1B3764] w-1/6 my-4 opacity-62"></div>
@@ -24,7 +24,7 @@ const HomeSection4 = () => {
             <div className="mt-8">
               {!isLoggedIn ? (
                 <Link to="/login">
-                  <span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold">
+                  <span className="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold">
                     Sign In
                   </span>
                 </Link>
@@ -33,7 +33,7 @@ const HomeSection4 = () => {
               )}
             </div>
           </div>
-          <div class="flex-1 p-4">
+          <div className="flex-1 p-4">
             <img src={cupbook} alt="" className="w-full h-full object-contain" />
           </div>
         </div>
