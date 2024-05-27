@@ -305,13 +305,13 @@ const HirerAfterLogin = () => {
       {/* ---> page Body  */}
       <div className="mt-1 md:mx-[9%]">
         {/* ---> page Header  */}
-        <div className="relative">
-          <img src={profilebg} alt="" className="w-full h-52" />
-          <div className="absolute top-12 left-12 p-4 text-left">
-            <h1 className="font-cardo text-[#031136] sm:text-xl text-lg font-normal">
+        <div className="relative h-32 md:h-auto bg-[#F6FAFD] md:bg-transparent m-2 md:m-0">
+          <img src={profilebg} alt="" className="w-full h-52 hidden md:block" />
+          <div className="absolute md:top-12 md:left-12 p-4 text-left">
+            <h1 className=" text-[#031136] sm:text-xl text-lg font-normal">
               {day}, {formattedDate}
             </h1>
-            <h1 className="font-cardo text-[#031136] sm:text-3xl text-2xl font-semibold py-1">
+            <h1 className=" text-[#031136] sm:text-3xl text-2xl font-semibold py-1">
               Good {greeting}, {displayName}
             </h1>
           </div>
@@ -321,7 +321,7 @@ const HirerAfterLogin = () => {
           <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left sticky top-24 h-[90vh] overflow-y-auto hidden md:block">
             <div class="skills">
               <div>
-                <h1 className="font-cardo text-xl text-left font-normal">Skills</h1>
+                <h1 className=" text-xl text-left font-normal">Skills</h1>
               </div>
               {visibleSkills.map((skill, index) => (
                 <div key={skill} className="flex flex-row mt-4">
@@ -344,19 +344,19 @@ const HirerAfterLogin = () => {
               ))}
               {showAllSkills ? (
                 <div>
-                  <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowLessSkills}>
+                  <h1 className=" text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowLessSkills}>
                     Show Less
                   </h1>
                 </div>
               ) : (
                 <div>
-                  <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowMoreSkills}>
+                  <h1 className=" text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowMoreSkills}>
                     +{req_skill.length - initialSkillCount} More
                   </h1>
                 </div>
               )}
             </div>
-            {/* <div><h1 className='font-cardo text-xl text-left font-normal mt-10'>Freelancer Rate</h1></div>
+            {/* <div><h1 className=' text-xl text-left font-normal mt-10'>Freelancer Rate</h1></div>
   <div className="pt-4 w-[75%]">
               <Slider
                 min={1}
@@ -409,7 +409,7 @@ const HirerAfterLogin = () => {
             </div> */}
             <div class="location">
               <div>
-                <h1 className="font-cardo text-xl text-left font-normal mt-10">Citys</h1>
+                <h1 className=" text-xl text-left font-normal mt-10">Citys</h1>
               </div>
 
               {visibleCities.map((location, index) => (
@@ -433,13 +433,13 @@ const HirerAfterLogin = () => {
               ))}
               {showAllCity ? (
                 <div>
-                  <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowLessCity}>
+                  <h1 className=" text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowLessCity}>
                     Show Less
                   </h1>
                 </div>
               ) : (
                 <div>
-                  <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowMoreCity}>
+                  <h1 className=" text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowMoreCity}>
                     +{city.length - initialCityCount} More
                   </h1>
                 </div>
@@ -447,7 +447,7 @@ const HirerAfterLogin = () => {
             </div>
             <div class="language">
               <div>
-                <h1 className="font-cardo text-xl text-left font-normal mt-10">Languages</h1>
+                <h1 className=" text-xl text-left font-normal mt-10">Languages</h1>
               </div>
               {visibleLanguages.map((language, index) => (
                 <div key={language} className="flex flex-row mt-4">
@@ -470,13 +470,13 @@ const HirerAfterLogin = () => {
               ))}
               {showAllLanguage ? (
                 <div>
-                  <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowLessLanguage}>
+                  <h1 className=" text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowLessLanguage}>
                     Show Less
                   </h1>
                 </div>
               ) : (
                 <div>
-                  <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowMoreLanguage}>
+                  <h1 className=" text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowMoreLanguage}>
                     +{language.length - initialLanguageCount} More
                   </h1>
                 </div>
@@ -484,7 +484,7 @@ const HirerAfterLogin = () => {
             </div>
             <div class="level">
               <div>
-                <h1 className="font-cardo text-xl text-left font-normal mt-10">Experience Level</h1>
+                <h1 className=" text-xl text-left font-normal mt-10">Experience Level</h1>
               </div>
               {expe.map((exp, index) => (
                 <div key={exp} className="flex flex-row mt-4">
@@ -508,12 +508,12 @@ const HirerAfterLogin = () => {
           {/* ---> card container  */}
           <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
             <div className="px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30">
-              <div className="md:flex justify-between items-center flex-col">
+              <div className="md:flex justify-between items-center">
                 <div className="flex items-center">
-                  <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Freelancers that Matches your Job</h1>
+                  <h1 className=" text-[21px] text-[#031136] font-normal mr-1">Freelancers that Matches your Job</h1>
                 </div>
                 <div className="flex items-center">
-                  <div className="flex items-center mr-1 space-x-1 border p-1 md:w-[200px] w-full rounded-md">
+                  <div className="flex items-center md:mr-1 space-x-1 border p-1 md:w-[200px] w-full rounded-md">
                     <img src={search} alt="Search Icon" className="h-4 w-4 mr-1 ml-1" />
                     <input
                       className="w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none"
@@ -623,8 +623,8 @@ const HirerAfterLogin = () => {
               ) : (
                 <div className=" mt-20">
                   <img src={Bag} alt="" className="w-[18%] mx-auto" />
-                  <p className=" mt-5 font-cardo text-xl opacity-70 text-center">There are no results that match your search.</p>
-                  <p className=" mt-3 font-cardo text-sm opacity-60 text-center">Please try adjusting your search keywords or filters.</p>
+                  <p className=" mt-5  text-xl opacity-70 text-center">There are no results that match your search.</p>
+                  <p className=" mt-3  text-sm opacity-60 text-center">Please try adjusting your search keywords or filters.</p>
                 </div>
               )
             ) : (
