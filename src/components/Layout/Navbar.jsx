@@ -4,16 +4,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import navback from "../images/Nav_Background.png";
 import { useDispatch, useSelector } from "react-redux";
 import { LogoutAction } from "../../redux/Auth/AuthAction";
-import search from "../images/SearchOutlined.png";
-import searchbtn from "../images/searchbtn.png";
-import profilepic from "../../components/images/profilepic.png";
-import { GetHirerSelfProfileAction } from "../../redux/Hirer/HirerAction";
-import { GetViewAllFreelancersAction } from "../../redux/Hirer/HirerAction";
 import axios from "axios";
 import { useEffect } from "react";
 import alancedlogo from "../images/Alanced-footer.png";
-import { GetFreelancerSelfProfileAction } from "../../redux/Freelancer/FreelancerAction";
-import { GetViewAllProjectsListAction } from "../../redux/Freelancer/FreelancerAction";
+
 import { timeAgo } from "../../container/freelancer/TimeFunctions";
 import { dontNeedMTScreens } from "../../routes/DynamicMarginTop";
 import { FiMenu } from "react-icons/fi";
@@ -27,7 +21,7 @@ const Navbar = () => {
   const accessToken = localStorage.getItem("accessToken");
   const AccessToken = useSelector((state) => state.login.accessToken) || localStorage.getItem("jwtToken");
   // const AccessToken = useSelector(state => state.login.accessToken);
-  const jwtToken = localStorage.getItem("jwtToken");
+  // const jwtToken = localStorage.getItem("jwtToken");
   //   const loginType = useSelector(state => state.login.type)
   const loginType = useSelector((state) => state.login.type) || localStorage.getItem("loginType");
   const logindata = useSelector((state) => state.login.login_data) || JSON.parse(localStorage.getItem("logindata"));
@@ -99,6 +93,7 @@ const Navbar = () => {
   const [isNotificationsDropdownVisible, setIsNotificationsDropdownVisible] = useState(false);
 
   const fetchClientNotifications = async () => {
+    if (!isLoggedIn) return;
     try {
       const response = await axios.get("https://www.api.alanced.com/freelance/view/client-notifications", {
         headers: {
@@ -168,6 +163,7 @@ const Navbar = () => {
   };
 
   const fetchFreeNotifications = async () => {
+    if (!isLoggedIn) return;
     try {
       const response = await axios.get("https://www.api.alanced.com/freelance/view/freelancer-notifications", {
         headers: {
