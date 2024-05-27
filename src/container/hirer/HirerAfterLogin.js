@@ -508,12 +508,12 @@ const HirerAfterLogin = () => {
           {/* ---> card container  */}
           <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
             <div className="px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30">
-              <div className="flex justify-between items-center">
+              <div className="md:flex justify-between items-center flex-col">
                 <div className="flex items-center">
                   <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Freelancers that Matches your Job</h1>
                 </div>
                 <div className="flex items-center">
-                  <div className="flex items-center mr-1 space-x-1 border p-1 w-[200px] rounded-md">
+                  <div className="flex items-center mr-1 space-x-1 border p-1 md:w-[200px] w-full rounded-md">
                     <img src={search} alt="Search Icon" className="h-4 w-4 mr-1 ml-1" />
                     <input
                       className="w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none"
