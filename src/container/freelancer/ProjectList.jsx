@@ -1,26 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../../components/Layout/Navbar";
 import HomeSection4 from "../../components/Layout/HomeSection4";
 import Footer from "../../components/Layout/Footer";
-import profile_list from "../../components/images/profile_list.png";
-import search from "../../components/images/SearchOutlined.png";
-import { Avatar } from "@material-tailwind/react";
-import profilepic from "../../components/images/profilepic.png";
-import clint1 from "../../components/images/client2.png";
 import "font-awesome/css/font-awesome.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { GetViewAllProjectsListAction } from "../../redux/Freelancer/FreelancerAction";
-import ViewProjectPopup from "./AllPopup/ViewProjectPopup";
-import AddBidPopup from "./AllPopup/AddBidPopup";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import axios from "axios";
 import TaskOutlinedIcon from "@mui/icons-material/TaskOutlined";
-import { IconButton, Typography } from "@material-tailwind/react";
+import { IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import CategoryList from "./AllSelectionData/CategoryList";
 import ExperienceLevel from "./AllSelectionData/ExperienceLevel";
@@ -36,8 +26,6 @@ function ProjectList() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const category = searchParams.get("category");
-  // const viewallprojects = useSelector(state => state.freelancer.viewallprojects)
-  // const accessToken = useSelector(state => state.login.accessToken);
   const accessToken = useSelector((state) => state.login.accessToken) || localStorage.getItem("jwtToken");
 
   const [categoryFilter, setCategoryFilter] = useState([]);
@@ -46,18 +34,8 @@ function ProjectList() {
   const [rateFilter, setRateFilter] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [cityFilter, setCityFilter] = useState([]);
-  const [priceRange, setPriceRange] = useState([1, 100]);
-  // const projectData = { viewallprojects }
-  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-
-  // React.useEffect(() => {
-  //   dispatch(GetViewAllProjectsListAction())
-  // }, [])
-
-  // const [viewProject, setViewproject] = useState([]);
-  // console.log(viewProject,"project, project")
 
   const handleCategoryFilterChange = (e) => {
     const category = e.target.value;
@@ -109,16 +87,6 @@ function ProjectList() {
     setCurrentPage(1);
   };
 
-  const handleSliderChange = (newPriceRange) => {
-    setPriceRange(newPriceRange);
-  };
-
-  const handleInputChange = (index, newValue) => {
-    const updatedPriceRange = [...priceRange];
-    updatedPriceRange[index] = Number(newValue);
-    setPriceRange(updatedPriceRange);
-  };
-
   const [viewProject, setViewProject] = useState([]);
 
   useEffect(() => {
@@ -148,11 +116,6 @@ function ProjectList() {
       queryParameters.push(`search_query=${searchQuery}`);
     }
 
-    // if (priceRange[0] !== 1 || priceRange[1] !== 10000) {
-    //   queryParameters.push(`min_hourly_rate=${priceRange[0]}`);
-    //   queryParameters.push(`max_hourly_rate=${priceRange[1]}`);
-    // }
-
     queryParameters.push(`page=${currentPage}`);
 
     const queryString = queryParameters.join("&");
@@ -166,25 +129,13 @@ function ProjectList() {
       .catch((error) => {
         console.error("Error fetching filtered data:", error);
       });
-  }, [categoryFilter, skillFilter, expFilter, rateFilter, searchQuery, cityFilter, priceRange, currentPage]);
+  }, [categoryFilter, skillFilter, expFilter, rateFilter, searchQuery, cityFilter, currentPage]);
 
   const [cate] = useState(CategoryList);
   const [expe] = useState(ExperienceLevel);
   const [type] = useState(ProjectRate);
   const [city] = useState(CityList);
   const [req_skill] = useState(SkillsList);
-
-  // const [range, setRange] = useState([1, 1000]);
-
-  // const handleSliderChange = (newRange) => {
-  //   setRange(newRange);
-  // };
-
-  // const handleInputChange = (index, newValue) => {
-  //   const newRange = [...range];
-  //   newRange[index] = newValue;
-  //   setRange(newRange);
-  // };
 
   function timeAgo(postedTimeStr) {
     const postedTime = new Date(postedTimeStr);
@@ -213,16 +164,6 @@ function ProjectList() {
     }
   }
 
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const openDialog = () => {
-    setIsDialogOpen(true);
-  };
-
-  const closeDialog = () => {
-    setIsDialogOpen(false);
-  };
-
   const [expandedProjects, setExpandedProjects] = useState([]);
 
   const handleToggleDescription = (index) => {
@@ -234,8 +175,6 @@ function ProjectList() {
     event.stopPropagation();
 
     handleToggleDescription(index);
-
-    // Rest of your handleClick code, if any...
   };
 
   const [AllProposals, setAllProposals] = useState([]);
@@ -259,8 +198,6 @@ function ProjectList() {
   }, []);
 
   //(=//=//=//=//=//=//=//=//=)filter API integrtion(//=//=//=//=//=//=//=//=//=)
-
-  const [filteredApiData, setFilteredApiData] = useState([]);
 
   const [bidsCount, setBidsCount] = useState({});
 
@@ -288,9 +225,6 @@ function ProjectList() {
 
     fetchBidsForAllProjects();
   }, [viewProject]);
-
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [categorySearch, setCategorySearch] = useState('');
 
   const prev = () => {
     window.scrollTo(0, 0);
@@ -434,7 +368,7 @@ function ProjectList() {
             <div>
               <h1 className=" text-xl text-left font-normal mt-10">Experience Level</h1>
             </div>
-            {expe.map((exp, index) => (
+            {expe.map((exp) => (
               <div key={exp} className="flex flex-row mt-4">
                 <div className="basis-8/12">
                   <label class="flex items-center  relative cursor-pointer">
@@ -448,7 +382,6 @@ function ProjectList() {
                     <span class="font-normal text-[#797979]">{exp.replace(/_/g, " ")}</span>
                   </label>
                 </div>
-                {/* <div className='basis-4/12  text-base font-normal text-[#797979] text-left'>({count})</div> */}
               </div>
             ))}
             <div>
@@ -463,60 +396,9 @@ function ProjectList() {
                     <span class="ml-3 text-base font-normal  text-[#797979]">{protype}</span>
                   </label>
                 </div>
-                {/* <div className=' basis-4/12  text-base font-normal text-[#797979] text-left'>({count})</div> */}
               </div>
             ))}
-            {/* <div><h1 className=' text-xl text-left font-normal mt-10'>Project Rate</h1></div> */}
-            {/* <div className="pt-4 w-[85%]">
-              <Slider
-                min={1}
-                max={100}
-                step={1}
-                range
-                value={priceRange} // Use priceRange
-                onChange={handleSliderChange}
-                railStyle={{ background: 'lightgray' }}
-                trackStyle={[
-                  {
-                    background: 'linear-gradient(45deg, #0909E9, #00D4FF)',
-                    borderColor: '#65a30d',
-                  },
-                ]}
-                handleStyle={[
-                  {
-                    backgroundColor: 'white',
-                    borderColor: 'transparent', 
-                    borderRadius: '50%', // Set border radius for circular shape
-                    borderImage: 'linear-gradient(45deg, #0909E9, #00D4FF)',
-                    borderImageSlice: 1,
-                  },
-                  {
-                    backgroundColor: 'white',
-                    borderColor: 'transparent',
-                    borderRadius: '50%',
-                    borderImage: 'linear-gradient(45deg, #0909E9, #00D4FF)',
-                    borderImageSlice: 1,
-                  },
-                ]}
-                />
-              <div className='flex flex-row mt-4'>
-                <div className='basis-5/12'><input
-                type="text"
-                value={priceRange[0]}
-                onChange={(e) => handleInputChange(0, e.target.value)}
-                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12  text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-60
-                focus:outline-none'
-              /></div>
-              <div className='basis-2/12 m-auto mt-4'><i class="bi bi-dash-lg text-[#475569]"></i></div>
-                <div className='basis-5/12'><input
-                type="text"
-                value={priceRange[1]}
-                onChange={(e) => handleInputChange(1, e.target.value)}
-                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12  text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-60
-                focus:outline-none'
-              /></div>
-              </div>
-            </div> */}
+
             <div>
               <h1 className=" text-xl text-left font-normal mt-10">Skills</h1>
             </div>
@@ -534,9 +416,6 @@ function ProjectList() {
                     <span className="font-normal text-[#797979]">{skills}</span>
                   </label>
                 </div>
-                {/* <div className='basis-4/12  text-base font-normal text-[#797979] text-left'>
-                      ({count})
-                  </div> */}
               </div>
             ))}
             {showAllSkills ? (
@@ -569,7 +448,6 @@ function ProjectList() {
                     <span class="font-normal text-[#797979]">{location}</span>
                   </label>
                 </div>
-                {/* <div className='basis-4/12  text-base font-normal text-[#797979] text-left'>({count})</div> */}
               </div>
             ))}
             {showAllCity ? (
@@ -602,7 +480,7 @@ function ProjectList() {
                           <div className="basis-9/12 text-left ">
                             <h1 className=" text-lg">{highlightText(project.title, searchQuery)}</h1>
                             {AllProposals &&
-                              AllProposals.map((all, proposal) => {
+                              AllProposals.map((all) => {
                                 return (
                                   <>
                                     {project.id == all.project_id ? (
@@ -644,7 +522,7 @@ function ProjectList() {
                                 </div>
                               </div>
                             </div>
-                            {/* <p className=' text-base font-normal text-[#797979] mt-3'>{project.description}</p> */}
+
                             <p className=" text-opacity-50 text-[#0A142F] text-[14px] py-3">
                               Job Description: {highlightText(displayWords.join(" "), searchQuery)}
                               {words.length > 30 && (
@@ -657,7 +535,6 @@ function ProjectList() {
                               )}
                             </p>
                             {JSON.parse(project.skills_required.replace(/'/g, '"')).map((skill, index) => (
-                              // <div key={index} className='mt-3 bg-white shadow-lg text-center rounded-xl inline-block mr-3 py-1 px-2  border'>{skill}</div>
                               <span
                                 key={index}
                                 className="border px-4 py-1 border-gray-300 opacity-60 rounded  text-[#0A142F] text-[13px] inline-block mr-2 my-2"
