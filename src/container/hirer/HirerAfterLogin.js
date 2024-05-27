@@ -24,9 +24,7 @@ import Bag from "../../components/images/experience.png";
 
 const HirerAfterLogin = () => {
   // const logindata = useSelector(state => state.login.login_data);
-  const logindata =
-    useSelector((state) => state.login.login_data) ||
-    JSON.parse(localStorage.getItem("logindata"));
+  const logindata = useSelector((state) => state.login.login_data) || JSON.parse(localStorage.getItem("logindata"));
   const googleUserName = localStorage.getItem("googleUserName");
   const loginMethod = localStorage.getItem("loginMethod");
   const [isFreeHiringOpen, setIsFreeHiringOpen] = useState({});
@@ -59,9 +57,7 @@ const HirerAfterLogin = () => {
     if (e.target.checked) {
       setSkillFilter((prevFilters) => [...prevFilters, skills]);
     } else {
-      setSkillFilter((prevFilters) =>
-        prevFilters.filter((filter) => filter !== skills)
-      );
+      setSkillFilter((prevFilters) => prevFilters.filter((filter) => filter !== skills));
     }
     setCurrentPage(1);
   };
@@ -71,9 +67,7 @@ const HirerAfterLogin = () => {
     if (e.target.checked) {
       setExpFilter((prevFilters) => [...prevFilters, exp]);
     } else {
-      setExpFilter((prevFilters) =>
-        prevFilters.filter((filter) => filter !== exp)
-      );
+      setExpFilter((prevFilters) => prevFilters.filter((filter) => filter !== exp));
     }
     setCurrentPage(1);
   };
@@ -83,9 +77,7 @@ const HirerAfterLogin = () => {
     if (e.target.checked) {
       setCityFilter((prevFilters) => [...prevFilters, city]);
     } else {
-      setCityFilter((prevFilters) =>
-        prevFilters.filter((filter) => filter !== city)
-      );
+      setCityFilter((prevFilters) => prevFilters.filter((filter) => filter !== city));
     }
     setCurrentPage(1);
   };
@@ -95,9 +87,7 @@ const HirerAfterLogin = () => {
     if (e.target.checked) {
       setLanguageFilter((prevFilters) => [...prevFilters, language]);
     } else {
-      setLanguageFilter((prevFilters) =>
-        prevFilters.filter((filter) => filter !== language)
-      );
+      setLanguageFilter((prevFilters) => prevFilters.filter((filter) => filter !== language));
     }
     setCurrentPage(1);
   };
@@ -113,9 +103,7 @@ const HirerAfterLogin = () => {
     }
 
     if (expFilter.length > 0) {
-      queryParameters.push(
-        `experience_level=${expFilter.join("&experience_level=")}`
-      );
+      queryParameters.push(`experience_level=${expFilter.join("&experience_level=")}`);
     }
 
     if (cityFilter.length > 0) {
@@ -135,9 +123,7 @@ const HirerAfterLogin = () => {
     const queryString = queryParameters.join("&");
 
     axios
-      .get(
-        `https://www.api.alanced.com/account/freelancer/profile/view-all/?${queryString}`
-      )
+      .get(`https://www.api.alanced.com/account/freelancer/profile/view-all/?${queryString}`)
       .then((response) => {
         setViewFreelancer(response.data.results);
         setTotalPages(Math.ceil(response.data.count / 8));
@@ -145,14 +131,7 @@ const HirerAfterLogin = () => {
       .catch((error) => {
         console.error("Error fetching filtered data:", error);
       });
-  }, [
-    skillFilter,
-    expFilter,
-    searchQuery,
-    cityFilter,
-    languageFilter,
-    currentPage,
-  ]);
+  }, [skillFilter, expFilter, searchQuery, cityFilter, languageFilter, currentPage]);
 
   const [showMoreSkills, setShowMoreSkills] = useState({});
 
@@ -202,10 +181,7 @@ const HirerAfterLogin = () => {
 
   if (loginMethod === "google") {
     // displayName = googleUserName;
-    displayName =
-      logindata.first_Name && logindata.last_Name
-        ? logindata?.first_Name + " " + logindata?.last_Name
-        : googleUserName;
+    displayName = logindata.first_Name && logindata.last_Name ? logindata?.first_Name + " " + logindata?.last_Name : googleUserName;
   } else if (loginMethod === "traditional") {
     displayName = logindata?.first_Name + " " + logindata?.last_Name;
   }
@@ -213,29 +189,8 @@ const HirerAfterLogin = () => {
   function getCurrentDateAndGreeting() {
     const current = new Date();
     const hours = current.getHours();
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    const days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
     let greeting;
     if (hours < 12) {
@@ -261,9 +216,7 @@ const HirerAfterLogin = () => {
       }
     }
 
-    const formattedDate = `${
-      months[current.getMonth()]
-    } ${dateOfMonth}${getOrdinalSuffix(dateOfMonth)}`;
+    const formattedDate = `${months[current.getMonth()]} ${dateOfMonth}${getOrdinalSuffix(dateOfMonth)}`;
     return {
       day: days[current.getDay()],
       formattedDate,
@@ -276,9 +229,7 @@ const HirerAfterLogin = () => {
   const [showAllSkills, setShowAllSkills] = useState(false);
   const initialSkillCount = 5; // Initial number of skills to show
 
-  const [visibleSkills, setVisibleSkills] = useState(
-    req_skill.slice(0, initialSkillCount)
-  );
+  const [visibleSkills, setVisibleSkills] = useState(req_skill.slice(0, initialSkillCount));
 
   const handleShowMoreSkills = () => {
     setVisibleSkills(req_skill); // Show all skills
@@ -293,9 +244,7 @@ const HirerAfterLogin = () => {
   const [showAllCity, setShowAllCity] = useState(false);
   const initialCityCount = 5; // Initial number of cities to show
 
-  const [visibleCities, setVisibleCities] = useState(
-    city.slice(0, initialCityCount)
-  );
+  const [visibleCities, setVisibleCities] = useState(city.slice(0, initialCityCount));
 
   const handleShowMoreCity = () => {
     setVisibleCities(city); // Show all cities
@@ -310,9 +259,7 @@ const HirerAfterLogin = () => {
   const [showAllLanguage, setShowAllLanguage] = useState(false);
   const initialLanguageCount = 5; // Initial number of language to show
 
-  const [visibleLanguages, setVisibleLanguages] = useState(
-    language.slice(0, initialLanguageCount)
-  );
+  const [visibleLanguages, setVisibleLanguages] = useState(language.slice(0, initialLanguageCount));
 
   const handleShowMoreLanguage = () => {
     setVisibleLanguages(language); // Show all Languages
@@ -368,32 +315,24 @@ const HirerAfterLogin = () => {
           </div>
         </div>
         <div class="flex flex-col md:flex-row mb-5 mx-5">
-          <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
+          {/* ---> side category bar */}
+          <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left sticky top-24 h-[90vh] overflow-y-auto">
             <div class="skills">
               <div>
-                <h1 className="font-cardo text-xl text-left font-normal">
-                  Skills
-                </h1>
+                <h1 className="font-cardo text-xl text-left font-normal">Skills</h1>
               </div>
               {visibleSkills.map((skill, index) => (
                 <div key={skill} className="flex flex-row mt-4">
                   <div className="basis-8/12">
                     <label className="flex items-center font-inter relative cursor-pointer">
-                      <input
-                        className="hidden"
-                        type="checkbox"
-                        value={skill}
-                        onChange={handleSkillFilterChange}
-                      />
+                      <input className="hidden" type="checkbox" value={skill} onChange={handleSkillFilterChange} />
                       <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                         <span className="checkmark hidden">
                           <i className="bi bi-check-lg pr-0.5 pt-2"></i>
                         </span>
                       </div>
                       <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                      <span className="font-normal text-[#797979]">
-                        {skill}
-                      </span>
+                      <span className="font-normal text-[#797979]">{skill}</span>
                     </label>
                   </div>
                   {/* <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
@@ -403,19 +342,13 @@ const HirerAfterLogin = () => {
               ))}
               {showAllSkills ? (
                 <div>
-                  <h1
-                    className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer"
-                    onClick={handleShowLessSkills}
-                  >
+                  <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowLessSkills}>
                     Show Less
                   </h1>
                 </div>
               ) : (
                 <div>
-                  <h1
-                    className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer"
-                    onClick={handleShowMoreSkills}
-                  >
+                  <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowMoreSkills}>
                     +{req_skill.length - initialSkillCount} More
                   </h1>
                 </div>
@@ -474,30 +407,21 @@ const HirerAfterLogin = () => {
             </div> */}
             <div class="location">
               <div>
-                <h1 className="font-cardo text-xl text-left font-normal mt-10">
-                  Citys
-                </h1>
+                <h1 className="font-cardo text-xl text-left font-normal mt-10">Citys</h1>
               </div>
 
               {visibleCities.map((location, index) => (
                 <div key={location} className="flex flex-row mt-4">
                   <div className="basis-8/12">
                     <label className="flex items-center font-inter relative cursor-pointer">
-                      <input
-                        className="hidden"
-                        type="checkbox"
-                        value={location}
-                        onChange={handleCityFilterChange}
-                      />
+                      <input className="hidden" type="checkbox" value={location} onChange={handleCityFilterChange} />
                       <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                         <span className="checkmark hidden">
                           <i className="bi bi-check-lg pr-0.5 pt-2"></i>
                         </span>
                       </div>
                       <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                      <span className="font-normal text-[#797979]">
-                        {location}
-                      </span>
+                      <span className="font-normal text-[#797979]">{location}</span>
                     </label>
                   </div>
                   {/* <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
@@ -507,19 +431,13 @@ const HirerAfterLogin = () => {
               ))}
               {showAllCity ? (
                 <div>
-                  <h1
-                    className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer"
-                    onClick={handleShowLessCity}
-                  >
+                  <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowLessCity}>
                     Show Less
                   </h1>
                 </div>
               ) : (
                 <div>
-                  <h1
-                    className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer"
-                    onClick={handleShowMoreCity}
-                  >
+                  <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowMoreCity}>
                     +{city.length - initialCityCount} More
                   </h1>
                 </div>
@@ -527,29 +445,20 @@ const HirerAfterLogin = () => {
             </div>
             <div class="language">
               <div>
-                <h1 className="font-cardo text-xl text-left font-normal mt-10">
-                  Languages
-                </h1>
+                <h1 className="font-cardo text-xl text-left font-normal mt-10">Languages</h1>
               </div>
               {visibleLanguages.map((language, index) => (
                 <div key={language} className="flex flex-row mt-4">
                   <div className="basis-8/12">
                     <label className="flex items-center font-inter relative cursor-pointer">
-                      <input
-                        className="hidden"
-                        type="checkbox"
-                        value={language}
-                        onChange={handleLanguageFilterChange}
-                      />
+                      <input className="hidden" type="checkbox" value={language} onChange={handleLanguageFilterChange} />
                       <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                         <span className="checkmark hidden">
                           <i className="bi bi-check-lg pr-0.5 pt-2"></i>
                         </span>
                       </div>
                       <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                      <span className="font-normal text-[#797979]">
-                        {language}
-                      </span>
+                      <span className="font-normal text-[#797979]">{language}</span>
                     </label>
                   </div>
                   {/* <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
@@ -559,19 +468,13 @@ const HirerAfterLogin = () => {
               ))}
               {showAllLanguage ? (
                 <div>
-                  <h1
-                    className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer"
-                    onClick={handleShowLessLanguage}
-                  >
+                  <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowLessLanguage}>
                     Show Less
                   </h1>
                 </div>
               ) : (
                 <div>
-                  <h1
-                    className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer"
-                    onClick={handleShowMoreLanguage}
-                  >
+                  <h1 className="font-cardo text-xl text-left mt-5 font-normal cursor-pointer" onClick={handleShowMoreLanguage}>
                     +{language.length - initialLanguageCount} More
                   </h1>
                 </div>
@@ -579,20 +482,13 @@ const HirerAfterLogin = () => {
             </div>
             <div class="level">
               <div>
-                <h1 className="font-cardo text-xl text-left font-normal mt-10">
-                  Experience Level
-                </h1>
+                <h1 className="font-cardo text-xl text-left font-normal mt-10">Experience Level</h1>
               </div>
               {expe.map((exp, index) => (
                 <div key={exp} className="flex flex-row mt-4">
                   <div className="basis-8/12">
                     <label class="flex items-center font-inter relative cursor-pointer">
-                      <input
-                        className="hidden"
-                        type="checkbox"
-                        value={exp}
-                        onChange={handleExpFilterChange}
-                      />
+                      <input className="hidden" type="checkbox" value={exp} onChange={handleExpFilterChange} />
                       <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
                         <span class="checkmark hidden">
                           <i class="bi bi-check-lg pr-0.5 pt-2"></i>
@@ -607,22 +503,16 @@ const HirerAfterLogin = () => {
               ))}
             </div>
           </div>
-
+          {/* ---> card container  */}
           <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
             <div className="px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30">
               <div className="flex justify-between items-center">
                 <div className="flex items-center">
-                  <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">
-                    Freelancers that Matches your Job
-                  </h1>
+                  <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Freelancers that Matches your Job</h1>
                 </div>
                 <div className="flex items-center">
                   <div className="flex items-center mr-1 space-x-1 border p-1 w-[200px] rounded-md">
-                    <img
-                      src={search}
-                      alt="Search Icon"
-                      className="h-4 w-4 mr-1 ml-1"
-                    />
+                    <img src={search} alt="Search Icon" className="h-4 w-4 mr-1 ml-1" />
                     <input
                       className="w-28 lg:w-40 xl:w-[160px] h-7 text-sm lg:text-sm outline-none"
                       placeholder="Search"
@@ -634,9 +524,7 @@ const HirerAfterLogin = () => {
               </div>
             </div>
             <div className="px-4 md:px-8 py-2">
-              <p className="font-inter opacity-50 text-[#0A142F] text-[13px]">
-                Explore freelancers who are a perfect fit for your projects.
-              </p>
+              <p className="font-inter opacity-50 text-[#0A142F] text-[13px]">Explore freelancers who are a perfect fit for your projects.</p>
             </div>
             {viewFreelancer != null ? (
               viewFreelancer.length > 0 ? (
@@ -650,126 +538,68 @@ const HirerAfterLogin = () => {
                             key={index}
                           >
                             <div className="flex items-center">
-                              <Avatar
-                                src={
-                                  "https://www.api.alanced.com" +
-                                  free.images_logo
-                                }
-                                alt=""
-                                variant="rounded"
-                                className="mr-4 h-24 w-24"
-                              />
+                              <Avatar src={"https://www.api.alanced.com" + free.images_logo} alt="" variant="rounded" className="mr-4 h-24 w-24" />
                               <div>
                                 <p className="font-inter text-[#0A142F] text-[18px] font-semibold">
-                                  {highlightText(
-                                    free.first_Name + " " + free.last_Name,
-                                    searchQuery
-                                  )}
+                                  {highlightText(free.first_Name + " " + free.last_Name, searchQuery)}
                                 </p>
-                                <p className="font-inter opacity-50 text-[#0A142F] text-[14px]">
-                                  {highlightText(free.category, searchQuery)}
-                                </p>
+                                <p className="font-inter opacity-50 text-[#0A142F] text-[14px]">{highlightText(free.category, searchQuery)}</p>
                               </div>
                             </div>
                             <div>
                               <p className="font-inter opacity-50 text-[#0A142F] text-[14px] pt-4 inline-block">
-                                {highlightText(
-                                  getDisplayedText(
-                                    free.about,
-                                    showMoreDes[free.id]?.showAllDes
-                                  ),
-                                  searchQuery
-                                )}
+                                {highlightText(getDisplayedText(free.about, showMoreDes[free.id]?.showAllDes), searchQuery)}
                               </p>
-                              {free.about &&
-                                free.about.split(" ").length > 20 && (
-                                  <button
-                                    onClick={() => toggleShowMoreDes(free.id)}
-                                    className="font-inter text-blue-600 text-[14px] cursor-pointer font-bold inline-block mb-2"
-                                  >
-                                    {showMoreDes[free.id] &&
-                                    showMoreDes[free.id].showAllDes
-                                      ? "See Less"
-                                      : "See More"}
-                                  </button>
-                                )}
-                            </div>
-                            {free.skills &&
-                              JSON.parse(free.skills.replace(/'/g, '"')).map(
-                                (skill, skillIndex) => (
-                                  <Link to={""} key={skillIndex}>
-                                    <span
-                                      className={`border px-4 py-1 border-gray-300 opacity-50 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 ${
-                                        skillIndex < 4 ||
-                                        (showMoreSkills[free.id] &&
-                                          showMoreSkills[free.id].showAll)
-                                          ? ""
-                                          : "hidden"
-                                      }`}
-                                    >
-                                      {highlightText(skill, searchQuery)}
-                                    </span>
-                                  </Link>
-                                )
-                              )}
-                            {free.skills &&
-                              JSON.parse(free.skills.replace(/'/g, '"'))
-                                .length > 4 && (
+                              {free.about && free.about.split(" ").length > 20 && (
                                 <button
-                                  onClick={() => toggleShowMoreSkills(free.id)}
-                                  className="font-inter text-blue-600 text-[14px] cursor-pointer font-bold"
+                                  onClick={() => toggleShowMoreDes(free.id)}
+                                  className="font-inter text-blue-600 text-[14px] cursor-pointer font-bold inline-block mb-2"
                                 >
-                                  {showMoreSkills[free.id] &&
-                                  showMoreSkills[free.id].showAll
-                                    ? " Less"
-                                    : " More"}
+                                  {showMoreDes[free.id] && showMoreDes[free.id].showAllDes ? "See Less" : "See More"}
                                 </button>
                               )}
+                            </div>
+                            {free.skills &&
+                              JSON.parse(free.skills.replace(/'/g, '"')).map((skill, skillIndex) => (
+                                <Link to={""} key={skillIndex}>
+                                  <span
+                                    className={`border px-4 py-1 border-gray-300 opacity-50 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2 ${
+                                      skillIndex < 4 || (showMoreSkills[free.id] && showMoreSkills[free.id].showAll) ? "" : "hidden"
+                                    }`}
+                                  >
+                                    {highlightText(skill, searchQuery)}
+                                  </span>
+                                </Link>
+                              ))}
+                            {free.skills && JSON.parse(free.skills.replace(/'/g, '"')).length > 4 && (
+                              <button
+                                onClick={() => toggleShowMoreSkills(free.id)}
+                                className="font-inter text-blue-600 text-[14px] cursor-pointer font-bold"
+                              >
+                                {showMoreSkills[free.id] && showMoreSkills[free.id].showAll ? " Less" : " More"}
+                              </button>
+                            )}
 
                             <div className="mb-12">
                               {/* <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>completed projects : <span className='opacity-50'>More than 50</span></p> */}
-                              <img
-                                src={verify}
-                                alt=""
-                                className="inline-block h-3 w-3 mr-1"
-                              />
-                              <p className="font-inter text-[#0A142F] text-[14px] opacity-50 inline-block">
-                                Account verified
-                              </p>
-                              <div className="text-[16px] text-[#FFC107] inline-block mx-3">
-                                ★★★★★
-                              </div>
+                              <img src={verify} alt="" className="inline-block h-3 w-3 mr-1" />
+                              <p className="font-inter text-[#0A142F] text-[14px] opacity-50 inline-block">Account verified</p>
+                              <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>
                               <p className="font-inter text-[#0A142F] text-[14px] opacity-80 inline-block mr-1">
                                 ${free.hourly_rate ? free.hourly_rate : 0}/Hr
                               </p>
-                              <p className="font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-3">
-                                Hourly Rate
-                              </p>
+                              <p className="font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-3">Hourly Rate</p>
                               <p className="font-inter text-[#0A142F] text-[14px] opacity-50 inline-block mr-2">
-                                {highlightText(
-                                  free.experience_level.replace(/_/g, " "),
-                                  searchQuery
-                                )}
+                                {highlightText(free.experience_level.replace(/_/g, " "), searchQuery)}
                               </p>
-                              <img
-                                src={location}
-                                alt=""
-                                className="inline-block h-3 w-3 mr-1"
-                              />
+                              <img src={location} alt="" className="inline-block h-3 w-3 mr-1" />
                               <p className="font-inter text-[#0A142F] text-[14px] opacity-50 inline-block">
-                                {highlightText(
-                                  free.Address ? free.Address : "NA",
-                                  searchQuery
-                                )}
+                                {highlightText(free.Address ? free.Address : "NA", searchQuery)}
                               </p>
                             </div>
                             <div className=" flex flex-row">
                               <div className=" basis-8/12 absolute bottom-4 items-center font-inter text-blue-600 text-[14px] cursor-pointer font-bold hover:underline">
-                                <Link
-                                  to="/view-freelancer/full-detail"
-                                  state={{ free }}
-                                  onClick={() => window.scroll(0, 0)}
-                                >
+                                <Link to="/view-freelancer/full-detail" state={{ free }} onClick={() => window.scroll(0, 0)}>
                                   <p>View more detail</p>
                                 </Link>
                               </div>
@@ -781,14 +611,7 @@ const HirerAfterLogin = () => {
                                   Hire Now
                                 </span>
                               </div>
-                              {isFreeHiringOpen[free.id] && (
-                                <AddFreeHireRequest
-                                  closeFreeHiring={() =>
-                                    closeFreeHiring(free.id)
-                                  }
-                                  free={free}
-                                />
-                              )}
+                              {isFreeHiringOpen[free.id] && <AddFreeHireRequest closeFreeHiring={() => closeFreeHiring(free.id)} free={free} />}
                             </div>
                           </div>
                         </>
@@ -798,12 +621,8 @@ const HirerAfterLogin = () => {
               ) : (
                 <div className=" mt-20">
                   <img src={Bag} alt="" className="w-[18%] mx-auto" />
-                  <p className=" mt-5 font-cardo text-xl opacity-70 text-center">
-                    There are no results that match your search.
-                  </p>
-                  <p className=" mt-3 font-cardo text-sm opacity-60 text-center">
-                    Please try adjusting your search keywords or filters.
-                  </p>
+                  <p className=" mt-5 font-cardo text-xl opacity-70 text-center">There are no results that match your search.</p>
+                  <p className=" mt-3 font-cardo text-sm opacity-60 text-center">Please try adjusting your search keywords or filters.</p>
                 </div>
               )
             ) : (
@@ -811,37 +630,12 @@ const HirerAfterLogin = () => {
                 {[...Array(6)].map((_) => {
                   return (
                     <div className="px-4 w-[26vw] h-[467px] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4">
-                      <Skeleton
-                        height={90}
-                        width={90}
-                        inline={true}
-                        style={{ borderRadius: "10%", float: "left" }}
-                      />
-                      <Skeleton
-                        height={20}
-                        width={200}
-                        style={{ marginLeft: 10, marginTop: 20 }}
-                      />
-                      <Skeleton
-                        height={20}
-                        width={200}
-                        style={{ marginLeft: 10, marginTop: 10 }}
-                      />
-                      <Skeleton
-                        height={200}
-                        width={300}
-                        style={{ marginTop: 20 }}
-                      />
-                      <Skeleton
-                        height={50}
-                        width={200}
-                        style={{ marginTop: 10 }}
-                      />
-                      <Skeleton
-                        height={35}
-                        width={80}
-                        style={{ marginTop: 20, float: "right" }}
-                      />
+                      <Skeleton height={90} width={90} inline={true} style={{ borderRadius: "10%", float: "left" }} />
+                      <Skeleton height={20} width={200} style={{ marginLeft: 10, marginTop: 20 }} />
+                      <Skeleton height={20} width={200} style={{ marginLeft: 10, marginTop: 10 }} />
+                      <Skeleton height={200} width={300} style={{ marginTop: 20 }} />
+                      <Skeleton height={50} width={200} style={{ marginTop: 10 }} />
+                      <Skeleton height={35} width={80} style={{ marginTop: 20, float: "right" }} />
                     </div>
                   );
                 })}
@@ -856,15 +650,11 @@ const HirerAfterLogin = () => {
                     onClick={prev}
                     disabled={currentPage === 1}
                     style={{
-                      backgroundImage:
-                        "linear-gradient(45deg, #0909E9, #00D4FF)",
+                      backgroundImage: "linear-gradient(45deg, #0909E9, #00D4FF)",
                       border: "none",
                     }}
                   >
-                    <ArrowLeftIcon
-                      strokeWidth={2}
-                      className="h-4 w-4 text-white"
-                    />
+                    <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 text-white" />
                   </IconButton>
 
                   {[...Array(totalPages)].map((_, index) => {
@@ -893,15 +683,11 @@ const HirerAfterLogin = () => {
                     onClick={next}
                     disabled={currentPage === totalPages}
                     style={{
-                      backgroundImage:
-                        "linear-gradient(45deg, #0909E9, #00D4FF)",
+                      backgroundImage: "linear-gradient(45deg, #0909E9, #00D4FF)",
                       border: "none",
                     }}
                   >
-                    <ArrowRightIcon
-                      strokeWidth={2}
-                      className="h-4 w-4 text-white"
-                    />
+                    <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
                   </IconButton>
                 </div>
               )}
