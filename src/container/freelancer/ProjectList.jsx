@@ -181,6 +181,7 @@ function ProjectList() {
 
   React.useEffect(() => {
     const fetchData = async () => {
+      if (!accessToken) return;
       try {
         // Fetch doc API
         const response1 = await axios.get("https://www.api.alanced.com/freelance/view/freelancer-all-self/bid", {
@@ -339,15 +340,15 @@ function ProjectList() {
             {visibleCategories.map((category, index) => (
               <div key={category} className="flex flex-row mt-4">
                 <div className="basis-10/12">
-                  <label class="flex items-center  relative cursor-pointer">
+                  <label className="flex items-center  relative cursor-pointer">
                     <input className="hidden" type="checkbox" value={category} onChange={handleCategoryFilterChange} />
-                    <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                      <span class="checkmark hidden">
-                        <i class="bi bi-check-lg pr-0.5 pt-2"></i>
+                    <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                      <span className="checkmark hidden">
+                        <i className="bi bi-check-lg pr-0.5 pt-2"></i>
                       </span>
                     </div>
-                    <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                    <span class="font-normal text-[#797979]">{category}</span>
+                    <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                    <span className="font-normal text-[#797979]">{category}</span>
                   </label>
                 </div>
               </div>
@@ -371,15 +372,15 @@ function ProjectList() {
             {expe.map((exp) => (
               <div key={exp} className="flex flex-row mt-4">
                 <div className="basis-8/12">
-                  <label class="flex items-center  relative cursor-pointer">
+                  <label className="flex items-center  relative cursor-pointer">
                     <input className="hidden" type="checkbox" value={exp} onChange={handleExpFilterChange} />
-                    <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                      <span class="checkmark hidden">
-                        <i class="bi bi-check-lg pr-0.5 pt-2"></i>
+                    <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                      <span className="checkmark hidden">
+                        <i className="bi bi-check-lg pr-0.5 pt-2"></i>
                       </span>
                     </div>
-                    <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                    <span class="font-normal text-[#797979]">{exp.replace(/_/g, " ")}</span>
+                    <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                    <span className="font-normal text-[#797979]">{exp.replace(/_/g, " ")}</span>
                   </label>
                 </div>
               </div>
@@ -388,12 +389,12 @@ function ProjectList() {
               <h1 className=" text-xl text-left font-normal mt-10">Project Type</h1>
             </div>
             {type.map((protype, index) => (
-              <div className="flex flex-row mt-4">
+              <div key={index} className="flex flex-row mt-4">
                 <div className=" basis-8/12 text-left">
-                  <label class="relative inline-flex items-center mr-5 cursor-pointer">
-                    <input class="sr-only peer" type="checkbox" value={protype} onChange={handleRateFilterChange} />
-                    <div class="w-11 h-6 bg-white border-2  border-blue-300 rounded-full peer dark:bg-white-700 peer-focus:ring-0 peer-focus:ring-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-gradient-to-r  after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r from-[#0909E9] to-[#00D4FF]"></div>
-                    <span class="ml-3 text-base font-normal  text-[#797979]">{protype}</span>
+                  <label className="relative inline-flex items-center mr-5 cursor-pointer">
+                    <input className="sr-only peer" type="checkbox" value={protype} onChange={handleRateFilterChange} />
+                    <div className="w-11 h-6 bg-white border-2  border-blue-300 rounded-full peer dark:bg-white-700 peer-focus:ring-0 peer-focus:ring-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-gradient-to-r  after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r from-[#0909E9] to-[#00D4FF]"></div>
+                    <span className="ml-3 text-base font-normal  text-[#797979]">{protype}</span>
                   </label>
                 </div>
               </div>
@@ -402,7 +403,7 @@ function ProjectList() {
             <div>
               <h1 className=" text-xl text-left font-normal mt-10">Skills</h1>
             </div>
-            {visibleSkills.map((skills, index) => (
+            {visibleSkills.map((skills) => (
               <div key={skills} className="flex flex-row mt-4">
                 <div className="basis-8/12">
                   <label className="flex items-center  relative cursor-pointer">
@@ -435,17 +436,17 @@ function ProjectList() {
               <h1 className=" text-xl text-left font-normal mt-10">Citys</h1>
             </div>
             {visibleCities.map((location, index) => (
-              <div className="flex flex-row mt-4">
+              <div key={index} className="flex flex-row mt-4">
                 <div className="basis-8/12">
-                  <label class="flex items-center  relative cursor-pointer">
+                  <label className="flex items-center  relative cursor-pointer">
                     <input className="hidden" type="checkbox" value={location} onChange={handleCityFilterChange} />
-                    <div class="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
-                      <span class="checkmark hidden">
-                        <i class="bi bi-check-lg pr-0.5 pt-2"></i>
+                    <div className="checkbox-border-gradient bg-transparent mr-3 w-5 h-5 rounded flex items-center justify-center">
+                      <span className="checkmark hidden">
+                        <i className="bi bi-check-lg pr-0.5 pt-2"></i>
                       </span>
                     </div>
-                    <span class="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
-                    <span class="font-normal text-[#797979]">{location}</span>
+                    <span className="normal-checkbox mr-3 border border-gray-300 w-5 h-5 inline-block rounded"></span>
+                    <span className="font-normal text-[#797979]">{location}</span>
                   </label>
                 </div>
               </div>
@@ -476,7 +477,10 @@ function ProjectList() {
                       const displayWords = expandedProjects[index] || words.length <= 30 ? words : words.slice(0, 30);
 
                       return (
-                        <div className="w-full flex flex-col md:flex-row justify-between md:px-12 p-2 rounded-md bg-gray-50 hover:bg-gray-100 duration-300">
+                        <div
+                          key={index}
+                          className="w-full flex flex-col md:flex-row justify-between md:px-12 p-2 rounded-md bg-gray-50 hover:bg-gray-100 duration-300"
+                        >
                           <div className="basis-9/12 text-left ">
                             <h1 className=" text-lg">{highlightText(project.title, searchQuery)}</h1>
                             {AllProposals &&
@@ -484,7 +488,7 @@ function ProjectList() {
                                 return (
                                   <>
                                     {project.id == all.project_id ? (
-                                      <span className="text-blue-600 flex justify-center items-center w-fit">
+                                      <span key={all.project_id} className="text-blue-600 flex justify-center items-center w-fit">
                                         <TaskOutlinedIcon className="mr-1 text-blue-600" />
                                         Already Applied
                                       </span>
@@ -498,7 +502,7 @@ function ProjectList() {
                               <div className=" basis-4/12 border-2 border-r-[#797979] mr-2 border-t-0 border-b-0 border-l-0">
                                 <div className="flex flex-row">
                                   <div className=" basis-2/12">
-                                    <i class="bi bi-geo-alt"></i>
+                                    <i className="bi bi-geo-alt"></i>
                                   </div>
                                   <div className=" basis-10/12  text-[#797979]">
                                     {highlightText(project.project_owner_location ? project.project_owner_location : "NA", searchQuery)}
@@ -508,7 +512,7 @@ function ProjectList() {
                               <div className=" basis-4/12 border-2 border-r-[#797979] mr-2 border-t-0 border-b-0 border-l-0">
                                 <div className="flex flex-row">
                                   <div className=" basis-2/12">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    <i className="fa fa-calendar" aria-hidden="true"></i>
                                   </div>
                                   <div className=" basis-10/12  text-[#797979]">{timeAgo(project.project_creation_date)}</div>
                                 </div>
@@ -516,7 +520,7 @@ function ProjectList() {
                               <div className=" basis-4/12">
                                 <div className="flex flex-row">
                                   <div className=" basis-2/12">
-                                    <i class="bi bi-file-text"></i>
+                                    <i className="bi bi-file-text"></i>
                                   </div>
                                   <div className=" basis-10/12  text-[#797979]">{bidsCount[project.id] ? bidsCount[project.id] : 0} Received</div>
                                 </div>
