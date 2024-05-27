@@ -18,7 +18,7 @@ const Background = () => {
             With the largest professional creative community online, simply <br /> search through from our website
           </h1>
           <Link to="/sign-up">
-            <span class="inline-block text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-2 font-semibold">
+            <span className="inline-block text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-2 font-semibold">
               Get Started
             </span>
           </Link>
