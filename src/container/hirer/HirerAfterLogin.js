@@ -302,7 +302,9 @@ const HirerAfterLogin = () => {
 
   return (
     <>
-      <div className="mt-1 mx-[9%]">
+      {/* ---> page Body  */}
+      <div className="mt-1 md:mx-[9%]">
+        {/* ---> page Header  */}
         <div className="relative">
           <img src={profilebg} alt="" className="w-full h-52" />
           <div className="absolute top-12 left-12 p-4 text-left">
@@ -316,7 +318,7 @@ const HirerAfterLogin = () => {
         </div>
         <div class="flex flex-col md:flex-row mb-5 mx-5">
           {/* ---> side category bar */}
-          <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left sticky top-24 h-[90vh] overflow-y-auto">
+          <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left sticky top-24 h-[90vh] overflow-y-auto hidden md:block">
             <div class="skills">
               <div>
                 <h1 className="font-cardo text-xl text-left font-normal">Skills</h1>
@@ -528,13 +530,13 @@ const HirerAfterLogin = () => {
             </div>
             {viewFreelancer != null ? (
               viewFreelancer.length > 0 ? (
-                <div className="grid md:grid-cols-2 grid-cols-1 md:w-full pl-3.5">
+                <div className="grid md:grid-cols-2 grid-cols-1 md:w-full md:pl-3.5">
                   {viewFreelancer &&
                     viewFreelancer.map((free, index) => {
                       return (
                         <>
                           <div
-                            className="px-4 md:w-[26vw] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow-lg rounded-lg mt-4"
+                            className="px-4 md:w-[26vw] relative flex-shrink-0 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer shadow rounded-lg mt-4"
                             key={index}
                           >
                             <div className="flex items-center">
