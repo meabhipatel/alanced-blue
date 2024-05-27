@@ -99,6 +99,7 @@ const Navbar = () => {
   const [isNotificationsDropdownVisible, setIsNotificationsDropdownVisible] = useState(false);
 
   const fetchClientNotifications = async () => {
+    if (!isLoggedIn) return;
     try {
       const response = await axios.get("https://www.api.alanced.com/freelance/view/client-notifications", {
         headers: {
@@ -168,6 +169,7 @@ const Navbar = () => {
   };
 
   const fetchFreeNotifications = async () => {
+    if (!isLoggedIn) return;
     try {
       const response = await axios.get("https://www.api.alanced.com/freelance/view/freelancer-notifications", {
         headers: {
