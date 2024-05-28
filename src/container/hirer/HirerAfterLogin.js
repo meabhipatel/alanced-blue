@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../../components/Layout/Navbar";
 import HomeSection4 from "../../components/Layout/HomeSection4";
 import Footer from "../../components/Layout/Footer";
 import profilebg from "../../components/images/profilebg.png";
@@ -23,7 +22,6 @@ import AddFreeHireRequest from "./HirerAllPopup/AddFreeHireRequest";
 import Bag from "../../components/images/experience.png";
 
 const HirerAfterLogin = () => {
-  // const logindata = useSelector(state => state.login.login_data);
   const logindata = useSelector((state) => state.login.login_data) || JSON.parse(localStorage.getItem("logindata"));
   const googleUserName = localStorage.getItem("googleUserName");
   const loginMethod = localStorage.getItem("loginMethod");
@@ -337,9 +335,6 @@ const HirerAfterLogin = () => {
                       <span className="font-normal text-[#797979]">{skill}</span>
                     </label>
                   </div>
-                  {/* <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
-              (21)
-          </div> */}
                 </div>
               ))}
               {showAllSkills ? (
@@ -356,57 +351,7 @@ const HirerAfterLogin = () => {
                 </div>
               )}
             </div>
-            {/* <div><h1 className=' text-xl text-left font-normal mt-10'>Freelancer Rate</h1></div>
-  <div className="pt-4 w-[75%]">
-              <Slider
-                min={1}
-                max={1000}
-                step={1}
-                range
-                value={range}
-                onChange={handleSliderChange}
-                railStyle={{ background: 'lightgray' }}
-                trackStyle={[
-                  {
-                    background: 'linear-gradient(45deg, #0909E9, #00D4FF)',
-                    borderColor: '#65a30d',
-                  },
-                ]}
-                handleStyle={[
-                  {
-                    backgroundColor: 'white',
-                    borderColor: 'transparent', 
-                    borderRadius: '50%', // Set border radius for circular shape
-                    borderImage: 'linear-gradient(45deg, #0909E9, #00D4FF)',
-                    borderImageSlice: 1,
-                  },
-                  {
-                    backgroundColor: 'white',
-                    borderColor: 'transparent',
-                    borderRadius: '50%',
-                    borderImage: 'linear-gradient(45deg, #0909E9, #00D4FF)',
-                    borderImageSlice: 1,
-                  },
-                ]}
-                />
-              <div className='flex flex-row mt-4'>
-                <div className='basis-5/12'><input
-                type="text"
-                value={range[0]}
-                onChange={(e) => handleInputChange(0, e.target.value)}
-                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-60
-                focus:outline-none'
-              /></div>
-              <div className='basis-2/12 m-auto mt-4 text-center'><i class="bi bi-dash-lg text-[#475569]"></i></div>
-                <div className='basis-5/12'><input
-                type="text"
-                value={range[1]}
-                onChange={(e) => handleInputChange(1, e.target.value)}
-                className='mt-3 bg-white text-center border rounded-md p-1 basis-6/12 font-inter text-base font-normal text-[#797979] w-24 focus:border-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-60
-                focus:outline-none'
-              /></div>
-              </div>
-            </div> */}
+
             <div class="location">
               <div>
                 <h1 className=" text-xl text-left font-normal mt-10">Citys</h1>
@@ -426,9 +371,6 @@ const HirerAfterLogin = () => {
                       <span className="font-normal text-[#797979]">{location}</span>
                     </label>
                   </div>
-                  {/* <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
-          (5)
-        </div> */}
                 </div>
               ))}
               {showAllCity ? (
@@ -463,9 +405,6 @@ const HirerAfterLogin = () => {
                       <span className="font-normal text-[#797979]">{language}</span>
                     </label>
                   </div>
-                  {/* <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>
-              (22)
-          </div> */}
                 </div>
               ))}
               {showAllLanguage ? (
@@ -500,7 +439,6 @@ const HirerAfterLogin = () => {
                       <span class="font-normal text-[#797979]">{exp}</span>
                     </label>
                   </div>
-                  {/* <div className='basis-4/12 font-inter text-base font-normal text-[#797979] text-left'>(23)</div> */}
                 </div>
               ))}
             </div>
@@ -583,7 +521,6 @@ const HirerAfterLogin = () => {
                             )}
 
                             <div className="mb-12">
-                              {/* <p className='font-inter text-[#0A142F] text-[14px] py-1 mr-1'>completed projects : <span className='opacity-50'>More than 50</span></p> */}
                               <img src={verify} alt="" className="inline-block h-3 w-3 mr-1" />
                               <p className="font-inter text-[#0A142F] text-[14px] opacity-50 inline-block">Account verified</p>
                               <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>
