@@ -272,7 +272,7 @@ const FindTalent = () => {
       <div className=" mt-1 px-2  xl:px-20">
         <div class="flex flex-col md:flex-row mb-5 mx-5">
           {/* ---> side categoy bar */}
-          <div class="w-full hidden lg:block md:w-[25%] pt-3 bg-[#FFFFFF] py-8 text-left sticky top-20 h-[90vh] overflow-y-auto">
+          <div class="w-full hidden lg:block md:w-[25%] pt-3 bg-[#FFFFFF] py-8 text-left sticky top-24 h-[90vh] overflow-y-auto">
             <div class="skills">
               <div>
                 <h1 className="bg-white text-xl text-left font-normal">Skills</h1>
