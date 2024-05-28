@@ -510,9 +510,9 @@ const HirerAfterLogin = () => {
             <div className="px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30">
               <div className="md:flex justify-between items-center">
                 <div className="flex items-center">
-                  <h1 className=" text-[21px] text-[#031136] font-normal mr-1">Freelancers that Matches your Job</h1>
+                  <h1 className=" text-[21px] text-[#031136] font-semibold mr-1">Freelancers that Matches your Job</h1>
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center mt-2 md:mt-0">
                   <div className="flex items-center md:mr-1 space-x-1 border p-1 md:w-[200px] w-full rounded-md">
                     <img src={search} alt="Search Icon" className="h-4 w-4 mr-1 ml-1" />
                     <input
