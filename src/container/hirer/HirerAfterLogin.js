@@ -318,7 +318,7 @@ const HirerAfterLogin = () => {
         </div>
         <div class="flex flex-col md:flex-row mb-5 mx-5">
           {/* ---> side category bar */}
-          <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left sticky top-28 h-[90vh] overflow-y-auto hidden md:block">
+          <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 text-left sticky top-28 h-[90vh] overflow-y-auto hidden md:block">
             <div class="skills">
               <div>
                 <h1 className=" text-xl text-left font-normal">Skills</h1>
@@ -506,8 +506,8 @@ const HirerAfterLogin = () => {
             </div>
           </div>
           {/* ---> card container  */}
-          <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
-            <div className="px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30">
+          <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 text-left">
+            <div className="px-4 md:px-8 pt-4">
               <div className="md:flex justify-between items-center">
                 <div className="flex items-center">
                   <h1 className=" text-[21px] text-[#031136] font-semibold mr-1">Freelancers that Matches your Job</h1>
