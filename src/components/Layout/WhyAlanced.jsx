@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "./Navbar";
 import Footer from "./Footer";
 import HomeSection4 from "./HomeSection4";
 import { Link } from "react-router-dom";
@@ -12,19 +11,20 @@ import call from "../images/call1.jpg";
 const WhyAlanced = () => {
   return (
     <>
-      <div className="container-sm px-32 mt-10">
+      <div className="px-5 lg:px-32">
+        {/* ---> Page header  */}
         <div className=" flex flex-row border border-gray-200 rounded">
-          <div className=" basis-8/12">
-            <h1 className="ml-8 text-left font-jost text-[26px] mt-6 font-semibold text-blue-600">Take part in the global job market platform.</h1>
-            <div class="w-36 ml-8  mt-1 relative">
+          <div className="w-full sm:basis-8/12 p-4 md:p-8">
+            <h1 className=" text-left font-jost text-[26px] mt-6 font-semibold text-blue-600">Take part in the global job market platform.</h1>
+            <div class="w-36   mt-1 relative">
               <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
               <div class="border-gray-600 border-b-2 rounded-lg"></div>
             </div>
-            <p className=" ml-8 font-jost  text-[15px] mt-4 opacity-[70%] text-left">
+            <p className="  font-jost  text-[15px] mt-4 opacity-[70%] text-left">
               Are you geared up to take your business
               <br /> or career to the next level?.{" "}
             </p>
-            <div className=" flex flex-row mt-3  mb-3 ml-7">
+            <div className=" flex flex-row mt-3">
               <Link to="/view-all/freelancer">
                 <div className=" basis-2/12">
                   <button className="h-10 w-28 text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF] mt-5 text-base font-semibold rounded">
@@ -41,12 +41,15 @@ const WhyAlanced = () => {
               </Link>
             </div>
           </div>
-          <div className=" basis-4/12">
-            <img src={topimg} alt="" className="h-40 mt-[6%] mb-[5%] mx-auto" />
+
+          <div className="hidden sm:block basis-4/12">
+            <img src={topimg} alt="" className="h-28 md:h-40 mt-[6%] mb-[5%] mx-auto" />
           </div>
         </div>
-        <div className=" mt-12">
-          <div className=" flex flex-row">
+
+        {/* ---> Page section 1 */}
+        <div className="flex flex-col gap-2 mt-3">
+          <div className="flex flex-col md:flex-row">
             <div className="basis-3/12">
               <img src={create} alt="" className="h-36 ml-1 mx-auto" />
             </div>
@@ -59,7 +62,7 @@ const WhyAlanced = () => {
               </p>
             </div>
           </div>
-          <div className=" flex flex-row mt-5">
+          <div className="flex flex-col md:flex-row">
             <div className="basis-3/12">
               <img src={earn} alt="" className="h-32 ml-1 mx-auto" />
             </div>
@@ -72,7 +75,7 @@ const WhyAlanced = () => {
               </p>
             </div>
           </div>
-          <div className=" flex flex-row mt-5">
+          <div className="flex flex-col md:flex-row">
             <div className="basis-3/12">
               <img src={pay} alt="" className="h-32 ml-1 mx-auto" />
             </div>
@@ -85,8 +88,10 @@ const WhyAlanced = () => {
             </div>
           </div>
         </div>
-        <div className=" flex flex-row border border-gray-200 rounded mt-12">
-          <div className=" basis-6/12 ml-16 border-r border-gray-200">
+
+        {/* ---> Page section 2 */}
+        <div className=" flex flex-col gap-1 md:flex-row border border-gray-200 rounded mt-12">
+          <div className=" basis-6/12 p-3 md:ml-16 md:border-r  border-gray-200">
             <h1 className="font-jost text-[24px] mt-8 text-left font-semibold">Create a job posting and hire talent.</h1>
             <div class="w-32  mt-2 relative">
               <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
@@ -115,7 +120,7 @@ const WhyAlanced = () => {
               </Link>
             </div>
           </div>
-          <div className=" basis-6/12 ml-16">
+          <div className=" basis-6/12 p-3 md:ml-16 border-t">
             <h1 className="font-jost text-[24px] mt-8 text-left font-semibold">Explore projects and get opportunities.</h1>
             <div class="w-32  mt-2 relative">
               <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
@@ -146,7 +151,9 @@ const WhyAlanced = () => {
             </div>
           </div>
         </div>
-        <div className=" flex flex-row mt-12 mb-5">
+
+        {/* ---> Page section 3 */}
+        <div className=" flex flex-col-reverse md:flex-row mt-12 mb-5">
           <div className=" basis-9/12 ml-4">
             <h1 className="text-left font-jost text-[26px] mt-6 font-semibold">We are available 24/7</h1>
             <div class="w-32  mt-2 relative">
