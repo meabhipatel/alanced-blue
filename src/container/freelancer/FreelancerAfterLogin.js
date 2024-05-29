@@ -25,6 +25,7 @@ import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { timeAgo } from "./TimeFunctions";
 import Bag from "../../components/images/experience.png";
+import hero2Image from "../../assets/hero2.png";
 
 const FreelancerAfterLogin = () => {
   //   const logindata = useSelector(state => state.login.login_data);
@@ -314,23 +315,25 @@ const FreelancerAfterLogin = () => {
 
   return (
     <>
-      <div className="mt-1 mx-[9%]">
-        <div className="relative">
-          <img src={profilebg} alt="" className="w-full h-52" />
-          <div className="absolute top-12 left-12 p-4 text-left">
-            <h1 className="font-cardo text-[#031136] sm:text-xl text-lg font-normal">
+      <div className="lg:pt-5 px-5 lg:px-24">
+        <div className="w-full h-40 md:h-52 flex bg-[#F6FAFD]">
+          <div className="w-full md:w-[60%] flex flex-col justify-center items-start p-2 md:pl-10 ">
+            <h1 className=" text-[#031136] text-xl font-normal">
               {day}, {formattedDate}
             </h1>
-            <h1 className="font-cardo text-[#031136] sm:text-3xl text-2xl font-semibold py-1">
-              Good {greeting}, {displayName}
+            <h1 className=" text-[#031136] text-3xl text-start font-semibold py-1">
+              Good {greeting}, <span className="capitalize font-[500]">{displayName}</span>
             </h1>
+          </div>
+          <div className="hidden w-[40%] h-full md:block">
+            <img src={hero2Image} alt="hero-2" className="w-full h-full bg-contain " />
           </div>
         </div>
         <div class="flex flex-col md:flex-row mb-5 mx-5">
           <div class="w-full md:w-[30%] pt-3 bg-[#FFFFFF] py-8 border-l border-b border-gray-200 border-opacity-30 text-left">
             <Link to="/saved-jobs">
               <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#e2f1f9] rounded-2xl">
-                <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Saved Jobs</h1>
+                <h1 className=" text-xl text-[#031136] font-normal mr-1">Saved Jobs</h1>
                 <div className="flex items-center space-x-2 text-blue-600 mr-5">
                   <i class="bi bi-heart"></i>
                   {/* <i class="bi bi-heart-fill"></i> */}
@@ -339,7 +342,7 @@ const FreelancerAfterLogin = () => {
             </Link>
             <Link to="/my-proposals">
               <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#e2f1f9] rounded-2xl">
-                <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Proposals</h1>
+                <h1 className=" text-xl text-[#031136] font-normal mr-1">Proposals</h1>
                 <div className="flex items-center space-x-2 text-blue-600 mr-5">
                   <i class="bi bi-send-check"></i>
                   {/* <i class="bi bi-send-check-fill"></i> */}
@@ -347,7 +350,7 @@ const FreelancerAfterLogin = () => {
               </div>
             </Link>
             <div className="flex items-center justify-between border-b border-gray-200 border-opacity-30 px-4 md:px-8 py-4 hover:bg-[#e2f1f9] rounded-2xl">
-              <h1 className="font-cardo text-xl text-[#031136] font-normal mr-1">Get Paid</h1>
+              <h1 className=" text-xl text-[#031136] font-normal mr-1">Get Paid</h1>
               <div className="flex items-center space-x-2 text-blue-600 mr-5">
                 {/* <img src={downarrow} alt="" /> */}
                 <i class="bi bi-coin"></i>
@@ -356,8 +359,8 @@ const FreelancerAfterLogin = () => {
             <Link to="/projects">
               <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#e2f1f9] rounded-lg p-4 mx-4 my-3 shadow-sm">
                 <div>
-                  <h1 className="font-cardo text-lg text-[#031136] text-left">Get Tips To Find Work</h1>
-                  <p className="font-inter text-sm text-[#0A142F] opacity-50 py-2 text-left">
+                  <h1 className=" text-lg text-[#031136] text-left">Get Tips To Find Work</h1>
+                  <p className=" text-sm text-[#0A142F] opacity-50 py-2 text-left">
                     Learn to optimize search, use Connects, and land your first job.
                   </p>
                 </div>
@@ -370,10 +373,8 @@ const FreelancerAfterLogin = () => {
             <Link to="/all-invitations">
               <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#e2f1f9] rounded-lg p-4 mx-4 relative z-10 shadow-sm">
                 <div>
-                  <h1 className="font-cardo text-lg text-[#031136] text-left">My Jobs</h1>
-                  <p className="font-inter text-sm text-[#0A142F] opacity-50 py-2 text-left">
-                    View your active contracts, timesheets, and available earnings.
-                  </p>
+                  <h1 className=" text-lg text-[#031136] text-left">My Jobs</h1>
+                  <p className=" text-sm text-[#0A142F] opacity-50 py-2 text-left">View your active contracts, timesheets, and available earnings.</p>
                 </div>
                 <div className="text-center">
                   <i class="bi bi-arrow-right"></i>
@@ -385,10 +386,10 @@ const FreelancerAfterLogin = () => {
           {/* {viewallprojects != null ?  */}
           <div class="w-full md:w-[70%] pt-3 bg-[#FFFFFF] py-8 border border-gray-200 border-opacity-30 text-left">
             <div className="px-4 md:px-8 pt-4 border-b border-gray-200 border-opacity-30">
-              {/* <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1> */}
+              {/* <h1 className=" text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1> */}
               <div className="flex justify-between items-center">
                 <div className="flex items-center">
-                  <h1 className="font-cardo text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1>
+                  <h1 className=" text-[21px] text-[#031136] font-normal mr-1">Jobs You Might Like</h1>
                 </div>
                 <div className="flex items-center">
                   <div className="flex items-center mr-1 space-x-1 border p-1 w-[200px] rounded-md">
@@ -404,7 +405,7 @@ const FreelancerAfterLogin = () => {
               </div>
             </div>
             <div className="px-4 md:px-8 py-2">
-              <p className="font-inter opacity-50 text-[#0A142F] text-[13px]">
+              <p className=" opacity-50 text-[#0A142F] text-[13px]">
                 Browse jobs that match your experience to a client's hiring preferences.
                 <br /> Ordered by most relevant.
               </p>
@@ -421,7 +422,7 @@ const FreelancerAfterLogin = () => {
                           <Link to="/view-project/full-detail" state={{ project }}>
                             <div className="px-4 md:px-8 py-5 hover:bg-[#F6FAFD] border-t border-b border-gray-200 border-opacity-30 cursor-pointer">
                               <div className="flex items-center justify-between">
-                                <p className="font-inter text-[#0A142F] text-[18px] font-semibold">{highlightText(project.title, searchQuery)}</p>
+                                <p className=" text-[#0A142F] text-[18px] font-semibold">{highlightText(project.title, searchQuery)}</p>
                                 <div className="flex items-center space-x-2">
                                   <div
                                     className="p-1 w-8 h-8 bg-white rounded-full border border-gray-200"
@@ -450,7 +451,7 @@ const FreelancerAfterLogin = () => {
                                     </>
                                   );
                                 })}
-                              <p className="font-inter opacity-50 text-[#0A142F] text-[13px] py-3">
+                              <p className=" opacity-50 text-[#0A142F] text-[13px] py-3">
                                 {highlightText(project.rate, searchQuery)} - {highlightText(project.experience_level.replace(/_/g, " "), searchQuery)}{" "}
                                 - Est. Budget: $
                                 {project.rate == "Hourly"
@@ -458,11 +459,11 @@ const FreelancerAfterLogin = () => {
                                   : project.fixed_budget}{" "}
                                 - Posted {timeAgo(project.project_creation_date)}
                               </p>
-                              <p className="font-inter text-opacity-50 text-[#0A142F] text-[14px] py-3">
+                              <p className=" text-opacity-50 text-[#0A142F] text-[14px] py-3">
                                 Job Description: {highlightText(displayWords.join(" "), searchQuery)}
                                 {words.length > 50 && (
                                   <span
-                                    className="font-cardo text-[#031136] text-[18px] font-semibold cursor-pointer pl-2"
+                                    className=" text-[#031136] text-[18px] font-semibold cursor-pointer pl-2"
                                     onClick={(event) => handleClick(event, index)}
                                   >
                                     {expandedProjects[index] ? "Less" : "More"}
@@ -471,19 +472,19 @@ const FreelancerAfterLogin = () => {
                               </p>
                               {JSON.parse(project.skills_required.replace(/'/g, '"')).map((skill, index) => (
                                 <Link to="">
-                                  <span className="border px-4 py-1 border-gray-300 opacity-50 rounded font-inter text-[#0A142F] text-[13px] inline-block mr-2 my-2">
+                                  <span className="border px-4 py-1 border-gray-300 opacity-50 rounded  text-[#0A142F] text-[13px] inline-block mr-2 my-2">
                                     {highlightText(skill, searchQuery)}
                                   </span>
                                 </Link>
                               ))}
-                              <p className="font-inter text-[#0A142F] text-[14px] py-1 mr-1">
+                              <p className=" text-[#0A142F] text-[14px] py-1 mr-1">
                                 Proposals : <span className="opacity-50">{bidsCount[project.id] ? bidsCount[project.id] : 0}</span>
                               </p>
                               <img src={verify} alt="" className="inline-block h-3 w-3 mr-1" />
-                              <p className="font-inter text-[#0A142F] text-[14px] opacity-50 inline-block">Payment verified</p>
+                              <p className=" text-[#0A142F] text-[14px] opacity-50 inline-block">Payment verified</p>
                               <div className="text-[16px] text-[#FFC107] inline-block mx-3">★★★★★</div>
                               <img src={location} alt="" className="inline-block h-3 w-3 mr-1" />
-                              <p className="font-inter text-[#0A142F] text-[14px] opacity-50 inline-block">
+                              <p className=" text-[#0A142F] text-[14px] opacity-50 inline-block">
                                 {highlightText(project.project_owner_location ? project.project_owner_location : "NA", searchQuery)}
                               </p>
                             </div>
@@ -495,8 +496,8 @@ const FreelancerAfterLogin = () => {
               ) : (
                 <div className=" mx-auto">
                   <img src={Bag} alt="" className="h-[10%] ml-[42%] mt-[20%]" />
-                  <p className=" mt-5 font-cardo text-xl opacity-70 text-center">There are no results that match your search.</p>
-                  <p className=" mt-3 font-cardo text-sm opacity-60 text-center">Please try adjusting your search keywords or filters.</p>
+                  <p className=" mt-5  text-xl opacity-70 text-center">There are no results that match your search.</p>
+                  <p className=" mt-3  text-sm opacity-60 text-center">Please try adjusting your search keywords or filters.</p>
                 </div>
               )
             ) : (
@@ -536,7 +537,7 @@ const FreelancerAfterLogin = () => {
                             return (
                                 <span
                                     key={pageNumber}
-                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer'}`}
+                                    className={`px-0 py-1 ${currentPage === pageNumber ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold  text-[14px] cursor-pointer' : 'text-[#0A142F] font-bold  text-[14px] cursor-pointer'}`}
                                     onClick={() => setCurrentPage(pageNumber)}
                                 >
                                     {pageNumber}
@@ -577,8 +578,8 @@ const FreelancerAfterLogin = () => {
                         key={pageNumber}
                         className={`px-0 py-1 ${
                           currentPage === pageNumber
-                            ? "bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold font-inter text-[14px] cursor-pointer"
-                            : "text-[#0A142F] font-bold font-inter text-[14px] cursor-pointer"
+                            ? "bg-clip-text text-transparent bg-gradient-to-r from-[#0909E9] to-[#00D4FF] font-bold  text-[14px] cursor-pointer"
+                            : "text-[#0A142F] font-bold  text-[14px] cursor-pointer"
                         }`}
                         onClick={() => {
                           window.scrollTo(0, 0);
