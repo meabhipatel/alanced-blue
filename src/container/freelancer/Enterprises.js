@@ -66,7 +66,7 @@ const Enterprises = () => {
                 <div className='text-left text-2xl'><i class="bi bi-boxes"></i></div>
                 <h1 className=' font-cardo text-[30px] text-left mt-2'>Talent</h1>
                 <p className=' font-cardo text-[18px] text-left mt-3'>Unleash our exceptional talent to fuel your project's success.</p>
-                <div className='text-left mt-3'><Link to='/view-all/freelancer' onClick={() => window.scroll(0, 0)}><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-[#9cdcfa] border rounded border-none text-white mr-2 font-semibold">View Features</span></Link></div>
+                <div className='text-left mt-3'><Link to='/find-talent' onClick={() => window.scroll(0, 0)}><span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-[#9cdcfa] border rounded border-none text-white mr-2 font-semibold">View Features</span></Link></div>
             </div>
             <div className=' basis-3/12 border border-blue-200 rounded-lg border-opacity-[50%] p-6 shadow-md bg-[#e6ebfc]'>
             <div className=' text-left text-2xl'><i class="bi bi-shield-lock"></i></div>

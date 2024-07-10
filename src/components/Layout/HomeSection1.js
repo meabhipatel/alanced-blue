@@ -14,27 +14,7 @@ import { Link } from 'react-router-dom'
 const HomeSection1 = () => {
   return (
     <div>
-        <h4 className="pt-16 font-cardo text-[20px]">Trusted by 4,000+ companies</h4>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 px-32 mt-8 cursor-pointer">
-    <div class="p-4">
-        <img src={coinbase} alt="" />
-    </div>
-    <div class="p-4">
-    <img src={spotify} alt="" />
-    </div>
-    <div class="p-4">
-    <img src={slack} alt="" />
-    </div>
-    <div class="p-4">
-    <img src={adobe} alt="" />
-    </div>
-    <div class="p-4">
-    <img src={webflow} alt="" />
-    </div>
-    <div class="p-4">
-    <img src={zoom} alt="" />
-    </div>
-</div>
+      
 <hr className='mx-28 my-9'/>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 md:px-32 mt-6">
     <div class="relative p-10 md:ml-24">

@@ -25,7 +25,7 @@ const WhyAlanced = () => {
                 </div>
           <p className=' ml-8 font-jost  text-[15px] mt-4 opacity-[70%] text-left'>Are you geared up to take your business<br/> or career to the next level?. </p>
           <div className=' flex flex-row mt-3  mb-3 ml-7'>
-            <Link to='/view-all/freelancer'><div className=' basis-2/12' ><button className='h-10 w-28 text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF] mt-5 text-base font-semibold rounded'>Find Talent</button></div></Link>
+            <Link to='/find-talent'><div className=' basis-2/12' ><button className='h-10 w-28 text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF] mt-5 text-base font-semibold rounded'>Find Talent</button></div></Link>
             <Link to='/projects'><div class="p-0.5 mt-5 rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF] ml-5">
             <button class="px-2 py-1 bg-[#f8faf9] rounded"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-bold text-sm py-[4px] px-[8px]">Find Work</p></button>
             </div></Link>
@@ -66,7 +66,7 @@ const WhyAlanced = () => {
             <h1 className='font-jost text-[18px] mt-3 opacity-70 text-left'>Discover the perfect talent match in our Talent <br/>Marketplace.</h1>
             <p className='font-jost text-[15px] mt-4 opacity-70 text-left'>Publish your job listing on the global job market and <br/> anticipate a wave of proposals from skilled<br/> individuals spanning the globe</p>
             <p className='font-jost text-[15px] mt-4 opacity-70 text-left'>Our cutting-edge algorithms assist in identifying <br/> top candidates tailored to your needs.You have <br/> the opportunity to thoroughly review  profiles,<br/> portfolios, and feedback before granting<br/> approval.</p>
-            <div className=' text-left mb-8'> <Link to='/view-all/freelancer' onClick={() => window.scroll(0, 0)}><span class="inline-block text-[16px] px-5 py-[10px] mt-8 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-2 text-base font-semibold ">Talents</span></Link></div>
+            <div className=' text-left mb-8'> <Link to='/find-talent' onClick={() => window.scroll(0, 0)}><span class="inline-block text-[16px] px-5 py-[10px] mt-8 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-2 text-base font-semibold ">Talents</span></Link></div>
           </div>
           <div className=' basis-6/12 ml-16'>
           <h1 className='font-jost text-[24px] mt-8 text-left font-semibold' >Explore projects and get opportunities.</h1>

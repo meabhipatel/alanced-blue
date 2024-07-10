@@ -121,7 +121,7 @@ import FreelancerFullDetailBeforeLogin from "../container/hirer/FreelancerFullDe
           <Route path="/View/Job-post" element={<ViewJobPost/>}/>
           <Route path="/View/bid-details" element={<ViewBidDetailAfterAdd/>}/>
           <Route path="/edit/Job-post" element={<EditJobPost/>}/>
-          <Route path="/view-all/freelancer" element={<FindTalent/>}/>
+          <Route path="/find-talent" element={<FindTalent/>}/>
           <Route path="/add/Job-post" element={<AddJobPost/>}/>
           <Route path="/view-project/full-detail" element={<ViewProjectPopup/>}/>
           <Route path='/send-proposal/detail' element={<ViewSendPraposalAfterAdd/>}></Route>
@@ -150,8 +150,8 @@ import FreelancerFullDetailBeforeLogin from "../container/hirer/FreelancerFullDe
           <Route path="/freelancer/registration" element={<FreelancerRegistration />} />
           <Route path="/hirer/registration" element={<HirerRegistration/>}/>
           <Route path="/sign-up" element={<Choose />} />
-          <Route path="/projects" element={<ProjectList/>}/>
-          <Route path="/view-all/freelancer" element={<FindTalent/>}/>
+          <Route path="/find-job" element={<ProjectList/>}/>
+          <Route path="/find-talent" element={<FindTalent/>}/>
           <Route path="/about-us" element={<AboutUs/>}/>
           <Route path="/contact-us" element={<ContactUs/>}/>
           <Route path="/FAQ" element={<FAQ/>}/>
