@@ -41,7 +41,7 @@ const Section = () => {
           <div className='lg:ml-12 mt-2'>
           <Link
             to={{
-                pathname: searchType === 'Talent' ? '/find-talent' : '/find-job',
+                pathname: searchType === 'Talent' ? '/view-all/freelancer' : '/projects',
                 // search: `?category=${searchTerm}`,
             }} onClick={()=>window.scroll(0, 0)}
             > 

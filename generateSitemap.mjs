@@ -4,8 +4,8 @@ import { createWriteStream } from 'fs';
 // Define your URLs
 const urls = [
     { url: '/', changefreq: 'yearly', priority: 1.0 },
-    { url: '/find-talent', changefreq: 'yearly', priority: 1.0 },
-    { url: '/find-job', changefreq: 'yearly', priority: 1.0 },
+    { url: '/view-all/freelancer', changefreq: 'yearly', priority: 1.0 },
+    { url: '/projects', changefreq: 'yearly', priority: 1.0 },
     { url: '/why-alanced', changefreq: 'yearly', priority: 1.0 },
     { url: '/enterprises', changefreq: 'yearly', priority: 1.0 },
     { url: '/about-us', changefreq: 'yearly', priority: 1.0 },
