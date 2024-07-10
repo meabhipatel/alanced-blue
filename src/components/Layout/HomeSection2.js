@@ -33,7 +33,7 @@ const HomeSection2 = () => {
           Translation
         </Typography>
         <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-          
+          218,356 Freelancers
         </Typography>
       </CardBody>
         </Card>
@@ -50,7 +50,7 @@ const HomeSection2 = () => {
           Software
         </Typography>
         <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-          
+          309,384 Freelancers
         </Typography>
       </CardBody>
         </Card>
@@ -67,7 +67,7 @@ const HomeSection2 = () => {
           Art
         </Typography>
         <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-         
+          218,356 Freelancers
         </Typography>
       </CardBody>
         </Card>
@@ -85,7 +85,7 @@ const HomeSection2 = () => {
           Secretarial
         </Typography>
         <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-         
+          100,130 Freelancers
         </Typography>
       </CardBody>
         </Card>
@@ -103,7 +103,7 @@ const HomeSection2 = () => {
             & Marketing
             </Typography>
             <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-           
+            76,605 Freelancers
             </Typography>
         </CardBody>
         </Card>
@@ -121,7 +121,7 @@ const HomeSection2 = () => {
             Architecture
             </Typography>
             <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-            
+            53,508 Freelancers
             </Typography>
         </CardBody>
         </Card>
@@ -139,7 +139,7 @@ const HomeSection2 = () => {
             Finance
             </Typography>
             <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-           
+            52,417 Freelancers
             </Typography>
         </CardBody>
         </Card>
@@ -157,14 +157,14 @@ const HomeSection2 = () => {
             & Training
             </Typography>
             <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-           
+            8,837 Freelancers
             </Typography>
         </CardBody>
         </Card>
     </div>
 </div>
 <div className='mt-8 text-center'>
-    <Link to='/find-talent' onClick={() => window.scrollTo(0, 0)}>
+    <Link to='/view-all/freelancer' onClick={() => window.scrollTo(0, 0)}>
         <span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold">See All Skills</span>
     </Link>
 </div>
