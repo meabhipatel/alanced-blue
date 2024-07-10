@@ -72,9 +72,13 @@ const FreelancerFullDetailBeforeLogin = () => {
     const queryString = queryParameters.join("&");
 
     axios
+<<<<<<< Updated upstream
       .get(
         `https://www.api.alanced.com/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`
       )
+=======
+      .get(`https://www.api.alanced.com/freelance/find-talent/Self-Project/${id}?${queryString}`)
+>>>>>>> Stashed changes
       .then((response) => {
         setfreelancerproject(response.data.results);
         setProjectCount(response.data.count);
@@ -123,6 +127,7 @@ const FreelancerFullDetailBeforeLogin = () => {
   };
 
   const visibleReviews = reviews.slice(startIdx, startIdx + 3);
+<<<<<<< Updated upstream
 
   // const chunkArray = (array, size) => {
   //     let chunked = [];
@@ -170,6 +175,48 @@ const FreelancerFullDetailBeforeLogin = () => {
       new Date(b.Company_Joining_date) - new Date(a.Company_Joining_date)
   );
 
+=======
+   
+    // const chunkArray = (array, size) => {
+    //     let chunked = [];
+    //     for (let i = 0; i < array.length; i += size) {
+    //         chunked.push(array.slice(i, i + size));
+    //     }
+    //     return chunked;
+    // }
+  
+    // const chunkedProjects = chunkArray(freelancerproject, 6);
+    
+    const openPortfolio = (project) => {
+      setSelectedProjects(project);
+      setIsPortfolioOpen(true);
+    };
+  
+    const closePortfolio = () => {
+      setSelectedProjects(null);
+      setIsPortfolioOpen(false);
+    };
+  
+    useEffect(() => {
+      if(id) { 
+          axios.get(`https://www.api.alanced.com/freelance/find-talent/Employment/${id}`)
+              .then(response => {
+                  if (response.data.status === 200) {
+                      setfreelanceremployment(response.data.data);
+                  } else {
+                      console.log(response.data.message || 'Error fetching Employment data');
+                  }
+              })
+              .catch(err => {
+                  console.log(err.message);
+              });
+      }
+  }, [id]); 
+  
+  
+    const sortedEmployments = [...freelanceremployment].sort((a, b) => new Date(b.Company_Joining_date) - new Date(a.Company_Joining_date));
+  
+>>>>>>> Stashed changes
   const showMoreHandlers = () => {
     setStartIdx((prevIdx) => prevIdx + 2);
   };

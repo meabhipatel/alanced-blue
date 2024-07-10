@@ -136,9 +136,13 @@ const FreelancerSelfProfile = () => {
     const queryString = queryParameters.join("&");
 
     axios
+<<<<<<< Updated upstream
       .get(
         `https://www.api.alanced.com/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`
       )
+=======
+      .get(`https://www.api.alanced.com/freelance/find-talent/Self-Project/${id}?${queryString}`)
+>>>>>>> Stashed changes
       .then((response) => {
         setfreelancerproject(response.data.results);
         setProjectCount(response.data.count);
@@ -149,6 +153,7 @@ const FreelancerSelfProfile = () => {
       });
   }, [currentPage]);
 
+<<<<<<< Updated upstream
   // useEffect(() => {
   //     if(id) {
   //         axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/View-all/Freelancer/Self-Project/${id}`)
@@ -164,6 +169,81 @@ const FreelancerSelfProfile = () => {
   //             });
   //     }
   // }, [id]);
+=======
+
+// useEffect(() => {
+//     if(id) { 
+//         axios.get(`https://aparnawiz91.pythonanywhere.com/freelance/find-talent/Self-Project/${id}`)
+//             .then(response => {
+//                 if (response.data.status === 200) {
+//                     setfreelancerproject(response.data.data);
+//                 } else {
+//                     console.log(response.data.message || 'Error fetching project');
+//                 }
+//             })
+//             .catch(err => {
+//                 console.log(err.message);
+//             });
+//     }
+// }, [id]); 
+
+
+useEffect(() => {
+    if(id) { 
+        axios.get(`https://www.api.alanced.com/freelance/find-talent/Employment/${id}`)
+            .then(response => {
+                if (response.data.status === 200) {
+                    setfreelanceremployment(response.data.data);
+                } else {
+                    console.log(response.data.message || 'Error fetching Employment data');
+                }
+            })
+            .catch(err => {
+                console.log(err.message);
+            });
+    }
+}, [id]); 
+
+
+// useEffect(() => {
+//     const queryParameters = [];
+  
+//     queryParameters.push(`page=${currentPage}`);
+
+//     const queryString = queryParameters.join('&');
+
+//     axios
+//       .get(`https://alanced.pythonanywhere.com/freelance/view/freelancer-self/bid?${queryString}`,{
+//         headers: {
+//             'Authorization': `Bearer ${accessToken}`
+//         }
+//     })
+//       .then((response) => {
+//         setBid(response.data.count);
+//       })
+//       .catch((error) => {
+//         console.error('Error fetching filtered data:', error);
+//       });
+//   }, [currentPage]);
+
+
+
+useEffect(() => { 
+        axios.get('https://www.api.alanced.com/freelance/view/freelancer-self/bid',{
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+            .then(response => {
+                    setBid(response.data.count);
+            })
+            .catch(err => {
+                console.log(err.message);
+            });
+    }, []); 
+  
+  const [isAvailable, setIsAvailable] = useState(localStorage.getItem('userAvailability') || 'available');
+>>>>>>> Stashed changes
 
   useEffect(() => {
     if (id) {

@@ -68,9 +68,13 @@ const ViewProposalPopup = ({ closeViewProposal }) => {
     const queryString = queryParameters.join("&");
 
     axios
+<<<<<<< Updated upstream
       .get(
         `https://www.api.alanced.com/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`
       )
+=======
+      .get(`https://www.api.alanced.com/freelance/find-talent/Self-Project/${id}?${queryString}`)
+>>>>>>> Stashed changes
       .then((response) => {
         setfreelancerproject(response.data.results);
         setProjectCount(response.data.count);
@@ -121,6 +125,46 @@ const ViewProposalPopup = ({ closeViewProposal }) => {
 
   const [viewinvites, setViewinvites] = useState([]);
 
+<<<<<<< Updated upstream
+=======
+//   useEffect(() => {
+//     if(id) { 
+//         axios.get(`http://127.0.0.1:8000/freelance/find-talent/Self-Project/${id}`)
+//             .then(response => {
+//                 if (response.data.status === 200) {
+//                     setfreelancerproject(response.data.data);
+//                 } else {
+//                     console.log(response.data.message || 'Error fetching project');
+//                 }
+//             })
+//             .catch(err => {
+//                 console.log(err.message);
+//             });
+//     }
+// }, [id]); 
+
+
+
+useEffect(() => {
+  if(id) { 
+      axios.get(`https://www.api.alanced.com/freelance/find-talent/Employment/${id}`)
+          .then(response => {
+              if (response.data.status === 200) {
+                  setfreelanceremp(response.data.data);
+              } else {
+                  console.log(response.data.message || 'Error fetching project');
+              }
+          })
+          .catch(err => {
+              console.log(err.message);
+          });
+  }
+}, [id]);
+
+
+const [viewinvites, setViewinvites] = useState([]);
+    
+>>>>>>> Stashed changes
   useEffect(() => {
     axios
       .get(

@@ -41,12 +41,18 @@ const AllContracts = () => {
     const queryString = queryParameters.join("&");
 
     axios
+<<<<<<< Updated upstream
       .get(
         `https://www.api.alanced.com/freelance/View-all/freelancer-contracts?${queryString}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
+=======
+      .get(`https://www.api.alanced.com/freelance/find-talent-contracts?${queryString}`,{
+        headers: {
+          "Authorization":`Bearer ${accessToken}`
+>>>>>>> Stashed changes
         }
       )
       .then((response) => {

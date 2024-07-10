@@ -73,6 +73,7 @@ const FreelancerFullDetailAfterLogin = () => {
 
     const queryString = queryParameters.join("&");
 
+<<<<<<< Updated upstream
     axios
       .get(
         `https://www.api.alanced.com/freelance/View-all/Freelancer/Self-Project/${id}?${queryString}`
@@ -86,6 +87,19 @@ const FreelancerFullDetailAfterLogin = () => {
         console.error("Error fetching filtered data:", error);
       });
   }, [currentPage]);
+=======
+  axios
+    .get(`https://www.api.alanced.com/freelance/find-talent/Self-Project/${id}?${queryString}`)
+    .then((response) => {
+      setfreelancerproject(response.data.results); 
+      setProjectCount(response.data.count);
+      setTotalPages(Math.ceil(response.data.count / 6));
+    })
+    .catch((error) => {
+      console.error('Error fetching filtered data:', error);
+    });
+}, [currentPage]);
+>>>>>>> Stashed changes
 
   const prev = () => {
     // window.scrollTo(0, 0);
@@ -147,6 +161,7 @@ const FreelancerFullDetailAfterLogin = () => {
   };
 
   useEffect(() => {
+<<<<<<< Updated upstream
     if (id) {
       axios
         .get(
@@ -164,6 +179,20 @@ const FreelancerFullDetailAfterLogin = () => {
         .catch((err) => {
           console.log(err.message);
         });
+=======
+    if(id) { 
+        axios.get(`https://www.api.alanced.com/freelance/find-talent/Employment/${id}`)
+            .then(response => {
+                if (response.data.status === 200) {
+                    setfreelanceremployment(response.data.data);
+                } else {
+                    console.log(response.data.message || 'Error fetching Employment data');
+                }
+            })
+            .catch(err => {
+                console.log(err.message);
+            });
+>>>>>>> Stashed changes
     }
   }, [id]);
 
