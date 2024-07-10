@@ -45,7 +45,7 @@ const Section = () => {
                 // search: `?category=${searchTerm}`,
             }} onClick={()=>window.scroll(0, 0)}
             > 
-            <button className='rounded h-12 w-28 lg:ml-6 font-semibold text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF]'>
+            <button className='rounded h-12 w-28 lg:ml-6 font-semibold test text-white bg-gradient-to-r from-[#0909E9] to-[#00D4FF]'>
                 Search
             </button>
             </Link>
