@@ -343,18 +343,18 @@ const handleClientNotificationClick = (notif) => {
   </Link>
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mt-0">
     <div class="text-sm lg:flex-grow lg:ml-[45px]">
-      <Link to='/view-all/freelancer' onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
-        Search Freelancer
+      <Link to='/find-talent' onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
+     Find Talent
       </span></Link>
-      <Link to='/projects' onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Search Job</span></Link>
+      <Link to='/jobs' onClick={() => window.scrollTo(0, 0)}><span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">Find Job</span></Link>
       <Link to='/why-alanced' onClick={() => window.scrollTo(0, 0)}>
       <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]">
         Why Alanced
       </span>
       </Link>
-      <Link to='/enterprises' onClick={() => window.scroll(0, 0)}>
+      <Link to='/contact-us' onClick={() => window.scroll(0, 0)}>
       <span class="block mt-4 lg:inline-block lg:mt-0 font-inter text-[16px] text-[#031136]">
-        Enterprise
+      Contact Us
       </span></Link>
     </div>
     <div className='lg:mr-[100px] mt-2'>
@@ -386,7 +386,7 @@ const handleClientNotificationClick = (notif) => {
       {Findworkdropdown && (
         <div className="absolute md:right-[54.5rem] right-[11rem] z-20 mt-5 w-48 rounded-md shadow-lg bg-white dropdown-container">
             <div className="py-1">
-            <Link to='/projects' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
+            <Link to='/jobs' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
                           <span className="font-inter text-[16px] text-[#031136] hover:text-blue-600">Search Job</span>
                       </Link>
                       <Link to='/saved-jobs' onClick={() => window.scrollTo(0, 0)} className="flex items-center px-4 py-2">
@@ -402,7 +402,7 @@ const handleClientNotificationClick = (notif) => {
         </div>
     )}
       </> : <Link to='/hirer/profile' onClick={() => window.scrollTo(0, 0)}>
-      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]"  onMouseEnter={() => {setFindworkDropdown(false); setReportsDropdown(false); setMyJobsDropdown(false);}}>Search Freelancer </span>
+      <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136]"  onMouseEnter={() => {setFindworkDropdown(false); setReportsDropdown(false); setMyJobsDropdown(false);}}>Find Talent </span>
       </Link> }
       {loginType=='FREELANCER' ? <>
       <span class="block mt-4 lg:inline-block lg:mt-0 lg:mr-12 font-inter text-[16px] text-[#031136] cursor-pointer" onMouseEnter={() => {setMyJobsDropdown(true); setFindworkDropdown(false); setReportsDropdown(false);}} 

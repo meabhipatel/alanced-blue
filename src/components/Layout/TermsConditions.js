@@ -8,6 +8,59 @@ const TermsConditions = () => {
     <>
     <Navbar/>
     <div className='mt-2 mx-[9%]'>
+    <div className='my-2 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left py-5 px-8'>
+    <h1 className="font-cardo text-[26px] text-[#031136] text-left font-normal p-3">Terms & Conditions</h1>
+    Welcome to Alanced! Before using our platform, please read these Terms & Conditions carefully. By accessing or using Alanced, you agree to be bound by these terms, which govern your use of our website and services.<br/><br/>
+
+User Responsibilities
+
+You must be at least 18 years old to use Alanced.
+You agree to provide accurate and truthful information when creating your account.
+You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.
+You agree to comply with all applicable laws and regulations when using our platform.<br/><br/>
+Use of Alanced
+
+Alanced provides a platform where freelancers and clients can connect for freelance services.
+You agree to use Alanced solely for lawful purposes and in accordance with these Terms & Conditions.
+You are prohibited from using Alanced for any illegal or unauthorized purpose.<br/><br/>
+Payment and Fees
+
+Alanced may charge fees for certain services provided on the platform.
+By using our services, you agree to pay any applicable fees as outlined on the platform.
+Payments are processed securely through our designated payment methods.<br/><br/>
+Intellectual Property
+
+The content on Alanced, including logos, trademarks, and other proprietary materials, are owned by or licensed to Alanced.
+You agree not to use, reproduce, distribute, or create derivative works based on our intellectual property without prior written consent.<br/><br/>
+Privacy
+
+Your privacy is important to us. Please review our Privacy Policy to understand how we collect, use, and disclose your information.<br/><br/>
+Disclaimer of Warranties
+
+Alanced provides its services on an "as is" and "as available" basis.
+We do not warrant that our platform will be error-free, secure, or uninterrupted.
+Your use of Alanced is at your own risk.<br/><br/>
+Limitation of Liability
+
+To the extent permitted by law, Alanced shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or in connection with your use of our platform.<br/><br/>
+Termination
+
+Alanced reserves the right to suspend or terminate your access to the platform at any time, with or without cause.
+Upon termination, your rights to use Alanced will cease immediately.<br/><br/>
+Governing Law
+
+These Terms & Conditions shall be governed by and construed in accordance with the laws of the Government Jurisdiction of India, without regard to its conflict of law provisions.<br/><br/>
+Changes to Terms & Conditions
+
+Alanced reserves the right to modify or update these Terms & Conditions at any time. We will notify you of any changes by posting the revised Terms & Conditions on our website.<br/><br/>
+By using Alanced, you acknowledge that you have read, understood, and agree to be bound by these Terms & Conditions. If you do not agree with any part of these terms, please do not use our platform.<br/><br/>
+
+For any questions regarding these Terms & Conditions, please contact us at contact@alanced.com.<br/><br/>
+
+Thank you for choosing Alanced!<br/><br/>
+      </div>
+    </div>
+    {/* <div className='mt-2 mx-[9%]'>
    <h1 className="font-cardo text-[26px] text-[#031136] text-left font-normal p-3">Terms & Conditions</h1>
     <div className='my-2 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left py-5 px-8'>
     <div className="flex items-center justify-between">
@@ -54,7 +107,7 @@ const TermsConditions = () => {
     <h1 className="font-inter text-md text-[#031136] text-left font-normal opacity-40">
     Alanced reserves the right to update or change these Terms at any time, and users should check this page periodically. Your continued use of the service after any modifications indicates your acceptance of the updated Terms.</h1>
     </div>
-    </div>
+    </div> */}
     <HomeSection4/>
     <Footer/>
     </>

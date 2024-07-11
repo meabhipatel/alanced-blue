@@ -4,14 +4,13 @@ import { createWriteStream } from 'fs';
 // Define your URLs
 const urls = [
     { url: '/', changefreq: 'yearly', priority: 1.0 },
-    { url: '/view-all/freelancer', changefreq: 'yearly', priority: 1.0 },
-    { url: '/projects', changefreq: 'yearly', priority: 1.0 },
+    { url: '/find-talent', changefreq: 'yearly', priority: 1.0 },
+    { url: '/jobs', changefreq: 'yearly', priority: 1.0 },
     { url: '/why-alanced', changefreq: 'yearly', priority: 1.0 },
-    { url: '/enterprises', changefreq: 'yearly', priority: 1.0 },
     { url: '/about-us', changefreq: 'yearly', priority: 1.0 },
     { url: '/contact-us', changefreq: 'yearly', priority: 1.0 },
     { url: '/safety-security', changefreq: 'yearly', priority: 1.0 },
-    { url: '/FAQ', changefreq: 'yearly', priority: 1.0 },
+    { url: '/faq', changefreq: 'yearly', priority: 1.0 },
     { url: '/terms', changefreq: 'yearly', priority: 1.0 },
     { url: '/privacy-policy', changefreq: 'yearly', priority: 1.0 },
     { url: '/cookies', changefreq: 'yearly', priority: 1.0 },

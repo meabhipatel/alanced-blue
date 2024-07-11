@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Navbar from'./Navbar'
-import HomeSection4 from './HomeSection4'
 import Footer from './Footer'
 import faq from '../images/faq.png'
 import { useRef } from 'react'
@@ -159,7 +158,6 @@ const FAQ = () => {
 </div>
 
    </div>
-   <HomeSection4/>
    <Footer/>
    </>
   )

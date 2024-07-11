@@ -1,6 +1,5 @@
 import React from 'react'
 import Navbar from'./Navbar'
-import HomeSection4 from './HomeSection4'
 import Footer from './Footer'
 import { Link } from 'react-router-dom'
 
@@ -9,6 +8,29 @@ const AboutUs = () => {
    <>
    <Navbar/>
    <div className='mt-2 mx-[9%]'>
+   <h1 className="font-cardo text-[26px] text-[#031136] text-left font-normal p-3">About Us</h1>
+   <h2 className="font-inter text-lg  text-[#031136] text-left font-semibold">Welcome to Alanced: Empowering Freelancers Worldwide</h2>
+ <div className="font-inter text-md  text-[#031136] text-left ">
+ At Alanced, we are dedicated to revolutionizing the freelance industry by providing a robust platform where talent meets opportunity. Our mission is to empower freelancers of all backgrounds to thrive in their careers, offering a diverse range of projects and resources to support their professional growth.
+<br></br><br></br>
+Why Choose Alanced?
+<br></br><br></br>
+Diverse Opportunities: Explore a wide array of freelance projects across various industries and skill sets. Whether you specialize in creative arts, technology, business consulting, or any other field, you'll find exciting opportunities to showcase your expertise.
+<br></br><br></br>
+Secure and Efficient: We prioritize your security and convenience with a seamless payment system and user-friendly interface. Manage your projects effortlessly, communicate with clients, and receive payments securely—all within the Alanced platform.
+<br></br><br></br>
+Community Support: Join a vibrant community of freelancers where collaboration and learning thrive. Connect with like-minded professionals, share insights, and build valuable relationships that enhance your freelance journey.
+<br></br><br></br>
+Empowering Freelancers: At Alanced, we believe in empowering freelancers to take control of their careers. Whether you're starting your freelance journey or looking to expand your client base, our platform provides the tools and support you need to succeed.
+<br></br><br></br>
+Join the Alanced Community
+<br></br><br></br>
+Join thousands of freelancers who have already discovered the benefits of Alanced. Take the next step in your freelance career and experience the freedom and opportunities that await you. Sign up today and embark on a journey of growth and success with Alanced.
+<br></br><br></br>
+Empowerment. Opportunity. Success. Welcome to Alanced, where your freelance future begins.
+ </div>
+   </div>
+   {/* <div className='mt-2 mx-[9%]'>
    <h1 className="font-cardo text-[26px] text-[#031136] text-left font-normal p-3">About Us</h1>
     <div className='my-2 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left py-5 px-8'>
     <h1 className="font-inter text-lg  text-[#031136] text-left font-semibold">Welcome to Alanced: Your Freelance Ecosystem</h1>
@@ -42,14 +64,14 @@ const AboutUs = () => {
     </h1>
     <h1 className="font-inter text-xl  text-blue-600 text-left font-semibold">Join Us Now And Start Your Journey</h1>
     <div className='mt-8'>
-        <Link to='/projects' onClick={() => window.scrollTo(0, 0)}><span class="inline-block text-sm px-8 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-4 font-semibold">Find Work</span></Link>
+        <Link to='/jobs' onClick={() => window.scrollTo(0, 0)}><span class="inline-block text-sm px-8 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-4 font-semibold">Find Work</span></Link>
       <div class="p-0.5 inline-block rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]">
-      <Link to='/view-all/freelancer' onClick={() => window.scrollTo(0, 0)}><button class="px-8 py-1 bg-[#E2F9EE]"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px]">Find Talent</p></button></Link>
+      <Link to='/find-talent' onClick={() => window.scrollTo(0, 0)}><button class="px-8 py-1 bg-[#E2F9EE]"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-semibold text-sm py-[4px] px-[6px]">Find Talent</p></button></Link>
 </div>    
     </div>
     </div>
-   </div>
-   <HomeSection4/>
+   </div> */}
+  
    <Footer/>
    </>
   )

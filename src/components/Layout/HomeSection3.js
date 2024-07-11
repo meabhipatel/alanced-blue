@@ -14,29 +14,29 @@ const HomeSection3 = () => {
     <div>
     <div className='bg-[#F6FAFD] mt-10 pb-7'>
         <h1 className='font-cardo text-xl md:text-[26px] text-center pt-6 inline-block text-[#0A142F]'>
-            Why Over 3 Million People Choose Us
+        Why Choose Alanced?
             <div className="border-b-2 border-gray-300 w-1/4 sm:w-1/6 mx-auto mt-3.5"></div>
         </h1>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8 px-4 md:px-32 text-center">
         <div class="p-4">
          <img src={credibility} alt="" className='mx-auto'/>
         <p className='opacity-50'>01</p>
-        <h5 className='font-inter font-semibold py-4 text-[#0A142F]'>Credibility</h5>
-        <p className='opacity-50'>We verify Freelancers, publish their feedback <br /> scores and All-Time Transaction Data to help <br /> you identify time-tested professionals across <br /> the globe.</p>
+        <h5 className='font-inter font-semibold py-4 text-[#0A142F]'>Streamlined Process</h5>
+        <p className='opacity-50'>Our platform is designed to simplify the freelance experience, from project posting to hiring and payment, ensuring efficiency and transparency every step of the way.</p>
         <img src={boxarrow} alt="" className='mx-auto mt-2 cursor-pointer'/>
    </div>
     <div class="p-4">
     <img src={flexibility} alt="" className='mx-auto'/>
      <p className='opacity-50'>02</p>
-    <h5 className='font-inter font-semibold py-4 text-[#0A142F]'>Flexibility</h5>
-    <p className='opacity-50'>We provide multiple Payment terms and <br />flexible Agreements to enable you to work <br />the way you want.</p>
+    <h5 className='font-inter font-semibold py-4 text-[#0A142F]'>Secure and Reliable</h5>
+    <p className='opacity-50'>We prioritize the security and reliability of our platform, offering secure payments and robust support to both freelancers and clients.</p>
          <img src={boxarrow} alt="" className='mx-auto mt-8 cursor-pointer'/>
     </div>
     <div class="p-4">
     <img src={value} alt="" className='mx-auto'/>
     <p className='opacity-50'>03</p>
-    <h5 className='font-inter font-semibold py-4 text-[#0A142F]'>Value</h5>
-    <p className='opacity-50'>We have the lowest fees in the industry,<br /> providing you with maximum value at <br />minimum cost.</p>
+    <h5 className='font-inter font-semibold py-4 text-[#0A142F]'>Community and Support</h5>
+    <p className='opacity-50'> Join a supportive community of freelancers where collaboration, learning, and growth are encouraged. Our commitment to your success extends beyond just finding gigs—it's about nurturing a thriving freelance career.</p>
         <img src={boxarrow} alt="" className='mx-auto mt-8 cursor-pointer'/>
     </div>
         </div>
@@ -59,7 +59,6 @@ const HomeSection3 = () => {
         <img src={uparrow} alt="" className='h-5 w-5'/>
     <span className='font-cardo text-[18px] font-[700px] text-[#0A142F]'>Fixed Price</span>
     </div>
-    <p className='opacity-50 text-[12px] pl-8 pt-2'>Set a total fixed cost for your job and create milestones to ensure you're <br /> satisfied every step of the way. Set a due date and the amount to be <br />paid for each milestone.</p>
     <div class="flex items-center space-x-3 mt-4">
         <img src={downarrow} alt="" className='h-5 w-5'/>
     <span className='font-cardo text-[18px] font-[700px] text-[#0A142F]'>Hourly</span>

@@ -1,6 +1,5 @@
 import React from 'react'
 import Navbar from './Navbar'
-import HomeSection4 from './HomeSection4'
 import Footer from './Footer'
 import axios from 'axios'
 import { useEffect } from 'react'
@@ -298,7 +297,7 @@ const handleClientNotificationClick = (notif) => {
    </div>
    </div>
     </div>
-    <HomeSection4/>
+    
     <Footer/>
     </>
   )

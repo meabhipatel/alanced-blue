@@ -254,8 +254,8 @@ const FindTalent = () => {
       <Navbar/>
       <div className="h-[43vh] bg-no-repeat -mt-[1.2rem] bg-cover" style={{ backgroundImage: `url(${mybg})` }}>
         <div className='text-left pt-[6rem] ml-[13.5vw] text-2xl font-cardo'>
-          <h1>Find & Hire Freelancers</h1>
-          <p className='font-inter text-sm text-[#797979] font-normal mt-2'>More than 10K expert freelancers are waiting for you</p>
+          <h1>Find & Hire Talent</h1>
+          <p className='font-inter text-sm text-[#797979] font-normal mt-2'>Expert freelancers are waiting for you</p>
           <div className='lg:w-[44vw] bg-white p-3 lg:h-14 rounded-2xl lg:flex items-center mt-4 shadow-md'>
             <div className='flex flex-row'>
               <img className='w-5 h-5' src={search}></img>

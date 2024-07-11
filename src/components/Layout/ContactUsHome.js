@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from'./Navbar'
-import Footer from './Footer'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { AddUserContactAction } from '../../redux/User/UserAction'
 import { toast } from 'react-toastify'
 
 
-const ContactUs = () => {
+const ContactUsHome = () => {
 
   const initialUserState = {
     Applicant_Name: '',
@@ -88,10 +86,12 @@ const onChange = e =>{
 
   return (
     <>
-    <Navbar/>
+  
     <div className='mt-2 mx-[9%]'>
-   <h1 className="font-cardo text-[26px] text-[#031136] text-left font-normal p-3">Contact Us</h1>
-    
+
+    <div className='my-2 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left py-5 px-8'>
+  
+    <h1 className="font-cardo text-[26px] text-[#031136] text-left font-semibold pt-4">Contact Us</h1>
     <div class="w-28 mt-1 relative">
       <div class="absolute inset-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] rounded-lg"></div>
       <div class="border-gray-600 border-b-2 rounded-lg"></div>
@@ -105,18 +105,19 @@ const onChange = e =>{
   <Link to='/contact-us' onClick={AddUserContact}><span class="w-full inline-block px-8 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white mr-4 font-semibold text-center text-md">{show ? <div><Loader/></div> : "Submit"}</span></Link>
   </div>
   <div class="flex-1 px-8">
-  <h2 className="font-inter text-lg  text-[#031136] text-left font-semibold pt-5">Reach Out Directly:</h2>
+  <h1 className="font-inter text-lg  text-[#031136] text-left font-semibold pt-5">Reach Out Directly:</h1>
+  <h1 className="font-inter text-md  text-[#031136] text-left font-semibold pt-1"><i class="bi bi-envelope-at text-blue-600 mr-1"></i> Email: <span className='font-normal opacity-40'>contact@alanced.com</span></h1>
 
-  <h3 className="font-inter text-md  text-[#031136] text-left font-semibold pt-1"><i class="bi bi-envelope-at text-blue-600 mr-1"></i> Email: <span className='font-normal opacity-40'>contact@alanced.com</span></h3>
-  
+
+
   </div>
 </div>
 
     </div>
-  
-    <Footer/>
+   </div>
+   
     </>
   )
 }
 
-export default ContactUs
+export default ContactUsHome

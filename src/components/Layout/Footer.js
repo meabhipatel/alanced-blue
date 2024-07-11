@@ -92,15 +92,11 @@ const onChange = e =>{
           {/* <Link to='/why-alanced' onClick={() => window.scrollTo(0, 0)}>
           <li class="mb-2 hover:text-blue-600 hover:underline">Alanced Foundation</li>
           </Link> */}
-          <Link to='/enterprises' onClick={() => window.scrollTo(0, 0)}>
-          <li class="mb-2 hover:text-blue-600 hover:underline">Enterprise </li>
-          </Link>
-          <Link to='/FAQ' onClick={() => window.scrollTo(0, 0)}>
+          
+          <Link to='/faq' onClick={() => window.scrollTo(0, 0)}>
           <li class="mb-2 hover:text-blue-600 hover:underline">FAQ</li>
           </Link>
-          <Link to='/why-alanced' onClick={() => window.scrollTo(0, 0)}>
-          <li class="mb-2 hover:text-blue-600 hover:underline">Alanced Foundation</li>
-          </Link>
+         
         </ul>
     </div>
     <div class="p-4 text-left">

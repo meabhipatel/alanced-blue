@@ -14,27 +14,7 @@ import { Link } from 'react-router-dom'
 const HomeSection1 = () => {
   return (
     <div>
-        <h4 className="pt-16 font-cardo text-[20px]">Trusted by 4,000+ companies</h4>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 px-32 mt-8 cursor-pointer">
-    <div class="p-4">
-        <img src={coinbase} alt="" />
-    </div>
-    <div class="p-4">
-    <img src={spotify} alt="" />
-    </div>
-    <div class="p-4">
-    <img src={slack} alt="" />
-    </div>
-    <div class="p-4">
-    <img src={adobe} alt="" />
-    </div>
-    <div class="p-4">
-    <img src={webflow} alt="" />
-    </div>
-    <div class="p-4">
-    <img src={zoom} alt="" />
-    </div>
-</div>
+      
 <hr className='mx-28 my-9'/>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 md:px-32 mt-6">
     <div class="relative p-10 md:ml-24">
@@ -49,17 +29,22 @@ const HomeSection1 = () => {
         </div>
     </div>
     <div class="p-4 text-left">
-        <h4 className='font-cardo text-lg md:text-[23px] text-[#0A142F] mt-5'>Simple Solutions for Complex <br />Connections</h4>
-        <p className='font-inter text-sm md:text-[13px] opacity-50 mt-3'>Welcome to our freelancing platform, your gateway to success in the digital realm! Our platform offers a straightforward approach to navigating the intricate web of professional connections, providing freelancers with a reliable and user-friendly interface.
+        <h4 className='font-cardo text-lg md:text-[23px] text-[#0A142F] mt-5'>About Alanced: Empowering <br />Freelancers Worldwide</h4>
+        <p className='font-inter text-sm md:text-[13px] opacity-50 mt-3'>At Alanced, we are passionate about empowering freelancers to achieve their professional aspirations. Founded with the vision of creating a seamless platform where talent meets opportunity, Alanced connects skilled individuals with businesses seeking top-tier freelance expertise.
 
-Embrace the essence of simplicity as you curate your portfolio and showcase your diverse skills and expertise. From graphic designing to web development, each project resonates with clarity and purpose, leaving a lasting impression on potential clients.
+Our Mission
 
-Join us in navigating the dynamic landscape of freelancing with confidence and ease. Your portfolio is more than just a collection of works—it's a compelling narrative of your professional journey and achievements.</p>
+Our mission is simple yet profound: to democratize access to freelance opportunities globally. We believe in fostering a dynamic marketplace where freelancers can thrive, grow their careers, and achieve financial independence on their own terms.</p>
         <div class="flex flex-wrap items-center space-x-3 mt-4">
             <img src={circlecheck} alt="" className='h-5 w-5'/>
-            <span className='pr-6 font-inter text-[15px]'>High Analysis</span>
+            <span className='pr-6 font-inter text-[15px]'>Diverse Talent Pool</span>
             <img src={circlecheck} alt="" className='h-5 w-5'/>
-            <span className='font-inter text-[15px]'>Certified Institute</span>
+            <span className='font-inter text-[15px]'>Streamlined Process</span>
+            <img src={circlecheck} alt="" className='h-5 w-5'/>
+            <span className='font-inter text-[15px]'>Secure and Reliable</span>
+            <img src={circlecheck} alt="" className='h-5 w-5'/>
+            <span className='font-inter text-[15px]'>Community and Support</span>
+            
         </div>
         {/* <div className='mt-7'>
             <Link to=''><span class="text-sm px-4 py-[10px] lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold">Read More</span></Link>
