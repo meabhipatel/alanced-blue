@@ -339,7 +339,7 @@ const [showFullDescription, setShowFullDescription] = useState(false);
             </button>
         </div>
         <div class="p-0.5 mt-5 rounded bg-gradient-to-b from-[#0909E9] to-[#00D4FF]">
-        <Link to='/projects' onClick={() => window.scrollTo(0, 0)}><button class="px-2 py-1 bg-[#f8faf9] rounded-sm"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-bold text-sm py-[4px] px-[16px]">Cancel</p></button></Link>
+        <Link to='/jobs' onClick={() => window.scrollTo(0, 0)}><button class="px-2 py-1 bg-[#f8faf9] rounded-sm"><p class="bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent font-bold text-sm py-[4px] px-[16px]">Cancel</p></button></Link>
         </div>
         </div>
     </div>

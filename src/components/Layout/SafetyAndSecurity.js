@@ -14,6 +14,26 @@ const SafetyAndSecurity = () => {
     <>
     <Navbar/>
     <div className='mt-6 mx-[9%]'>
+    <h1 className="font-cardo text-4xl text-blue-600 text-left font-semibold p-3">Safety and Security at Alanced</h1>
+    <div className="font-inter text-md  text-[#031136] text-left ">
+    At Alanced, ensuring the safety and security of our users is our top priority. We are committed to providing a trustworthy platform where freelancers and clients can collaborate with confidence. Here's how we prioritize your safety:<br/><br/>
+
+Secure Payments: We utilize advanced encryption and secure payment gateways to safeguard your financial transactions. Your payment details are protected at every step of the process.<br/><br/>
+
+Data Protection: Your personal information is treated with the utmost confidentiality. We adhere to strict data protection regulations to ensure that your data is safe from unauthorized access or misuse.<br/><br/>
+
+Verified Users: We verify the identity of all users to maintain the integrity of our platform. This helps create a community of trusted freelancers and clients who are committed to professionalism and reliability.<br/><br/>
+
+Dispute Resolution: In the rare event of a dispute, our dedicated support team is available to facilitate fair and efficient resolutions. We strive to ensure that all parties are treated fairly and transparently.<br/><br/>
+
+Constant Monitoring: Our platform undergoes continuous monitoring and updates to identify and address potential security threats proactively. This ongoing vigilance helps us maintain a secure environment for all users.<br/><br/>
+
+At Alanced, your peace of mind is paramount. Join our community and experience a secure and reliable platform where you can focus on what matters most—building your freelance career or finding the perfect freelancer for your project.<br/><br/>
+
+Trust. Integrity. Security. Welcome to Alanced, where your safety comes first.<br/><br/>
+    </div>
+    </div>
+    {/* <div className='mt-6 mx-[9%]'>
       <h1 className="font-cardo text-4xl text-blue-600 text-left font-semibold p-3">Safety and security</h1>
       <h1 className="font-inter text-md text-[#031136] text-left font-normal opacity-40 py-6 px-3">
       At Alanced, we prioritize your safety, trust, and the security of your data above all else. We understand that in the world of freelancing, you're not just working with us – you're entrusting us with your projects, your professional reputation, and your personal data. Here's how we're committed to keeping that trust.
@@ -99,7 +119,7 @@ Ensuring secure entry and verification is paramount to Alanced. Our robust syste
 <h1 className="font-inter text-md text-[#031136] text-left font-normal opacity-40 py-6 px-3">
 Our commitment to your safety and security is unwavering. As technology evolves, so do our efforts to ensure that Alanced remains a trusted and secure platform for freelancers everywhere. We invite you to reach out with any questions or feedback, and thank you for being a valued member of the Alanced community.
 </h1>
-    </div>
+    </div> */}
     <HomeSection4/>
     <Footer/>
     </>

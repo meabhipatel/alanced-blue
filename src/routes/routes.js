@@ -51,7 +51,6 @@ import SelfBidProject from "../container/freelancer/SelfBidProject";
 import AboutUs from "../components/Layout/AboutUs";
 import ContactUs from "../components/Layout/ContactUs";
 import FAQ from "../components/Layout/FAQ";
-import Enterprises from "../container/freelancer/Enterprises";
 import HirerSelfProfile from "../container/hirer/HirerProfile";
 import WhyAlanced from "../components/Layout/WhyAlanced";
 import SafetyAndSecurity from "../components/Layout/SafetyAndSecurity";
@@ -97,7 +96,7 @@ import FreelancerFullDetailBeforeLogin from "../container/hirer/FreelancerFullDe
           <Route path="/freelancer/registration" element={<FreelancerRegistration />} />
           <Route path="/hirer/registration" element={<HirerRegistration/>}/>
           <Route path="/sign-up" element={<Choose />} />
-          <Route path="/projects" element={<ProjectList/>}/>
+          <Route path="/jobs" element={<ProjectList/>}/>
           <Route path="/freelancer/edit-profile" element={<FreelancerSelfProfile/>}/>
           <Route path="/freelancer/profile" element={<FreelancerAfterLogin/>}/>
           <Route path="/freelancer/view-project/detail" element={<ViewProjectNewTab/>}/>
@@ -121,7 +120,7 @@ import FreelancerFullDetailBeforeLogin from "../container/hirer/FreelancerFullDe
           <Route path="/View/Job-post" element={<ViewJobPost/>}/>
           <Route path="/View/bid-details" element={<ViewBidDetailAfterAdd/>}/>
           <Route path="/edit/Job-post" element={<EditJobPost/>}/>
-          <Route path="/view-all/freelancer" element={<FindTalent/>}/>
+          <Route path="/find-talent" element={<FindTalent/>}/>
           <Route path="/add/Job-post" element={<AddJobPost/>}/>
           <Route path="/view-project/full-detail" element={<ViewProjectPopup/>}/>
           <Route path='/send-proposal/detail' element={<ViewSendPraposalAfterAdd/>}></Route>
@@ -150,12 +149,11 @@ import FreelancerFullDetailBeforeLogin from "../container/hirer/FreelancerFullDe
           <Route path="/freelancer/registration" element={<FreelancerRegistration />} />
           <Route path="/hirer/registration" element={<HirerRegistration/>}/>
           <Route path="/sign-up" element={<Choose />} />
-          <Route path="/projects" element={<ProjectList/>}/>
-          <Route path="/view-all/freelancer" element={<FindTalent/>}/>
+          <Route path="/jobs" element={<ProjectList/>}/>
+          <Route path="/find-talent" element={<FindTalent/>}/>
           <Route path="/about-us" element={<AboutUs/>}/>
           <Route path="/contact-us" element={<ContactUs/>}/>
-          <Route path="/FAQ" element={<FAQ/>}/>
-          <Route path='/enterprises' element={<Enterprises/>}></Route>
+          <Route path="/faq" element={<FAQ/>}/>
           <Route path="/why-alanced" element={<WhyAlanced/>}></Route>
           <Route path="/safety-security" element={<SafetyAndSecurity/>}></Route>
           <Route path="/terms" element={<TermsConditions/>}/>

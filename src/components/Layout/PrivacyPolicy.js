@@ -1,6 +1,5 @@
 import React from 'react'
 import Navbar from'./Navbar'
-import HomeSection4 from './HomeSection4'
 import Footer from './Footer'
 import { useState } from 'react';
 
@@ -222,6 +221,51 @@ const PrivacyPolicy = () => {
    <Navbar/>
    <div className='mt-2 mx-[9%]'>
    <h1 className="font-cardo text-[26px] text-[#031136] text-left font-normal p-3">Privacy Policy</h1>
+   <div className='my-2 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left py-5 px-8'>
+   Thank you for choosing Alanced. Protecting your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website and services. Please read this policy carefully to understand our practices regarding your personal data.<br/><br/>
+
+Information We Collect
+
+Personal Information: When you create an account, we collect information such as your name, email address, and other contact details.
+Payment Information: If you make payments through Alanced, we collect payment details to process transactions securely.<br/><br/>
+Usage Information: We gather data about your interactions with our platform, including log data, device information, and browsing history.<br/><br/>
+Communications: We may retain copies of any communications you send to us (e.g., emails or messages through our platform).<br/><br/>
+How We Use Your Information
+
+To Provide Services: We use your information to operate, maintain, and improve our platform and services.<br/><br/>
+To Communicate: We may send you service-related announcements, updates, and promotional messages.<br/><br/>
+To Process Transactions: We use your payment information to facilitate transactions and manage payments.<br/><br/>
+To Enhance Security: We implement measures to protect our platform and users from unauthorized access and fraud.<br/><br/>
+Sharing Your Information
+
+With Third Parties: We may share your information with third-party service providers who assist us in delivering our services (e.g., payment processors).
+Legal Compliance: We may disclose your information when required by law, to enforce our policies, or to protect our rights or others' rights.<br/><br/>
+Data Security
+
+We implement technical and organizational measures to protect your personal data from unauthorized access, alteration, or destruction.<br/><br/>
+Despite our efforts, no method of transmission over the internet or electronic storage is completely secure. We cannot guarantee absolute security.<br/><br/>
+Your Choices
+
+Account Settings: You can update your account information and communication preferences through your account settings.<br/><br/>
+Cookies: You can manage cookies through your browser settings. Please note that disabling cookies may affect your experience on our platform.<br/><br/>
+Children's Privacy
+
+Alanced is not intended for children under the age of 18. We do not knowingly collect or solicit personal information from children.<br/><br/>
+Changes to This Policy
+
+We may update this Privacy Policy from time to time. We will notify you of any changes by posting the updated policy on our website.<br/><br/>
+Contact Us
+
+If you have any questions or concerns about this Privacy Policy or our practices, please contact us at contact@alanced.com.<br/><br/>
+By using Alanced, you consent to the collection and use of your information as described in this Privacy Policy. If you do not agree with any part of this policy, please do not use our platform.<br/><br/>
+
+Thank you for trusting Alanced with your information. We are committed to protecting your privacy and providing a secure and reliable platform for freelancers and clients alike.<br/><br/>
+
+
+    </div>
+   </div>
+   {/* <div className='mt-2 mx-[9%]'>
+   <h1 className="font-cardo text-[26px] text-[#031136] text-left font-normal p-3">Privacy Policy</h1>
     <div className='my-2 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left py-5 px-8'>
     <div className="flex items-center justify-between">
     <h1 className="font-inter text-lg  text-[#031136] text-left font-semibold">Privacy Policy for Alanced</h1>
@@ -261,8 +305,7 @@ const PrivacyPolicy = () => {
     </div>
 </div>
     </div>
-   </div>
-   <HomeSection4/>
+   </div> */}
     <Footer/>
    </>
   )

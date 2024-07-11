@@ -4,14 +4,13 @@ host: http://www.alanced.com
 
 User-agent: Googlebot
 Allow: /
-Allow: /view-all/freelancer
-Allow: /projects
+Allow: /find-talent
+Allow: /jobs
 Allow: /why-alanced
-Allow: /enterprises
 Allow: /about-us
 Allow: /contact-us
 Allow: /safety-security
-Allow: /FAQ
+Allow: /faq
 Allow: /terms
 Allow: /Privacy
 Allow: /cookies
@@ -54,14 +53,13 @@ Crawl-delay: 2
 
 User-agent: *
 Allow: /
-Allow: /view-all/freelancer
-Allow: /projects
+Allow: /find-talent
+Allow: /jobs
 Allow: /why-alanced
-Allow: /enterprises
 Allow: /about-us
 Allow: /contact-us
 Allow: /safety-security
-Allow: /FAQ
+Allow: /faq
 Allow: /terms
 Allow: /Privacy
 Allow: /cookies

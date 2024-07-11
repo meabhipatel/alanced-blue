@@ -17,7 +17,7 @@ import payment from '../images/payment.png'
 const HomeSection2 = () => {
   return (
     <>
-    <div className='mt-10 mb-10 text-3xl font-cardo'>
+    <div className='mt-20 mb-10 text-3xl font-cardo'>
     <h1 className='text-center'>Find Top Freelancer</h1>
     <div className='border-b border-gray-600 w-20 mx-auto mt-5'></div>
 </div>
@@ -32,9 +32,7 @@ const HomeSection2 = () => {
         <Typography variant="h5" color="" className="text-left font-cardo">
           Translation
         </Typography>
-        <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-          218,356 Freelancers
-        </Typography>
+       
       </CardBody>
         </Card>
     </div>
@@ -49,9 +47,7 @@ const HomeSection2 = () => {
         <Typography variant="h5" color="" className="text-left font-cardo">
           Software
         </Typography>
-        <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-          309,384 Freelancers
-        </Typography>
+      
       </CardBody>
         </Card>
     </div>
@@ -66,9 +62,7 @@ const HomeSection2 = () => {
         <Typography variant="h5" color="" className="text-left font-cardo">
           Art
         </Typography>
-        <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-          218,356 Freelancers
-        </Typography>
+       
       </CardBody>
         </Card>
     </div>
@@ -84,9 +78,7 @@ const HomeSection2 = () => {
         <Typography variant="h5" color="" className="text-left font-cardo">
           Secretarial
         </Typography>
-        <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-          100,130 Freelancers
-        </Typography>
+       
       </CardBody>
         </Card>
     </div>
@@ -102,9 +94,7 @@ const HomeSection2 = () => {
             <Typography variant="h5" color="" className="text-left font-cardo">
             & Marketing
             </Typography>
-            <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-            76,605 Freelancers
-            </Typography>
+          
         </CardBody>
         </Card>
     </div>
@@ -120,9 +110,7 @@ const HomeSection2 = () => {
             <Typography variant="h5" color="" className="text-left font-cardo">
             Architecture
             </Typography>
-            <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-            53,508 Freelancers
-            </Typography>
+            
         </CardBody>
         </Card>
     </div>
@@ -138,9 +126,7 @@ const HomeSection2 = () => {
             <Typography variant="h5" color="" className="text-left font-cardo">
             Finance
             </Typography>
-            <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-            52,417 Freelancers
-            </Typography>
+         
         </CardBody>
         </Card>
     </div>
@@ -156,15 +142,13 @@ const HomeSection2 = () => {
             <Typography variant="h5" color="" className="text-left font-cardo">
             & Training
             </Typography>
-            <Typography className="text-left font-inter opacity-50 text-sm mt-2">
-            8,837 Freelancers
-            </Typography>
+           
         </CardBody>
         </Card>
     </div>
 </div>
 <div className='mt-8 text-center'>
-    <Link to='/view-all/freelancer' onClick={() => window.scrollTo(0, 0)}>
+    <Link to='/find-talent' onClick={() => window.scrollTo(0, 0)}>
         <span class="inline-block text-sm px-4 py-[10px] mt-4 lg:mt-0 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded border-none text-white font-semibold">See All Skills</span>
     </Link>
 </div>
@@ -217,7 +201,7 @@ const HomeSection2 = () => {
     </div>
 </div>
 <div className="container mx-auto px-6 mt-8 text-center">
-    <Link to="/enterprises" onClick={() => window.scroll(0 ,0)}>
+    <Link to="/" onClick={() => window.scroll(0 ,0)}>
         <span className="inline-block text-sm px-4 py-2 bg-gradient-to-r from-[#0909E9] to-[#00D4FF] border rounded text-white font-semibold">
             See How Alanced Work
         </span>

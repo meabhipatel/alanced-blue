@@ -350,7 +350,7 @@ const [bidsCount, setBidsCount] = useState({});
             <i class="bi bi-coin"></i>
     </div>
     </div>
-<Link to='/projects' onClick={() => window.scrollTo(0, 0)}>
+<Link to='/jobs' onClick={() => window.scrollTo(0, 0)}>
     <div className="grid grid-cols-[2fr,1fr] gap-2 bg-[#e2f1f9] rounded-lg p-4 mx-4 my-3 shadow-sm">
         <div>
         <h1 className='font-cardo text-lg text-[#031136] text-left'>Get Tips To Find Work</h1>

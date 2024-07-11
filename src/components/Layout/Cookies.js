@@ -1,6 +1,5 @@
 import React from 'react'
 import Navbar from'./Navbar'
-import HomeSection4 from './HomeSection4'
 import Footer from './Footer'
 
 const Cookies = () => {
@@ -8,6 +7,40 @@ const Cookies = () => {
     <>
     <Navbar/>
     <div className='mt-2 mx-[9%]'>
+    <h1 className="font-cardo text-[26px] text-[#031136] text-left font-normal p-3">Cookie Policy</h1>
+    <div className='my-2 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left py-5 px-8'>
+    At Alanced, we use cookies to enhance your experience and improve the functionality of our platform. This Cookie Policy explains how we use cookies and similar technologies when you visit our website.<br/><br/>
+
+What are Cookies?<br/><br/>
+
+Cookies are small text files that are stored on your device when you visit a website. They help websites remember your preferences and enhance your browsing experience.<br/><br/>
+Types of Cookies We Use
+
+Essential Cookies: These cookies are necessary for the operation of our website. They enable core functionalities such as security, network management, and accessibility.<br/><br/>
+Analytics Cookies: We use these cookies to analyze how visitors use our website, track site performance, and gather statistical information about user behavior.<br/><br/>
+Advertising Cookies: These cookies are used to deliver advertisements relevant to your interests based on your browsing activities and preferences.<br/><br/>
+Functionality Cookies: Functionality cookies allow us to remember choices you make and provide enhanced features and personalized content.<br/><br/>
+Managing Cookies
+
+You can control and manage cookies through your browser settings. Most browsers allow you to block or delete cookies, and you can set preferences for cookie acceptance.<br/><br/>
+Please note that blocking cookies may impact your experience on our website, as some features may not function properly.<br/><br/>
+Third-Party Cookies
+
+We may also use cookies from third-party service providers to assist with analytics, advertising, and other functionalities.<br/><br/>
+Third-party cookies are subject to the respective privacy policies of these providers.<br/><br/>
+Changes to This Policy
+
+We may update this Cookie Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons.<br/><br/>
+Any updates will be posted on our website, and we encourage you to review this policy periodically.<br/><br/>
+Contact Us
+
+If you have any questions or concerns about our Cookie Policy or cookie practices, please contact us at contact@alanced.com.<br/><br/>
+By using Alanced, you consent to the use of cookies as described in this Cookie Policy. If you do not agree with any part of this policy, please adjust your browser settings accordingly or refrain from using our platform.<br/><br/>
+
+Thank you for choosing Alanced. We strive to provide you with a seamless and personalized experience while respecting your privacy preferences.<br/><br/>
+    </div>
+    </div>
+    {/* <div className='mt-2 mx-[9%]'>
    <h1 className="font-cardo text-[26px] text-[#031136] text-left font-normal p-3">Cookie Policy</h1>
     <div className='my-2 bg-[#FFFFFF] border border-gray-200 border-opacity-30 text-left py-5 px-8'>
     <div className="flex items-center justify-between">
@@ -47,8 +80,7 @@ const Cookies = () => {
     <h1 className="font-inter text-lg  text-[#031136] text-left font-semibold pt-6">Contacting Us</h1>
     <h1 className="font-inter text-md text-[#031136] text-left font-normal py-2"><span className='opacity-40'>If you have any questions about our use of cookies, please contact us at</span><span className='font-semibold'> info@wiz91.com</span></h1>
     </div>
-    </div>
-    <HomeSection4/>
+    </div> */}
     <Footer/>
     </>
   )

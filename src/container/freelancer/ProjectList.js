@@ -375,8 +375,8 @@ function ProjectList() {
       <Navbar />
       <div className="h-[43vh] bg-no-repeat -mt-[1.2rem] bg-cover" style={{ backgroundImage: `url(${profile_list})` }}>
         <div className='text-left pt-[6rem] ml-[13.5vw] text-2xl font-cardo'>
-          <h1>Projects List</h1>
-          <p className='font-inter text-sm text-[#797979] font-normal mt-2'>Explore high-paying freelance opportunities and land your dream job now!</p>
+          <h1>Jobs</h1>
+          <p className='font-inter text-sm text-[#797979] font-normal mt-2'>Discover lucrative freelance opportunities and secure your dream job today!</p>
           <div className='lg:w-[44vw] bg-white p-3 lg:h-14 rounded-2xl lg:flex items-center mt-4 shadow-md'>
             <div className='flex flex-row'>
               <img className='w-5 h-5' src={search}></img>
